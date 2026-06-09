@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Logan5 Mobile Preview | Martini Mortgage Calculator</title>
+  <title>Logan5 Preview — Mobile & Desktop | Martini Mortgage Calculator</title>
   <style>
     * { box-sizing: border-box; }
     body {
@@ -15,10 +15,10 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 1.5rem 1rem 2rem;
+      padding: 1.25rem 1rem 2rem;
     }
     h1 {
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       font-weight: 600;
       margin: 0 0 0.35rem;
       text-align: center;
@@ -28,7 +28,7 @@
       opacity: 0.8;
       margin: 0 0 1rem;
       text-align: center;
-      max-width: 420px;
+      max-width: 560px;
       line-height: 1.45;
     }
     .version-nav {
@@ -55,20 +55,42 @@
       border-color: #c9a227;
       font-weight: 600;
     }
+    .preview-stage {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+      align-items: flex-start;
+      width: 100%;
+      max-width: 1280px;
+    }
+    .preview-panel {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.65rem;
+    }
+    .preview-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.7);
+      margin: 0;
+    }
     .device-tabs {
       display: flex;
       gap: 0.5rem;
-      margin-bottom: 1rem;
       flex-wrap: wrap;
       justify-content: center;
     }
     .device-tabs button {
-      padding: 0.45rem 0.85rem;
+      padding: 0.4rem 0.75rem;
       border: 1px solid rgba(255,255,255,0.35);
       background: transparent;
       color: #fff;
       border-radius: 6px;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       cursor: pointer;
     }
     .device-tabs button.active {
@@ -81,9 +103,7 @@
       background: #111;
       border-radius: 36px;
       padding: 12px 10px 16px;
-      box-shadow:
-        0 0 0 2px #333,
-        0 24px 48px rgba(0,0,0,0.5);
+      box-shadow: 0 0 0 2px #333, 0 24px 48px rgba(0,0,0,0.5);
       position: relative;
     }
     .phone-shell::before {
@@ -109,10 +129,64 @@
       border: none;
       background: #f4f5f9;
     }
+    .desktop-shell {
+      width: min(100%, 820px);
+      background: #2a2438;
+      border-radius: 12px;
+      padding: 0;
+      box-shadow: 0 24px 48px rgba(0,0,0,0.45);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+    .desktop-chrome {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.55rem 0.75rem;
+      background: #1f1a2e;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .desktop-dots {
+      display: flex;
+      gap: 0.35rem;
+    }
+    .desktop-dots span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #555;
+    }
+    .desktop-dots span:nth-child(1) { background: #ff5f57; }
+    .desktop-dots span:nth-child(2) { background: #febc2e; }
+    .desktop-dots span:nth-child(3) { background: #28c840; }
+    .desktop-url {
+      flex: 1;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.75);
+      background: rgba(0,0,0,0.25);
+      border-radius: 6px;
+      padding: 0.35rem 0.65rem;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .desktop-screen {
+      background: #ebe8f2;
+      overflow: hidden;
+    }
+    .desktop-screen iframe {
+      display: block;
+      border: none;
+      width: 100%;
+      height: 720px;
+      background: #f4f2f8;
+    }
     .links {
       margin-top: 1.25rem;
       text-align: center;
       font-size: 0.85rem;
+      max-width: 640px;
     }
     .links a {
       color: #e8c84a;
@@ -122,11 +196,23 @@
       margin: 0.35rem 0;
       opacity: 0.85;
     }
+    @media (max-width: 900px) {
+      .preview-stage {
+        flex-direction: column;
+        align-items: center;
+      }
+      .desktop-shell {
+        width: 100%;
+      }
+      .desktop-screen iframe {
+        height: 560px;
+      }
+    }
   </style>
 </head>
 <body>
-  <h1>Logan5 — mobile preview</h1>
-  <p class="subtitle">Ultimate payment calculator (<code>go5.html</code>). Reverse payment, buydowns, FTHB filters, scenario PDF — Logan Martini branded.</p>
+  <h1>Logan5 — mobile &amp; desktop preview</h1>
+  <p class="subtitle">Side-by-side preview of <code>go5.html</code>. Use the phone tabs to switch device size. Both frames load the same live calculator.</p>
 
   <nav class="version-nav" aria-label="Calculator versions">
     <a href="/mobile-preview-logan1.html">Logan1</a>
@@ -136,38 +222,64 @@
     <a href="/mobile-preview-logan5.html" class="current">Logan5</a>
   </nav>
 
-  <div class="device-tabs" role="tablist">
-    <button type="button" class="active" data-w="390" data-h="844" data-label="iPhone 14">iPhone 14</button>
-    <button type="button" data-w="360" data-h="780" data-label="Android">Android</button>
-    <button type="button" data-w="320" data-h="568" data-label="Small phone">Small</button>
-  </div>
+  <div class="preview-stage">
+    <section class="preview-panel" aria-label="Desktop preview">
+      <p class="preview-label">Desktop</p>
+      <div class="desktop-shell">
+        <div class="desktop-chrome">
+          <div class="desktop-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div class="desktop-url" id="desktopUrlBar">/go5.html</div>
+        </div>
+        <div class="desktop-screen">
+          <iframe
+            id="desktopFrame"
+            src="/go5.html"
+            title="Logan5 desktop preview"
+          ></iframe>
+        </div>
+      </div>
+      <p class="preview-label"><a href="/go5.html" id="desktopLink" style="color:#e8c84a;">Open full desktop</a></p>
+    </section>
 
-  <div class="phone-shell">
-    <div class="phone-screen">
-      <iframe
-        id="previewFrame"
-        src="/go5.html"
-        title="Logan5 ultimate calculator mobile preview"
-        width="390"
-        height="844"
-      ></iframe>
-    </div>
+    <section class="preview-panel" aria-label="Mobile preview">
+      <p class="preview-label">Mobile</p>
+      <div class="device-tabs" role="tablist" aria-label="Phone size">
+        <button type="button" class="active" data-w="390" data-h="844" data-label="iPhone 14">iPhone 14</button>
+        <button type="button" data-w="360" data-h="780" data-label="Android">Android</button>
+        <button type="button" data-w="320" data-h="568" data-label="Small phone">Small</button>
+      </div>
+      <div class="phone-shell">
+        <div class="phone-screen">
+          <iframe
+            id="mobileFrame"
+            src="/go5.html"
+            title="Logan5 mobile preview"
+            width="390"
+            height="844"
+          ></iframe>
+        </div>
+      </div>
+    </section>
   </div>
 
   <div class="links">
-    <p><strong>Desktop (Logan5):</strong> <a href="/go5.html" id="desktopLink">/go5.html</a></p>
-    <p><strong>On your phone:</strong> <a href="#" id="phoneLink">loading…</a></p>
-    <p style="font-size:0.75rem;opacity:0.65;">Same Wi‑Fi · <code>python3 server.py</code> running</p>
+    <p><strong>Live (Render):</strong> <a href="https://ultimate-calculator-mmg.onrender.com/go5.html" target="_blank" rel="noopener">ultimate-calculator-mmg.onrender.com/go5.html</a></p>
+    <p><strong>On your phone (same Wi‑Fi):</strong> <a href="#" id="phoneLink">loading…</a></p>
+    <p style="font-size:0.75rem;opacity:0.65;">Local server · <code>python3 server.py</code></p>
   </div>
 
   <script>
     const LOGAN5_PATH = "/go5.html";
-    const frame = document.getElementById("previewFrame");
+    const mobileFrame = document.getElementById("mobileFrame");
+    const desktopFrame = document.getElementById("desktopFrame");
     const tabs = document.querySelectorAll(".device-tabs button");
     const phoneLink = document.getElementById("phoneLink");
     const desktopLink = document.getElementById("desktopLink");
+    const desktopUrlBar = document.getElementById("desktopUrlBar");
 
-    desktopLink.href = window.location.origin + LOGAN5_PATH;
+    const localDesktop = window.location.origin + LOGAN5_PATH;
+    desktopLink.href = localDesktop;
+    desktopUrlBar.textContent = localDesktop;
 
     fetch("/api/preview-info")
       .then((r) => r.json())
@@ -179,7 +291,7 @@
         phoneLink.href = onPhone;
         const previewP = document.createElement("p");
         previewP.innerHTML =
-          "<strong>Logan5 preview on phone:</strong> " +
+          "<strong>This preview on phone:</strong> " +
           '<a href="' + previewOnPhone + '">' + previewOnPhone + "</a>";
         document.querySelector(".links").insertBefore(
           previewP,
@@ -194,9 +306,9 @@
       btn.addEventListener("click", () => {
         tabs.forEach((b) => b.classList.remove("active"));
         btn.classList.add("active");
-        frame.width = btn.dataset.w;
-        frame.height = btn.dataset.h;
-        frame.title = "Logan5 preview at " + btn.dataset.label;
+        mobileFrame.width = btn.dataset.w;
+        mobileFrame.height = btn.dataset.h;
+        mobileFrame.title = "Logan5 mobile preview at " + btn.dataset.label;
       });
     });
   </script>

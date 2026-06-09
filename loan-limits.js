@@ -69,7 +69,7 @@ window.MMG_getFhaIneligibleNote = function (homePrice, countyKey) {
   return (
     `FHA loan limit ${name} is $${limit.toLocaleString("en-US")} (2026). ` +
     `At 3.5% down, FHA typically fits homes up to about $${maxPrice.toLocaleString("en-US")}. ` +
-    `Consider conventional or jumbo for this price.`
+    `Consider conventional (high balance) for this price.`
   );
 };
 
@@ -77,6 +77,13 @@ window.MMG_isJumboLoan = function (homePrice, downPercent, countyKey) {
   const loan = window.MMG_loanAmount(homePrice, downPercent);
   const limit = window.MMG_getConformingLimit(countyKey);
   return loan > limit;
+};
+
+/** Loan amount at or below county conforming limit (eligible for LP buydown offers). */
+window.MMG_isConformingLoan = function (homePrice, downPercent, countyKey) {
+  const loan = window.MMG_loanAmount(homePrice, downPercent);
+  if (loan <= 0) return false;
+  return loan <= window.MMG_getConformingLimit(countyKey);
 };
 
 window.MMG_getJumboIneligibleNote = function () {

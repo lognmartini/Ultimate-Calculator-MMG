@@ -251,7 +251,6 @@ def tax_rate(state: str, county: str) -> float:
 
 DEFAULT_MORTGAGE_SPREAD_30 = 2.60
 LEADS_PATH = os.path.join(ROOT, ".leads.jsonl")
-LEAD_WEBHOOK_URL = os.environ.get("LEAD_WEBHOOK_URL", "").strip()
 PARTNERS_DIR = os.path.join(ROOT, "partners")
 
 
@@ -391,93 +390,6 @@ def append_lead(entry: dict) -> None:
         with open(LEADS_PATH, "a", encoding="utf-8") as f:
             f.write(json.dumps(entry) + "\n")
     except OSError:
-        pass
-
-
-def notify_lead_webhook(entry: dict) -> None:
-    if not LEAD_WEBHOOK_URL:
-        return
-    try:
-        payload = json.dumps(entry).encode("utf-8")
-        req = urllib.request.Request(
-            LEAD_WEBHOOK_URL,
-            data=payload,
-            headers={
-                "Content-Type": "application/json",
-                "User-Agent": USER_AGENT,
-            },
-            method="POST",
-        )
-        urllib.request.urlopen(req, timeout=10)
-    except (urllib.error.URLError, OSError, TimeoutError, ValueError):
-        pass
-
-
-def notify_lead_email(entry: dict, to_addr: str) -> None:
-    """Optional SMTP notification when SMTP_HOST + SMTP_FROM are configured."""
-    host = os.environ.get("SMTP_HOST", "").strip()
-    from_addr = os.environ.get("SMTP_FROM", "").strip()
-    if not host or not from_addr or not to_addr:
-        return
-    try:
-        import smtplib
-        from email.message import EmailMessage
-
-        scenario = entry.get("scenario") or {}
-        subject = f"MMG Lead: {entry.get('source', 'calculator')}"
-        if entry.get("source") == "logan5-realtor-quiz":
-            subject = "Realtor match request — Logan5 calculator"
-        elif entry.get("source") == "logan5-rate-alert":
-            subject = "Rate drop alert signup — Logan5 calculator"
-        elif entry.get("source") == "logan5-share-estimate":
-            subject = "Share estimate lead — Logan5 calculator"
-        lines = [
-            f"Source: {entry.get('source', '')}",
-            f"Name: {entry.get('name', '')}",
-            f"Email: {entry.get('email', '')}",
-            f"Phone: {entry.get('phone', '')}",
-            f"Assigned LO: {entry.get('assignedLo', '')}",
-        ]
-        if scenario.get("realtorType"):
-            lines.extend([
-                "",
-                "Realtor questionnaire:",
-                f"  Type: {scenario.get('realtorType', '')}",
-                f"  Timeline: {scenario.get('moveTimeline', '')}",
-                f"  Priority: {scenario.get('realtorPriority', '')}",
-            ])
-        if scenario.get("baselineRate") is not None:
-            lines.extend([
-                "",
-                "Rate alert:",
-                f"  Baseline rate: {scenario.get('baselineRate', '')}%",
-                f"  Alert threshold: ±{scenario.get('alertThreshold', 0.125)}%",
-            ])
-        if scenario.get("piti"):
-            lines.append(f"PITI estimate: {scenario.get('piti', '')}")
-        if scenario.get("homePrice"):
-            lines.append(f"Home price: {scenario.get('homePrice', '')}")
-        if scenario.get("address"):
-            lines.append(f"Address: {scenario.get('address', '')}")
-        if scenario.get("shareUrl"):
-            lines.append(f"Share URL: {scenario.get('shareUrl', '')}")
-        if scenario.get("address"):
-            lines.append(f"Address: {scenario.get('address', '')}")
-        msg = EmailMessage()
-        msg["Subject"] = subject
-        msg["From"] = from_addr
-        msg["To"] = to_addr
-        msg.set_content("\n".join(lines))
-        port = int(os.environ.get("SMTP_PORT", "587"))
-        user = os.environ.get("SMTP_USER", "").strip()
-        password = os.environ.get("SMTP_PASSWORD", "").strip()
-        with smtplib.SMTP(host, port, timeout=15) as smtp:
-            if os.environ.get("SMTP_TLS", "1") != "0":
-                smtp.starttls()
-            if user and password:
-                smtp.login(user, password)
-            smtp.send_message(msg)
-    except Exception:
         pass
 
 
@@ -1068,48 +980,19 @@ class Handler(SimpleHTTPRequestHandler):
             self._json_response(400, {"ok": False, "error": "invalid JSON"})
             return
         email = (data.get("email") or "").strip().lower()
-        phone = (data.get("phone") or "").strip()
-        source = (data.get("source") or "logan1-calculator").strip()
-        sms_ok = source == "logan5-sms-estimate" and len(
-            re.sub(r"\D", "", phone)
-        ) >= 10 and bool(data.get("smsConsent") or data.get("consent"))
-        if (not email or "@" not in email) and not sms_ok:
-            self._json_response(400, {"ok": False, "error": "email or valid SMS consent required"})
+        if not email or "@" not in email:
+            self._json_response(400, {"ok": False, "error": "email required"})
             return
-        scenario = data.get("scenario") or {}
-        ref = (data.get("ref") or scenario.get("ref") or "").strip()
-        assigned_lo = (data.get("assignedLo") or "").strip()
-        if not assigned_lo and ref:
-            ref_lower = ref.lower()
-            if "kevin" in ref_lower:
-                assigned_lo = "kevin"
-            elif "logan" in ref_lower:
-                assigned_lo = "logan"
-        notify_email = (data.get("notifyEmail") or "").strip()
-        if not notify_email and source in (
-            "logan5-realtor-quiz",
-            "logan5-rate-alert",
-            "logan5-share-estimate",
-        ):
-            notify_email = "logan@martinimortgagegroup.com"
         entry = {
             "ts": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
             "email": email,
             "name": (data.get("name") or "").strip(),
-            "phone": (data.get("phone") or "").strip(),
             "agent": (data.get("agent") or "").strip(),
-            "ref": ref,
-            "assignedLo": assigned_lo or "team",
-            "version": (data.get("version") or "").strip(),
-            "source": source,
-            "notifyEmail": notify_email,
-            "scenario": scenario,
+            "source": (data.get("source") or "logan1-calculator").strip(),
+            "scenario": data.get("scenario") or {},
             "consent": bool(data.get("consent")),
         }
         append_lead(entry)
-        notify_lead_webhook(entry)
-        if notify_email:
-            notify_lead_email(entry, notify_email)
         self._json_response(200, {"ok": True})
 
     def _api_preview_info(self, parsed):
@@ -1133,12 +1016,8 @@ class Handler(SimpleHTTPRequestHandler):
                 "localCalculator": f"http://127.0.0.1:{port}/index.html",
                 "logan3": f"{base_lan}/go.html",
                 "logan3MobilePreview": f"{base_lan}/mobile-preview-logan3.html",
-                "logan4": f"{base_lan}/go4.html",
-                "logan4MobilePreview": f"{base_lan}/mobile-preview-logan4.html",
                 "localLogan3": f"http://127.0.0.1:{port}/go.html",
                 "localLogan3Preview": f"http://127.0.0.1:{port}/mobile-preview-logan3.html",
-                "localLogan4": f"http://127.0.0.1:{port}/go4.html",
-                "localLogan4Preview": f"http://127.0.0.1:{port}/mobile-preview-logan4.html",
             },
         )
 

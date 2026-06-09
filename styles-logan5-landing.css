@@ -1,0 +1,570 @@
+/* Logan5 landing-page enhancements — rate ticker, donut, readiness, compare */
+
+/* ── Sticky rate ticker (item 1 + 5) ── */
+.ultimate-rate-ticker-bar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem 0.85rem;
+  padding: 0.45rem 0.75rem;
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.92);
+  background: linear-gradient(90deg, #1a1230 0%, #2a1f4a 50%, #1a1230 100%);
+  border-bottom: 1px solid rgba(201, 162, 39, 0.25);
+  box-shadow: 0 4px 14px rgba(26, 18, 48, 0.18);
+}
+
+.ultimate-rate-ticker-bar .rate-ticker-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.rate-ticker-pulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.5);
+  animation: rate-ticker-pulse 2s ease infinite;
+}
+
+@keyframes rate-ticker-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.45); }
+  70% { box-shadow: 0 0 0 8px rgba(74, 222, 128, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
+}
+
+.rate-ticker-market {
+  color: rgba(255, 255, 255, 0.65);
+  text-decoration: line-through;
+  text-decoration-color: rgba(255, 255, 255, 0.35);
+}
+
+.rate-ticker-martini {
+  color: #e8c84a;
+  font-weight: 700;
+}
+
+.rate-ticker-countdown {
+  opacity: 0.75;
+  font-size: 0.68rem;
+}
+
+/* ── County limit badge (item 4) ── */
+.ultimate-limit-badge {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+}
+
+.ultimate-limit-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.3rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  background: rgba(201, 162, 39, 0.14);
+  color: #4a3b10;
+  border: 1px solid rgba(201, 162, 39, 0.35);
+}
+
+.ultimate-limit-chip-limit {
+  background: rgba(26, 18, 48, 0.06);
+  border-color: rgba(26, 18, 48, 0.12);
+  color: #1a1230;
+}
+
+/* ── Credit tier picker (item 6) ── */
+.credit-tier-picker {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.4rem;
+  margin-top: 0.55rem;
+}
+
+.credit-tier-btn {
+  padding: 0.5rem 0.35rem;
+  border-radius: 10px;
+  border: 2px solid rgba(26, 18, 48, 0.1);
+  background: #fff;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, transform 0.1s;
+  text-align: center;
+  line-height: 1.25;
+}
+
+.credit-tier-btn span {
+  display: block;
+  font-weight: 400;
+  font-size: 0.65rem;
+  opacity: 0.75;
+  margin-top: 0.15rem;
+}
+
+.credit-tier-btn.active {
+  border-color: rgba(201, 162, 39, 0.65);
+  background: rgba(232, 200, 74, 0.16);
+}
+
+.credit-field .credit-bands-desktop-only {
+  display: block;
+}
+
+@media (max-width: 640px) {
+  .credit-field input[type="range"]#creditScore {
+    display: none;
+  }
+  .credit-field .field-value#creditScoreDisplay {
+    font-size: 0.85rem;
+  }
+}
+
+@media (min-width: 641px) {
+  .credit-tier-picker {
+    display: none;
+  }
+}
+
+/* ── Buying power viz (item 3) ── */
+.ultimate-buying-power-viz {
+  margin-top: 1rem;
+  padding: 0.85rem;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(26, 18, 48, 0.04) 0%, rgba(201, 162, 39, 0.08) 100%);
+  border: 1px solid rgba(201, 162, 39, 0.2);
+}
+
+.buying-power-range-track {
+  position: relative;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(26, 18, 48, 0.08);
+  margin: 0.75rem 0 0.5rem;
+  overflow: hidden;
+}
+
+.buying-power-range-fill {
+  position: absolute;
+  left: 15%;
+  right: 15%;
+  top: 0;
+  bottom: 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #c9a227, #e8c84a);
+  transition: left 0.35s ease, right 0.35s ease;
+}
+
+.buying-power-range-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #1a1230;
+}
+
+.buying-power-pin {
+  text-align: center;
+  margin-top: 0.35rem;
+  font-size: 0.72rem;
+  color: rgba(26, 18, 48, 0.65);
+}
+
+/* ── Buydown chip (item 8) ── */
+.ultimate-buydown-chip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.65rem;
+  margin-top: 0.65rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: 12px;
+  background: rgba(232, 200, 74, 0.18);
+  border: 1px solid rgba(201, 162, 39, 0.4);
+  font-size: 0.78rem;
+  color: #fff;
+}
+
+.ultimate-buydown-chip strong {
+  color: #e8c84a;
+}
+
+.ultimate-buydown-chip-note {
+  opacity: 0.85;
+  font-size: 0.68rem;
+  width: 100%;
+}
+
+/* ── Readiness score (item 14) ── */
+.ultimate-readiness-panel {
+  margin-top: 0.75rem;
+  padding: 0.7rem 0.85rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.ultimate-readiness-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.45rem;
+}
+
+.ultimate-readiness-head h3 {
+  margin: 0;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.ultimate-readiness-score {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #e8c84a;
+}
+
+.ultimate-readiness-ticks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.ultimate-readiness-tick {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.2rem 0.45rem;
+  border-radius: 999px;
+  font-size: 0.65rem;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.ultimate-readiness-tick.done {
+  background: rgba(74, 222, 128, 0.18);
+  color: #bbf7d0;
+}
+
+.ultimate-readiness-tick.done::before {
+  content: "✓";
+  font-weight: 700;
+}
+
+.ultimate-readiness-disclaimer {
+  margin: 0.4rem 0 0;
+  font-size: 0.62rem;
+  opacity: 0.7;
+  color: #fff;
+}
+
+/* ── Payment donut (item 2) ── */
+.ultimate-donut-panel {
+  margin: 0.85rem 0;
+  padding: 0.85rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ultimate-donut-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: none;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+}
+
+.ultimate-donut-toggle-icon {
+  transition: transform 0.2s;
+}
+
+.ultimate-donut-panel.is-open .ultimate-donut-toggle-icon {
+  transform: rotate(180deg);
+}
+
+.ultimate-donut-body {
+  display: none;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.75rem;
+}
+
+.ultimate-donut-panel.is-open .ultimate-donut-body {
+  display: flex;
+}
+
+.ultimate-donut-svg {
+  width: 110px;
+  height: 110px;
+  flex-shrink: 0;
+}
+
+.ultimate-donut-legend {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex: 1;
+  font-size: 0.78rem;
+}
+
+.ultimate-donut-legend li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.25rem 0;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.ultimate-donut-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  flex-shrink: 0;
+  margin-right: 0.35rem;
+}
+
+.ultimate-donut-legend li span:first-child {
+  display: flex;
+  align-items: center;
+}
+
+/* ── Scenario compare (item 7) ── */
+.ultimate-scenario-compare-panel {
+  margin: 1rem 0;
+  padding: 1rem;
+  border-radius: 14px;
+  background: var(--surface-muted, #f8f7fb);
+  border: 1px solid rgba(26, 18, 48, 0.1);
+}
+
+.ultimate-scenario-compare-panel h3 {
+  margin: 0 0 0.35rem;
+  font-size: 0.95rem;
+}
+
+.ultimate-scenario-compare-lead {
+  margin: 0 0 0.75rem;
+  font-size: 0.78rem;
+  opacity: 0.8;
+}
+
+.ultimate-scenario-sliders {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+@media (max-width: 560px) {
+  .ultimate-scenario-sliders {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ultimate-scenario-col {
+  padding: 0.65rem;
+  border-radius: 12px;
+  background: #fff;
+  border: 2px solid rgba(26, 18, 48, 0.08);
+}
+
+.ultimate-scenario-col.is-winner {
+  border-color: rgba(201, 162, 39, 0.55);
+  box-shadow: 0 4px 14px rgba(201, 162, 39, 0.12);
+}
+
+.ultimate-scenario-col h4 {
+  margin: 0 0 0.5rem;
+  font-size: 0.82rem;
+}
+
+.ultimate-scenario-col .field {
+  margin-bottom: 0.45rem;
+}
+
+.ultimate-scenario-col input[type="range"] {
+  width: 100%;
+}
+
+.ultimate-scenario-piti {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #1a1230;
+}
+
+.ultimate-scenario-diff-banner {
+  margin-top: 0.65rem;
+  padding: 0.55rem 0.7rem;
+  border-radius: 10px;
+  background: rgba(201, 162, 39, 0.12);
+  font-size: 0.78rem;
+}
+
+/* ── Program rate table (item 1 extension) ── */
+.ultimate-program-rates-panel {
+  margin: 1rem 0;
+  overflow-x: auto;
+}
+
+.ultimate-program-rates-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.78rem;
+}
+
+.ultimate-program-rates-table th,
+.ultimate-program-rates-table td {
+  padding: 0.45rem 0.55rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(26, 18, 48, 0.08);
+}
+
+.ultimate-program-rates-table th {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  opacity: 0.7;
+}
+
+.ultimate-program-rates-table tr.is-active td {
+  background: rgba(201, 162, 39, 0.1);
+  font-weight: 600;
+}
+
+.ultimate-program-rates-table .rate-cell-martini {
+  color: #6b4f00;
+  font-weight: 700;
+}
+
+/* ── Wealth builder (item 17) ── */
+.ultimate-wealth-panel {
+  margin: 1rem 0;
+  padding: 0.85rem;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(26, 18, 48, 0.03) 0%, rgba(74, 222, 128, 0.08) 100%);
+  border: 1px solid rgba(74, 222, 128, 0.2);
+}
+
+.ultimate-wealth-panel h3 {
+  margin: 0 0 0.35rem;
+  font-size: 0.9rem;
+}
+
+.ultimate-wealth-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.ultimate-wealth-stat {
+  text-align: center;
+  padding: 0.5rem 0.35rem;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.ultimate-wealth-stat dt {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  opacity: 0.7;
+}
+
+.ultimate-wealth-stat dd {
+  margin: 0.2rem 0 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #166534;
+}
+
+.ultimate-wealth-note {
+  margin: 0.45rem 0 0;
+  font-size: 0.68rem;
+  opacity: 0.75;
+}
+
+/* ── Share + SMS (items 10, 11) ── */
+.ultimate-share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  width: 100%;
+  justify-content: center;
+  padding: 0.55rem 0.75rem;
+  border-radius: 10px;
+  border: 1px dashed rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.ultimate-share-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.ultimate-share-btn.copied {
+  border-color: #4ade80;
+  color: #bbf7d0;
+}
+
+.save-estimate-tabs {
+  display: flex;
+  gap: 0.35rem;
+  margin-bottom: 0.5rem;
+}
+
+.save-estimate-tab {
+  flex: 1;
+  padding: 0.4rem;
+  border-radius: 8px;
+  border: 1px solid rgba(26, 18, 48, 0.15);
+  background: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.save-estimate-tab.active {
+  border-color: rgba(201, 162, 39, 0.55);
+  background: rgba(232, 200, 74, 0.14);
+}
+
+.save-estimate-sms-consent {
+  font-size: 0.65rem;
+  opacity: 0.85;
+  margin: 0.35rem 0 0;
+}
+
+.save-estimate-sms-consent label {
+  display: flex;
+  gap: 0.4rem;
+  align-items: flex-start;
+  cursor: pointer;
+}
+
+/* ── Hub stack spacing ── */
+.ultimate-hub-stack .ultimate-share-btn {
+  margin-top: 0.25rem;
+}

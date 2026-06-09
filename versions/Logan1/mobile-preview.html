@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Realtor Partner Mobile Preview | Logan5</title>
+  <title>Mobile Preview | Martini Mortgage Calculator</title>
   <style>
     * { box-sizing: border-box; }
     body {
@@ -26,34 +26,10 @@
     .subtitle {
       font-size: 0.85rem;
       opacity: 0.8;
-      margin: 0 0 1rem;
+      margin: 0 0 1.25rem;
       text-align: center;
       max-width: 420px;
       line-height: 1.45;
-    }
-    .version-nav {
-      display: flex;
-      gap: 0.5rem;
-      margin-bottom: 1rem;
-      flex-wrap: wrap;
-      justify-content: center;
-      font-size: 0.82rem;
-    }
-    .version-nav a {
-      color: #e8c84a;
-      text-decoration: none;
-      padding: 0.35rem 0.65rem;
-      border: 1px solid rgba(232, 200, 74, 0.45);
-      border-radius: 6px;
-    }
-    .version-nav a:hover {
-      background: rgba(232, 200, 74, 0.15);
-    }
-    .version-nav a.current {
-      background: #c9a227;
-      color: #1a1230;
-      border-color: #c9a227;
-      font-weight: 600;
     }
     .device-tabs {
       display: flex;
@@ -125,15 +101,8 @@
   </style>
 </head>
 <body>
-  <h1>Logan1 — mobile preview</h1>
-  <p class="subtitle">Realtor co-market (default: Tyler Chestnutt). Mobile layout puts <strong>payment first</strong> with simple sliders.</p>
-
-  <nav class="version-nav" aria-label="Calculator versions">
-    <a href="/mobile-preview-logan1.html" class="current">Logan1</a>
-    <a href="/mobile-preview.html">Logan2</a>
-    <a href="/mobile-preview-logan3.html">Logan3</a>
-    <a href="/mobile-preview-logan4.html">Logan4</a>
-  </nav>
+  <h1>Mobile preview</h1>
+  <p class="subtitle">This shows how the calculator looks on a phone. Use the buttons to switch device widths, or open the phone link on your actual device (same Wi‑Fi).</p>
 
   <div class="device-tabs" role="tablist">
     <button type="button" class="active" data-w="390" data-h="844" data-label="iPhone 14">iPhone 14</button>
@@ -145,8 +114,8 @@
     <div class="phone-screen">
       <iframe
         id="previewFrame"
-        src="/realtor.html?agent=tyler-chestnutt"
-        title="Logan1 Martini Mortgage Calculator mobile preview"
+        src="/index.html"
+        title="Martini Mortgage Calculator mobile preview"
         width="390"
         height="844"
       ></iframe>
@@ -154,35 +123,31 @@
   </div>
 
   <div class="links">
-    <p><strong>Desktop (Logan1 + Tyler):</strong> <a href="/realtor.html?agent=tyler-chestnutt" id="desktopLink">/realtor.html?agent=tyler-chestnutt</a></p>
+    <p><strong>Desktop:</strong> <a href="/index.html" id="desktopLink">/index.html</a></p>
     <p><strong>On your phone:</strong> <a href="#" id="phoneLink">loading…</a></p>
     <p style="font-size:0.75rem;opacity:0.65;">Phone link uses this computer’s local IP. Server must be running (<code>python3 server.py</code>).</p>
   </div>
 
   <script>
-    const LOGAN1_PATH = "/realtor.html?agent=tyler-chestnutt";
     const frame = document.getElementById("previewFrame");
     const tabs = document.querySelectorAll(".device-tabs button");
     const phoneLink = document.getElementById("phoneLink");
     const desktopLink = document.getElementById("desktopLink");
 
-    desktopLink.href = window.location.origin + LOGAN1_PATH;
+    desktopLink.href = window.location.origin + "/index.html";
 
     fetch("/api/preview-info")
       .then((r) => r.json())
       .then((info) => {
-        const origin = new URL(info.calculator).origin;
-        const onPhone = origin + LOGAN1_PATH;
-        const previewOnPhone = origin + "/mobile-preview-logan1.html";
-        phoneLink.textContent = onPhone;
-        phoneLink.href = onPhone;
+        phoneLink.textContent = info.calculator;
+        phoneLink.href = info.calculator;
         const previewP = document.createElement("p");
         previewP.innerHTML =
-          "<strong>Logan1 preview on phone:</strong> " +
-          '<a href="' + previewOnPhone + '">' + previewOnPhone + "</a>";
+          "<strong>Mobile preview (this page):</strong> " +
+          '<a href="' + info.localPreview + '">' + info.localPreview + "</a>";
         document.querySelector(".links").insertBefore(
           previewP,
-          document.querySelector(".links p:last-child")
+          document.querySelector(".links p:last-child)
         );
       })
       .catch(() => {
@@ -195,7 +160,7 @@
         btn.classList.add("active");
         frame.width = btn.dataset.w;
         frame.height = btn.dataset.h;
-        frame.title = "Logan1 preview at " + btn.dataset.label;
+        frame.title = "Preview at " + btn.dataset.label;
       });
     });
   </script>

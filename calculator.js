@@ -466,8 +466,24 @@
   let typicalLenderRate = null;
 
   function getLoanProgram() {
-    const id = els.loanProgram?.value || "conventional";
-    return window.MMG_getLoanProgram ? window.MMG_getLoanProgram(id) : { id: "conventional", minDownPercent: 3, defaultDownPercent: 20, rateSpreadVsConventional: 0, miLabel: "PMI", miRequiredBelowLtv: 80, defaultMiAnnualRate: 0.5 };
+    const raw = els.loanProgram?.value || "conventional";
+    const id = window.MMG_normalizeProgramId
+      ? window.MMG_normalizeProgramId(raw)
+      : raw === "jumbo"
+        ? "conventional"
+        : raw;
+    if (els.loanProgram && raw === "jumbo") els.loanProgram.value = "conventional";
+    return window.MMG_getLoanProgram
+      ? window.MMG_getLoanProgram(id)
+      : {
+          id: "conventional",
+          minDownPercent: 3,
+          defaultDownPercent: 20,
+          rateSpreadVsConventional: 0,
+          miLabel: "PMI",
+          miRequiredBelowLtv: 80,
+          defaultMiAnnualRate: 0.5,
+        };
   }
 
   function getBuyerProfile() {
@@ -507,14 +523,31 @@
     return Number.isInteger(n) ? `${n}%` : `${n.toFixed(1)}%`;
   }
 
+  function syncLoanSizeRules() {
+    if (!window.MMG_syncProgramForLoanSize || !els.loanProgram) return false;
+    const result = window.MMG_syncProgramForLoanSize({
+      homePrice: Number(els.homePrice?.value || 0),
+      countyKey: getCountyKey(),
+      loanProgramEl: els.loanProgram,
+      downPercentEl: els.downPercent,
+      profile: getBuyerProfile(),
+    });
+    if (result.changed) {
+      syncDownFromPercent();
+      if (window.MMG_applyLoanProgramUi) window.MMG_applyLoanProgramUi();
+    }
+    return result.changed;
+  }
+
   function snapDownToProgramDefault() {
     if (!document.body.classList.contains("logan5")) return;
+    syncLoanSizeRules();
     const program = getLoanProgram();
     const profile = getBuyerProfile();
     const price = Number(els.homePrice?.value || 0);
     const countyKey = getCountyKey();
     const down =
-      window.MMG_getProgramDefaultDown?.(program.id, profile) ??
+      window.MMG_getProgramDefaultDown?.(program.id, profile, price, countyKey) ??
       program.defaultDownPercent ??
       getEffectiveMinDown(program);
     const min = getEffectiveMinDown(program);
@@ -564,8 +597,12 @@
             ? " First-time buyer programs (e.g. HomeReady) may allow 3%."
             : " Non–first-time buyers often need 5%+ on conventional.";
         }
-        if (program.id === "jumbo" && window.MMG_getConformingLimit) {
-          hint += ` Conforming limit ${formatCurrency(window.MMG_getConformingLimit(countyKey))} (2026).`;
+        if (
+          program.id === "conventional" &&
+          window.MMG_isJumboConventional?.(price, Number(els.downPercent?.value || 0), countyKey)
+        ) {
+          const jMin = window.MMG_getJumboMinDownPercent?.(price, countyKey) ?? 10.1;
+          hint = `Conventional (high balance): loan exceeds ${formatCurrency(window.MMG_getConformingLimit(countyKey))} conforming limit. Minimum ${jMin}% down for this estimate.`;
         }
         els.programDownHint.textContent = hint;
         els.programDownHint.classList.remove("hidden");
@@ -648,6 +685,22 @@
         /* fallback */
       }
     }
+    if (window.MMG_fetchFredPmms) {
+      try {
+        const fred = await window.MMG_fetchFredPmms();
+        if (pmmsHasValidRates(fred)) {
+          cachedPmms = fred;
+          try {
+            sessionStorage.setItem("mmg_pmms_day", dayKey);
+          } catch {
+            /* ignore */
+          }
+          return cachedPmms;
+        }
+      } catch {
+        /* fallback */
+      }
+    }
     cachedPmms = { ...fallback, source: "Freddie Mac PMMS (cached)", cacheDate: dayKey };
     return cachedPmms;
   }
@@ -671,11 +724,22 @@
 
   function getRateScenarioInputs() {
     const program = getLoanProgram();
+    const price = Number(els.homePrice?.value || 0);
+    const downPercent = Number(els.downPercent?.value || 20);
+    const countyKey = getCountyKey();
+    const programSpread = window.MMG_getEffectiveProgramSpread
+      ? window.MMG_getEffectiveProgramSpread(
+          program.id,
+          price,
+          downPercent,
+          countyKey
+        )
+      : Number(program.rateSpreadVsConventional) || 0;
     return {
       creditScore: Number(els.creditScore?.value || 740),
-      downPercent: Number(els.downPercent?.value || 20),
+      downPercent,
       termYears: Number(els.loanTerm?.value || 30),
-      programSpread: Number(program.rateSpreadVsConventional) || 0,
+      programSpread,
     };
   }
 
@@ -1362,6 +1426,9 @@
       applyBaselineRatesImmediate();
     }
     calculate();
+    document.dispatchEvent(
+      new CustomEvent("mmg-property-resolved", { detail: data })
+    );
   }
 
   function buildLocalPropertyEstimate(location) {
@@ -1845,6 +1912,10 @@
       );
       data.updatePriceRequested = updatePrice;
       applyPropertyData(data);
+    if (document.body.classList.contains("logan5")) {
+      syncLoanSizeRules();
+      snapDownToProgramDefault();
+    }
     } catch (err) {
       setLocationNote(
         err.message === "Address not found"
@@ -2108,7 +2179,11 @@
       }
     }
 
-    const cashToClose = downPayment + closingCosts + prepaids + extraPoints;
+    const sellerCredit = window.MMG_getSellerCredit?.() || 0;
+    const cashToClose = Math.max(
+      0,
+      downPayment + closingCosts + prepaids + extraPoints - sellerCredit
+    );
 
     if (els.quoteDownPayment) {
       els.quoteDownPayment.textContent = formatCurrency(downPayment);
@@ -2118,6 +2193,13 @@
     }
     if (els.quotePrepaids) {
       els.quotePrepaids.textContent = formatCurrency(prepaids);
+    }
+    if (els.quoteSellerCreditRow && els.quoteSellerCredit) {
+      const showCredit = sellerCredit > 0;
+      els.quoteSellerCreditRow.classList.toggle("hidden", !showCredit);
+      els.quoteSellerCredit.textContent = showCredit
+        ? `−${formatCurrency(sellerCredit)}`
+        : "—";
     }
     if (els.quoteCashToClose) {
       els.quoteCashToClose.textContent = formatCurrency(cashToClose);
@@ -2418,6 +2500,7 @@
       if (els.homePriceDisplay) {
         els.homePriceDisplay.textContent = formatCurrency(price);
       }
+      if (document.body.classList.contains("logan5")) syncLoanSizeRules();
       syncDownFromPercent();
       recalcTaxFromAddressIfNeeded();
       calculate();
@@ -2431,6 +2514,7 @@
       els.homePrice.value = clamped;
       if (els.homePriceDisplay) els.homePriceDisplay.textContent = formatCurrency(clamped);
       if (els.homePriceInput) els.homePriceInput.value = formatCurrencyInput(clamped);
+      if (document.body.classList.contains("logan5")) syncLoanSizeRules();
       syncDownFromPercent();
       recalcTaxFromAddressIfNeeded();
       calculate();
@@ -2502,7 +2586,8 @@
       "vsPointsRow", "vsPointsCost", "vsCompNote",
       "discountPointsPanel", "discountPointsDetail", "feeSheetPointsRow", "feeSheetPointsCost",
       "quoteDownPayment", "quoteClosingCosts", "quotePrepaids", "quotePointsRow",
-      "quotePointsCost", "quoteCashToClose", "quoteScenarioSummary",
+      "quotePointsCost", "quoteSellerCreditRow", "quoteSellerCredit",
+      "quoteCashToClose", "quoteScenarioSummary",
       "heroLiveRate", "marketPulseText",
       "leadSavingsRibbon", "leadSavingsAmount",
       "leadMonthlySavingsRow",
@@ -2516,6 +2601,31 @@
   window.MMG_applyLoanProgramUi = applyLoanProgramUi;
   window.MMG_snapDownToProgram = snapDownToProgramDefault;
   window.MMG_getCountyKey = getCountyKey;
+  window.MMG_syncLoanSizeRules = syncLoanSizeRules;
+  window.MMG_getMartiniRateForProgram = function (
+    programId,
+    downPctOverride,
+    termYearsOverride
+  ) {
+    const pmms = pmmsHasValidRates(cachedPmms) ? cachedPmms : getPmmsFallback();
+    const price = Number(els.homePrice?.value || 0);
+    const down = downPctOverride ?? Number(els.downPercent?.value || 20);
+    const id = window.MMG_normalizeProgramId
+      ? window.MMG_normalizeProgramId(programId)
+      : programId;
+    const spread = window.MMG_getEffectiveProgramSpread
+      ? window.MMG_getEffectiveProgramSpread(id, price, down, getCountyKey())
+      : window.MMG_getLoanProgram(id).rateSpreadVsConventional || 0;
+    const computed = window.MMG_computeMarketRate?.(
+      pmms.rate30,
+      pmms.rate15,
+      Number(els.creditScore?.value || 740),
+      down,
+      termYearsOverride ?? Number(els.loanTerm?.value || 30),
+      spread
+    );
+    return computed?.martiniRate ?? Number(els.interestRate?.value || DEFAULT_MARTINI_OFFER_RATE);
+  };
 
   async function init() {
     try {

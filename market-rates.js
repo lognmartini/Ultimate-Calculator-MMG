@@ -6,6 +6,10 @@ window.MMG_MARKET = {
   fallback: { rate30: 6.5, rate15: 5.875, asOf: "estimate" },
   /** Martini pricing: always this much below rounded par for the scenario */
   martiniDiscount: 0.25,
+  /** LP buydown note rate is often priced above par before subsidy (e.g. 6.25% par → 6.875% note). */
+  lenderPaidBuydownNoteBump: 0.625,
+  /** 1-0 buydown: year 1 effective rate reduction */
+  buydown10Reduction: 1.0,
   /** Internal only — base lender finance charge in APR (not shown in UI) */
   aprFinanceCharge: 2500,
   /** Rate buydown: one discount point per this much rate reduction */
@@ -176,4 +180,37 @@ window.MMG_discountPointsDollarCost = function (loanAmount, points) {
   const loan = Math.max(0, Number(loanAmount) || 0);
   const pts = Math.max(0, Number(points) || 0);
   return Math.round(loan * (pts / 100));
+};
+
+/**
+ * Optional FRED fallback when Render /api/market-rate is unavailable (WordPress static).
+ * Add <meta name="mmg-fred-api-key" content="YOUR_KEY" /> — free at fred.stlouisfed.org.
+ */
+window.MMG_fetchFredPmms = async function () {
+  const key =
+    document.querySelector('meta[name="mmg-fred-api-key"]')?.content?.trim() || "";
+  if (!key) return null;
+  const today = new Date().toISOString().slice(0, 10);
+  const fetchSeries = async (seriesId) => {
+    const url =
+      `https://api.stlouisfed.org/fred/series/observations?series_id=${seriesId}` +
+      `&api_key=${encodeURIComponent(key)}&file_type=json&sort_order=desc&limit=1`;
+    const res = await fetch(url);
+    if (!res.ok) return null;
+    const data = await res.json();
+    const val = Number(data?.observations?.[0]?.value);
+    return Number.isFinite(val) && val > 0 ? val : null;
+  };
+  const [rate30, rate15] = await Promise.all([
+    fetchSeries("MORTGAGE30US"),
+    fetchSeries("MORTGAGE15US"),
+  ]);
+  if (!rate30) return null;
+  return {
+    rate30,
+    rate15: rate15 ?? Math.max(0, rate30 - 0.65),
+    asOf: `FRED · ${today}`,
+    source: "FRED MORTGAGE30US / MORTGAGE15US",
+    cacheDate: today,
+  };
 };

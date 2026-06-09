@@ -1,0 +1,646 @@
+/* Logan5 growth layer — payment wheel, seller credits, rate alerts */
+
+/* ── Instant listing landing banner ── */
+body.logan5 .logan5-instant-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem 1rem;
+  padding: 0.55rem 1rem;
+  background: linear-gradient(90deg, #1a1230 0%, #2d2250 50%, #1a1230 100%);
+  border-bottom: 1px solid rgba(201, 162, 39, 0.35);
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 0.78rem;
+}
+
+body.logan5 .logan5-instant-banner.hidden {
+  display: none;
+}
+
+body.logan5 .logan5-instant-pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.45);
+  animation: rate-ticker-pulse 2s ease infinite;
+}
+
+body.logan5 .logan5-instant-copy {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.5rem;
+  align-items: baseline;
+  justify-content: center;
+  text-align: center;
+}
+
+body.logan5 .logan5-instant-copy strong {
+  color: #e8c84a;
+}
+
+body.logan5 .logan5-instant-cta {
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  background: #c9a227;
+  color: #1a1230;
+  font-weight: 700;
+  font-size: 0.72rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+body.logan5 .logan5-instant-cta:hover {
+  background: #e8c84a;
+}
+
+/* ── Payment breakdown wheel (step 3 hero) ── */
+body.logan5 .ultimate-payment-hero-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+body.logan5 .payment-breakdown-wheel {
+  margin-top: 1.1rem;
+  padding-top: 1.15rem;
+  border-top: 1px solid rgba(201, 162, 39, 0.22);
+}
+
+body.logan5 .payment-breakdown-wheel--gap {
+  margin-top: 0;
+  padding: 1rem 1.1rem 1.05rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(201, 162, 39, 0.28);
+}
+
+body.logan5 .payment-breakdown-wheel--gap .pbw-title {
+  text-align: left;
+}
+
+@media (min-width: 720px) {
+  body.logan5 .payment-breakdown-wheel--gap .pbw-layout {
+    grid-template-columns: minmax(140px, 168px) 1fr;
+    gap: 1rem 1.25rem;
+  }
+}
+
+body.logan5 .payment-breakdown-wheel.pbw-animate-in {
+  animation: pbw-fade-in 0.55s ease-out;
+}
+
+@keyframes pbw-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+body.logan5 .pbw-title {
+  margin: 0 0 0.75rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+  text-align: center;
+}
+
+body.logan5 .pbw-layout {
+  display: grid;
+  grid-template-columns: minmax(120px, 148px) 1fr;
+  gap: 0.85rem 1rem;
+  align-items: center;
+}
+
+body.logan5 .pbw-chart {
+  position: relative;
+  width: 100%;
+  max-width: 148px;
+  margin: 0 auto;
+  aspect-ratio: 1;
+}
+
+body.logan5 .pbw-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+body.logan5 .pbw-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  pointer-events: none;
+}
+
+body.logan5 .pbw-center-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+body.logan5 .pbw-center-amount {
+  font-size: clamp(0.95rem, 3.2vw, 1.15rem);
+  font-weight: 700;
+  color: #e8c84a;
+  line-height: 1.15;
+}
+
+body.logan5 .pbw-legend {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+body.logan5 .pbw-legend-item {
+  display: grid;
+  grid-template-columns: 10px 1fr auto auto;
+  gap: 0.4rem 0.5rem;
+  align-items: center;
+  font-size: 0.74rem;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+body.logan5 .pbw-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+body.logan5 .pbw-legend-label {
+  opacity: 0.9;
+}
+
+body.logan5 .pbw-legend-val {
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+}
+
+body.logan5 .pbw-legend-pct {
+  font-size: 0.68rem;
+  opacity: 0.62;
+  min-width: 2rem;
+  text-align: right;
+}
+
+body.logan5 .pbw-segment {
+  transition: stroke-dasharray 0.45s ease, stroke-dashoffset 0.45s ease;
+}
+
+/* ── Seller concession slider (#11) ── */
+body.logan5 .seller-credit-panel {
+  margin: 0.85rem 0 1rem;
+  padding: 0.85rem 0.9rem;
+  border-radius: 12px;
+  background: rgba(26, 18, 48, 0.04);
+  border: 1px solid rgba(201, 162, 39, 0.22);
+}
+
+body.logan5.wizard-on-results .seller-credit-panel {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(201, 162, 39, 0.28);
+}
+
+body.logan5 .seller-credit-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.55rem;
+}
+
+body.logan5 .seller-credit-head label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+body.logan5 .seller-credit-head strong {
+  font-size: 1rem;
+  color: #4ade80;
+}
+
+body.logan5 .seller-credit-panel input[type="range"] {
+  width: 100%;
+  margin: 0.25rem 0 0.5rem;
+  accent-color: #c9a227;
+}
+
+body.logan5 .seller-credit-note {
+  margin: 0;
+  font-size: 0.68rem;
+  line-height: 1.45;
+  opacity: 0.78;
+}
+
+body.logan5 #quoteSellerCredit {
+  color: #4ade80;
+}
+
+/* ── Scenario snapshot (#5) ── */
+body.logan5 .ultimate-scenario-snapshot {
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(201, 162, 39, 0.28);
+}
+
+body.logan5 .ultimate-scenario-snapshot-label {
+  margin: 0 0 0.55rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+body.logan5 .ultimate-scenario-snapshot-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.45rem 0.75rem;
+  margin: 0;
+}
+
+body.logan5 .ultimate-scenario-snapshot-grid > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+body.logan5 .ultimate-scenario-snapshot-grid dt {
+  margin: 0;
+  font-size: 0.64rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.68;
+}
+
+body.logan5 .ultimate-scenario-snapshot-grid dd {
+  margin: 0;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+body.logan5 .ultimate-scenario-snapshot-highlight dd {
+  color: #e8c84a;
+}
+
+@media (min-width: 560px) {
+  body.logan5 .ultimate-scenario-snapshot-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+/* ── Step 3 tabbed panel (#12 + share #9) ── */
+body.logan5 .ultimate-step3-tabs {
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(201, 162, 39, 0.32);
+  background: linear-gradient(
+    165deg,
+    rgba(37, 47, 110, 0.28) 0%,
+    rgba(26, 18, 48, 0.5) 100%
+  );
+}
+
+body.logan5 .ultimate-step3-tablist {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.logan5 .ultimate-step3-tab {
+  flex: 1 1 auto;
+  min-width: 4.5rem;
+  padding: 0.55rem 0.65rem;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+}
+
+body.logan5 .ultimate-step3-tab.active {
+  color: #e8c84a;
+  background: rgba(201, 162, 39, 0.1);
+  border-bottom-color: #c9a227;
+}
+
+body.logan5 .ultimate-step3-panels {
+  padding: 0.9rem 1rem 1rem;
+}
+
+body.logan5 .ultimate-step3-panel {
+  display: none;
+}
+
+body.logan5 .ultimate-step3-panel.active {
+  display: block;
+}
+
+body.logan5 .ultimate-step3-panel-lead {
+  margin: 0 0 0.65rem;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+body.logan5 .ultimate-step3-panel-lead strong {
+  color: #e8c84a;
+}
+
+body.logan5 .ultimate-step3-panel-cta {
+  font-size: 0.78rem;
+}
+
+body.logan5 .ultimate-share-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+body.logan5 .ultimate-share-url-input {
+  width: 100%;
+  padding: 0.55rem 0.65rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(0, 0, 0, 0.25);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.72rem;
+  font-family: ui-monospace, monospace;
+}
+
+body.logan5 .ultimate-share-btn-primary {
+  width: 100%;
+  justify-content: center;
+  padding: 0.6rem 0.85rem;
+  border-radius: 10px;
+  border: 1px solid rgba(201, 162, 39, 0.45);
+  background: rgba(201, 162, 39, 0.15);
+  color: #e8c84a;
+  font-weight: 700;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+body.logan5 .ultimate-share-preview-note {
+  margin: 0.45rem 0 0;
+  font-size: 0.66rem;
+  opacity: 0.72;
+}
+
+/* ── Hub share lead gate (email to unlock) ── */
+body.logan5 .ultimate-hub-share-gate,
+body.logan5 .ultimate-hub-share-reveal {
+  margin-top: 0.55rem;
+  padding: 0.75rem 0.8rem;
+  border-radius: 12px;
+  background: rgba(37, 47, 110, 0.06);
+  border: 1px solid rgba(37, 47, 110, 0.16);
+}
+
+body.logan5 .ultimate-hub-share-gate-lead {
+  margin: 0 0 0.6rem;
+  font-size: 0.74rem;
+  line-height: 1.45;
+  color: var(--navy-dark, #1a1230);
+  opacity: 0.88;
+}
+
+body.logan5 .ultimate-hub-share-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+body.logan5 .ultimate-hub-share-form input[type="email"] {
+  width: 100%;
+  padding: 0.6rem 0.7rem;
+  border-radius: 10px;
+  border: 2px solid rgba(37, 47, 110, 0.18);
+  background: #fff;
+  font-size: 0.85rem;
+  font-family: inherit;
+}
+
+body.logan5 .ultimate-hub-share-consent {
+  display: flex;
+  gap: 0.45rem;
+  align-items: flex-start;
+  font-size: 0.66rem;
+  line-height: 1.4;
+  color: var(--text-muted, #5c5670);
+  cursor: pointer;
+}
+
+body.logan5 .ultimate-hub-share-consent input {
+  margin-top: 0.15rem;
+  flex-shrink: 0;
+}
+
+body.logan5 .ultimate-hub-share-submit {
+  width: 100%;
+  font-weight: 700;
+  border-width: 2px;
+}
+
+body.logan5 .ultimate-hub-share-error {
+  margin: 0.45rem 0 0;
+  font-size: 0.72rem;
+  color: #b91c1c;
+}
+
+body.logan5 .ultimate-hub-share-reveal-label {
+  margin: 0 0 0.45rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--navy-dark, #1a1230);
+  opacity: 0.7;
+}
+
+body.logan5 .ultimate-hub-share-snapshot {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.4rem;
+  margin: 0 0 0.65rem;
+}
+
+body.logan5 .ultimate-hub-share-snapshot > div {
+  padding: 0.45rem 0.5rem;
+  border-radius: 8px;
+  background: #fff;
+  border: 1px solid rgba(201, 162, 39, 0.28);
+}
+
+body.logan5 .ultimate-hub-share-snapshot dt {
+  margin: 0;
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.68;
+}
+
+body.logan5 .ultimate-hub-share-snapshot dd {
+  margin: 0.1rem 0 0;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--navy-dark, #1a1230);
+}
+
+body.logan5 .ultimate-hub-rail .ultimate-share-url-input {
+  border: 2px solid rgba(37, 47, 110, 0.16);
+  background: #fff;
+  color: var(--navy-dark, #1a1230);
+}
+
+body.logan5 .ultimate-hub-rail .ultimate-share-btn-primary {
+  background: linear-gradient(135deg, #f0d060 0%, #c9a227 55%, #b8891a 100%);
+  color: var(--navy-dark, #1a1230);
+  border: 2px solid rgba(201, 162, 39, 0.65);
+}
+
+body.logan5 .ultimate-hub-share-success {
+  margin: 0.5rem 0 0;
+  font-size: 0.7rem;
+  line-height: 1.4;
+  color: #166534;
+}
+
+body.logan5 .ultimate-rate-alert-form-compact {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.45rem 0.55rem;
+  align-items: start;
+}
+
+body.logan5 .ultimate-rate-alert-form-compact input[type="email"] {
+  grid-column: 1 / -1;
+}
+
+body.logan5 .ultimate-rate-alert-form-compact .ultimate-rate-alert-consent {
+  grid-column: 1 / -1;
+}
+
+body.logan5 .ultimate-rate-alert-form-compact .ultimate-rate-alert-submit {
+  grid-column: 1 / -1;
+  width: 100%;
+}
+
+body.logan5 .ultimate-rate-alert-strip {
+  margin: 0 0 1rem;
+  padding: 1rem 1.05rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(201, 162, 39, 0.28);
+}
+
+body.logan5 .ultimate-rate-alert-heading {
+  margin: 0 0 0.45rem;
+  font-size: 0.95rem;
+  color: #fff;
+}
+
+body.logan5 .ultimate-rate-alert-lead {
+  margin: 0 0 0.75rem;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+body.logan5 .ultimate-rate-alert-lead strong {
+  color: #e8c84a;
+}
+
+body.logan5 .ultimate-rate-alert-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+body.logan5 .ultimate-rate-alert-form input[type="email"] {
+  width: 100%;
+  padding: 0.5rem 0.65rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(0, 0, 0, 0.2);
+  color: #fff;
+  font-size: 0.82rem;
+}
+
+body.logan5 .ultimate-rate-alert-consent {
+  display: flex;
+  gap: 0.4rem;
+  align-items: flex-start;
+  font-size: 0.64rem;
+  line-height: 1.4;
+  opacity: 0.85;
+  cursor: pointer;
+}
+
+body.logan5 .ultimate-rate-alert-consent input {
+  margin-top: 0.15rem;
+  flex-shrink: 0;
+}
+
+body.logan5 .ultimate-rate-alert-submit {
+  font-size: 0.78rem;
+  padding: 0.5rem 0.85rem;
+  align-self: stretch;
+  width: 100%;
+  border-color: rgba(201, 162, 39, 0.55);
+  color: #e8c84a;
+  font-weight: 700;
+}
+
+body.logan5 .ultimate-rate-alert-submit:hover {
+  background: rgba(201, 162, 39, 0.18);
+}
+
+body.logan5 .ultimate-rate-alert-success {
+  margin: 0.5rem 0 0;
+  font-size: 0.72rem;
+  color: #4ade80;
+  line-height: 1.4;
+}
+
+body.logan5 .ultimate-rate-alert-error {
+  margin: 0.35rem 0 0;
+  font-size: 0.68rem;
+  color: #fb923c;
+}
+
+@media (max-width: 520px) {
+  body.logan5 .pbw-layout {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  body.logan5 .pbw-legend {
+    width: 100%;
+    max-width: 280px;
+  }
+
+}

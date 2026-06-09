@@ -12,6 +12,9 @@ window.MMG_SITE = {
   logan4Path: "/mortgage-calculator/go4.html",
   /** Logan5 — ultimate payment calculator (Logan Martini, lead + realtor tool) */
   logan5Path: "/mortgage-calculator/go5.html",
+  /** Affordability Calculator — Vonk-style split layout, Martini branded */
+  affordabilityPath: "/mortgage-calculator/affordability.html",
+  martiniApplyUrl: "https://applywithmartini.com",
   /** Logan1 realtor co-marketing */
   realtorPath: "/mortgage-calculator/realtor.html",
   socialWizardPath: "/mortgage-calculator/go4.html",

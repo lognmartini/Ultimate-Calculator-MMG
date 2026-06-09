@@ -316,6 +316,13 @@
     }
   }
 
+  function jumpToPaymentStep(opts) {
+    const price = Number($("homePrice")?.value || 0);
+    if (price < 50000) return;
+    if (opts?.instant) document.body.dataset.instantLanding = "1";
+    showStep(TOTAL_STEPS - 1);
+  }
+
   function applyDeepLink() {
     if (deepLinkBootstrapped) return;
     deepLinkBootstrapped = true;
@@ -325,6 +332,12 @@
     const price = p.get("price") || p.get("p") || p.get("list_price") || "";
     const down = p.get("down") || p.get("down_percent") || "";
     const credit = p.get("credit") || p.get("credit_score") || "";
+    const program = p.get("program") || p.get("loan_program") || "";
+    const instant = p.get("instant") === "1" || p.get("listing") === "1";
+    const jumpPayment =
+      instant ||
+      p.get("quick") === "1" ||
+      (p.get("step") === "payment" && (price || address));
 
     if (address) {
       const field = $("propertyAddress");
@@ -334,8 +347,53 @@
     if (price) setPriceFromParam(price);
     if (down) setDownFromParam(down);
     if (credit) setCreditFromParam(credit);
+    if (program) {
+      const progEl = $("loanProgram");
+      const allowed = ["conventional", "fha", "va", "usda"];
+      if (progEl && allowed.includes(program)) {
+        const price = Number($("homePrice")?.value || 0);
+        const profile = {
+          firstTimeBuyer: Boolean($("firstTimeBuyer")?.checked),
+          veteranEligible: Boolean($("veteranEligible")?.checked),
+          usdaEligible: Boolean($("usdaEligible")?.checked),
+        };
+        const countyKey =
+          window.MMG_getCountyKey?.() || window.MMG_LOAN_LIMITS?.defaultCounty || "wake";
+        let resolved = program;
+        if (
+          window.MMG_isProgramAvailable &&
+          price > 0 &&
+          !window.MMG_isProgramAvailable(program, price, profile, countyKey)
+        ) {
+          resolved = "conventional";
+        }
+        if (typeof window.MMG_logan5_setProgram === "function") {
+          window.MMG_logan5_setProgram(resolved, resolved === program);
+        } else {
+          progEl.value = resolved;
+          progEl.dispatchEvent(new Event("change", { bubbles: true }));
+          document.querySelectorAll(".ultimate-program-btn").forEach((btn) => {
+            const on = btn.dataset.program === resolved;
+            btn.classList.toggle("active", on);
+            btn.setAttribute("aria-checked", on ? "true" : "false");
+          });
+        }
+        if (resolved !== program && $("loanProgramNote")) {
+          if (program === "va") {
+            $("loanProgramNote").textContent =
+              "VA link needs Military / VA eligible checked — showing conventional estimate.";
+          } else if (program === "usda") {
+            $("loanProgramNote").textContent =
+              "USDA link needs rural property checked — showing conventional estimate.";
+          }
+        }
+      }
+    }
 
     recalculate();
+
+    const jumpOpts = { instant, listing: p.get("listing") === "1" || instant };
+    const jumpDelay = instant ? 350 : 800;
 
     if (address && typeof window.MMG_lookupAddress === "function") {
       window.setTimeout(() => {
@@ -344,10 +402,31 @@
       }, 600);
     }
 
-    if (p.get("step") === "payment" || p.get("quick") === "1") {
-      if (price || Number($("homePrice")?.value) >= 50000) {
-        window.setTimeout(() => showStep(TOTAL_STEPS - 1), 800);
-      }
+    if (!jumpPayment) return;
+
+    const tryJump = () => jumpToPaymentStep(jumpOpts);
+
+    if (address && !price) {
+      let jumped = false;
+      const onResolved = () => {
+        if (jumped) return;
+        jumped = true;
+        document.removeEventListener("mmg-property-resolved", onResolved);
+        recalculate();
+        window.setTimeout(tryJump, 200);
+      };
+      document.addEventListener("mmg-property-resolved", onResolved);
+      window.setTimeout(() => {
+        if (jumped) return;
+        jumped = true;
+        document.removeEventListener("mmg-property-resolved", onResolved);
+        tryJump();
+      }, 4000);
+      return;
+    }
+
+    if (price || Number($("homePrice")?.value) >= 50000) {
+      window.setTimeout(tryJump, jumpDelay);
     }
   }
 
@@ -408,6 +487,25 @@
     bindWizard();
     bindLiveUpdates();
     updateLiveRailVisibility();
+    const p = new URLSearchParams(window.location.search);
+    const skipWizard =
+      p.get("instant") === "1" ||
+      p.get("listing") === "1" ||
+      p.get("quick") === "1" ||
+      (p.get("step") === "payment" && (p.get("price") || p.get("address") || p.get("addr") || p.get("a")));
+    if (!skipWizard) {
+      ["instant", "listing", "quick", "step"].forEach((k) => {
+        if (p.has(k)) {
+          p.delete(k);
+          try {
+            const clean = `${window.location.pathname}${p.toString() ? `?${p}` : ""}${window.location.hash}`;
+            history.replaceState(null, "", clean);
+          } catch {
+            /* ignore */
+          }
+        }
+      });
+    }
     showStep(0);
     window.setTimeout(applyDeepLink, 300);
     window.setTimeout(recalculate, 900);

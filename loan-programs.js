@@ -31,7 +31,7 @@ window.MMG_LOAN_PROGRAMS = {
     miRequiredBelowLtv: 100,
     defaultMiAnnualRate: 0.55,
     upfrontMipPercent: 1.75,
-    rateSpreadVsConventional: 0.25,
+    rateSpreadVsConventional: -0.125,
     feeSheetNote: "Includes estimated annual MIP. Upfront MIP (~1.75% of loan) may be financed.",
   },
   va: {
@@ -47,7 +47,7 @@ window.MMG_LOAN_PROGRAMS = {
     miRequiredBelowLtv: 0,
     defaultMiAnnualRate: 0,
     fundingFeePercent: 2.15,
-    rateSpreadVsConventional: -0.125,
+    rateSpreadVsConventional: -0.25,
     feeSheetNote: "VA funding fee varies by service history and use. Fee can often be financed into the loan.",
   },
   usda: {
@@ -63,7 +63,7 @@ window.MMG_LOAN_PROGRAMS = {
     miRequiredBelowLtv: 100,
     defaultMiAnnualRate: 0.35,
     upfrontGuaranteePercent: 1,
-    rateSpreadVsConventional: 0.125,
+    rateSpreadVsConventional: -0.125,
     feeSheetNote: "Property and household income must meet USDA eligibility. Guarantee fees apply for the life of the loan.",
   },
   jumbo: {
@@ -78,8 +78,8 @@ window.MMG_LOAN_PROGRAMS = {
     miLabel: "PMI",
     miRequiredBelowLtv: 80,
     defaultMiAnnualRate: 0.45,
-    rateSpreadVsConventional: 0.375,
-    feeSheetNote: "Jumbo underwriting is stricter. Rates and minimum down vary by lender and loan size.",
+    rateSpreadVsConventional: 0.5,
+    feeSheetNote: "High-balance conventional (above conforming limit). Stricter reserves; rates vary by loan size.",
   },
 };
 
@@ -154,4 +154,11 @@ window.MMG_getSellerConcessionNote = function (programId, downPercent) {
     return cfg.tiers[cfg.tiers.length - 1];
   }
   return cfg;
+};
+
+window.MMG_getSellerConcessionMax = function (programId, downPercent, homePrice) {
+  const note = window.MMG_getSellerConcessionNote(programId, downPercent);
+  const pct = Number(note.maxPercent) || 3;
+  const price = Number(homePrice) || 0;
+  return Math.max(0, Math.round(price * (pct / 100)));
 };

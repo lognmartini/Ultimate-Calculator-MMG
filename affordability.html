@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="mmg-api-base" content="/" />
+  <meta name="description" content="Smart mortgage calculators by Martini Mortgage Group — affordability, purchase, refinance, rent vs buy, VA, DSCR, and fix &amp; flip. Educational estimates only." />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#1a1230" />
+  <link rel="canonical" href="https://martinimortgagegroup.com/mortgage-calculator/affordability.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Martini Mortgage Group" />
+  <meta property="og:title" content="Mortgage Calculators | Martini Mortgage Group" />
+  <meta property="og:description" content="Estimate payments, affordability, refinance savings, rent vs buy, VA loans, DSCR, and fix &amp; flip returns — Martini Mortgage Group, Raleigh NC." />
+  <meta property="og:url" content="https://martinimortgagegroup.com/mortgage-calculator/affordability.html" />
+  <title>Mortgage Calculators | Martini Mortgage Group</title>
+  <link rel="icon" href="assets/mmg-logo.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles-affordability.css" />
+</head>
+<body class="afd-page">
+  <header class="afd-header">
+    <div class="afd-header-inner">
+      <a href="https://martinimortgagegroup.com" class="afd-logo" target="_blank" rel="noopener">
+        <img src="assets/mmg-logo-full.png" data-asset="assets/mmg-logo-full.png" data-fallback="assets/mmg-logo-alt.png" alt="Martini Mortgage Group powered by Gold Star Mortgage" width="320" height="52" />
+      </a>
+      <nav class="afd-nav" aria-label="Main">
+        <a href="https://martinimortgagegroup.com/loan-options/">Loan Options</a>
+        <a href="go5.html">Payment Calculator</a>
+        <a href="https://martinimortgagegroup.com/about/">About</a>
+        <a href="https://martinimortgagegroup.com/contact/">Contact</a>
+      </nav>
+      <div class="afd-header-actions">
+        <a href="tel:+19192384934" class="afd-header-phone">(919) 238-4934</a>
+        <a href="https://applywithmartini.com" class="afd-btn-quote afd-btn-apply" target="_blank" rel="noopener">Apply Online</a>
+        <a href="https://applywithmartini.com" class="afd-btn-quote" data-afd-quote target="_blank" rel="noopener">Get a Quote</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="afd-hero">
+    <div class="afd-hero-overlay" aria-hidden="true"></div>
+    <div class="afd-hero-content">
+      <h1>Smart Mortgage Calculators to Guide Your Next Move</h1>
+      <p class="afd-hero-lead">Instantly estimate your monthly payments, home affordability, and refinance savings — with Martini Mortgage Group strategy and today&rsquo;s rates.</p>
+      <div class="afd-hero-actions">
+        <a href="#calculator" class="afd-hero-btn afd-hero-btn-primary">Explore Calculators</a>
+        <a href="#quote" class="afd-hero-btn afd-hero-btn-outline">Request a Quote</a>
+      </div>
+      <p class="afd-hero-note">No commitment. No fees. Just clarity.</p>
+    </div>
+  </section>
+
+  <section class="afd-calculator-section" id="calculator">
+    <h2 class="afd-calc-title">Calculator</h2>
+    <ul class="afd-tabs" role="tablist" aria-label="Calculator type">
+      <li class="active" data-tab="affordability" data-hash="affordability"><a href="#affordability">Affordability Calculator</a></li>
+      <li data-tab="purchase" data-hash="purchase-item"><a href="#purchase-item">Purchase</a></li>
+      <li data-tab="refinance" data-hash="refinance-item"><a href="#refinance-item">Refinance</a></li>
+      <li data-tab="rentbuy" data-hash="rent-buy-item"><a href="#rent-buy-item">Rent vs Buy</a></li>
+      <li data-tab="vapurchase" data-hash="veteran-affairs"><a href="#veteran-affairs">VA Purchase</a></li>
+      <li data-tab="varefinance" data-hash="va-refinance"><a href="#va-refinance">VA Refinance</a></li>
+      <li data-tab="dscr" data-hash="rental-loan"><a href="#rental-loan">Debt-Service (DSCR)</a></li>
+      <li data-tab="fixflip" data-hash="fix-and-flip"><a href="#fix-and-flip">Fix &amp; Flip</a></li>
+    </ul>
+
+    <div class="afd-split">
+      <!-- LEFT: forms -->
+      <div class="afd-left">
+        <h3 class="afd-left-title" id="afdLeftTitle">Affordability Calculator</h3>
+        <p class="afd-rate-badge" id="afdRateBadge">Loading today&rsquo;s rate&hellip;</p>
+
+        <!-- Affordability -->
+        <div class="afd-tab-panel active" data-tab="affordability">
+          <ul class="afd-subtabs" role="tablist" aria-label="Affordability program">
+            <li class="active"><a href="#affordability-conventional" data-program="conventional">Conventional</a></li>
+            <li><a href="#affordability-fha" data-program="fha">FHA</a></li>
+            <li><a href="#affordability-va" data-program="va">VA</a></li>
+            <li><a href="#affordability-usda" data-program="usda">USDA</a></li>
+            <li><a href="#affordability-jumbo" data-program="jumbo">Jumbo</a></li>
+          </ul>
+          <div class="afd-field-row">
+            <div class="afd-field">
+              <label for="afdIncome">Gross Income (Monthly)</label>
+              <input type="text" id="afdIncome" class="afd-calc-input" value="8500" inputmode="decimal" />
+            </div>
+            <div class="afd-field">
+              <label for="afdDebts">Monthly Debts</label>
+              <input type="text" id="afdDebts" class="afd-calc-input" value="650" inputmode="decimal" />
+              <p class="afd-field-note">Auto, cards (minimums), student loans — exclude rent &amp; utilities.</p>
+            </div>
+          </div>
+          <div class="afd-field-row">
+            <div class="afd-field">
+              <label for="afdHomePrice">Home Price</label>
+              <input type="text" id="afdHomePrice" class="afd-calc-input" value="450000" inputmode="decimal" />
+            </div>
+            <div class="afd-field">
+              <label for="afdDownPayment">Down Payment</label>
+              <div class="afd-input-row">
+                <input type="text" id="afdDownPayment" class="afd-calc-input" value="5" />
+                <div class="afd-toggle-group" data-toggle-scope="afd-down">
+                  <label data-toggle-group="afd-down" data-mode="dollar"><input type="radio" name="afd-down" /> $</label>
+                  <label class="active" data-toggle-group="afd-down" data-mode="percent"><input type="radio" name="afd-down" checked /> %</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="afd-field-row">
+            <div class="afd-field">
+              <label for="afdLoanAmount">Loan Amount</label>
+              <input type="text" id="afdLoanAmount" class="afd-calc-input" value="427500" readonly />
+            </div>
+            <div class="afd-field">
+              <label for="afdLoanTerm">Loan Term (Years)</label>
+              <input type="number" id="afdLoanTerm" class="afd-calc-input" value="30" min="10" max="30" step="5" />
+            </div>
+          </div>
+          <div class="afd-field-row">
+            <div class="afd-field">
+              <label for="afdRate">Interest Rate (%)</label>
+              <input type="number" id="afdRate" class="afd-calc-input" value="6.25" min="0" max="20" step="0.125" />
+            </div>
+            <div class="afd-field afd-only-conventional afd-only-jumbo">
+              <label for="afdCredit">Credit Score (estimate)</label>
+              <select id="afdCredit" class="afd-calc-input">
+                <option value="760">760+</option>
+                <option value="740" selected>700–759</option>
+                <option value="680">640–699</option>
+                <option value="620">580–639</option>
+              </select>
+            </div>
+            <div class="afd-field afd-only-va hidden">
+              <label for="afdVaFundingOption">This is my&hellip;</label>
+              <select id="afdVaFundingOption" class="afd-calc-input">
+                <option value="first_use" selected>First time use of a VA loan</option>
+                <option value="after_first_use">I have used a VA loan before</option>
+                <option value="exempt">Exempt from VA funding fee</option>
+              </select>
+            </div>
+          </div>
+          <div class="afd-field-row">
+            <div class="afd-field">
+              <label for="afdTaxPct">Property Tax (% yearly)</label>
+              <input type="number" id="afdTaxPct" class="afd-calc-input" value="0.6" min="0" max="3" step="0.05" />
+            </div>
+            <div class="afd-field">
+              <label for="afdInsurance">Homeowners Insurance (Yearly $)</label>
+              <input type="text" id="afdInsurance" class="afd-calc-input" value="1800" />
+            </div>
+          </div>
+          <div class="afd-field-row">
+            <div class="afd-field">
+              <label for="afdHoa">HOA Dues (Monthly)</label>
+              <input type="text" id="afdHoa" class="afd-calc-input" value="0" />
+            </div>
+            <div class="afd-field afd-only-fha afd-only-usda hidden">
+              <label id="afdMipLabel">Annual MIP / Guarantee Fee (%)</label>
+              <input type="number" id="afdAnnualMip" class="afd-calc-input" value="0.55" min="0" max="2" step="0.05" readonly />
+            </div>
+          </div>
+          <div class="afd-quote-row">
+            <a href="https://applywithmartini.com" class="afd-btn-get-quote" data-afd-quote target="_blank" rel="noopener">Get a Quote</a>
+          </div>
+        </div>
+
+        <!-- Purchase -->
+        <div class="afd-tab-panel" data-tab="purchase">
+          <div class="afd-field">
+            <label for="purHomePrice">Home Value</label>
+            <input type="text" id="purHomePrice" class="afd-calc-input" value="450000" />
+          </div>
+          <div class="afd-field">
+            <label for="purDownPayment">Down Payment</label>
+            <div class="afd-input-row">
+              <input type="text" id="purDownPayment" class="afd-calc-input" value="5" />
+              <div class="afd-toggle-group">
+                <label data-toggle-group="pur-down" data-mode="dollar"><input type="radio" name="pur-down" /> $</label>
+                <label class="active" data-toggle-group="pur-down" data-mode="percent"><input type="radio" name="pur-down" checked /> %</label>
+              </div>
+            </div>
+          </div>
+          <div class="afd-field">
+            <label for="purLoanAmount">Mortgage Amount</label>
+            <input type="text" id="purLoanAmount" class="afd-calc-input" value="427500" readonly />
+          </div>
+          <div class="afd-field">
+            <label for="purLoanTerm">Loan Term (Years)</label>
+            <input type="number" id="purLoanTerm" class="afd-calc-input" value="30" min="10" max="30" />
+          </div>
+          <div class="afd-field">
+            <label for="purInterestRate">Interest Rate (%)</label>
+            <input type="number" id="purInterestRate" class="afd-calc-input" value="6.25" min="0" max="20" step="0.125" />
+          </div>
+          <div class="afd-field">
+            <label for="purPropertyTax">Property Tax (Yearly)</label>
+            <div class="afd-input-row">
+              <input type="text" id="purPropertyTax" class="afd-calc-input" value="0.6" />
+              <div class="afd-toggle-group">
+                <label data-toggle-group="pur-tax" data-mode="dollar"><input type="radio" name="pur-tax" /> $</label>
+                <label class="active" data-toggle-group="pur-tax" data-mode="percent"><input type="radio" name="pur-tax" checked /> %</label>
+              </div>
+            </div>
+          </div>
+          <div class="afd-field">
+            <label for="purInsurance">Homeowners Insurance (Yearly)</label>
+            <div class="afd-input-row">
+              <input type="text" id="purInsurance" class="afd-calc-input" value="1800" />
+              <div class="afd-toggle-group">
+                <label class="active" data-toggle-group="pur-ins" data-mode="dollar"><input type="radio" name="pur-ins" checked /> $</label>
+                <label data-toggle-group="pur-ins" data-mode="percent"><input type="radio" name="pur-ins" /> %</label>
+              </div>
+            </div>
+          </div>
+          <div class="afd-field">
+            <label for="purHoa">HOA Dues Per Month</label>
+            <input type="text" id="purHoa" class="afd-calc-input" value="0" />
+          </div>
+          <div class="afd-field">
+            <label for="purExtraPayment">Extra Payment Per Month</label>
+            <input type="text" id="purExtraPayment" class="afd-calc-input" value="0" />
+          </div>
+          <div class="afd-quote-row">
+            <a href="https://applywithmartini.com" class="afd-btn-get-quote" data-afd-quote target="_blank" rel="noopener">Get a Quote</a>
+          </div>
+        </div>
+
+        <!-- Refinance -->
+        <div class="afd-tab-panel" data-tab="refinance">
+          <fieldset class="afd-fieldset">
+            <legend>What is most important to you?</legend>
+            <div class="afd-choice-pills">
+              <label class="afd-choice-pill active"><input type="radio" name="rfGoal" value="payment" checked /> Low Monthly Payment</label>
+              <label class="afd-choice-pill"><input type="radio" name="rfGoal" value="interest" /> Lower Interest Paid</label>
+            </div>
+          </fieldset>
+          <h4 class="afd-section-label">Current Loan</h4>
+          <div class="afd-field">
+            <label for="rfOrigLoan">Original Loan Amount</label>
+            <input type="text" id="rfOrigLoan" class="afd-calc-input" value="350000" />
+          </div>
+          <div class="afd-field-row">
+            <div class="afd-field">
+              <label for="rfOrigRate">Original Rate (%)</label>
+              <input type="number" id="rfOrigRate" class="afd-calc-input" value="7" step="0.125" />
+            </div>
+            <div class="afd-field">
+              <label for="rfOrigTerm">Original Term (Years)</label>
+              <input type="number" id="rfOrigTerm" class="afd-calc-input" value="30" min="5" max="30" />
+            </div>
+          </div>
+          <div class="afd-field">
+            <label for="rfMonthsElapsed">Months Already Paid</label>
+            <input type="number" id="rfMonthsElapsed" class="afd-calc-input" value="36" min="0" max="360" />
+          </div>
+          <h4 class="afd-section-label">New Loan</h4>
+          <div class="afd-field">
+            <label for="rfBalance">Current Loan Balance</label>
+            <input type="text" id="rfBalance" class="afd-calc-input" value="340000" />
+          </div>
+          <div class="afd-field-row">
+            <div class="afd-field">
+              <label for="rfCashOut">Cash Out Amount</label>
+              <input type="text" id="rfCashOut" class="afd-calc-input" value="0" />
+            </div>
+            <div class="afd-field">
+              <label for="rfFees">Refinance Costs</label>
+              <input type="text" id="rfFees" class="afd-calc-input" value="3500" />
+            </div>
+          </div>
+          <div class="afd-field">
+            <label for="rfNewLoan">New Loan Amount</label>
+            <input type="text" id="rfNewLoan" class="afd-calc-input" readonly />
+          </div>
+          <div class="afd-field-row">
+            <div class="afd-field">
+              <label for="rfNewRate">New Rate (%)</label>
+              <input type="number" id="rfNewRate" class="afd-calc-input" value="6.25" step="0.125" />
+            </div>
+            <div class="afd-field">
+              <label for="rfNewTerm">New Term (Years)</label>
+              <input type="number" id="rfNewTerm" class="afd-calc-input" value="30" min="5" max="30" />
+            </div>
+          </div>
+          <fieldset class="afd-fieldset">
+            <legend>Paying Refinance Costs</legend>
+            <div class="afd-choice-pills">
+              <label class="afd-choice-pill"><input type="radio" name="rfFeesInLoan" value="yes" /> Include In Loan</label>
+              <label class="afd-choice-pill active"><input type="radio" name="rfFeesInLoan" value="no" checked /> Pay Out of Pocket</label>
+            </div>
+          </fieldset>
+          <div class="afd-quote-row">
+            <a href="https://applywithmartini.com" class="afd-btn-get-quote" data-afd-quote target="_blank" rel="noopener">Get a Quote</a>
+          </div>
+        </div>
+
+        <!-- Rent vs Buy -->
+        <div class="afd-tab-panel" data-tab="rentbuy">
+          <h4 class="afd-section-label">Mortgage Information</h4>
+          <div class="afd-field-row">
+            <div class="afd-field">
+              <label for="rvbHomePrice">Home Price</label>
+              <input type="text" id="rvbHomePrice" class="afd-calc-input" value="450000" />
+            </div>
+            <div class="afd-field">
+              <label for="rvbDown">Down Payment</label>
+              <div class="afd-input-row">
+                <input type="text" id="rvbDown" class="afd-calc-input" value="10" />
+                <div class="afd-toggle-group">
+                  <label data-toggle-group="rvb-down" data-mode="dollar"><input type="radio" name="rvb-down" /> $</label>
+                  <label class="active" data-toggle-group="rvb-down" data-mode="percent"><input type="radio" name="rvb-down" checked /> %</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="afd-field-row">
+            <div class="afd-field">
+              <label for="rvbRate">Interest Rate (%)</label>
+              <input type="number" id="rvbRate" class="afd-calc-input" value="6.25" step="0.125" />
+            </div>
+            <div class="afd-field">
+              <label for="rvbTerm">Loan Term (Years)</label>
+              <input type="number" id="rvbTerm" class="afd-calc-input" value="30" />
+            </div>
+          </div>
+          <div class="afd-field-row">
+            <div class="afd-field">
+              <label for="rvbTax">Annual Property Taxes ($)</label>
+              <input type="text" id="rvbTax" class="afd-calc-input" value="2700" />
+            </div>
+            <div class="afd-field">
+              <label for="rvbIns">Annual Insurance ($)</label>
+              <input type="text" id="rvbIns" class="afd-calc-input" value="1800" />
+            </div>
+          </div>
+          <div class="afd-field-row">
+            <div class="afd-field">
+              <label for="rvbHoa">Annual HOA ($)</label>
+              <input type="text" id="rvbHoa" class="afd-calc-input" value="0" />
+            </div>
+            <div class="afd-field">
+              <label for="rvbMaint">Annual Maintenance (% of value)</label>
+              <input type="number" id="rvbMaint" class="afd-calc-input" value="1" step="0.25" />
+            </div>
+          </div>
+          <h4 class="afd-section-label">Buying Assumptions</h4>
+          <div class="afd-field-row">
+            <div class="afd-field">
+              <label for="rvbAppreciation">Annual Appreciation (%)</label>
+              <input type="number" id="rvbAppreciation" class="afd-calc-input" value="3" step="0.25" />
+            </div>
+            <div class="afd-field">
+              <label for="rvbSellCost">Selling Costs (%)</label>
+              <input type="number" id="rvbSellCost" class="afd-calc-input" value="6" step="0.5" />
+            </div>
+          </div>
+          <h4 class="afd-section-label">Renting Assumptions</h4>
+          <div class="afd-field-row">
+            <div class="afd-field">
+              <label for="rvbRent">Monthly Rent</label>
+              <input type="text" id="rvbRent" class="afd-calc-input" value="2200" />
+            </div>
+            <div class="afd-field">
+              <label for="rvbRentGrowth">Rent Appreciation (%)</label>
+              <input type="number" id="rvbRentGrowth" class="afd-calc-input" value="2" step="0.25" />
+            </div>
+          </div>
+          <div class="afd-field">
+            <label for="rvbYears">Compare Over (Years)</label>
+            <input type="number" id="rvbYears" class="afd-calc-input" value="7" min="1" max="30" />
+          </div>
+          <div class="afd-quote-row">
+            <a href="https://applywithmartini.com" class="afd-btn-get-quote" data-afd-quote target="_blank" rel="noopener">Get a Quote</a>
+          </div>
+        </div>
+
+        <!-- VA Purchase -->
+        <div class="afd-tab-panel" data-tab="vapurchase">
+          <div class="afd-field">
+            <label for="vaHomePrice">Home Value</label>
+            <input type="text" id="vaHomePrice" class="afd-calc-input" value="400000" />
+          </div>
+          <div class="afd-field">
+            <label for="vaDown">Down Payment</label>
+            <div class="afd-input-row">
+              <input type="text" id="vaDown" class="afd-calc-input" value="0" />
+              <div class="afd-toggle-group">
+                <label data-toggle-group="va-down" data-mode="dollar"><input type="radio" name="va-down" /> $</label>
+                <label class="active" data-toggle-group="va-down" data-mode="percent"><input type="radio" name="va-down" checked /> %</label>
+              </div>
+            </div>
+          </div>
+          <div class="afd-field">
+            <label for="vaBaseLoan">Base Mortgage Amount</label>
+            <input type="text" id="vaBaseLoan" class="afd-calc-input" readonly />
+          </div>
+          <div class="afd-field-row">
+            <div class="afd-field">
+              <label for="vaTerm">Loan Term (Years)</label>
+              <input type="number" id="vaTerm" class="afd-calc-input" value="30" />
+            </div>
+            <div class="afd-field">
+              <label for="vaRate">Interest Rate (%)</label>
+              <input type="number" id="vaRate" class="afd-calc-input" value="6" step="0.125" />
+            </div>
+          </div>
+          <div class="afd-field-row">
+            <div class="afd-field">
+              <label for="vaFundingOption">This is my&hellip;</label>
+              <select id="vaFundingOption" class="afd-calc-input">
+                <option value="first_use" selected>First time use of a VA loan</option>
+                <option value="after_first_use">I have used a VA loan before</option>
+                <option value="exempt">Exempt from VA funding fee</option>
+              </select>
+            </div>
+            <div class="afd-field">
+              <label for="vaFundingFee">VA Funding Fee (%)</label>
+              <input type="number" id="vaFundingFee" class="afd-calc-input" value="2.15" readonly />
+            </div>
+          </div>
+          <div class="afd-field">
+            <label for="vaFinalLoan">Final Mortgage Amount</label>
+            <input type="text" id="vaFinalLoan" class="afd-calc-input" readonly />
+          </div>
+          <div class="afd-field-row">
+            <div class="afd-field">
+              <label for="vaTax">Property Tax (% yearly)</label>
+              <input type="number" id="vaTax" class="afd-calc-input" value="0.6" step="0.05" />
+            </div>
+            <div class="afd-field">
+              <label for="vaIns">Homeowners Insurance (Yearly $)</label>
+              <input type="text" id="vaIns" class="afd-calc-input" value="1600" />
+            </div>
+          </div>
+          <div class="afd-field">
+            <label for="vaHoa">HOA Dues Per Month</label>
+            <input type="text" id="vaHoa" class="afd-calc-input" value="0" />
+          </div>
+          <div class="afd-field">
+            <label for="vaExtra">Extra Payment Per Month</label>
+            <input type="text" id="vaExtra" class="afd-calc-input" value="0" />
+          </div>
+          <div class="afd-quote-row">
+            <a href="https://applywithmartini.com" class="afd-btn-get-quote" data-afd-quote target="_blank" rel="noopener">Get a Quote</a>
+          </div>
+        </div>
+
+        <!-- VA Refinance -->
+        <div class="afd-tab-panel" data-tab="varefinance">
+          <div class="afd-field">
+            <label for="varBalance">Current VA Loan Balance</label>
+            <input type="text" id="varBalance" class="afd-calc-input" value="320000" />
+          </div>
+          <div class="afd-field-row">
+            <div class="afd-field">
+              <label for="varOrigRate">Current Rate (%)</label>
+              <input type="number" id="varOrigRate" class="afd-calc-input" value="6.75" step="0.125" />
+            </div>
+            <div class="afd-field">
+              <label for="varOrigTerm">Remaining Term (Years)</label>
+              <input type="number" id="varOrigTerm" class="afd-calc-input" value="27" />
+            </div>
+          </div>
+          <div class="afd-field-row">
+            <div class="afd-field">
+              <label for="varNewRate">New Rate (%)</label>
+              <input type="number" id="varNewRate" class="afd-calc-input" value="5.75" step="0.125" />
+            </div>
+            <div class="afd-field">
+              <label for="varNewTerm">New Term (Years)</label>
+              <input type="number" id="varNewTerm" class="afd-calc-input" value="30" />
+            </div>
+          </div>
+          <div class="afd-field-row">
+            <div class="afd-field">
+              <label for="varFundingOption">Funding Fee Status</label>
+              <select id="varFundingOption" class="afd-calc-input">
+                <option value="irrrl" selected>VA IRRRL (0.5% fee typical)</option>
+                <option value="exempt">Exempt from funding fee</option>
+              </select>
+            </div>
+            <div class="afd-field">
+              <label for="varFees">Closing Costs</label>
+              <input type="text" id="varFees" class="afd-calc-input" value="2500" />
+            </div>
+          </div>
+          <div class="afd-quote-row">
+            <a href="https://applywithmartini.com" class="afd-btn-get-quote" data-afd-quote target="_blank" rel="noopener">Get a Quote</a>
+          </div>
+        </div>
+
+        <!-- DSCR -->
+        <div class="afd-tab-panel" data-tab="dscr">
+          <div class="afd-field-row">
+            <div class="afd-field">
+              <label for="dscrUnits">Number of Units</label>
+              <select id="dscrUnits" class="afd-calc-input">
+                <option value="1" selected>1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </select>
+            </div>
+            <div class="afd-field">
+              <label for="dscrPurpose">Purchase or Refinance</label>
+              <select id="dscrPurpose" class="afd-calc-input">
+                <option value="purchase">Purchase</option>
+                <option value="refinance" selected>Refinance</option>
+              </select>
+            </div>
+          </div>
+          <div class="afd-field">
+            <label for="dscrValue">Property Value / Purchase Price</label>
+            <input type="text" id="dscrValue" class="afd-calc-input" value="500000" />
+          </div>
+          <div class="afd-field-row">
+            <div class="afd-field">
+              <label for="dscrRent1">Unit 1 Monthly Rent</label>
+              <input type="text" id="dscrRent1" class="afd-calc-input" value="2800" />
+            </div>
+            <div class="afd-field">
+              <label for="dscrRent2">Unit 2 Monthly Rent</label>
+              <input type="text" id="dscrRent2" class="afd-calc-input" value="0" />
+            </div>
+          </div>
+          <div class="afd-field-row">
+            <div class="afd-field">
+              <label for="dscrTax">Annual Property Taxes</label>
+              <input type="text" id="dscrTax" class="afd-calc-input" value="4000" />
+            </div>
+            <div class="afd-field">
+              <label for="dscrIns">Annual Insurance</label>
+              <input type="text" id="dscrIns" class="afd-calc-input" value="3000" />
+            </div>
+          </div>
+          <div class="afd-field-row">
+            <div class="afd-field">
+              <label for="dscrHoa">Monthly HOA Fee</label>
+              <input type="text" id="dscrHoa" class="afd-calc-input" value="0" />
+            </div>
+            <div class="afd-field">
+              <label for="dscrVacancy">Vacancy Rate (%)</label>
+              <input type="number" id="dscrVacancy" class="afd-calc-input" value="5" min="0" max="20" />
+            </div>
+          </div>
+          <div class="afd-field-row">
+            <div class="afd-field">
+              <label for="dscrMaint">Annual Repairs &amp; Maintenance ($)</label>
+              <input type="text" id="dscrMaint" class="afd-calc-input" value="500" />
+            </div>
+            <div class="afd-field">
+              <label for="dscrUtils">Annual Utilities ($)</label>
+              <input type="text" id="dscrUtils" class="afd-calc-input" value="1200" />
+            </div>
+          </div>
+          <div class="afd-field-row">
+            <div class="afd-field">
+              <label for="dscrLtv">Loan to Value (%)</label>
+              <input type="number" id="dscrLtv" class="afd-calc-input" value="75" min="50" max="80" />
+            </div>
+            <div class="afd-field">
+              <label for="dscrRate">Interest Rate (%)</label>
+              <input type="number" id="dscrRate" class="afd-calc-input" value="7.5" step="0.125" />
+            </div>
+          </div>
+          <div class="afd-field-row">
+            <div class="afd-field">
+              <label for="dscrTerm">Loan Term (Years)</label>
+              <input type="number" id="dscrTerm" class="afd-calc-input" value="30" />
+            </div>
+            <div class="afd-field">
+              <label for="dscrOrigFee">Origination Fee (%)</label>
+              <input type="number" id="dscrOrigFee" class="afd-calc-input" value="2" step="0.25" />
+            </div>
+          </div>
+          <div class="afd-quote-row">
+            <a href="https://applywithmartini.com" class="afd-btn-get-quote" data-afd-quote target="_blank" rel="noopener">Get a Quote</a>
+          </div>
+        </div>
+
+        <!-- Fix & Flip -->
+        <div class="afd-tab-panel" data-tab="fixflip">
+          <div class="afd-field-row">
+            <div class="afd-field">
+              <label for="ffPurchase">Purchase Price</label>
+              <input type="text" id="ffPurchase" class="afd-calc-input" value="280000" />
+            </div>
+            <div class="afd-field">
+              <label for="ffRehab">Renovation Cost</label>
+              <input type="text" id="ffRehab" class="afd-calc-input" value="65000" />
+            </div>
+          </div>
+          <div class="afd-field-row">
+            <div class="afd-field">
+              <label for="ffArv">After Repaired Value (ARV)</label>
+              <input type="text" id="ffArv" class="afd-calc-input" value="420000" />
+            </div>
+            <div class="afd-field">
+              <label for="ffMonths">Length of Loan (Months)</label>
+              <select id="ffMonths" class="afd-calc-input">
+                <option value="6">6</option>
+                <option value="9" selected>9</option>
+                <option value="12">12</option>
+                <option value="15">15</option>
+                <option value="18">18</option>
+              </select>
+            </div>
+          </div>
+          <div class="afd-field-row">
+            <div class="afd-field">
+              <label for="ffTax">Annual Property Taxes</label>
+              <input type="text" id="ffTax" class="afd-calc-input" value="3200" />
+            </div>
+            <div class="afd-field">
+              <label for="ffIns">Annual Insurance</label>
+              <input type="text" id="ffIns" class="afd-calc-input" value="2400" />
+            </div>
+          </div>
+          <div class="afd-field-row">
+            <div class="afd-field">
+              <label for="ffLtv">Purchase Price LTV (%)</label>
+              <input type="number" id="ffLtv" class="afd-calc-input" value="80" min="65" max="90" />
+            </div>
+            <div class="afd-field">
+              <label for="ffRate">Interest Rate (%)</label>
+              <input type="number" id="ffRate" class="afd-calc-input" value="10" step="0.125" />
+            </div>
+          </div>
+          <div class="afd-field-row">
+            <div class="afd-field">
+              <label for="ffOrigFee">Origination Fee (%)</label>
+              <input type="number" id="ffOrigFee" class="afd-calc-input" value="2" step="0.25" />
+            </div>
+            <div class="afd-field">
+              <label for="ffClosing">Other Closing Costs (%)</label>
+              <input type="number" id="ffClosing" class="afd-calc-input" value="3" step="0.5" />
+            </div>
+          </div>
+          <div class="afd-field">
+            <label for="ffSellCost">Cost to Sell (% of ARV)</label>
+            <input type="number" id="ffSellCost" class="afd-calc-input" value="5" step="0.5" />
+          </div>
+          <div class="afd-quote-row">
+            <a href="https://applywithmartini.com" class="afd-btn-get-quote" data-afd-quote target="_blank" rel="noopener">Get a Quote</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: results -->
+      <div class="afd-right">
+        <div class="afd-stats-bar" id="afdStatsBar">
+          <span>All Payment<strong id="statPayment">—</strong></span>
+          <span>Loan Amount<strong id="statLoan">—</strong></span>
+          <span id="statThirdWrap">Total Interest<strong id="statThird">—</strong></span>
+        </div>
+
+        <div class="afd-results-columns">
+          <div class="afd-results-main">
+            <div class="afd-afford-hero-result hidden" id="afdAffordHero">
+              <p class="afd-afford-hero-label">You may afford up to</p>
+              <div class="afd-big-number" id="afdMaxPrice">—</div>
+              <p id="afdAffordNote">Based on income, debts, and program guidelines.</p>
+            </div>
+
+            <div class="afd-result-card">
+              <h3>Payment Breakdown</h3>
+              <div class="afd-donut-wrap">
+                <div class="afd-donut-chart">
+                  <canvas id="afdDonut" width="150" height="150" aria-hidden="true"></canvas>
+                  <div class="afd-donut-center">
+                    <strong id="afdDonutCenter" aria-live="polite">—</strong>
+                    <span>per month</span>
+                  </div>
+                </div>
+                <ul class="afd-legend" id="afdLegend"></ul>
+              </div>
+            </div>
+
+            <div class="afd-result-card">
+              <div class="afd-detail-tabs" role="tablist">
+                <button type="button" class="afd-detail-tab active" data-detail="monthly">Monthly Payment</button>
+                <button type="button" class="afd-detail-tab" data-detail="total">Total Payment</button>
+              </div>
+              <ul class="afd-detail-list active" id="afdDetailMonthly"></ul>
+              <ul class="afd-detail-list" id="afdDetailTotal"></ul>
+            </div>
+          </div>
+
+          <div class="afd-results-side" id="afdResultsSide">
+            <div class="afd-side-stats" id="afdSideStats">
+              <span>Savings<strong id="sideSavings">—</strong></span>
+              <span>Payment<strong id="sidePayment">—</strong></span>
+              <span>Term Saved<strong id="sideTerm">—</strong></span>
+            </div>
+            <div class="afd-result-card afd-payoff-card" id="afdPayoffCard">
+              <h3>Early Payoff Strategy</h3>
+              <p class="afd-card-note">Add extra principal to see interest and term savings.</p>
+              <label for="afdExtraStrategy">Additional Monthly</label>
+              <input type="text" id="afdExtraStrategy" class="afd-calc-input afd-side-input" value="0" placeholder="$0" />
+            </div>
+            <div class="afd-result-card afd-summary-card" id="afdSummaryCard">
+              <h3>Summary</h3>
+              <p id="afdSummaryText" class="afd-summary-text">Adjust inputs to see your estimate.</p>
+            </div>
+            <div class="afd-cta-card">
+              <h3>Ready for a real quote?</h3>
+              <p>Get a personalized Loan Estimate from Martini Mortgage Group — strategy first, not just a rate.</p>
+              <a href="https://applywithmartini.com" class="afd-btn-get-quote" data-afd-quote target="_blank" rel="noopener">Get a Quote</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <p class="afd-disclaimer">
+    <strong>Educational estimate only</strong> — not a Loan Estimate, pre-approval, or rate lock. Figures use typical program guidelines and market assumptions; actual limits depend on credit, documentation, reserves, property type, and automated underwriting. Martini Mortgage Group · NMLS #3446 · Logan Martini NMLS #1591485 · Equal Housing Lender.
+  </p>
+
+  <section class="afd-quote-section" id="quote">
+    <div class="afd-quote-inner">
+      <div class="afd-quote-copy">
+        <h2>No Obligation.<br />No Credit Check.</h2>
+        <p>Whether you are a first-time homebuyer or an experienced investor, having a mortgage team you can count on is crucial.</p>
+        <p>We pride ourselves on excellent communication and easy accessibility when you need us. Our experienced staff is here to guide you every step of the way.</p>
+        <p>Start a discussion about your mortgage needs today.</p>
+      </div>
+      <div class="afd-quote-cta-box">
+        <h3>Get started with Martini Mortgage Group</h3>
+        <p>Apply online for a personalized quote and Loan Estimate review with Logan Martini&rsquo;s team.</p>
+        <a href="https://applywithmartini.com" class="afd-btn-get-quote afd-quote-apply" data-afd-quote target="_blank" rel="noopener">Apply Online — Get a Quote</a>
+        <a href="tel:+19192384934" class="afd-quote-phone">Or call (919) 238-4934</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="afd-footer">
+    <div class="afd-footer-inner">
+      <img src="assets/equal-housing-lender.png" alt="Equal Housing Lender" width="48" height="49" />
+      <div>
+        <strong>Martini Mortgage Group</strong> at Gold Star Mortgage Financial Group, Corporation · NMLS #3446<br />
+        507 N Blount St, Raleigh, NC 27604 · <a href="tel:+19192384934">(919) 238-4934</a> · <a href="https://martinimortgagegroup.com">martinimortgagegroup.com</a>
+      </div>
+      <div>
+        <a href="go5.html">Payment Calculator</a> · <a href="compare-versions.html">All calculators</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="site-config.js"></script>
+  <script src="market-rates.js"></script>
+  <script src="affordability-calc.js"></script>
+</body>
+</html>

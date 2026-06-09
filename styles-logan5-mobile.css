@@ -128,7 +128,17 @@
   }
 
   body.logan5 .ultimate-hub-btn-rail {
-    min-height: 48px;
+    min-height: 3.5rem;
+    flex: 1 1 calc(50% - 0.25rem);
+  }
+
+  body.logan5 .ultimate-hub-btn-rail.ultimate-hub-btn-apply,
+  body.logan5 .ultimate-hub-btn-rail.ultimate-hub-btn-email {
+    flex: 1 1 100%;
+  }
+
+  body.logan5 .ultimate-hub-share-snapshot {
+    grid-template-columns: 1fr;
   }
 
   body.logan5 .ultimate-live-rate-strip {
@@ -170,5 +180,28 @@
 @media (max-width: 380px) {
   body.logan5 .ultimate-program-picker {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .ultimate-rate-ticker-bar {
+    font-size: 0.65rem;
+    padding: 0.4rem 0.5rem;
+    gap: 0.25rem 0.5rem;
+  }
+
+  .ultimate-rate-ticker-bar .rate-ticker-countdown {
+    width: 100%;
+    text-align: center;
+    font-size: 0.62rem;
+  }
+
+  .ultimate-donut-panel.is-open .ultimate-donut-body {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .ultimate-readiness-ticks {
+    justify-content: center;
   }
 }

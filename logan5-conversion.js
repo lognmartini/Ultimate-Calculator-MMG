@@ -106,9 +106,13 @@
     try {
       if (localStorage.getItem(EXIT_KEY) === "1") return false;
       if (localStorage.getItem(EXIT_SUBMITTED_KEY) === "1") return false;
+      if (localStorage.getItem("mmg_save_estimate_submitted") === "1") return false;
+      if (localStorage.getItem("mmg_save_estimate_dismissed") === "1") return false;
     } catch {
       /* ignore */
     }
+    const modal = $("ultimateExitModal");
+    if (modal && !modal.classList.contains("hidden")) return false;
     const piti = $("pitiPayment")?.textContent?.trim();
     return piti && piti !== "—" && piti !== "$0";
   }
@@ -136,6 +140,23 @@
     }
   }
 
+  function bindScrollDepthExit() {
+    let fired = false;
+    const onScroll = () => {
+      if (fired || currentWizardStep() < 2) return;
+      const docH = document.documentElement.scrollHeight - window.innerHeight;
+      if (docH <= 0) return;
+      const ratio = window.scrollY / docH;
+      if (ratio >= 0.5) {
+        fired = true;
+        window.removeEventListener("scroll", onScroll, { passive: true });
+        showExitModal();
+        window.MMG_logan5_track?.("exit_scroll_depth", { depth: 0.5 });
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+  }
+
   function bindExitIntent() {
     let shown = false;
     const onLeave = (e) => {
@@ -144,6 +165,7 @@
       if (y > 12) return;
       shown = true;
       showExitModal();
+      window.MMG_logan5_track?.("exit_intent_mouse", {});
     };
     document.addEventListener("mouseout", onLeave);
 
@@ -170,6 +192,9 @@
       } catch {
         /* ignore */
       }
+      if (ok) {
+        window.MMG_trackPixel?.("LeadSubmit", { source: "logan5-exit-intent" });
+      }
       window.setTimeout(() => hideExitModal(true), 2200);
     });
   }
@@ -191,6 +216,7 @@
     bindSliderHook();
     bindSaveEstimateExpand();
     bindExitIntent();
+    bindScrollDepthExit();
     updateSpeedHint(0);
   }
 

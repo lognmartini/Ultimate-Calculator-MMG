@@ -11,12 +11,21 @@
   const DELAY_MS = 8000;
   const LOGAN4_DELAY_MS = 7000;
   const LOGAN4_SCROLL_MIN_MS = 3000;
+  const LOGAN5_DELAY_MS = 15000;
+  const LOGAN5_ENGAGEMENT_MS = 10000;
+  const LOGAN5_HUB_DELAY_MS = 8000;
 
   let sliderMoves = 0;
   let shown = false;
   let timer = null;
   let logan4ResultsAt = 0;
   let logan4ScrollObserver = null;
+  let logan5ResultsAt = 0;
+  let logan5ScrollObserver = null;
+  let logan5HubTimer = null;
+  let logan5ScrollDepthObserver = null;
+  let logan5ScrollDepthFired = false;
+  const LOGAN5_SCROLL_DEPTH = 0.5;
 
   function isLogan1() {
     return (
@@ -116,34 +125,62 @@
     };
   }
 
+  function activeSaveTab() {
+    return document.querySelector(".save-estimate-tab.active")?.dataset.saveTab || "email";
+  }
+
   async function submitLead(form) {
     const emailEl = document.getElementById("saveEstimateEmail");
     const nameEl = document.getElementById("saveEstimateName");
     const phoneEl = document.getElementById("saveEstimatePhone");
+    const smsPhoneEl = document.getElementById("saveEstimateSmsPhone");
+    const smsConsentEl = document.getElementById("saveEstimateSmsConsent");
     const successEl = document.getElementById("saveEstimateSuccess");
+    const tab = isLogan5() ? activeSaveTab() : "email";
     const email = emailEl?.value?.trim() || "";
-    if (!email || !email.includes("@")) {
+    const smsPhone = smsPhoneEl?.value?.trim() || "";
+    const digits = smsPhone.replace(/\D/g, "");
+
+    if (tab === "sms") {
+      if (digits.length < 10) {
+        smsPhoneEl?.focus();
+        return;
+      }
+      if (!smsConsentEl?.checked) {
+        smsConsentEl?.focus();
+        return;
+      }
+    } else if (!email || !email.includes("@")) {
       emailEl?.focus();
       return;
     }
+
     const assignedLo = resolveAssignedLo();
     const payload = {
-      email,
+      email: tab === "sms" ? `sms+${digits}@estimate.martinimortgagegroup.com` : email,
       name: nameEl?.value?.trim() || "",
-      phone: phoneEl?.value?.trim() || "",
+      phone: tab === "sms" ? smsPhone : phoneEl?.value?.trim() || "",
       agent: document.documentElement.dataset.coAgent || "",
       ref: assignedLo === "team" ? "" : assignedLo,
       assignedLo,
       version: isLogan5() ? "Logan5" : isLogan4() ? "Logan4" : isLogan3() ? "Logan3" : "Logan1",
-      source: isLogan5()
-        ? "logan5-save-estimate"
-        : isLogan4()
-          ? "logan4-save-estimate"
-          : isLogan3()
-            ? "logan3-save-estimate"
-            : "logan1-save-estimate",
+      source:
+        tab === "sms"
+          ? "logan5-sms-estimate"
+          : isLogan5()
+            ? "logan5-save-estimate"
+            : isLogan4()
+              ? "logan4-save-estimate"
+              : isLogan3()
+                ? "logan3-save-estimate"
+                : "logan1-save-estimate",
       consent: true,
-      scenario: collectScenario(),
+      smsConsent: tab === "sms" ? true : undefined,
+      scenario: {
+        ...collectScenario(),
+        delivery: tab,
+        shareUrl: window.MMG_logan5_buildShareUrl?.() || "",
+      },
     };
     try {
       const res = await fetch(`${apiBase()}api/lead`, {
@@ -154,11 +191,18 @@
       if (!res.ok) throw new Error("save failed");
       form?.classList.add("hidden");
       successEl?.classList.remove("hidden");
+      if (successEl && tab === "sms") {
+        successEl.textContent = "Saved — we'll text your estimate shortly.";
+      }
       try {
         localStorage.setItem(SUBMITTED_KEY, "1");
       } catch {
         /* ignore */
       }
+      window.MMG_trackPixel?.("LeadSubmit", {
+        source: payload.source,
+        delivery: tab,
+      });
       window.setTimeout(() => hideCard(false), 5000);
     } catch {
       if (successEl) {
@@ -185,6 +229,118 @@
         showCard();
       }
     }, DELAY_MS);
+  }
+
+  function logan5EngagedLongEnough() {
+    return logan5ResultsAt > 0 && Date.now() - logan5ResultsAt >= LOGAN5_ENGAGEMENT_MS;
+  }
+
+  function tryShowLogan5Card() {
+    if (!isLogan5() || shown || !shouldShow()) return;
+    if (!logan5EngagedLongEnough()) return;
+    showCard();
+  }
+
+  function scheduleLogan5Reveal() {
+    if (!isLogan5() || !shouldShow()) return;
+    logan5ResultsAt = Date.now();
+    if (timer) window.clearTimeout(timer);
+    timer = window.setTimeout(() => {
+      timer = null;
+      tryShowLogan5Card();
+    }, LOGAN5_DELAY_MS);
+    bindLogan5ScrollReveal();
+  }
+
+  function bindLogan5ScrollReveal() {
+    if (!isLogan5() || logan5ScrollObserver) return;
+    const target =
+      document.getElementById("ultimatePaymentMain") ||
+      document.getElementById("saveEstimateCard");
+    if (!target || typeof IntersectionObserver === "undefined") return;
+    logan5ScrollObserver = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.some((e) => e.isIntersecting && e.intersectionRatio >= 0.25);
+        if (!visible || shown || !shouldShow()) return;
+        if (!logan5EngagedLongEnough()) return;
+        if (timer) {
+          window.clearTimeout(timer);
+          timer = null;
+        }
+        showCard();
+      },
+      { threshold: [0.25, 0.5] }
+    );
+    logan5ScrollObserver.observe(target);
+  }
+
+  function bindLogan5ScrollDepth() {
+    if (!isLogan5() || logan5ScrollDepthObserver) return;
+    const target = document.querySelector(".ultimate-payment-details");
+    if (!target || typeof IntersectionObserver === "undefined") return;
+    logan5ScrollDepthObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (logan5ScrollDepthFired || shown || !shouldShow()) return;
+          const docH = document.documentElement.scrollHeight - window.innerHeight;
+          const scrolled = docH > 0 ? window.scrollY / docH : 0;
+          if (e.isIntersecting && (scrolled >= LOGAN5_SCROLL_DEPTH || e.intersectionRatio >= 0.2)) {
+            logan5ScrollDepthFired = true;
+            if (logan5EngagedLongEnough()) {
+              if (timer) {
+                window.clearTimeout(timer);
+                timer = null;
+              }
+              showCard();
+            }
+          }
+        });
+      },
+      { threshold: [0.15, 0.35, 0.5] }
+    );
+    logan5ScrollDepthObserver.observe(target);
+  }
+
+  function bindSaveEstimateTabs() {
+    if (!isLogan5()) return;
+    const emailTab = document.getElementById("saveTabEmail");
+    const smsTab = document.getElementById("saveTabSms");
+    const emailInput = document.getElementById("saveEstimateEmail");
+    const smsFields = document.getElementById("saveEstimateSmsFields");
+    const title = document.querySelector(".save-estimate-title");
+
+    function setTab(tab) {
+      [emailTab, smsTab].forEach((btn) => {
+        if (!btn) return;
+        const on = btn.dataset.saveTab === tab;
+        btn.classList.toggle("active", on);
+        btn.setAttribute("aria-selected", on ? "true" : "false");
+      });
+      if (emailInput) emailInput.required = tab === "email";
+      smsFields?.classList.toggle("hidden", tab !== "sms");
+      if (title) {
+        title.textContent =
+          tab === "sms" ? "Text me this payment" : "Email me this payment";
+      }
+    }
+
+    emailTab?.addEventListener("click", () => setTab("email"));
+    smsTab?.addEventListener("click", () => setTab("sms"));
+    setTab("email");
+  }
+
+  function bindLogan5HubReveal() {
+    if (!isLogan5()) return;
+    document.querySelectorAll("[data-hub-action]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        if (shown || !shouldShow()) return;
+        if (logan5HubTimer) window.clearTimeout(logan5HubTimer);
+        logan5HubTimer = window.setTimeout(() => {
+          logan5HubTimer = null;
+          if (logan5EngagedLongEnough()) showCard();
+        }, LOGAN5_HUB_DELAY_MS);
+      });
+    });
   }
 
   function bindLogan4ScrollReveal() {
@@ -228,15 +384,17 @@
         }, LOGAN4_DELAY_MS);
         bindLogan4ScrollReveal();
       });
-    } else if (isLogan3() || isLogan5()) {
+    } else if (isLogan5()) {
       document.addEventListener("mmg-wizard-results", () => {
-        window.setTimeout(showCard, isLogan5() ? 2500 : 400);
+        scheduleLogan5Reveal();
+        bindLogan5ScrollDepth();
       });
-      if (isLogan5()) {
-        document.addEventListener("mmg-logan5-reverse", () => {
-          if (!shown) window.setTimeout(showCard, 5000);
-        });
-      }
+      bindLogan5HubReveal();
+      bindSaveEstimateTabs();
+    } else if (isLogan3()) {
+      document.addEventListener("mmg-wizard-results", () => {
+        window.setTimeout(showCard, 400);
+      });
     }
 
     document.getElementById("saveEstimateDismiss")?.addEventListener("click", () => hideCard(true));

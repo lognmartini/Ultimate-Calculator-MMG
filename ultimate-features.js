@@ -657,9 +657,20 @@
     });
     const convGuide = $("ultimateGuideConventional");
     if (convGuide) {
-      convGuide.textContent = $("firstTimeBuyer")?.checked
-        ? "3% min (FTHB) · PMI below 20%"
-        : "5% min · PMI below 20%";
+      const price = Number($("homePrice")?.value || 0);
+      const countyKey = getCountyKey();
+      const downPct = Number($("downPercent")?.value || 0);
+      if (
+        price > 0 &&
+        window.MMG_isJumboConventional?.(price, downPct, countyKey)
+      ) {
+        const jMin = window.MMG_getJumboMinDownPercent?.(price, countyKey) ?? 10.1;
+        convGuide.textContent = `High balance · ${jMin}%+ down · Fannie conventional`;
+      } else {
+        convGuide.textContent = $("firstTimeBuyer")?.checked
+          ? "3% min (FTHB) · PMI below 20%"
+          : "5% min · PMI below 20%";
+      }
     }
   }
 
@@ -688,16 +699,11 @@
       if (window.MMG_isProgramAvailable) {
         available = window.MMG_isProgramAvailable(id, price, profile, countyKey);
       }
-      btn.disabled = !available;
+      // Keep buttons clickable so taps still show eligibility hints (disabled skips click).
+      btn.disabled = false;
       btn.classList.toggle("ultimate-program-unavailable", !available);
       btn.setAttribute("aria-disabled", available ? "false" : "true");
     });
-
-    const jumboBtn = $("ultimateProgramJumbo");
-    if (jumboBtn && window.MMG_isJumboLoan) {
-      const showJumbo = price > 0 && window.MMG_isJumboLoan(price, 15, countyKey);
-      jumboBtn.classList.toggle("hidden", !showJumbo);
-    }
 
     const current = $("loanProgram")?.value || "conventional";
     if (
@@ -727,6 +733,7 @@
   }
 
   function setProgramFromButton(programId, force) {
+    if (programId === "jumbo") programId = "conventional";
     const program = $("loanProgram");
     if (!program) return;
     const price = Number($("homePrice")?.value || 0);
@@ -784,60 +791,180 @@
     return downPayment + closingCosts + prepaids + extraPoints;
   }
 
+  function martiniRateFor(programId, downPct, termYears) {
+    if (window.MMG_getMartiniRateForProgram) {
+      return window.MMG_getMartiniRateForProgram(programId, downPct, termYears);
+    }
+    return Number($("interestRate")?.value || 0);
+  }
+
+  function pitiFromLoan(price, loan, rate, years, base, programId, downPct) {
+    const pi = monthlyPi(loan, rate, years);
+    const taxRate = base.annualTax / Math.max(base.homePrice, 1);
+    const insRate = base.annualInsurance / Math.max(base.homePrice, 1);
+    const monthlyTax = (price * taxRate) / 12;
+    const monthlyIns = (price * insRate) / 12;
+    const needsMi = programNeedsMi(programId, downPct);
+    const monthlyMi = needsMi ? (loan * (base.pmiAnnualRate / 100)) / 12 : 0;
+    const piti = pi + monthlyTax + monthlyIns;
+    return piti + monthlyMi + base.monthlyHoa;
+  }
+
+  function isConformingForBuydown(price, downPct, countyKey) {
+    return window.MMG_isConformingLoan
+      ? window.MMG_isConformingLoan(price, downPct, countyKey)
+      : !window.MMG_isJumboLoan?.(price, downPct, countyKey);
+  }
+
+  function buildDownCompareCard(price, base, countyKey, downLow, downHigh, opts) {
+    const rateLow = martiniRateFor("conventional", downLow);
+    const rateHigh = martiniRateFor("conventional", downHigh);
+    const loanLow = Math.max(0, price - Math.round((price * downLow) / 100));
+    const loanHigh = Math.max(0, price - Math.round((price * downHigh) / 100));
+    const pitiLow = pitiFromLoan(price, loanLow, rateLow, base.years, base, "conventional", downLow);
+    const pitiHigh = pitiFromLoan(price, loanHigh, rateHigh, base.years, base, "conventional", downHigh);
+    const cashLow = estimateCashToClose(price, downLow, loanLow, base.annualTax, base.annualInsurance, 0);
+    const cashHigh = estimateCashToClose(price, downHigh, loanHigh, base.annualTax, base.annualInsurance, 0);
+    const limit = window.MMG_getConformingLimit?.(countyKey) || 832750;
+    return {
+      id: opts.id || "hb-down-compare",
+      featured: Boolean(opts.featured),
+      featuredBadge: opts.featuredBadge || "Cost comparison",
+      icon: opts.icon || "⚖️",
+      title: opts.title || `${downLow}% vs ${downHigh}% down`,
+      tagline: opts.tagline || "Trade monthly payment against cash to close",
+      getEstimate() {
+        const moDiff = pitiLow - pitiHigh;
+        const cashDiff = cashLow - cashHigh;
+        return {
+          piti: pitiLow,
+          cash: cashLow,
+          note:
+            `${downHigh}%: ${formatCurrency(pitiHigh)}/mo · ` +
+            `${moDiff > 0 ? `${formatCurrency(moDiff)} higher/mo at ${downLow}%` : "similar monthly"} · ` +
+            `${cashDiff > 0 ? `${formatCurrency(cashDiff)} less cash at ${downHigh}%` : ""} · above ${formatCurrency(limit)} conforming`,
+        };
+      },
+    };
+  }
+
   function buildCreativeLoanOptions() {
     const base = getInputs();
     const price = base.homePrice;
     const vet = base.profile?.veteranEligible;
     const fthb = base.profile?.firstTimeBuyer;
     const countyKey = getCountyKey();
+    const isJumbo =
+      window.MMG_isJumboConventional?.(price, base.downPct, countyKey) || false;
+    const conformingBuydown = isConformingForBuydown(price, base.downPct, countyKey);
     const options = [];
+    const noteBump = window.MMG_MARKET?.lenderPaidBuydownNoteBump ?? 0.625;
+    const y1Cut = window.MMG_MARKET?.buydown10Reduction ?? 1;
 
-    options.push({
-      id: "buydown-21",
-      icon: "📉",
-      title: "2-1 Seller buydown",
-      tagline: "Lower payments years 1–2 via seller concessions",
-      getEstimate() {
-        const loan = Math.max(0, price - Math.round((price * base.downPct) / 100));
-        const sched = calcBuydownSchedule(loan, base.rate, base.years, "2-1");
-        const y1Pi = sched.rows[0]?.pi || sched.fullPi;
-        const taxRate = base.annualTax / Math.max(price, 1);
-        const insRate = base.annualInsurance / Math.max(price, 1);
-        const monthlyTax = (price * taxRate) / 12;
-        const monthlyIns = (price * insRate) / 12;
-        const needsMi = programNeedsMi(base.programId, base.downPct);
-        const monthlyMi = needsMi ? (loan * (base.pmiAnnualRate / 100)) / 12 : 0;
-        const piti = y1Pi + monthlyTax + monthlyIns;
-        const total = piti + monthlyMi + base.monthlyHoa;
-        const cash = estimateCashToClose(price, base.downPct, loan, base.annualTax, base.annualInsurance, 0);
-        return { piti: total, cash, note: "Year 1 payment estimate" };
-      },
-    });
+    if (conformingBuydown) {
+      options.push({
+        id: "buydown-10-lp",
+        featured: true,
+        featuredBadge: "Martini complimentary",
+        icon: "🎁",
+        title: "Complimentary 1-year buydown",
+        tagline: "Within conforming limit — Martini lender-paid 1-0 buydown",
+        getEstimate() {
+          const loan = Math.max(0, price - Math.round((price * base.downPct) / 100));
+          const parRate = martiniRateFor(base.programId, base.downPct);
+          const noteRate = parRate + noteBump;
+          const y1Rate = Math.max(0.125, noteRate - y1Cut);
+          const piti = pitiFromLoan(price, loan, y1Rate, base.years, base, base.programId, base.downPct);
+          const cash = estimateCashToClose(price, base.downPct, loan, base.annualTax, base.annualInsurance, 0);
+          return {
+            piti,
+            cash,
+            note: `Year 1 ~${formatRate(y1Rate)} effective · note ${formatRate(noteRate)} yrs 2–30 · conforming loan`,
+          };
+        },
+      });
+    } else if (isJumbo) {
+      const jMin = window.MMG_getJumboMinDownPercent?.(price, countyKey) ?? 15;
+      const highDown = jMin < 15 ? 15 : 20;
+      options.push(
+        buildDownCompareCard(price, base, countyKey, jMin, highDown, {
+          id: "hb-down-ladder",
+          featured: true,
+          featuredBadge: "High-balance compare",
+          title: `${jMin}% vs ${highDown}% high-balance`,
+          tagline: "More down = lower payment & less MI — see the tradeoff",
+          icon: "⚖️",
+        })
+      );
+      options.push({
+        id: "hb-lifetime-interest",
+        icon: "📉",
+        title: "Interest saved with 20% down",
+        tagline: "High-balance conventional — equity vs cash flow",
+        getEstimate() {
+          const down = 20;
+          const rate = martiniRateFor("conventional", down);
+          const loan = Math.max(0, price - Math.round((price * down) / 100));
+          const piti20 = pitiFromLoan(price, loan, rate, base.years, base, "conventional", down);
+          const cash20 = estimateCashToClose(price, down, loan, base.annualTax, base.annualInsurance, 0);
+          const rateMin = martiniRateFor("conventional", jMin);
+          const loanMin = Math.max(0, price - Math.round((price * jMin) / 100));
+          const pi20 = monthlyPi(loan, rate, base.years);
+          const piMin = monthlyPi(loanMin, rateMin, base.years);
+          const interest20 = pi20 * base.years * 12 - loan;
+          const interestMin = piMin * base.years * 12 - loanMin;
+          const saved = Math.max(0, interestMin - interest20);
+          return {
+            piti: piti20,
+            cash: cash20,
+            note: `20% down vs ${jMin}%: est. ${formatCurrency(saved)} less lifetime interest · ~${formatRate(rate)}`,
+          };
+        },
+      });
+    }
 
-    if (window.MMG_isFhaEligible && window.MMG_isFhaEligible(price, countyKey)) {
+    if (window.MMG_isFhaEligible && window.MMG_isFhaEligible(price, countyKey) && !isJumbo) {
       options.push({
         id: "fha-low-down",
         icon: "🔑",
         title: "FHA 3.5% down",
         tagline: `Within ${window.MMG_LOAN_LIMITS?.counties[countyKey]?.name || "county"} FHA limit`,
         getEstimate() {
-          const inputs = { ...base, downPct: 3.5, programId: "fha" };
-          const est = estimatePitiForPrice(price, inputs);
-          const cash = estimateCashToClose(price, 3.5, est.loan, base.annualTax, base.annualInsurance, 0);
-          return { piti: est.total, cash, note: "Includes FHA MIP estimate" };
+          const down = 3.5;
+          const rate = martiniRateFor("fha", down);
+          const loan = Math.max(0, price - Math.round((price * down) / 100));
+          const piti = pitiFromLoan(price, loan, rate, base.years, base, "fha", down);
+          const cash = estimateCashToClose(price, down, loan, base.annualTax, base.annualInsurance, 0);
+          return { piti, cash, note: `FHA ~${formatRate(rate)} · includes MIP estimate` };
         },
       });
-    } else if (window.MMG_isJumboLoan && window.MMG_isJumboLoan(price, 15, countyKey)) {
+    } else if (isJumbo) {
+      const down = 20;
       options.push({
-        id: "jumbo-15",
-        icon: "💎",
-        title: "Jumbo 15% down",
-        tagline: "Above 2026 conforming limit · $832,750 baseline",
+        id: "hb-no-pmi",
+        icon: "🛡️",
+        title: "20% down — no PMI",
+        tagline: "High-balance conventional with no monthly mortgage insurance",
         getEstimate() {
-          const inputs = { ...base, downPct: 15, programId: "jumbo", rate: base.rate + 0.25 };
-          const est = estimatePitiForPrice(price, inputs);
-          const cash = estimateCashToClose(price, 15, est.loan, base.annualTax, base.annualInsurance, 0);
-          return { piti: est.total, cash, note: "Jumbo rates vary — educational estimate" };
+          const rate = martiniRateFor("conventional", down);
+          const loan = Math.max(0, price - Math.round((price * down) / 100));
+          const piti = pitiFromLoan(price, loan, rate, base.years, base, "conventional", down);
+          const cash = estimateCashToClose(price, down, loan, base.annualTax, base.annualInsurance, 0);
+          const jMin = window.MMG_getJumboMinDownPercent?.(price, countyKey) ?? 15;
+          const pitiMin = pitiFromLoan(
+            price,
+            Math.max(0, price - Math.round((price * jMin) / 100)),
+            martiniRateFor("conventional", jMin),
+            base.years,
+            base,
+            "conventional",
+            jMin
+          );
+          return {
+            piti,
+            cash,
+            note: `~${formatCurrency(pitiMin - piti)}/mo less than ${jMin}% with PMI · ~${formatRate(rate)}`,
+          };
         },
       });
     } else {
@@ -847,61 +974,145 @@
         title: "10% conventional",
         tagline: "Lower MI · strong equity start",
         getEstimate() {
-          const inputs = { ...base, downPct: 10, programId: "conventional" };
-          const est = estimatePitiForPrice(price, inputs);
-          const cash = estimateCashToClose(price, 10, est.loan, base.annualTax, base.annualInsurance, 0);
-          return { piti: est.total, cash, note: "PMI until 20% equity on many loans" };
+          const down = 10;
+          const rate = martiniRateFor("conventional", down);
+          const loan = Math.max(0, price - Math.round((price * down) / 100));
+          const piti = pitiFromLoan(price, loan, rate, base.years, base, "conventional", down);
+          const cash = estimateCashToClose(price, 10, loan, base.annualTax, base.annualInsurance, 0);
+          return { piti, cash, note: `~${formatRate(rate)} · PMI until 20% equity` };
         },
       });
     }
 
-    if (vet && window.MMG_isVaEligible?.(base.profile)) {
+    if (vet && window.MMG_isVaEligible?.(base.profile) && !isJumbo) {
       options.push({
         id: "va-zero",
         icon: "🎖️",
         title: "VA 0% down",
         tagline: "No down payment for eligible veterans",
         getEstimate() {
-          const inputs = { ...base, downPct: 0, programId: "va" };
-          const est = estimatePitiForPrice(price, inputs);
-          const cash = estimateCashToClose(price, 0, est.loan, base.annualTax, base.annualInsurance, 0);
-          return { piti: est.total, cash, note: "VA funding fee may apply" };
+          const rate = martiniRateFor("va", 0);
+          const loan = price;
+          const piti = pitiFromLoan(price, loan, rate, base.years, base, "va", 0);
+          const cash = estimateCashToClose(price, 0, loan, base.annualTax, base.annualInsurance, 0);
+          return { piti, cash, note: `VA ~${formatRate(rate)} · funding fee may apply` };
         },
       });
-    } else if (fthb) {
+    } else if (base.profile?.usdaEligible && window.MMG_isUsdaEligible?.(base.profile) && !isJumbo) {
+      options.push({
+        id: "usda-zero",
+        icon: "🌾",
+        title: "USDA 0% down",
+        tagline: "Rural/suburban eligible · income limits apply",
+        getEstimate() {
+          const rate = martiniRateFor("usda", 0);
+          const loan = price;
+          const piti = pitiFromLoan(price, loan, rate, base.years, base, "usda", 0);
+          const cash = estimateCashToClose(price, 0, loan, base.annualTax, base.annualInsurance, 0);
+          return { piti, cash, note: `USDA ~${formatRate(rate)} · guarantee fee estimate` };
+        },
+      });
+    } else if (fthb && !isJumbo) {
       options.push({
         id: "fthb-3",
         icon: "🏡",
         title: "3% FTHB conventional",
         tagline: "First-time buyer low-down path",
         getEstimate() {
-          const inputs = { ...base, downPct: 3, programId: "conventional" };
-          const est = estimatePitiForPrice(price, inputs);
-          const cash = estimateCashToClose(price, 3, est.loan, base.annualTax, base.annualInsurance, 0);
-          return { piti: est.total, cash, note: "HomeReady-style estimate" };
+          const down = 3;
+          const rate = martiniRateFor("conventional", down);
+          const loan = Math.max(0, price - Math.round((price * down) / 100));
+          const piti = pitiFromLoan(price, loan, rate, base.years, base, "conventional", down);
+          const cash = estimateCashToClose(price, down, loan, base.annualTax, base.annualInsurance, 0);
+          return { piti, cash, note: `HomeReady-style ~${formatRate(rate)}` };
         },
       });
-    } else {
+    } else if (!isJumbo) {
       options.push({
         id: "conv-20",
         icon: "🏡",
         title: "20% conventional",
-        tagline: "No PMI · lowest monthly MI cost",
+        tagline: "No PMI · strongest equity start",
         getEstimate() {
-          const inputs = { ...base, downPct: 20, programId: "conventional" };
-          const est = estimatePitiForPrice(price, inputs);
-          const cash = estimateCashToClose(price, 20, est.loan, base.annualTax, base.annualInsurance, 0);
-          return { piti: est.total, cash, note: "Avoids monthly MI on conventional" };
+          const down = 20;
+          const rate = martiniRateFor("conventional", down);
+          const loan = Math.max(0, price - Math.round((price * down) / 100));
+          const piti = pitiFromLoan(price, loan, rate, base.years, base, "conventional", down);
+          const cash = estimateCashToClose(price, down, loan, base.annualTax, base.annualInsurance, 0);
+          return { piti, cash, note: `~${formatRate(rate)} · avoids monthly PMI` };
         },
       });
     }
 
-    return options.slice(0, 3);
+    if (isJumbo) {
+      const jDown = window.MMG_getJumboMinDownPercent?.(price, countyKey) ?? 15;
+      options.push({
+        id: "hb-15yr",
+        icon: "⚡",
+        title: "15-year high-balance",
+        tagline: "Build equity faster on loans above conforming",
+        getEstimate() {
+          const rate = martiniRateFor("conventional", jDown, 15);
+          const loan = Math.max(0, price - Math.round((price * jDown) / 100));
+          const piti = pitiFromLoan(price, loan, rate, 15, base, "conventional", jDown);
+          const cash = estimateCashToClose(price, jDown, loan, base.annualTax, base.annualInsurance, 0);
+          const piti30 = pitiFromLoan(
+            price,
+            loan,
+            martiniRateFor("conventional", jDown, 30),
+            30,
+            base,
+            "conventional",
+            jDown
+          );
+          return {
+            piti,
+            cash,
+            note: `15-yr ~${formatRate(rate)} · vs 30-yr saves ~${formatCurrency(Math.max(0, piti30 - piti))}/mo P&I`,
+          };
+        },
+      });
+    } else {
+      options.push({
+        id: "fixed-15",
+        icon: "⚡",
+        title: "15-year fixed",
+        tagline: "Pay off faster · less total interest",
+        getEstimate() {
+          const down = base.downPct;
+          const rate = martiniRateFor(base.programId, down, 15);
+          const loan = Math.max(0, price - Math.round((price * down) / 100));
+          const piti = pitiFromLoan(price, loan, rate, 15, base, base.programId, down);
+          const cash = estimateCashToClose(price, down, loan, base.annualTax, base.annualInsurance, 0);
+          return { piti, cash, note: `15-yr ~${formatRate(rate)} · higher P&I, lower lifetime cost` };
+        },
+      });
+    }
+
+    return options.slice(0, 4);
+  }
+
+  function updateCreativeLoansIntro() {
+    const lead = document.querySelector("#ultimateCompareView .wizard-lead");
+    if (!lead) return;
+    const price = Number($("homePrice")?.value || 0);
+    const down = Number($("downPercent")?.value || 0);
+    const countyKey = getCountyKey();
+    const conforming = isConformingForBuydown(price, down, countyKey);
+    if (conforming) {
+      lead.innerHTML =
+        "Starts with Martini&rsquo;s complimentary <strong>1-year lender-paid buydown</strong> (conforming loans) — then FHA, VA, and more matched to your price.";
+    } else {
+      const limit = formatCurrency(window.MMG_getConformingLimit?.(countyKey) || 832750);
+      lead.innerHTML =
+        `Above the <strong>${limit}</strong> conforming limit — compare <strong>down payment tiers</strong>, lifetime interest, and 15-year high-balance paths instead of a buydown.`;
+    }
   }
 
   function renderCreativeLoans() {
     const grid = $("ultimateCreativeLoans");
     if (!grid) return;
+    updateCreativeLoansIntro();
     const options = buildCreativeLoanOptions();
     const calendly =
       document.querySelector("[data-mmg-calendly]")?.href ||
@@ -909,10 +1120,15 @@
     grid.innerHTML = options
       .map((opt) => {
         const est = opt.getEstimate();
-        return `<article class="ultimate-creative-card" role="listitem" data-loan-id="${opt.id}">
+        const featured = opt.featured ? " ultimate-creative-card-featured" : "";
+        const badge = opt.featuredBadge
+          ? `<span class="ultimate-creative-badge">${escapeHtml(opt.featuredBadge)}</span>`
+          : "";
+        return `<article class="ultimate-creative-card${featured}" role="listitem" data-loan-id="${opt.id}">
           <header class="ultimate-creative-card-head">
             <span class="ultimate-creative-icon" aria-hidden="true">${opt.icon}</span>
             <div>
+              ${badge}
               <h3>${escapeHtml(opt.title)}</h3>
               <p>${escapeHtml(opt.tagline)}</p>
             </div>
@@ -958,9 +1174,9 @@
       consent: true,
       scenario: {
         ...collectScenarioSnapshot(),
-        realtorType: fd.get("realtorType"),
-        moveTimeline: fd.get("moveTimeline"),
-        realtorPriority: fd.get("realtorPriority"),
+        huntStyle: fd.get("huntStyle"),
+        keysTimeline: fd.get("keysTimeline"),
+        realtorSuperpower: fd.get("realtorSuperpower"),
       },
     };
     let ok = false;
@@ -977,6 +1193,7 @@
     const confirm = $("ultimateRealtorConfirm");
     const consent = $("ultimateRealtorConsent");
     if (ok && confirm) {
+      window.MMG_trackPixel?.("LeadSubmit", { source: "logan5-realtor-quiz" });
       form.querySelectorAll(".ultimate-realtor-q, .ultimate-realtor-contact, .ultimate-realtor-submit").forEach((el) => {
         el.classList.add("hidden");
       });
@@ -1069,6 +1286,7 @@
   window.MMG_logan5_applyReverse = applyReverseToCalculator;
   window.MMG_logan5_runReverse = runReversePayment;
   window.MMG_logan5_renderCreativeLoans = renderCreativeLoans;
+  window.MMG_logan5_setProgram = (programId, force) => setProgramFromButton(programId, Boolean(force));
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", bind);
