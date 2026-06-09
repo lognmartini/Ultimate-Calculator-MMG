@@ -1059,7 +1059,7 @@
     const params = new URLSearchParams(window.location.search);
     const ref = params.get("ref") || params.get("agent") || params.get("realtor");
     const strip = $("ultimateRealtorStrip");
-    if (strip && ref) {
+    if (strip && ref && !document.body.classList.contains("logan5-realtor")) {
       strip.classList.remove("hidden");
       const name = params.get("realtor_name") || ref.replace(/-/g, " ");
       strip.innerHTML = `Your realtor shared this calculator — questions? <a href="tel:+19192384934">Call Logan</a> or <a href="#" data-mmg-apply>apply</a> when you&rsquo;re ready. Partner: <strong>${name}</strong>`;

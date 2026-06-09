@@ -54,7 +54,16 @@
   function apiUrl(path) {
     if (API_BASE === null) return null;
     const clean = String(path || "").replace(/^\//, "");
-    return new URL(clean, window.location.href).toString();
+    let base = window.location.href;
+    const metaBase = document.querySelector('meta[name="mmg-api-base"]')?.content?.trim();
+    if (metaBase === "/") {
+      base = `${window.location.origin}/`;
+    } else if (metaBase && metaBase !== ".") {
+      base = metaBase.endsWith("/") ? metaBase : `${metaBase}/`;
+    } else {
+      base = new URL("./", window.location.href).href;
+    }
+    return new URL(clean, base).toString();
   }
 
   function initPageMode() {
@@ -73,7 +82,13 @@
     const embedFull =
       params.get("embed") === "full" ||
       (inIframe && params.get("embed") === "0");
-    const ref = (params.get("ref") || params.get("partner") || "").trim();
+    const ref = (
+      params.get("ref") ||
+      params.get("partner") ||
+      params.get("agent") ||
+      params.get("realtor") ||
+      ""
+    ).trim();
     if (embed) document.documentElement.classList.add("embed-mode");
     if (embedFull) document.documentElement.classList.add("embed-full-mode");
     if (ref) {
@@ -181,7 +196,8 @@
       else if (!url.searchParams.has("utm_content")) url.searchParams.set("utm_content", ref);
     }
     if (document.body.classList.contains("logan5") && !url.searchParams.has("utm_content")) {
-      url.searchParams.set("utm_content", "logan5-calculator");
+      const coAgent = document.documentElement.dataset.coAgent || agentRef;
+      url.searchParams.set("utm_content", coAgent || "logan5-calculator");
     }
     return url.toString();
   }
@@ -292,8 +308,8 @@
     const copyBtn = document.getElementById("copyShareLink");
     if (!wrap || !input) return;
     const show =
-      PAGE.ref ||
       PAGE.params.get("share") === "1" ||
+      PAGE.params.get("share") === "true" ||
       PAGE.params.get("partner") === "1";
     if (!show) return;
     wrap.classList.remove("hidden");
@@ -1305,6 +1321,8 @@
       syncDownFromPercent();
       setHomePriceAutoFilled(true, price);
       data.homePrice = price;
+      els.homePrice.dispatchEvent(new Event("input", { bubbles: true }));
+      els.homePriceInput?.dispatchEvent(new Event("input", { bubbles: true }));
     } else if (data.updatePriceRequested) {
       setHomePriceAutoFilled(false);
     }
@@ -1376,14 +1394,20 @@
     if (API_BASE !== null) {
       try {
         const res = await fetch(apiUrl(`api/property?${params}`));
-        if (res.status === 404) throw new Error("Address not found");
-        if (!res.ok) throw new Error("Lookup failed");
-        return await res.json();
-      } catch (err) {
-        if (err.message === "Address not found" || err.message === "Lookup failed") {
-          throw err;
+        const contentType = (res.headers.get("content-type") || "").toLowerCase();
+        if (res.ok && contentType.includes("json")) {
+          const data = await res.json();
+          if (data?.error) {
+            throw new Error(
+              data.error === "Address not found" ? "Address not found" : "Lookup failed"
+            );
+          }
+          return data;
         }
-        /* fall through on network errors */
+        /* HTML 404/500 from WordPress etc. — fall through to client lookup */
+      } catch (err) {
+        if (err.message === "Address not found") throw err;
+        /* network or API unavailable — fall through */
       }
     }
 
@@ -1391,9 +1415,27 @@
       ? location
       : await geocodeAddress(address, magicKey);
     if (!loc?.state) throw new Error("Address not found");
+
+    if (updatePrice && typeof window.MMG_clientPropertyLookup === "function") {
+      try {
+        const clientData = await window.MMG_clientPropertyLookup(address, loc, {
+          homePrice,
+          creditScore,
+          updatePrice: true,
+        });
+        if (clientData) {
+          clientData.updatePriceRequested = updatePrice;
+          return clientData;
+        }
+      } catch (err) {
+        console.warn("Client property lookup failed:", err);
+      }
+    }
+
     const estimate = buildLocalPropertyEstimate(loc);
     estimate.updatePriceRequested = updatePrice;
-    estimate.priceLookupConfigured = false;
+    estimate.priceLookupConfigured =
+      typeof window.MMG_clientPropertyLookup === "function";
     return estimate;
   }
 
@@ -2234,6 +2276,17 @@
       if (input.value.trim().length) scheduleAcSearch();
     });
 
+    input.addEventListener("blur", () => {
+      window.setTimeout(() => {
+        if (addressPickInFlight || lookupInFlight) return;
+        const address = input.value.trim();
+        if (!address || address === lastSelectedAddress) return;
+        if (looksLikeFullAddress(address)) {
+          lookupFromAddress();
+        }
+      }, 220);
+    });
+
     input.addEventListener("keydown", (e) => {
       const options = list.querySelectorAll("li[role='option']");
       if (e.key === "ArrowDown" && options.length) {
@@ -2284,6 +2337,10 @@
   }
 
   function bindEvents() {
+    window.addEventListener("mmg:address-selected", (e) => {
+      if (e.detail) onAddressPicked(e.detail);
+    });
+
     els.lookupAddress?.addEventListener("click", lookupFromAddress);
 
     els.loanProgram?.addEventListener("change", () => {
@@ -2485,7 +2542,9 @@
 
       bindEvents();
       try {
-        bindAddressAutocomplete();
+        if (!window.MMG_addressAutocomplete?.refresh) {
+          bindAddressAutocomplete();
+        }
       } catch (err) {
         console.error("Address autocomplete failed:", err);
       }

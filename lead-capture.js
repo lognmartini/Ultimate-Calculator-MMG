@@ -19,7 +19,10 @@
   let logan4ScrollObserver = null;
 
   function isLogan1() {
-    return document.body.classList.contains("logan1-realtor");
+    return (
+      document.body.classList.contains("logan1-realtor") ||
+      document.body.classList.contains("logan5-realtor")
+    );
   }
 
   function isLogan3() {

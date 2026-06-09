@@ -790,8 +790,12 @@ body.wizard-social .compliance-trigger-terms {
   border: 0;
 }
 
-body.wizard-social .partner-share,
+body.wizard-social:not(.logan5-realtor) .partner-share,
 body.wizard-social .amortization-section {
+  display: none !important;
+}
+
+body.logan5-realtor .partner-share.hidden {
   display: none !important;
 }
 

@@ -89,7 +89,33 @@
     padding: 0.5rem 0.75rem;
   }
 
-  /* Step 3: stack payment hero, actions, hub */
+  /* Step 3: payment at top, then meta + actions + hub */
+  body.logan5.wizard-on-results .ultimate-payment-landing.wizard-card {
+    padding: 0.85rem 0.95rem 0.7rem;
+  }
+
+  body.logan5.wizard-on-results .ultimate-payment-top {
+    margin-bottom: 0.5rem;
+  }
+
+  body.logan5.wizard-on-results .ultimate-payment-top .wizard-title {
+    margin-bottom: 0.45rem;
+    font-size: 1.3rem;
+  }
+
+  body.logan5.wizard-on-results .ultimate-payment-hero-block {
+    margin: 0 0 0.5rem;
+    padding: 0.95rem 0.85rem 0.8rem;
+  }
+
+  body.logan5.wizard-on-results .ultimate-payment-hero-block .total-amount {
+    font-size: clamp(2.15rem, 9vw, 2.65rem);
+  }
+
+  body.logan5.wizard-on-results .wizard-progress-wrap {
+    margin-bottom: 0.65rem;
+  }
+
   body.logan5 .ultimate-payment-lead-grid {
     display: flex;
     flex-direction: column;
@@ -106,7 +132,7 @@
   }
 
   body.logan5 .ultimate-live-rate-strip {
-    flex-direction: column;
+    grid-template-columns: 1fr;
     gap: 0.45rem;
   }
 

@@ -1,34 +1,39 @@
-Logan5 — upload this entire folder to GitHub
-=============================================
+Logan5 — upload THIS ENTIRE FOLDER to GitHub (Render auto-deploys)
+==================================================================
 
-WHAT'S IN HERE
-  Everything needed to run go5.html on Render (or any host):
-  - go5.html (the calculator)
-  - 4 stylesheets (including mobile)
-  - 11 JavaScript files
-  - assets/ (logos + photos)
-  - server.py + requirements.txt + render.yaml (cloud hosting)
+WHAT'S IN HERE (43 files — includes all bug fixes)
+  • go5.html — main Logan5 wizard (step 3 payment-at-top + desktop full width)
+  • realtor.html — partner co-marketing page
+  • server.py + realtor_lookup.py — property search + list price API (Render)
+  • property-lookup-client.js — browser fallback when API unavailable
+  • address-autocomplete.js + calculator.js — address pick → auto-fill price
+  • steps-flow.js, styles-*.css, assets/, partners/
+  • render.yaml + requirements.txt — Render hosting config
 
-HOW TO UPLOAD TO GITHUB (easiest)
-  1. Go to https://github.com/lognmartini/mmg-calculator
+GITHUB UPLOAD (updates live Render site)
+  1. Open https://github.com/lognmartini/mmg-calculator
   2. Click "Add file" → "Upload files"
-  3. Open this folder in Finder: Desktop → Logan5-GitHub-Upload
-  4. Press Cmd+A to select ALL files and the assets folder
-  5. Drag everything into the GitHub upload box
-  6. Commit message: "Logan5 wizard — desktop + mobile step flow"
+  3. In Finder, open: Desktop → Logan5-GitHub-Upload
+  4. Press Cmd+A (select ALL files + assets + partners folders)
+  5. Drag everything into GitHub
+  6. Commit message: "Logan5 fixes — property search, step 3 layout, Render API"
   7. Click "Commit changes"
+  8. Render redeploys in ~5 min (check dashboard → Logs → Live)
 
-AFTER UPLOAD (Render will auto-deploy if connected)
-  Live link will be something like:
-  https://mmg-calculator-xxxx.onrender.com/go5.html
+AFTER DEPLOY — TEST THESE
+  • https://YOUR-RENDER-URL.onrender.com/go5.html
+  • https://YOUR-RENDER-URL.onrender.com/api/health  (must return JSON)
+  • On go5 step 1: search "504 Tilden St Raleigh NC" → pick suggestion
+    → purchase price should auto-fill (not stay at $450,000)
 
-LOCAL PREVIEW (before upload)
-  cd to this folder, then:
-    python3 server.py
+LIVE LINKS TO SHARE
+  • Logan5:     /go5.html
+  • Realtor:    /realtor.html?agent=tyler-chestnutt
+  • Listing:    /go5.html?address=504+Tilden+St+Raleigh+NC+27605&price=1895000
+
+LOCAL PREVIEW BEFORE UPLOAD
+  cd to this folder, then:  python3 server.py
   Open: http://127.0.0.1:8765/go5.html
-  Mobile: http://127.0.0.1:8765/preview-logan5-mobile.html
 
-3-STEP FLOW (verified)
-  Step 1: This home
-  Step 2: Your numbers → tap "See my payment"
-  Step 3: Your payment + What's next
+DO NOT UPLOAD
+  .property-cache.json, .leads.jsonl, .git, versions/ (not needed for Render)

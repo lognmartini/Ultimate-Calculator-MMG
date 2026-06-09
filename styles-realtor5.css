@@ -1,0 +1,156 @@
+/**
+ * Logan5 realtor partner — co-marketing + 3-step wizard
+ */
+
+body.logan5-realtor .partner-share {
+  max-width: var(--logan5-column, 640px);
+  margin: 0.65rem auto 0;
+  padding: 0 1rem;
+}
+
+@media (min-width: 960px) {
+  body.logan5-realtor.wizard-on-results .partner-share {
+    max-width: var(--logan5-column-wide, min(1200px, calc(100vw - 2.5rem)));
+  }
+}
+
+body.logan5-realtor.co-market-active .partner-share:not(.hidden) {
+  display: block;
+}
+
+body.logan5-realtor .partner-share-inner {
+  padding: 0.65rem 0.85rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+}
+
+body.logan5-realtor .partner-share-label {
+  margin: 0 0 0.45rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--navy-dark);
+}
+
+body.logan5-realtor .partner-share-row {
+  display: flex;
+  gap: 0.45rem;
+  align-items: stretch;
+}
+
+body.logan5-realtor .partner-share-input {
+  flex: 1;
+  min-width: 0;
+  font-size: 0.78rem;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-muted, #f8f7fb);
+}
+
+body.logan5-realtor .btn-share {
+  flex-shrink: 0;
+  min-height: 40px;
+  padding: 0.5rem 0.85rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--navy-dark);
+  background: #fff;
+  font-weight: 600;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+
+/* Co-market bar inside Logan5 column */
+body.logan5-realtor .co-market-bar-wizard {
+  max-width: 100%;
+  margin: 0 0 0.85rem;
+  padding: 0;
+}
+
+body.logan5-realtor .co-market-bar-wizard .co-market-inner {
+  border-radius: 14px;
+  box-shadow: 0 4px 22px rgba(26, 18, 48, 0.06);
+}
+
+body.logan5-realtor .co-market-wizard-note {
+  margin: 0.65rem 0 0;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.68rem;
+  line-height: 1.45;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+body.logan5-realtor .co-market-wizard-note.hidden {
+  display: none !important;
+}
+
+body.logan5-realtor .co-market-eyebrow,
+body.logan5-realtor .co-market-lead {
+  display: none;
+}
+
+body.logan5-realtor.co-market-active .co-market-eyebrow:not(.hidden),
+body.logan5-realtor.co-market-active .co-market-lead:not(.hidden) {
+  display: block;
+}
+
+body.logan5-realtor.co-market-active #wizardEyebrowDefault.hidden,
+body.logan5-realtor.co-market-active #wizardLeadDefault.hidden {
+  display: none !important;
+}
+
+body.logan5-realtor .ultimate-realtor-strip {
+  margin: 0.5rem 0 0.75rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: var(--radius-lg);
+  background: var(--ultimate-accent-soft, rgba(201, 162, 39, 0.1));
+  border: 1px solid rgba(201, 162, 39, 0.35);
+  font-size: 0.82rem;
+  line-height: 1.45;
+  text-align: center;
+  color: var(--navy-dark);
+}
+
+body.logan5-realtor .wizard-site-footer .co-market-legal {
+  margin-top: 0.75rem;
+  padding-top: 0.65rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+@media (max-width: 959px) {
+  body.logan5-realtor .co-market-bar-wizard .co-market-partners {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  body.logan5-realtor .co-market-bar-wizard .co-market-divider {
+    display: none;
+  }
+
+  body.logan5-realtor .co-market-bar-wizard .co-market-partner {
+    width: 100%;
+  }
+
+  body.logan5-realtor .partner-share-row {
+    flex-direction: column;
+  }
+
+  body.logan5-realtor .btn-share {
+    width: 100%;
+  }
+}
+
+@media (max-width: 380px) {
+  body.logan5-realtor .co-market-bar-wizard .co-market-photo {
+    width: 48px;
+    height: 48px;
+  }
+
+  body.logan5-realtor .co-market-bar-wizard .co-market-logo {
+    height: 30px;
+    max-width: 64px;
+  }
+}

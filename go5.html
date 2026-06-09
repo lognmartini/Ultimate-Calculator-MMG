@@ -448,87 +448,95 @@
     <section class="wizard-step wizard-results ultimate-payment-step ultimate-final-step ultimate-combined-final" data-step="2" hidden aria-labelledby="wiz-title-2">
       <div class="ultimate-payment-main" id="ultimatePaymentMain">
       <div class="wizard-card wizard-card-dark panel results-panel lead-results ultimate-results-final ultimate-payment-landing" aria-labelledby="results-heading">
-        <div class="ultimate-payment-lead-grid">
-          <div class="ultimate-payment-lead-main">
-            <p class="wizard-eyebrow">Your Martini estimate</p>
-            <h2 class="wizard-title" id="wiz-title-2" style="color:#fff;">Your monthly payment</h2>
-            <p class="ultimate-payment-sublead">Live rate estimate · savings vs. typical lenders · educational only</p>
+        <header class="ultimate-payment-top" id="results-heading">
+          <p class="wizard-eyebrow">Your Martini estimate</p>
+          <h2 class="wizard-title" id="wiz-title-2" style="color:#fff;">Your monthly payment</h2>
 
-            <div class="ultimate-payment-cta-stack ultimate-payment-cta-top">
-              <a href="https://applywithlogan.com" class="btn btn-apply-now btn-results-apply ultimate-cta-primary ultimate-cta-hero" data-mmg-apply target="_blank" rel="noopener">
-                <span class="btn-apply-text">Apply now</span>
-                <span class="btn-apply-arrow" aria-hidden="true">→</span>
-              </a>
-              <p class="results-apply-note">3 min · soft credit pull · Logan reviews every file</p>
-            </div>
-
-            <div class="ultimate-payment-trust-badges" aria-label="Trust signals">
-              <span>NMLS #1591485 · #3446</span>
-              <span>Equal Housing Lender</span>
-              <span>Raleigh-based team</span>
+          <div class="ultimate-payment-hero-block">
+            <div class="total-payment total-payment-hero">
+              <span class="total-label">Estimated monthly PITI</span>
+              <span class="total-amount" id="pitiPayment">—</span>
+              <span class="total-sublabel">Principal, interest, taxes &amp; insurance</span>
             </div>
           </div>
 
-          <aside class="ultimate-hub-rail" id="ultimateHubView" aria-label="What's next">
-            <p class="ultimate-hub-rail-label">What&rsquo;s next?</p>
-            <div class="ultimate-hub-stack">
-              <button type="button" class="ultimate-hub-btn ultimate-hub-btn-rail" id="ultimateHubCompare" data-hub-action="compare">
-                <span class="ultimate-hub-btn-icon" aria-hidden="true">📊</span>
-                <strong>See other loan options</strong>
-              </button>
-              <button type="button" class="ultimate-hub-btn ultimate-hub-btn-rail" id="ultimateHubRealtor" data-hub-action="realtor">
-                <span class="ultimate-hub-btn-icon" aria-hidden="true">🏘️</span>
-                <strong>Need a realtor?</strong>
-              </button>
-              <a href="https://applywithlogan.com" class="ultimate-hub-btn ultimate-hub-btn-rail ultimate-hub-btn-apply" data-mmg-apply target="_blank" rel="noopener">
-                <span class="ultimate-hub-btn-icon" aria-hidden="true">✓</span>
-                <strong>Apply now</strong>
-              </a>
+          <div class="total-payment total-payment-secondary ultimate-payment-extras hidden" id="totalWithExtras">
+            <span class="total-label">Total with PMI / HOA</span>
+            <span class="total-amount total-amount-sm" id="totalPayment">$0</span>
+            <span class="total-sublabel hidden" id="extrasNote"></span>
+          </div>
+        </header>
+
+        <div class="ultimate-payment-above-fold">
+          <div class="ultimate-payment-meta-col">
+            <div class="ultimate-live-rate-strip" aria-label="Live rate comparison">
+              <div class="ultimate-live-rate-col">
+                <span class="ultimate-live-rate-label">Typical lender</span>
+                <strong class="ultimate-live-rate-value" id="ultimatePaymentMarketRate">—</strong>
+              </div>
+              <div class="ultimate-live-rate-col ultimate-live-rate-col-martini">
+                <span class="ultimate-live-rate-label">Your Martini rate</span>
+                <strong class="ultimate-live-rate-value" id="ultimatePaymentMartiniRate">—</strong>
+              </div>
             </div>
-          </aside>
+
+            <div class="lead-savings-ribbon lead-savings-ribbon-hero hidden" id="leadSavingsRibbon" role="status">
+              <div class="lead-savings-row hidden" id="leadMonthlySavingsRow">
+                <span class="lead-savings-label">You could save</span>
+                <strong class="lead-savings-amount" id="leadSavingsAmount">—</strong>
+                <span class="lead-savings-suffix">/mo vs. typical lenders</span>
+              </div>
+              <div class="lead-savings-row lead-savings-row-cash hidden" id="leadCashSavingsRow">
+                <span class="lead-savings-label">Est. cash at closing</span>
+                <strong class="lead-savings-amount lead-savings-amount-cash" id="leadCashSavingsAmount">—</strong>
+                <span class="lead-savings-suffix">less vs. typical lender quote</span>
+              </div>
+              <p class="lead-savings-disclaimer hidden" id="leadCashSavingsNote" role="note">
+                Illustrative comparison only — assumes a typical lender may charge about 1 discount point and higher origination fees. Not a Loan Estimate; actual cash to close varies by lender, credits, and property.
+              </p>
+            </div>
+          </div>
+
+          <div class="ultimate-payment-lead-grid">
+            <div class="ultimate-payment-lead-main">
+              <p class="ultimate-payment-sublead">Live rate estimate · savings vs. typical lenders · educational only</p>
+
+              <div class="ultimate-payment-cta-stack ultimate-payment-cta-top">
+                <a href="https://applywithlogan.com" class="btn btn-apply-now btn-results-apply ultimate-cta-primary ultimate-cta-hero" data-mmg-apply target="_blank" rel="noopener">
+                  <span class="btn-apply-text">Apply now</span>
+                  <span class="btn-apply-arrow" aria-hidden="true">→</span>
+                </a>
+                <p class="results-apply-note">3 min · soft credit pull · Logan reviews every file</p>
+              </div>
+
+              <div class="ultimate-payment-trust-badges" aria-label="Trust signals">
+                <span>NMLS #1591485 · #3446</span>
+                <span>Equal Housing Lender</span>
+                <span>Raleigh-based team</span>
+              </div>
+            </div>
+
+            <aside class="ultimate-hub-rail" id="ultimateHubView" aria-label="What's next">
+              <p class="ultimate-hub-rail-label">What&rsquo;s next?</p>
+              <div class="ultimate-hub-stack">
+                <button type="button" class="ultimate-hub-btn ultimate-hub-btn-rail" id="ultimateHubCompare" data-hub-action="compare">
+                  <span class="ultimate-hub-btn-icon" aria-hidden="true">📊</span>
+                  <strong>See other loan options</strong>
+                </button>
+                <button type="button" class="ultimate-hub-btn ultimate-hub-btn-rail" id="ultimateHubRealtor" data-hub-action="realtor">
+                  <span class="ultimate-hub-btn-icon" aria-hidden="true">🏘️</span>
+                  <strong>Need a realtor?</strong>
+                </button>
+                <a href="https://applywithlogan.com" class="ultimate-hub-btn ultimate-hub-btn-rail ultimate-hub-btn-apply" data-mmg-apply target="_blank" rel="noopener">
+                  <span class="ultimate-hub-btn-icon" aria-hidden="true">✓</span>
+                  <strong>Apply now</strong>
+                </a>
+              </div>
+            </aside>
+          </div>
         </div>
 
-        <div class="ultimate-live-rate-strip" aria-label="Live rate comparison">
-          <div class="ultimate-live-rate-col">
-            <span class="ultimate-live-rate-label">Typical lender</span>
-            <strong class="ultimate-live-rate-value" id="ultimatePaymentMarketRate">—</strong>
-          </div>
-          <div class="ultimate-live-rate-col ultimate-live-rate-col-martini">
-            <span class="ultimate-live-rate-label">Your Martini rate</span>
-            <strong class="ultimate-live-rate-value" id="ultimatePaymentMartiniRate">—</strong>
-          </div>
-        </div>
-
-        <div class="lead-savings-ribbon lead-savings-ribbon-hero hidden" id="leadSavingsRibbon" role="status">
-          <div class="lead-savings-row hidden" id="leadMonthlySavingsRow">
-            <span class="lead-savings-label">You could save</span>
-            <strong class="lead-savings-amount" id="leadSavingsAmount">—</strong>
-            <span class="lead-savings-suffix">/mo vs. typical lenders</span>
-          </div>
-          <div class="lead-savings-row lead-savings-row-cash hidden" id="leadCashSavingsRow">
-            <span class="lead-savings-label">Est. cash at closing</span>
-            <strong class="lead-savings-amount lead-savings-amount-cash" id="leadCashSavingsAmount">—</strong>
-            <span class="lead-savings-suffix">less vs. typical lender quote</span>
-          </div>
-          <p class="lead-savings-disclaimer hidden" id="leadCashSavingsNote" role="note">
-            Illustrative comparison only — assumes a typical lender may charge about 1 discount point and higher origination fees. Not a Loan Estimate; actual cash to close varies by lender, credits, and property.
-          </p>
-        </div>
-
-        <div class="ultimate-payment-hero-block">
-          <div class="total-payment total-payment-hero">
-            <span class="total-label">Estimated monthly PITI</span>
-            <span class="total-amount" id="pitiPayment">—</span>
-            <span class="total-sublabel">Principal, interest, taxes &amp; insurance</span>
-          </div>
-        </div>
-
-        <div class="total-payment total-payment-secondary hidden" id="totalWithExtras">
-          <span class="total-label">Total with PMI / HOA</span>
-          <span class="total-amount total-amount-sm" id="totalPayment">$0</span>
-          <span class="total-sublabel hidden" id="extrasNote"></span>
-        </div>
-
+        <div class="ultimate-payment-details">
         <section class="vs-competition ultimate-vs-visible" id="vsCompetition" aria-labelledby="vsCompetitionTitle">
           <h3 class="vs-competition-title" id="vsCompetitionTitle">Martini vs. typical lenders</h3>
           <div class="vs-competition-grid">
@@ -607,6 +615,7 @@
             <footer><strong>Katie J.</strong> · First-time buyer</footer>
           </div>
         </div>
+        </div><!-- .ultimate-payment-details -->
       </div>
       </div><!-- .ultimate-payment-main -->
 
@@ -738,7 +747,7 @@
       Logan Martini · NMLS #1591485 · Senior Mortgage Strategist<br />
       507 N Blount St, Raleigh, NC 27604 · <a href="https://martinimortgagegroup.com">martinimortgagegroup.com</a>
     </p>
-    <p class="footer-team-link"><a href="go5.html">Logan5 calculator</a></p>
+    <p class="footer-team-link"><a href="go5.html">Logan5</a> · <a href="go.html">Logan3</a> · <a href="go4.html">Logan4</a> · <a href="compare-versions.html">Compare all</a></p>
   </footer>
 
   <nav class="wizard-nav ultimate-wizard-nav" aria-label="Wizard navigation">
@@ -801,7 +810,9 @@
   <script src="loan-limits.js"></script>
   <script src="market-rates.js"></script>
   <script src="compliance.js"></script>
+  <script src="property-lookup-client.js"></script>
   <script src="calculator.js"></script>
+  <script src="address-autocomplete.js"></script>
   <script src="steps-flow.js"></script>
   <script src="lead-capture.js"></script>
   <script src="ultimate-features.js"></script>
