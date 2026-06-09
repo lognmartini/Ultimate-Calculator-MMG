@@ -30,8 +30,12 @@
     return document.body.classList.contains("logan4");
   }
 
+  function isLogan5() {
+    return document.body.classList.contains("logan5");
+  }
+
   function isSocialWizard() {
-    return isLogan3() || isLogan4();
+    return isLogan3() || isLogan4() || isLogan5();
   }
 
   function apiBase() {
@@ -89,7 +93,8 @@
     const params = new URLSearchParams(window.location.search);
     const loRef = normalizeLoRef(params.get("ref") || params.get("partner") || "");
     if (loRef === "kevin" || loRef === "logan") return loRef;
-    return isLogan4() ? "team" : isLogan3() ? "logan" : "";
+    if (isLogan5() || isLogan3()) return "logan";
+    return isLogan4() ? "team" : "";
   }
 
   function collectScenario() {
@@ -126,12 +131,14 @@
       agent: document.documentElement.dataset.coAgent || "",
       ref: assignedLo === "team" ? "" : assignedLo,
       assignedLo,
-      version: isLogan4() ? "Logan4" : isLogan3() ? "Logan3" : "Logan1",
-      source: isLogan4()
-        ? "logan4-save-estimate"
-        : isLogan3()
-          ? "logan3-save-estimate"
-          : "logan1-save-estimate",
+      version: isLogan5() ? "Logan5" : isLogan4() ? "Logan4" : isLogan3() ? "Logan3" : "Logan1",
+      source: isLogan5()
+        ? "logan5-save-estimate"
+        : isLogan4()
+          ? "logan4-save-estimate"
+          : isLogan3()
+            ? "logan3-save-estimate"
+            : "logan1-save-estimate",
       consent: true,
       scenario: collectScenario(),
     };
@@ -218,10 +225,15 @@
         }, LOGAN4_DELAY_MS);
         bindLogan4ScrollReveal();
       });
-    } else if (isLogan3()) {
+    } else if (isLogan3() || isLogan5()) {
       document.addEventListener("mmg-wizard-results", () => {
-        window.setTimeout(showCard, 400);
+        window.setTimeout(showCard, isLogan5() ? 6000 : 400);
       });
+      if (isLogan5()) {
+        document.addEventListener("mmg-logan5-reverse", () => {
+          if (!shown) window.setTimeout(showCard, 5000);
+        });
+      }
     }
 
     document.getElementById("saveEstimateDismiss")?.addEventListener("click", () => hideCard(true));

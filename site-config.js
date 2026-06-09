@@ -10,6 +10,8 @@ window.MMG_SITE = {
   logan3Path: "/mortgage-calculator/go.html",
   /** Logan4 — team / company social wizard (shared by Kevin & Logan) */
   logan4Path: "/mortgage-calculator/go4.html",
+  /** Logan5 — ultimate payment calculator (Logan Martini, lead + realtor tool) */
+  logan5Path: "/mortgage-calculator/go5.html",
   /** Logan1 realtor co-marketing */
   realtorPath: "/mortgage-calculator/realtor.html",
   socialWizardPath: "/mortgage-calculator/go4.html",

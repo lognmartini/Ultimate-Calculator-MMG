@@ -124,6 +124,9 @@
       document.body.classList.remove("wizard-on-results");
       recalculate();
     }
+    document.dispatchEvent(
+      new CustomEvent("mmg-wizard-step-change", { detail: { step: currentStep } })
+    );
     window.dispatchEvent(new Event("scroll"));
   }
 

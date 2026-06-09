@@ -80,6 +80,28 @@ https://martinimortgagegroup.com/mortgage-calculator/go4.html?address=504+Tilden
 
 ---
 
+## Logan5 (ultimate payment calculator — Logan Martini)
+
+**Files:** `go5.html`, `styles-ultimate.css`, `ultimate-features.js`, `loan-programs.js` (FTHB / concession helpers), `lead-capture.js`
+
+**Open:** `http://127.0.0.1:8765/go5.html` · **Mobile:** `mobile-preview-logan5.html`
+
+Logan3 wizard flow extended for realtors and lead gen:
+
+- **Reverse payment** — target PITI → estimated purchase price
+- **Buyer profile** — first-time (3% vs 5% conventional min), VA, USDA
+- **Buydowns** — 1-0, 2-1, 3-2-1 seller-paid estimates + complimentary 1-year lender buydown CTA
+- **Scenario A/B** — total cost compare; email + phone to open print/PDF report
+- **Lead capture** — save estimate, buying power snapshot, strategy form, PDF gate
+
+**Example realtor link:**
+
+```
+https://martinimortgagegroup.com/mortgage-calculator/go5.html?ref=your-agent&realtor_name=Agent+Name&utm_source=realtor-share
+```
+
+---
+
 ## Compliance (all versions)
 
 | Requirement | Implementation |

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Total Cost Analysis PDF Sample | Logan5</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      padding: 28px;
+      color: #1a1230;
+      max-width: 720px;
+      margin: 0 auto;
+      line-height: 1.45;
+      background: #f4f2f8;
+    }
+    .sample-note {
+      background: #1a1230;
+      color: #fff;
+      padding: 1rem 1.25rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+      font-size: 0.88rem;
+    }
+    .sample-note a { color: #e8c84a; }
+    .pdf-doc {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(26, 18, 48, 0.12);
+    }
+    h1 { font-size: 1.35rem; margin: 0 0 0.35rem; }
+    h2 { font-size: 1rem; margin: 0 0 0.35rem; }
+    table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.88rem; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    th { background: #f4f2f8; font-weight: 600; }
+    .pdf-hdr { border-bottom: 3px solid #c9a227; padding-bottom: 14px; margin-bottom: 18px; }
+    .pdf-meta { margin: 0.15rem 0; font-size: 0.82rem; color: #5c5670; }
+    .pdf-section { margin: 18px 0; }
+    .pdf-highlight { background: #fff8e1; }
+    .pdf-foot { margin-top: 24px; padding-top: 14px; border-top: 1px solid #ddd; font-size: 0.75rem; color: #5c5670; }
+    .print-btn {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.6rem 1rem;
+      background: #c9a227;
+      color: #1a1230;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <p class="sample-note">
+    <strong>Sample Total Cost Analysis PDF</strong> — This is what buyers see when they request a comparison from Logan5 Step 3 → <em>Lower your payment</em> → <em>Compare options</em> → Get PDF.
+    <a href="go5.html">Open calculator</a>
+  </p>
+
+  <div class="pdf-doc" id="sampleDoc"></div>
+  <button type="button" class="print-btn" onclick="window.print()">Print / Save as PDF</button>
+
+  <script>
+    const sample = {
+      address: "123 Oak Street, Raleigh, NC 27604",
+      generated: new Date().toLocaleString("en-US", { dateStyle: "medium", timeStyle: "short" }),
+      a: { label: "Your estimate (5% down)", downPct: 5, rate: 6.25, program: "Conventional", price: 450000, down: 22500, piti: 2847, total: 2912, loan: 427500 },
+      b: { label: "FHA 3.5%", downPct: 3.5, rate: 6.25, program: "FHA", price: 450000, down: 15750, piti: 2998, total: 3156, loan: 434250 },
+      primary: { price: 450000, downPct: 5, rate: 6.25, program: "conventional", piti: 2847, loan: 427500, cashToClose: "$48,200" },
+    };
+
+    const fmt = (n) => new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(n);
+    const diff = sample.a.piti - sample.b.piti;
+
+    document.getElementById("sampleDoc").innerHTML = `
+      <div class="pdf-hdr">
+        <h1>Total Cost Analysis</h1>
+        <p class="pdf-meta"><strong>Martini Mortgage Group</strong> · Logan Martini · NMLS #1591485 · Company NMLS #3446</p>
+        <p class="pdf-meta">Generated ${sample.generated} · Property: ${sample.address}</p>
+      </div>
+      <div class="pdf-section">
+        <h2>Side-by-side comparison</h2>
+        <table>
+          <thead><tr><th>Metric</th><th>${sample.a.label}</th><th>${sample.b.label}</th></tr></thead>
+          <tbody>
+            <tr><td>Purchase price</td><td>${fmt(sample.a.price)}</td><td>${fmt(sample.b.price)}</td></tr>
+            <tr><td>Down payment</td><td>${sample.a.downPct}%</td><td>${sample.b.downPct}%</td></tr>
+            <tr><td>Down $</td><td>${fmt(sample.a.down)}</td><td>${fmt(sample.b.down)}</td></tr>
+            <tr><td>Note rate</td><td>${sample.a.rate}%</td><td>${sample.b.rate}%</td></tr>
+            <tr><td>Loan program</td><td>${sample.a.program}</td><td>${sample.b.program}</td></tr>
+            <tr class="pdf-highlight"><td>Est. monthly PITI</td><td>${fmt(sample.a.piti)}</td><td>${fmt(sample.b.piti)}</td></tr>
+            <tr class="pdf-highlight"><td>Est. w/ MI & HOA</td><td>${fmt(sample.a.total)}</td><td>${fmt(sample.b.total)}</td></tr>
+            <tr><td>Loan amount</td><td>${fmt(sample.a.loan)}</td><td>${fmt(sample.b.loan)}</td></tr>
+          </tbody>
+        </table>
+        <p class="pdf-highlight">Monthly PITI difference: <strong>${fmt(Math.abs(diff))}/mo</strong> lower with ${sample.a.label} (estimate).</p>
+      </div>
+      <div class="pdf-section">
+        <h2>Your primary calculator estimate</h2>
+        <p>Purchase <strong>${fmt(sample.primary.price)}</strong> · <strong>${sample.primary.downPct}%</strong> down · <strong>${sample.primary.rate}%</strong> · Program <strong>Conventional</strong></p>
+        <p>Estimated monthly PITI: <strong>${fmt(sample.primary.piti)}</strong> · Loan amount: <strong>${fmt(sample.primary.loan)}</strong></p>
+        <p>Est. cash to close (from calculator): <strong>${sample.primary.cashToClose}</strong></p>
+      </div>
+      <div class="pdf-section">
+        <h2>Buydown note</h2>
+        <p>Seller-paid or lender-paid buydowns may further reduce payments in early years. Ask Logan about a complimentary 1-year lender-paid buydown on eligible scenarios. Subject to underwriting and program rules.</p>
+      </div>
+      <div class="pdf-foot">
+        <p>Educational estimate only — not a Loan Estimate, Closing Disclosure, loan commitment, pre-approval, or rate lock.</p>
+        <p>Equal Housing Lender. Verify licenses at nmlsconsumeraccess.org. 507 N Blount St, Raleigh, NC 27604 · (919) 238-4934</p>
+        <p>This report was produced by the Martini Mortgage educational calculator (Logan5). Not legal or tax advice.</p>
+      </div>`;
+  </script>
+</body>
+</html>

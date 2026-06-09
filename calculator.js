@@ -438,6 +438,21 @@
     return window.MMG_getLoanProgram ? window.MMG_getLoanProgram(id) : { id: "conventional", minDownPercent: 3, defaultDownPercent: 20, rateSpreadVsConventional: 0, miLabel: "PMI", miRequiredBelowLtv: 80, defaultMiAnnualRate: 0.5 };
   }
 
+  function getBuyerProfile() {
+    return {
+      firstTimeBuyer: Boolean(document.getElementById("firstTimeBuyer")?.checked),
+      veteranEligible: Boolean(document.getElementById("veteranEligible")?.checked),
+      usdaEligible: Boolean(document.getElementById("usdaEligible")?.checked),
+    };
+  }
+
+  function getEffectiveMinDown(program) {
+    if (window.MMG_getEffectiveMinDown && document.body.classList.contains("logan5")) {
+      return window.MMG_getEffectiveMinDown(program.id, getBuyerProfile());
+    }
+    return program.minDownPercent ?? 0;
+  }
+
   function programNeedsMonthlyMi(program, downPct) {
     if (program.id === "va") return false;
     if (program.id === "conventional") return downPct < 20;
@@ -451,12 +466,19 @@
       els.loanProgramNote.textContent = program.description || "";
     }
     if (els.programDownHint) {
-      const min = program.minDownPercent;
+      const min = getEffectiveMinDown(program);
+      const profile = getBuyerProfile();
       if (min <= 0) {
         els.programDownHint.textContent = `${program.shortLabel}: no down payment required for eligible buyers.`;
         els.programDownHint.classList.remove("hidden");
       } else if (min < 20) {
-        els.programDownHint.textContent = `${program.shortLabel}: minimum ${min}% down for this estimate.`;
+        let hint = `${program.shortLabel}: minimum ${min}% down for this estimate.`;
+        if (document.body.classList.contains("logan5") && program.id === "conventional") {
+          hint += profile.firstTimeBuyer
+            ? " First-time buyer programs (e.g. HomeReady) may allow 3%."
+            : " Non–first-time buyers often need 5%+ on conventional.";
+        }
+        els.programDownHint.textContent = hint;
         els.programDownHint.classList.remove("hidden");
       } else {
         els.programDownHint.classList.add("hidden");
@@ -473,7 +495,7 @@
     if (els.feeSheetProgramNote) {
       els.feeSheetProgramNote.textContent = program.feeSheetNote || "";
     }
-    const minDown = program.minDownPercent ?? 0;
+    const minDown = getEffectiveMinDown(program);
     if (els.downPercent) {
       els.downPercent.min = String(minDown);
     }
@@ -1820,6 +1842,32 @@
       );
     }
 
+    if (document.body.classList.contains("logan5")) {
+      document.dispatchEvent(
+        new CustomEvent("mmg-logan5-calculated", {
+          detail: {
+            homePrice,
+            downPct,
+            downPayment,
+            loanPrincipal,
+            rate,
+            years,
+            piti,
+            pi,
+            totalMonthly,
+            monthlyTax,
+            monthlyInsurance,
+            monthlyPmi,
+            monthlyHoa,
+            totalInterest,
+            program: program.id,
+            profile: getBuyerProfile(),
+            vsSavings,
+          },
+        })
+      );
+    }
+
     if (els.totalWithExtras) {
       els.totalWithExtras.classList.toggle("hidden", !hasExtras);
     }
@@ -2267,6 +2315,8 @@
       els[id] = $(id);
     }
   }
+
+  window.MMG_applyLoanProgramUi = applyLoanProgramUi;
 
   async function init() {
     try {
