@@ -1,0 +1,148 @@
+/**
+ * Logan5 mobile only — same 3-step wizard as desktop.
+ * This home → Your numbers → Your payment
+ * Loaded after styles-ultimate.css; rules apply below 960px only.
+ */
+
+@media (max-width: 959px) {
+  body.logan5 {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body.logan5 input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+  body.logan5 select,
+  body.logan5 textarea {
+    font-size: 16px;
+  }
+
+  /* One step at a time — reinforce styles-steps.css on small screens */
+  body.logan5 .wizard-step {
+    display: none !important;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  body.logan5 .wizard-step.wizard-step-active:not([hidden]) {
+    display: block !important;
+  }
+
+  body.logan5 .wizard-step[hidden] {
+    display: none !important;
+  }
+
+  body.logan5 .ultimate-page-shell,
+  body.logan5 .ultimate-page-content {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  body.logan5 .wizard-main {
+    padding-bottom: calc(5.75rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  /* Progress + nav always visible during the wizard */
+  body.logan5 .wizard-progress-wrap {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  body.logan5 .ultimate-wizard-nav {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 40;
+    padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  body.logan5 .ultimate-live-rail.ultimate-live-rail-hidden {
+    display: none !important;
+  }
+
+  /* Step 1–2: full-width cards */
+  body.logan5 .wizard-card,
+  body.logan5 .wizard-advisor-card,
+  body.logan5 .ultimate-trust-panel {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  body.logan5 .ultimate-mode-choice {
+    min-height: auto;
+  }
+
+  /* Step 2: touch-friendly controls */
+  body.logan5 .ultimate-program-btn,
+  body.logan5 .ultimate-profile-chip,
+  body.logan5 .btn-wizard-back,
+  body.logan5 .btn-wizard-next {
+    min-height: 48px;
+  }
+
+  body.logan5 .ultimate-term-btn {
+    min-height: 40px;
+    padding: 0.5rem 0.75rem;
+  }
+
+  /* Step 3: stack payment hero, actions, hub */
+  body.logan5 .ultimate-payment-lead-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  body.logan5 .ultimate-hub-rail {
+    width: 100%;
+    margin-top: 0;
+  }
+
+  body.logan5 .ultimate-hub-btn-rail {
+    min-height: 48px;
+  }
+
+  body.logan5 .ultimate-live-rate-strip {
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  body.logan5 .ultimate-payment-cta-top .ultimate-cta-hero {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Subviews: compare / realtor */
+  body.logan5.logan5-subview-active .ultimate-subview {
+    width: 100%;
+    min-width: 0;
+  }
+
+  body.logan5.logan5-subview-active .ultimate-subview .wizard-card {
+    margin: 0;
+  }
+
+  body.logan5 .ultimate-creative-loans {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  body.logan5 .ultimate-realtor-form .ultimate-realtor-choice {
+    min-height: 44px;
+  }
+
+  /* Sticky apply bar only on final step (steps-flow sets data-wizard-step) */
+  body.logan5:not([data-wizard-step="3"]) .sticky-cta-logan5 {
+    display: none !important;
+  }
+}
+
+@media (max-width: 380px) {
+  body.logan5 .ultimate-program-picker {
+    grid-template-columns: 1fr;
+  }
+}

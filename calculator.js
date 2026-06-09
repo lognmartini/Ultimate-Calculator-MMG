@@ -326,9 +326,7 @@
       const wizardStep = Number(document.body.dataset.wizardStep || "0");
       const isLogan5 = document.body.classList.contains("logan5");
       const pastHero = socialWizard
-        ? isLogan5
-          ? wizardStep >= 1
-          : wizardStep >= 3
+        ? wizardStep >= 3
         : y > 320;
       bar.classList.toggle("sticky-cta-visible", pastHero);
       bar.setAttribute("aria-hidden", pastHero ? "false" : "true");

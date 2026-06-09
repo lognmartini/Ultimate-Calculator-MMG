@@ -5,7 +5,6 @@ body.logan5 {
   --ultimate-accent-soft: rgba(232, 200, 74, 0.14);
   --ultimate-card-border: rgba(255, 255, 255, 0.12);
   --logan5-column: 640px;
-  --logan5-column-wide: min(1360px, calc(100vw - 2rem));
 }
 
 body.logan5 .wizard-eyebrow-ultimate {
@@ -712,36 +711,6 @@ body.logan5 .wizard-main {
   max-width: var(--logan5-column) !important;
   padding-left: 1rem;
   padding-right: 1rem;
-}
-
-/* Step 3 — full-width results stage */
-body.logan5.wizard-on-results .wizard-header-inner,
-body.logan5.wizard-on-results .wizard-main,
-body.logan5.wizard-on-results .wizard-nav-inner {
-  max-width: var(--logan5-column-wide);
-}
-
-body.logan5.wizard-on-results .wizard-main {
-  max-width: var(--logan5-column-wide) !important;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-}
-
-body.logan5.wizard-on-results .wizard-progress-wrap {
-  max-width: var(--logan5-column-wide);
-  margin-left: auto;
-  margin-right: auto;
-}
-
-body.logan5.wizard-on-results .ultimate-payment-step {
-  width: 100%;
-}
-
-body.logan5.wizard-on-results .ultimate-payment-main {
-  display: flex;
-  flex-direction: column;
-  gap: 1.15rem;
-  width: 100%;
 }
 
 body.logan5 .ultimate-page-shell {
@@ -1549,338 +1518,120 @@ body.logan5 .ultimate-step-apply {
   text-decoration: none;
 }
 
-/* Step 3 — payment summary + progressive disclosure details */
-body.logan5 .ultimate-payment-step {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+/* Payment landing — lead gen */
+body.logan5 .ultimate-payment-landing {
+  padding-bottom: 0.5rem;
 }
 
-body.logan5 .ultimate-payment-summary {
-  padding: 1.15rem 1.1rem 1.25rem;
-  margin: 0;
-}
-
-body.logan5 .ultimate-payment-summary-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-  align-items: stretch;
-}
-
-body.logan5 .ultimate-payment-hero-col,
-body.logan5 .ultimate-payment-actions-col {
+body.logan5 .ultimate-payment-sublead {
+  margin: -0.25rem 0 1rem;
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.78);
   text-align: center;
-  min-width: 0;
 }
 
-body.logan5 .ultimate-payment-actions-col {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 0.65rem;
+.ultimate-live-rate-strip {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.55rem;
+  margin-bottom: 1rem;
 }
 
-body.logan5 .ultimate-payment-header {
-  margin-bottom: 0.35rem;
-}
-
-body.logan5 .ultimate-payment-header .wizard-title {
-  margin: 0.15rem 0 0;
-  font-size: clamp(1.35rem, 3.5vw, 1.65rem);
-}
-
-body.logan5 .ultimate-payment-extras {
-  padding: 0.5rem 0 0;
-  border-bottom: none;
-}
-
-body.logan5 .ultimate-payment-meta {
-  margin: 0.75rem 0 0.65rem;
-}
-
-body.logan5 .ultimate-payment-rate-pill {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 0.5rem 0.75rem;
-  padding: 0.55rem 0.75rem;
-  border-radius: 999px;
+.ultimate-live-rate-col {
+  padding: 0.65rem 0.75rem;
+  border-radius: 10px;
   background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
 }
 
-body.logan5 .ultimate-payment-rate-item {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 0.35rem;
-  font-size: 0.78rem;
+.ultimate-live-rate-col-martini {
+  border-color: rgba(201, 162, 39, 0.45);
+  background: rgba(201, 162, 39, 0.12);
 }
 
-body.logan5 .ultimate-payment-rate-item-you .ultimate-payment-rate-value {
+.ultimate-live-rate-label {
+  display: block;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.8;
+  margin-bottom: 0.2rem;
+}
+
+.ultimate-live-rate-value {
+  font-size: 1.15rem;
   color: var(--gold-light, #e8c84a);
 }
 
-body.logan5 .ultimate-payment-rate-label {
-  opacity: 0.78;
-  font-size: 0.68rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-body.logan5 .ultimate-payment-rate-value {
-  font-size: 1rem;
-  font-weight: 700;
-  color: #fff;
-}
-
-body.logan5 .ultimate-payment-rate-divider {
-  font-size: 0.68rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  opacity: 0.45;
-}
-
-body.logan5 .ultimate-payment-compliance-line {
-  margin: 0.75rem 0 0;
-  font-size: 0.66rem;
-  line-height: 1.45;
-  opacity: 0.72;
-  text-align: center;
-}
-
-body.logan5 .ultimate-payment-details {
-  display: flex;
-  flex-direction: column;
-  gap: 0.85rem;
-}
-
-body.logan5 .ultimate-payment-details-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0.75rem;
-}
-
-body.logan5 .ultimate-payment-panel {
-  border-radius: 14px;
-  border: 1px solid var(--border, rgba(26, 18, 48, 0.1));
-  background: #fff;
-  box-shadow: 0 4px 18px rgba(26, 18, 48, 0.05);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  min-height: 100%;
-}
-
-body.logan5 .ultimate-payment-panel-summary {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.15rem;
-  padding: 0.85rem 2.25rem 0.85rem 1rem;
-  font-weight: 700;
-  font-size: 0.9rem;
-  color: var(--navy-dark, #1a1230);
-  cursor: pointer;
-  list-style: none;
-  user-select: none;
-}
-
-body.logan5 .ultimate-payment-panel-summary::-webkit-details-marker {
-  display: none;
-}
-
-body.logan5 .ultimate-payment-panel-summary::after {
-  content: "+";
-  position: absolute;
-  right: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 1.1rem;
-  font-weight: 400;
-  color: var(--text-muted, #5c5670);
-  line-height: 1;
-}
-
-body.logan5 .ultimate-payment-panel {
-  position: relative;
-}
-
-body.logan5 .ultimate-payment-panel[open] .ultimate-payment-panel-summary::after {
-  content: "−";
-}
-
-body.logan5 .ultimate-payment-panel[open] .ultimate-payment-panel-summary {
-  border-bottom: 1px solid var(--border, rgba(26, 18, 48, 0.08));
-  background: var(--surface-muted, #f8f7fb);
-}
-
-body.logan5 .ultimate-payment-panel-hint {
-  font-size: 0.72rem;
-  font-weight: 500;
-  color: var(--text-muted, #5c5670);
-}
-
-body.logan5 .ultimate-payment-panel-body {
-  flex: 1;
-  padding: 0.75rem 1rem 1rem;
-}
-
-body.logan5 .ultimate-payment-breakdown {
-  border-bottom: none;
-  margin-bottom: 0.65rem;
-}
-
-body.logan5 .ultimate-payment-breakdown li {
-  border-bottom-color: var(--border, rgba(26, 18, 48, 0.08));
-  color: var(--navy-dark, #1a1230);
-}
-
-body.logan5 .ultimate-payment-breakdown li span {
-  color: var(--text-muted, #5c5670);
-}
-
-body.logan5 .ultimate-payment-breakdown li strong {
-  color: var(--navy-dark, #1a1230);
-}
-
-body.logan5 .ultimate-payment-stats-inline {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.5rem;
-  margin: 0;
-  padding: 0.65rem 0 0;
-  border-top: 1px solid var(--border, rgba(26, 18, 48, 0.08));
-}
-
-body.logan5 .ultimate-payment-stats-inline .stat {
-  text-align: center;
-}
-
-body.logan5 .ultimate-payment-stats-inline .stat-label {
-  color: var(--text-muted, #5c5670);
-  font-size: 0.65rem;
-}
-
-body.logan5 .ultimate-payment-stats-inline .stat-value {
-  color: var(--navy-dark, #1a1230);
-  font-size: 0.82rem;
-}
-
-body.logan5 .ultimate-vs-panel {
-  margin: 0;
-  padding: 0;
-  background: transparent;
-  border: none;
+body.logan5 .ultimate-vs-visible {
+  margin: 1rem 0;
+  padding: 0.85rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   text-align: left;
 }
 
-body.logan5 .ultimate-vs-panel .vs-competition-grid {
+body.logan5 .ultimate-vs-visible .vs-competition-title {
+  text-align: center;
   margin-bottom: 0.65rem;
 }
 
-body.logan5 .ultimate-vs-panel .vs-comp-col {
-  background: var(--surface-muted, #f8f7fb);
-  border-color: var(--border, rgba(26, 18, 48, 0.1));
-}
-
-body.logan5 .ultimate-vs-panel .vs-comp-col-rate,
-body.logan5 .ultimate-vs-panel .vs-comp-col-payment,
-body.logan5 .ultimate-vs-panel .vs-comp-savings li,
-body.logan5 .ultimate-vs-panel .vs-comp-note {
-  color: var(--navy-dark, #1a1230);
+body.logan5 .ultimate-payment-stats {
+  margin: 1rem 0;
 }
 
 body.logan5 .ultimate-payment-cash-quote {
-  margin: 0;
+  margin: 1rem 0;
   text-align: left;
-  color: var(--navy-dark, #1a1230);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #fff;
 }
 
-body.logan5 .ultimate-payment-cash-quote .official-quote-scenario {
-  margin: 0 0 0.65rem;
-  font-size: 0.78rem;
-  color: var(--text-muted, #5c5670);
+body.logan5 .ultimate-payment-cash-quote h3 {
+  color: #fff;
+  text-align: center;
 }
 
-body.logan5 .ultimate-payment-cash-quote .official-quote-row dt {
-  color: var(--text-muted, #5c5670);
-}
-
+body.logan5 .ultimate-payment-cash-quote .official-quote-row dt,
 body.logan5 .ultimate-payment-cash-quote .official-quote-row dd {
-  color: var(--navy-dark, #1a1230);
-}
-
-body.logan5 .ultimate-payment-email {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0.65rem;
-  padding: 1rem;
-  border-radius: 14px;
-  border: 1px solid rgba(201, 162, 39, 0.28);
-  background: var(--ultimate-accent-soft, rgba(232, 200, 74, 0.1));
-}
-
-body.logan5 .ultimate-payment-email-form {
-  display: grid;
-  grid-template-columns: 1fr auto auto;
-  gap: 0.45rem;
-  align-items: center;
-}
-
-body.logan5 .ultimate-payment-email .save-estimate-title {
-  margin: 0;
-  font-size: 0.9rem;
-}
-
-body.logan5 .ultimate-payment-email .save-estimate-lead {
-  margin: 0.15rem 0 0;
-  font-size: 0.72rem;
-}
-
-body.logan5 .ultimate-payment-email .save-estimate-consent {
-  margin: 0;
-  font-size: 0.65rem;
-  grid-column: 1 / -1;
-}
-
-body.logan5 .ultimate-payment-quote {
-  margin: 0;
-  padding: 0.85rem 1rem;
-  border-radius: 12px;
-  border-left: 3px solid var(--gold, #c9a227);
-  background: var(--surface-muted, #f8f7fb);
-  text-align: left;
-}
-
-body.logan5 .ultimate-payment-quote p {
-  margin: 0.35rem 0;
-  font-size: 0.78rem;
-  color: var(--navy-dark, #1a1230);
-}
-
-body.logan5 .ultimate-payment-quote footer {
-  font-size: 0.72rem;
-  color: var(--text-muted, #5c5670);
-}
-
-body.logan5 .ultimate-payment-footer-row {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0.75rem;
+  color: rgba(255, 255, 255, 0.92);
 }
 
 body.logan5 .ultimate-payment-cta-stack {
-  margin-top: 0.85rem;
+  margin-top: 1.15rem;
   text-align: center;
 }
 
 body.logan5 .ultimate-cta-primary {
   width: 100%;
   max-width: 320px;
+}
+
+body.logan5 .ultimate-payment-trust {
+  margin-top: 1rem;
+}
+
+.ultimate-review-inline {
+  margin: 0;
+  padding: 0.75rem 0.85rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  border-left: 3px solid var(--gold, #c9a227);
+  text-align: left;
+}
+
+.ultimate-review-inline p {
+  margin: 0 0 0.35rem;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.ultimate-review-inline footer {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.65);
 }
 
 /* Hub + sub-views */
@@ -2252,8 +2003,8 @@ body.logan5 .lead-savings-ribbon-hero {
   display: flex;
   flex-direction: column;
   gap: 0.55rem;
-  padding: 0.75rem 0.9rem;
-  margin: 0.65rem 0 0;
+  padding: 0.95rem 1.1rem;
+  margin: 0.85rem 0 1rem;
   border-radius: 14px;
   background: linear-gradient(135deg, rgba(232, 200, 74, 0.22) 0%, rgba(201, 162, 39, 0.16) 100%);
   border: 1px solid rgba(201, 162, 39, 0.45);
@@ -2297,8 +2048,8 @@ body.logan5 .lead-savings-disclaimer {
 }
 
 body.logan5 .ultimate-payment-hero-block {
-  margin: 0.15rem 0 0;
-  padding: 1.15rem 0.85rem 1rem;
+  margin: 0.25rem 0 1rem;
+  padding: 1.35rem 1rem 1.15rem;
   border-radius: 16px;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
   border: 2px solid rgba(201, 162, 39, 0.35);
@@ -2364,7 +2115,19 @@ body.logan5 .save-estimate-optional {
   gap: 0.45rem;
 }
 
-/* Summary grid — payment focus left, hub right */
+/* Payment lead row — apply left, vertical hub rail right */
+body.logan5 .ultimate-payment-lead-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+body.logan5 .ultimate-payment-lead-main {
+  text-align: center;
+}
 
 body.logan5 .ultimate-hub-rail {
   width: 100%;
@@ -2397,7 +2160,7 @@ body.logan5 .ultimate-hub-stack {
 
 body.logan5 .ultimate-hub-btn-rail {
   width: 100%;
-  padding: 0.7rem 0.85rem;
+  padding: 0.8rem 0.9rem;
   border-radius: 14px;
   border: 2px solid rgba(201, 162, 39, 0.22);
   background: #fff;
@@ -2422,6 +2185,12 @@ body.logan5 .ultimate-hub-btn-rail strong {
   font-size: 0.9rem;
 }
 
+body.logan5 .ultimate-hub-btn-rail span:last-child {
+  color: var(--text-muted, #5c5670);
+  font-size: 0.72rem;
+  text-align: left;
+}
+
 body.logan5 .ultimate-hub-btn-rail.ultimate-hub-btn-apply {
   border-color: rgba(201, 162, 39, 0.75);
   background: linear-gradient(135deg, #f0d060 0%, var(--gold, #c9a227) 55%, #b8891a 100%);
@@ -2433,7 +2202,8 @@ body.logan5 .ultimate-hub-btn-rail.ultimate-hub-btn-apply:hover {
   box-shadow: 0 10px 26px rgba(201, 162, 39, 0.42);
 }
 
-body.logan5 .ultimate-hub-btn-rail.ultimate-hub-btn-apply strong {
+body.logan5 .ultimate-hub-btn-rail.ultimate-hub-btn-apply strong,
+body.logan5 .ultimate-hub-btn-rail.ultimate-hub-btn-apply span:last-child {
   color: var(--navy-dark, #1a1230);
 }
 
@@ -2453,161 +2223,41 @@ body.logan5 .ultimate-hub-btn-rail.ultimate-hub-btn-apply .ultimate-hub-btn-icon
   background: rgba(26, 18, 48, 0.08);
 }
 
-body.logan5 .ultimate-hub-btn-rail strong {
+body.logan5 .ultimate-hub-btn-rail strong,
+body.logan5 .ultimate-hub-btn-rail span:last-child {
   display: block;
-  line-height: 1.25;
 }
 
 @media (min-width: 720px) {
-  body.logan5 .ultimate-payment-summary-grid {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: 1rem 1.25rem;
+  body.logan5 .ultimate-payment-lead-grid {
+    grid-template-columns: minmax(0, 1.15fr) minmax(220px, 0.85fr);
+    align-items: start;
+    gap: 1.15rem;
   }
 
-  body.logan5 .ultimate-hub-rail {
-    grid-column: 1 / -1;
-  }
-
-  body.logan5 .ultimate-payment-hero-col,
-  body.logan5 .ultimate-payment-actions-col {
+  body.logan5 .ultimate-payment-lead-main {
     text-align: left;
   }
 
-  body.logan5 .ultimate-payment-actions-col .results-apply-note,
-  body.logan5 .ultimate-payment-actions-col .ultimate-payment-compliance-line {
+  body.logan5 .ultimate-payment-lead-main .ultimate-payment-sublead,
+  body.logan5 .ultimate-payment-lead-main .results-apply-note {
     text-align: left;
   }
 
-  body.logan5 .ultimate-payment-rate-pill {
+  body.logan5 .ultimate-payment-lead-main .ultimate-payment-trust-badges {
     justify-content: flex-start;
   }
 
   body.logan5 .ultimate-payment-cta-top .ultimate-cta-hero {
-    max-width: 100%;
+    max-width: 320px;
   }
 
-  body.logan5 .ultimate-payment-email {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
-    align-items: center;
-  }
-
-  body.logan5 .ultimate-payment-email-form {
-    grid-column: 2;
-  }
-
-  body.logan5 .ultimate-payment-email .save-estimate-consent {
-    grid-column: 1 / -1;
-  }
-}
-
-@media (min-width: 960px) {
-  body.logan5.wizard-on-results .ultimate-payment-summary {
-    padding: 1.35rem 1.5rem 1.5rem;
-  }
-
-  body.logan5.wizard-on-results .ultimate-payment-summary-grid {
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr) minmax(260px, 300px);
-    gap: 1.25rem 1.5rem;
-    align-items: stretch;
-  }
-
-  body.logan5.wizard-on-results .ultimate-hub-rail {
-    grid-column: auto;
-    margin-top: 0;
-    align-self: stretch;
-  }
-
-  body.logan5.wizard-on-results .ultimate-payment-hero-block {
-    text-align: left;
-  }
-
-  body.logan5.wizard-on-results .ultimate-payment-hero-block .total-payment-hero {
-    text-align: left;
-  }
-
-  body.logan5.wizard-on-results .ultimate-payment-hero-block .total-amount {
-    font-size: clamp(2.5rem, 4vw, 3.35rem);
-  }
-
-  body.logan5.wizard-on-results .ultimate-hub-rail {
+  body.logan5 .ultimate-hub-rail {
     position: sticky;
-    top: 0.75rem;
+    top: 0.5rem;
   }
 
-  body.logan5.wizard-on-results .ultimate-payment-details-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1rem;
-    align-items: stretch;
-  }
-
-  body.logan5.wizard-on-results .ultimate-payment-panel-summary {
-    pointer-events: none;
-    cursor: default;
-    padding-right: 1rem;
-  }
-
-  body.logan5.wizard-on-results .ultimate-payment-panel-summary::after {
-    display: none;
-  }
-
-  body.logan5.wizard-on-results .ultimate-payment-panel[open] .ultimate-payment-panel-summary {
-    border-bottom: 1px solid var(--border, rgba(26, 18, 48, 0.08));
-  }
-
-  body.logan5.wizard-on-results .ultimate-payment-email {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.75rem 1.25rem;
-    padding: 1rem 1.25rem;
-  }
-
-  body.logan5.wizard-on-results .ultimate-payment-email-copy {
-    flex: 1 1 220px;
-  }
-
-  body.logan5.wizard-on-results .ultimate-payment-email-form {
-    flex: 2 1 360px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    align-items: center;
-    grid-column: auto;
-  }
-
-  body.logan5.wizard-on-results .ultimate-payment-email-form input[type="email"] {
-    flex: 1 1 180px;
-    min-width: 0;
-  }
-
-  body.logan5.wizard-on-results .ultimate-payment-footer-row {
-    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-    gap: 1rem;
-    align-items: stretch;
-  }
-
-  body.logan5.wizard-on-results .ultimate-payment-quote {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100%;
-    margin: 0;
-  }
-}
-
-@media (max-width: 719px) {
-  body.logan5 .ultimate-payment-email-form {
-    grid-template-columns: 1fr;
-  }
-
-  body.logan5 .ultimate-payment-stats-inline {
-    grid-template-columns: 1fr;
-    gap: 0.35rem;
-  }
-
-  body.logan5 .ultimate-payment-stats-inline .stat {
-    display: flex;
-    justify-content: space-between;
+  body.logan5 .ultimate-hub-rail-label {
     text-align: left;
   }
 }

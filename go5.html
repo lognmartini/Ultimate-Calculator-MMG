@@ -21,6 +21,7 @@
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="styles-steps.css" />
   <link rel="stylesheet" href="styles-ultimate.css" />
+  <link rel="stylesheet" href="styles-logan5-mobile.css" />
 </head>
 <body class="wizard-social logan3 logan5" data-wizard-step="1" data-mmg-version="Logan5">
   <header class="wizard-header">
@@ -443,201 +444,170 @@
       </div>
     </section>
 
-    <!-- Step 3: Payment + What's next — hero first, details on demand -->
+    <!-- Step 3: Payment + What's next (combined) -->
     <section class="wizard-step wizard-results ultimate-payment-step ultimate-final-step ultimate-combined-final" data-step="2" hidden aria-labelledby="wiz-title-2">
       <div class="ultimate-payment-main" id="ultimatePaymentMain">
+      <div class="wizard-card wizard-card-dark panel results-panel lead-results ultimate-results-final ultimate-payment-landing" aria-labelledby="results-heading">
+        <div class="ultimate-payment-lead-grid">
+          <div class="ultimate-payment-lead-main">
+            <p class="wizard-eyebrow">Your Martini estimate</p>
+            <h2 class="wizard-title" id="wiz-title-2" style="color:#fff;">Your monthly payment</h2>
+            <p class="ultimate-payment-sublead">Live rate estimate · savings vs. typical lenders · educational only</p>
 
-        <div class="ultimate-payment-summary wizard-card wizard-card-dark results-panel lead-results ultimate-payment-landing" aria-labelledby="results-heading">
-          <div class="ultimate-payment-summary-grid">
-            <section class="ultimate-payment-hero-col">
-              <header class="ultimate-payment-header">
-                <p class="wizard-eyebrow">Your Martini estimate</p>
-                <h2 class="wizard-title" id="wiz-title-2">Your monthly payment</h2>
-              </header>
+            <div class="ultimate-payment-cta-stack ultimate-payment-cta-top">
+              <a href="https://applywithlogan.com" class="btn btn-apply-now btn-results-apply ultimate-cta-primary ultimate-cta-hero" data-mmg-apply target="_blank" rel="noopener">
+                <span class="btn-apply-text">Apply now</span>
+                <span class="btn-apply-arrow" aria-hidden="true">→</span>
+              </a>
+              <p class="results-apply-note">3 min · soft credit pull · Logan reviews every file</p>
+            </div>
 
-              <div class="ultimate-payment-hero-block">
-                <div class="total-payment total-payment-hero">
-                  <span class="total-label">Estimated monthly PITI</span>
-                  <span class="total-amount" id="pitiPayment">—</span>
-                  <span class="total-sublabel">Principal, interest, taxes &amp; insurance</span>
-                </div>
-              </div>
+            <div class="ultimate-payment-trust-badges" aria-label="Trust signals">
+              <span>NMLS #1591485 · #3446</span>
+              <span>Equal Housing Lender</span>
+              <span>Raleigh-based team</span>
+            </div>
+          </div>
 
-              <div class="total-payment total-payment-secondary ultimate-payment-extras hidden" id="totalWithExtras">
-                <span class="total-label">Total with PMI / HOA</span>
-                <span class="total-amount total-amount-sm" id="totalPayment">$0</span>
-                <span class="total-sublabel hidden" id="extrasNote"></span>
-              </div>
-            </section>
+          <aside class="ultimate-hub-rail" id="ultimateHubView" aria-label="What's next">
+            <p class="ultimate-hub-rail-label">What&rsquo;s next?</p>
+            <div class="ultimate-hub-stack">
+              <button type="button" class="ultimate-hub-btn ultimate-hub-btn-rail" id="ultimateHubCompare" data-hub-action="compare">
+                <span class="ultimate-hub-btn-icon" aria-hidden="true">📊</span>
+                <strong>See other loan options</strong>
+              </button>
+              <button type="button" class="ultimate-hub-btn ultimate-hub-btn-rail" id="ultimateHubRealtor" data-hub-action="realtor">
+                <span class="ultimate-hub-btn-icon" aria-hidden="true">🏘️</span>
+                <strong>Need a realtor?</strong>
+              </button>
+              <a href="https://applywithlogan.com" class="ultimate-hub-btn ultimate-hub-btn-rail ultimate-hub-btn-apply" data-mmg-apply target="_blank" rel="noopener">
+                <span class="ultimate-hub-btn-icon" aria-hidden="true">✓</span>
+                <strong>Apply now</strong>
+              </a>
+            </div>
+          </aside>
+        </div>
 
-            <section class="ultimate-payment-actions-col">
-              <div class="ultimate-payment-meta" aria-label="Rate comparison">
-                <div class="ultimate-payment-rate-pill">
-                  <span class="ultimate-payment-rate-item">
-                    <span class="ultimate-payment-rate-label">Typical lender</span>
-                    <strong class="ultimate-payment-rate-value" id="ultimatePaymentMarketRate">—</strong>
-                  </span>
-                  <span class="ultimate-payment-rate-divider" aria-hidden="true">vs</span>
-                  <span class="ultimate-payment-rate-item ultimate-payment-rate-item-you">
-                    <span class="ultimate-payment-rate-label">Your Martini rate</span>
-                    <strong class="ultimate-payment-rate-value" id="ultimatePaymentMartiniRate">—</strong>
-                  </span>
-                </div>
-              </div>
-
-              <div class="lead-savings-ribbon lead-savings-ribbon-hero hidden" id="leadSavingsRibbon" role="status">
-                <div class="lead-savings-row hidden" id="leadMonthlySavingsRow">
-                  <span class="lead-savings-label">You could save</span>
-                  <strong class="lead-savings-amount" id="leadSavingsAmount">—</strong>
-                  <span class="lead-savings-suffix">/mo vs. typical lenders</span>
-                </div>
-                <div class="lead-savings-row lead-savings-row-cash hidden" id="leadCashSavingsRow">
-                  <span class="lead-savings-label">Est. cash at closing</span>
-                  <strong class="lead-savings-amount lead-savings-amount-cash" id="leadCashSavingsAmount">—</strong>
-                  <span class="lead-savings-suffix">less vs. typical lender quote</span>
-                </div>
-                <p class="lead-savings-disclaimer hidden" id="leadCashSavingsNote" role="note">
-                  Illustrative comparison only — assumes a typical lender may charge about 1 discount point and higher origination fees. Not a Loan Estimate; actual cash to close varies by lender, credits, and property.
-                </p>
-              </div>
-
-              <div class="ultimate-payment-cta-stack ultimate-payment-cta-top">
-                <a href="https://applywithlogan.com" class="btn btn-apply-now btn-results-apply ultimate-cta-primary ultimate-cta-hero" data-mmg-apply target="_blank" rel="noopener">
-                  <span class="btn-apply-text">Apply now</span>
-                  <span class="btn-apply-arrow" aria-hidden="true">→</span>
-                </a>
-                <p class="results-apply-note">3 min · soft credit pull · Logan reviews every file</p>
-              </div>
-
-              <p class="ultimate-payment-compliance-line">Educational estimate only · NMLS #1591485 · #3446 · Equal Housing Lender</p>
-            </section>
-
-            <aside class="ultimate-hub-rail" id="ultimateHubView" aria-label="What's next">
-              <p class="ultimate-hub-rail-label">What&rsquo;s next?</p>
-              <div class="ultimate-hub-stack">
-                <button type="button" class="ultimate-hub-btn ultimate-hub-btn-rail" id="ultimateHubCompare" data-hub-action="compare">
-                  <span class="ultimate-hub-btn-icon" aria-hidden="true">📊</span>
-                  <strong>See other loan options</strong>
-                </button>
-                <button type="button" class="ultimate-hub-btn ultimate-hub-btn-rail" id="ultimateHubRealtor" data-hub-action="realtor">
-                  <span class="ultimate-hub-btn-icon" aria-hidden="true">🏘️</span>
-                  <strong>Need a realtor?</strong>
-                </button>
-                <a href="https://applywithlogan.com" class="ultimate-hub-btn ultimate-hub-btn-rail ultimate-hub-btn-apply" data-mmg-apply target="_blank" rel="noopener">
-                  <span class="ultimate-hub-btn-icon" aria-hidden="true">✓</span>
-                  <strong>Apply now</strong>
-                </a>
-              </div>
-            </aside>
+        <div class="ultimate-live-rate-strip" aria-label="Live rate comparison">
+          <div class="ultimate-live-rate-col">
+            <span class="ultimate-live-rate-label">Typical lender</span>
+            <strong class="ultimate-live-rate-value" id="ultimatePaymentMarketRate">—</strong>
+          </div>
+          <div class="ultimate-live-rate-col ultimate-live-rate-col-martini">
+            <span class="ultimate-live-rate-label">Your Martini rate</span>
+            <strong class="ultimate-live-rate-value" id="ultimatePaymentMartiniRate">—</strong>
           </div>
         </div>
 
-        <div class="ultimate-payment-details">
-          <div class="ultimate-payment-details-grid">
-            <details class="ultimate-payment-panel" open>
-              <summary class="ultimate-payment-panel-summary">
-                <span>Payment breakdown</span>
-                <span class="ultimate-payment-panel-hint">P&amp;I, tax, insurance &amp; loan stats</span>
-              </summary>
-              <div class="ultimate-payment-panel-body">
-                <ul class="breakdown ultimate-final-breakdown ultimate-payment-breakdown" id="breakdown">
-                  <li><span>Principal &amp; interest</span><strong id="piPayment">$0</strong></li>
-                  <li><span>Property tax</span><strong id="taxPayment">$0</strong></li>
-                  <li><span>Insurance</span><strong id="insurancePayment">$0</strong></li>
-                  <li id="pmiRow" class="hidden"><span id="pmiRowLabel">MI</span><strong id="pmiPayment">$0</strong></li>
-                  <li id="hoaRow" class="hidden"><span>HOA</span><strong id="hoaPayment">$0</strong></li>
-                </ul>
-                <div class="summary-stats ultimate-payment-stats ultimate-payment-stats-inline">
-                  <div class="stat"><span class="stat-label">Loan amount</span><span class="stat-value" id="loanAmount">$0</span></div>
-                  <div class="stat"><span class="stat-label">Total interest</span><span class="stat-value" id="totalInterest">$0</span></div>
-                  <div class="stat"><span class="stat-label">Payoff</span><span class="stat-value" id="payoffDate">—</span></div>
-                </div>
-              </div>
-            </details>
-
-            <details class="ultimate-payment-panel" open>
-              <summary class="ultimate-payment-panel-summary">
-                <span>Compare to typical lenders</span>
-                <span class="ultimate-payment-panel-hint">Rates, savings &amp; lifetime interest</span>
-              </summary>
-              <div class="ultimate-payment-panel-body">
-                <section class="vs-competition ultimate-vs-panel" id="vsCompetition" aria-labelledby="vsCompetitionTitle">
-                  <h3 class="vs-competition-title sr-only" id="vsCompetitionTitle">Martini vs. typical lenders</h3>
-                  <div class="vs-competition-grid">
-                    <div class="vs-comp-col vs-comp-col-them">
-                      <span class="vs-comp-col-label">Typical</span>
-                      <span class="vs-comp-col-rate" id="vsTypicalRate">—</span>
-                      <span class="vs-comp-col-payment" id="vsTypicalPi">—</span>
-                    </div>
-                    <div class="vs-comp-col vs-comp-col-us">
-                      <span class="vs-comp-col-label">Martini</span>
-                      <span class="vs-comp-col-rate" id="vsMartiniRate">—</span>
-                      <span class="vs-comp-col-payment" id="vsMartiniPi">—</span>
-                    </div>
-                  </div>
-                  <ul class="vs-comp-savings">
-                    <li><span>Monthly P&amp;I savings</span><strong id="vsMonthlyPiSave">—</strong></li>
-                    <li><span>Monthly PITI savings</span><strong id="vsMonthlyPitiSave">—</strong></li>
-                    <li class="vs-comp-savings-highlight"><span>Interest saved (term)</span><strong id="vsLifetimeInterestSave">—</strong></li>
-                    <li class="hidden" id="vsPointsRow"><span>Discount points</span><strong id="vsPointsCost">—</strong></li>
-                  </ul>
-                  <p class="vs-comp-note" id="vsCompNote"></p>
-                </section>
-              </div>
-            </details>
-
-            <details class="ultimate-payment-panel" open>
-              <summary class="ultimate-payment-panel-summary">
-                <span>Estimated cash to close</span>
-                <span class="ultimate-payment-panel-hint">Down payment, costs &amp; prepaids</span>
-              </summary>
-              <div class="ultimate-payment-panel-body">
-                <div class="ultimate-payment-cash-quote">
-                  <p class="official-quote-scenario" id="quoteScenarioSummary">Based on your inputs.</p>
-                  <dl class="official-quote-figures">
-                    <div class="official-quote-row"><dt>Down payment</dt><dd id="quoteDownPayment">—</dd></div>
-                    <div class="official-quote-row"><dt>Est. closing costs</dt><dd id="quoteClosingCosts">—</dd></div>
-                    <div class="official-quote-row"><dt>Prepaids &amp; escrows</dt><dd id="quotePrepaids">—</dd></div>
-                    <div class="official-quote-row hidden" id="quotePointsRow"><dt>Discount points</dt><dd id="quotePointsCost">—</dd></div>
-                    <div class="official-quote-row official-quote-row-total"><dt>Est. cash to close</dt><dd id="quoteCashToClose">—</dd></div>
-                  </dl>
-                </div>
-              </div>
-            </details>
+        <div class="lead-savings-ribbon lead-savings-ribbon-hero hidden" id="leadSavingsRibbon" role="status">
+          <div class="lead-savings-row hidden" id="leadMonthlySavingsRow">
+            <span class="lead-savings-label">You could save</span>
+            <strong class="lead-savings-amount" id="leadSavingsAmount">—</strong>
+            <span class="lead-savings-suffix">/mo vs. typical lenders</span>
           </div>
+          <div class="lead-savings-row lead-savings-row-cash hidden" id="leadCashSavingsRow">
+            <span class="lead-savings-label">Est. cash at closing</span>
+            <strong class="lead-savings-amount lead-savings-amount-cash" id="leadCashSavingsAmount">—</strong>
+            <span class="lead-savings-suffix">less vs. typical lender quote</span>
+          </div>
+          <p class="lead-savings-disclaimer hidden" id="leadCashSavingsNote" role="note">
+            Illustrative comparison only — assumes a typical lender may charge about 1 discount point and higher origination fees. Not a Loan Estimate; actual cash to close varies by lender, credits, and property.
+          </p>
+        </div>
 
-          <div class="ultimate-payment-footer-row">
-          <aside class="save-estimate-card ultimate-payment-email hidden" id="saveEstimateCard" aria-label="Save your estimate">
-            <button type="button" class="save-estimate-dismiss" id="saveEstimateDismiss" aria-label="Dismiss">×</button>
-            <div class="ultimate-payment-email-copy">
-              <p class="save-estimate-title">Email me this estimate</p>
-              <p class="save-estimate-lead">Optional — no application required.</p>
+        <div class="ultimate-payment-hero-block">
+          <div class="total-payment total-payment-hero">
+            <span class="total-label">Estimated monthly PITI</span>
+            <span class="total-amount" id="pitiPayment">—</span>
+            <span class="total-sublabel">Principal, interest, taxes &amp; insurance</span>
+          </div>
+        </div>
+
+        <div class="total-payment total-payment-secondary hidden" id="totalWithExtras">
+          <span class="total-label">Total with PMI / HOA</span>
+          <span class="total-amount total-amount-sm" id="totalPayment">$0</span>
+          <span class="total-sublabel hidden" id="extrasNote"></span>
+        </div>
+
+        <section class="vs-competition ultimate-vs-visible" id="vsCompetition" aria-labelledby="vsCompetitionTitle">
+          <h3 class="vs-competition-title" id="vsCompetitionTitle">Martini vs. typical lenders</h3>
+          <div class="vs-competition-grid">
+            <div class="vs-comp-col vs-comp-col-them">
+              <span class="vs-comp-col-label">Typical</span>
+              <span class="vs-comp-col-rate" id="vsTypicalRate">—</span>
+              <span class="vs-comp-col-payment" id="vsTypicalPi">—</span>
             </div>
-            <form id="saveEstimateForm" class="save-estimate-form save-estimate-form-lite ultimate-payment-email-form">
-              <label class="sr-only" for="saveEstimateEmail">Email</label>
-              <input type="email" id="saveEstimateEmail" name="email" placeholder="Email" autocomplete="email" inputmode="email" required />
-              <div class="save-estimate-optional hidden" id="saveEstimateOptional">
-                <label class="sr-only" for="saveEstimateName">Name</label>
-                <input type="text" id="saveEstimateName" name="name" placeholder="Name (optional)" autocomplete="name" />
-                <label class="sr-only" for="saveEstimatePhone">Phone</label>
-                <input type="tel" id="saveEstimatePhone" name="phone" placeholder="Phone (optional)" autocomplete="tel" inputmode="tel" />
-              </div>
-              <button type="button" class="save-estimate-expand" id="saveEstimateExpand">+ Add name &amp; phone</button>
-              <button type="submit" class="btn btn-outline save-estimate-submit">Send</button>
-              <button type="button" class="save-estimate-skip" id="saveEstimateSkip">No thanks</button>
-            </form>
-            <p class="save-estimate-success hidden" id="saveEstimateSuccess">Saved &mdash; we&rsquo;ll send your estimate shortly.</p>
-            <p class="save-estimate-consent">By submitting, you agree we may contact you about this estimate. Not a loan application.</p>
-          </aside>
+            <div class="vs-comp-col vs-comp-col-us">
+              <span class="vs-comp-col-label">Martini</span>
+              <span class="vs-comp-col-rate" id="vsMartiniRate">—</span>
+              <span class="vs-comp-col-payment" id="vsMartiniPi">—</span>
+            </div>
+          </div>
+          <ul class="vs-comp-savings">
+            <li><span>Monthly P&amp;I savings</span><strong id="vsMonthlyPiSave">—</strong></li>
+            <li><span>Monthly PITI savings</span><strong id="vsMonthlyPitiSave">—</strong></li>
+            <li class="vs-comp-savings-highlight"><span>Interest saved (term)</span><strong id="vsLifetimeInterestSave">—</strong></li>
+            <li class="hidden" id="vsPointsRow"><span>Discount points</span><strong id="vsPointsCost">—</strong></li>
+          </ul>
+          <p class="vs-comp-note" id="vsCompNote"></p>
+        </section>
 
-          <blockquote class="ultimate-payment-quote">
+        <ul class="breakdown ultimate-final-breakdown" id="breakdown">
+          <li><span>Principal &amp; interest</span><strong id="piPayment">$0</strong></li>
+          <li><span>Property tax</span><strong id="taxPayment">$0</strong></li>
+          <li><span>Insurance</span><strong id="insurancePayment">$0</strong></li>
+          <li id="pmiRow" class="hidden"><span id="pmiRowLabel">MI</span><strong id="pmiPayment">$0</strong></li>
+          <li id="hoaRow" class="hidden"><span>HOA</span><strong id="hoaPayment">$0</strong></li>
+        </ul>
+
+        <div class="summary-stats ultimate-payment-stats">
+          <div class="stat"><span class="stat-label">Loan amount</span><span class="stat-value" id="loanAmount">$0</span></div>
+          <div class="stat"><span class="stat-label">Total interest</span><span class="stat-value" id="totalInterest">$0</span></div>
+          <div class="stat"><span class="stat-label">Payoff</span><span class="stat-value" id="payoffDate">—</span></div>
+        </div>
+
+        <div class="wizard-card wizard-mini-quote ultimate-payment-cash-quote">
+          <h3>Ballpark cash to close</h3>
+          <p class="official-quote-scenario" id="quoteScenarioSummary">Based on your inputs.</p>
+          <dl class="official-quote-figures">
+            <div class="official-quote-row"><dt>Down payment</dt><dd id="quoteDownPayment">—</dd></div>
+            <div class="official-quote-row"><dt>Est. closing costs</dt><dd id="quoteClosingCosts">—</dd></div>
+            <div class="official-quote-row"><dt>Prepaids &amp; escrows</dt><dd id="quotePrepaids">—</dd></div>
+            <div class="official-quote-row hidden" id="quotePointsRow"><dt>Discount points</dt><dd id="quotePointsCost">—</dd></div>
+            <div class="official-quote-row official-quote-row-total"><dt>Est. cash to close</dt><dd id="quoteCashToClose">—</dd></div>
+          </dl>
+        </div>
+
+        <aside class="save-estimate-card hidden" id="saveEstimateCard" aria-label="Save your estimate">
+          <button type="button" class="save-estimate-dismiss" id="saveEstimateDismiss" aria-label="Dismiss">×</button>
+          <p class="save-estimate-eyebrow">Get it in your inbox</p>
+          <p class="save-estimate-title">Email me this payment</p>
+          <p class="save-estimate-lead">Just your email — we&rsquo;ll send your numbers. No application required.</p>
+          <form id="saveEstimateForm" class="save-estimate-form save-estimate-form-lite">
+            <label class="sr-only" for="saveEstimateEmail">Email</label>
+            <input type="email" id="saveEstimateEmail" name="email" placeholder="Email" autocomplete="email" inputmode="email" required />
+            <div class="save-estimate-optional hidden" id="saveEstimateOptional">
+              <label class="sr-only" for="saveEstimateName">Name</label>
+              <input type="text" id="saveEstimateName" name="name" placeholder="Name (optional)" autocomplete="name" />
+              <label class="sr-only" for="saveEstimatePhone">Phone</label>
+              <input type="tel" id="saveEstimatePhone" name="phone" placeholder="Phone (optional)" autocomplete="tel" inputmode="tel" />
+            </div>
+            <button type="button" class="save-estimate-expand" id="saveEstimateExpand">+ Add name &amp; phone (optional)</button>
+            <button type="submit" class="btn btn-outline save-estimate-submit">Send my estimate</button>
+            <button type="button" class="save-estimate-skip" id="saveEstimateSkip">No thanks</button>
+          </form>
+          <p class="save-estimate-success hidden" id="saveEstimateSuccess">Saved &mdash; we&rsquo;ll send your estimate shortly.</p>
+          <p class="save-estimate-consent">By submitting, you agree we may contact you about this home and estimate. Not a loan application. TCPA: message/data rates may apply.</p>
+        </aside>
+
+        <div class="ultimate-payment-trust">
+          <div class="ultimate-review ultimate-review-inline">
             <div class="ultimate-review-stars" aria-hidden="true">★★★★★</div>
             <p>&ldquo;Logan was exceptional&mdash;thorough, responsive, and incredibly knowledgeable.&rdquo;</p>
             <footer><strong>Katie J.</strong> · First-time buyer</footer>
-          </blockquote>
           </div>
         </div>
-
+      </div>
       </div><!-- .ultimate-payment-main -->
 
       <div class="ultimate-subview hidden" id="ultimateCompareView" aria-labelledby="ultimate-compare-title">
@@ -768,7 +738,7 @@
       Logan Martini · NMLS #1591485 · Senior Mortgage Strategist<br />
       507 N Blount St, Raleigh, NC 27604 · <a href="https://martinimortgagegroup.com">martinimortgagegroup.com</a>
     </p>
-    <p class="footer-team-link"><a href="go5.html">Logan5</a> · <a href="go.html">Logan3</a> · <a href="go4.html">Logan4</a> · <a href="compare-versions.html">Compare all</a></p>
+    <p class="footer-team-link"><a href="go5.html">Logan5 calculator</a></p>
   </footer>
 
   <nav class="wizard-nav ultimate-wizard-nav" aria-label="Wizard navigation">

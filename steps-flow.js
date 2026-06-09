@@ -232,8 +232,14 @@
 
     getSteps().forEach((el, i) => {
       const active = i === currentStep;
-      el.classList.toggle("wizard-step-active", active);
-      el.hidden = !active;
+      el.classList.remove("wizard-step-active");
+      el.hidden = true;
+      el.setAttribute("aria-hidden", "true");
+      if (active) {
+        el.classList.add("wizard-step-active");
+        el.hidden = false;
+        el.setAttribute("aria-hidden", "false");
+      }
     });
     updateProgress();
     updateNavButtons();

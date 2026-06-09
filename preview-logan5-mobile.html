@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Logan5 Mobile Preview</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #1a1230;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem 1rem;
+    }
+    h1 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 0 0 0.5rem;
+      text-align: center;
+    }
+    .device-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .device-tabs button {
+      padding: 0.4rem 0.75rem;
+      border: 1px solid rgba(255,255,255,0.35);
+      background: transparent;
+      color: #fff;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      cursor: pointer;
+    }
+    .device-tabs button.active {
+      background: #c9a227;
+      color: #1a1230;
+      border-color: #c9a227;
+      font-weight: 600;
+    }
+    .phone-shell {
+      background: #111;
+      border-radius: 36px;
+      padding: 12px 10px 16px;
+      box-shadow: 0 0 0 2px #333, 0 24px 48px rgba(0,0,0,0.5);
+      position: relative;
+    }
+    .phone-shell::before {
+      content: "";
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 22px;
+      background: #111;
+      border-radius: 0 0 14px 14px;
+      z-index: 2;
+    }
+    .phone-screen {
+      background: #fff;
+      border-radius: 26px;
+      overflow: hidden;
+      box-shadow: inset 0 0 0 1px #222;
+    }
+    .phone-screen iframe {
+      display: block;
+      border: none;
+      background: #f4f5f9;
+    }
+    .link {
+      margin-top: 1rem;
+      font-size: 0.8rem;
+      opacity: 0.85;
+    }
+    .link a { color: #e8c84a; }
+  </style>
+</head>
+<body>
+  <h1>Logan5 — mobile preview</h1>
+  <p style="margin:0 0 1rem;font-size:0.8rem;opacity:0.8;text-align:center;max-width:360px;line-height:1.45;">Same 3-step flow as desktop: This home → Your numbers → Your payment.</p>
+  <div class="device-tabs" role="tablist">
+    <button type="button" class="active" data-w="390" data-h="844">iPhone 14</button>
+    <button type="button" data-w="360" data-h="780">Android</button>
+    <button type="button" data-w="320" data-h="568">Small</button>
+  </div>
+  <div class="phone-shell">
+    <div class="phone-screen">
+      <iframe id="frame" src="/go5.html" title="Logan5 mobile" width="390" height="844"></iframe>
+    </div>
+  </div>
+  <p class="link"><a href="/go5.html">Open full page</a></p>
+  <script>
+    const frame = document.getElementById("frame");
+    document.querySelectorAll(".device-tabs button").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".device-tabs button").forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        frame.width = btn.dataset.w;
+        frame.height = btn.dataset.h;
+      });
+    });
+  </script>
+</body>
+</html>

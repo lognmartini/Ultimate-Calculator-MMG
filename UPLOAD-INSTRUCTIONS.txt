@@ -1,0 +1,34 @@
+Logan5 — upload this entire folder to GitHub
+=============================================
+
+WHAT'S IN HERE
+  Everything needed to run go5.html on Render (or any host):
+  - go5.html (the calculator)
+  - 4 stylesheets (including mobile)
+  - 11 JavaScript files
+  - assets/ (logos + photos)
+  - server.py + requirements.txt + render.yaml (cloud hosting)
+
+HOW TO UPLOAD TO GITHUB (easiest)
+  1. Go to https://github.com/lognmartini/mmg-calculator
+  2. Click "Add file" → "Upload files"
+  3. Open this folder in Finder: Desktop → Logan5-GitHub-Upload
+  4. Press Cmd+A to select ALL files and the assets folder
+  5. Drag everything into the GitHub upload box
+  6. Commit message: "Logan5 wizard — desktop + mobile step flow"
+  7. Click "Commit changes"
+
+AFTER UPLOAD (Render will auto-deploy if connected)
+  Live link will be something like:
+  https://mmg-calculator-xxxx.onrender.com/go5.html
+
+LOCAL PREVIEW (before upload)
+  cd to this folder, then:
+    python3 server.py
+  Open: http://127.0.0.1:8765/go5.html
+  Mobile: http://127.0.0.1:8765/preview-logan5-mobile.html
+
+3-STEP FLOW (verified)
+  Step 1: This home
+  Step 2: Your numbers → tap "See my payment"
+  Step 3: Your payment + What's next

@@ -312,6 +312,23 @@ body.wizard-social {
   display: block;
 }
 
+.wizard-step[hidden] {
+  display: none !important;
+}
+
+/* Logan5 — exactly one wizard step visible (desktop + mobile) */
+body.logan5 .wizard-step {
+  display: none !important;
+}
+
+body.logan5 .wizard-step.wizard-step-active:not([hidden]) {
+  display: block !important;
+}
+
+body.logan5 .wizard-step[hidden] {
+  display: none !important;
+}
+
 @keyframes wizardFadeIn {
   from {
     opacity: 0;
