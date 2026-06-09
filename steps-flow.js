@@ -1,13 +1,17 @@
 /**
- * Logan3 / Logan4 — social-first wizard (go.html, go4.html).
- * 3 steps: home → tune → payment. URL deep links for listing posts.
+ * Logan3 / Logan4 / Logan5 — social-first wizard (go.html, go4.html, go5.html).
+ * Logan5: home → numbers → payment + what's next (combined).
  */
 (function () {
   "use strict";
 
+  const IS_LOGAN5 = document.body.classList.contains("logan5");
   const TOTAL_STEPS = 3;
-  const STEP_LABELS = ["This home", "Your numbers", "Your payment"];
+  const STEP_LABELS = IS_LOGAN5
+    ? ["This home", "Your numbers", "Your payment"]
+    : ["This home", "Your numbers", "Your payment"];
   let currentStep = 0;
+  let logan5SubView = null;
   let deepLinkBootstrapped = false;
 
   function $(id) {
@@ -23,18 +27,56 @@
     return t && t !== "—" && t !== "$0" ? t : "—";
   }
 
+  function isLogan5PaymentRevealed() {
+    return !IS_LOGAN5 || currentStep >= 2;
+  }
+
+  function isLogan5LiveRailVisible() {
+    return IS_LOGAN5 && currentStep === 1;
+  }
+
+  function updateLiveRailVisibility() {
+    if (!IS_LOGAN5) return;
+    const rail = document.querySelector(".ultimate-live-rail");
+    const showRail = isLogan5LiveRailVisible();
+    document.body.classList.toggle("logan5-payment-hidden", !isLogan5PaymentRevealed());
+    if (rail) {
+      rail.classList.toggle("ultimate-live-rail-hidden", !showRail);
+      rail.setAttribute("aria-hidden", showRail ? "false" : "true");
+    }
+  }
+
+  function syncPaymentRateStrip() {
+    if (!IS_LOGAN5) return;
+    const market = $("ultimatePaymentMarketRate");
+    const martini = $("ultimatePaymentMartiniRate");
+    if (market) market.textContent = $("vsTypicalRate")?.textContent || $("marketRateDisplay")?.textContent || "—";
+    if (martini) {
+      const r = $("vsMartiniRate")?.textContent || $("interestRate")?.value;
+      martini.textContent = r ? (String(r).includes("%") ? r : `${r}%`) : "—";
+    }
+  }
+
   function updateLivePreview() {
     const amount = $("wizardLivePayment");
     const note = $("wizardLiveNote");
     const piti = $("pitiPayment");
     if (!amount) return;
+
+    if (!isLogan5PaymentRevealed()) {
+      amount.textContent = "—";
+      if (note) note.textContent = currentStep === 1 ? "Adjust sliders — tap See my payment" : "";
+      $("wizardLivePreview")?.classList.remove("wizard-live-preview-ready");
+      return;
+    }
+
     const val = formatLivePayment(piti?.textContent);
     amount.textContent = val;
     if (note) {
       if (currentStep === TOTAL_STEPS - 1) {
-        note.textContent = "Your estimate is ready";
+        note.textContent = val !== "—" ? "Your estimate is ready" : "Calculating…";
       } else if (val !== "—") {
-        note.textContent = "Tap Next to continue";
+        note.textContent = "Updates as you adjust";
       } else {
         note.textContent = "Updates as you adjust";
       }
@@ -43,6 +85,7 @@
     if (preview) {
       preview.classList.toggle("wizard-live-preview-ready", val !== "—");
     }
+    syncPaymentRateStrip();
   }
 
   function updateListingBanner() {
@@ -58,6 +101,25 @@
     }
   }
 
+  function showLogan5SubView(view) {
+    if (!IS_LOGAN5 || currentStep !== TOTAL_STEPS - 1) return;
+    logan5SubView = view;
+    const paymentMain = $("ultimatePaymentMain");
+    const hub = $("ultimateHubView");
+    const compare = $("ultimateCompareView");
+    const realtor = $("ultimateRealtorView");
+    if (paymentMain) paymentMain.classList.toggle("hidden", view !== null);
+    if (hub) hub.classList.toggle("hidden", view !== null);
+    if (compare) compare.classList.toggle("hidden", view !== "compare");
+    if (realtor) realtor.classList.toggle("hidden", view !== "realtor");
+    document.body.classList.toggle("logan5-subview-active", view !== null);
+    if (view === "compare" && typeof window.MMG_logan5_renderCreativeLoans === "function") {
+      window.MMG_logan5_renderCreativeLoans();
+    }
+    updateNavButtons();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
   function updateProgress() {
     const fill = $("wizardProgressFill");
     const label = $("wizardProgressLabel");
@@ -69,32 +131,85 @@
     document.body.dataset.wizardStep = String(currentStep + 1);
     const live = $("wizardLivePreview");
     if (live) {
-      live.classList.toggle("wizard-live-preview-results", currentStep === TOTAL_STEPS - 1);
+      live.classList.toggle(
+        "wizard-live-preview-results",
+        IS_LOGAN5 ? currentStep >= 2 : currentStep === TOTAL_STEPS - 1
+      );
     }
   }
 
   function updateNavButtons() {
     const next = $("wizardNext");
     const back = $("wizardBack");
-    if (back) {
-      back.style.visibility = currentStep === 0 ? "hidden" : "visible";
-      back.style.pointerEvents = currentStep === 0 ? "none" : "auto";
+    const navInner = $("wizardNavInner") || document.querySelector(".wizard-nav-inner");
+    const nav = document.querySelector(".ultimate-wizard-nav");
+
+    if (IS_LOGAN5 && currentStep === TOTAL_STEPS - 1) {
+      if (logan5SubView) {
+        if (back) {
+          back.hidden = false;
+          back.style.visibility = "visible";
+          back.style.pointerEvents = "auto";
+          const backText = back.querySelector(".btn-wizard-back-text");
+          if (backText) backText.textContent = "Back to payment";
+        }
+        if (next) next.style.display = "none";
+        if (navInner) navInner.classList.remove("wizard-nav-solo");
+        if (nav) nav.classList.remove("wizard-nav-hidden");
+        return;
+      }
+      if (next) next.style.display = "none";
+      if (back) {
+        back.hidden = false;
+        back.style.visibility = "visible";
+        back.style.pointerEvents = "auto";
+        const backText = back.querySelector(".btn-wizard-back-text");
+        if (backText) backText.textContent = "Back";
+      }
+      if (nav) nav.classList.remove("wizard-nav-hidden");
+      return;
     }
+
+    if (back) {
+      if (IS_LOGAN5) {
+        const onFirst = currentStep === 0;
+        back.hidden = onFirst;
+        back.style.visibility = onFirst ? "hidden" : "visible";
+        back.style.pointerEvents = onFirst ? "none" : "auto";
+        const backText = back.querySelector(".btn-wizard-back-text");
+        if (backText) backText.textContent = "Back";
+      } else {
+        back.hidden = false;
+        back.style.visibility = currentStep === 0 ? "hidden" : "visible";
+        back.style.pointerEvents = currentStep === 0 ? "none" : "auto";
+      }
+    }
+
     if (!next) return;
     if (currentStep === TOTAL_STEPS - 1) {
       next.style.display = "none";
     } else {
       next.style.display = "";
-      const text = next.querySelector(".btn-apply-text");
+      const text =
+        next.querySelector(".btn-wizard-next-text") || next.querySelector(".btn-apply-text");
       if (!text) return;
-      if (currentStep === 0) text.textContent = "Next";
-      else if (currentStep === TOTAL_STEPS - 2) text.textContent = "See payment";
-      else text.textContent = "Next";
+      if (currentStep === 0) {
+        text.textContent = "Next";
+      } else if (IS_LOGAN5 && currentStep === 1) {
+        text.textContent = "See my payment";
+      } else if (currentStep === TOTAL_STEPS - 2) {
+        text.textContent = "See payment";
+      } else {
+        text.textContent = "Next";
+      }
     }
-    if (currentStep === TOTAL_STEPS - 1 && back) {
-      back.style.visibility = "visible";
-      back.style.pointerEvents = "auto";
+
+    if (navInner) {
+      navInner.classList.toggle("wizard-nav-solo", currentStep === 0);
     }
+    if (nav) nav.classList.remove("wizard-nav-hidden");
+
+    document.body.classList.toggle("logan5-show-apply-everywhere", IS_LOGAN5 && currentStep >= 1);
   }
 
   function recalculate() {
@@ -103,10 +218,18 @@
     }
     updateLivePreview();
     updateListingBanner();
+    syncPaymentRateStrip();
   }
 
   function showStep(index) {
     currentStep = Math.max(0, Math.min(TOTAL_STEPS - 1, index));
+    logan5SubView = null;
+    document.body.classList.remove("logan5-subview-active");
+    $("ultimatePaymentMain")?.classList.remove("hidden");
+    $("ultimateHubView")?.classList.remove("hidden");
+    $("ultimateCompareView")?.classList.add("hidden");
+    $("ultimateRealtorView")?.classList.add("hidden");
+
     getSteps().forEach((el, i) => {
       const active = i === currentStep;
       el.classList.toggle("wizard-step-active", active);
@@ -114,9 +237,18 @@
     });
     updateProgress();
     updateNavButtons();
+    updateLiveRailVisibility();
+    updateLivePreview();
     window.scrollTo({ top: 0, behavior: "smooth" });
 
-    if (currentStep === TOTAL_STEPS - 1) {
+    if (IS_LOGAN5 && currentStep === 2) {
+      document.body.classList.add("wizard-on-results");
+      recalculate();
+      window.dispatchEvent(new CustomEvent("mmg-wizard-results"));
+      if (typeof window.MMG_logan5_renderCreativeLoans === "function") {
+        window.MMG_logan5_renderCreativeLoans();
+      }
+    } else if (currentStep === TOTAL_STEPS - 1 && !IS_LOGAN5) {
       document.body.classList.add("wizard-on-results");
       recalculate();
       window.dispatchEvent(new CustomEvent("mmg-wizard-results"));
@@ -124,6 +256,7 @@
       document.body.classList.remove("wizard-on-results");
       recalculate();
     }
+
     document.dispatchEvent(
       new CustomEvent("mmg-wizard-step-change", { detail: { step: currentStep } })
     );
@@ -213,7 +346,10 @@
   }
 
   function bindLiveUpdates() {
-    document.addEventListener("mmg-calculated", updateLivePreview);
+    document.addEventListener("mmg-calculated", () => {
+      updateLivePreview();
+      syncPaymentRateStrip();
+    });
     document
       .querySelectorAll(
         "#homePrice, #homePriceInput, #downPercent, #downPercentInput, #downAmountInput, #creditScore, #loanProgram, #loanTerm, #interestRate, #propertyAddress"
@@ -237,6 +373,10 @@
     });
 
     $("wizardBack")?.addEventListener("click", () => {
+      if (IS_LOGAN5 && currentStep === TOTAL_STEPS - 1 && logan5SubView) {
+        showLogan5SubView(null);
+        return;
+      }
       if (currentStep > 0) showStep(currentStep - 1);
     });
 
@@ -247,6 +387,11 @@
       $("homePriceInput")?.focus();
     });
 
+    $("ultimateHubCompare")?.addEventListener("click", () => showLogan5SubView("compare"));
+    $("ultimateHubRealtor")?.addEventListener("click", () => showLogan5SubView("realtor"));
+    $("ultimateCompareBack")?.addEventListener("click", () => showLogan5SubView(null));
+    $("ultimateRealtorBack")?.addEventListener("click", () => showLogan5SubView(null));
+
     document.addEventListener("mmg-wizard-advance-after-address", () => {
       if (currentStep === 0) recalculate();
     });
@@ -256,6 +401,7 @@
     if (!document.body.classList.contains("wizard-social")) return;
     bindWizard();
     bindLiveUpdates();
+    updateLiveRailVisibility();
     showStep(0);
     window.setTimeout(applyDeepLink, 300);
     window.setTimeout(recalculate, 900);
@@ -268,4 +414,5 @@
   }
 
   window.MMG_wizardShowStep = showStep;
+  window.MMG_logan5_showSubView = showLogan5SubView;
 })();

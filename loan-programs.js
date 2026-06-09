@@ -66,8 +66,92 @@ window.MMG_LOAN_PROGRAMS = {
     rateSpreadVsConventional: 0.125,
     feeSheetNote: "Property and household income must meet USDA eligibility. Guarantee fees apply for the life of the loan.",
   },
+  jumbo: {
+    id: "jumbo",
+    label: "Jumbo",
+    shortLabel: "Jumbo",
+    description:
+      "For loan amounts above the 2026 conforming limit ($832,750 baseline). Typically 10–20%+ down, strong credit, and asset reserves. Not FHA/VA/USDA.",
+    minDownPercent: 10,
+    maxDownPercent: 50,
+    defaultDownPercent: 15,
+    miLabel: "PMI",
+    miRequiredBelowLtv: 80,
+    defaultMiAnnualRate: 0.45,
+    rateSpreadVsConventional: 0.375,
+    feeSheetNote: "Jumbo underwriting is stricter. Rates and minimum down vary by lender and loan size.",
+  },
 };
 
 window.MMG_getLoanProgram = function (id) {
   return window.MMG_LOAN_PROGRAMS[id] || window.MMG_LOAN_PROGRAMS.conventional;
+};
+
+/**
+ * Effective minimum down for estimates (simplified; not underwriting).
+ * Conventional: 3% for first-time buyers (HomeReady / Home Possible style),
+ * 5% otherwise. FHA/VA/USDA use program defaults.
+ */
+window.MMG_getEffectiveMinDown = function (programId, profile, homePrice, countyKey) {
+  const program = window.MMG_getLoanProgram(programId);
+  const fthb = Boolean(profile && profile.firstTimeBuyer);
+  if (programId === "conventional") {
+    return fthb ? 3 : 5;
+  }
+  if (programId === "fha" && homePrice && window.MMG_isFhaEligible && !window.MMG_isFhaEligible(homePrice, countyKey)) {
+    const limit = window.MMG_getFhaLimit ? window.MMG_getFhaLimit(countyKey) : 541287;
+    const price = Number(homePrice) || 0;
+    if (price > limit) {
+      const needed = Math.ceil(((price - limit) / price) * 1000) / 10;
+      return Math.min(50, Math.max(3.5, needed));
+    }
+  }
+  return program.minDownPercent ?? 0;
+};
+
+window.MMG_isProgramAvailable = function (programId, homePrice, profile, countyKey) {
+  const price = Number(homePrice) || 0;
+  if (programId === "fha") {
+    return true;
+  }
+  if (programId === "va") {
+    return window.MMG_isVaEligible ? window.MMG_isVaEligible(profile) : true;
+  }
+  if (programId === "usda") {
+    return window.MMG_isUsdaEligible ? window.MMG_isUsdaEligible(profile) : true;
+  }
+  if (programId === "jumbo") {
+    return price > 0 && window.MMG_isJumboLoan && window.MMG_isJumboLoan(price, 20, countyKey);
+  }
+  if (programId === "conventional") {
+    return true;
+  }
+  return true;
+};
+
+/** Educational seller concession caps (vary by LTV and occupancy). */
+window.MMG_SELLER_CONCESSION_NOTES = {
+  conventional: {
+    label: "Conventional seller concessions",
+    tiers: [
+      { ltvMin: 90.01, maxPercent: 3, note: "LTV > 90%: often up to 3% of price toward closing" },
+      { ltvMin: 75.01, maxPercent: 6, note: "LTV 75.01–90%: often up to 6%" },
+      { ltvMin: 0, maxPercent: 9, note: "LTV ≤ 75%: often up to 9%" },
+    ],
+  },
+  fha: { label: "FHA seller concessions", maxPercent: 6, note: "Often up to 6% toward allowable borrower costs." },
+  va: { label: "VA seller concessions", maxPercent: 4, note: "Often up to 4% toward certain buyer costs (plus normal closing costs)." },
+  usda: { label: "USDA seller concessions", maxPercent: 6, note: "Often up to 6% toward allowable costs." },
+};
+
+window.MMG_getSellerConcessionNote = function (programId, downPercent) {
+  const ltv = 100 - (Number(downPercent) || 0);
+  const cfg = window.MMG_SELLER_CONCESSION_NOTES[programId] || window.MMG_SELLER_CONCESSION_NOTES.conventional;
+  if (cfg.tiers) {
+    for (const t of cfg.tiers) {
+      if (ltv >= t.ltvMin) return t;
+    }
+    return cfg.tiers[cfg.tiers.length - 1];
+  }
+  return cfg;
 };

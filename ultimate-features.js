@@ -17,7 +17,6 @@
   let lastCalc = null;
   let reversePrice = null;
   let scenarioB = null;
-  let activeResultsTab = "payment";
   let activeLowerTab = "buydowns";
 
   const SCENARIO_PRESETS = {
@@ -81,7 +80,7 @@
 
   function programNeedsMi(programId, downPct) {
     if (programId === "va") return false;
-    if (programId === "conventional") return downPct < 20;
+    if (programId === "conventional" || programId === "jumbo") return downPct < 20;
     return true;
   }
 
@@ -456,28 +455,11 @@
     <script>window.onload=function(){window.print();}</script></body></html>`;
   }
 
-  function setResultsTab(tab) {
-    activeResultsTab = tab;
-    document.querySelectorAll(".ultimate-results-tab").forEach((btn) => {
-      const on = btn.dataset.resultsTab === tab;
-      btn.classList.toggle("active", on);
-      btn.setAttribute("aria-selected", on ? "true" : "false");
-    });
-    const paymentPanel = $("ultimateResultsPanelPayment");
-    const lowerPanel = $("ultimateResultsPanelLower");
-    const lead = $("ultimateLowerPaymentLead");
-    if (paymentPanel) {
-      paymentPanel.classList.toggle("hidden", tab !== "payment");
-      paymentPanel.hidden = tab !== "payment";
-    }
-    if (lowerPanel) {
-      lowerPanel.classList.toggle("hidden", tab !== "lower");
-      lowerPanel.hidden = tab !== "lower";
-    }
-    if (lead) lead.classList.toggle("hidden", tab !== "lower");
-    if (tab === "compare" || tab === "lower") {
-      if (activeLowerTab === "compare") renderPdfPreview();
-    }
+  function refreshCompareStep() {
+    if (lastCalc) renderBuydowns(lastCalc);
+    syncScenarioFieldsFromMain();
+    showComparePanels();
+    if (activeLowerTab === "compare") renderPdfPreview();
   }
 
   function setLowerSubtab(tab) {
@@ -500,8 +482,7 @@
     }
   }
 
-  function showResultsOptions() {
-    $("ultimateResultsTabs")?.classList.remove("hidden");
+  function showComparePanels() {
     $("ultimateBuydownPanel")?.classList.remove("hidden");
     $("ultimateScenarioPanel")?.classList.remove("hidden");
     $("ultimatePdfLeadCard")?.classList.remove("hidden");
@@ -573,7 +554,6 @@
   }
 
   function onPdfPreviewClick() {
-    setResultsTab("lower");
     setLowerSubtab("compare");
     renderPdfPreview();
     $("ultimatePdfPreviewWrap")?.scrollIntoView({ behavior: "smooth", block: "nearest" });
@@ -627,22 +607,24 @@
   function applyProfileToProgram() {
     const vet = $("veteranEligible");
     const usda = $("usdaEligible");
-    const program = $("loanProgram");
-    if (!program) return;
     if (vet?.checked) {
-      program.value = "va";
-      program.dispatchEvent(new Event("change", { bubbles: true }));
+      setProgramFromButton("va");
     } else if (usda?.checked && !vet?.checked) {
-      program.value = "usda";
-      program.dispatchEvent(new Event("change", { bubbles: true }));
+      setProgramFromButton("usda");
     }
+    updateProgramPickerAvailability();
   }
 
   function bindProfileFilters() {
     $("firstTimeBuyer")?.addEventListener("change", () => {
       document.dispatchEvent(new Event("mmg-logan5-profile-change"));
+      const prog = $("loanProgram")?.value;
+      if (prog === "conventional" && window.MMG_snapDownToProgram) {
+        window.MMG_snapDownToProgram();
+      }
       if (window.MMG_applyLoanProgramUi) window.MMG_applyLoanProgramUi();
       else $("loanProgram")?.dispatchEvent(new Event("change", { bubbles: true }));
+      updateProgramPickerAvailability();
     });
     $("veteranEligible")?.addEventListener("change", () => {
       if ($("veteranEligible")?.checked && $("usdaEligible")) $("usdaEligible").checked = false;
@@ -666,25 +648,13 @@
     if (rateEl && rate) rateEl.textContent = `${rate}%`;
   }
 
-  function updateProcessHighlight(stepIndex) {
-    document.querySelectorAll(".ultimate-trust-panel .ultimate-process-step").forEach((el, i) => {
-      el.classList.toggle("ultimate-process-step-current", i === stepIndex);
-    });
-    document.querySelectorAll(".ultimate-process-steps-compact .ultimate-process-step").forEach((el) => {
-      const n = Number(el.dataset.processStep);
-      el.classList.toggle("ultimate-process-step-current", n === stepIndex + 1);
-    });
-    const step2Panel = $("ultimateStep2Guide");
-    if (step2Panel) {
-      step2Panel.hidden = stepIndex !== 1;
-    }
-    const guide = $("ultimateProgramGuide");
+  function syncProgramButtons() {
     const program = $("loanProgram")?.value || "conventional";
-    if (guide) {
-      guide.querySelectorAll("li").forEach((li) => {
-        li.classList.toggle("ultimate-program-active", li.dataset.program === program);
-      });
-    }
+    document.querySelectorAll(".ultimate-program-btn").forEach((btn) => {
+      const on = btn.dataset.program === program;
+      btn.classList.toggle("active", on);
+      btn.setAttribute("aria-checked", on ? "true" : "false");
+    });
     const convGuide = $("ultimateGuideConventional");
     if (convGuide) {
       convGuide.textContent = $("firstTimeBuyer")?.checked
@@ -693,78 +663,398 @@
     }
   }
 
+  function syncTermButtons() {
+    const term = $("loanTerm")?.value || "30";
+    document.querySelectorAll(".ultimate-term-btn").forEach((btn) => {
+      const on = btn.dataset.term === term;
+      btn.classList.toggle("active", on);
+      btn.setAttribute("aria-checked", on ? "true" : "false");
+    });
+  }
+
+  function getCountyKey() {
+    return window.MMG_getCountyKey?.() || window.MMG_LOAN_LIMITS?.defaultCounty || "wake";
+  }
+
+  function updateProgramPickerAvailability() {
+    const price = Number($("homePrice")?.value || 0);
+    const profile = getInputs().profile;
+    const countyKey = getCountyKey();
+    const note = $("loanProgramNote");
+
+    document.querySelectorAll(".ultimate-program-btn").forEach((btn) => {
+      const id = btn.dataset.program || "";
+      let available = true;
+      if (window.MMG_isProgramAvailable) {
+        available = window.MMG_isProgramAvailable(id, price, profile, countyKey);
+      }
+      btn.disabled = !available;
+      btn.classList.toggle("ultimate-program-unavailable", !available);
+      btn.setAttribute("aria-disabled", available ? "false" : "true");
+    });
+
+    const jumboBtn = $("ultimateProgramJumbo");
+    if (jumboBtn && window.MMG_isJumboLoan) {
+      const showJumbo = price > 0 && window.MMG_isJumboLoan(price, 15, countyKey);
+      jumboBtn.classList.toggle("hidden", !showJumbo);
+    }
+
+    const current = $("loanProgram")?.value || "conventional";
+    if (
+      window.MMG_isProgramAvailable &&
+      price > 0 &&
+      current !== "fha" &&
+      !window.MMG_isProgramAvailable(current, price, profile, countyKey)
+    ) {
+      setProgramFromButton("conventional", true);
+    } else {
+      syncProgramButtons();
+    }
+
+    const fhaBtn = document.querySelector('.ultimate-program-btn[data-program="fha"]');
+    if (fhaBtn && window.MMG_isFhaEligible && window.MMG_getFhaIneligibleNote) {
+      const overLimit = price > 0 && !window.MMG_isFhaEligible(price, countyKey);
+      const sub = fhaBtn.querySelector("span:last-child");
+      if (sub) {
+        sub.textContent = overLimit
+          ? "3.5% down · higher down may apply above limit"
+          : "3.5% down · flexible credit";
+      }
+      if (note && ($("loanProgram")?.value === "fha") && overLimit) {
+        note.textContent = window.MMG_getFhaIneligibleNote(price, countyKey);
+      }
+    }
+  }
+
+  function setProgramFromButton(programId, force) {
+    const program = $("loanProgram");
+    if (!program) return;
+    const price = Number($("homePrice")?.value || 0);
+    const profile = getInputs().profile;
+    const countyKey = getCountyKey();
+    const note = $("loanProgramNote");
+
+    if (
+      !force &&
+      programId !== "fha" &&
+      window.MMG_isProgramAvailable &&
+      !window.MMG_isProgramAvailable(programId, price, profile, countyKey)
+    ) {
+      if (programId === "va" && note) {
+        note.textContent = "Check Military / VA eligible above to model 0% down.";
+      } else if (programId === "usda" && note) {
+        note.textContent = "Check USDA rural property above to model 0% down.";
+      }
+      return;
+    }
+
+    program.value = programId;
+    program.dispatchEvent(new Event("change", { bubbles: true }));
+    syncProgramButtons();
+    if (window.MMG_snapDownToProgram) window.MMG_snapDownToProgram();
+    if (window.MMG_applyLoanProgramUi) window.MMG_applyLoanProgramUi();
+    if (
+      programId === "fha" &&
+      note &&
+      window.MMG_isFhaEligible &&
+      window.MMG_getFhaIneligibleNote &&
+      price > 0 &&
+      !window.MMG_isFhaEligible(price, countyKey)
+    ) {
+      note.textContent = window.MMG_getFhaIneligibleNote(price, countyKey);
+    }
+    document.dispatchEvent(new Event("input", { bubbles: true }));
+  }
+
+  function setTermFromButton(term) {
+    const el = $("loanTerm");
+    if (!el) return;
+    el.value = term;
+    el.dispatchEvent(new Event("change", { bubbles: true }));
+    syncTermButtons();
+    document.dispatchEvent(new Event("input", { bubbles: true }));
+  }
+
+  function estimateCashToClose(price, downPct, loanPrincipal, annualTax, annualInsurance, pointsCost) {
+    const downPayment = Math.round((price * downPct) / 100);
+    const lenderBase = window.MMG_MARKET?.aprFinanceCharge ?? 2500;
+    const closingCosts = Math.round(loanPrincipal * 0.02 + lenderBase);
+    const prepaids = Math.round((annualTax / 12) * 3 + (annualInsurance / 12) * 14);
+    const extraPoints = Math.max(0, Number(pointsCost) || 0);
+    return downPayment + closingCosts + prepaids + extraPoints;
+  }
+
+  function buildCreativeLoanOptions() {
+    const base = getInputs();
+    const price = base.homePrice;
+    const vet = base.profile?.veteranEligible;
+    const fthb = base.profile?.firstTimeBuyer;
+    const countyKey = getCountyKey();
+    const options = [];
+
+    options.push({
+      id: "buydown-21",
+      icon: "📉",
+      title: "2-1 Seller buydown",
+      tagline: "Lower payments years 1–2 via seller concessions",
+      getEstimate() {
+        const loan = Math.max(0, price - Math.round((price * base.downPct) / 100));
+        const sched = calcBuydownSchedule(loan, base.rate, base.years, "2-1");
+        const y1Pi = sched.rows[0]?.pi || sched.fullPi;
+        const taxRate = base.annualTax / Math.max(price, 1);
+        const insRate = base.annualInsurance / Math.max(price, 1);
+        const monthlyTax = (price * taxRate) / 12;
+        const monthlyIns = (price * insRate) / 12;
+        const needsMi = programNeedsMi(base.programId, base.downPct);
+        const monthlyMi = needsMi ? (loan * (base.pmiAnnualRate / 100)) / 12 : 0;
+        const piti = y1Pi + monthlyTax + monthlyIns;
+        const total = piti + monthlyMi + base.monthlyHoa;
+        const cash = estimateCashToClose(price, base.downPct, loan, base.annualTax, base.annualInsurance, 0);
+        return { piti: total, cash, note: "Year 1 payment estimate" };
+      },
+    });
+
+    if (window.MMG_isFhaEligible && window.MMG_isFhaEligible(price, countyKey)) {
+      options.push({
+        id: "fha-low-down",
+        icon: "🔑",
+        title: "FHA 3.5% down",
+        tagline: `Within ${window.MMG_LOAN_LIMITS?.counties[countyKey]?.name || "county"} FHA limit`,
+        getEstimate() {
+          const inputs = { ...base, downPct: 3.5, programId: "fha" };
+          const est = estimatePitiForPrice(price, inputs);
+          const cash = estimateCashToClose(price, 3.5, est.loan, base.annualTax, base.annualInsurance, 0);
+          return { piti: est.total, cash, note: "Includes FHA MIP estimate" };
+        },
+      });
+    } else if (window.MMG_isJumboLoan && window.MMG_isJumboLoan(price, 15, countyKey)) {
+      options.push({
+        id: "jumbo-15",
+        icon: "💎",
+        title: "Jumbo 15% down",
+        tagline: "Above 2026 conforming limit · $832,750 baseline",
+        getEstimate() {
+          const inputs = { ...base, downPct: 15, programId: "jumbo", rate: base.rate + 0.25 };
+          const est = estimatePitiForPrice(price, inputs);
+          const cash = estimateCashToClose(price, 15, est.loan, base.annualTax, base.annualInsurance, 0);
+          return { piti: est.total, cash, note: "Jumbo rates vary — educational estimate" };
+        },
+      });
+    } else {
+      options.push({
+        id: "conv-10",
+        icon: "🏡",
+        title: "10% conventional",
+        tagline: "Lower MI · strong equity start",
+        getEstimate() {
+          const inputs = { ...base, downPct: 10, programId: "conventional" };
+          const est = estimatePitiForPrice(price, inputs);
+          const cash = estimateCashToClose(price, 10, est.loan, base.annualTax, base.annualInsurance, 0);
+          return { piti: est.total, cash, note: "PMI until 20% equity on many loans" };
+        },
+      });
+    }
+
+    if (vet && window.MMG_isVaEligible?.(base.profile)) {
+      options.push({
+        id: "va-zero",
+        icon: "🎖️",
+        title: "VA 0% down",
+        tagline: "No down payment for eligible veterans",
+        getEstimate() {
+          const inputs = { ...base, downPct: 0, programId: "va" };
+          const est = estimatePitiForPrice(price, inputs);
+          const cash = estimateCashToClose(price, 0, est.loan, base.annualTax, base.annualInsurance, 0);
+          return { piti: est.total, cash, note: "VA funding fee may apply" };
+        },
+      });
+    } else if (fthb) {
+      options.push({
+        id: "fthb-3",
+        icon: "🏡",
+        title: "3% FTHB conventional",
+        tagline: "First-time buyer low-down path",
+        getEstimate() {
+          const inputs = { ...base, downPct: 3, programId: "conventional" };
+          const est = estimatePitiForPrice(price, inputs);
+          const cash = estimateCashToClose(price, 3, est.loan, base.annualTax, base.annualInsurance, 0);
+          return { piti: est.total, cash, note: "HomeReady-style estimate" };
+        },
+      });
+    } else {
+      options.push({
+        id: "conv-20",
+        icon: "🏡",
+        title: "20% conventional",
+        tagline: "No PMI · lowest monthly MI cost",
+        getEstimate() {
+          const inputs = { ...base, downPct: 20, programId: "conventional" };
+          const est = estimatePitiForPrice(price, inputs);
+          const cash = estimateCashToClose(price, 20, est.loan, base.annualTax, base.annualInsurance, 0);
+          return { piti: est.total, cash, note: "Avoids monthly MI on conventional" };
+        },
+      });
+    }
+
+    return options.slice(0, 3);
+  }
+
+  function renderCreativeLoans() {
+    const grid = $("ultimateCreativeLoans");
+    if (!grid) return;
+    const options = buildCreativeLoanOptions();
+    const calendly =
+      document.querySelector("[data-mmg-calendly]")?.href ||
+      "https://calendly.com/kevinmartini/private-call-with-martini";
+    grid.innerHTML = options
+      .map((opt) => {
+        const est = opt.getEstimate();
+        return `<article class="ultimate-creative-card" role="listitem" data-loan-id="${opt.id}">
+          <header class="ultimate-creative-card-head">
+            <span class="ultimate-creative-icon" aria-hidden="true">${opt.icon}</span>
+            <div>
+              <h3>${escapeHtml(opt.title)}</h3>
+              <p>${escapeHtml(opt.tagline)}</p>
+            </div>
+          </header>
+          <dl class="ultimate-creative-stats">
+            <div><dt>Est. payment</dt><dd>${formatCurrency(est.piti)}<span class="ultimate-creative-note">/mo</span></dd></div>
+            <div><dt>Cash to close</dt><dd>${formatCurrency(est.cash)}</dd></div>
+          </dl>
+          <div class="ultimate-creative-locked">
+            <p>Full rate breakdown, buydown costs, and program guidelines unlock when you connect with Logan.</p>
+            <div class="ultimate-creative-actions">
+              <a href="https://applywithlogan.com" class="btn btn-apply-now ultimate-creative-apply" data-mmg-apply target="_blank" rel="noopener">
+                <span class="btn-apply-text">Apply now</span>
+                <span class="btn-apply-arrow" aria-hidden="true">→</span>
+              </a>
+              <a href="${escapeHtml(calendly)}" class="btn btn-outline ultimate-creative-meeting" target="_blank" rel="noopener">Request a meeting</a>
+            </div>
+          </div>
+          <p class="ultimate-creative-footnote">${escapeHtml(est.note)} · Educational estimate only</p>
+        </article>`;
+      })
+      .join("");
+  }
+
+  async function onRealtorSubmit(e) {
+    e.preventDefault();
+    const form = $("ultimateRealtorForm");
+    if (!form) return;
+    const fd = new FormData(form);
+    const email = String(fd.get("email") || "").trim();
+    if (!email || !email.includes("@")) {
+      form.querySelector('[type="email"]')?.focus();
+      return;
+    }
+    const payload = {
+      email,
+      name: String(fd.get("name") || "").trim(),
+      phone: String(fd.get("phone") || "").trim(),
+      assignedLo: "logan",
+      version: "Logan5",
+      source: "logan5-realtor-quiz",
+      notifyEmail: "logan@martinimortgagegroup.com",
+      consent: true,
+      scenario: {
+        ...collectScenarioSnapshot(),
+        realtorType: fd.get("realtorType"),
+        moveTimeline: fd.get("moveTimeline"),
+        realtorPriority: fd.get("realtorPriority"),
+      },
+    };
+    let ok = false;
+    try {
+      const res = await fetch(`${apiBase()}api/lead`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      ok = res.ok;
+    } catch {
+      ok = false;
+    }
+    const confirm = $("ultimateRealtorConfirm");
+    const consent = $("ultimateRealtorConsent");
+    if (ok && confirm) {
+      form.querySelectorAll(".ultimate-realtor-q, .ultimate-realtor-contact, .ultimate-realtor-submit").forEach((el) => {
+        el.classList.add("hidden");
+      });
+      if (consent) consent.classList.add("hidden");
+      confirm.classList.remove("hidden");
+      confirm.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    } else {
+      const success = $("ultimateRealtorSuccess");
+      if (success) {
+        success.classList.remove("hidden");
+        success.textContent =
+          "We noted your answers — call (919) 238-4934 if you need help right away.";
+      }
+    }
+    form.querySelector(".ultimate-realtor-submit")?.setAttribute("disabled", "true");
+  }
+
+  function updateProcessHighlight(stepIndex) {
+    document.querySelectorAll(".ultimate-trust-panel .ultimate-process-step").forEach((el, i) => {
+      el.classList.toggle("ultimate-process-step-current", i === Math.min(stepIndex, 4));
+    });
+    syncProgramButtons();
+    syncTermButtons();
+  }
+
   function bind() {
     document.querySelectorAll(".ultimate-mode-tab").forEach((btn) => {
       btn.addEventListener("click", () => setCalcMode(btn.dataset.mode || "price"));
     });
 
+    document.querySelectorAll(".ultimate-program-btn").forEach((btn) => {
+      btn.addEventListener("click", () => setProgramFromButton(btn.dataset.program || "conventional"));
+    });
+
+    document.querySelectorAll(".ultimate-term-btn").forEach((btn) => {
+      btn.addEventListener("click", () => setTermFromButton(btn.dataset.term || "30"));
+    });
+
     $("targetPaymentInput")?.addEventListener("input", runReversePayment);
     $("applyReversePrice")?.addEventListener("click", applyReverseToCalculator);
 
-    document.addEventListener("mmg-calculated", updateLiveStats);
+    document.addEventListener("mmg-calculated", () => {
+      updateLiveStats();
+      updateProgramPickerAvailability();
+    });
+    document.addEventListener("mmg-program-change", updateProgramPickerAvailability);
     document.addEventListener("mmg-wizard-step-change", (e) => {
       updateProcessHighlight(e.detail?.step ?? 0);
+      if ((e.detail?.step ?? 0) === 2) renderCreativeLoans();
     });
-    document.addEventListener("mmg-logan5-profile-change", () => updateProcessHighlight(
-      Number(document.body.dataset.wizardStep || 1) - 1
-    ));
-    $("loanProgram")?.addEventListener("change", () => updateProcessHighlight(
-      Number(document.body.dataset.wizardStep || 1) - 1
-    ));
+    document.addEventListener("mmg-logan5-profile-change", () => {
+      updateProcessHighlight(Number(document.body.dataset.wizardStep || 1) - 1);
+      syncProgramButtons();
+    });
+    $("loanProgram")?.addEventListener("change", () => {
+      syncProgramButtons();
+      updateProcessHighlight(Number(document.body.dataset.wizardStep || 1) - 1);
+    });
+    $("loanTerm")?.addEventListener("change", syncTermButtons);
 
     document.addEventListener("mmg-logan5-calculated", (e) => {
       lastCalc = e.detail;
-      renderBuydowns(e.detail);
-      syncScenarioFieldsFromMain();
-      showResultsOptions();
-      renderPdfPreview();
     });
-
-    document.querySelectorAll(".ultimate-results-tab").forEach((btn) => {
-      btn.addEventListener("click", () => setResultsTab(btn.dataset.resultsTab || "payment"));
-    });
-
-    document.querySelectorAll(".ultimate-lower-subtab").forEach((btn) => {
-      btn.addEventListener("click", () => setLowerSubtab(btn.dataset.lowerTab || "buydowns"));
-    });
-
-    document.querySelectorAll(".ultimate-scenario-preset").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        setResultsTab("lower");
-        setLowerSubtab("compare");
-        applyScenarioPreset(btn.dataset.preset || "");
-      });
-    });
-
-    $("ultimatePdfPreviewBtn")?.addEventListener("click", onPdfPreviewClick);
 
     document.addEventListener("mmg-calculated", () => {
       if (document.body.dataset.ultimateMode === "payment") runReversePayment();
     });
 
-    ["scenarioAPrice", "scenarioBPrice", "scenarioADown", "scenarioBDown", "scenarioARate", "scenarioBRate", "scenarioAProgram", "scenarioBProgram", "scenarioALabel", "scenarioBLabel"].forEach(
-      (id) => {
-        $(id)?.addEventListener("input", () => {
-          const el = $(id);
-          if (el) el.dataset.touched = "1";
-          renderScenarioCompare();
-        });
-        $(id)?.addEventListener("change", () => {
-          const el = $(id);
-          if (el) el.dataset.touched = "1";
-          renderScenarioCompare();
-        });
-      }
-    );
-
-    $("ultimatePdfLeadForm")?.addEventListener("submit", onPdfLeadSubmit);
-    $("ultimateStrategyForm")?.addEventListener("submit", onStrategyLeadSubmit);
     $("buyingPowerLeadForm")?.addEventListener("submit", onBuyingPowerSubmit);
+    $("ultimateRealtorForm")?.addEventListener("submit", onRealtorSubmit);
 
     bindProfileFilters();
     setCalcMode("price");
     updateLiveStats();
     updateProcessHighlight(0);
+    syncProgramButtons();
+    syncTermButtons();
+    updateProgramPickerAvailability();
 
     const params = new URLSearchParams(window.location.search);
     const ref = params.get("ref") || params.get("agent") || params.get("realtor");
@@ -778,6 +1068,7 @@
 
   window.MMG_logan5_applyReverse = applyReverseToCalculator;
   window.MMG_logan5_runReverse = runReversePayment;
+  window.MMG_logan5_renderCreativeLoans = renderCreativeLoans;
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", bind);

@@ -413,6 +413,57 @@ def notify_lead_webhook(entry: dict) -> None:
         pass
 
 
+def notify_lead_email(entry: dict, to_addr: str) -> None:
+    """Optional SMTP notification when SMTP_HOST + SMTP_FROM are configured."""
+    host = os.environ.get("SMTP_HOST", "").strip()
+    from_addr = os.environ.get("SMTP_FROM", "").strip()
+    if not host or not from_addr or not to_addr:
+        return
+    try:
+        import smtplib
+        from email.message import EmailMessage
+
+        scenario = entry.get("scenario") or {}
+        subject = f"MMG Lead: {entry.get('source', 'calculator')}"
+        if entry.get("source") == "logan5-realtor-quiz":
+            subject = "Realtor match request — Logan5 calculator"
+        lines = [
+            f"Source: {entry.get('source', '')}",
+            f"Name: {entry.get('name', '')}",
+            f"Email: {entry.get('email', '')}",
+            f"Phone: {entry.get('phone', '')}",
+            f"Assigned LO: {entry.get('assignedLo', '')}",
+        ]
+        if scenario.get("realtorType"):
+            lines.extend([
+                "",
+                "Realtor questionnaire:",
+                f"  Type: {scenario.get('realtorType', '')}",
+                f"  Timeline: {scenario.get('moveTimeline', '')}",
+                f"  Priority: {scenario.get('realtorPriority', '')}",
+            ])
+        if scenario.get("piti"):
+            lines.append(f"PITI estimate: {scenario.get('piti', '')}")
+        if scenario.get("address"):
+            lines.append(f"Address: {scenario.get('address', '')}")
+        msg = EmailMessage()
+        msg["Subject"] = subject
+        msg["From"] = from_addr
+        msg["To"] = to_addr
+        msg.set_content("\n".join(lines))
+        port = int(os.environ.get("SMTP_PORT", "587"))
+        user = os.environ.get("SMTP_USER", "").strip()
+        password = os.environ.get("SMTP_PASSWORD", "").strip()
+        with smtplib.SMTP(host, port, timeout=15) as smtp:
+            if os.environ.get("SMTP_TLS", "1") != "0":
+                smtp.starttls()
+            if user and password:
+                smtp.login(user, password)
+            smtp.send_message(msg)
+    except Exception:
+        pass
+
+
 def sync_partner_photo(slug: str) -> dict:
     """Try to refresh partner headshot from photoPage / photoUrl in partners JSON."""
     clean = re.sub(r"[^a-zA-Z0-9_-]", "", slug or "")
@@ -1012,6 +1063,10 @@ class Handler(SimpleHTTPRequestHandler):
                 assigned_lo = "kevin"
             elif "logan" in ref_lower:
                 assigned_lo = "logan"
+        source = (data.get("source") or "logan1-calculator").strip()
+        notify_email = (data.get("notifyEmail") or "").strip()
+        if not notify_email and source == "logan5-realtor-quiz":
+            notify_email = "logan@martinimortgagegroup.com"
         entry = {
             "ts": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
             "email": email,
@@ -1021,12 +1076,15 @@ class Handler(SimpleHTTPRequestHandler):
             "ref": ref,
             "assignedLo": assigned_lo or "team",
             "version": (data.get("version") or "").strip(),
-            "source": (data.get("source") or "logan1-calculator").strip(),
+            "source": source,
+            "notifyEmail": notify_email,
             "scenario": scenario,
             "consent": bool(data.get("consent")),
         }
         append_lead(entry)
         notify_lead_webhook(entry)
+        if notify_email:
+            notify_lead_email(entry, notify_email)
         self._json_response(200, {"ok": True})
 
     def _api_preview_info(self, parsed):

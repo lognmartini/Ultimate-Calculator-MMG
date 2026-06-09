@@ -227,7 +227,7 @@
       });
     } else if (isLogan3() || isLogan5()) {
       document.addEventListener("mmg-wizard-results", () => {
-        window.setTimeout(showCard, isLogan5() ? 6000 : 400);
+        window.setTimeout(showCard, isLogan5() ? 2500 : 400);
       });
       if (isLogan5()) {
         document.addEventListener("mmg-logan5-reverse", () => {

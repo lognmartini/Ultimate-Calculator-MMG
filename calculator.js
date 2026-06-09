@@ -164,11 +164,24 @@
     url.searchParams.set("utm_source", source);
     url.searchParams.set("utm_medium", medium);
     url.searchParams.set("utm_campaign", campaign);
+    p.forEach((value, key) => {
+      if (!value) return;
+      if (key.startsWith("utm_") && !url.searchParams.has(key)) {
+        url.searchParams.set(key, value);
+      }
+      if ((key === "gclid" || key === "fbclid" || key === "msclkid") && !url.searchParams.has(key)) {
+        url.searchParams.set(key, value);
+      }
+    });
     const agentRef = (p.get("agent") || p.get("realtor") || "").trim();
     const ref = PAGE.ref || agentRef || loRef;
     if (ref) {
       url.searchParams.set("ref", ref);
       if (isLogan4) url.searchParams.set("utm_content", ref);
+      else if (!url.searchParams.has("utm_content")) url.searchParams.set("utm_content", ref);
+    }
+    if (document.body.classList.contains("logan5") && !url.searchParams.has("utm_content")) {
+      url.searchParams.set("utm_content", "logan5-calculator");
     }
     return url.toString();
   }
@@ -311,7 +324,12 @@
     const show = () => {
       const y = window.scrollY || document.documentElement.scrollTop;
       const wizardStep = Number(document.body.dataset.wizardStep || "0");
-      const pastHero = socialWizard ? wizardStep >= 3 : y > 320;
+      const isLogan5 = document.body.classList.contains("logan5");
+      const pastHero = socialWizard
+        ? isLogan5
+          ? wizardStep >= 1
+          : wizardStep >= 3
+        : y > 320;
       bar.classList.toggle("sticky-cta-visible", pastHero);
       bar.setAttribute("aria-hidden", pastHero ? "false" : "true");
       document.body.classList.toggle("has-sticky-pad", pastHero);
@@ -446,16 +464,58 @@
     };
   }
 
+  function getCountyKey() {
+    if (window.MMG_resolveCountyKey && lastGeocode) {
+      return window.MMG_resolveCountyKey(lastGeocode);
+    }
+    return window.MMG_LOAN_LIMITS?.defaultCounty || "wake";
+  }
+
   function getEffectiveMinDown(program) {
     if (window.MMG_getEffectiveMinDown && document.body.classList.contains("logan5")) {
-      return window.MMG_getEffectiveMinDown(program.id, getBuyerProfile());
+      const price = Number(els.homePrice?.value || 0);
+      return window.MMG_getEffectiveMinDown(program.id, getBuyerProfile(), price, getCountyKey());
     }
     return program.minDownPercent ?? 0;
   }
 
+  function getDownPctStep() {
+    return document.body.classList.contains("logan5") ? 0.5 : 1;
+  }
+
+  function roundDownPct(pct) {
+    const step = getDownPctStep();
+    return Math.round((Number(pct) || 0) / step) * step;
+  }
+
+  function formatDownPctLabel(pct) {
+    const n = Number(pct) || 0;
+    return Number.isInteger(n) ? `${n}%` : `${n.toFixed(1)}%`;
+  }
+
+  function snapDownToProgramDefault() {
+    if (!document.body.classList.contains("logan5")) return;
+    const program = getLoanProgram();
+    const profile = getBuyerProfile();
+    const price = Number(els.homePrice?.value || 0);
+    const countyKey = getCountyKey();
+    const down =
+      window.MMG_getProgramDefaultDown?.(program.id, profile) ??
+      program.defaultDownPercent ??
+      getEffectiveMinDown(program);
+    const min = getEffectiveMinDown(program);
+    const target = roundDownPct(Math.max(min, down));
+    if (els.downPercent) {
+      els.downPercent.step = String(getDownPctStep());
+      els.downPercent.value = String(target);
+    }
+    if (els.downPercentInput) els.downPercentInput.value = target;
+    syncDownFromPercent();
+  }
+
   function programNeedsMonthlyMi(program, downPct) {
     if (program.id === "va") return false;
-    if (program.id === "conventional") return downPct < 20;
+    if (program.id === "conventional" || program.id === "jumbo") return downPct < 20;
     if (program.id === "fha" || program.id === "usda") return true;
     return downPct < 20;
   }
@@ -468,15 +528,30 @@
     if (els.programDownHint) {
       const min = getEffectiveMinDown(program);
       const profile = getBuyerProfile();
-      if (min <= 0) {
+      const price = Number(els.homePrice?.value || 0);
+      const countyKey = getCountyKey();
+      let hint = "";
+      if (
+        program.id === "fha" &&
+        window.MMG_getFhaIneligibleNote &&
+        price > 0 &&
+        !window.MMG_isFhaEligible(price, countyKey)
+      ) {
+        hint = window.MMG_getFhaIneligibleNote(price, countyKey);
+        els.programDownHint.textContent = hint;
+        els.programDownHint.classList.remove("hidden");
+      } else if (min <= 0) {
         els.programDownHint.textContent = `${program.shortLabel}: no down payment required for eligible buyers.`;
         els.programDownHint.classList.remove("hidden");
       } else if (min < 20) {
-        let hint = `${program.shortLabel}: minimum ${min}% down for this estimate.`;
+        hint = `${program.shortLabel}: minimum ${min}% down for this estimate.`;
         if (document.body.classList.contains("logan5") && program.id === "conventional") {
           hint += profile.firstTimeBuyer
             ? " First-time buyer programs (e.g. HomeReady) may allow 3%."
             : " Non–first-time buyers often need 5%+ on conventional.";
+        }
+        if (program.id === "jumbo" && window.MMG_getConformingLimit) {
+          hint += ` Conforming limit ${formatCurrency(window.MMG_getConformingLimit(countyKey))} (2026).`;
         }
         els.programDownHint.textContent = hint;
         els.programDownHint.classList.remove("hidden");
@@ -504,7 +579,9 @@
     }
     const currentDown = Number(els.downPercent?.value || 0);
     if (currentDown < minDown) {
-      if (els.downPercent) els.downPercent.value = minDown;
+      const bumped = roundDownPct(minDown);
+      if (els.downPercent) els.downPercent.value = String(bumped);
+      if (els.downPercentInput) els.downPercentInput.value = bumped;
       syncDownFromPercent();
     }
     applyCreditToPmi();
@@ -776,12 +853,10 @@
 
     if (loanPrincipal <= 0) {
       els.vsCompetition.classList.add("hidden");
-      updateLeadSavingsRibbon(0, 0);
       return null;
     }
     if (typical <= 0 || martiniRate <= 0) {
       els.vsCompetition.classList.add("hidden");
-      updateLeadSavingsRibbon(0, 0);
       return null;
     }
 
@@ -848,8 +923,6 @@
       els.vsCompNote.textContent = note;
     }
 
-    updateLeadSavingsRibbon(monthlyPitiSave, rateDiff);
-
     return {
       monthlyPiSave,
       monthlyPitiSave,
@@ -864,13 +937,54 @@
     };
   }
 
-  function updateLeadSavingsRibbon(monthlyPitiSave, rateDiff) {
+  function estimateTypicalLenderCashToClose(
+    loanPrincipal,
+    downPayment,
+    annualTax,
+    annualInsurance,
+    martiniPointsCost
+  ) {
+    const lenderBase = window.MMG_MARKET?.aprFinanceCharge ?? 2500;
+    const prepaids = Math.round((annualTax / 12) * 3 + (annualInsurance / 12) * 14);
+    const martiniClosing = Math.round(loanPrincipal * 0.02 + lenderBase);
+    const martiniPoints = Math.max(0, Number(martiniPointsCost) || 0);
+    const martiniCash = downPayment + martiniClosing + prepaids + martiniPoints;
+
+    const typicalClosing = Math.round(
+      loanPrincipal * 0.02 + lenderBase * 1.75 + loanPrincipal * 0.004
+    );
+    const typicalPoints = Math.round(loanPrincipal * 0.01);
+    const typicalCash = downPayment + typicalClosing + prepaids + typicalPoints;
+
+    return {
+      martiniCash,
+      typicalCash,
+      savings: Math.max(0, typicalCash - martiniCash),
+    };
+  }
+
+  function updateLeadSavingsRibbon(monthlyPitiSave, rateDiff, cashSavings) {
     if (!els.leadSavingsRibbon || !els.leadSavingsAmount) return;
     const save = Math.max(0, Number(monthlyPitiSave) || 0);
-    const show = save >= 25 && (rateDiff == null || rateDiff >= 0.0625);
+    const cashSave = Math.max(0, Number(cashSavings) || 0);
+    const showMonthly = save >= 25 && (rateDiff == null || rateDiff >= 0.0625);
+    const showCash = cashSave >= 500;
+    const show = showMonthly || showCash;
     els.leadSavingsRibbon.classList.toggle("hidden", !show);
-    if (show) {
+    if (els.leadMonthlySavingsRow) {
+      els.leadMonthlySavingsRow.classList.toggle("hidden", !showMonthly);
+    }
+    if (showMonthly) {
       els.leadSavingsAmount.textContent = formatCurrency(save);
+    }
+    if (els.leadCashSavingsRow) {
+      els.leadCashSavingsRow.classList.toggle("hidden", !showCash);
+    }
+    if (els.leadCashSavingsAmount && showCash) {
+      els.leadCashSavingsAmount.textContent = formatCurrency(cashSave);
+    }
+    if (els.leadCashSavingsNote) {
+      els.leadCashSavingsNote.classList.toggle("hidden", !showCash);
     }
   }
 
@@ -1121,21 +1235,25 @@
 
   function syncDownFromPercent() {
     const price = Number(els.homePrice?.value || 0);
-    const pct = Number(els.downPercent?.value || 0);
+    const pct = roundDownPct(els.downPercent?.value || 0);
     const amount = Math.round((price * pct) / 100);
     if (els.downAmountInput) els.downAmountInput.value = formatCurrencyInput(amount);
     if (els.downPercentInput) els.downPercentInput.value = pct;
-    if (els.downDisplay) els.downDisplay.textContent = `${pct}% · ${formatCurrency(amount)}`;
+    if (els.downDisplay) {
+      els.downDisplay.textContent = `${formatDownPctLabel(pct)} · ${formatCurrency(amount)}`;
+    }
   }
 
   function syncDownFromAmount() {
     const price = Number(els.homePrice?.value || 0);
     const amount = parseCurrency(els.downAmountInput?.value);
     const pct = price > 0 ? Math.min(100, Math.round((amount / price) * 1000) / 10) : 0;
-    const clampedPct = Math.min(50, Math.max(0, pct));
-    if (els.downPercent) els.downPercent.value = Math.round(clampedPct);
+    const clampedPct = roundDownPct(Math.min(50, Math.max(0, pct)));
+    if (els.downPercent) els.downPercent.value = String(clampedPct);
     if (els.downPercentInput) els.downPercentInput.value = clampedPct;
-    if (els.downDisplay) els.downDisplay.textContent = `${clampedPct}% · ${formatCurrency(amount)}`;
+    if (els.downDisplay) {
+      els.downDisplay.textContent = `${formatDownPctLabel(clampedPct)} · ${formatCurrency(amount)}`;
+    }
   }
 
   function setLocationNote(message, type) {
@@ -1884,13 +2002,29 @@
       els.amortSection.setAttribute("aria-hidden", showAmort ? "false" : "true");
     }
 
+    const pointsCost = rateInfo?.pointsCost ?? 0;
     updateOfficialQuotePanel(
       homePrice,
       downPayment,
       loanPrincipal,
       annualTax,
       annualInsurance,
-      rateInfo?.pointsCost ?? 0
+      pointsCost
+    );
+
+    const cashCompare = estimateTypicalLenderCashToClose(
+      loanPrincipal,
+      downPayment,
+      annualTax,
+      annualInsurance,
+      pointsCost
+    );
+    updateLeadSavingsRibbon(
+      vsSavings?.monthlyPitiSave ?? 0,
+      vsSavings?.typical != null && vsSavings?.martiniRate != null
+        ? vsSavings.typical - vsSavings.martiniRate
+        : 0,
+      cashCompare.savings
     );
 
     renderAmortTable(rows);
@@ -2155,10 +2289,12 @@
     els.lookupAddress?.addEventListener("click", lookupFromAddress);
 
     els.loanProgram?.addEventListener("change", () => {
+      snapDownToProgramDefault();
       applyLoanProgramUi();
       rateManualOverride = false;
       refreshMarketRateIfActive();
       calculate();
+      document.dispatchEvent(new CustomEvent("mmg-program-change"));
     });
 
     els.toggleFeeSheet?.addEventListener("click", () => {
@@ -2230,6 +2366,7 @@
       syncDownFromPercent();
       recalcTaxFromAddressIfNeeded();
       calculate();
+      document.dispatchEvent(new CustomEvent("mmg-program-change"));
     });
 
     els.homePriceInput?.addEventListener("input", () => {
@@ -2242,18 +2379,21 @@
       syncDownFromPercent();
       recalcTaxFromAddressIfNeeded();
       calculate();
+      document.dispatchEvent(new CustomEvent("mmg-program-change"));
     });
 
     els.downPercent?.addEventListener("input", () => {
-      if (els.downPercentInput) els.downPercentInput.value = els.downPercent.value;
+      const pct = roundDownPct(els.downPercent.value);
+      if (els.downPercent) els.downPercent.value = String(pct);
+      if (els.downPercentInput) els.downPercentInput.value = pct;
       syncDownFromPercent();
       refreshMarketRateIfActive();
       calculate();
     });
 
     els.downPercentInput?.addEventListener("input", () => {
-      const pct = Math.min(50, Math.max(0, Number(els.downPercentInput.value) || 0));
-      els.downPercent.value = Math.round(pct);
+      const pct = roundDownPct(Math.min(50, Math.max(0, Number(els.downPercentInput.value) || 0)));
+      els.downPercent.value = String(pct);
       els.downPercentInput.value = pct;
       syncDownFromPercent();
       refreshMarketRateIfActive();
@@ -2310,6 +2450,8 @@
       "quotePointsCost", "quoteCashToClose", "quoteScenarioSummary",
       "heroLiveRate", "marketPulseText",
       "leadSavingsRibbon", "leadSavingsAmount",
+      "leadMonthlySavingsRow",
+      "leadCashSavingsRow", "leadCashSavingsAmount", "leadCashSavingsNote",
     ];
     for (const id of ids) {
       els[id] = $(id);
@@ -2317,6 +2459,8 @@
   }
 
   window.MMG_applyLoanProgramUi = applyLoanProgramUi;
+  window.MMG_snapDownToProgram = snapDownToProgramDefault;
+  window.MMG_getCountyKey = getCountyKey;
 
   async function init() {
     try {
