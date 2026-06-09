@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Embed Martini Mortgage Calculator</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 720px; margin: 2rem auto; padding: 0 1rem; line-height: 1.5; }
+    pre { background: #f4f5f9; padding: 1rem; overflow-x: auto; border-radius: 8px; font-size: 0.85rem; }
+    code { font-size: 0.9em; }
+  </style>
+</head>
+<body>
+  <h1>Embed on MartiniMortgageGroup.com</h1>
+  <p>Paste into a WordPress HTML block, custom tab, or page builder. Replace <code>YOUR_DOMAIN</code> with your live calculator URL (same folder as <code>server.py</code>).</p>
+  <h2>Website tab (recommended)</h2>
+  <p><strong>Compact embed</strong> (logo + Logan headshot in top bar):</p>
+  <pre>&lt;iframe
+  src="https://YOUR_DOMAIN/mortgage-calculator/?embed=1"
+  title="Martini Mortgage Payment Calculator"
+  width="100%"
+  height="1200"
+  style="border:0;max-width:1100px;margin:0 auto;display:block;min-height:80vh;"
+  loading="lazy"
+  allow="clipboard-write"
+&gt;&lt;/iframe&gt;</pre>
+  <p><strong>Full branding in iframe</strong> (header, hero photo, full footer):</p>
+  <pre>&lt;iframe
+  src="https://YOUR_DOMAIN/mortgage-calculator/?embed=full"
+  title="Martini Mortgage Payment Calculator"
+  width="100%"
+  height="2400"
+  style="border:0;max-width:1100px;margin:0 auto;display:block;"
+  loading="lazy"
+&gt;&lt;/iframe&gt;</pre>
+
+  <h2>Referral partner link</h2>
+  <p>Send clients a tracked link (replace <code>partner-slug</code>):</p>
+  <pre>https://YOUR_DOMAIN/mortgage-calculator/?ref=partner-slug</pre>
+  <h2>Logan1 — realtor co-marketing</h2>
+  <p>Per-agent link (create <code>partners/agent-slug.json</code> first):</p>
+  <pre>https://YOUR_DOMAIN/mortgage-calculator/realtor.html?agent=agent-slug</pre>
+  <p>Compact embed for agent sites:</p>
+  <pre>&lt;iframe src="https://YOUR_DOMAIN/mortgage-calculator/realtor.html?agent=agent-slug&amp;embed=1" title="Payment calculator" width="100%" height="1200" style="border:0;max-width:1100px;" loading="lazy"&gt;&lt;/iframe&gt;</pre>
+
+  <h2>Logan4 — team social / open house (recommended)</h2>
+  <p>Same fast 3-step flow as Logan3, company-branded. One link for Kevin &amp; Logan:</p>
+  <pre>https://YOUR_DOMAIN/mortgage-calculator/go4.html?utm_source=instagram&amp;utm_medium=social&amp;utm_campaign=open-house</pre>
+  <p><strong>Pre-fill a listing</strong> (buyer sees payment faster):</p>
+  <pre>https://YOUR_DOMAIN/mortgage-calculator/go4.html?address=504+Tilden+St+Raleigh+NC+27605&amp;price=1895000&amp;utm_source=instagram&amp;utm_campaign=504-tilden-open-house</pre>
+  <p><strong>Attribution</strong> (same page — apply + leads route to the right LO):</p>
+  <pre>https://YOUR_DOMAIN/mortgage-calculator/go4.html?ref=kevin&amp;utm_source=instagram&amp;utm_campaign=kevin-open-house
+https://YOUR_DOMAIN/mortgage-calculator/go4.html?ref=logan&amp;utm_source=instagram&amp;utm_campaign=logan-reel</pre>
+  <p><strong>Jump straight to payment</strong> when price is in the post:</p>
+  <pre>https://YOUR_DOMAIN/mortgage-calculator/go4.html?price=750000&amp;down=10&amp;quick=1</pre>
+
+  <h2>Logan3 — social / open house (Logan-branded)</h2>
+  <p>Logan headshot on step 1 — use when the post is from Logan personally:</p>
+  <pre>https://YOUR_DOMAIN/mortgage-calculator/go.html?utm_source=instagram&amp;utm_medium=social&amp;utm_campaign=open-house</pre>
+  <h2>Full calculator (Logan2)</h2>
+  <pre>https://YOUR_DOMAIN/mortgage-calculator/?utm_source=instagram&amp;utm_medium=social&amp;utm_campaign=payment-calculator</pre>
+  <p><a href="index.html">← Back to calculator</a> · <a href="mobile-preview.html">Mobile preview</a></p>
+</body>
+</html>

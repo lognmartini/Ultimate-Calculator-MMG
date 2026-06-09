@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Free mortgage payment calculator for North Carolina and beyond. Estimate PITI with live Freddie Mac rates, address lookup, and Martini Mortgage Group pricing." />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#1a1230" />
+  <link rel="canonical" href="https://martinimortgagegroup.com/mortgage-calculator/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Martini Mortgage Group" />
+  <meta property="og:title" content="Mortgage Payment Calculator | Martini Mortgage Group" />
+  <meta property="og:description" content="See your monthly payment and Martini rate advantage before you apply. Address search, taxes, insurance, FHA/VA/USDA/Conventional." />
+  <meta property="og:url" content="https://martinimortgagegroup.com/mortgage-calculator/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Mortgage Payment Calculator | Martini Mortgage Group" />
+  <meta name="twitter:description" content="Estimate your payment with live market rates and local strategist support in Raleigh, NC." />
+  <title>Mortgage Payment Calculator | Martini Mortgage Group</title>
+  <link rel="icon" href="assets/mmg-logo.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles-lead.css" />
+</head>
+<body class="lead-mode">
+  <div class="partner-share hidden" id="partnerShare" role="region" aria-label="Partner share link">
+    <div class="partner-share-inner">
+      <p class="partner-share-label" id="partnerShareLabel">Share this calculator with your clients</p>
+      <div class="partner-share-row">
+        <input type="text" id="shareLinkInput" class="partner-share-input" readonly aria-label="Shareable calculator link" />
+        <button type="button" class="btn btn-share" id="copyShareLink">Copy link</button>
+      </div>
+    </div>
+  </div>
+
+  <header class="site-header full-branding conversion-header">
+    <div class="header-inner">
+      <a href="https://martinimortgagegroup.com" class="logo-link" target="_blank" rel="noopener">
+        <img
+          src="assets/mmg-logo-full.png"
+          data-asset="assets/mmg-logo-full.png"
+          data-fallback="assets/mmg-logo-alt.png"
+          alt="Martini Mortgage Group powered by Gold Star Mortgage"
+          class="header-logo"
+          width="350"
+          height="88"
+        />
+      </a>
+      <div class="header-actions">
+        <a href="tel:+19192384934" class="header-phone" data-mmg-phone data-mmg-phone-text>(919) 238-4934</a>
+        <a href="https://applywithlogan.com" class="btn btn-apply-now header-cta" data-mmg-apply target="_blank" rel="noopener">
+          <span class="btn-apply-text">Apply — 3 min</span>
+          <span class="btn-apply-arrow" aria-hidden="true">→</span>
+        </a>
+        <p class="header-cta-note">No obligation · soft credit pull · local Raleigh team</p>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <h1 class="sr-only embed-only">Mortgage payment calculator</h1>
+
+    <section class="embed-advisor embed-only" role="banner" aria-label="Martini Mortgage Group">
+      <img
+        src="assets/logan-headshot.jpg"
+        data-asset="assets/logan-headshot.jpg"
+        data-fallback="assets/logan-martini-portrait.png"
+        alt="Logan Martini"
+        class="embed-advisor-photo"
+        width="56"
+        height="56"
+      />
+      <div class="embed-advisor-text">
+        <a href="https://martinimortgagegroup.com" class="embed-advisor-logo-link" target="_blank" rel="noopener">
+          <img
+            src="assets/mmg-logo-full.png"
+            data-asset="assets/mmg-logo-full.png"
+            data-fallback="assets/mmg-logo-alt.png"
+            alt="Martini Mortgage Group"
+            class="embed-advisor-logo"
+            width="140"
+            height="36"
+          />
+        </a>
+        <p class="embed-advisor-tagline"><strong>Logan Martini</strong> · Senior Mortgage Strategist · NMLS #1591485</p>
+      </div>
+      <a href="https://applywithlogan.com" class="btn btn-apply-now embed-advisor-cta" data-mmg-apply target="_blank" rel="noopener">
+        <span class="btn-apply-text">Apply</span>
+        <span class="btn-apply-arrow" aria-hidden="true">→</span>
+      </a>
+    </section>
+
+    <section class="hero hero-with-advisor full-branding lead-hero">
+      <div class="hero-content">
+        <p class="eyebrow">Strategy before structure · Martini Mortgage Group · Raleigh, NC</p>
+        <h1>Know your payment—and your edge—before any online lender quotes you</h1>
+        <p class="hero-lead">Instant PITI on <strong>your</strong> address, credit, and today&rsquo;s Freddie Mac rates—plus Martini pricing that beats the typical lender on the same scenario. No account required to explore.</p>
+        <ul class="hero-trust-list" aria-label="Why work with Martini">
+          <li><strong>Live PMMS rates</strong> — refreshed daily, adjusted for your credit &amp; down payment</li>
+          <li><strong>0.25%+ below</strong> typical lender on eligible scenarios</li>
+          <li><strong>Logan Martini, NMLS #1591485</strong> — strategist, not a call center</li>
+        </ul>
+        <div class="hero-cta-row">
+          <a href="#calculator-start" class="btn btn-apply-now btn-scroll-calc">
+            <span class="btn-apply-text">Start my estimate</span>
+            <span class="btn-apply-arrow" aria-hidden="true">↓</span>
+          </a>
+          <a href="https://applywithlogan.com" class="btn btn-secondary btn-secondary-invert" data-mmg-apply target="_blank" rel="noopener">Apply in 3 minutes</a>
+        </div>
+        <p class="hero-no-ssn">Calculator only — applying uses a soft credit pull. We&rsquo;ll explain everything before you commit.</p>
+      </div>
+      <div class="hero-photo-wrap hero-advisor-card">
+        <div class="hero-advisor-badge">Your strategist</div>
+        <img
+          src="assets/logan-headshot.jpg"
+          data-asset="assets/logan-headshot.jpg"
+          data-fallback="assets/logan-martini-portrait.png"
+          alt="Logan Martini, Senior Mortgage Strategist at Martini Mortgage Group in Raleigh, NC"
+          class="hero-photo"
+          width="280"
+          height="280"
+          loading="eager"
+          decoding="async"
+        />
+        <p class="hero-byline">
+          <a href="https://martinimortgagegroup.com/logan-martini/">Logan Martini</a><br />
+          Senior Mortgage Strategist · NMLS #1591485
+        </p>
+        <div class="hero-live-rate" id="heroLiveRate" aria-live="polite">Today&rsquo;s market · loading…</div>
+      </div>
+    </section>
+
+    <div class="market-pulse full-branding" id="marketPulse" role="status" aria-live="polite">
+      <span class="market-pulse-label">Market snapshot</span>
+      <span class="market-pulse-text" id="marketPulseText">Freddie Mac PMMS updates daily — your rate adjusts for credit score &amp; down payment.</span>
+    </div>
+
+    <div class="credentials-strip full-branding" role="region" aria-label="Martini Mortgage Group credentials">
+      <span>Serving Raleigh since <strong>2006</strong></span>
+      <span><strong>$1B+</strong> financed</span>
+      <span><strong>5-star</strong> client experiences</span>
+      <span><strong>Equal Housing</strong> Lender</span>
+    </div>
+
+    <div class="value-strip full-branding" role="region" aria-label="What you get" id="calculator-start">
+      <div class="value-pill">
+        <span class="value-pill-icon" aria-hidden="true">✓</span>
+        <span><strong>0.25% below par</strong> on eligible scenarios</span>
+      </div>
+      <div class="value-pill">
+        <span class="value-pill-icon" aria-hidden="true">✓</span>
+        <span><strong>FHA · VA · USDA · Conventional</strong></span>
+      </div>
+      <div class="value-pill">
+        <span class="value-pill-icon" aria-hidden="true">✓</span>
+        <span><strong>Apply in minutes</strong> — we handle the rest</span>
+      </div>
+    </div>
+
+    <div class="calculator-layout lead-calculator-layout">
+      <section class="panel inputs-panel lead-inputs" aria-labelledby="inputs-heading">
+        <p class="calc-step-label"><span class="calc-step-num">1</span> Property &amp; credit</p>
+        <h2 id="inputs-heading" class="panel-title">Tell us about the home</h2>
+
+        <div class="field">
+          <label for="propertyAddress">Property address</label>
+          <div class="address-search-wrap">
+            <input
+              type="text"
+              id="propertyAddress"
+              class="address-input"
+              placeholder="Enter street number and address…"
+              autocomplete="off"
+              autocorrect="off"
+              autocapitalize="off"
+              spellcheck="false"
+              role="combobox"
+              aria-expanded="false"
+              aria-controls="addressSuggestions"
+              aria-autocomplete="list"
+            />
+            <ul id="addressSuggestions" class="address-suggestions hidden" role="listbox"></ul>
+          </div>
+          <p class="field-note field-note-hint">Search an address and <strong>pick a suggestion</strong> to auto-fill list price or estimated value, plus taxes and insurance—or enter a purchase price manually below.</p>
+          <button type="button" class="btn-lookup" id="lookupAddress">Look up this address</button>
+          <p class="field-note" id="locationNote" role="status" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="loanProgram">Loan program</label>
+          <select id="loanProgram" aria-describedby="loanProgramNote">
+            <option value="conventional" selected>Conventional</option>
+            <option value="fha">FHA</option>
+            <option value="va">VA</option>
+            <option value="usda">USDA</option>
+          </select>
+          <p class="field-note field-note-hint" id="loanProgramNote">Not government-backed. Often best for strong credit and 3–20%+ down.</p>
+        </div>
+
+        <div class="field credit-field">
+          <div class="field-label-row">
+            <label for="creditScore">Credit score</label>
+            <span class="field-value" id="creditScoreDisplay">740</span>
+          </div>
+          <input type="range" id="creditScore" min="580" max="850" step="5" value="740" aria-describedby="creditScoreHint" />
+          <div class="credit-bands" id="creditBandLabel">Good — typical conventional pricing</div>
+          <p class="field-note field-note-hint" id="creditScoreHint">Moving your credit score updates your estimated interest rate (and PMI when applicable).</p>
+        </div>
+
+        <p class="calc-step-label calc-step-label-spaced"><span class="calc-step-num">2</span> Loan details</p>
+        <h2 class="panel-title panel-title-spaced">Purchase &amp; down payment</h2>
+
+        <div class="field" id="homePriceField">
+          <div class="field-label-row">
+            <label for="homePrice">Purchase price</label>
+            <span class="field-value" id="homePriceDisplay">$450,000</span>
+          </div>
+          <input type="range" id="homePrice" min="50000" max="3000000" step="5000" value="450000" aria-describedby="homePriceHint" />
+          <input type="text" id="homePriceInput" class="currency-input" inputmode="numeric" value="450,000" aria-label="Purchase price amount" aria-describedby="homePriceHint" />
+          <p class="field-note field-note-hint hidden" id="homePriceHint" role="status">
+            Filled from this property’s data — change the purchase price anytime using the slider or amount above.
+          </p>
+        </div>
+
+        <div class="field">
+          <div class="field-label-row">
+            <label for="downPercent">Down payment</label>
+            <span class="field-value" id="downDisplay">20% · $90,000</span>
+          </div>
+          <input type="range" id="downPercent" min="0" max="50" step="1" value="20" />
+          <p class="field-note down-pmi-hint hidden" id="downPmiHint">Less than 20% down — mortgage insurance is included in your total payment estimate below.</p>
+          <p class="field-note field-note-hint hidden" id="programDownHint"></p>
+          <div class="inline-inputs">
+            <div class="inline-field">
+              <span class="inline-label">%</span>
+              <input type="number" id="downPercentInput" min="0" max="100" step="0.5" value="20" />
+            </div>
+            <div class="inline-field">
+              <span class="inline-label">$</span>
+              <input type="text" id="downAmountInput" class="currency-input" inputmode="numeric" value="90,000" />
+            </div>
+          </div>
+        </div>
+
+        <div class="field rate-field martini-rate-block">
+          <p class="rate-block-eyebrow">Your pricing advantage</p>
+          <div class="rate-compare">
+            <div class="rate-compare-row rate-compare-row-market">
+              <span class="rate-compare-label">Typical lender today <span class="rate-compare-sub">(PMMS + your profile)</span></span>
+              <span class="rate-compare-value" id="marketRateDisplay">6.5%</span>
+            </div>
+            <div class="rate-compare-row rate-compare-row-highlight">
+              <div class="rate-compare-label-wrap">
+                <label for="interestRate" class="rate-compare-label">Your Martini rate</label>
+                <span class="rate-savings-chip hidden" id="rateSavingsChip">0.25% below par</span>
+              </div>
+              <div class="input-suffix rate-input-wrap rate-input-wrap-highlight">
+                <input type="number" id="interestRate" min="0" max="20" step="0.125" value="6.25" aria-describedby="rateAprDisclaimer" />
+                <span>%</span>
+              </div>
+            </div>
+          </div>
+          <div class="discount-points-panel hidden" id="discountPointsPanel" role="status">
+            <p class="discount-points-title">Discount points to get this lower rate</p>
+            <p class="discount-points-detail" id="discountPointsDetail">—</p>
+            <p class="field-note field-note-hint">Paid at closing. Included in your estimated APR below.</p>
+          </div>
+          <p class="rate-updated-note" id="marketRateUpdated">Typical lender 6.5% · Your Martini rate 6.25% (30-year, estimate). <span class="rate-daily-badge" id="rateDailyBadge">Daily PMMS</span></p>
+          <p class="rate-apr-disclaimer" id="rateAprDisclaimer">
+            <sup>*</sup> Payment estimate uses the Martini note rate above. Estimated APR reflects the note rate plus typical lender finance charges for comparison. APR varies with loan amount, term, and closing costs. Not a loan offer or rate lock.
+          </p>
+          <button type="button" class="btn btn-outline btn-fee-toggle" id="toggleFeeSheet" aria-expanded="false" aria-controls="feeSheetPanel">
+            View estimated APR
+          </button>
+          <div class="fee-sheet-panel hidden" id="feeSheetPanel">
+            <table class="fee-sheet-table">
+              <tbody>
+                <tr>
+                  <th scope="row">Typical lender (note)</th>
+                  <td id="feeSheetParNoteRate">—</td>
+                </tr>
+                <tr>
+                  <th scope="row">Typical lender (est. APR)</th>
+                  <td id="feeSheetMarketApr">—</td>
+                </tr>
+                <tr class="fee-sheet-divider">
+                  <th scope="row">Your rate (note)</th>
+                  <td id="feeSheetNoteRate">—</td>
+                </tr>
+                <tr>
+                  <th scope="row">Your rate (est. APR)</th>
+                  <td id="feeSheetMartiniApr">—</td>
+                </tr>
+                <tr class="fee-sheet-divider hidden" id="feeSheetPointsRow">
+                  <th scope="row">Discount points (est.)</th>
+                  <td id="feeSheetPointsCost">—</td>
+                </tr>
+              </tbody>
+            </table>
+            <p class="field-note field-note-hint" id="feeSheetProgramNote"></p>
+            <p class="field-note">APR estimates use the same methodology for both rates. Third-party closing costs are not included. Apply for an official Loan Estimate.</p>
+          </div>
+          <p class="field-note field-note-hint hidden" id="creditRateNote" role="status"></p>
+        </div>
+
+        <div class="field">
+          <label for="loanTerm">Loan term</label>
+          <select id="loanTerm">
+            <option value="30" selected>30 years</option>
+            <option value="25">25 years</option>
+            <option value="20">20 years</option>
+            <option value="15">15 years</option>
+            <option value="10">10 years</option>
+          </select>
+        </div>
+
+        <details class="advanced">
+          <summary>Adjust taxes, insurance &amp; HOA</summary>
+          <div class="advanced-body">
+            <div class="field">
+              <label for="propertyTax">Annual property tax</label>
+              <input type="text" id="propertyTax" class="currency-input" inputmode="numeric" value="4,500" />
+            </div>
+            <div class="field">
+              <label for="homeInsurance">Annual homeowners insurance</label>
+              <input type="text" id="homeInsurance" class="currency-input" inputmode="numeric" value="1,800" />
+            </div>
+            <div class="field">
+              <label for="hoa">Monthly HOA <span class="optional">(optional)</span></label>
+              <input type="text" id="hoa" class="currency-input" inputmode="numeric" value="0" />
+            </div>
+            <div class="field" id="pmiField">
+              <label for="pmiRate" id="pmiRateLabel">Mortgage insurance rate <span class="hint">(when applicable)</span></label>
+              <div class="input-suffix">
+                <input type="number" id="pmiRate" min="0" max="2" step="0.05" value="0.5" />
+                <span>% of loan / yr</span>
+              </div>
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <section class="panel results-panel lead-results" aria-labelledby="results-heading">
+        <p class="calc-step-label calc-step-label-light"><span class="calc-step-num">✓</span> Your estimate</p>
+        <h2 id="results-heading" class="panel-title">Monthly payment</h2>
+
+        <div class="lead-savings-ribbon hidden" id="leadSavingsRibbon" role="status">
+          <span class="lead-savings-label">You could save</span>
+          <strong class="lead-savings-amount" id="leadSavingsAmount">—</strong>
+          <span class="lead-savings-suffix">/mo vs. typical lenders on this scenario</span>
+        </div>
+
+        <div class="total-payment total-payment-hero">
+          <span class="total-label">Estimated monthly PITI</span>
+          <span class="total-amount" id="pitiPayment">—</span>
+          <span class="total-sublabel">Principal, interest, taxes &amp; insurance</span>
+        </div>
+
+        <div class="total-payment total-payment-secondary" id="totalWithExtras">
+          <span class="total-label">Total monthly payment</span>
+          <span class="total-amount total-amount-sm" id="totalPayment">$0</span>
+          <span class="total-sublabel hidden" id="extrasNote">Includes PMI and/or HOA</span>
+        </div>
+
+        <a href="https://applywithlogan.com" class="btn btn-apply-now btn-results-apply" data-mmg-apply target="_blank" rel="noopener">
+          <span class="btn-apply-text">Lock in my numbers — apply now</span>
+          <span class="btn-apply-arrow" aria-hidden="true">→</span>
+        </a>
+        <p class="results-apply-note">Soft pull · ~3 minutes · buyer consultation included</p>
+
+        <section class="vs-competition" id="vsCompetition" aria-labelledby="vsCompetitionTitle">
+          <h3 class="vs-competition-title" id="vsCompetitionTitle">You vs. typical lenders</h3>
+          <div class="vs-competition-grid">
+            <div class="vs-comp-col vs-comp-col-them">
+              <span class="vs-comp-col-label">Typical lender</span>
+              <span class="vs-comp-col-rate" id="vsTypicalRate">—</span>
+              <span class="vs-comp-col-payment" id="vsTypicalPi">—</span>
+            </div>
+            <div class="vs-comp-col vs-comp-col-us">
+              <span class="vs-comp-col-label">Martini Mortgage</span>
+              <span class="vs-comp-col-rate" id="vsMartiniRate">—</span>
+              <span class="vs-comp-col-payment" id="vsMartiniPi">—</span>
+            </div>
+          </div>
+          <ul class="vs-comp-savings">
+            <li>
+              <span>Monthly P&amp;I savings</span>
+              <strong id="vsMonthlyPiSave">—</strong>
+            </li>
+            <li>
+              <span>Monthly payment savings (PITI)</span>
+              <strong id="vsMonthlyPitiSave">—</strong>
+            </li>
+            <li class="vs-comp-savings-highlight">
+              <span>Interest saved over loan term</span>
+              <strong id="vsLifetimeInterestSave">—</strong>
+            </li>
+            <li class="hidden" id="vsPointsRow">
+              <span>Discount points (your rate)</span>
+              <strong id="vsPointsCost">—</strong>
+            </li>
+          </ul>
+          <p class="vs-comp-note" id="vsCompNote">Same loan amount and term. Typical lender uses today&rsquo;s national average rate; Martini uses your rate above.</p>
+        </section>
+
+        <p class="pmi-estimate-note hidden" id="pmiNote">Includes estimated monthly mortgage insurance (PMI) because your down payment is under 20%.</p>
+
+        <ul class="breakdown" id="breakdown">
+          <li>
+            <span>Principal &amp; interest</span>
+            <strong id="piPayment">$0</strong>
+          </li>
+          <li>
+            <span>Property tax</span>
+            <strong id="taxPayment">$0</strong>
+          </li>
+          <li>
+            <span>Homeowners insurance</span>
+            <strong id="insurancePayment">$0</strong>
+          </li>
+          <li id="pmiRow" class="hidden">
+            <span id="pmiRowLabel">Mortgage insurance</span>
+            <strong id="pmiPayment">$0</strong>
+          </li>
+          <li id="hoaRow" class="hidden">
+            <span>HOA</span>
+            <strong id="hoaPayment">$0</strong>
+          </li>
+        </ul>
+
+        <div class="summary-stats">
+          <div class="stat">
+            <span class="stat-label">Loan amount</span>
+            <span class="stat-value" id="loanAmount">$0</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Total interest</span>
+            <span class="stat-value" id="totalInterest">$0</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Payoff date</span>
+            <span class="stat-value" id="payoffDate">—</span>
+          </div>
+        </div>
+
+        <div class="cta-card">
+          <p class="cta-card-eyebrow">Next step</p>
+          <h3 class="cta-card-title">Make it official—it takes minutes</h3>
+          <p class="cta-card-lead">Apply for your real numbers, rate options, and a buyer consultation with Logan. No obligation to move forward.</p>
+          <a href="https://applywithlogan.com" class="btn btn-apply-now btn-apply-now-lg" data-mmg-apply target="_blank" rel="noopener">
+            <span class="btn-apply-text">Apply with Martini</span>
+            <span class="btn-apply-arrow" aria-hidden="true">→</span>
+          </a>
+          <ul class="cta-reassurance">
+            <li>Soft credit pull only</li>
+            <li>We call you to plan next steps</li>
+            <li>Raleigh-based team you can reach</li>
+          </ul>
+          <a href="tel:+19192384934" class="btn btn-ghost btn-ghost-light" data-mmg-phone data-mmg-phone-text>Questions? (919) 238-4934</a>
+        </div>
+      </section>
+    </div>
+
+    <section class="apply-band full-branding" aria-label="Apply for your official quote">
+      <div class="apply-band-inner">
+        <div class="apply-band-copy">
+          <h2 class="apply-band-title">Like what you see? Get your official Loan Estimate.</h2>
+          <p>We&rsquo;ll verify income and credit once—then send exact rate, payment, and cash to close. Most buyers start in about 3 minutes.</p>
+        </div>
+        <div class="apply-band-actions">
+          <a href="https://applywithlogan.com" class="btn btn-apply-now btn-apply-now-lg" data-mmg-apply target="_blank" rel="noopener">
+            <span class="btn-apply-text">Apply with Logan</span>
+            <span class="btn-apply-arrow" aria-hidden="true">→</span>
+          </a>
+          <a href="https://calendly.com/kevinmartini/private-call-with-martini" class="btn btn-secondary btn-secondary-light" data-mmg-calendly target="_blank" rel="noopener">Book a clarity call</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="reviews-section" aria-labelledby="reviews-heading">
+      <div class="reviews-inner">
+        <h2 id="reviews-heading" class="reviews-title">Why Triangle buyers choose Martini</h2>
+        <p class="reviews-lead">5-star experiences—strategy-first guidance, not a rate quote and a goodbye.</p>
+        <div class="reviews-grid reviews-grid-featured">
+          <blockquote class="review-card">
+            <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <p class="review-quote">&ldquo;Logan was exceptional—thorough, extremely responsive, and incredibly knowledgeable. Their professionalism and personalized approach gave us complete confidence every step of the way. For anyone who wants expertise with genuine care, Martini Mortgage Group is second to none.&rdquo;</p>
+            <footer class="review-author"><strong>Katie J.</strong> · First-time homebuyer</footer>
+          </blockquote>
+          <blockquote class="review-card">
+            <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <p class="review-quote">&ldquo;Working with Logan and the Martini team was one of the best decisions we made. From day one they treated us with kindness, honesty, and care—never rushed or pressured. Thanks to their guidance, we&rsquo;re in our dream home.&rdquo;</p>
+            <footer class="review-author"><strong>Morgan J.</strong> · Triangle homebuyer</footer>
+          </blockquote>
+          <blockquote class="review-card">
+            <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <p class="review-quote">&ldquo;I have worked with Logan on 2 homes. They are wonderful—quick to respond, address any concerns, and the turn-around time for the mortgage was super quick. Would recommend Martini Mortgage to anyone.&rdquo;</p>
+            <footer class="review-author"><strong>Jennifer M.</strong> · Repeat Martini client</footer>
+          </blockquote>
+          <blockquote class="review-card">
+            <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <p class="review-quote">&ldquo;The level of expertise they have continues to astound me. When using Martini Mortgage Group, I always feel well taken care of and part of their family. I highly suggest you contact Kevin or Logan for your home loan needs.&rdquo;</p>
+            <footer class="review-author"><strong>Carrie S.</strong> · Greater Raleigh area</footer>
+          </blockquote>
+          <blockquote class="review-card">
+            <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <p class="review-quote">&ldquo;Logan Martini was responsive, knowledgeable, and patient throughout the entire process. We always felt like we were getting thoughtful advice—not a script.&rdquo;</p>
+            <footer class="review-author"><strong>Ashley T.</strong> · Apex, NC</footer>
+          </blockquote>
+        </div>
+        <p class="reviews-source">Reviews summarized from verified client feedback. Individual experiences may vary.</p>
+      </div>
+    </section>
+
+    <section class="faq-section" aria-labelledby="faq-heading">
+      <div class="faq-inner">
+        <h2 id="faq-heading" class="faq-title">Quick answers</h2>
+        <details class="faq-item" open>
+          <summary>Is this the same as a Loan Estimate?</summary>
+          <p>No. This calculator is an educational estimate. After you apply, we verify your income, assets, and full credit report and issue a federally required Loan Estimate with exact fees and cash to close.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Will applying hurt my credit?</summary>
+          <p>We start with a soft credit pull on applications. We&rsquo;ll explain if a full credit review is needed for your scenario—before you move forward.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How is Martini different from big online lenders?</summary>
+          <p>You work with a local Senior Mortgage Strategist who designs your loan around your goals—not a call center script. You still get digital speed, plus fiduciary-style guidance and Same-As-Cash-style approval options when you qualify.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why does my rate change when I move the credit score slider?</summary>
+          <p>We model conventional pricing adjustments (similar to industry LLPAs) on top of today&rsquo;s Freddie Mac PMMS average so your estimate reflects real-world pricing tiers—not a single generic rate.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Do you lend outside Raleigh?</summary>
+          <p>Yes—Martini Mortgage Group helps buyers across North Carolina and can discuss other states on a case-by-case basis.</p>
+        </details>
+      </div>
+    </section>
+
+    <section class="official-quote-section" aria-labelledby="official-quote-heading">
+      <div class="official-quote-inner">
+        <h2 id="official-quote-heading" class="official-quote-title">Turn these numbers into an official quote</h2>
+        <p class="official-quote-lead">This calculator gives you a strong starting point. For a formal quote with <strong>your rate, payment, and itemized closing costs</strong>, we&rsquo;ll verify a few details after you apply.</p>
+
+        <div class="official-quote-grid">
+          <div class="official-quote-card">
+            <h3 class="official-quote-card-title">What we&rsquo;ll need from you</h3>
+            <ul class="official-quote-checklist">
+              <li>Government-issued ID</li>
+              <li>Authorization to review credit (soft pull to start; we&rsquo;ll explain full credit if needed)</li>
+              <li>Income documentation (pay stubs, W-2s, tax returns, or business returns if self-employed)</li>
+              <li>Asset statements for down payment and reserves</li>
+              <li>Property address, listing link, or purchase contract if you&rsquo;re under contract</li>
+              <li>Homeowners insurance information (or we can estimate until you have a binder)</li>
+            </ul>
+            <p class="official-quote-note">Every file is different—employed vs. self-employed, gift funds, or multiple properties may require additional items. We&rsquo;ll tell you exactly what applies to you.</p>
+          </div>
+
+          <div class="official-quote-card official-quote-card-highlight">
+            <h3 class="official-quote-card-title">Ballpark cash to close (estimate)</h3>
+            <p class="official-quote-scenario" id="quoteScenarioSummary">Based on your inputs above.</p>
+            <dl class="official-quote-figures">
+              <div class="official-quote-row">
+                <dt>Down payment</dt>
+                <dd id="quoteDownPayment">—</dd>
+              </div>
+              <div class="official-quote-row">
+                <dt>Est. lender &amp; third-party closing costs</dt>
+                <dd id="quoteClosingCosts">—</dd>
+              </div>
+              <div class="official-quote-row">
+                <dt>Est. prepaids &amp; escrows</dt>
+                <dd id="quotePrepaids">—</dd>
+              </div>
+              <div class="official-quote-row hidden" id="quotePointsRow">
+                <dt>Discount points (if applicable)</dt>
+                <dd id="quotePointsCost">—</dd>
+              </div>
+              <div class="official-quote-row official-quote-row-total">
+                <dt>Est. cash to close</dt>
+                <dd id="quoteCashToClose">—</dd>
+              </div>
+            </dl>
+            <p class="official-quote-disclaimer" id="quoteDisclaimer">
+              <strong>Important:</strong> Figures above are <strong>estimates only</strong>—not a Loan Estimate, loan commitment, or rate lock. Payment, rate, APR, and cash to close can change after we verify your actual income, employment, assets, and full credit report; property appraisal; title work; and program guidelines. Discount points (if any) are included in APR math on this page but are not itemized as closing line items here. You will receive a federally required Loan Estimate with exact fees after application.
+            </p>
+            <a href="https://applywithlogan.com" class="btn btn-apply-now" data-mmg-apply target="_blank" rel="noopener">
+              <span class="btn-apply-text">Get my official quote</span>
+              <span class="btn-apply-arrow" aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta full-branding" aria-label="Get started">
+      <div class="final-cta-inner">
+        <img
+          src="assets/logan-headshot.jpg"
+          data-asset="assets/logan-headshot.jpg"
+          data-fallback="assets/logan-martini-portrait.png"
+          alt=""
+          class="final-cta-photo"
+          width="72"
+          height="72"
+        />
+        <div>
+          <h2>Ready when you are.</h2>
+          <p>Logan Martini · Martini Mortgage Group · NMLS #1591485</p>
+        </div>
+        <a href="https://applywithlogan.com" class="btn btn-apply-now" data-mmg-apply target="_blank" rel="noopener">
+          <span class="btn-apply-text">Apply now</span>
+          <span class="btn-apply-arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="more-options-panel full-branding" aria-labelledby="more-options-heading">
+      <div class="more-options-inner">
+        <h2 id="more-options-heading">Every situation is different</h2>
+        <p>Investor loans, new construction, rate locks, and exact closing costs deserve a full conversation—not a generic calculator. Logan will walk you through it after you apply.</p>
+        <a href="https://applywithlogan.com" class="btn btn-apply-now" data-mmg-apply target="_blank" rel="noopener">
+          <span class="btn-apply-text">Start your application</span>
+          <span class="btn-apply-arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="amortization-section hidden" id="amortSection" aria-hidden="true">
+      <div class="amortization-header">
+        <h2>Amortization schedule</h2>
+        <p>See how each payment splits between principal and interest over the life of the loan.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="amort-table" id="amortTable">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Payment</th>
+              <th>Principal</th>
+              <th>Interest</th>
+              <th>Balance</th>
+            </tr>
+          </thead>
+          <tbody id="amortBody"></tbody>
+        </table>
+      </div>
+      <button type="button" class="btn btn-outline" id="toggleAmort">Show full schedule</button>
+    </section>
+  </main>
+
+  <aside class="sticky-cta" id="stickyCta" aria-hidden="true">
+    <div class="sticky-cta-inner">
+      <p class="sticky-cta-text"><strong>Ready for real numbers?</strong> Apply in minutes.</p>
+      <a href="https://applywithlogan.com" class="btn btn-apply-now sticky-cta-btn" data-mmg-apply target="_blank" rel="noopener">
+        <span class="btn-apply-text">Apply with Martini</span>
+        <span class="btn-apply-arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
+  </aside>
+
+  <footer class="site-footer full-branding-footer">
+    <img src="assets/equal-housing-lender.png" data-asset="assets/equal-housing-lender.png" alt="Equal Housing Lender" class="equal-housing-logo" width="75" height="77" />
+    <p class="compliance-disclaimer">
+      <strong>TILA / RESPA notice:</strong> This calculator provides hypothetical, educational estimates only—not a Loan Estimate, Closing Disclosure, loan commitment, pre-approval, or rate lock. Rates and payments shown must be actually available when offered; final terms depend on verified credit, income, assets, appraisal, and program guidelines. APR estimates include typical lender finance charges for comparison; third-party closing costs are not included. RESPA: you are free to shop for your own lender and settlement providers; nothing here requires you to use Martini Mortgage Group or any affiliated provider.
+    </p>
+    <p class="disclaimer">Equal Housing Lender. North Carolina licensed mortgage professionals. This is not legal or tax advice. Consult your tax advisor regarding deductibility of interest. For current terms, request an official Loan Estimate after application.</p>
+    <p class="compliance-block nmls-compliance">
+      <strong>NMLS licensing:</strong> Martini Mortgage Group at Gold Star Mortgage Financial Group, Corporation · NMLS #3446 · Logan Martini · NMLS #1591485 · Verify at <a href="https://www.nmlsconsumeraccess.org/" target="_blank" rel="noopener noreferrer">nmlsconsumeraccess.org</a>.
+    </p>
+    <p class="nmls">
+      Martini Mortgage Group at Gold Star Mortgage Financial Group, Corporation · NMLS #3446<br />
+      Logan Martini · NMLS #1591485 · Senior Mortgage Strategist<br />
+      507 N Blount St, Raleigh, NC 27604 · <a href="https://martinimortgagegroup.com">martinimortgagegroup.com</a>
+    </p>
+    <p class="footer-team-link"><a href="go4.html">Logan4 team social</a> · <a href="realtor.html">Logan1 realtor co-market</a> · <a href="go.html">Logan3 social</a> · <a href="embed-snippet.html">Embed</a> · <a href="mobile-preview.html">Mobile previews</a></p>
+  </footer>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Martini Mortgage Payment Calculator",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "provider": {
+      "@type": "MortgageBroker",
+      "name": "Martini Mortgage Group",
+      "url": "https://martinimortgagegroup.com"
+    }
+  }
+  </script>
+  <script src="site-config.js"></script>
+  <script src="tax-rates.js"></script>
+  <script src="loan-programs.js"></script>
+  <script src="market-rates.js"></script>
+  <script src="compliance.js"></script>
+  <script src="calculator.js"></script>
+</body>
+</html>

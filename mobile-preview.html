@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Logan2 Mobile Preview | Martini Mortgage Calculator</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #1a1230;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.5rem 1rem 2rem;
+    }
+    h1 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin: 0 0 0.35rem;
+      text-align: center;
+    }
+    .subtitle {
+      font-size: 0.85rem;
+      opacity: 0.8;
+      margin: 0 0 1.25rem;
+      text-align: center;
+      max-width: 420px;
+      line-height: 1.45;
+    }
+    .device-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .device-tabs button {
+      padding: 0.45rem 0.85rem;
+      border: 1px solid rgba(255,255,255,0.35);
+      background: transparent;
+      color: #fff;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+    .device-tabs button.active {
+      background: #c9a227;
+      color: #1a1230;
+      border-color: #c9a227;
+      font-weight: 600;
+    }
+    .phone-shell {
+      background: #111;
+      border-radius: 36px;
+      padding: 12px 10px 16px;
+      box-shadow:
+        0 0 0 2px #333,
+        0 24px 48px rgba(0,0,0,0.5);
+      position: relative;
+    }
+    .phone-shell::before {
+      content: "";
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 22px;
+      background: #111;
+      border-radius: 0 0 14px 14px;
+      z-index: 2;
+    }
+    .phone-screen {
+      background: #fff;
+      border-radius: 26px;
+      overflow: hidden;
+      box-shadow: inset 0 0 0 1px #222;
+    }
+    .phone-screen iframe {
+      display: block;
+      border: none;
+      background: #f4f5f9;
+    }
+    .links {
+      margin-top: 1.25rem;
+      text-align: center;
+      font-size: 0.85rem;
+    }
+    .links a {
+      color: #e8c84a;
+      word-break: break-all;
+    }
+    .links p {
+      margin: 0.35rem 0;
+      opacity: 0.85;
+    }
+  </style>
+</head>
+<body>
+  <h1>Logan2 — mobile preview</h1>
+  <p class="subtitle">Lead-optimized calculator (Logan2) in a phone frame. Switch device widths below, or open the link on your real phone (same Wi‑Fi, server running).</p>
+
+  <nav class="version-nav" aria-label="Calculator versions" style="display:flex;gap:0.5rem;margin-bottom:1rem;flex-wrap:wrap;justify-content:center;font-size:0.78rem;">
+    <a href="/mobile-preview-logan1.html" style="color:#e8c84a;text-decoration:none;padding:0.35rem 0.6rem;border:1px solid rgba(232,200,74,0.45);border-radius:6px;">Logan1</a>
+    <a href="/mobile-preview.html" style="color:#1a1230;text-decoration:none;padding:0.35rem 0.6rem;border:1px solid #c9a227;border-radius:6px;background:#c9a227;font-weight:600;">Logan2</a>
+    <a href="/mobile-preview-logan3.html" style="color:#e8c84a;text-decoration:none;padding:0.35rem 0.6rem;border:1px solid rgba(232,200,74,0.45);border-radius:6px;">Logan3</a>
+    <a href="/mobile-preview-logan4.html" style="color:#e8c84a;text-decoration:none;padding:0.35rem 0.6rem;border:1px solid rgba(232,200,74,0.45);border-radius:6px;">Logan4</a>
+  </nav>
+
+  <div class="device-tabs" role="tablist">
+    <button type="button" class="active" data-w="390" data-h="844" data-label="iPhone 14">iPhone 14</button>
+    <button type="button" data-w="360" data-h="780" data-label="Android">Android</button>
+    <button type="button" data-w="320" data-h="568" data-label="Small phone">Small</button>
+  </div>
+
+  <div class="phone-shell">
+    <div class="phone-screen">
+      <iframe
+        id="previewFrame"
+        src="/index.html"
+        title="Martini Mortgage Calculator mobile preview"
+        width="390"
+        height="844"
+      ></iframe>
+    </div>
+  </div>
+
+  <div class="links">
+    <p><strong>Desktop:</strong> <a href="/index.html" id="desktopLink">/index.html</a></p>
+    <p><strong>On your phone:</strong> <a href="#" id="phoneLink">loading…</a></p>
+    <p style="font-size:0.75rem;opacity:0.65;">Phone link uses this computer’s local IP. Server must be running (<code>python3 server.py</code>).</p>
+  </div>
+
+  <script>
+    const frame = document.getElementById("previewFrame");
+    const tabs = document.querySelectorAll(".device-tabs button");
+    const phoneLink = document.getElementById("phoneLink");
+    const desktopLink = document.getElementById("desktopLink");
+
+    desktopLink.href = window.location.origin + "/index.html";
+
+    fetch("/api/preview-info")
+      .then((r) => r.json())
+      .then((info) => {
+        phoneLink.textContent = info.calculator;
+        phoneLink.href = info.calculator;
+        const previewP = document.createElement("p");
+        previewP.innerHTML =
+          "<strong>Mobile preview (this page):</strong> " +
+          '<a href="' + info.localPreview + '">' + info.localPreview + "</a>";
+        document.querySelector(".links").insertBefore(
+          previewP,
+          document.querySelector(".links p:last-child")
+        );
+      })
+      .catch(() => {
+        phoneLink.textContent = "Start server first (python3 server.py)";
+      });
+
+    tabs.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        tabs.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        frame.width = btn.dataset.w;
+        frame.height = btn.dataset.h;
+        frame.title = "Preview at " + btn.dataset.label;
+      });
+    });
+  </script>
+</body>
+</html>

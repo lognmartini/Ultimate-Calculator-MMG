@@ -1,0 +1,2 @@
+# Martini Mortgage Calculator — Python stdlib only (no pip packages required).
+# This file exists so cloud hosts (Render, etc.) detect Python correctly.

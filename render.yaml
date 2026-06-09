@@ -1,0 +1,14 @@
+# Render.com — free cloud hosting (no WordPress, no laptop running).
+# After you connect this folder to Render, you get a link like:
+#   https://mmg-calculator-xxxx.onrender.com/go4.html
+services:
+  - type: web
+    name: mmg-calculator
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: HOST=0.0.0.0 python3 server.py
+    healthCheckPath: /api/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12.0"

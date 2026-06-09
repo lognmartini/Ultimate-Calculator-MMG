@@ -1,0 +1,431 @@
+/**
+ * Lead-optimized layer (Logan2) — loads after styles.css.
+ * Revert to Logan1: ./scripts/revert-to-logan1.sh
+ */
+
+body.lead-mode {
+  background: linear-gradient(180deg, var(--surface-warm) 0%, #f0f1f8 40%, var(--surface-warm) 100%);
+}
+
+/* ——— Header conversion ——— */
+.conversion-header .header-inner {
+  align-items: center;
+}
+
+.header-phone {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--gold-light);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+
+.header-phone:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* ——— Hero (lead) ——— */
+.lead-hero {
+  max-width: 1100px;
+  margin: 0 auto 1rem;
+  padding: 0 1.5rem;
+}
+
+.lead-hero .hero-content h1 {
+  font-size: clamp(1.65rem, 4.2vw, 2.35rem);
+}
+
+.hero-advisor-card {
+  position: relative;
+  padding: 1rem;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.hero-advisor-badge {
+  position: absolute;
+  top: 0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.25rem 0.65rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--navy-dark);
+  background: linear-gradient(135deg, #f0d060 0%, var(--gold) 100%);
+  border-radius: 999px;
+  white-space: nowrap;
+  z-index: 1;
+}
+
+.lead-hero .hero-photo {
+  width: 240px;
+  height: 240px;
+  margin-top: 1.25rem;
+}
+
+.hero-live-rate {
+  margin-top: 0.85rem;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--navy);
+  background: var(--gold-soft);
+  border: 1px solid rgba(201, 162, 39, 0.4);
+  border-radius: 8px;
+}
+
+.hero-no-ssn {
+  margin: 0.85rem 0 0;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  max-width: 420px;
+}
+
+.btn-secondary-invert {
+  border-color: var(--navy);
+  background: transparent;
+}
+
+.btn-secondary-invert:hover {
+  background: var(--navy-dark);
+  border-color: var(--navy-dark);
+  color: #fff;
+}
+
+.btn-scroll-calc .btn-apply-arrow {
+  transform: none;
+}
+
+.btn-scroll-calc:hover .btn-apply-arrow {
+  transform: translateY(2px);
+}
+
+/* ——— Market pulse strip ——— */
+.market-pulse {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem 1rem;
+  max-width: 1100px;
+  margin: 0 auto 1rem;
+  padding: 0.65rem 1.25rem;
+  background: linear-gradient(90deg, var(--navy-deeper) 0%, var(--navy-dark) 100%);
+  border-radius: var(--radius);
+  border-left: 4px solid var(--gold);
+  box-shadow: 0 4px 20px rgba(26, 18, 48, 0.12);
+}
+
+.market-pulse-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--gold-light);
+  flex-shrink: 0;
+}
+
+.market-pulse-text {
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.92);
+  text-align: center;
+}
+
+/* ——— Calculator layout anchor ——— */
+#calculator-start.value-strip {
+  scroll-margin-top: 5rem;
+}
+
+.lead-calculator-layout {
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 1.5rem;
+}
+
+.lead-inputs {
+  border-top-color: var(--gold);
+}
+
+/* ——— Results: savings ribbon + CTA ——— */
+.lead-savings-ribbon {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.25rem 0.4rem;
+  margin: 0 0 1rem;
+  padding: 0.75rem 1rem;
+  text-align: center;
+  background: rgba(61, 143, 110, 0.22);
+  border: 1px solid rgba(61, 143, 110, 0.45);
+  border-radius: 10px;
+  font-size: 0.88rem;
+  line-height: 1.35;
+}
+
+.lead-savings-label {
+  opacity: 0.9;
+}
+
+.lead-savings-amount {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  color: #a8e6cf;
+}
+
+.lead-savings-suffix {
+  opacity: 0.85;
+  font-size: 0.8rem;
+}
+
+.total-payment-hero {
+  padding-top: 0.25rem;
+}
+
+.btn-results-apply {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.results-apply-note {
+  margin: 0.5rem 0 1rem;
+  text-align: center;
+  font-size: 0.72rem;
+  opacity: 0.8;
+  line-height: 1.4;
+}
+
+/* ——— Mid-page apply band ——— */
+.apply-band {
+  margin: 2.5rem 0 0;
+  padding: 0 1.5rem;
+}
+
+.apply-band-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1.5rem;
+  align-items: center;
+  padding: 1.75rem 1.75rem;
+  background: linear-gradient(135deg, var(--navy-deeper) 0%, var(--navy) 100%);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(201, 162, 39, 0.35);
+  box-shadow: var(--shadow-lg);
+  color: #fff;
+}
+
+.apply-band-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.5vw, 1.55rem);
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+  color: #fff;
+}
+
+.apply-band-copy p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  opacity: 0.9;
+  max-width: 520px;
+}
+
+.apply-band-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  min-width: 200px;
+}
+
+.btn-secondary-light {
+  border-color: rgba(255, 255, 255, 0.5);
+  background: transparent;
+  color: #fff;
+}
+
+.btn-secondary-light:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border-color: #fff;
+}
+
+@media (max-width: 720px) {
+  .apply-band-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .apply-band-copy p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .apply-band-actions {
+    width: 100%;
+  }
+}
+
+/* ——— Featured reviews (lead) ——— */
+.reviews-grid-featured {
+  grid-template-columns: 1fr;
+}
+
+.reviews-grid-featured .review-card:first-child {
+  grid-column: 1 / -1;
+  padding: 1.5rem 1.65rem;
+  background: linear-gradient(165deg, #fff 0%, var(--surface-muted) 100%);
+  border-width: 1px;
+  border-top-width: 4px;
+}
+
+.reviews-grid-featured .review-card:first-child .review-quote {
+  font-size: 1rem;
+}
+
+@media (min-width: 900px) {
+  .reviews-grid-featured {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .reviews-grid-featured .review-card:first-child {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ——— FAQ ——— */
+.faq-section {
+  margin: 2rem 0 0;
+  padding: 0 1.5rem;
+}
+
+.faq-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 1.5rem 1.35rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4px 24px rgba(26, 18, 48, 0.06);
+}
+
+.faq-title {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--navy-dark);
+  margin: 0 0 1rem;
+  text-align: center;
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--border);
+  padding: 0.35rem 0;
+}
+
+.faq-item:last-child {
+  border-bottom: none;
+}
+
+.faq-item summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--navy);
+  padding: 0.65rem 0;
+  list-style-position: outside;
+}
+
+.faq-item summary::-webkit-details-marker {
+  color: var(--gold);
+}
+
+.faq-item p {
+  margin: 0 0 0.85rem;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+/* ——— Final CTA strip ——— */
+.final-cta {
+  margin: 2rem 0 0;
+  padding: 0 1.5rem;
+}
+
+.final-cta-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.5rem;
+  padding: 1.35rem 1.5rem;
+  background: var(--surface);
+  border: 2px solid var(--gold);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+}
+
+.final-cta-photo {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--gold);
+  flex-shrink: 0;
+}
+
+.final-cta-inner h2 {
+  margin: 0 0 0.25rem;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  color: var(--navy-dark);
+}
+
+.final-cta-inner p {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.final-cta-inner .btn-apply-now {
+  margin-left: auto;
+}
+
+@media (max-width: 600px) {
+  .final-cta-inner {
+    text-align: center;
+    justify-content: center;
+  }
+
+  .final-cta-inner .btn-apply-now {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+/* ——— Embed: preserve lead strip where useful ——— */
+html.embed-mode .market-pulse,
+html.embed-mode .credentials-strip,
+html.embed-mode .apply-band,
+html.embed-mode .faq-section,
+html.embed-mode .final-cta {
+  display: none !important;
+}
+
+html.embed-full-mode .market-pulse,
+html.embed-full-mode .credentials-strip {
+  display: flex !important;
+}

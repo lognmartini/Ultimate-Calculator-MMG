@@ -1,0 +1,260 @@
+/**
+ * Logan1 — elementary mobile-first layout (realtor co-market).
+ */
+
+@media (max-width: 768px) {
+  body.logan1-realtor .site-header.full-branding {
+    padding: 0.5rem 0.75rem;
+  }
+
+  body.logan1-realtor .header-inner {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  body.logan1-realtor .logo-link {
+    padding: 0.35rem 0.5rem;
+  }
+
+  body.logan1-realtor .header-logo {
+    height: 44px;
+    max-width: 140px;
+  }
+
+  body.logan1-realtor .header-actions {
+    width: auto;
+    text-align: right;
+  }
+
+  body.logan1-realtor .header-cta.btn-apply-now {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.72rem;
+    max-width: none;
+    width: auto;
+  }
+
+  body.logan1-realtor .header-cta-note,
+  body.logan1-realtor .hero-with-advisor,
+  body.logan1-realtor .credentials-strip,
+  body.logan1-realtor .value-strip,
+  body.logan1-realtor .official-quote-section,
+  body.logan1-realtor .reviews-section,
+  body.logan1-realtor .more-options-panel,
+  body.logan1-realtor .amortization-section,
+  body.logan1-realtor .vs-competition,
+  body.logan1-realtor .rate-field.martini-rate-block,
+  body.logan1-realtor .field-note-hint,
+  body.logan1-realtor .inputs-panel .calc-step-label,
+  body.logan1-realtor .inputs-panel .panel-title,
+  body.logan1-realtor .results-panel .calc-step-label,
+  body.logan1-realtor .results-panel .panel-title,
+  body.logan1-realtor .breakdown,
+  body.logan1-realtor .total-payment-secondary,
+  body.logan1-realtor .inline-inputs,
+  body.logan1-realtor .advanced,
+  body.logan1-realtor .pmi-estimate-note,
+  body.logan1-realtor .credit-bands,
+  body.logan1-realtor .down-pmi-hint,
+  body.logan1-realtor .partner-share {
+    display: none !important;
+  }
+
+  body.logan1-realtor .save-estimate-card {
+    display: block;
+  }
+
+  body.logan1-realtor .save-estimate-card.hidden {
+    display: none !important;
+  }
+
+  body.logan1-realtor .field:has(#loanProgram),
+  body.logan1-realtor .field:has(#loanTerm) {
+    display: none !important;
+  }
+
+  body.logan1-realtor.co-market-active .site-header .logo-link {
+    display: none;
+  }
+
+  body.logan1-realtor.co-market-active .header-inner {
+    justify-content: flex-end;
+  }
+
+  body.logan1-realtor .co-market-bar {
+    padding: 0 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+
+  body.logan1-realtor .co-market-headline {
+    font-size: 0.68rem;
+    margin-bottom: 0.5rem;
+  }
+
+  body.logan1-realtor .co-market-contacts {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.2rem;
+  }
+
+  body.logan1-realtor .co-market-contact:not(.co-market-contact-phone) {
+    font-size: 0.64rem;
+    font-weight: 500;
+  }
+
+  body.logan1-realtor main {
+    padding: 0.5rem 0.75rem 5rem;
+  }
+
+  body.logan1-realtor .calculator-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    margin: 0;
+  }
+
+  body.logan1-realtor .results-panel {
+    order: -1;
+    position: static;
+    top: auto;
+    padding: 1.1rem 1rem;
+  }
+
+  body.logan1-realtor .inputs-panel {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  body.logan1-realtor .inputs-panel .field:has(#homePrice) {
+    order: 1;
+  }
+
+  body.logan1-realtor .inputs-panel .field:has(#downPercent) {
+    order: 2;
+  }
+
+  body.logan1-realtor .inputs-panel .field:has(#creditScore) {
+    order: 3;
+  }
+
+  body.logan1-realtor .co-market-address {
+    display: block;
+  }
+
+  body.logan1-realtor .simple-mobile-banner {
+    display: block;
+    margin: 0 0 0.75rem;
+    padding: 0.85rem 1rem;
+    background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-deeper) 100%);
+    border-radius: var(--radius);
+    color: #fff;
+    text-align: center;
+    border-left: 4px solid var(--gold);
+  }
+
+  body.logan1-realtor .simple-mobile-banner strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    margin-bottom: 0.25rem;
+  }
+
+  body.logan1-realtor .simple-mobile-banner span {
+    font-size: 0.82rem;
+    opacity: 0.9;
+  }
+
+  body.logan1-realtor .panel-title,
+  body.logan1-realtor .calc-step-label {
+    font-size: 0.75rem;
+  }
+
+  body.logan1-realtor .field label {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  body.logan1-realtor input[type="range"] {
+    height: 28px;
+    margin: 0.5rem 0;
+  }
+
+  body.logan1-realtor .currency-input,
+  body.logan1-realtor .address-input,
+  body.logan1-realtor select {
+    font-size: 1.05rem;
+    padding: 0.85rem 0.75rem;
+    min-height: 48px;
+  }
+
+  body.logan1-realtor .btn-lookup {
+    min-height: 48px;
+    font-size: 1rem;
+  }
+
+  body.logan1-realtor .total-payment {
+    text-align: center;
+    padding: 0.25rem 0 0.5rem;
+  }
+
+  body.logan1-realtor .total-label {
+    display: block;
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 0.35rem;
+  }
+
+  body.logan1-realtor .total-sublabel {
+    display: none;
+  }
+
+  body.logan1-realtor .total-amount {
+    font-size: clamp(2.75rem, 14vw, 3.35rem);
+    line-height: 1.05;
+  }
+
+  body.logan1-realtor .vs-competition,
+  body.logan1-realtor .summary-stats,
+  body.logan1-realtor .breakdown {
+    font-size: 0.88rem;
+  }
+
+  body.logan1-realtor .vs-competition {
+    padding: 0.75rem;
+  }
+
+  body.logan1-realtor .btn-results-apply,
+  body.logan1-realtor .cta-card .btn-apply-now {
+    width: 100%;
+    min-height: 52px;
+    font-size: 1rem;
+  }
+
+  body.logan1-realtor .rate-field.martini-rate-block {
+    padding: 0.75rem;
+  }
+
+  body.logan1-realtor .advanced {
+    margin-top: 0.5rem;
+  }
+
+  body.logan1-realtor .sticky-cta-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  body.logan1-realtor .sticky-cta-btn {
+    width: 100%;
+    min-height: 48px;
+  }
+}
+
+.simple-mobile-banner {
+  display: none;
+}
+
+body.logan1-realtor.co-market-active .hero-lead-default {
+  display: none;
+}

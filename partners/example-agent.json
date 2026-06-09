@@ -1,0 +1,10 @@
+{
+  "name": "Alex Rivera",
+  "brokerage": "Triangle Realty Group",
+  "phone": "9195551234",
+  "phoneDisplay": "(919) 555-1234",
+  "email": "alex@trianglerealty.example",
+  "photo": "assets/logan-headshot.jpg",
+  "logo": "assets/mmg-logo-alt.png",
+  "website": "https://example.com"
+}

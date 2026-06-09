@@ -1,0 +1,99 @@
+================================================================================
+  GET LOGAN4 LIVE ON THE INTERNET (no WordPress, no laptop, no same Wi-Fi)
+  Plain-English checklist — about 20 minutes, all free accounts
+================================================================================
+
+WHAT YOU GET AT THE END
+  A link anyone can open on their phone, like:
+    https://mmg-calculator-xxxx.onrender.com/go4.html
+  Share that with Kevin, compliance, or your team.
+
+WHAT YOU NEED
+  • This mortgage-calculator folder (on your Mac)
+  • An email address (for free sign-ups)
+  • No WordPress login required
+
+--------------------------------------------------------------------------------
+PART 1 — Put the code on GitHub (free file storage the cloud reads from)
+--------------------------------------------------------------------------------
+
+STEP 1  Open https://github.com and click "Sign up" (free).
+
+STEP 2  After you’re logged in, click the green "New" button (new repository).
+
+STEP 3  Name it:  mmg-calculator
+        Leave everything else default.
+        Click "Create repository".
+
+STEP 4  On the new empty repo page, click "uploading an existing file".
+
+STEP 5  Open Finder → go to your mortgage-calculator folder.
+        Select ALL files and folders INSIDE it (not the parent folder).
+        Drag them into the GitHub browser window.
+
+STEP 6  Scroll down, click "Commit changes".
+
+        ✓ Your code is now on GitHub.
+
+--------------------------------------------------------------------------------
+PART 2 — Tell Render to run it on the internet (free hosting)
+--------------------------------------------------------------------------------
+
+STEP 7  Open https://render.com and click "Get Started" (free).
+
+STEP 8  Sign up with the SAME GitHub account you just made (easiest).
+
+STEP 9  On Render dashboard, click "New +" → "Blueprint".
+
+STEP 10 Pick your mmg-calculator repository from the list.
+         Render reads the render.yaml file automatically.
+         Click "Apply" or "Deploy".
+
+STEP 11 Wait 5–10 minutes. Status should turn green: "Live".
+
+STEP 12 Click your service name. At the top you’ll see a URL like:
+         https://mmg-calculator-xxxx.onrender.com
+
+        THAT is your live link.
+
+--------------------------------------------------------------------------------
+PART 3 — Links to share with your team
+--------------------------------------------------------------------------------
+
+MAIN (Logan4 — Kevin & Logan team calculator):
+  https://YOUR-RENDER-URL.onrender.com/go4.html
+
+DEMO (jumps straight to payment example):
+  https://YOUR-RENDER-URL.onrender.com/go4.html?price=750000&quick=1
+
+OPEN HOUSE EXAMPLE:
+  https://YOUR-RENDER-URL.onrender.com/go4.html?address=504+Tilden+St+Raleigh+NC+27605&price=1895000
+
+Replace YOUR-RENDER-URL with the real URL from Step 12.
+
+--------------------------------------------------------------------------------
+GOOD TO KNOW
+--------------------------------------------------------------------------------
+
+• FREE PLAN: If nobody uses it for ~15 minutes, the first visit may take
+  30–60 seconds to wake up. After that it’s fast. Fine for team demos.
+
+• APPLY BUTTONS still go to Kevin/Logan’s normal apply sites — not WordPress.
+
+• YOUR LAPTOP can be off. Render runs it in the cloud.
+
+• TO UPDATE LATER: change files on your Mac → re-upload to GitHub
+  (or ask Logan’s AI assistant to fix bugs → upload again).
+  Render redeploys automatically when GitHub changes.
+
+• LEADS: Saved on Render’s server unless you add LEAD_WEBHOOK_URL in
+  Render → Environment (optional, later).
+
+--------------------------------------------------------------------------------
+IF SOMETHING BREAKS
+--------------------------------------------------------------------------------
+
+Render dashboard → your service → "Logs" tab (error messages).
+Copy/paste logs to your AI assistant in Cursor for fixes.
+
+================================================================================
