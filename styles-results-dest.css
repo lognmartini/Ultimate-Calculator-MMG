@@ -1,0 +1,547 @@
+/**
+ * RESULTS DESTINATION — interactive payoff page (dest-*)
+ * Loads last. Full visual rebuild of results only.
+ */
+
+html body.guided-flow.wizard-on-results .guided-main {
+  padding: 0.45rem 0.65rem 1.25rem !important;
+}
+
+html body.guided-flow.wizard-on-results .guided-layout {
+  display: block !important;
+  max-width: min(440px, 100%) !important;
+  margin: 0 auto !important;
+}
+
+html body.guided-flow.wizard-on-results .guided-live-rail {
+  display: none !important;
+}
+
+html body.guided-flow .dest-page {
+  max-width: min(420px, 100%) !important;
+  margin: 0 auto !important;
+}
+
+html body.guided-flow .dest-shell {
+  background: #fff !important;
+  border-radius: 20px !important;
+  border: 1px solid rgba(26, 18, 48, 0.1) !important;
+  box-shadow: 0 16px 48px rgba(26, 18, 48, 0.12) !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+}
+
+/* ---------- HERO ---------- */
+html body.guided-flow .dest-hero {
+  background: linear-gradient(165deg, #1a1230 0%, #2a1f45 55%, #1a1230 100%) !important;
+  padding: 1.35rem 1.1rem 1.25rem !important;
+  text-align: center !important;
+}
+
+html body.guided-flow .dest-hero-label {
+  margin: 0 0 0.45rem !important;
+  font-family: "DM Sans", system-ui, sans-serif !important;
+  font-size: 0.7rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  color: #e8c84a !important;
+}
+
+html body.guided-flow .dest-hero-amount,
+html body.guided-flow .dest-shell #pitiPayment {
+  display: block !important;
+  margin: 0.1rem 0 0.4rem !important;
+  font-family: "DM Sans", system-ui, sans-serif !important;
+  font-size: clamp(3.4rem, 14vw, 4.25rem) !important;
+  font-weight: 800 !important;
+  font-variant-numeric: tabular-nums !important;
+  letter-spacing: -0.04em !important;
+  line-height: 0.95 !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.25) !important;
+}
+
+html body.guided-flow .dest-hero-sub {
+  margin: 0 auto 0.55rem !important;
+  max-width: 17rem !important;
+  font-size: 0.8rem !important;
+  color: rgba(255, 255, 255, 0.72) !important;
+  line-height: 1.35 !important;
+}
+
+html body.guided-flow .dest-hero-rates {
+  display: flex !important;
+  justify-content: center !important;
+  flex-wrap: wrap !important;
+  gap: 0.25rem 0.45rem !important;
+  margin: 0 !important;
+  font-size: 0.8rem !important;
+  font-weight: 600 !important;
+  color: rgba(255, 255, 255, 0.75) !important;
+}
+
+html body.guided-flow .dest-hero-rates strong {
+  color: #e8c84a !important;
+  font-weight: 800 !important;
+}
+
+html body.guided-flow .dest-dot {
+  color: rgba(232, 200, 74, 0.6) !important;
+}
+
+/* ---------- BREAKDOWN ---------- */
+html body.guided-flow .dest-break {
+  padding: 0.75rem 1rem 0.35rem !important;
+  background: #fff !important;
+}
+
+html body.guided-flow .dest-break-list,
+html body.guided-flow .dest-shell #breakdown {
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+html body.guided-flow .dest-shell #breakdown li {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: baseline !important;
+  gap: 0.75rem !important;
+  padding: 0.5rem 0.15rem !important;
+  border-bottom: 1px solid rgba(26, 18, 48, 0.07) !important;
+  font-family: "DM Sans", system-ui, sans-serif !important;
+  font-size: 0.9rem !important;
+  font-weight: 500 !important;
+  color: #3d3750 !important;
+  background: transparent !important;
+  margin: 0 !important;
+}
+
+html body.guided-flow .dest-shell #breakdown li:last-child {
+  border-bottom: 0 !important;
+}
+
+html body.guided-flow .dest-shell #breakdown li.hidden {
+  display: none !important;
+}
+
+html body.guided-flow .dest-shell #breakdown li strong {
+  font-weight: 800 !important;
+  color: #1a1230 !important;
+  font-variant-numeric: tabular-nums !important;
+}
+
+/* ---------- LIVE ADJUST ---------- */
+html body.guided-flow .dest-adjust {
+  margin: 0.5rem 0.85rem 0 !important;
+  padding: 0.85rem 0.85rem 0.75rem !important;
+  border-radius: 14px !important;
+  background: #f7f6fa !important;
+  border: 1px solid rgba(26, 18, 48, 0.08) !important;
+  text-align: left !important;
+}
+
+html body.guided-flow .dest-adjust-heading {
+  margin: 0 !important;
+  font-size: 0.82rem !important;
+  font-weight: 800 !important;
+  color: #1a1230 !important;
+  text-align: center !important;
+}
+
+html body.guided-flow .dest-adjust-hint {
+  margin: 0.15rem 0 0.75rem !important;
+  font-size: 0.72rem !important;
+  color: #6b6580 !important;
+  text-align: center !important;
+}
+
+html body.guided-flow .dest-control {
+  margin-bottom: 0.7rem !important;
+}
+
+html body.guided-flow .dest-control:last-of-type {
+  margin-bottom: 0.5rem !important;
+}
+
+html body.guided-flow .dest-control-top {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: baseline !important;
+  gap: 0.5rem !important;
+  margin-bottom: 0.3rem !important;
+}
+
+html body.guided-flow .dest-control-top label,
+html body.guided-flow .dest-control-top-label {
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
+  color: #3d3750 !important;
+}
+
+html body.guided-flow .dest-control-top strong {
+  font-size: 0.85rem !important;
+  font-weight: 800 !important;
+  color: #1a1230 !important;
+  font-variant-numeric: tabular-nums !important;
+}
+
+html body.guided-flow .dest-control input[type="range"] {
+  width: 100% !important;
+  accent-color: #c9a227 !important;
+  height: 1.4rem !important;
+  cursor: pointer !important;
+}
+
+html body.guided-flow .dest-term-pills {
+  display: flex !important;
+  gap: 0.4rem !important;
+  margin-top: 0.35rem !important;
+}
+
+html body.guided-flow .dest-term-pill {
+  flex: 1 !important;
+  min-height: 40px !important;
+  border-radius: 10px !important;
+  border: 1.5px solid rgba(26, 18, 48, 0.14) !important;
+  background: #fff !important;
+  color: #3d3750 !important;
+  font-family: "DM Sans", system-ui, sans-serif !important;
+  font-size: 0.82rem !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+}
+
+html body.guided-flow .dest-term-pill.active {
+  background: #1a1230 !important;
+  color: #f5e6a8 !important;
+  border-color: #c9a227 !important;
+}
+
+html body.guided-flow .dest-term-pill:focus-visible {
+  outline: 3px solid #c9a227 !important;
+  outline-offset: 2px !important;
+}
+
+html body.guided-flow .dest-mini-stats {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 0.35rem !important;
+  margin-top: 0.65rem !important;
+  padding-top: 0.65rem !important;
+  border-top: 1px solid rgba(26, 18, 48, 0.08) !important;
+}
+
+html body.guided-flow .dest-mini-stats div {
+  text-align: center !important;
+  background: #fff !important;
+  border-radius: 8px !important;
+  padding: 0.4rem 0.25rem !important;
+}
+
+html body.guided-flow .dest-mini-stats span {
+  display: block !important;
+  font-size: 0.62rem !important;
+  font-weight: 600 !important;
+  color: #6b6580 !important;
+  margin-bottom: 0.15rem !important;
+}
+
+html body.guided-flow .dest-mini-stats strong {
+  font-size: 0.75rem !important;
+  font-weight: 800 !important;
+  color: #1a1230 !important;
+  font-variant-numeric: tabular-nums !important;
+}
+
+/* ---------- LEAD (one primary) ---------- */
+html body.guided-flow .dest-lead {
+  margin: 0.85rem 0.85rem 0 !important;
+  padding: 1.05rem 0.9rem 0.9rem !important;
+  border-radius: 14px !important;
+  background: #fff !important;
+  border: 2px solid #c9a227 !important;
+  box-shadow: 0 8px 22px rgba(201, 162, 39, 0.12) !important;
+  text-align: center !important;
+}
+
+html body.guided-flow .dest-lead-title {
+  margin: 0 0 0.3rem !important;
+  font-size: 1.15rem !important;
+  font-weight: 800 !important;
+  color: #1a1230 !important;
+}
+
+html body.guided-flow .dest-lead-copy {
+  margin: 0 auto 0.75rem !important;
+  max-width: 19rem !important;
+  font-size: 0.84rem !important;
+  line-height: 1.4 !important;
+  color: #5c5670 !important;
+}
+
+html body.guided-flow .dest-lead-form {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.5rem !important;
+  text-align: left !important;
+}
+
+html body.guided-flow .dest-field {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.2rem !important;
+}
+
+html body.guided-flow .dest-field span {
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  color: #3d3750 !important;
+}
+
+html body.guided-flow .dest-field em {
+  font-style: normal !important;
+  font-weight: 500 !important;
+  color: #8a8499 !important;
+}
+
+html body.guided-flow .dest-field input {
+  min-height: 46px !important;
+  padding: 0.55rem 0.7rem !important;
+  border-radius: 10px !important;
+  border: 1.5px solid rgba(26, 18, 48, 0.14) !important;
+  font-size: 1rem !important;
+  color: #1a1230 !important;
+  background: #faf9fc !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+html body.guided-flow .dest-field input:focus {
+  outline: none !important;
+  border-color: #c9a227 !important;
+  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.22) !important;
+  background: #fff !important;
+}
+
+html body.guided-flow .dest-btn-primary,
+html body.guided-flow .dest-lead .save-estimate-submit {
+  width: 100% !important;
+  min-height: 50px !important;
+  margin-top: 0.35rem !important;
+  border-radius: 12px !important;
+  border: 1.5px solid #c9a227 !important;
+  background: linear-gradient(145deg, #1a1230, #2a1f45) !important;
+  color: #f5e6a8 !important;
+  font-size: 1.02rem !important;
+  font-weight: 800 !important;
+  cursor: pointer !important;
+  font-family: "DM Sans", system-ui, sans-serif !important;
+}
+
+html body.guided-flow .dest-btn-primary:hover,
+html body.guided-flow .dest-lead .save-estimate-submit:hover {
+  background: linear-gradient(145deg, #c9a227, #b8921f) !important;
+  color: #1a1230 !important;
+}
+
+/* Kill duplicate restore primary */
+html body.guided-flow .dest-restore-hidden,
+html body.guided-flow #saveEstimateRestore,
+html body.guided-flow .save-estimate-restore {
+  display: none !important;
+  visibility: hidden !important;
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  pointer-events: none !important;
+}
+
+html body.guided-flow .dest-reopen-lead {
+  display: inline !important;
+  border: 0 !important;
+  background: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  color: #1a1230 !important;
+  font-weight: 800 !important;
+  font-size: 1rem !important;
+  text-decoration: underline !important;
+  cursor: pointer !important;
+  box-shadow: none !important;
+  min-height: 0 !important;
+}
+
+html body.guided-flow .guided-lead-collapsed .dest-lead-form,
+html body.guided-flow .guided-lead-collapsed #saveEstimateForm {
+  display: none !important;
+}
+
+html body.guided-flow .dest-link-quiet,
+html body.guided-flow .dest-lead .save-estimate-skip {
+  display: block !important;
+  width: 100% !important;
+  margin: 0.55rem 0 0 !important;
+  padding: 0.25rem !important;
+  border: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+  color: #8a8499 !important;
+  font-size: 0.78rem !important;
+  text-decoration: underline !important;
+  cursor: pointer !important;
+  min-height: 0 !important;
+}
+
+html body.guided-flow .dest-lead-consent {
+  margin: 0.5rem 0 0 !important;
+  font-size: 0.6rem !important;
+  line-height: 1.35 !important;
+  color: #8a8499 !important;
+}
+
+html body.guided-flow .dest-lead-success:not(.hidden) {
+  display: block !important;
+  margin-top: 0.55rem !important;
+  padding: 0.6rem !important;
+  border-radius: 10px !important;
+  background: rgba(26, 92, 56, 0.1) !important;
+  color: #1a5c38 !important;
+  font-weight: 700 !important;
+}
+
+html body.guided-flow .dest-lead-error:not(.hidden):not([hidden]) {
+  display: block !important;
+  padding: 0.45rem 0.55rem !important;
+  border-radius: 8px !important;
+  background: #fdecec !important;
+  color: #6b1f1f !important;
+  font-size: 0.78rem !important;
+  font-weight: 600 !important;
+}
+
+/* ---------- TRUST + LEGAL ---------- */
+html body.guided-flow .dest-trust {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.45rem !important;
+  margin: 0.75rem 0.85rem 0 !important;
+  padding: 0.4rem !important;
+}
+
+html body.guided-flow .dest-trust-photo {
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  border: 2px solid rgba(201, 162, 39, 0.4) !important;
+}
+
+html body.guided-flow .dest-trust p {
+  margin: 0 !important;
+  font-size: 0.75rem !important;
+  color: #5c5670 !important;
+}
+
+html body.guided-flow .dest-trust strong {
+  color: #1a1230 !important;
+  font-weight: 700 !important;
+}
+
+html body.guided-flow .dest-legal {
+  margin: 0.35rem 0.85rem 0 !important;
+  padding: 0 0.25rem !important;
+  font-size: 0.58rem !important;
+  line-height: 1.4 !important;
+  color: #9a96a8 !important;
+  text-align: center !important;
+}
+
+html body.guided-flow .dest-secondary-wrap {
+  text-align: center !important;
+  margin: 0.55rem 0.85rem 0 !important;
+}
+
+html body.guided-flow .dest-link-secondary {
+  font-size: 0.8rem !important;
+  font-weight: 600 !important;
+  color: #5c5670 !important;
+  text-decoration: underline !important;
+  text-underline-offset: 2px !important;
+}
+
+html body.guided-flow .dest-more {
+  margin: 0.65rem 0.85rem 1rem !important;
+  border-top: 1px solid rgba(26, 18, 48, 0.08) !important;
+  padding-top: 0.45rem !important;
+}
+
+html body.guided-flow .dest-more > summary {
+  cursor: pointer !important;
+  text-align: center !important;
+  font-size: 0.78rem !important;
+  font-weight: 700 !important;
+  color: #6b6580 !important;
+  padding: 0.35rem !important;
+  list-style: none !important;
+}
+
+html body.guided-flow .dest-more > summary::-webkit-details-marker {
+  display: none;
+}
+
+html body.guided-flow .dest-more-body {
+  padding: 0.5rem 0.15rem 0.25rem !important;
+  text-align: left !important;
+}
+
+html body.guided-flow .dest-more-h {
+  margin: 0.65rem 0 0.35rem !important;
+  font-size: 0.7rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+  color: #6b6580 !important;
+}
+
+html body.guided-flow .dest-text-btn {
+  width: 100% !important;
+  min-height: 42px !important;
+  border-radius: 10px !important;
+  border: 1.5px solid rgba(26, 18, 48, 0.14) !important;
+  background: #fff !important;
+  font-weight: 600 !important;
+  font-size: 0.85rem !important;
+  color: #1a1230 !important;
+  cursor: pointer !important;
+}
+
+html body.guided-flow.wizard-on-results .guided-step-nav {
+  max-width: 180px !important;
+  margin: 0.75rem auto 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+}
+
+@media (max-width: 560px) {
+  html body.guided-flow .dest-hero {
+    padding: 1.15rem 0.9rem 1.05rem !important;
+  }
+
+  html body.guided-flow .dest-hero-amount,
+  html body.guided-flow .dest-shell #pitiPayment {
+    font-size: clamp(3.1rem, 15vw, 3.75rem) !important;
+  }
+
+  html body.guided-flow .dest-adjust,
+  html body.guided-flow .dest-lead {
+    margin-left: 0.7rem !important;
+    margin-right: 0.7rem !important;
+  }
+}

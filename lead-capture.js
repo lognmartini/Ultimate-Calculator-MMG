@@ -97,13 +97,28 @@
     const form = document.getElementById("saveEstimateForm");
     const restore = document.getElementById("saveEstimateRestore");
     const successEl = document.getElementById("saveEstimateSuccess");
-    const alreadySubmitted = successEl && !successEl.classList.contains("hidden") && form?.classList.contains("hidden");
+    const alreadySubmitted =
+      successEl && !successEl.classList.contains("hidden") && form?.classList.contains("hidden");
     if (!alreadySubmitted) {
       form?.classList.remove("hidden");
       if (restore) {
         restore.classList.add("hidden");
         restore.hidden = true;
+        restore.setAttribute("aria-hidden", "true");
       }
+      const title = document.getElementById("saveEstimateHeading");
+      const lead = document.querySelector(".save-estimate-lead, .dest-lead-copy");
+      const isRefi = document.body.dataset.loanGoal === "refinance";
+      if (title) {
+        title.textContent = isRefi
+          ? "Email me this refinance estimate"
+          : "Email me this estimate";
+      }
+      if (lead) {
+        lead.textContent =
+          "Get a clean summary + a quick personalized review from Logan. No obligation.";
+      }
+      el.classList.remove("guided-lead-collapsed");
     }
   }
 
@@ -111,16 +126,30 @@
     const el = card();
     if (!el) return;
 
-    // Guided: soft-collapse with restore CTA — never permanent localStorage kill
+    // Guided: soft-collapse — show quiet skip only (never a second primary button)
     if (isGuided() && isLogan5()) {
       const form = document.getElementById("saveEstimateForm");
       const restore = document.getElementById("saveEstimateRestore");
       const successEl = document.getElementById("saveEstimateSuccess");
+      const title = document.getElementById("saveEstimateHeading");
+      const lead = document.querySelector(".save-estimate-lead, .dest-lead-copy");
       form?.classList.add("hidden");
       successEl?.classList.add("hidden");
+      // Keep restore in DOM for API but never show as a second primary
       if (restore) {
-        restore.classList.remove("hidden");
-        restore.hidden = false;
+        restore.classList.add("hidden");
+        restore.hidden = true;
+        restore.setAttribute("aria-hidden", "true");
+      }
+      if (title) title.textContent = "Want this estimate emailed?";
+      if (lead) {
+        lead.innerHTML =
+          '<button type="button" class="dest-reopen-lead" id="destReopenLead">Email me this estimate · free review from Logan</button>';
+        document.getElementById("destReopenLead")?.addEventListener(
+          "click",
+          () => showCard(),
+          { once: true }
+        );
       }
       el.classList.add("guided-lead-collapsed");
       el.classList.remove("hidden");
@@ -211,7 +240,7 @@
   }
 
   function defaultSubmitLabel(tab) {
-    return tab === "sms" ? "Text my estimate" : "Email my estimate";
+    return tab === "sms" ? "Text my estimate" : "Email me this estimate";
   }
 
   function applyImpactLeadCopy(tab) {
@@ -223,18 +252,17 @@
     if (title) {
       if (tab === "sms") {
         title.textContent = isRefi
-          ? "Text me this refinance payment"
-          : "Text me this payment";
+          ? "Text me this refinance estimate"
+          : "Text me this estimate";
       } else {
         title.textContent = isRefi
-          ? "Email me this refinance payment"
-          : "Get this payment emailed to you";
+          ? "Email me this refinance estimate"
+          : "Email me this estimate";
       }
     }
     if (lead) {
-      lead.textContent = isRefi
-        ? "Save your refi scenario + Logan’s plain-English take on your options."
-        : "Save your numbers + a plain-English note from Logan on your options.";
+      lead.textContent =
+        "Get a clean summary + a quick personalized review from Logan. No obligation.";
     }
   }
 

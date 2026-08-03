@@ -1,0 +1,696 @@
+/**
+ * RESULTS REBUILD — fresh layout only (rx-*)
+ * Loads last. Completely replaces previous results chrome.
+ */
+
+/* Kill legacy results card styling when rebuild is present */
+html body.guided-flow.wizard-on-results .guided-results-impact,
+html body.guided-flow.wizard-on-results .guided-results-final:not(.rx-shell),
+html body.guided-flow.wizard-on-results .guided-results-v2:not(.rx-shell) {
+  /* no-op: old classes removed from markup */
+}
+
+html body.guided-flow.wizard-on-results .guided-main {
+  padding-top: 0.5rem !important;
+  padding-bottom: 1.25rem !important;
+  max-width: 100% !important;
+}
+
+html body.guided-flow.wizard-on-results .guided-layout {
+  display: block !important;
+  max-width: min(440px, 100%) !important;
+  margin: 0 auto !important;
+}
+
+html body.guided-flow.wizard-on-results .guided-layout-center {
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+html body.guided-flow.wizard-on-results .guided-progress {
+  max-width: min(280px, 90%) !important;
+  margin: 0 auto 0.65rem !important;
+  padding: 0.3rem 0.55rem 0.35rem !important;
+}
+
+/* Page shell */
+html body.guided-flow .rx-page {
+  width: 100% !important;
+  max-width: min(420px, 100%) !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+}
+
+html body.guided-flow .rx-shell {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0 !important;
+  margin: 0 auto !important;
+  padding: 1.35rem 1.1rem 1.25rem !important;
+  border-radius: 20px !important;
+  background: #ffffff !important;
+  border: 1px solid rgba(26, 18, 48, 0.1) !important;
+  box-shadow: 0 18px 50px rgba(26, 18, 48, 0.12) !important;
+  text-align: center !important;
+}
+
+/* ---------- 1. HERO ---------- */
+html body.guided-flow .rx-hero {
+  padding: 0.25rem 0 1rem !important;
+  margin: 0 0 0.15rem !important;
+  border-bottom: 1px solid rgba(26, 18, 48, 0.08) !important;
+}
+
+html body.guided-flow .rx-hero-label {
+  margin: 0 0 0.35rem !important;
+  font-family: "DM Sans", system-ui, sans-serif !important;
+  font-size: 0.72rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  color: #9a7b14 !important;
+}
+
+html body.guided-flow .rx-hero-title {
+  margin: 0 0 0.55rem !important;
+  font-family: "DM Sans", system-ui, sans-serif !important;
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
+  color: #5c5670 !important;
+  line-height: 1.25 !important;
+}
+
+html body.guided-flow .rx-hero-amount,
+html body.guided-flow .rx-shell #pitiPayment {
+  display: block !important;
+  margin: 0.2rem 0 0.45rem !important;
+  font-family: "DM Sans", system-ui, -apple-system, sans-serif !important;
+  font-size: clamp(3.5rem, 15vw, 4.35rem) !important;
+  font-weight: 800 !important;
+  font-variant-numeric: tabular-nums !important;
+  letter-spacing: -0.04em !important;
+  line-height: 0.95 !important;
+  color: #1a1230 !important;
+  -webkit-text-fill-color: #1a1230 !important;
+}
+
+html body.guided-flow .rx-hero-sub {
+  margin: 0 auto 0.55rem !important;
+  max-width: 16rem !important;
+  font-size: 0.8rem !important;
+  font-weight: 500 !important;
+  color: #6b6580 !important;
+  line-height: 1.35 !important;
+}
+
+html body.guided-flow .rx-hero-rates {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 0.25rem 0.5rem !important;
+  margin: 0 !important;
+  font-size: 0.8rem !important;
+  font-weight: 600 !important;
+  color: #5c5670 !important;
+}
+
+html body.guided-flow .rx-hero-rates strong {
+  color: #1a1230 !important;
+  font-weight: 800 !important;
+}
+
+html body.guided-flow .rx-hero-rates-sep {
+  color: #c9a227 !important;
+  font-weight: 700 !important;
+}
+
+html body.guided-flow .rx-engine-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+  padding: 0 !important;
+  margin: -1px !important;
+}
+
+/* ---------- 2. BREAKDOWN ---------- */
+html body.guided-flow .rx-breakdown {
+  padding: 0.85rem 0 0.25rem !important;
+  margin: 0 !important;
+}
+
+html body.guided-flow .rx-breakdown-list,
+html body.guided-flow .rx-shell #breakdown {
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0.15rem 0.15rem 0.35rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+}
+
+html body.guided-flow .rx-breakdown-row,
+html body.guided-flow .rx-shell #breakdown li {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: baseline !important;
+  gap: 0.75rem !important;
+  padding: 0.55rem 0.35rem !important;
+  margin: 0 !important;
+  border-bottom: 1px solid rgba(26, 18, 48, 0.07) !important;
+  font-family: "DM Sans", system-ui, sans-serif !important;
+  font-size: 0.92rem !important;
+  font-weight: 500 !important;
+  color: #3d3750 !important;
+  text-align: left !important;
+  background: transparent !important;
+}
+
+html body.guided-flow .rx-shell #breakdown li:last-child {
+  border-bottom: 0 !important;
+}
+
+html body.guided-flow .rx-shell #breakdown li.hidden,
+html body.guided-flow .rx-shell #breakdown li[hidden] {
+  display: none !important;
+}
+
+html body.guided-flow .rx-breakdown-row strong,
+html body.guided-flow .rx-shell #breakdown li strong {
+  font-weight: 800 !important;
+  font-variant-numeric: tabular-nums !important;
+  color: #1a1230 !important;
+  font-size: 0.95rem !important;
+}
+
+/* ---------- 3. LEAD ---------- */
+html body.guided-flow .rx-lead,
+html body.guided-flow .rx-shell #saveEstimateCard {
+  margin: 0.85rem 0 0 !important;
+  padding: 1.15rem 1rem 1rem !important;
+  border-radius: 16px !important;
+  background: linear-gradient(180deg, #fbf8f0 0%, #ffffff 100%) !important;
+  border: 2px solid #c9a227 !important;
+  box-shadow: 0 8px 24px rgba(201, 162, 39, 0.12) !important;
+  text-align: center !important;
+}
+
+html body.guided-flow .rx-lead-title {
+  margin: 0 0 0.3rem !important;
+  font-family: "DM Sans", system-ui, sans-serif !important;
+  font-size: clamp(1.15rem, 3.5vw, 1.3rem) !important;
+  font-weight: 800 !important;
+  color: #1a1230 !important;
+  line-height: 1.2 !important;
+}
+
+html body.guided-flow .rx-lead-copy {
+  margin: 0 auto 0.85rem !important;
+  max-width: 20rem !important;
+  font-size: 0.86rem !important;
+  line-height: 1.4 !important;
+  color: #5c5670 !important;
+}
+
+html body.guided-flow .rx-lead-form {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.55rem !important;
+  margin: 0 !important;
+  text-align: left !important;
+}
+
+html body.guided-flow .rx-field {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.25rem !important;
+  margin: 0 !important;
+}
+
+html body.guided-flow .rx-field-label {
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  color: #3d3750 !important;
+  letter-spacing: 0.02em !important;
+}
+
+html body.guided-flow .rx-field-label em {
+  font-style: normal !important;
+  font-weight: 500 !important;
+  color: #8a8499 !important;
+}
+
+html body.guided-flow .rx-field input,
+html body.guided-flow .rx-lead input[type="text"],
+html body.guided-flow .rx-lead input[type="email"],
+html body.guided-flow .rx-lead input[type="tel"] {
+  width: 100% !important;
+  box-sizing: border-box !important;
+  min-height: 48px !important;
+  padding: 0.6rem 0.8rem !important;
+  border-radius: 11px !important;
+  border: 1.5px solid rgba(26, 18, 48, 0.14) !important;
+  background: #fff !important;
+  font-family: "DM Sans", system-ui, sans-serif !important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  color: #1a1230 !important;
+}
+
+html body.guided-flow .rx-field input:focus {
+  outline: none !important;
+  border-color: #c9a227 !important;
+  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.22) !important;
+}
+
+/* ---------- 4. BUTTONS ---------- */
+html body.guided-flow .rx-btn-primary,
+html body.guided-flow .rx-shell .save-estimate-submit {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  min-height: 52px !important;
+  margin-top: 0.35rem !important;
+  padding: 0.75rem 1rem !important;
+  border-radius: 12px !important;
+  border: 1.5px solid #c9a227 !important;
+  background: linear-gradient(145deg, #1a1230 0%, #2a1f45 100%) !important;
+  color: #f5e6a8 !important;
+  font-family: "DM Sans", system-ui, sans-serif !important;
+  font-size: 1.05rem !important;
+  font-weight: 800 !important;
+  cursor: pointer !important;
+  box-shadow: 0 6px 18px rgba(26, 18, 48, 0.18) !important;
+  text-decoration: none !important;
+}
+
+html body.guided-flow .rx-btn-primary:hover,
+html body.guided-flow .rx-shell .save-estimate-submit:hover {
+  background: linear-gradient(145deg, #c9a227 0%, #b8921f 100%) !important;
+  color: #1a1230 !important;
+}
+
+html body.guided-flow .rx-btn-secondary {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  min-height: 46px !important;
+  margin: 0 !important;
+  padding: 0.65rem 1rem !important;
+  border-radius: 12px !important;
+  border: 1.5px solid rgba(26, 18, 48, 0.18) !important;
+  background: #fff !important;
+  color: #1a1230 !important;
+  font-family: "DM Sans", system-ui, sans-serif !important;
+  font-size: 0.92rem !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  text-decoration: none !important;
+  box-sizing: border-box !important;
+}
+
+html body.guided-flow .rx-btn-secondary:hover {
+  border-color: #c9a227 !important;
+  background: #fbf8f0 !important;
+}
+
+html body.guided-flow .rx-secondary {
+  margin: 0.75rem 0 0 !important;
+  padding: 0 !important;
+}
+
+html body.guided-flow .rx-link-quiet,
+html body.guided-flow .rx-shell .save-estimate-skip {
+  display: block !important;
+  width: 100% !important;
+  margin: 0.65rem 0 0 !important;
+  padding: 0.25rem !important;
+  border: 0 !important;
+  background: transparent !important;
+  color: #8a8499 !important;
+  font-size: 0.78rem !important;
+  font-weight: 500 !important;
+  text-decoration: underline !important;
+  text-underline-offset: 2px !important;
+  cursor: pointer !important;
+  box-shadow: none !important;
+  min-height: 0 !important;
+}
+
+html body.guided-flow .rx-lead-consent {
+  margin: 0.55rem 0 0 !important;
+  font-size: 0.62rem !important;
+  line-height: 1.35 !important;
+  color: #8a8499 !important;
+}
+
+html body.guided-flow .rx-lead-success {
+  margin: 0.65rem 0 0 !important;
+  padding: 0.65rem !important;
+  border-radius: 10px !important;
+  background: rgba(26, 92, 56, 0.1) !important;
+  color: #1a5c38 !important;
+  font-weight: 700 !important;
+  font-size: 0.9rem !important;
+}
+
+html body.guided-flow .rx-lead-error:not(.hidden) {
+  display: block !important;
+  margin: 0 !important;
+  padding: 0.45rem 0.55rem !important;
+  border-radius: 8px !important;
+  background: rgba(139, 30, 45, 0.08) !important;
+  color: #8b1e2d !important;
+  font-size: 0.78rem !important;
+}
+
+/* ---------- 5. TRUST ---------- */
+html body.guided-flow .rx-trust {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.55rem !important;
+  margin: 1rem auto 0 !important;
+  padding: 0.55rem 0.65rem !important;
+  max-width: 100% !important;
+  border-radius: 12px !important;
+  background: #f7f6fa !important;
+  border: 1px solid rgba(26, 18, 48, 0.06) !important;
+}
+
+html body.guided-flow .rx-trust-photo {
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  border: 2px solid rgba(201, 162, 39, 0.45) !important;
+  flex-shrink: 0 !important;
+}
+
+html body.guided-flow .rx-trust-copy {
+  text-align: left !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.1rem !important;
+}
+
+html body.guided-flow .rx-trust-copy strong {
+  font-size: 0.82rem !important;
+  font-weight: 700 !important;
+  color: #1a1230 !important;
+}
+
+html body.guided-flow .rx-trust-copy span {
+  font-size: 0.7rem !important;
+  color: #6b6580 !important;
+  line-height: 1.25 !important;
+}
+
+/* ---------- 6. LEGAL ---------- */
+html body.guided-flow .rx-legal {
+  margin: 0.75rem 0 0 !important;
+  padding: 0 0.25rem !important;
+  font-size: 0.6rem !important;
+  line-height: 1.4 !important;
+  color: #9a96a8 !important;
+  text-align: center !important;
+}
+
+/* ---------- Advanced (collapsed) ---------- */
+html body.guided-flow .rx-advanced {
+  margin-top: 0.85rem !important;
+  text-align: left !important;
+  border-top: 1px solid rgba(26, 18, 48, 0.08) !important;
+  padding-top: 0.55rem !important;
+}
+
+html body.guided-flow .rx-advanced-summary {
+  cursor: pointer !important;
+  font-size: 0.8rem !important;
+  font-weight: 700 !important;
+  color: #5c5670 !important;
+  padding: 0.4rem 0 !important;
+  list-style: none !important;
+  text-align: center !important;
+}
+
+html body.guided-flow .rx-advanced-summary::-webkit-details-marker {
+  display: none;
+}
+
+html body.guided-flow .rx-advanced-body {
+  padding: 0.5rem 0 0.25rem !important;
+}
+
+html body.guided-flow .rx-advanced-h {
+  margin: 0.75rem 0 0.4rem !important;
+  font-size: 0.72rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  color: #6b6580 !important;
+}
+
+html body.guided-flow .rx-stats {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 0.4rem !important;
+  margin: 0.5rem 0 !important;
+}
+
+html body.guided-flow .rx-stats .stat {
+  background: #f7f6fa !important;
+  border-radius: 10px !important;
+  padding: 0.45rem 0.35rem !important;
+  text-align: center !important;
+}
+
+html body.guided-flow .rx-advanced-block {
+  margin-top: 0.75rem !important;
+}
+
+/* Results nav: back only, centered, tight */
+html body.guided-flow.wizard-on-results .guided-step-nav {
+  position: relative !important;
+  margin: 0.85rem auto 0 !important;
+  padding: 0.35rem 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  max-width: min(200px, 100%) !important;
+}
+
+html body.guided-flow.wizard-on-results .guided-step-nav .btn-wizard-back {
+  width: 100% !important;
+  min-height: 42px !important;
+  font-size: 0.85rem !important;
+}
+
+/* Hide mid-flow chrome that shouldn't show on results */
+html body.guided-flow.wizard-on-results .guided-live-rail,
+html body.guided-flow.wizard-on-results .guided-realtor-mobile-entry {
+  display: none !important;
+}
+
+@media (max-width: 560px) {
+  html body.guided-flow .rx-shell {
+    padding: 1.15rem 0.9rem 1.1rem !important;
+    border-radius: 16px !important;
+  }
+
+  html body.guided-flow .rx-hero-amount,
+  html body.guided-flow .rx-shell #pitiPayment {
+    font-size: clamp(3rem, 15vw, 3.6rem) !important;
+  }
+
+  html body.guided-flow .rx-lead {
+    padding: 1rem 0.85rem 0.9rem !important;
+  }
+}
+
+@media (min-width: 900px) {
+  html body.guided-flow.wizard-on-results .guided-layout {
+    max-width: min(440px, 100%) !important;
+  }
+}
+
+/* ---------- A11y: focus + errors ---------- */
+html body.guided-flow .rx-btn-primary:focus-visible,
+html body.guided-flow .rx-btn-secondary:focus-visible,
+html body.guided-flow .rx-field input:focus-visible,
+html body.guided-flow .guided-choice-card:focus-visible,
+html body.guided-flow .btn-wizard-next:focus-visible,
+html body.guided-flow .btn-wizard-back:focus-visible {
+  outline: 3px solid #c9a227 !important;
+  outline-offset: 2px !important;
+}
+
+html body.guided-flow .guided-inline-error:not([hidden]) {
+  display: block !important;
+  margin: 0 0 0.45rem !important;
+  padding: 0.5rem 0.65rem !important;
+  border-radius: 10px !important;
+  background: #fdecec !important;
+  border: 1px solid #c45c5c !important;
+  color: #6b1f1f !important;
+  font-size: 0.82rem !important;
+  font-weight: 600 !important;
+  text-align: center !important;
+  line-height: 1.35 !important;
+}
+
+html body.guided-flow .input-error-flash {
+  border-color: #c45c5c !important;
+  box-shadow: 0 0 0 3px rgba(196, 92, 92, 0.25) !important;
+}
+
+html body.guided-flow .guided-price-error:not(.hidden),
+html body.guided-flow #guidedDownError:not(.hidden) {
+  display: block !important;
+  color: #6b1f1f !important;
+  background: #fdecec !important;
+  border: 1px solid #c45c5c !important;
+  border-radius: 8px !important;
+  padding: 0.45rem 0.55rem !important;
+  font-weight: 600 !important;
+  margin-top: 0.45rem !important;
+}
+
+/* Global density + primary path clarity */
+html body.guided-flow.guided-flagship .guided-choice-card {
+  min-height: 72px !important;
+  border: 1.5px solid rgba(26, 18, 48, 0.14) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-choice-card:hover,
+html body.guided-flow.guided-flagship .guided-choice-card.is-selected {
+  border-color: #c9a227 !important;
+  background: #fbf8f0 !important;
+}
+
+html body.guided-flow.guided-flagship .guided-header-apply {
+  min-height: 36px !important;
+}
+
+/* Hide header Apply mid-flow (reduces competing CTAs) */
+html body.guided-flow.guided-pre-results .guided-header-apply {
+  opacity: 0.55 !important;
+  font-size: 0.7rem !important;
+}
+
+/* Live card: ensure instant visibility when shown */
+html body.guided-flow.guided-live-active .guided-live-rail:not(.ultimate-live-rail-hidden) {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* ---------- Price & loan step: one primary only ---------- */
+html body.guided-flow.guided-flagship .guided-price-to-loan,
+html body.guided-flow #guidedPriceToLoan {
+  display: none !important;
+}
+
+/* Back = secondary/outline; Continue = sole primary */
+html body.guided-flow.guided-flagship .guided-step-nav .btn-wizard-back {
+  background: #fff !important;
+  color: #1a1230 !important;
+  border: 1.5px solid rgba(26, 18, 48, 0.2) !important;
+  box-shadow: none !important;
+  font-weight: 600 !important;
+}
+
+html body.guided-flow.guided-flagship .guided-step-nav .btn-wizard-back:hover {
+  border-color: #c9a227 !important;
+  background: #fbf8f0 !important;
+  color: #1a1230 !important;
+}
+
+html body.guided-flow.guided-flagship .guided-step-nav .btn-wizard-next {
+  background: linear-gradient(145deg, #1a1230 0%, #2a1f45 100%) !important;
+  color: #f5e6a8 !important;
+  border: 1.5px solid #c9a227 !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 14px rgba(26, 18, 48, 0.16) !important;
+}
+
+/* Light text link for payment target */
+html body.guided-flow .guided-price-target-link-wrap {
+  margin: 0.55rem 0 0 !important;
+  text-align: center !important;
+}
+
+html body.guided-flow .guided-price-target-link {
+  display: inline !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+  min-height: 0 !important;
+  font-family: "DM Sans", system-ui, sans-serif !important;
+  font-size: 0.8rem !important;
+  font-weight: 500 !important;
+  color: #6b6580 !important;
+  text-decoration: underline !important;
+  text-underline-offset: 2px !important;
+  cursor: pointer !important;
+}
+
+html body.guided-flow .guided-price-target-link:hover {
+  color: #1a1230 !important;
+}
+
+html body.guided-flow .guided-price-target-panel:not(.hidden) {
+  margin-top: 0.65rem !important;
+  padding-top: 0.65rem !important;
+  border-top: 1px dashed rgba(26, 18, 48, 0.12) !important;
+}
+
+/* Soften national banner — quiet status, not a warning */
+html body.guided-flow .guided-national-banner:not(.hidden) {
+  max-width: min(400px, 100%) !important;
+  margin: 0 auto 0.55rem !important;
+  padding: 0.35rem 0.6rem !important;
+  font-size: 0.72rem !important;
+  font-weight: 500 !important;
+  color: #6b6580 !important;
+  background: rgba(26, 18, 48, 0.04) !important;
+  border: 1px solid rgba(26, 18, 48, 0.08) !important;
+  border-radius: 8px !important;
+  text-align: center !important;
+}
+
+/* Price errors never visible when empty/hidden */
+html body.guided-flow #guidedPriceError:empty,
+html body.guided-flow #guidedDownError:empty,
+html body.guided-flow #guidedPriceError.hidden,
+html body.guided-flow #guidedDownError.hidden,
+html body.guided-flow #guidedPriceError[hidden],
+html body.guided-flow #guidedDownError[hidden] {
+  display: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  min-height: 0 !important;
+}
+
+/* Screen-reader only helper */
+html body.guided-flow .sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}

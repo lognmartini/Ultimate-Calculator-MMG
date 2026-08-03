@@ -107,12 +107,8 @@
 
   function isLogan5LiveRailVisible() {
     if (!IS_LOGAN5) return false;
-    // Guided: only after price step (and not on results — CSS also hides rail there)
-    if (IS_GUIDED) {
-      if (currentStep < 3) return false;
-      if (currentStep >= resultsStepIndex()) return false;
-      return hasPurchasePriceSet();
-    }
+    // Guided: never show mid-flow live card — payment climax is results only
+    if (IS_GUIDED) return false;
     return currentStep === 1;
   }
 
@@ -121,17 +117,18 @@
     const rail = document.querySelector(".ultimate-live-rail");
     const showRail = isLogan5LiveRailVisible();
     document.body.classList.toggle("logan5-payment-hidden", !showRail);
-    document.body.classList.toggle("guided-live-active", showRail && IS_GUIDED);
-    document.body.classList.toggle("guided-live-waiting", IS_GUIDED && !showRail && currentStep < resultsStepIndex());
+    document.body.classList.toggle("guided-live-active", false);
+    document.body.classList.toggle("guided-live-waiting", IS_GUIDED);
+    document.body.classList.toggle("guided-no-live-rail", IS_GUIDED);
     if (rail) {
       rail.classList.toggle("ultimate-live-rail-hidden", !showRail);
       rail.hidden = !showRail;
       rail.setAttribute("aria-hidden", showRail ? "false" : "true");
     }
-    // Mobile entry sits above live card when live is visible
     const mobileRealtor = $("guidedRealtorMobileEntry");
     if (mobileRealtor) {
-      mobileRealtor.classList.toggle("guided-realtor-above-live", showRail);
+      mobileRealtor.classList.remove("guided-realtor-above-live");
+      mobileRealtor.hidden = true;
     }
   }
 
@@ -523,7 +520,10 @@
         loanCard.classList.remove("guided-loan-stage-hidden");
         loanCard.setAttribute("aria-hidden", "false");
       }
-      if (toLoanBtn) toLoanBtn.hidden = true;
+      if (toLoanBtn) {
+        toLoanBtn.hidden = true;
+        toLoanBtn.setAttribute("aria-hidden", "true");
+      }
       if (title) {
         title.textContent =
           getLoanGoal() === "refinance"
@@ -557,7 +557,10 @@
         loanCard.classList.add("guided-loan-stage-hidden");
         loanCard.setAttribute("aria-hidden", "true");
       }
-      if (toLoanBtn) toLoanBtn.hidden = false;
+      if (toLoanBtn) {
+        toLoanBtn.hidden = true;
+        toLoanBtn.setAttribute("aria-hidden", "true");
+      }
       if (title) {
         title.textContent =
           getLoanGoal() === "refinance" ? "Current home value" : "Purchase price";
@@ -565,8 +568,8 @@
       if (lead) {
         lead.textContent =
           getLoanGoal() === "refinance"
-            ? "What is the home worth today? Then choose how you’ll refinance."
-            : "Set the price, then choose your loan type.";
+            ? "Set today’s value, then continue."
+            : "Set your price, then continue.";
       }
     }
     updateNavButtons();
@@ -576,11 +579,19 @@
     const price = Number($("homePrice")?.value || 0);
     const err = $("guidedPriceError");
     if (price < 50000) {
-      if (err) err.classList.remove("hidden");
+      if (err) {
+        err.textContent = "Enter a purchase price of at least $50,000.";
+        err.classList.remove("hidden");
+        err.hidden = false;
+      }
       $("homePriceInput")?.focus();
       return false;
     }
-    if (err) err.classList.add("hidden");
+    if (err) {
+      err.classList.add("hidden");
+      err.hidden = true;
+      err.textContent = "";
+    }
     setPriceLoanStage("loan");
     return true;
   }
@@ -651,22 +662,34 @@
     const navInner = $("wizardNavInner") || document.querySelector(".wizard-nav-inner");
     const nav = document.querySelector(".ultimate-wizard-nav");
 
-    // Choice steps + address (until ready) + price stage (until loan revealed)
+    // Choice steps + address (until ready) hide Continue — price stage uses Continue to reveal loan
     const onChoice = IS_GUIDED && (currentStep === 0 || currentStep === 1);
     const onAddressGate = IS_GUIDED && currentStep === 2 && !isAddressStepReady();
     const onPriceStage =
       IS_GUIDED && currentStep === 3 && !isLoanStageVisible();
-    const hideNext = onChoice || onAddressGate || onPriceStage;
+    const onPriceLoanStep = IS_GUIDED && currentStep === 3;
+    // Only hide Next on pure choice / address-gate — NOT on price stage (Continue advances stage)
+    const hideNext = onChoice || onAddressGate;
     const choiceHint = $("guidedChoiceHint");
 
     if (IS_LOGAN5 && currentStep === resultsStepIndex()) {
       if (choiceHint) {
         choiceHint.hidden = true;
       }
-      document.body.classList.remove("guided-on-choice", "guided-on-address-gate");
+      document.body.classList.remove(
+        "guided-on-choice",
+        "guided-on-address-gate",
+        "guided-nav-empty",
+        "guided-on-price-stage"
+      );
       document.body.classList.add("guided-results-back-only");
       // Results: only Back, at bottom of page (no Continue, no sticky chrome)
-      if (next) next.style.display = "none";
+      if (next) {
+        next.hidden = true;
+        next.setAttribute("aria-hidden", "true");
+        next.classList.add("wizard-next-hidden");
+        next.style.display = "none";
+      }
       if (back) {
         back.hidden = false;
         back.style.visibility = "visible";
@@ -680,7 +703,11 @@
         navInner.classList.add("wizard-nav-back-only");
         navInner.classList.remove("wizard-nav-solo");
       }
-      if (nav) nav.classList.remove("wizard-nav-hidden");
+      if (nav) {
+        nav.classList.remove("wizard-nav-hidden");
+        nav.hidden = false;
+        nav.setAttribute("aria-hidden", "false");
+      }
       return;
     }
 
@@ -697,46 +724,50 @@
     }
 
     if (next) {
+      // Class + hidden attr — CSS forces display:inline-flex !important so style.display alone fails
+      next.hidden = !!hideNext;
+      next.setAttribute("aria-hidden", hideNext ? "true" : "false");
+      next.classList.toggle("wizard-next-hidden", !!hideNext);
       next.style.display = hideNext ? "none" : "";
       const text =
         next.querySelector(".btn-wizard-next-text") || next.querySelector(".btn-apply-text");
       if (text) {
         if (currentStep === resultsStepIndex() - 1) {
           text.textContent = "See my estimate";
+        } else if (onPriceStage) {
+          text.textContent = "Continue";
+        } else if (onPriceLoanStep && isLoanStageVisible()) {
+          text.textContent = "Continue";
         } else {
           text.textContent = "Continue";
         }
       }
     }
 
-    // Microcopy when Continue is intentionally hidden
-    if (choiceHint) {
-      if (onPriceStage) {
-        choiceHint.hidden = false;
-        choiceHint.textContent = "Set price, then loan type";
-      } else if (onAddressGate) {
-        choiceHint.hidden = false;
-        choiceHint.textContent = "Look up address or use price only";
-      } else if (onChoice) {
-        choiceHint.hidden = false;
-        choiceHint.textContent =
-          currentStep === 0
-            ? "Tap to continue"
-            : getLoanGoal() === "refinance"
-              ? "Tap your goal"
-              : "Tap to continue";
-      } else {
-        choiceHint.hidden = true;
-      }
+    // Keep hint free unless validation failed (no repetitive “tap to continue” noise)
+    if (choiceHint && !choiceHint.dataset.stickyError) {
+      choiceHint.hidden = true;
+      choiceHint.textContent = "";
     }
+
     document.body.classList.toggle("guided-on-choice", onChoice);
     document.body.classList.toggle("guided-on-address-gate", onAddressGate);
     document.body.classList.toggle("guided-on-price-stage", onPriceStage);
+    // Front page (goal): auto-advance on tap — no Back, no Continue → hide entire nav chrome
+    document.body.classList.toggle("guided-nav-empty", IS_GUIDED && currentStep === 0);
 
     if (navInner) {
-      navInner.classList.toggle("wizard-nav-solo", currentStep === 0 || hideNext);
+      // Solo only when Back is the only visible control (choice steps after first, address gate)
+      navInner.classList.toggle("wizard-nav-solo", hideNext && currentStep > 0);
+      navInner.classList.toggle("wizard-nav-back-only", hideNext && currentStep > 0);
     }
-    if (nav) nav.classList.remove("wizard-nav-hidden");
+    if (nav) {
+      // Hide sticky bar completely on front page (nothing to show)
+      const hideBar = IS_GUIDED && currentStep === 0;
+      nav.classList.toggle("wizard-nav-hidden", hideBar);
+      nav.hidden = hideBar;
+      nav.setAttribute("aria-hidden", hideBar ? "true" : "false");
+    }
 
     // Apply CTA only after payment reveal (don't compete with Continue mid-flow)
     document.body.classList.toggle(
@@ -814,23 +845,36 @@
       downSummary.textContent = isRefi ? "Adjust equity %" : "Adjust down payment";
     }
     if (resultsTitle) {
-      resultsTitle.textContent = isRefi ? "Your refinance payment" : "Your monthly payment";
+      resultsTitle.textContent = isRefi
+        ? "Your refinance strategy estimate"
+        : "Your strategy estimate";
     }
-    if (resultsEyebrow) {
-      resultsEyebrow.textContent = isRefi ? "Refinance estimate ready" : "Your estimate is ready";
+    // Rebuild results: eyebrow class is the hero label (“Estimated monthly payment”)
+    const heroLabel = $("pitiHeroLabel");
+    if (heroLabel) {
+      heroLabel.textContent = isRefi
+        ? "Estimated refinance payment"
+        : "Estimated monthly payment";
+    } else if (resultsEyebrow && !resultsEyebrow.id) {
+      resultsEyebrow.textContent = isRefi
+        ? "Estimated refinance payment"
+        : "Estimated monthly payment";
     }
-    // Lead form value copy by goal
+    // Lead form — fixed conversion microcopy (refi only tweaks headline slightly)
     const leadTitle = $("saveEstimateHeading");
     const leadLead = document.querySelector(".save-estimate-lead");
     if (leadTitle && !leadTitle.dataset.userLocked) {
       leadTitle.textContent = isRefi
-        ? "Email me this refinance payment"
-        : "Get this payment emailed to you";
+        ? "Email me this refinance estimate"
+        : "Email me this estimate";
     }
     if (leadLead) {
-      leadLead.textContent = isRefi
-        ? "Save your refi scenario + Logan’s plain-English take on your options."
-        : "Save your numbers + a plain-English note from Logan on your options.";
+      leadLead.textContent =
+        "Get a clean summary + a quick personalized review from Logan. No obligation.";
+    }
+    const leadSubmit = document.querySelector(".save-estimate-submit");
+    if (leadSubmit && !leadSubmit.classList.contains("is-loading")) {
+      leadSubmit.textContent = "Send my estimate";
     }
   }
 
@@ -963,12 +1007,40 @@
     window.dispatchEvent(new Event("scroll"));
   }
 
+  function showStepError(message) {
+    const hint = $("guidedChoiceHint");
+    if (!hint) return;
+    hint.hidden = false;
+    hint.dataset.stickyError = "1";
+    hint.textContent = message;
+    hint.classList.add("guided-inline-error");
+    window.setTimeout(() => {
+      if (hint.dataset.stickyError === "1") {
+        delete hint.dataset.stickyError;
+        hint.hidden = true;
+        hint.textContent = "";
+      }
+    }, 5000);
+  }
+
+  function clearStepError() {
+    const hint = $("guidedChoiceHint");
+    if (!hint) return;
+    delete hint.dataset.stickyError;
+    hint.hidden = true;
+    hint.textContent = "";
+  }
+
   function validateBeforeLeave(stepIndex) {
+    clearStepError();
+    $("guidedDownError")?.classList.add("hidden");
+
     if (!IS_GUIDED) {
       if (stepIndex === 0) {
         const price = Number($("homePrice")?.value || 0);
         if (price < 50000) {
           $("homePriceInput")?.focus();
+          showStepError("Enter a purchase price of at least $50,000.");
           return false;
         }
       }
@@ -979,6 +1051,7 @@
       if (!document.body.dataset.loanGoal) {
         document.querySelector(".guided-choice-grid")?.classList.add("guided-shake");
         window.setTimeout(() => document.querySelector(".guided-choice-grid")?.classList.remove("guided-shake"), 500);
+        showStepError("Choose buying or refinancing to continue.");
         return false;
       }
     }
@@ -986,43 +1059,81 @@
       if (getLoanGoal() === "purchase" && !getHasAddress()) {
         $("guidedPurchaseBranch")?.classList.add("guided-shake");
         window.setTimeout(() => $("guidedPurchaseBranch")?.classList.remove("guided-shake"), 500);
+        showStepError("Choose address or price to continue.");
         return false;
       }
       if (getLoanGoal() === "refinance" && !document.body.dataset.refiGoal) {
         $("guidedRefiBranch")?.classList.add("guided-shake");
         window.setTimeout(() => $("guidedRefiBranch")?.classList.remove("guided-shake"), 500);
+        showStepError("Choose a refinance goal to continue.");
         return false;
       }
     }
     if (stepIndex === 2) {
-      // Require lookup success or explicit "price only" skip
       if (IS_GUIDED && !isAddressStepReady()) {
         const recovery = document.querySelector(".guided-address-recovery");
         recovery?.classList.add("guided-shake");
         window.setTimeout(() => recovery?.classList.remove("guided-shake"), 500);
-        const hint = $("guidedChoiceHint");
-        if (hint) {
-          hint.hidden = false;
-          hint.textContent = "Look up an address or continue with price only";
-        }
+        $("wizardSkipAddress")?.classList.add("guided-skip-highlight");
+        showStepError("Look up an address, or tap “Skip lookup — use price only”.");
         return false;
       }
       return true;
     }
     if (stepIndex === 3) {
-      // Combined price + loan — require price + loan stage revealed
       const price = Number($("homePrice")?.value || 0);
       const err = $("guidedPriceError");
-      if (price < 50000) {
+      const downErr = $("guidedDownError");
+      if (!Number.isFinite(price) || price < 50000) {
         $("homePriceInput")?.focus();
         $("homePriceInput")?.classList.add("input-error-flash");
-        if (err) err.classList.remove("hidden");
+        if (err) {
+          err.textContent = "Enter a purchase price of at least $50,000.";
+          err.classList.remove("hidden");
+          err.hidden = false;
+        }
+        showStepError("Purchase price must be at least $50,000.");
         setTimeout(() => $("homePriceInput")?.classList.remove("input-error-flash"), 1200);
         return false;
       }
-      if (err) err.classList.add("hidden");
+      if (err) {
+        err.classList.add("hidden");
+        err.hidden = true;
+        err.textContent = "";
+      }
       if (!isLoanStageVisible()) {
-        revealLoanStage();
+        // Should not happen if Continue revealed loan first — auto-reveal
+        if (!revealLoanStage()) return false;
+        return false;
+      }
+      const down = Number($("downPercent")?.value);
+      if (!Number.isFinite(down) || down < 0 || down > 100) {
+        if (downErr) {
+          downErr.textContent = "Down payment must be between 0% and 100%.";
+          downErr.classList.remove("hidden");
+          downErr.hidden = false;
+        }
+        $("downPercentInput")?.focus();
+        showStepError("Enter a valid down payment percent (0–100).");
+        return false;
+      }
+      if (downErr) {
+        downErr.classList.add("hidden");
+        downErr.hidden = true;
+        downErr.textContent = "";
+      }
+    }
+    if (stepIndex === 4) {
+      const score = Number($("creditScore")?.value);
+      if (!Number.isFinite(score) || score < 580 || score > 850) {
+        $("creditScore")?.focus();
+        showStepError("Credit score must be between 580 and 850.");
+        return false;
+      }
+      const rate = Number($("interestRate")?.value);
+      if (!Number.isFinite(rate) || rate < 0 || rate > 20) {
+        $("interestRate")?.focus();
+        showStepError("Enter a valid interest rate between 0% and 20%.");
         return false;
       }
     }
@@ -1202,7 +1313,14 @@
     ["homePrice", "homePriceInput"].forEach((id) => {
       $(id)?.addEventListener("input", () => {
         const price = Number($("homePrice")?.value || 0);
-        if (price >= 50000) $("guidedPriceError")?.classList.add("hidden");
+        if (price >= 50000) {
+          const err = $("guidedPriceError");
+          if (err) {
+            err.classList.add("hidden");
+            err.hidden = true;
+            err.textContent = "";
+          }
+        }
       });
     });
   }
@@ -1210,8 +1328,29 @@
   function bindWizard() {
     $("wizardNext")?.addEventListener("click", () => {
       if (currentStep < TOTAL_STEPS - 1) {
+        // Price step stage 1: Continue reveals loan type (single primary action)
+        if (IS_GUIDED && currentStep === 3 && !isLoanStageVisible()) {
+          document.body.dataset.priceLoanTouched = "1";
+          if (!revealLoanStage()) return;
+          updateNavButtons();
+          return;
+        }
         if (!validateBeforeLeave(currentStep)) return;
         showStep(nextValidStep(currentStep));
+      }
+    });
+
+    // Light text link: optional payment-target reverse calc
+    $("guidedPriceTargetToggle")?.addEventListener("click", () => {
+      const panel = $("ultimateModePayment");
+      const btn = $("guidedPriceTargetToggle");
+      if (!panel || !btn) return;
+      const open = panel.classList.contains("hidden") || panel.hidden;
+      panel.classList.toggle("hidden", !open);
+      panel.hidden = !open;
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+      if (open) {
+        window.setTimeout(() => $("targetPaymentInput")?.focus(), 50);
       }
     });
 
@@ -1291,9 +1430,11 @@
     });
 
     // P1: price → loan staging
+    // Legacy in-card button removed from UI; keep no-op guard if present
     $("guidedPriceToLoan")?.addEventListener("click", () => {
       document.body.dataset.priceLoanTouched = "1";
       revealLoanStage();
+      updateNavButtons();
     });
     ["homePrice", "homePriceInput"].forEach((id) => {
       $(id)?.addEventListener("input", () => {

@@ -1,0 +1,884 @@
+/**
+ * Site-wide polish — every step + results
+ * Mobile-first · equal priority mobile/desktop · navy + gold
+ * Loads last. Spacing: section 1.25–1.75rem (m) / 1.75–2.25rem (d)
+ * Card pad 1.25rem (m) / 1.5rem (d) · stack gap 1.25–1.75rem
+ * Breakpoints: 0–639 · sm 640 · md 768 · lg 1024 · xl 1280
+ */
+
+/* ========== Design tokens ========== */
+html body.guided-flow.guided-flagship {
+  --polish-navy: #1a1230;
+  --polish-navy-mid: #2a1f45;
+  --polish-gold: #c9a227;
+  --polish-gold-hi: #e8c84a;
+  --polish-cream: #f5e6a8;
+  --polish-muted: #5c5670;
+  --polish-soft: #8a8499;
+  --polish-border: rgba(26, 18, 48, 0.12);
+  --polish-border-strong: rgba(26, 18, 48, 0.18);
+  --polish-surface: #ffffff;
+  --polish-surface-2: #f7f6fa;
+  --polish-radius: 14px;
+  --polish-radius-sm: 10px;
+  --polish-section-pad: 1.25rem;
+  --polish-card-pad: 1.25rem;
+  --polish-stack: 1.25rem;
+  --polish-max: min(480px, 100%);
+  --polish-results-max: min(960px, 100%);
+}
+
+/* ========== Page shell — centered, intentional ========== */
+html body.guided-flow.guided-flagship {
+  background: linear-gradient(180deg, #f3f1f7 0%, #faf9fc 40%, #f7f6fa 100%) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-main {
+  padding: 0.55rem clamp(0.85rem, 3.5vw, 1.35rem) calc(5.25rem + env(safe-area-inset-bottom, 0px)) !important;
+  max-width: min(720px, 100%) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+html body.guided-flow.wizard-on-results .guided-main {
+  max-width: var(--polish-results-max) !important;
+  padding-bottom: 1.75rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-layout {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  gap: var(--polish-stack) !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
+  align-items: start !important;
+}
+
+html body.guided-flow.guided-flagship .guided-layout-center {
+  width: 100% !important;
+  max-width: var(--polish-max) !important;
+  margin: 0 auto !important;
+  min-width: 0 !important;
+}
+
+html body.guided-flow.wizard-on-results .guided-layout-center {
+  max-width: 100% !important;
+}
+
+/* ========== Header cohesion ========== */
+html body.guided-flow.guided-flagship .guided-header-inner {
+  max-width: min(960px, 100%) !important;
+  margin: 0 auto !important;
+  padding-left: clamp(0.75rem, 3vw, 1.25rem) !important;
+  padding-right: clamp(0.75rem, 3vw, 1.25rem) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-header-logo {
+  max-height: 42px !important;
+  width: auto !important;
+}
+
+/* Soft apply in-flow; stronger on results only */
+html body.guided-flow.guided-flagship:not(.wizard-on-results) .guided-header-apply-soft {
+  opacity: 0.88 !important;
+}
+
+/* ========== Progress — tight, centered ========== */
+html body.guided-flow.guided-flagship .guided-progress {
+  max-width: var(--polish-max) !important;
+  margin: 0 auto 0.85rem !important;
+  padding: 0 !important;
+}
+
+html body.guided-flow.guided-flagship .guided-progress-line,
+html body.guided-flow.guided-flagship #wizardProgressLine {
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.04em !important;
+  color: var(--polish-muted) !important;
+  text-align: center !important;
+  display: block !important;
+}
+
+html body.guided-flow.guided-flagship .wizard-progress-track {
+  height: 4px !important;
+  border-radius: 99px !important;
+  background: rgba(26, 18, 48, 0.08) !important;
+  overflow: hidden !important;
+  margin-top: 0.4rem !important;
+}
+
+html body.guided-flow.guided-flagship .wizard-progress-fill {
+  background: linear-gradient(90deg, var(--polish-navy), var(--polish-gold)) !important;
+  border-radius: 99px !important;
+  transition: width 0.28s ease !important;
+}
+
+html body.guided-flow.wizard-on-results .guided-progress {
+  max-width: min(420px, 100%) !important;
+  opacity: 0.75 !important;
+}
+
+/* ========== Step panels — every step ========== */
+html body.guided-flow.guided-flagship .guided-step-panel,
+html body.guided-flow.guided-flagship .guided-choice-grid,
+html body.guided-flow.guided-flagship .guided-card {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+html body.guided-flow.guided-flagship .guided-step-panel {
+  width: 100% !important;
+  max-width: var(--polish-max) !important;
+  padding: 0 !important;
+}
+
+html body.guided-flow.guided-flagship .guided-step-intro {
+  margin-bottom: 1rem !important;
+  text-align: center !important;
+  padding: 0 0.25rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-kicker {
+  margin: 0 0 0.35rem !important;
+  font-size: 0.68rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  color: #9a7b14 !important;
+}
+
+html body.guided-flow.guided-flagship .guided-title,
+html body.guided-flow.guided-flagship .wizard-title.guided-title {
+  margin: 0 0 0.35rem !important;
+  font-size: clamp(1.35rem, 5.2vw, 1.65rem) !important;
+  font-weight: 800 !important;
+  line-height: 1.2 !important;
+  color: var(--polish-navy) !important;
+  letter-spacing: -0.02em !important;
+}
+
+html body.guided-flow.guided-flagship .guided-lead,
+html body.guided-flow.guided-flagship .wizard-lead.guided-lead {
+  margin: 0 auto !important;
+  max-width: 22rem !important;
+  font-size: 0.9rem !important;
+  line-height: 1.4 !important;
+  color: var(--polish-muted) !important;
+}
+
+/* Cards */
+html body.guided-flow.guided-flagship .guided-card,
+html body.guided-flow.guided-flagship .wizard-card.guided-card {
+  background: var(--polish-surface) !important;
+  border: 1px solid var(--polish-border) !important;
+  border-radius: var(--polish-radius) !important;
+  padding: var(--polish-card-pad) !important;
+  box-shadow: 0 4px 18px rgba(26, 18, 48, 0.05) !important;
+  width: 100% !important;
+  max-width: var(--polish-max) !important;
+  box-sizing: border-box !important;
+}
+
+html body.guided-flow.guided-flagship .guided-card-wide {
+  max-width: min(520px, 100%) !important;
+}
+
+/* ========== Choice cards — purchase + refi equal quality ========== */
+html body.guided-flow.guided-flagship .guided-choice-grid {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  gap: 0.7rem !important;
+  width: 100% !important;
+  max-width: min(420px, 100%) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-refi-goal-grid {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+  gap: 0.6rem !important;
+  max-width: min(440px, 100%) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-choice-card {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.2rem !important;
+  min-height: 96px !important;
+  padding: 1.1rem 0.9rem !important;
+  text-align: center !important;
+  background: var(--polish-surface) !important;
+  border: 1.5px solid var(--polish-border-strong) !important;
+  border-radius: var(--polish-radius) !important;
+  box-shadow: 0 2px 10px rgba(26, 18, 48, 0.04) !important;
+  cursor: pointer !important;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease, background 0.15s ease !important;
+  font-family: "DM Sans", system-ui, sans-serif !important;
+  color: var(--polish-navy) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-choice-card strong {
+  font-size: 0.98rem !important;
+  font-weight: 800 !important;
+  color: var(--polish-navy) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-choice-card > span:not(.guided-choice-icon) {
+  font-size: 0.78rem !important;
+  color: var(--polish-muted) !important;
+  font-weight: 500 !important;
+}
+
+html body.guided-flow.guided-flagship .guided-choice-icon {
+  font-size: 1.35rem !important;
+  line-height: 1 !important;
+  margin-bottom: 0.15rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-choice-card:hover {
+  transform: translateY(-2px) !important;
+  border-color: var(--polish-gold) !important;
+  box-shadow: 0 8px 20px rgba(26, 18, 48, 0.1) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-choice-card:active {
+  transform: translateY(0) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-choice-card:focus-visible {
+  outline: 3px solid var(--polish-gold) !important;
+  outline-offset: 2px !important;
+}
+
+html body.guided-flow.guided-flagship .guided-choice-card.active,
+html body.guided-flow.guided-flagship .guided-choice-card[aria-pressed="true"] {
+  border-color: var(--polish-gold) !important;
+  background: linear-gradient(160deg, #fffef8, #fff) !important;
+  box-shadow: 0 0 0 1px rgba(201, 162, 39, 0.35), 0 6px 16px rgba(26, 18, 48, 0.08) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-refi-card {
+  min-height: 108px !important;
+  padding: 0.95rem 0.65rem !important;
+}
+
+/* ========== Address step ========== */
+html body.guided-flow.guided-flagship .guided-address-field label {
+  font-size: 0.76rem !important;
+  font-weight: 700 !important;
+  color: #3d3750 !important;
+  margin-bottom: 0.3rem !important;
+  display: block !important;
+}
+
+html body.guided-flow.guided-flagship .guided-address-field .address-input,
+html body.guided-flow.guided-flagship #propertyAddress {
+  min-height: 48px !important;
+  border-radius: var(--polish-radius-sm) !important;
+  border: 1.5px solid var(--polish-border-strong) !important;
+  padding: 0.65rem 0.85rem !important;
+  font-size: 1rem !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  background: var(--polish-surface-2) !important;
+  color: var(--polish-navy) !important;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease !important;
+}
+
+html body.guided-flow.guided-flagship .guided-address-field .address-input:focus,
+html body.guided-flow.guided-flagship #propertyAddress:focus {
+  outline: none !important;
+  border-color: var(--polish-gold) !important;
+  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.2) !important;
+  background: #fff !important;
+}
+
+html body.guided-flow.guided-flagship .guided-lookup-primary,
+html body.guided-flow.guided-flagship #lookupAddress {
+  width: 100% !important;
+  min-height: 48px !important;
+  margin-top: 0.65rem !important;
+  border-radius: 12px !important;
+  border: 1.5px solid var(--polish-gold) !important;
+  background: linear-gradient(145deg, var(--polish-navy), var(--polish-navy-mid)) !important;
+  color: var(--polish-cream) !important;
+  font-size: 0.95rem !important;
+  font-weight: 800 !important;
+  cursor: pointer !important;
+  font-family: "DM Sans", system-ui, sans-serif !important;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease !important;
+}
+
+html body.guided-flow.guided-flagship .guided-lookup-primary:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 16px rgba(26, 18, 48, 0.16) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-lookup-primary:focus-visible {
+  outline: 3px solid var(--polish-gold) !important;
+  outline-offset: 2px !important;
+}
+
+html body.guided-flow.guided-flagship .guided-skip-price-btn {
+  width: 100% !important;
+  min-height: 44px !important;
+  border-radius: var(--polish-radius-sm) !important;
+  border: 1.5px solid var(--polish-border-strong) !important;
+  background: #fff !important;
+  color: var(--polish-navy) !important;
+  font-weight: 700 !important;
+  font-size: 0.88rem !important;
+  cursor: pointer !important;
+  transition: border-color 0.15s ease, background 0.15s ease !important;
+}
+
+html body.guided-flow.guided-flagship .guided-skip-price-btn:hover {
+  border-color: var(--polish-gold) !important;
+  background: var(--polish-surface-2) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-address-or {
+  text-align: center !important;
+  margin: 0.85rem 0 0.55rem !important;
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  color: var(--polish-soft) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+}
+
+html body.guided-flow.guided-flagship .guided-property-summary {
+  margin-top: 0.85rem !important;
+  padding: 0.85rem !important;
+  border-radius: var(--polish-radius-sm) !important;
+  background: var(--polish-surface-2) !important;
+  border: 1px solid rgba(201, 162, 39, 0.25) !important;
+}
+
+/* ========== Price / loan step ========== */
+html body.guided-flow.guided-flagship [data-step-id="price-loan"] .guided-price-hero,
+html body.guided-flow.guided-flagship #homePriceDisplay {
+  display: block !important;
+  text-align: center !important;
+  font-size: clamp(2rem, 9vw, 2.65rem) !important;
+  font-weight: 800 !important;
+  font-variant-numeric: tabular-nums !important;
+  letter-spacing: -0.03em !important;
+  color: var(--polish-navy) !important;
+  margin: 0.15rem 0 0.65rem !important;
+  font-family: "DM Sans", system-ui, sans-serif !important;
+  transition: color 0.15s ease, transform 0.15s ease !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="price-loan"] input[type="range"],
+html body.guided-flow.guided-flagship #homePrice {
+  width: 100% !important;
+  accent-color: var(--polish-gold) !important;
+  height: 1.45rem !important;
+  cursor: pointer !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="price-loan"] .guided-price-input,
+html body.guided-flow.guided-flagship #homePriceInput {
+  display: block !important;
+  width: 100% !important;
+  max-width: 12rem !important;
+  margin: 0.55rem auto 0 !important;
+  text-align: center !important;
+  min-height: 44px !important;
+  border-radius: var(--polish-radius-sm) !important;
+  border: 1.5px solid var(--polish-border-strong) !important;
+  font-size: 1.05rem !important;
+  font-weight: 700 !important;
+  color: var(--polish-navy) !important;
+  background: var(--polish-surface-2) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-loan-section-label {
+  margin: 0 0 0.65rem !important;
+  font-size: 0.72rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: var(--polish-muted) !important;
+  text-align: center !important;
+}
+
+html body.guided-flow.guided-flagship .guided-loan-type-grid,
+html body.guided-flow.guided-flagship #ultimateProgramPicker {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+  gap: 0.55rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-loan-type-grid .ultimate-program-btn {
+  min-height: 78px !important;
+  padding: 0.7rem 0.55rem !important;
+  border-radius: var(--polish-radius-sm) !important;
+  border: 1.5px solid var(--polish-border-strong) !important;
+  background: var(--polish-surface-2) !important;
+  text-align: center !important;
+  cursor: pointer !important;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.12s ease, box-shadow 0.15s ease !important;
+  font-family: "DM Sans", system-ui, sans-serif !important;
+}
+
+html body.guided-flow.guided-flagship .guided-loan-type-grid .ultimate-program-btn:hover {
+  border-color: var(--polish-gold) !important;
+  transform: translateY(-1px) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-loan-type-grid .ultimate-program-btn.active {
+  background: var(--polish-navy) !important;
+  border-color: var(--polish-gold) !important;
+  color: var(--polish-cream) !important;
+  box-shadow: 0 4px 12px rgba(26, 18, 48, 0.15) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-loan-type-grid .ultimate-program-btn.active strong,
+html body.guided-flow.guided-flagship .guided-loan-type-grid .ultimate-program-btn.active span {
+  color: inherit !important;
+}
+
+html body.guided-flow.guided-flagship .guided-loan-type-grid .ultimate-program-btn strong {
+  display: block !important;
+  font-size: 0.88rem !important;
+  font-weight: 800 !important;
+  color: var(--polish-navy) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-loan-type-grid .ultimate-program-btn span {
+  display: block !important;
+  font-size: 0.68rem !important;
+  font-weight: 500 !important;
+  color: var(--polish-muted) !important;
+  margin-top: 0.15rem !important;
+  line-height: 1.25 !important;
+}
+
+html body.guided-flow.guided-flagship .guided-loan-type-grid .guided-selected-mark {
+  display: none !important;
+}
+
+/* Down payment + term chips on price-loan */
+html body.guided-flow.guided-flagship .ultimate-term-picker,
+html body.guided-flow.guided-flagship .guided-term-row {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 0.4rem !important;
+}
+
+html body.guided-flow.guided-flagship .ultimate-term-btn {
+  min-height: 42px !important;
+  border-radius: var(--polish-radius-sm) !important;
+  border: 1.5px solid var(--polish-border-strong) !important;
+  background: var(--polish-surface-2) !important;
+  font-weight: 700 !important;
+  font-size: 0.82rem !important;
+  color: #3d3750 !important;
+  cursor: pointer !important;
+  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease !important;
+}
+
+html body.guided-flow.guided-flagship .ultimate-term-btn:hover {
+  border-color: var(--polish-gold) !important;
+}
+
+html body.guided-flow.guided-flagship .ultimate-term-btn.active {
+  background: var(--polish-navy) !important;
+  color: var(--polish-cream) !important;
+  border-color: var(--polish-gold) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-rate-strip-ro {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 0.5rem !important;
+  margin-top: 0.85rem !important;
+  padding: 0.75rem !important;
+  background: var(--polish-surface-2) !important;
+  border-radius: var(--polish-radius-sm) !important;
+  border: 1px solid var(--polish-border) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-rate-strip-col {
+  text-align: center !important;
+}
+
+html body.guided-flow.guided-flagship .guided-rate-strip-label {
+  display: block !important;
+  font-size: 0.62rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.04em !important;
+  color: var(--polish-muted) !important;
+  margin-bottom: 0.15rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-rate-strip-value {
+  font-size: 1.05rem !important;
+  font-weight: 800 !important;
+  color: var(--polish-navy) !important;
+  font-variant-numeric: tabular-nums !important;
+}
+
+html body.guided-flow.guided-flagship .guided-rate-strip-martini .guided-rate-strip-value {
+  color: #9a7b14 !important;
+}
+
+/* ========== Bottom nav — one clear primary ========== */
+html body.guided-flow.guided-flagship .guided-step-nav {
+  position: fixed !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  z-index: 40 !important;
+  padding: 0.65rem clamp(0.75rem, 3vw, 1.25rem) calc(0.65rem + env(safe-area-inset-bottom, 0px)) !important;
+  background: rgba(255, 255, 255, 0.94) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-top: 1px solid var(--polish-border) !important;
+  box-shadow: 0 -6px 24px rgba(26, 18, 48, 0.06) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-step-nav .wizard-nav-inner {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.45fr) !important;
+  gap: 0.55rem !important;
+  max-width: min(420px, 100%) !important;
+  margin: 0 auto !important;
+  width: 100% !important;
+}
+
+html body.guided-flow.guided-flagship .guided-step-nav.guided-results-back-only .wizard-nav-inner,
+html body.guided-flow.wizard-on-results .guided-step-nav .wizard-nav-inner {
+  grid-template-columns: minmax(0, 1fr) !important;
+  max-width: 160px !important;
+}
+
+html body.guided-flow.guided-flagship .guided-step-nav .btn-wizard-back,
+html body.guided-flow.guided-flagship .guided-step-nav .btn-wizard-next {
+  min-height: 48px !important;
+  border-radius: 12px !important;
+  font-family: "DM Sans", system-ui, sans-serif !important;
+  font-size: 0.95rem !important;
+  font-weight: 800 !important;
+  cursor: pointer !important;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, border-color 0.15s ease !important;
+}
+
+html body.guided-flow.guided-flagship .guided-step-nav .btn-wizard-back {
+  background: #fff !important;
+  color: var(--polish-navy) !important;
+  border: 1.5px solid var(--polish-border-strong) !important;
+  box-shadow: none !important;
+}
+
+html body.guided-flow.guided-flagship .guided-step-nav .btn-wizard-back:hover {
+  border-color: var(--polish-gold) !important;
+  background: var(--polish-surface-2) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-step-nav .btn-wizard-next {
+  background: linear-gradient(145deg, var(--polish-navy), var(--polish-navy-mid)) !important;
+  color: var(--polish-cream) !important;
+  border: 1.5px solid var(--polish-gold) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-step-nav .btn-wizard-next:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 16px rgba(26, 18, 48, 0.18) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-step-nav .btn-wizard-next:focus-visible,
+html body.guided-flow.guided-flagship .guided-step-nav .btn-wizard-back:focus-visible {
+  outline: 3px solid var(--polish-gold) !important;
+  outline-offset: 2px !important;
+}
+
+html body.guided-flow.wizard-on-results .guided-step-nav {
+  position: static !important;
+  max-width: 170px !important;
+  margin: 0.85rem auto 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+/* Hide competing mid-flow live rails & sticky CTAs */
+html body.guided-flow .guided-live-rail,
+html body.guided-flow .ultimate-live-rail,
+html body.guided-flow #wizardLivePreview,
+html body.guided-flow .guided-realtor-mobile-entry,
+html body.guided-flow .guided-sticky-cta,
+html body.guided-flow .ultimate-sticky-cta {
+  display: none !important;
+}
+
+/* ---- Choice steps: no Continue (auto-advance on tap) ----
+   visual-reset forces display:inline-flex !important on .btn-wizard-next,
+   which overrides inline style.display = "none". Class + body state wins. */
+html body.guided-flow.guided-on-choice .guided-step-nav #wizardNext,
+html body.guided-flow.guided-on-choice .guided-step-nav .btn-wizard-next,
+html body.guided-flow.guided-on-address-gate .guided-step-nav #wizardNext,
+html body.guided-flow.guided-on-address-gate .guided-step-nav .btn-wizard-next,
+html body.guided-flow .guided-step-nav #wizardNext.wizard-next-hidden,
+html body.guided-flow .guided-step-nav .btn-wizard-next.wizard-next-hidden,
+html body.guided-flow .guided-step-nav #wizardNext[hidden] {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  min-width: 0 !important;
+  max-width: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  overflow: hidden !important;
+  position: absolute !important;
+  clip: rect(0, 0, 0, 0) !important;
+}
+
+/* Front page (purchase / refi): hide entire bottom nav — cards auto-continue */
+html body.guided-flow.guided-nav-empty .guided-step-nav,
+html body.guided-flow.guided-flagship .guided-step-nav.wizard-nav-hidden,
+html body.guided-flow.guided-flagship nav.guided-step-nav[hidden],
+html body.guided-flow.guided-flagship nav.guided-step-nav.wizard-nav-hidden {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
+}
+
+/* No sticky nav padding waste on front page */
+html body.guided-flow.guided-nav-empty .guided-main,
+html body.guided-flow.guided-flagship.guided-nav-empty .guided-main {
+  padding-bottom: 1.5rem !important;
+}
+
+/* Choice step after first: Back only, centered */
+html body.guided-flow.guided-on-choice:not(.guided-nav-empty) .guided-step-nav .wizard-nav-inner,
+html body.guided-flow.guided-on-address-gate .guided-step-nav .wizard-nav-inner {
+  grid-template-columns: minmax(0, 1fr) !important;
+  max-width: 200px !important;
+}
+
+/* ========== Results points control ========== */
+html body.guided-flow .studio-chips-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+}
+
+html body.guided-flow .studio-points-note {
+  margin: 0.4rem 0 0 !important;
+  font-size: 0.72rem !important;
+  line-height: 1.35 !important;
+  color: var(--polish-muted) !important;
+  text-align: center !important;
+  min-height: 1.1em !important;
+  transition: color 0.15s ease !important;
+}
+
+html body.guided-flow #destRateLabel {
+  font-variant-numeric: tabular-nums !important;
+}
+
+/* Range feedback */
+html body.guided-flow .studio-control input[type="range"]:active {
+  accent-color: var(--polish-gold-hi) !important;
+}
+
+/* Lead: one primary only */
+html body.guided-flow .studio-lead .save-estimate-expand,
+html body.guided-flow .studio-lead .save-estimate-dismiss,
+html body.guided-flow .studio-lead .save-estimate-tabs,
+html body.guided-flow #saveEstimateRestore {
+  display: none !important;
+}
+
+html body.guided-flow .studio-lead .save-estimate-submit.studio-cta,
+html body.guided-flow .studio-cta {
+  letter-spacing: 0.01em !important;
+}
+
+/* National banner */
+html body.guided-flow.guided-flagship .guided-national-banner:not(.hidden) {
+  max-width: var(--polish-max) !important;
+  margin: 0 auto 0.75rem !important;
+  padding: 0.55rem 0.75rem !important;
+  text-align: center !important;
+  font-size: 0.78rem !important;
+  border-radius: var(--polish-radius-sm) !important;
+  background: rgba(201, 162, 39, 0.1) !important;
+  color: var(--polish-navy) !important;
+  border: 1px solid rgba(201, 162, 39, 0.22) !important;
+}
+
+/* Inline errors — calm, secondary until needed */
+html body.guided-flow.guided-flagship .guided-inline-error:not(.hidden):not([hidden]) {
+  margin-top: 0.45rem !important;
+  padding: 0.45rem 0.6rem !important;
+  border-radius: 8px !important;
+  background: #fdecec !important;
+  color: #6b1f1f !important;
+  font-size: 0.78rem !important;
+  font-weight: 600 !important;
+  text-align: center !important;
+}
+
+/* ========== sm 640+ ========== */
+@media (min-width: 640px) {
+  html body.guided-flow.guided-flagship {
+    --polish-section-pad: 1.4rem;
+    --polish-stack: 1.35rem;
+  }
+
+  html body.guided-flow.guided-flagship .guided-choice-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+    max-width: min(440px, 100%) !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-choice-card {
+    min-height: 108px !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-refi-goal-grid {
+    max-width: min(480px, 100%) !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-main {
+    padding-top: 0.75rem !important;
+  }
+}
+
+/* ========== md 768+ tablet 2-col where appropriate ========== */
+@media (min-width: 768px) {
+  html body.guided-flow.guided-flagship {
+    --polish-card-pad: 1.4rem;
+    --polish-stack: 1.5rem;
+    --polish-max: min(520px, 100%);
+  }
+
+  html body.guided-flow.guided-flagship .guided-main {
+    padding-left: 1.35rem !important;
+    padding-right: 1.35rem !important;
+  }
+
+  html body.guided-flow.wizard-on-results .guided-main {
+    --polish-results-max: min(980px, 100%);
+  }
+
+  html body.guided-flow.guided-flagship .guided-loan-type-grid,
+  html body.guided-flow.guided-flagship #ultimateProgramPicker {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-loan-type-grid .ultimate-program-btn {
+    min-height: 88px !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-card-wide {
+    max-width: min(560px, 100%) !important;
+  }
+
+  /* Results already 2-col in studio; reinforce spacing */
+  html body.guided-flow.wizard-on-results .studio-grid {
+    gap: 1.5rem !important;
+  }
+
+  html body.guided-flow .studio-controls,
+  html body.guided-flow .studio-lead,
+  html body.guided-flow .studio-break {
+    padding: 1.4rem !important;
+  }
+}
+
+/* ========== lg 1024+ desktop centered max-width ========== */
+@media (min-width: 1024px) {
+  html body.guided-flow.guided-flagship {
+    --polish-section-pad: 1.75rem;
+    --polish-card-pad: 1.5rem;
+    --polish-stack: 1.65rem;
+    --polish-max: min(540px, 100%);
+  }
+
+  html body.guided-flow.guided-flagship .guided-main {
+    max-width: min(760px, 100%) !important;
+    padding: 0.85rem 1.75rem calc(5.5rem + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  html body.guided-flow.wizard-on-results .guided-main {
+    max-width: min(1000px, 100%) !important;
+    padding: 0.85rem 1.75rem 2.25rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-title,
+  html body.guided-flow.guided-flagship .wizard-title.guided-title {
+    font-size: 1.7rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-choice-card {
+    min-height: 112px !important;
+    padding: 1.2rem 1rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-step-nav .wizard-nav-inner {
+    max-width: min(440px, 100%) !important;
+  }
+
+  html body.guided-flow .studio-hero {
+    padding: 1.85rem 1.75rem 1.65rem !important;
+  }
+
+  html body.guided-flow .studio-controls,
+  html body.guided-flow .studio-lead {
+    padding: 1.5rem !important;
+  }
+
+  html body.guided-flow .studio-amount,
+  html body.guided-flow .studio-hero #pitiPayment {
+    font-size: clamp(3.75rem, 5vw, 4.75rem) !important;
+  }
+}
+
+/* ========== xl 1280+ ========== */
+@media (min-width: 1280px) {
+  html body.guided-flow.wizard-on-results .guided-main {
+    max-width: min(1080px, 100%) !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-main {
+    max-width: min(800px, 100%) !important;
+  }
+}
+
+/* ========== Micro-interactions (calm / premium) ========== */
+@media (prefers-reduced-motion: no-preference) {
+  html body.guided-flow .studio-hero #pitiPayment {
+    transition: transform 0.18s ease, color 0.18s ease, text-shadow 0.18s ease !important;
+  }
+
+  html body.guided-flow .studio-break #breakdown li strong {
+    transition: color 0.18s ease !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html body.guided-flow.guided-flagship .guided-choice-card,
+  html body.guided-flow.guided-flagship .btn-wizard-next,
+  html body.guided-flow.guided-flagship .btn-wizard-back,
+  html body.guided-flow .studio-chip,
+  html body.guided-flow .studio-cta,
+  html body.guided-flow .studio-amount,
+  html body.guided-flow.guided-flagship .wizard-progress-fill {
+    transition: none !important;
+  }
+}
