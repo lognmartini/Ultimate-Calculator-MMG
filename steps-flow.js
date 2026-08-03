@@ -283,7 +283,19 @@
       amount.classList.remove("guided-live-amount-tick");
       void amount.offsetWidth;
       amount.classList.add("guided-live-amount-tick");
-      window.setTimeout(() => amount.classList.remove("guided-live-amount-tick"), 400);
+      window.setTimeout(() => amount.classList.remove("guided-live-amount-tick"), 450);
+      // Brief “Updated” cue on the note for responsiveness
+      if (note && currentStep < resultsStepIndex()) {
+        const prevNote = note.textContent;
+        note.textContent = "Updated";
+        note.classList.add("guided-live-note-flash");
+        window.setTimeout(() => {
+          note.classList.remove("guided-live-note-flash");
+          if (note.textContent === "Updated") {
+            note.textContent = prevNote || "Live · educational";
+          }
+        }, 700);
+      }
     }
     lastLivePaymentKey = key;
 
@@ -514,13 +526,15 @@
       if (toLoanBtn) toLoanBtn.hidden = true;
       if (title) {
         title.textContent =
-          getLoanGoal() === "refinance" ? "How you’ll refinance" : "How you’ll finance";
+          getLoanGoal() === "refinance"
+            ? "Loan type for your refinance"
+            : "How you’ll finance";
       }
       if (lead) {
         lead.textContent =
           getLoanGoal() === "refinance"
-            ? "Pick a loan type — equity updates automatically."
-            : "Pick a loan type — down payment updates automatically.";
+            ? "Pick a program — equity updates for your refi goal."
+            : "Pick a program — down payment updates automatically.";
       }
       // Focus loan heading for keyboard / SR users
       const loanTitle = $("step-loan-you-title");
@@ -546,13 +560,13 @@
       if (toLoanBtn) toLoanBtn.hidden = false;
       if (title) {
         title.textContent =
-          getLoanGoal() === "refinance" ? "Home value" : "Purchase price";
+          getLoanGoal() === "refinance" ? "Current home value" : "Purchase price";
       }
       if (lead) {
         lead.textContent =
           getLoanGoal() === "refinance"
-            ? "Set today’s value, then loan type."
-            : "Then choose loan type.";
+            ? "What is the home worth today? Then choose how you’ll refinance."
+            : "Set the price, then choose your loan type.";
       }
     }
     updateNavButtons();
@@ -800,10 +814,23 @@
       downSummary.textContent = isRefi ? "Adjust equity %" : "Adjust down payment";
     }
     if (resultsTitle) {
-      resultsTitle.textContent = isRefi ? "Refinance payment" : "Monthly payment";
+      resultsTitle.textContent = isRefi ? "Your refinance payment" : "Your monthly payment";
     }
     if (resultsEyebrow) {
-      resultsEyebrow.textContent = isRefi ? "Refinance estimate" : "Your estimate";
+      resultsEyebrow.textContent = isRefi ? "Refinance estimate ready" : "Your estimate is ready";
+    }
+    // Lead form value copy by goal
+    const leadTitle = $("saveEstimateHeading");
+    const leadLead = document.querySelector(".save-estimate-lead");
+    if (leadTitle && !leadTitle.dataset.userLocked) {
+      leadTitle.textContent = isRefi
+        ? "Email me this refinance payment"
+        : "Get this payment emailed to you";
+    }
+    if (leadLead) {
+      leadLead.textContent = isRefi
+        ? "Save your refi scenario + Logan’s plain-English take on your options."
+        : "Save your numbers + a plain-English note from Logan on your options.";
     }
   }
 

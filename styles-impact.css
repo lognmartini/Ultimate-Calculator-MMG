@@ -1,0 +1,753 @@
+/**
+ * IMPACT — loads last. Unmistakable hierarchy, lead strength, density, buttons.
+ * Navy #1a1230 + gold #c9a227
+ */
+
+/* =========================================================
+   GLOBAL DENSITY + BUTTON SYSTEM
+   ========================================================= */
+html body.guided-flow.guided-flagship {
+  --impact-navy: #1a1230;
+  --impact-gold: #c9a227;
+  --impact-gold-hi: #e8c84a;
+  --impact-pad: 0.5rem;
+}
+
+html body.guided-flow.guided-flagship .guided-main,
+html body.guided-flow.guided-flagship .wizard-main.guided-main {
+  padding: 0.45rem clamp(0.55rem, 2vw, 0.9rem) 1.5rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-step-intro {
+  margin-bottom: 0.5rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-title,
+html body.guided-flow.guided-flagship .wizard-title.guided-title {
+  font-size: clamp(1.2rem, 4vw, 1.45rem) !important;
+  margin: 0 0 0.25rem !important;
+  line-height: 1.15 !important;
+}
+
+html body.guided-flow.guided-flagship .guided-lead {
+  font-size: 0.82rem !important;
+  margin: 0 auto !important;
+  max-width: 22rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-card,
+html body.guided-flow.guided-flagship .wizard-card.guided-card {
+  padding: 0.75rem 0.8rem 0.85rem !important;
+}
+
+/* Primary = navy/gold filled | Secondary = outline gold */
+html body.guided-flow.guided-flagship .guided-btn-primary,
+html body.guided-flow.guided-flagship .btn-wizard-next,
+html body.guided-flow.guided-flagship .guided-lead-submit,
+html body.guided-flow.guided-flagship .guided-price-to-loan,
+html body.guided-flow.guided-flagship #lookupAddress.guided-lookup-primary {
+  min-height: 48px !important;
+  border-radius: 12px !important;
+  font-family: "DM Sans", system-ui, sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 0.95rem !important;
+  background: linear-gradient(145deg, #1a1230 0%, #2a1f45 100%) !important;
+  color: #f5e6a8 !important;
+  border: 1.5px solid #c9a227 !important;
+  box-shadow: 0 4px 14px rgba(26, 18, 48, 0.18) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-btn-primary:hover,
+html body.guided-flow.guided-flagship .btn-wizard-next:hover,
+html body.guided-flow.guided-flagship .guided-lead-submit:hover {
+  background: linear-gradient(145deg, #c9a227 0%, #b8921f 100%) !important;
+  color: #1a1230 !important;
+}
+
+html body.guided-flow.guided-flagship .guided-btn-secondary,
+html body.guided-flow.guided-flagship .guided-results-secondary-apply,
+html body.guided-flow.guided-flagship .guided-skip-price-btn,
+html body.guided-flow.guided-flagship .btn-wizard-back {
+  min-height: 46px !important;
+  border-radius: 12px !important;
+  font-family: "DM Sans", system-ui, sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 0.9rem !important;
+  background: #fff !important;
+  color: #1a1230 !important;
+  border: 1.5px solid rgba(26, 18, 48, 0.2) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-secondary-apply:hover,
+html body.guided-flow.guided-flagship .guided-skip-price-btn:hover {
+  border-color: #c9a227 !important;
+  background: #fbf8f0 !important;
+}
+
+/* =========================================================
+   RESULTS — HERO PAYMENT (unmistakable)
+   ========================================================= */
+html body.guided-flow.guided-flagship .guided-results-impact,
+html body.guided-flow.guided-flagship .guided-results-final.guided-results-impact {
+  max-width: min(440px, 100%) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding: 1.25rem 1rem 1.35rem !important;
+  border-radius: 18px !important;
+  border: 1px solid rgba(201, 162, 39, 0.35) !important;
+  background: linear-gradient(175deg, #1a1230 0%, #241c38 55%, #1a1230 100%) !important;
+  box-shadow: 0 16px 48px rgba(26, 18, 48, 0.35) !important;
+}
+
+html body.guided-flow .guided-results-hero-impact {
+  text-align: center !important;
+  margin: 0 0 0.35rem !important;
+  padding: 0 !important;
+}
+
+html body.guided-flow .guided-results-hero-impact .guided-results-eyebrow {
+  font-size: 0.68rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  color: #c9a227 !important;
+  margin: 0 0 0.35rem !important;
+}
+
+html body.guided-flow .guided-results-hero-impact .guided-results-title {
+  font-size: clamp(0.95rem, 3vw, 1.1rem) !important;
+  font-weight: 600 !important;
+  color: rgba(255, 255, 255, 0.88) !important;
+  margin: 0 0 0.65rem !important;
+  letter-spacing: 0.01em !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-impact #pitiPayment,
+html body.guided-flow .guided-hero-block-impact #pitiPayment {
+  display: block !important;
+  font-family: "DM Sans", system-ui, -apple-system, sans-serif !important;
+  font-size: clamp(3.1rem, 13vw, 3.85rem) !important;
+  font-weight: 800 !important;
+  font-variant-numeric: tabular-nums !important;
+  line-height: 1 !important;
+  letter-spacing: -0.03em !important;
+  color: #e8c84a !important;
+  -webkit-text-fill-color: #e8c84a !important;
+  margin: 0.15rem 0 0.35rem !important;
+  text-shadow: 0 2px 24px rgba(201, 162, 39, 0.35) !important;
+}
+
+html body.guided-flow .guided-hero-block-impact .total-label {
+  display: block !important;
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+html body.guided-flow .guided-hero-block-impact .total-sublabel,
+html body.guided-flow .guided-hero-block-impact #pitiHeroSub {
+  display: block !important;
+  font-size: 0.8rem !important;
+  color: rgba(255, 255, 255, 0.72) !important;
+  margin-top: 0.25rem !important;
+  max-width: 18rem !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  line-height: 1.35 !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-impact .guided-results-rate-line {
+  justify-content: center !important;
+  margin: 0.65rem auto 0.25rem !important;
+  font-size: 0.82rem !important;
+  font-weight: 600 !important;
+  color: rgba(255, 255, 255, 0.75) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-impact .guided-results-rate-line strong {
+  color: #e8c84a !important;
+  font-weight: 800 !important;
+}
+
+/* =========================================================
+   BREAKDOWN — clean scannable list
+   ========================================================= */
+html body.guided-flow .guided-breakdown-wrap {
+  margin: 0.85rem 0 0 !important;
+  padding: 0 !important;
+}
+
+html body.guided-flow .guided-breakdown-heading {
+  margin: 0 0 0.4rem !important;
+  font-size: 0.68rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: rgba(255, 255, 255, 0.55) !important;
+  text-align: center !important;
+}
+
+html body.guided-flow .guided-breakdown-impact,
+html body.guided-flow.guided-flagship .guided-results-impact .guided-breakdown-hero {
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0.55rem 0.75rem !important;
+  border-radius: 12px !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  gap: 0 !important;
+}
+
+html body.guided-flow .guided-breakdown-impact li,
+html body.guided-flow.guided-flagship .guided-results-impact .guided-breakdown-hero li {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: baseline !important;
+  gap: 0.75rem !important;
+  padding: 0.4rem 0 !important;
+  font-size: 0.9rem !important;
+  font-weight: 500 !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  margin: 0 !important;
+}
+
+html body.guided-flow .guided-breakdown-impact li:last-child,
+html body.guided-flow.guided-flagship .guided-results-impact .guided-breakdown-hero li:last-child {
+  border-bottom: 0 !important;
+}
+
+html body.guided-flow .guided-breakdown-impact li strong,
+html body.guided-flow.guided-flagship .guided-results-impact .guided-breakdown-hero li strong {
+  font-family: "DM Sans", system-ui, sans-serif !important;
+  font-weight: 800 !important;
+  font-variant-numeric: tabular-nums !important;
+  color: #fff !important;
+  font-size: 0.95rem !important;
+}
+
+/* =========================================================
+   LEAD CAPTURE — primary conversion block (not an afterthought)
+   ========================================================= */
+html body.guided-flow.guided-flagship .guided-lead-impact,
+html body.guided-flow.guided-flagship .guided-lead-hero.guided-lead-impact {
+  margin: 1rem 0 0.65rem !important;
+  padding: 1.15rem 1rem 1rem !important;
+  border-radius: 16px !important;
+  background: #fff !important;
+  border: 2px solid #c9a227 !important;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(201, 162, 39, 0.2) !important;
+  text-align: center !important;
+}
+
+html body.guided-flow .guided-lead-impact .save-estimate-eyebrow {
+  color: #9a7b14 !important;
+  font-size: 0.68rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.07em !important;
+  text-transform: uppercase !important;
+  margin: 0 0 0.3rem !important;
+}
+
+html body.guided-flow .guided-lead-impact .save-estimate-title {
+  font-size: clamp(1.15rem, 3.5vw, 1.35rem) !important;
+  font-weight: 800 !important;
+  color: #1a1230 !important;
+  margin: 0 0 0.3rem !important;
+  line-height: 1.2 !important;
+}
+
+html body.guided-flow .guided-lead-impact .save-estimate-lead {
+  font-size: 0.86rem !important;
+  color: #4a4458 !important;
+  margin: 0 0 0.75rem !important;
+  line-height: 1.4 !important;
+}
+
+html body.guided-flow .guided-lead-impact .guided-field {
+  text-align: left !important;
+  margin-bottom: 0.5rem !important;
+}
+
+html body.guided-flow .guided-lead-impact .guided-field-label {
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  color: #3d3750 !important;
+}
+
+html body.guided-flow .guided-lead-impact input[type="text"],
+html body.guided-flow .guided-lead-impact input[type="email"],
+html body.guided-flow .guided-lead-impact input[type="tel"] {
+  min-height: 46px !important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  color: #1a1230 !important;
+  border: 1.5px solid rgba(26, 18, 48, 0.18) !important;
+  border-radius: 10px !important;
+  padding: 0.55rem 0.75rem !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  background: #faf9fc !important;
+}
+
+html body.guided-flow .guided-lead-impact input:focus {
+  border-color: #c9a227 !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.2) !important;
+  background: #fff !important;
+}
+
+html body.guided-flow .guided-lead-impact .guided-lead-submit {
+  width: 100% !important;
+  min-height: 52px !important;
+  margin-top: 0.45rem !important;
+  font-size: 1.05rem !important;
+  font-weight: 800 !important;
+}
+
+html body.guided-flow .guided-lead-skip-quiet,
+html body.guided-flow .guided-lead-impact .save-estimate-skip {
+  display: block !important;
+  width: 100% !important;
+  margin: 0.55rem 0 0 !important;
+  padding: 0.35rem !important;
+  border: 0 !important;
+  background: transparent !important;
+  color: #8a8499 !important;
+  font-size: 0.78rem !important;
+  font-weight: 500 !important;
+  text-decoration: underline !important;
+  text-underline-offset: 2px !important;
+  cursor: pointer !important;
+  min-height: 0 !important;
+  box-shadow: none !important;
+}
+
+html body.guided-flow .guided-lead-impact .save-estimate-consent {
+  font-size: 0.62rem !important;
+  color: #6b6580 !important;
+  margin-top: 0.55rem !important;
+  line-height: 1.35 !important;
+}
+
+html body.guided-flow .guided-lead-impact .save-estimate-tabs {
+  display: flex !important;
+  gap: 0.35rem !important;
+  justify-content: center !important;
+  margin-bottom: 0.65rem !important;
+}
+
+html body.guided-flow .guided-lead-impact .save-estimate-tab {
+  min-height: 36px !important;
+  padding: 0.35rem 0.85rem !important;
+  border-radius: 999px !important;
+  font-size: 0.8rem !important;
+  font-weight: 700 !important;
+  border: 1.5px solid rgba(26, 18, 48, 0.15) !important;
+  background: #f4f2f8 !important;
+  color: #3d3750 !important;
+}
+
+html body.guided-flow .guided-lead-impact .save-estimate-tab.active {
+  background: #1a1230 !important;
+  color: #f5e6a8 !important;
+  border-color: #c9a227 !important;
+}
+
+/* Secondary apply — quieter than lead */
+html body.guided-flow.guided-flagship .guided-results-ctas-solo {
+  margin: 0.75rem auto 0.25rem !important;
+  max-width: 100% !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-secondary-apply {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 0.35rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-impact .guided-results-compliance-quiet {
+  color: rgba(255, 255, 255, 0.45) !important;
+  font-size: 0.6rem !important;
+  margin-top: 0.75rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-impact .guided-results-details-summary {
+  color: rgba(255, 255, 255, 0.7) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-impact .guided-results-details-body {
+  background: #fff !important;
+  color: #1a1230 !important;
+  border-radius: 12px !important;
+  padding: 0.75rem !important;
+  margin-top: 0.5rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-impact .guided-results-details-body .guided-details-section-label,
+html body.guided-flow.guided-flagship .guided-results-impact .guided-results-details-body .field-note {
+  color: #5c5670 !important;
+}
+
+/* =========================================================
+   REFI PATH — equal visual weight to purchase
+   ========================================================= */
+html body.guided-flow .guided-refi-goal-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 0.55rem !important;
+  max-width: min(480px, 100%) !important;
+  margin: 0 auto !important;
+}
+
+html body.guided-flow .guided-refi-card {
+  min-height: 88px !important;
+  padding: 0.85rem 0.75rem !important;
+  text-align: left !important;
+  border: 1.5px solid rgba(26, 18, 48, 0.12) !important;
+  border-radius: 14px !important;
+  background: #fff !important;
+  box-shadow: 0 4px 14px rgba(26, 18, 48, 0.06) !important;
+}
+
+html body.guided-flow .guided-refi-card:hover,
+html body.guided-flow .guided-refi-card.is-selected {
+  border-color: #c9a227 !important;
+  background: #fbf8f0 !important;
+  box-shadow: 0 6px 18px rgba(201, 162, 39, 0.15) !important;
+}
+
+html body.guided-flow .guided-refi-card strong {
+  font-size: 0.92rem !important;
+  color: #1a1230 !important;
+  display: block !important;
+  margin: 0.15rem 0 0.2rem !important;
+}
+
+html body.guided-flow .guided-refi-card span:not(.guided-choice-icon) {
+  font-size: 0.74rem !important;
+  color: #5c5670 !important;
+  line-height: 1.3 !important;
+}
+
+html body.guided-flow .guided-refi-path-note {
+  text-align: center !important;
+  font-size: 0.72rem !important;
+  color: #6b6580 !important;
+  margin: 0.75rem auto 0 !important;
+  max-width: 22rem !important;
+}
+
+html body.guided-flow.guided-is-refinance .guided-progress {
+  border-color: rgba(201, 162, 39, 0.35) !important;
+}
+
+/* =========================================================
+   ADDRESS FALLBACK — clearer skip path
+   ========================================================= */
+html body.guided-flow .guided-address-recovery {
+  margin-top: 0.85rem !important;
+  padding: 0.75rem 0.65rem 0.35rem !important;
+  border-top: 1px dashed rgba(26, 18, 48, 0.12) !important;
+  text-align: center !important;
+}
+
+html body.guided-flow .guided-skip-price-btn {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+html body.guided-flow .guided-skip-highlight {
+  border-color: #c9a227 !important;
+  background: #fbf8f0 !important;
+  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.35) !important;
+  animation: impact-pulse 1s ease 3 !important;
+}
+
+@keyframes impact-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+html body.guided-flow #guidedAddressCard[data-address-state="error"] {
+  border-color: rgba(139, 30, 45, 0.35) !important;
+}
+
+html body.guided-flow #guidedAddressCard[data-address-state="error"] .guided-address-recovery {
+  background: rgba(201, 162, 39, 0.08) !important;
+  border-radius: 12px !important;
+  border-top: 0 !important;
+  margin-top: 0.65rem !important;
+  padding: 0.75rem !important;
+}
+
+/* =========================================================
+   LIVE PAYMENT — high-contrast, easy to read (navy + gold)
+   Dark navy panel + bright gold amount = no blending
+   ========================================================= */
+html body.guided-flow.guided-flagship .guided-live-card-interactive,
+html body.guided-flow.guided-flagship .wizard-live-preview.guided-live-card-interactive,
+html body.guided-flow #wizardLivePreview.guided-live-card-interactive {
+  background: linear-gradient(165deg, #1a1230 0%, #2a2040 55%, #1f1833 100%) !important;
+  border: 2px solid rgba(201, 162, 39, 0.55) !important;
+  box-shadow: 0 10px 32px rgba(26, 18, 48, 0.28), 0 0 0 1px rgba(201, 162, 39, 0.12) !important;
+  border-radius: 14px !important;
+  padding: 0.85rem 0.9rem 0.9rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-live-card-interactive .wizard-live-preview-label,
+html body.guided-flow #wizardLivePreview .wizard-live-preview-label {
+  display: block !important;
+  font-family: "DM Sans", system-ui, -apple-system, sans-serif !important;
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  color: #e8c84a !important;
+  -webkit-text-fill-color: #e8c84a !important;
+  opacity: 1 !important;
+  text-align: center !important;
+  margin: 0 0 0.2rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-live-card-interactive .wizard-live-preview-amount,
+html body.guided-flow.guided-flagship .guided-live-card-interactive #wizardLivePayment,
+html body.guided-flow #wizardLivePayment {
+  display: block !important;
+  font-family: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif !important;
+  font-weight: 800 !important;
+  font-size: clamp(2rem, 5.5vw, 2.45rem) !important;
+  font-variant-numeric: tabular-nums !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1.1 !important;
+  text-align: center !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35) !important;
+  opacity: 1 !important;
+  margin: 0.15rem 0 0.35rem !important;
+}
+
+html body.guided-flow.guided-flagship .wizard-live-preview-ready #wizardLivePayment,
+html body.guided-flow #wizardLivePreview.wizard-live-preview-ready #wizardLivePayment {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+html body.guided-flow .guided-live-rate-pair,
+html body.guided-flow #guidedLiveRatePair {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 0.25rem 0.55rem !important;
+  font-family: "DM Sans", system-ui, sans-serif !important;
+  font-size: 0.8rem !important;
+  font-weight: 600 !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.85) !important;
+  margin: 0 0 0.55rem !important;
+  text-align: center !important;
+}
+
+html body.guided-flow .guided-live-rate-pair strong,
+html body.guided-flow #guidedLiveRatePair strong {
+  color: #e8c84a !important;
+  -webkit-text-fill-color: #e8c84a !important;
+  font-weight: 800 !important;
+}
+
+html body.guided-flow .guided-live-rate-sep {
+  color: rgba(255, 255, 255, 0.45) !important;
+}
+
+html body.guided-flow .guided-live-breakdown,
+html body.guided-flow #guidedLiveBreakdown {
+  list-style: none !important;
+  margin: 0 0 0.5rem !important;
+  padding: 0.5rem 0.65rem !important;
+  border-radius: 10px !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+}
+
+html body.guided-flow .guided-live-breakdown li {
+  display: flex !important;
+  justify-content: space-between !important;
+  gap: 0.5rem !important;
+  font-family: "DM Sans", system-ui, sans-serif !important;
+  font-size: 0.8rem !important;
+  font-weight: 500 !important;
+  color: rgba(255, 255, 255, 0.88) !important;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.88) !important;
+  padding: 0.2rem 0 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+html body.guided-flow .guided-live-breakdown li:last-child {
+  border-bottom: 0 !important;
+}
+
+html body.guided-flow .guided-live-breakdown li strong {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  font-weight: 800 !important;
+  font-variant-numeric: tabular-nums !important;
+}
+
+html body.guided-flow .guided-live-breakdown li.guided-live-total strong,
+html body.guided-flow #liveTotal {
+  color: #e8c84a !important;
+  -webkit-text-fill-color: #e8c84a !important;
+  font-size: 0.95rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-live-card-interactive .ultimate-live-stats,
+html body.guided-flow.guided-flagship .guided-live-card-interactive .guided-live-stats {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-live-card-interactive .ultimate-live-stats dt {
+  color: rgba(255, 255, 255, 0.55) !important;
+  font-size: 0.65rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-live-card-interactive .ultimate-live-stats dd {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  font-size: 0.82rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-live-card-interactive .wizard-live-preview-note,
+html body.guided-flow #wizardLiveNote {
+  font-family: "DM Sans", system-ui, sans-serif !important;
+  font-size: 0.72rem !important;
+  font-weight: 600 !important;
+  color: rgba(255, 255, 255, 0.65) !important;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.65) !important;
+  text-align: center !important;
+  margin: 0.25rem 0 0 !important;
+}
+
+html body.guided-flow .guided-live-card.guided-live-flash {
+  border-color: #e8c84a !important;
+  box-shadow: 0 0 0 3px rgba(232, 200, 74, 0.45), 0 12px 36px rgba(26, 18, 48, 0.35) !important;
+}
+
+html body.guided-flow .guided-live-amount-tick {
+  color: #e8c84a !important;
+  -webkit-text-fill-color: #e8c84a !important;
+  transform: scale(1.05) !important;
+}
+
+html body.guided-flow .guided-live-note-flash {
+  color: #e8c84a !important;
+  -webkit-text-fill-color: #e8c84a !important;
+  font-weight: 800 !important;
+}
+
+@media (max-width: 1099px) {
+  html body.guided-flow.guided-flagship .guided-live-card-interactive #wizardLivePayment,
+  html body.guided-flow #wizardLivePayment {
+    font-size: 1.85rem !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-live-card-interactive {
+    padding: 0.7rem 0.75rem 0.75rem !important;
+  }
+}
+
+/* =========================================================
+   REALTOR — soft, never interrupts flow
+   ========================================================= */
+html body.guided-flow .guided-realtor-mobile-entry,
+html body.guided-flow .guided-realtor-mobile-quiet {
+  display: none !important; /* removed from mid-flow chrome */
+}
+
+html body.guided-flow .guided-side-cta-realtor-soft,
+html body.guided-flow .guided-realtor-btn.guided-side-cta-realtor-soft {
+  background: transparent !important;
+  border: 1px solid rgba(26, 18, 48, 0.15) !important;
+  color: #5c5670 !important;
+  font-size: 0.72rem !important;
+  font-weight: 600 !important;
+  min-height: 34px !important;
+  box-shadow: none !important;
+  padding: 0.35rem 0.5rem !important;
+}
+
+html body.guided-flow .guided-side-cta-realtor-soft:hover {
+  border-color: #c9a227 !important;
+  color: #1a1230 !important;
+  background: #fbf8f0 !important;
+}
+
+html body.guided-flow .guided-details-realtor {
+  text-align: center !important;
+}
+
+html body.guided-flow .guided-realtor-soft-btn {
+  width: 100% !important;
+  margin-top: 0.35rem !important;
+}
+
+/* Only show side realtor on results desktop */
+html body.guided-flow.guided-pre-results .guided-side-cta-realtor-soft {
+  display: none !important;
+}
+
+/* =========================================================
+   HEADER APPLY — soft mid-flow, one primary on results
+   ========================================================= */
+html body.guided-flow.guided-pre-results .guided-header-apply {
+  opacity: 0.85 !important;
+  font-size: 0.72rem !important;
+  min-height: 34px !important;
+  padding: 0.3rem 0.55rem !important;
+}
+
+/* Mobile density */
+@media (max-width: 560px) {
+  html body.guided-flow.guided-flagship .guided-results-impact #pitiPayment {
+    font-size: clamp(2.85rem, 14vw, 3.5rem) !important;
+  }
+
+  html body.guided-flow .guided-refi-goal-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  html body.guided-flow .guided-lead-impact {
+    padding: 1rem 0.85rem 0.9rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-main {
+    padding-top: 0.4rem !important;
+  }
+}
+
+@media (max-width: 1099px) {
+  /* Less bottom pad without mobile realtor bar */
+  html body.guided-flow.guided-live-active.guided-flagship .guided-main {
+    padding-bottom: calc(7.5rem + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  html body.guided-flow.guided-live-waiting.guided-flagship .guided-main {
+    padding-bottom: calc(5rem + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  html body.guided-flow.wizard-on-results .guided-main {
+    padding-bottom: 1.25rem !important;
+  }
+}

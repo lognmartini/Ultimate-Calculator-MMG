@@ -2044,11 +2044,18 @@
       }
       setLocationNote(
         err.message === "Address not found"
-          ? "Couldn’t find that address. Try a suggestion, or continue with price only (U.S. averages)."
-          : "Lookup didn’t work. Continue with price only — U.S. average tax & insurance until you edit.",
+          ? "We couldn’t find that address. Pick a suggestion below, or skip lookup and continue with price only."
+          : "Lookup didn’t connect. You can still continue — we’ll use U.S. average tax (~0.9%) & insurance (~0.48%). Edit anytime on results.",
         "error"
       );
-      document.getElementById("wizardSkipAddress")?.classList.add("guided-skip-highlight");
+      const skipBtn = document.getElementById("wizardSkipAddress");
+      skipBtn?.classList.add("guided-skip-highlight");
+      if (skipBtn) {
+        skipBtn.textContent = "Continue with price only →";
+      }
+      document.getElementById("guidedSkipPriceNote") &&
+        (document.getElementById("guidedSkipPriceNote").textContent =
+          "Recommended when lookup fails · nationwide averages · fully editable later");
     } finally {
       lookupInFlight = false;
       if (els.lookupAddress) {

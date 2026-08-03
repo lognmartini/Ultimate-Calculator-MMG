@@ -214,6 +214,30 @@
     return tab === "sms" ? "Text my estimate" : "Email my estimate";
   }
 
+  function applyImpactLeadCopy(tab) {
+    const title =
+      document.getElementById("saveEstimateHeading") ||
+      document.querySelector(".save-estimate-title");
+    const lead = document.querySelector(".save-estimate-lead");
+    const isRefi = document.body.dataset.loanGoal === "refinance";
+    if (title) {
+      if (tab === "sms") {
+        title.textContent = isRefi
+          ? "Text me this refinance payment"
+          : "Text me this payment";
+      } else {
+        title.textContent = isRefi
+          ? "Email me this refinance payment"
+          : "Get this payment emailed to you";
+      }
+    }
+    if (lead) {
+      lead.textContent = isRefi
+        ? "Save your refi scenario + Logan’s plain-English take on your options."
+        : "Save your numbers + a plain-English note from Logan on your options.";
+    }
+  }
+
   async function submitLead(form) {
     if (submitting) return;
     const emailEl = document.getElementById("saveEstimateEmail");
@@ -477,16 +501,7 @@
       if (submit && !submitting) {
         submit.textContent = defaultSubmitLabel(tab);
       }
-      if (title) {
-        title.textContent =
-          tab === "sms" ? "Text me this payment" : "Email me this payment";
-      }
-      if (lead) {
-        lead.textContent =
-          tab === "sms"
-            ? "Plus a plain-English note from Logan."
-            : "Plus a plain-English note from Logan.";
-      }
+      applyImpactLeadCopy(tab);
     }
 
     function onTabKey(e) {

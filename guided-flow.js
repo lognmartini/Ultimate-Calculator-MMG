@@ -515,11 +515,21 @@
         ) {
           setAddressCardState("error");
           note.textContent =
-            "Couldn’t find that property. Try another address, or continue with price only (U.S. averages — edit taxes later).";
+            "Couldn’t auto-fill this property. Try another address — or skip lookup and continue with price only (U.S. averages).";
           note.className = "field-note guided-address-status field-note-error guided-note-warn";
-          // Spotlight the price-only path so lookup failures don’t dead-end
-          $("wizardSkipAddress")?.classList.add("guided-skip-highlight");
-          $("wizardSkipAddress")?.focus({ preventScroll: true });
+          const skip = $("wizardSkipAddress");
+          skip?.classList.add("guided-skip-highlight");
+          if (skip) skip.textContent = "Continue with price only →";
+          const skipNote = $("guidedSkipPriceNote");
+          if (skipNote) {
+            skipNote.textContent =
+              "Fast path · nationwide tax & insurance averages · edit on results";
+          }
+          try {
+            skip?.focus({ preventScroll: true });
+          } catch {
+            skip?.focus();
+          }
         } else if (!stillEmpty) {
           setAddressCardState("success");
           $("wizardSkipAddress")?.classList.remove("guided-skip-highlight");
