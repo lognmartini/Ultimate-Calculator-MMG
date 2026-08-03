@@ -237,6 +237,11 @@
 
   function tryShowLogan5Card() {
     if (!isLogan5() || shown || !shouldShow()) return;
+    // Guided go5 keeps the primary lead form always visible on results
+    if (document.body.classList.contains("guided-flow")) {
+      showCard();
+      return;
+    }
     if (!logan5EngagedLongEnough()) return;
     showCard();
   }
@@ -386,8 +391,12 @@
       });
     } else if (isLogan5()) {
       document.addEventListener("mmg-wizard-results", () => {
-        scheduleLogan5Reveal();
-        bindLogan5ScrollDepth();
+        if (document.body.classList.contains("guided-flow")) {
+          showCard();
+        } else {
+          scheduleLogan5Reveal();
+          bindLogan5ScrollDepth();
+        }
       });
       bindLogan5HubReveal();
       bindSaveEstimateTabs();

@@ -201,6 +201,48 @@
   z-index: 5;
 }
 
+/* Embed / iframe — calculator tabs + split panel only */
+body.afd-embed {
+  margin: 0;
+  background: #fff;
+}
+
+body.afd-embed .afd-calculator-section,
+body.afd-embed .afd-calculator-embed {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+body.afd-embed .afd-calc-title,
+body.afd-embed .afd-rate-badge {
+  display: none !important;
+}
+
+body.afd-embed .afd-tabs {
+  border-radius: 0;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+}
+
+body.afd-embed .afd-split {
+  border-radius: 0;
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+  box-shadow: none;
+}
+
+body.afd-embed .afd-quote-section {
+  margin: 0;
+  border-top: 1px solid var(--afd-border);
+}
+
+body.afd-embed .afd-site-footer {
+  margin-top: 0;
+}
+
 .afd-calc-title {
   margin: 0 0 0.75rem;
   font-family: var(--font-display);
@@ -371,11 +413,39 @@
 }
 
 .afd-field label {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
   margin-bottom: 0.3rem;
   font-size: 0.76rem;
   font-weight: 600;
   color: rgba(255, 255, 255, 0.82);
+}
+
+.afd-info-btn {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.62rem;
+  font-weight: 800;
+  line-height: 1;
+  padding: 0;
+  cursor: help;
+  flex-shrink: 0;
+}
+
+.afd-derived-value {
+  flex-shrink: 0;
+  align-self: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--afd-gold-light);
+  white-space: nowrap;
+  min-width: 3.5rem;
+  text-align: right;
 }
 
 .afd-field input,
@@ -593,9 +663,15 @@
 }
 
 .afd-donut-center strong {
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: var(--afd-navy);
   line-height: 1.1;
+}
+
+@media (min-width: 900px) {
+  .afd-donut-center strong {
+    font-size: 1.1rem;
+  }
 }
 
 .afd-donut-center span {
@@ -753,6 +829,135 @@
 .afd-cta-card .afd-btn-get-quote {
   max-width: 280px;
   margin: 0 auto;
+}
+
+/* ── Affordability tab — screenshot-style results ── */
+.afd-loan-details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.55rem 1rem;
+  margin: 0;
+}
+
+.afd-loan-details-grid div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.afd-loan-details-grid dt {
+  margin: 0;
+  font-size: 0.72rem;
+  color: var(--afd-muted);
+  font-weight: 600;
+}
+
+.afd-loan-details-grid dd {
+  margin: 0;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--afd-navy);
+}
+
+.afd-metric-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--afd-border);
+}
+
+.afd-metric-card {
+  background: linear-gradient(135deg, var(--afd-navy-mid) 0%, var(--afd-navy) 100%);
+  color: #fff;
+  border-radius: 8px;
+  padding: 0.7rem 0.85rem;
+  box-shadow: 0 4px 12px rgba(26, 18, 48, 0.15);
+}
+
+.afd-metric-label {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 600;
+  opacity: 0.88;
+  line-height: 1.3;
+  margin-bottom: 0.2rem;
+}
+
+.afd-metric-value {
+  display: block;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--afd-gold-light);
+  line-height: 1.2;
+}
+
+.afd-slider-panel {
+  padding: 0.85rem 0.75rem 0.5rem;
+  border-bottom: 1px solid var(--afd-border);
+}
+
+.afd-slider-field + .afd-slider-field {
+  margin-top: 0.85rem;
+}
+
+.afd-slider-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.35rem;
+}
+
+.afd-slider-head label {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--afd-navy);
+}
+
+.afd-slider-head output {
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--afd-navy-mid);
+}
+
+.afd-range {
+  width: 100%;
+  accent-color: var(--afd-gold);
+  cursor: pointer;
+}
+
+.afd-summary-card {
+  background: linear-gradient(180deg, rgba(37, 47, 110, 0.06) 0%, #fff 100%);
+  border-left: 4px solid var(--afd-gold);
+}
+
+.afd-summary-card h3 {
+  color: var(--afd-navy-mid);
+}
+
+body.afd-tab-affordability .afd-loan-details-card {
+  display: block;
+}
+
+body.afd-tab-affordability .afd-generic-details-card,
+body.afd-tab-affordability #afdAffordHero {
+  display: none !important;
+}
+
+body.afd-tab-affordability .afd-metric-cards,
+body.afd-tab-affordability .afd-slider-panel {
+  display: flex;
+}
+
+body.afd-tab-affordability .afd-slider-panel {
+  display: block;
+}
+
+body:not(.afd-tab-affordability) .afd-loan-details-card,
+body:not(.afd-tab-affordability) .afd-metric-cards,
+body:not(.afd-tab-affordability) .afd-slider-panel {
+  display: none !important;
 }
 
 /* ── Quote section ── */

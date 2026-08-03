@@ -49,6 +49,14 @@
     jumbo: { front: 0.36, back: 0.43, label: "Jumbo" },
   };
 
+  const DISPLAY_DTI = {
+    conventional: { front: 0.5, back: 0.5 },
+    fha: { front: 0.31, back: 0.43 },
+    va: { front: 0.41, back: 0.41 },
+    usda: { front: 0.29, back: 0.41 },
+    jumbo: { front: 0.43, back: 0.43 },
+  };
+
   const PROGRAM_DEFAULTS = {
     conventional: { down: 5, mip: 0 },
     fha: { down: 3.5, mip: 0.55 },
@@ -61,13 +69,17 @@
   let affordProgram = "conventional";
   let marketRate = 6.25;
   const toggles = {
-    "afd-down": "percent",
+    "afd-down": "dollar",
+    "afd-term": "year",
+    "afd-tax": "percent",
     "pur-down": "percent",
     "pur-tax": "percent",
     "pur-ins": "dollar",
     "rvb-down": "percent",
     "va-down": "percent",
   };
+
+  let syncingSliders = false;
 
   function $(id) {
     return document.getElementById(id);
@@ -163,13 +175,42 @@
     return downPct >= 10 ? (option === "after_first_use" ? 1.5 : 1.25) : base;
   }
 
-  function estimatePmiMonthly(loan, homePrice, downPct, program) {
-    if (program === "va" || program === "usda" || program === "jumbo") {
-      if (downPct >= 20 || program === "jumbo") return 0;
+  function estimatePmiMonthly(loan, homePrice, downPct, program, pmiYearlyOverride) {
+    if (program === "va" || program === "usda") return 0;
+    if (downPct >= 20) return 0;
+    if (Number.isFinite(pmiYearlyOverride) && pmiYearlyOverride > 0) {
+      return Math.round(pmiYearlyOverride / 12);
     }
-    if (downPct >= 20 || program === "va") return 0;
     const rate = program === "fha" ? 0.0055 : 0.0045;
     return Math.round((loan * rate) / 12);
+  }
+
+  function termYearsFromInput() {
+    const raw = parseNum($("afdLoanTerm")?.value) || 30;
+    return toggles["afd-term"] === "month" ? raw / 12 : raw;
+  }
+
+  function taxPctFromInputs(homePrice) {
+    const raw = parseNum($("afdTaxPct")?.value);
+    if (toggles["afd-tax"] === "dollar") {
+      return homePrice > 0 ? (raw / homePrice) * 100 : 0;
+    }
+    return raw;
+  }
+
+  function formatDtiPair(front, back) {
+    return `${front.toFixed(2)}% / ${back.toFixed(2)}%`;
+  }
+
+  function programPaymentLabel(program) {
+    const map = {
+      conventional: "Monthly Conventional Payment",
+      fha: "Monthly FHA Payment",
+      va: "Monthly VA Payment",
+      usda: "Monthly USDA Payment",
+      jumbo: "Monthly Jumbo Payment",
+    };
+    return map[program] || "Monthly Payment";
   }
 
   function estimateMipMonthly(loan, program, annualPct) {
@@ -223,7 +264,7 @@
     if (cfg.program === "fha" || cfg.program === "usda") {
       monthlyPmi = estimateMipMonthly(loan, cfg.program, cfg.annualMip);
     } else {
-      monthlyPmi = estimatePmiMonthly(loan, homePrice, downPct, cfg.program);
+      monthlyPmi = estimatePmiMonthly(loan, homePrice, downPct, cfg.program, cfg.pmiYearly);
     }
 
     const total = pi + monthlyTax + monthlyIns + monthlyPmi + monthlyHoa + (cfg.extra || 0);
@@ -246,22 +287,54 @@
   function getAffordConfig() {
     const program = affordProgram;
     const defaults = PROGRAM_DEFAULTS[program] || PROGRAM_DEFAULTS.conventional;
+    const homePrice = parseNum($("afdHomePrice")?.value);
     return {
       program,
       income: parseNum($("afdIncome")?.value),
       debts: parseNum($("afdDebts")?.value),
-      homePrice: parseNum($("afdHomePrice")?.value),
-      downRaw: parseNum($("afdDownPayment")?.value) || defaults.down,
+      homePrice,
+      downRaw: parseNum($("afdDownPayment")?.value) ?? defaults.down,
       downMode: toggles["afd-down"],
-      termYears: parseNum($("afdLoanTerm")?.value) || 30,
+      termYears: termYearsFromInput(),
       rate: parseNum($("afdRate")?.value) || marketRate,
-      taxPct: parseNum($("afdTaxPct")?.value) || 0.6,
+      taxPct: taxPctFromInputs(homePrice) || 0.6,
       insuranceAnnual: parseNum($("afdInsurance")?.value) || 1200,
       hoa: parseNum($("afdHoa")?.value),
       annualMip: parseNum($("afdAnnualMip")?.value) || defaults.mip,
+      pmiYearly: parseNum($("afdPmiYearly")?.value),
       vaOption: $("afdVaFundingOption")?.value || "first_use",
       credit: parseNum($("afdCredit")?.value) || 740,
     };
+  }
+
+  function syncAffordSliders(cfg, br) {
+    if (syncingSliders) return;
+    syncingSliders = true;
+    const priceSlider = $("afdPriceSlider");
+    const downSlider = $("afdDownSlider");
+    if (priceSlider) {
+      const max = Math.max(Number(priceSlider.max) || 1500000, cfg.homePrice);
+      if (max !== Number(priceSlider.max)) priceSlider.max = String(max);
+      priceSlider.value = String(cfg.homePrice);
+      const out = $("afdPriceSliderOut");
+      if (out) out.textContent = formatCurrency(cfg.homePrice);
+    }
+    if (downSlider) {
+      const maxDown = Math.max(cfg.homePrice, br.down);
+      downSlider.max = String(maxDown);
+      downSlider.value = String(br.down);
+      const out = $("afdDownSliderOut");
+      if (out) out.textContent = formatCurrency(br.down);
+    }
+    syncingSliders = false;
+  }
+
+  function updateTaxDerived(homePrice) {
+    const el = $("afdTaxDerived");
+    if (!el) return;
+    const raw = parseNum($("afdTaxPct")?.value);
+    const yearly = toggles["afd-tax"] === "percent" ? (homePrice * raw) / 100 : raw;
+    el.textContent = formatCurrency(yearly);
   }
 
   function drawDonut(canvas, segments, centerLabel) {
@@ -356,46 +429,68 @@
   function renderAffordability() {
     const cfg = getAffordConfig();
     const br = paymentBreakdown(cfg.homePrice, cfg);
-    $("afdLoanAmount") && ($("afdLoanAmount").value = String(Math.round(br.loan)));
+    updateTaxDerived(cfg.homePrice);
+    syncAffordSliders(cfg, br);
+
+    if ($("afdLoanAmount")) {
+      $("afdLoanAmount").value = formatCurrency(br.loan, 2);
+    }
 
     const limits = DTI[cfg.program] || DTI.conventional;
+    const displayLimits = DISPLAY_DTI[cfg.program] || DISPLAY_DTI.conventional;
     const frontDti = cfg.income > 0 ? (br.total / cfg.income) * 100 : 0;
     const backDti = cfg.income > 0 ? ((br.total + cfg.debts) / cfg.income) * 100 : 0;
     const { maxPrice, cap } = solveMaxPrice(cfg);
 
-    const hero = $("afdAffordHero");
-    hero?.classList.remove("hidden");
+    const segs = buildSegments(br, cfg.program);
+    drawDonut($("afdDonut"), segs, formatCurrency(br.total, 2));
+    renderLegend($("afdLegend"), segs);
+
+    setStats(formatCurrency(br.total, 2), formatCurrency(br.loan), formatCurrency(cap), "Max Payment");
+
+    const pmiLabel = cfg.program === "fha" || cfg.program === "usda" ? "MIP" : "PMI";
+    const piLabel = programPaymentLabel(cfg.program);
+
+    $("afdLdHome") && ($("afdLdHome").textContent = formatCurrency(br.homePrice, 2));
+    $("afdLdLoan") && ($("afdLdLoan").textContent = formatCurrency(br.loan, 2));
+    $("afdLdPi") && ($("afdLdPi").textContent = formatCurrency(br.pi, 2));
+    $("afdLdDown") && ($("afdLdDown").textContent = formatCurrency(br.down, 2));
+    $("afdLdPmi") && ($("afdLdPmi").textContent = formatCurrency(br.monthlyPmi, 2));
+    $("afdLdPiLabel") && ($("afdLdPiLabel").textContent = piLabel);
+    $("afdLdPmiLabel") &&
+      ($("afdLdPmiLabel").textContent =
+        cfg.program === "fha" || cfg.program === "usda" ? "Monthly Estimated MIP" : "Monthly Estimated PMI");
+
+    $("afdMetricPayment") && ($("afdMetricPayment").textContent = formatCurrency(br.total, 2));
+    $("afdMetricLoan") && ($("afdMetricLoan").textContent = formatCurrency(br.loan));
+    $("afdMetricDti") && ($("afdMetricDti").textContent = formatDtiPair(frontDti, backDti));
+    $("afdMetricAllowable") &&
+      ($("afdMetricAllowable").textContent = formatDtiPair(displayLimits.front * 100, displayLimits.back * 100));
+
     $("afdMaxPrice") && ($("afdMaxPrice").textContent = formatCurrency(maxPrice));
     $("afdAffordNote") &&
       ($("afdAffordNote").textContent =
         maxPrice > 0
-          ? `${limits.label} · ${formatPct(br.downPct)} down · DTI ${Math.round(frontDti)}%/${Math.round(backDti)}% (max ${Math.round(limits.front * 100)}%/${Math.round(limits.back * 100)}%)`
+          ? `${limits.label} · ${formatPct(br.downPct)} down · max price estimate ${formatCurrency(maxPrice)}`
           : "Adjust income, debts, or program — current inputs may exceed typical DTI limits.");
 
-    const segs = buildSegments(br, cfg.program);
-    drawDonut($("afdDonut"), segs, formatCurrency(br.total));
-    renderLegend($("afdLegend"), segs);
-
-    setStats(formatCurrency(br.total), formatCurrency(br.loan), formatCurrency(cap), "Max Payment");
-
-    const pmiLabel = cfg.program === "fha" || cfg.program === "usda" ? "MIP" : "PMI";
     setDetailLists(
       [
         ["Gross income", formatCurrency(cfg.income)],
         ["Monthly debts", formatCurrency(cfg.debts)],
         ["Home value", formatCurrency(br.homePrice)],
         ["Mortgage amount", formatCurrency(br.loan)],
-        ["Principal & interest", formatCurrency(br.pi)],
-        ["Property tax", formatCurrency(br.monthlyTax)],
-        ["Insurance", formatCurrency(br.monthlyIns)],
-        [pmiLabel, formatCurrency(br.monthlyPmi)],
-        ["HOA", formatCurrency(br.hoa)],
-        ["Housing DTI (front)", formatPct(frontDti)],
-        ["Total DTI (back)", formatPct(backDti)],
+        ["Principal & interest", formatCurrency(br.pi, 2)],
+        ["Property tax", formatCurrency(br.monthlyTax, 2)],
+        ["Insurance", formatCurrency(br.monthlyIns, 2)],
+        [pmiLabel, formatCurrency(br.monthlyPmi, 2)],
+        ["HOA", formatCurrency(br.hoa, 2)],
+        ["Housing DTI (front)", formatPct(frontDti, 2)],
+        ["Total DTI (back)", formatPct(backDti, 2)],
       ],
       [
-        ["Down payment", formatCurrency(br.down)],
-        ["Loan term", `${cfg.termYears} years`],
+        ["Down payment", formatCurrency(br.down, 2)],
+        ["Loan term", `${Math.round(cfg.termYears)} years`],
         ["Rate", formatPct(cfg.rate, 3)],
         ["Total interest (est.)", formatCurrency(totalInterestPaid(br.loan, cfg.rate, cfg.termYears))],
         ["Program", limits.label],
@@ -405,9 +500,10 @@
 
     $("afdSummaryText") &&
       ($("afdSummaryText").textContent =
-        `Based on your inputs, total housing payment is ${formatCurrency(br.total)}/mo on a ${limits.label} loan with ${formatPct(br.downPct)} down. Your debt-to-income is ${Math.round(frontDti)}%/${Math.round(backDti)}% vs typical ${Math.round(limits.front * 100)}%/${Math.round(limits.back * 100)}% limits.`);
+        `Based on what you entered, today's total payment would be ${formatCurrency(br.total, 2)} on a ${limits.label} loan with a ${formatPct(br.downPct, 2)} down payment. Your debt-to-income ratio is ${frontDti.toFixed(2)}% and the maximum allowable on this program type is ${Math.round(displayLimits.front * 100)}%/${Math.round(displayLimits.back * 100)}%. Please confirm all numbers for accuracy with your loan officer. The monthly debts calculation is often where we see errors.`);
 
     toggleSidePanel(false);
+    document.body.classList.add("afd-tab-affordability");
   }
 
   function renderPurchase() {
@@ -464,6 +560,7 @@
     $("afdSummaryText") &&
       ($("afdSummaryText").textContent = `Estimated monthly payment ${formatCurrency(total)} on a ${formatCurrency(homePrice)} home with ${formatPct(downPct)} down at ${formatPct(rate, 3)}.`);
     toggleSidePanel(true);
+    document.body.classList.remove("afd-tab-affordability");
   }
 
   function renderRefinance() {
@@ -527,6 +624,7 @@
           ? `Refinancing may lower your principal & interest by about ${formatCurrency(monthlySavings)}/mo and save roughly ${formatCurrency(interestSavings)} in interest over the new loan term.`
           : `Your new payment may be higher — consider a shorter term or lower rate to improve savings.`);
     toggleSidePanel(false);
+    document.body.classList.remove("afd-tab-affordability");
   }
 
   function renderRentBuy() {
@@ -602,6 +700,7 @@
       ($("afdSummaryText").textContent =
         `${winner} may cost less over ${years} years by about ${formatCurrency(Math.abs(advantage))} based on these assumptions (not tax-adjusted).`);
     toggleSidePanel(false);
+    document.body.classList.remove("afd-tab-affordability");
   }
 
   function renderVaPurchase() {
@@ -662,6 +761,7 @@
     $("afdSummaryText") &&
       ($("afdSummaryText").textContent = `VA purchase estimate: ${formatCurrency(total)}/mo with ${formatPct(feePct, 2)} funding fee financed into the loan.`);
     toggleSidePanel(true);
+    document.body.classList.remove("afd-tab-affordability");
   }
 
   function renderVaRefinance() {
@@ -709,6 +809,7 @@
     $("afdSummaryText") &&
       ($("afdSummaryText").textContent = `VA IRRRL estimate: ${formatCurrency(newPi)}/mo — ${savings > 0 ? `about ${formatCurrency(savings)}/mo less than current P&I.` : "payment may increase; verify break-even with your loan officer."}`);
     toggleSidePanel(false);
+    document.body.classList.remove("afd-tab-affordability");
   }
 
   function renderDscr() {
@@ -769,6 +870,7 @@
     $("afdSummaryText") &&
       ($("afdSummaryText").textContent = `DSCR ${formatPct(dscr, 2)} — ${qualifying ? "rental income likely supports this debt service at a 1.0+ ratio." : "may need lower loan amount, higher rents, or different program."}`);
     toggleSidePanel(false);
+    document.body.classList.remove("afd-tab-affordability");
   }
 
   function renderFixFlip() {
@@ -832,6 +934,7 @@
     $("afdSummaryText") &&
       ($("afdSummaryText").textContent = `Fix & flip estimate: ${formatCurrency(profit)} profit over ${months} months (${formatPct(roi, 1)} ROI on cash invested) — educational only.`);
     toggleSidePanel(false);
+    document.body.classList.remove("afd-tab-affordability");
   }
 
   function updatePayoffSide(loan, rate, termYears, formExtra) {
@@ -869,7 +972,11 @@
         ($("afdMipLabel").textContent = program === "fha" ? "Annual MIP (%)" : "Annual Guarantee Fee (%)");
     }
     if ($("afdDownPayment") && ! $("afdDownPayment").dataset.touched) {
-      $("afdDownPayment").value = String(defaults.down);
+      if (toggles["afd-down"] === "percent") {
+        $("afdDownPayment").value = String(defaults.down);
+      } else if (program === "conventional" || program === "jumbo") {
+        $("afdDownPayment").value = "0";
+      }
     }
     recalc();
   }
@@ -998,6 +1105,26 @@
     });
   }
 
+  function bindAffordSliders() {
+    $("afdPriceSlider")?.addEventListener("input", (e) => {
+      if (syncingSliders) return;
+      const price = parseNum(e.target.value);
+      if ($("afdHomePrice")) $("afdHomePrice").value = String(price);
+      const downSlider = $("afdDownSlider");
+      if (downSlider) downSlider.max = String(price);
+      recalc();
+    });
+
+    $("afdDownSlider")?.addEventListener("input", (e) => {
+      if (syncingSliders) return;
+      const down = parseNum(e.target.value);
+      toggles["afd-down"] = "dollar";
+      setToggle("afd-down", "dollar");
+      if ($("afdDownPayment")) $("afdDownPayment").value = String(down);
+      recalc();
+    });
+  }
+
   function bindInputs() {
     document.querySelectorAll(".afd-calc-input, .afd-side-input").forEach((el) => {
       el.addEventListener("input", () => {
@@ -1006,10 +1133,11 @@
       });
       el.addEventListener("change", recalc);
     });
+    bindAffordSliders();
   }
 
   function bindQuoteButtons() {
-    document.querySelectorAll("[data-afd-quote]").forEach((btn) => {
+    document.querySelectorAll("[data-afd-quote], .afd-btn-get-quote, .afd-btn-quote").forEach((btn) => {
       btn.href = APPLY_URL;
       btn.setAttribute("target", "_blank");
       btn.setAttribute("rel", "noopener");
@@ -1024,7 +1152,7 @@
       const rate = Number(data.martiniRate ?? data.rate30 ?? data.rate);
       if (Number.isFinite(rate) && rate > 0) {
         marketRate = rate;
-        ["purInterestRate", "afdRate", "rfNewRate", "rvbRate", "vaRate", "varNewRate"].forEach((id) => {
+        ["purInterestRate", "rfNewRate", "rvbRate", "vaRate", "varNewRate"].forEach((id) => {
           const el = $(id);
           if (el && !el.dataset.touched) el.value = String(rate);
         });

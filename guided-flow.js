@@ -1,0 +1,385 @@
+/**
+ * Guided multi-step UX — profile toasts, FTHB→3%, USDA map, VA thank-you,
+ * down-slider paint, insurance/tax notes, side-rail CTAs.
+ */
+(function () {
+  "use strict";
+
+  if (!document.body.classList.contains("guided-flow")) return;
+
+  const USDA_MAP_URL =
+    "https://eligibility.sc.egov.usda.gov/eligibility/welcomeAction.do";
+
+  const REVIEWS_URL =
+    "https://martinimortgagegroup.com/what-people-say-about-martini-mortgage-group/";
+
+  function $(id) {
+    return document.getElementById(id);
+  }
+
+  function formatCurrency(n) {
+    if (!Number.isFinite(n)) return "—";
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      maximumFractionDigits: 0,
+    }).format(n);
+  }
+
+  function parseCurrency(raw) {
+    const n = Number(String(raw || "").replace(/[^0-9.-]/g, ""));
+    return Number.isFinite(n) ? n : 0;
+  }
+
+  function selectCard(containerSelector, selectedBtn) {
+    document.querySelectorAll(`${containerSelector} .guided-choice-card`).forEach((btn) => {
+      btn.classList.toggle("is-selected", btn === selectedBtn);
+    });
+  }
+
+  /* ---------- Toast / note popups ---------- */
+  function ensureToastHost() {
+    let host = $("guidedToastHost");
+    if (host) return host;
+    host = document.createElement("div");
+    host.id = "guidedToastHost";
+    host.className = "guided-toast-host";
+    host.setAttribute("aria-live", "polite");
+    document.body.appendChild(host);
+    return host;
+  }
+
+  function showToast(opts) {
+    const host = ensureToastHost();
+    // One toast of the same variant at a time (avoids spam on re-clicks)
+    if (opts.variant) {
+      host.querySelectorAll(`.guided-toast.${opts.variant}`).forEach((n) => n.remove());
+    }
+    const el = document.createElement("div");
+    el.className = "guided-toast " + (opts.variant || "info");
+    el.setAttribute("role", "status");
+    const title = opts.title ? `<strong class="guided-toast-title">${opts.title}</strong>` : "";
+    const link = opts.link
+      ? `<a class="guided-toast-link" href="${opts.link}" target="_blank" rel="noopener">${opts.linkLabel || "Learn more"} →</a>`
+      : "";
+    el.innerHTML = `
+      <button type="button" class="guided-toast-close" aria-label="Dismiss">×</button>
+      ${title}
+      <p class="guided-toast-body">${opts.body || ""}</p>
+      ${link}
+    `;
+    el.querySelector(".guided-toast-close")?.addEventListener("click", () => el.remove());
+    host.appendChild(el);
+    window.setTimeout(() => {
+      el.classList.add("is-out");
+      window.setTimeout(() => el.remove(), 320);
+    }, opts.duration || 7000);
+  }
+
+  /* ---------- Down slider visual fill (0–50 scale; 20% ≈ 40% of track) ---------- */
+  function paintDownSlider() {
+    const el = $("downPercent");
+    if (!el) return;
+    el.min = "0";
+    if (!el.max || Number(el.max) < 50) el.max = "50";
+    const max = Number(el.max) || 50;
+    const min = Number(el.min) || 0;
+    const val = Number(el.value) || 0;
+    const span = Math.max(0.0001, max - min);
+    const pct = Math.max(0, Math.min(100, ((val - min) / span) * 100));
+    el.style.setProperty("--down-fill", `${pct}%`);
+    el.classList.add("guided-range-fill");
+  }
+  window.MMG_guided_paintDownSlider = paintDownSlider;
+
+  function setDownPercent(pct) {
+    const el = $("downPercent");
+    const input = $("downPercentInput");
+    if (!el) return;
+    const v = Math.max(0, Math.min(50, Number(pct) || 0));
+    el.min = "0";
+    el.max = "50";
+    el.value = String(v);
+    if (input) input.value = String(v);
+    el.dispatchEvent(new Event("input", { bubbles: true }));
+    paintDownSlider();
+    document.querySelectorAll(".guided-mini-chip[data-down]").forEach((b) => {
+      b.classList.toggle("is-selected", Number(b.getAttribute("data-down")) === v);
+    });
+  }
+
+  function refreshInsurance() {
+    if (typeof window.MMG_refreshInsuranceFromCredit === "function") {
+      window.MMG_refreshInsuranceFromCredit();
+    }
+  }
+  window.MMG_guided_refreshInsurance = refreshInsurance;
+
+  function usdaMapNote(extra) {
+    const addr = ($("propertyAddress")?.value || "").trim();
+    const body = extra
+      ? extra
+      : addr
+        ? "USDA 0% down requires an eligible rural property. We can’t certify eligibility automatically (USDA’s map is the source of truth). Check this address on the official map."
+        : "USDA 0% down is only available on eligible rural properties. Use the official USDA eligibility map before relying on 0% down.";
+    showToast({
+      variant: "usda",
+      title: "USDA rural eligibility",
+      body,
+      link: USDA_MAP_URL,
+      linkLabel: "Open USDA eligibility map",
+      duration: 12000,
+    });
+  }
+
+  /**
+   * USDA has no free public CORS API for definitive eligibility.
+   * We deep-link the official map and optionally warn for major urban cores (educational only).
+   */
+  function noteUsdaAfterLookup(detail) {
+    if (!$("usdaEligible")?.checked && $("loanProgram")?.value !== "usda") return;
+    const city = String(detail?.location?.city || "").toLowerCase();
+    const urbanHint =
+      /raleigh|durham|charlotte|greensboro|winston|cary|apex|morrisville|chapel hill|fayetteville|wilmington|asheville|high point/.test(
+        city
+      );
+    if (urbanHint) {
+      showToast({
+        variant: "warn",
+        title: "USDA may not apply in this city",
+        body: `${detail.location?.city || "This city"} is often outside USDA rural boundaries. Confirm on the official map before planning on 0% down.`,
+        link: USDA_MAP_URL,
+        linkLabel: "Open USDA eligibility map",
+        duration: 11000,
+      });
+    } else {
+      usdaMapNote();
+    }
+  }
+
+  function updatePropertySummary() {
+    const card = $("propertySummaryCard");
+    if (!card) return;
+    const addr = ($("propertyAddress")?.value || "").trim();
+    const price = Number($("homePrice")?.value || 0);
+    const tax = parseCurrency($("propertyTax")?.value);
+    const ins = parseCurrency($("homeInsurance")?.value);
+    card.classList.toggle("hidden", addr.length <= 4);
+    if (addr.length <= 4) return;
+    if ($("propertySummaryAddress")) $("propertySummaryAddress").textContent = addr;
+    if ($("propertySummaryPrice")) {
+      $("propertySummaryPrice").textContent = price >= 50000 ? formatCurrency(price) : "—";
+    }
+    if ($("propertySummaryTax")) {
+      $("propertySummaryTax").textContent = tax > 0 ? formatCurrency(tax) + "/yr" : "—";
+    }
+    if ($("propertySummaryIns")) {
+      $("propertySummaryIns").textContent = ins > 0 ? formatCurrency(ins) + "/yr" : "—";
+    }
+  }
+
+  function clearPropertySummary() {
+    const addr = $("propertyAddress");
+    if (addr) {
+      addr.value = "";
+      addr.dispatchEvent(new Event("input", { bubbles: true }));
+    }
+    if ($("locationNote")) $("locationNote").textContent = "";
+    updatePropertySummary();
+    $("socialListingBanner")?.classList.add("hidden");
+  }
+
+  function ensureLeadCardVisibleOnResults() {
+    const card = $("saveEstimateCard");
+    if (card && document.body.classList.contains("wizard-on-results")) {
+      card.classList.remove("hidden");
+    }
+  }
+
+  function bindProfileToasts() {
+    $("firstTimeBuyer")?.addEventListener("change", () => {
+      if (!$("firstTimeBuyer").checked) return;
+      setDownPercent(3);
+      const prog = $("loanProgram");
+      if (prog && !["fha", "va", "usda"].includes(prog.value)) {
+        if (typeof window.MMG_logan5_setProgram === "function") {
+          window.MMG_logan5_setProgram("conventional", true);
+        } else {
+          prog.value = "conventional";
+          prog.dispatchEvent(new Event("change", { bubbles: true }));
+        }
+      }
+      showToast({
+        variant: "fthb",
+        title: "First-time homebuyer",
+        body: "If you are a first-time homebuyer, many conventional programs allow as little as <strong>3% down</strong> (e.g. HomeReady / Home Possible style options). We’ve set your down payment to <strong>3%</strong>. You can change it anytime. Final eligibility depends on income, credit, occupancy, and underwriting.",
+        duration: 9500,
+      });
+    });
+
+    $("veteranEligible")?.addEventListener("change", () => {
+      if (!$("veteranEligible").checked) return;
+      showToast({
+        variant: "va",
+        title: "We thank you for your service",
+        body: "VA financing can allow <strong>0% down</strong> for eligible veterans, active duty, and surviving spouses (funding fee and entitlement rules still apply). Select <strong>VA</strong> as the loan type when you’re ready.",
+        duration: 8500,
+      });
+    });
+
+    $("usdaEligible")?.addEventListener("change", () => {
+      if (!$("usdaEligible").checked) return;
+      usdaMapNote();
+      const geo = window.MMG_getLastGeocode?.();
+      if (geo) noteUsdaAfterLookup({ location: geo });
+    });
+
+    // Program picker: VA thank-you + USDA map when those loan types are chosen
+    document.querySelectorAll(".ultimate-program-btn[data-program]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const program = btn.getAttribute("data-program");
+        if (program === "va") {
+          showToast({
+            variant: "va",
+            title: "We thank you for your service",
+            body: "VA loans often allow <strong>0% down</strong> with no monthly PMI for eligible borrowers. Funding fee and entitlement rules still apply — educational estimate only.",
+            duration: 8000,
+          });
+        }
+        if (program === "usda") {
+          usdaMapNote();
+          const geo = window.MMG_getLastGeocode?.();
+          if (geo) noteUsdaAfterLookup({ location: geo });
+        }
+        window.setTimeout(paintDownSlider, 30);
+        window.setTimeout(paintDownSlider, 200);
+      });
+    });
+  }
+
+  function bindChoices() {
+    $("goalPurchaseBtn")?.addEventListener("click", () => {
+      selectCard('[data-step-id="goal"]', $("goalPurchaseBtn"));
+      window.MMG_guided_setGoal?.("purchase");
+      document.body.dataset.loanGoal = "purchase";
+      window.setTimeout(() => window.MMG_guided_next?.(), 160);
+    });
+    $("goalRefinanceBtn")?.addEventListener("click", () => {
+      selectCard('[data-step-id="goal"]', $("goalRefinanceBtn"));
+      window.MMG_guided_setGoal?.("refinance");
+      document.body.dataset.loanGoal = "refinance";
+      document.body.dataset.hasAddress = "yes";
+      window.setTimeout(() => window.MMG_guided_next?.(), 160);
+    });
+    $("hasAddressYesBtn")?.addEventListener("click", () => {
+      selectCard('[data-step-id="has-address"]', $("hasAddressYesBtn"));
+      window.MMG_guided_setHasAddress?.("yes");
+      document.body.dataset.hasAddress = "yes";
+      window.setTimeout(() => window.MMG_guided_next?.(), 160);
+    });
+    $("hasAddressNoBtn")?.addEventListener("click", () => {
+      selectCard('[data-step-id="has-address"]', $("hasAddressNoBtn"));
+      window.MMG_guided_setHasAddress?.("no");
+      document.body.dataset.hasAddress = "no";
+      const field = $("propertyAddress");
+      if (field) field.value = "";
+      window.setTimeout(() => window.MMG_guided_next?.(), 160);
+    });
+
+    document.querySelectorAll(".guided-mini-chip[data-down]").forEach((btn) => {
+      btn.addEventListener("click", () => setDownPercent(btn.getAttribute("data-down")));
+    });
+  }
+
+  function bindInsuranceTax() {
+    $("homeInsurance")?.addEventListener("input", () => {
+      if ($("homeInsurance")) $("homeInsurance").dataset.userEdited = "1";
+    });
+    $("propertyTax")?.addEventListener("input", () => {
+      if ($("propertyTax")) $("propertyTax").dataset.userEdited = "1";
+    });
+    $("downPercent")?.addEventListener("input", paintDownSlider);
+    $("downPercent")?.addEventListener("change", paintDownSlider);
+    $("homePrice")?.addEventListener("change", () => {
+      if ($("homeInsurance")?.dataset.userEdited !== "1") refreshInsurance();
+      paintDownSlider();
+    });
+
+    document.addEventListener("mmg-property-resolved", (e) => {
+      const detail = e.detail || {};
+      if (detail.location?.state) {
+        window.MMG_guidedPropertyState = detail.location.state;
+      }
+      window.setTimeout(() => {
+        if ($("homeInsurance")?.dataset.userEdited !== "1") {
+          delete $("homeInsurance")?.dataset.userEdited;
+          refreshInsurance();
+        }
+        updatePropertySummary();
+        noteUsdaAfterLookup(detail);
+      }, 250);
+    });
+  }
+
+  function bindRealtorSide() {
+    $("guidedNeedRealtorBtn")?.addEventListener("click", () => {
+      if (typeof window.MMG_logan5_showSubView === "function") {
+        window.MMG_logan5_showSubView("realtor");
+      }
+    });
+    $("ultimateRealtorBack")?.addEventListener("click", () => {
+      document.body.classList.remove("guided-realtor-open");
+      $("ultimateRealtorView")?.classList.remove("guided-realtor-overlay");
+    });
+  }
+
+  function bind() {
+    bindChoices();
+    bindProfileToasts();
+    bindInsuranceTax();
+    bindRealtorSide();
+
+    // Ensure reviews link is present
+    const reviews = $("guidedReviewsBtn");
+    if (reviews && !reviews.getAttribute("href")) {
+      reviews.href = REVIEWS_URL;
+    }
+
+    document.addEventListener("mmg-wizard-step-change", (e) => {
+      updatePropertySummary();
+      ensureLeadCardVisibleOnResults();
+      paintDownSlider();
+      const step = e?.detail?.step;
+      if (step === 4 || step === 5 || step === 3) {
+        window.setTimeout(paintDownSlider, 50);
+        window.setTimeout(paintDownSlider, 250);
+      }
+    });
+    document.addEventListener("mmg-wizard-results", () => {
+      ensureLeadCardVisibleOnResults();
+      if ($("homeInsurance")?.dataset.userEdited !== "1") refreshInsurance();
+    });
+    document.addEventListener("mmg-calculated", () => {
+      updatePropertySummary();
+      paintDownSlider();
+    });
+
+    $("propertyAddress")?.addEventListener("change", updatePropertySummary);
+    $("lookupAddress")?.addEventListener("click", () => {
+      window.setTimeout(updatePropertySummary, 500);
+      window.setTimeout(updatePropertySummary, 1500);
+    });
+    $("clearPropertySummary")?.addEventListener("click", clearPropertySummary);
+    $("saveEstimateOptional")?.classList.remove("hidden");
+
+    paintDownSlider();
+    window.setTimeout(paintDownSlider, 400);
+    window.setTimeout(updatePropertySummary, 300);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", bind);
+  } else {
+    bind();
+  }
+})();

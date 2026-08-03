@@ -54,16 +54,7 @@
   function apiUrl(path) {
     if (API_BASE === null) return null;
     const clean = String(path || "").replace(/^\//, "");
-    let base = window.location.href;
-    const metaBase = document.querySelector('meta[name="mmg-api-base"]')?.content?.trim();
-    if (metaBase === "/") {
-      base = `${window.location.origin}/`;
-    } else if (metaBase && metaBase !== ".") {
-      base = metaBase.endsWith("/") ? metaBase : `${metaBase}/`;
-    } else {
-      base = new URL("./", window.location.href).href;
-    }
-    return new URL(clean, base).toString();
+    return new URL(clean, window.location.href).toString();
   }
 
   function initPageMode() {
@@ -82,13 +73,7 @@
     const embedFull =
       params.get("embed") === "full" ||
       (inIframe && params.get("embed") === "0");
-    const ref = (
-      params.get("ref") ||
-      params.get("partner") ||
-      params.get("agent") ||
-      params.get("realtor") ||
-      ""
-    ).trim();
+    const ref = (params.get("ref") || params.get("partner") || "").trim();
     if (embed) document.documentElement.classList.add("embed-mode");
     if (embedFull) document.documentElement.classList.add("embed-full-mode");
     if (ref) {
@@ -122,29 +107,9 @@
     });
   }
 
-  function normalizeLoRef(raw) {
-    const ref = String(raw || "")
-      .trim()
-      .toLowerCase();
-    if (!ref) return "";
-    if (ref === "kevin" || ref.includes("kevin")) return "kevin";
-    if (ref === "logan" || ref.includes("logan")) return "logan";
-    return ref;
-  }
-
-  function resolveTeamApplyBase(site) {
-    const los = site.loanOfficers || {};
-    const loRef = normalizeLoRef(PAGE.ref || PAGE.params.get("ref") || "");
-    if (loRef && los[loRef]?.applyUrl) return los[loRef].applyUrl;
-    return site.teamApplyUrl || site.applyUrl || "https://applywithlogan.com";
-  }
-
   function buildApplyUrl() {
     const site = window.MMG_SITE || {};
-    const isLogan4 = document.body.classList.contains("logan4");
-    const base = isLogan4
-      ? resolveTeamApplyBase(site)
-      : site.applyUrl || "https://applywithlogan.com";
+    const base = site.applyUrl || "https://applywithlogan.com";
     let url;
     try {
       url = new URL(base);
@@ -153,15 +118,10 @@
     }
     const p = PAGE.params;
     const socialWizard = document.body.classList.contains("wizard-social");
-    const loRef = normalizeLoRef(PAGE.ref || p.get("ref") || "");
     const campaign =
       p.get("utm_campaign") ||
       PAGE.ref ||
-      (isLogan4
-        ? site.defaultTeamSocialCampaign
-        : socialWizard
-          ? site.defaultSocialCampaign
-          : null) ||
+      (socialWizard ? site.defaultSocialCampaign : null) ||
       site.defaultCampaign ||
       "mmg-calculator";
     const source =
@@ -179,88 +139,10 @@
     url.searchParams.set("utm_source", source);
     url.searchParams.set("utm_medium", medium);
     url.searchParams.set("utm_campaign", campaign);
-    p.forEach((value, key) => {
-      if (!value) return;
-      if (key.startsWith("utm_") && !url.searchParams.has(key)) {
-        url.searchParams.set(key, value);
-      }
-      if ((key === "gclid" || key === "fbclid" || key === "msclkid") && !url.searchParams.has(key)) {
-        url.searchParams.set(key, value);
-      }
-    });
     const agentRef = (p.get("agent") || p.get("realtor") || "").trim();
-    const ref = PAGE.ref || agentRef || loRef;
-    if (ref) {
-      url.searchParams.set("ref", ref);
-      if (isLogan4) url.searchParams.set("utm_content", ref);
-      else if (!url.searchParams.has("utm_content")) url.searchParams.set("utm_content", ref);
-    }
-    if (document.body.classList.contains("logan5") && !url.searchParams.has("utm_content")) {
-      const coAgent = document.documentElement.dataset.coAgent || agentRef;
-      url.searchParams.set("utm_content", coAgent || "logan5-calculator");
-    }
+    const ref = PAGE.ref || agentRef;
+    if (ref) url.searchParams.set("ref", ref);
     return url.toString();
-  }
-
-  function setMetaTag(attr, key, value) {
-    if (!value) return;
-    let el = document.querySelector(`meta[${attr}="${key}"]`);
-    if (!el) {
-      el = document.createElement("meta");
-      el.setAttribute(attr, key);
-      document.head.appendChild(el);
-    }
-    el.setAttribute("content", value);
-  }
-
-  function wireSocialMeta() {
-    const site = window.MMG_SITE || {};
-    const isLogan4 = document.body.classList.contains("logan4");
-    const image = isLogan4
-      ? site.teamShareImage || site.shareImage
-      : site.shareImage;
-    if (!image) return;
-    setMetaTag("property", "og:image", image);
-    setMetaTag("name", "twitter:card", "summary_large_image");
-    setMetaTag("name", "twitter:image", image);
-  }
-
-  function wireTeamBranding() {
-    if (!document.body.classList.contains("logan4")) return;
-    const site = window.MMG_SITE || {};
-    const los = site.loanOfficers || {};
-    const kevin = los.kevin || {};
-    const logan = los.logan || {};
-    const companyNmls = site.companyNmls || "3446";
-    const nmlsLine =
-      `${kevin.name || "Kevin Martini"} · NMLS #${kevin.nmls || "143962"} · ` +
-      `${logan.name || "Logan Martini"} · NMLS #${logan.nmls || site.nmls || "1591485"}`;
-
-    const teamTitle = document.querySelector(".wizard-team-title");
-    if (teamTitle) teamTitle.textContent = nmlsLine;
-
-    const teamMeta = document.querySelector(".wizard-team-meta");
-    if (teamMeta) {
-      teamMeta.textContent =
-        `${site.brandName || "Martini Mortgage Group"} · Powered by Gold Star Mortgage · NMLS #${companyNmls} · Raleigh, NC`;
-    }
-
-    document.querySelectorAll(".nmls-compliance").forEach((el) => {
-      el.innerHTML =
-        `<strong>NMLS licensing:</strong> ${site.companyLegalName || "Martini Mortgage Group"} · NMLS #${companyNmls} · ` +
-        `${kevin.name || "Kevin Martini"} · NMLS #${kevin.nmls || "143962"} · ` +
-        `${logan.name || "Logan Martini"} · NMLS #${logan.nmls || site.nmls || "1591485"} · ` +
-        `Verify at <a href="https://www.nmlsconsumeraccess.org/" target="_blank" rel="noopener noreferrer">nmlsconsumeraccess.org</a>.`;
-    });
-
-    const nmlsFooter = document.querySelector(".wizard-site-footer .nmls");
-    if (nmlsFooter) {
-      nmlsFooter.innerHTML =
-        `${site.companyLegalName || "Martini Mortgage Group"} · NMLS #${companyNmls}<br />` +
-        `${nmlsLine}<br />` +
-        `${site.address || "507 N Blount St, Raleigh, NC 27604"} · ` +
-        `<a href="${site.siteUrl || "https://martinimortgagegroup.com"}">martinimortgagegroup.com</a>`;
-    }
   }
 
   function wireApplyLinks() {
@@ -308,8 +190,8 @@
     const copyBtn = document.getElementById("copyShareLink");
     if (!wrap || !input) return;
     const show =
+      PAGE.ref ||
       PAGE.params.get("share") === "1" ||
-      PAGE.params.get("share") === "true" ||
       PAGE.params.get("partner") === "1";
     if (!show) return;
     wrap.classList.remove("hidden");
@@ -340,10 +222,7 @@
     const show = () => {
       const y = window.scrollY || document.documentElement.scrollTop;
       const wizardStep = Number(document.body.dataset.wizardStep || "0");
-      const isLogan5 = document.body.classList.contains("logan5");
-      const pastHero = socialWizard
-        ? wizardStep >= 3
-        : y > 320;
+      const pastHero = socialWizard ? wizardStep >= 5 : y > 320;
       bar.classList.toggle("sticky-cta-visible", pastHero);
       bar.setAttribute("aria-hidden", pastHero ? "false" : "true");
       document.body.classList.toggle("has-sticky-pad", pastHero);
@@ -466,103 +345,13 @@
   let typicalLenderRate = null;
 
   function getLoanProgram() {
-    const raw = els.loanProgram?.value || "conventional";
-    const id = window.MMG_normalizeProgramId
-      ? window.MMG_normalizeProgramId(raw)
-      : raw === "jumbo"
-        ? "conventional"
-        : raw;
-    if (els.loanProgram && raw === "jumbo") els.loanProgram.value = "conventional";
-    return window.MMG_getLoanProgram
-      ? window.MMG_getLoanProgram(id)
-      : {
-          id: "conventional",
-          minDownPercent: 3,
-          defaultDownPercent: 20,
-          rateSpreadVsConventional: 0,
-          miLabel: "PMI",
-          miRequiredBelowLtv: 80,
-          defaultMiAnnualRate: 0.5,
-        };
-  }
-
-  function getBuyerProfile() {
-    return {
-      firstTimeBuyer: Boolean(document.getElementById("firstTimeBuyer")?.checked),
-      veteranEligible: Boolean(document.getElementById("veteranEligible")?.checked),
-      usdaEligible: Boolean(document.getElementById("usdaEligible")?.checked),
-    };
-  }
-
-  function getCountyKey() {
-    if (window.MMG_resolveCountyKey && lastGeocode) {
-      return window.MMG_resolveCountyKey(lastGeocode);
-    }
-    return window.MMG_LOAN_LIMITS?.defaultCounty || "wake";
-  }
-
-  function getEffectiveMinDown(program) {
-    if (window.MMG_getEffectiveMinDown && document.body.classList.contains("logan5")) {
-      const price = Number(els.homePrice?.value || 0);
-      return window.MMG_getEffectiveMinDown(program.id, getBuyerProfile(), price, getCountyKey());
-    }
-    return program.minDownPercent ?? 0;
-  }
-
-  function getDownPctStep() {
-    return document.body.classList.contains("logan5") ? 0.5 : 1;
-  }
-
-  function roundDownPct(pct) {
-    const step = getDownPctStep();
-    return Math.round((Number(pct) || 0) / step) * step;
-  }
-
-  function formatDownPctLabel(pct) {
-    const n = Number(pct) || 0;
-    return Number.isInteger(n) ? `${n}%` : `${n.toFixed(1)}%`;
-  }
-
-  function syncLoanSizeRules() {
-    if (!window.MMG_syncProgramForLoanSize || !els.loanProgram) return false;
-    const result = window.MMG_syncProgramForLoanSize({
-      homePrice: Number(els.homePrice?.value || 0),
-      countyKey: getCountyKey(),
-      loanProgramEl: els.loanProgram,
-      downPercentEl: els.downPercent,
-      profile: getBuyerProfile(),
-    });
-    if (result.changed) {
-      syncDownFromPercent();
-      if (window.MMG_applyLoanProgramUi) window.MMG_applyLoanProgramUi();
-    }
-    return result.changed;
-  }
-
-  function snapDownToProgramDefault() {
-    if (!document.body.classList.contains("logan5")) return;
-    syncLoanSizeRules();
-    const program = getLoanProgram();
-    const profile = getBuyerProfile();
-    const price = Number(els.homePrice?.value || 0);
-    const countyKey = getCountyKey();
-    const down =
-      window.MMG_getProgramDefaultDown?.(program.id, profile, price, countyKey) ??
-      program.defaultDownPercent ??
-      getEffectiveMinDown(program);
-    const min = getEffectiveMinDown(program);
-    const target = roundDownPct(Math.max(min, down));
-    if (els.downPercent) {
-      els.downPercent.step = String(getDownPctStep());
-      els.downPercent.value = String(target);
-    }
-    if (els.downPercentInput) els.downPercentInput.value = target;
-    syncDownFromPercent();
+    const id = els.loanProgram?.value || "conventional";
+    return window.MMG_getLoanProgram ? window.MMG_getLoanProgram(id) : { id: "conventional", minDownPercent: 3, defaultDownPercent: 20, rateSpreadVsConventional: 0, miLabel: "PMI", miRequiredBelowLtv: 80, defaultMiAnnualRate: 0.5 };
   }
 
   function programNeedsMonthlyMi(program, downPct) {
     if (program.id === "va") return false;
-    if (program.id === "conventional" || program.id === "jumbo") return downPct < 20;
+    if (program.id === "conventional") return downPct < 20;
     if (program.id === "fha" || program.id === "usda") return true;
     return downPct < 20;
   }
@@ -573,38 +362,12 @@
       els.loanProgramNote.textContent = program.description || "";
     }
     if (els.programDownHint) {
-      const min = getEffectiveMinDown(program);
-      const profile = getBuyerProfile();
-      const price = Number(els.homePrice?.value || 0);
-      const countyKey = getCountyKey();
-      let hint = "";
-      if (
-        program.id === "fha" &&
-        window.MMG_getFhaIneligibleNote &&
-        price > 0 &&
-        !window.MMG_isFhaEligible(price, countyKey)
-      ) {
-        hint = window.MMG_getFhaIneligibleNote(price, countyKey);
-        els.programDownHint.textContent = hint;
-        els.programDownHint.classList.remove("hidden");
-      } else if (min <= 0) {
+      const min = program.minDownPercent;
+      if (min <= 0) {
         els.programDownHint.textContent = `${program.shortLabel}: no down payment required for eligible buyers.`;
         els.programDownHint.classList.remove("hidden");
       } else if (min < 20) {
-        hint = `${program.shortLabel}: minimum ${min}% down for this estimate.`;
-        if (document.body.classList.contains("logan5") && program.id === "conventional") {
-          hint += profile.firstTimeBuyer
-            ? " First-time buyer programs (e.g. HomeReady) may allow 3%."
-            : " Non–first-time buyers often need 5%+ on conventional.";
-        }
-        if (
-          program.id === "conventional" &&
-          window.MMG_isJumboConventional?.(price, Number(els.downPercent?.value || 0), countyKey)
-        ) {
-          const jMin = window.MMG_getJumboMinDownPercent?.(price, countyKey) ?? 10.1;
-          hint = `Conventional (high balance): loan exceeds ${formatCurrency(window.MMG_getConformingLimit(countyKey))} conforming limit. Minimum ${jMin}% down for this estimate.`;
-        }
-        els.programDownHint.textContent = hint;
+        els.programDownHint.textContent = `${program.shortLabel}: minimum ${min}% down for this estimate.`;
         els.programDownHint.classList.remove("hidden");
       } else {
         els.programDownHint.classList.add("hidden");
@@ -621,32 +384,17 @@
     if (els.feeSheetProgramNote) {
       els.feeSheetProgramNote.textContent = program.feeSheetNote || "";
     }
-    const minDown = getEffectiveMinDown(program);
-    // Keep range min at 0 so the thumb position matches the % (e.g. 20% is not stuck left).
-    // Enforce program minimums by bumping the value, not by shifting the slider scale.
+    const minDown = program.minDownPercent ?? 0;
     if (els.downPercent) {
-      els.downPercent.min = "0";
-      els.downPercent.max = "50";
+      els.downPercent.min = String(minDown);
     }
     if (els.downPercentInput) {
-      els.downPercentInput.min = "0";
-      els.downPercentInput.max = "100";
+      els.downPercentInput.min = String(minDown);
     }
     const currentDown = Number(els.downPercent?.value || 0);
     if (currentDown < minDown) {
-      const bumped = roundDownPct(minDown);
-      if (els.downPercent) els.downPercent.value = String(bumped);
-      if (els.downPercentInput) els.downPercentInput.value = bumped;
+      if (els.downPercent) els.downPercent.value = minDown;
       syncDownFromPercent();
-    }
-    // Paint track fill so 20% looks 20% across the bar
-    if (els.downPercent && typeof window.MMG_guided_paintDownSlider === "function") {
-      window.MMG_guided_paintDownSlider();
-    } else if (els.downPercent) {
-      const max = Number(els.downPercent.max) || 50;
-      const val = Number(els.downPercent.value) || 0;
-      const pct = Math.max(0, Math.min(100, (val / max) * 100));
-      els.downPercent.style.setProperty("--down-fill", `${pct}%`);
     }
     applyCreditToPmi();
   }
@@ -698,22 +446,6 @@
         /* fallback */
       }
     }
-    if (window.MMG_fetchFredPmms) {
-      try {
-        const fred = await window.MMG_fetchFredPmms();
-        if (pmmsHasValidRates(fred)) {
-          cachedPmms = fred;
-          try {
-            sessionStorage.setItem("mmg_pmms_day", dayKey);
-          } catch {
-            /* ignore */
-          }
-          return cachedPmms;
-        }
-      } catch {
-        /* fallback */
-      }
-    }
     cachedPmms = { ...fallback, source: "Freddie Mac PMMS (cached)", cacheDate: dayKey };
     return cachedPmms;
   }
@@ -737,22 +469,11 @@
 
   function getRateScenarioInputs() {
     const program = getLoanProgram();
-    const price = Number(els.homePrice?.value || 0);
-    const downPercent = Number(els.downPercent?.value || 20);
-    const countyKey = getCountyKey();
-    const programSpread = window.MMG_getEffectiveProgramSpread
-      ? window.MMG_getEffectiveProgramSpread(
-          program.id,
-          price,
-          downPercent,
-          countyKey
-        )
-      : Number(program.rateSpreadVsConventional) || 0;
     return {
       creditScore: Number(els.creditScore?.value || 740),
-      downPercent,
+      downPercent: Number(els.downPercent?.value || 20),
       termYears: Number(els.loanTerm?.value || 30),
-      programSpread,
+      programSpread: Number(program.rateSpreadVsConventional) || 0,
     };
   }
 
@@ -928,7 +649,7 @@
     monthlyInsurance,
     monthlyPmi
   ) {
-    if (!els.vsCompetition) return null;
+    if (!els.vsCompetition) return;
 
     const fmt = window.MMG_formatRate || ((n) => String(n));
     const typical =
@@ -944,11 +665,13 @@
 
     if (loanPrincipal <= 0) {
       els.vsCompetition.classList.add("hidden");
-      return null;
+      updateLeadSavingsRibbon(0, 0);
+      return;
     }
     if (typical <= 0 || martiniRate <= 0) {
       els.vsCompetition.classList.add("hidden");
-      return null;
+      updateLeadSavingsRibbon(0, 0);
+      return;
     }
 
     const piTypical = monthlyPI(loanPrincipal, typical, years);
@@ -1014,68 +737,16 @@
       els.vsCompNote.textContent = note;
     }
 
-    return {
-      monthlyPiSave,
-      monthlyPitiSave,
-      lifetimeSave,
-      typical,
-      martiniRate,
-      loanPrincipal,
-      years,
-      monthlyTax,
-      monthlyInsurance,
-      monthlyPmi,
-    };
+    updateLeadSavingsRibbon(monthlyPitiSave, rateDiff);
   }
 
-  function estimateTypicalLenderCashToClose(
-    loanPrincipal,
-    downPayment,
-    annualTax,
-    annualInsurance,
-    martiniPointsCost
-  ) {
-    const lenderBase = window.MMG_MARKET?.aprFinanceCharge ?? 2500;
-    const prepaids = Math.round((annualTax / 12) * 3 + (annualInsurance / 12) * 14);
-    const martiniClosing = Math.round(loanPrincipal * 0.02 + lenderBase);
-    const martiniPoints = Math.max(0, Number(martiniPointsCost) || 0);
-    const martiniCash = downPayment + martiniClosing + prepaids + martiniPoints;
-
-    const typicalClosing = Math.round(
-      loanPrincipal * 0.02 + lenderBase * 1.75 + loanPrincipal * 0.004
-    );
-    const typicalPoints = Math.round(loanPrincipal * 0.01);
-    const typicalCash = downPayment + typicalClosing + prepaids + typicalPoints;
-
-    return {
-      martiniCash,
-      typicalCash,
-      savings: Math.max(0, typicalCash - martiniCash),
-    };
-  }
-
-  function updateLeadSavingsRibbon(monthlyPitiSave, rateDiff, cashSavings) {
+  function updateLeadSavingsRibbon(monthlyPitiSave, rateDiff) {
     if (!els.leadSavingsRibbon || !els.leadSavingsAmount) return;
     const save = Math.max(0, Number(monthlyPitiSave) || 0);
-    const cashSave = Math.max(0, Number(cashSavings) || 0);
-    const showMonthly = save >= 25 && (rateDiff == null || rateDiff >= 0.0625);
-    const showCash = cashSave >= 500;
-    const show = showMonthly || showCash;
+    const show = save >= 25 && (rateDiff == null || rateDiff >= 0.0625);
     els.leadSavingsRibbon.classList.toggle("hidden", !show);
-    if (els.leadMonthlySavingsRow) {
-      els.leadMonthlySavingsRow.classList.toggle("hidden", !showMonthly);
-    }
-    if (showMonthly) {
+    if (show) {
       els.leadSavingsAmount.textContent = formatCurrency(save);
-    }
-    if (els.leadCashSavingsRow) {
-      els.leadCashSavingsRow.classList.toggle("hidden", !showCash);
-    }
-    if (els.leadCashSavingsAmount && showCash) {
-      els.leadCashSavingsAmount.textContent = formatCurrency(cashSave);
-    }
-    if (els.leadCashSavingsNote) {
-      els.leadCashSavingsNote.classList.toggle("hidden", !showCash);
     }
   }
 
@@ -1289,28 +960,12 @@
   }
 
   function refreshInsuranceFromCredit() {
-    if (!els.homeInsurance) return;
-    if (insuranceManualOverride) return;
+    if (!lastGeocode || !els.homeInsurance) return;
     const homePrice = Number(els.homePrice?.value || 0);
-    if (homePrice <= 0) return;
     const score = Number(els.creditScore?.value || 740);
-    // Prefer geocoded state (public-record tax path); fall back to NC / guided state
-    const state =
-      lastGeocode?.state ||
-      window.MMG_guidedPropertyState ||
-      "NC";
-    const insRate = getInsuranceRate(state, score);
-    const annual = Math.round(homePrice * (insRate / 100));
-    els.homeInsurance.value = formatCurrencyInput(annual);
-    const note = document.getElementById("homeInsuranceSourceNote");
-    if (note) {
-      note.textContent = `Est. ${insRate.toFixed(2)}%/yr of value · credit tier ${score} · ${state} base (illustrative, not a bindable quote)`;
-    }
+    const insRate = getInsuranceRate(lastGeocode.state, score);
+    els.homeInsurance.value = formatCurrencyInput(Math.round(homePrice * (insRate / 100)));
   }
-
-  /** Expose for guided UI after profile / credit changes */
-  window.MMG_refreshInsuranceFromCredit = refreshInsuranceFromCredit;
-  window.MMG_getLastGeocode = () => lastGeocode;
 
   function monthlyPI(principal, annualRate, years) {
     if (principal <= 0) return 0;
@@ -1340,54 +995,23 @@
     return { rows, totalInterest, payment };
   }
 
-  function paintDownSliderTrack() {
-    if (!els.downPercent) return;
-    // Always 0–50 track so 20% lands ~40% across (not stuck left)
-    els.downPercent.min = "0";
-    if (!els.downPercent.max || Number(els.downPercent.max) < 50) {
-      els.downPercent.max = "50";
-    }
-    const max = Number(els.downPercent.max) || 50;
-    const min = Number(els.downPercent.min) || 0;
-    const val = Number(els.downPercent.value) || 0;
-    const span = Math.max(0.0001, max - min);
-    const pct = Math.max(0, Math.min(100, ((val - min) / span) * 100));
-    els.downPercent.style.setProperty("--down-fill", `${pct}%`);
-    els.downPercent.classList.add("guided-range-fill");
-  }
-
   function syncDownFromPercent() {
     const price = Number(els.homePrice?.value || 0);
-    const pct = roundDownPct(els.downPercent?.value || 0);
+    const pct = Number(els.downPercent?.value || 0);
     const amount = Math.round((price * pct) / 100);
     if (els.downAmountInput) els.downAmountInput.value = formatCurrencyInput(amount);
     if (els.downPercentInput) els.downPercentInput.value = pct;
-    if (els.downDisplay) {
-      els.downDisplay.textContent = `${formatDownPctLabel(pct)} · ${formatCurrency(amount)}`;
-    }
-    // Keep min at 0 for correct thumb position (20% ≈ 40% along a 0–50 track)
-    if (els.downPercent) {
-      els.downPercent.min = "0";
-      if (String(els.downPercent.value) !== String(pct)) {
-        els.downPercent.value = String(pct);
-      }
-    }
-    paintDownSliderTrack();
-    if (typeof window.MMG_guided_paintDownSlider === "function") {
-      window.MMG_guided_paintDownSlider();
-    }
+    if (els.downDisplay) els.downDisplay.textContent = `${pct}% · ${formatCurrency(amount)}`;
   }
 
   function syncDownFromAmount() {
     const price = Number(els.homePrice?.value || 0);
     const amount = parseCurrency(els.downAmountInput?.value);
     const pct = price > 0 ? Math.min(100, Math.round((amount / price) * 1000) / 10) : 0;
-    const clampedPct = roundDownPct(Math.min(50, Math.max(0, pct)));
-    if (els.downPercent) els.downPercent.value = String(clampedPct);
+    const clampedPct = Math.min(50, Math.max(0, pct));
+    if (els.downPercent) els.downPercent.value = Math.round(clampedPct);
     if (els.downPercentInput) els.downPercentInput.value = clampedPct;
-    if (els.downDisplay) {
-      els.downDisplay.textContent = `${formatDownPctLabel(clampedPct)} · ${formatCurrency(amount)}`;
-    }
+    if (els.downDisplay) els.downDisplay.textContent = `${clampedPct}% · ${formatCurrency(amount)}`;
   }
 
   function setLocationNote(message, type) {
@@ -1441,41 +1065,15 @@
       syncDownFromPercent();
       setHomePriceAutoFilled(true, price);
       data.homePrice = price;
-      els.homePrice.dispatchEvent(new Event("input", { bubbles: true }));
-      els.homePriceInput?.dispatchEvent(new Event("input", { bubbles: true }));
     } else if (data.updatePriceRequested) {
       setHomePriceAutoFilled(false);
     }
 
     if (els.propertyTax) {
       els.propertyTax.value = formatCurrencyInput(data.annualTax);
-      const taxNote = document.getElementById("propertyTaxSourceNote");
-      if (taxNote) {
-        const src = data.taxSource === "county_median_rate" || data.priceLookupSource
-          ? "County millage / public-record estimate"
-          : "Local rate estimate";
-        taxNote.textContent = `${src} (${data.taxRatePercent?.toFixed?.(2) || "—"}%/yr) · editable · not a tax bill`;
-      }
-      if (data.location?.state) {
-        window.MMG_guidedPropertyState = data.location.state;
-      }
     }
     if (els.homeInsurance) {
-      insuranceManualOverride = false;
-      // Prefer credit-adjusted rate from same engine for consistency
-      const score = Number(els.creditScore?.value || 740);
-      const st = data.location?.state || "NC";
-      const insRate = getInsuranceRate(st, score);
-      const annualIns = Math.round(
-        (Number(data.homePrice) || Number(els.homePrice?.value) || 0) * (insRate / 100)
-      );
-      els.homeInsurance.value = formatCurrencyInput(
-        annualIns > 0 ? annualIns : data.annualInsurance
-      );
-      const insNote = document.getElementById("homeInsuranceSourceNote");
-      if (insNote) {
-        insNote.textContent = `Est. ${insRate.toFixed(2)}%/yr of value · credit tier ${score} · illustrative only`;
-      }
+      els.homeInsurance.value = formatCurrencyInput(data.annualInsurance);
     }
 
     const taxLabel =
@@ -1506,9 +1104,6 @@
       applyBaselineRatesImmediate();
     }
     calculate();
-    document.dispatchEvent(
-      new CustomEvent("mmg-property-resolved", { detail: data })
-    );
   }
 
   function buildLocalPropertyEstimate(location) {
@@ -1541,20 +1136,14 @@
     if (API_BASE !== null) {
       try {
         const res = await fetch(apiUrl(`api/property?${params}`));
-        const contentType = (res.headers.get("content-type") || "").toLowerCase();
-        if (res.ok && contentType.includes("json")) {
-          const data = await res.json();
-          if (data?.error) {
-            throw new Error(
-              data.error === "Address not found" ? "Address not found" : "Lookup failed"
-            );
-          }
-          return data;
-        }
-        /* HTML 404/500 from WordPress etc. — fall through to client lookup */
+        if (res.status === 404) throw new Error("Address not found");
+        if (!res.ok) throw new Error("Lookup failed");
+        return await res.json();
       } catch (err) {
-        if (err.message === "Address not found") throw err;
-        /* network or API unavailable — fall through */
+        if (err.message === "Address not found" || err.message === "Lookup failed") {
+          throw err;
+        }
+        /* fall through on network errors */
       }
     }
 
@@ -1562,27 +1151,9 @@
       ? location
       : await geocodeAddress(address, magicKey);
     if (!loc?.state) throw new Error("Address not found");
-
-    if (updatePrice && typeof window.MMG_clientPropertyLookup === "function") {
-      try {
-        const clientData = await window.MMG_clientPropertyLookup(address, loc, {
-          homePrice,
-          creditScore,
-          updatePrice: true,
-        });
-        if (clientData) {
-          clientData.updatePriceRequested = updatePrice;
-          return clientData;
-        }
-      } catch (err) {
-        console.warn("Client property lookup failed:", err);
-      }
-    }
-
     const estimate = buildLocalPropertyEstimate(loc);
     estimate.updatePriceRequested = updatePrice;
-    estimate.priceLookupConfigured =
-      typeof window.MMG_clientPropertyLookup === "function";
+    estimate.priceLookupConfigured = false;
     return estimate;
   }
 
@@ -1992,10 +1563,6 @@
       );
       data.updatePriceRequested = updatePrice;
       applyPropertyData(data);
-    if (document.body.classList.contains("logan5")) {
-      syncLoanSizeRules();
-      snapDownToProgramDefault();
-    }
     } catch (err) {
       setLocationNote(
         err.message === "Address not found"
@@ -2125,7 +1692,7 @@
       els.downPmiHint.classList.toggle("hidden", !showDownHint);
     }
     const rateInfo = updateDiscountPointsAndApr();
-    const vsSavings = updateVsCompetitionPanel(
+    updateVsCompetitionPanel(
       loanPrincipal,
       rate,
       years,
@@ -2133,49 +1700,6 @@
       monthlyInsurance,
       monthlyPmi
     );
-
-    if (document.body.classList.contains("logan4") && vsSavings) {
-      document.dispatchEvent(
-        new CustomEvent("mmg-logan4-results", {
-          detail: {
-            ...vsSavings,
-            homePrice,
-            downPct,
-            downPayment,
-            rate,
-            piti,
-            pi,
-            totalInterest,
-          },
-        })
-      );
-    }
-
-    if (document.body.classList.contains("logan5")) {
-      document.dispatchEvent(
-        new CustomEvent("mmg-logan5-calculated", {
-          detail: {
-            homePrice,
-            downPct,
-            downPayment,
-            loanPrincipal,
-            rate,
-            years,
-            piti,
-            pi,
-            totalMonthly,
-            monthlyTax,
-            monthlyInsurance,
-            monthlyPmi,
-            monthlyHoa,
-            totalInterest,
-            program: program.id,
-            profile: getBuyerProfile(),
-            vsSavings,
-          },
-        })
-      );
-    }
 
     if (els.totalWithExtras) {
       els.totalWithExtras.classList.toggle("hidden", !hasExtras);
@@ -2193,29 +1717,13 @@
       els.amortSection.setAttribute("aria-hidden", showAmort ? "false" : "true");
     }
 
-    const pointsCost = rateInfo?.pointsCost ?? 0;
     updateOfficialQuotePanel(
       homePrice,
       downPayment,
       loanPrincipal,
       annualTax,
       annualInsurance,
-      pointsCost
-    );
-
-    const cashCompare = estimateTypicalLenderCashToClose(
-      loanPrincipal,
-      downPayment,
-      annualTax,
-      annualInsurance,
-      pointsCost
-    );
-    updateLeadSavingsRibbon(
-      vsSavings?.monthlyPitiSave ?? 0,
-      vsSavings?.typical != null && vsSavings?.martiniRate != null
-        ? vsSavings.typical - vsSavings.martiniRate
-        : 0,
-      cashCompare.savings
+      rateInfo?.pointsCost ?? 0
     );
 
     renderAmortTable(rows);
@@ -2259,11 +1767,7 @@
       }
     }
 
-    const sellerCredit = window.MMG_getSellerCredit?.() || 0;
-    const cashToClose = Math.max(
-      0,
-      downPayment + closingCosts + prepaids + extraPoints - sellerCredit
-    );
+    const cashToClose = downPayment + closingCosts + prepaids + extraPoints;
 
     if (els.quoteDownPayment) {
       els.quoteDownPayment.textContent = formatCurrency(downPayment);
@@ -2273,13 +1777,6 @@
     }
     if (els.quotePrepaids) {
       els.quotePrepaids.textContent = formatCurrency(prepaids);
-    }
-    if (els.quoteSellerCreditRow && els.quoteSellerCredit) {
-      const showCredit = sellerCredit > 0;
-      els.quoteSellerCreditRow.classList.toggle("hidden", !showCredit);
-      els.quoteSellerCredit.textContent = showCredit
-        ? `−${formatCurrency(sellerCredit)}`
-        : "—";
     }
     if (els.quoteCashToClose) {
       els.quoteCashToClose.textContent = formatCurrency(cashToClose);
@@ -2438,17 +1935,6 @@
       if (input.value.trim().length) scheduleAcSearch();
     });
 
-    input.addEventListener("blur", () => {
-      window.setTimeout(() => {
-        if (addressPickInFlight || lookupInFlight) return;
-        const address = input.value.trim();
-        if (!address || address === lastSelectedAddress) return;
-        if (looksLikeFullAddress(address)) {
-          lookupFromAddress();
-        }
-      }, 220);
-    });
-
     input.addEventListener("keydown", (e) => {
       const options = list.querySelectorAll("li[role='option']");
       if (e.key === "ArrowDown" && options.length) {
@@ -2499,19 +1985,13 @@
   }
 
   function bindEvents() {
-    window.addEventListener("mmg:address-selected", (e) => {
-      if (e.detail) onAddressPicked(e.detail);
-    });
-
     els.lookupAddress?.addEventListener("click", lookupFromAddress);
 
     els.loanProgram?.addEventListener("change", () => {
-      snapDownToProgramDefault();
       applyLoanProgramUi();
       rateManualOverride = false;
       refreshMarketRateIfActive();
       calculate();
-      document.dispatchEvent(new CustomEvent("mmg-program-change"));
     });
 
     els.toggleFeeSheet?.addEventListener("click", () => {
@@ -2580,11 +2060,9 @@
       if (els.homePriceDisplay) {
         els.homePriceDisplay.textContent = formatCurrency(price);
       }
-      if (document.body.classList.contains("logan5")) syncLoanSizeRules();
       syncDownFromPercent();
       recalcTaxFromAddressIfNeeded();
       calculate();
-      document.dispatchEvent(new CustomEvent("mmg-program-change"));
     });
 
     els.homePriceInput?.addEventListener("input", () => {
@@ -2594,25 +2072,21 @@
       els.homePrice.value = clamped;
       if (els.homePriceDisplay) els.homePriceDisplay.textContent = formatCurrency(clamped);
       if (els.homePriceInput) els.homePriceInput.value = formatCurrencyInput(clamped);
-      if (document.body.classList.contains("logan5")) syncLoanSizeRules();
       syncDownFromPercent();
       recalcTaxFromAddressIfNeeded();
       calculate();
-      document.dispatchEvent(new CustomEvent("mmg-program-change"));
     });
 
     els.downPercent?.addEventListener("input", () => {
-      const pct = roundDownPct(els.downPercent.value);
-      if (els.downPercent) els.downPercent.value = String(pct);
-      if (els.downPercentInput) els.downPercentInput.value = pct;
+      if (els.downPercentInput) els.downPercentInput.value = els.downPercent.value;
       syncDownFromPercent();
       refreshMarketRateIfActive();
       calculate();
     });
 
     els.downPercentInput?.addEventListener("input", () => {
-      const pct = roundDownPct(Math.min(50, Math.max(0, Number(els.downPercentInput.value) || 0)));
-      els.downPercent.value = String(pct);
+      const pct = Math.min(50, Math.max(0, Number(els.downPercentInput.value) || 0));
+      els.downPercent.value = Math.round(pct);
       els.downPercentInput.value = pct;
       syncDownFromPercent();
       refreshMarketRateIfActive();
@@ -2666,52 +2140,18 @@
       "vsPointsRow", "vsPointsCost", "vsCompNote",
       "discountPointsPanel", "discountPointsDetail", "feeSheetPointsRow", "feeSheetPointsCost",
       "quoteDownPayment", "quoteClosingCosts", "quotePrepaids", "quotePointsRow",
-      "quotePointsCost", "quoteSellerCreditRow", "quoteSellerCredit",
-      "quoteCashToClose", "quoteScenarioSummary",
+      "quotePointsCost", "quoteCashToClose", "quoteScenarioSummary",
       "heroLiveRate", "marketPulseText",
       "leadSavingsRibbon", "leadSavingsAmount",
-      "leadMonthlySavingsRow",
-      "leadCashSavingsRow", "leadCashSavingsAmount", "leadCashSavingsNote",
     ];
     for (const id of ids) {
       els[id] = $(id);
     }
   }
 
-  window.MMG_applyLoanProgramUi = applyLoanProgramUi;
-  window.MMG_snapDownToProgram = snapDownToProgramDefault;
-  window.MMG_getCountyKey = getCountyKey;
-  window.MMG_syncLoanSizeRules = syncLoanSizeRules;
-  window.MMG_getMartiniRateForProgram = function (
-    programId,
-    downPctOverride,
-    termYearsOverride
-  ) {
-    const pmms = pmmsHasValidRates(cachedPmms) ? cachedPmms : getPmmsFallback();
-    const price = Number(els.homePrice?.value || 0);
-    const down = downPctOverride ?? Number(els.downPercent?.value || 20);
-    const id = window.MMG_normalizeProgramId
-      ? window.MMG_normalizeProgramId(programId)
-      : programId;
-    const spread = window.MMG_getEffectiveProgramSpread
-      ? window.MMG_getEffectiveProgramSpread(id, price, down, getCountyKey())
-      : window.MMG_getLoanProgram(id).rateSpreadVsConventional || 0;
-    const computed = window.MMG_computeMarketRate?.(
-      pmms.rate30,
-      pmms.rate15,
-      Number(els.creditScore?.value || 740),
-      down,
-      termYearsOverride ?? Number(els.loanTerm?.value || 30),
-      spread
-    );
-    return computed?.martiniRate ?? Number(els.interestRate?.value || DEFAULT_MARTINI_OFFER_RATE);
-  };
-
   async function init() {
     try {
       fixAssetUrls();
-      wireSocialMeta();
-      wireTeamBranding();
       wireApplyLinks();
       wirePhoneLinks();
       wireSecondaryCtas();
@@ -2732,9 +2172,7 @@
 
       bindEvents();
       try {
-        if (!window.MMG_addressAutocomplete?.refresh) {
-          bindAddressAutocomplete();
-        }
+        bindAddressAutocomplete();
       } catch (err) {
         console.error("Address autocomplete failed:", err);
       }

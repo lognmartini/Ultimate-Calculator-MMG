@@ -1,0 +1,3520 @@
+/* =========================================================
+   Guided multi-step flow — full-width desktop, centered, clean
+   ========================================================= */
+
+body.guided-flow {
+  background: #f4f2ef;
+}
+
+body.guided-flow .ultimate-rate-ticker-bar {
+  display: none !important;
+}
+
+/* Header full width but content centered */
+body.guided-flow .guided-header .guided-header-inner,
+body.guided-flow .wizard-header-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  width: 100%;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  box-sizing: border-box;
+}
+
+/* ---- Centered calculator column (not left-aligned) ---- */
+body.guided-flow.logan5 .wizard-main.guided-main,
+body.guided-flow .wizard-main.guided-main,
+body.guided-flow .guided-main {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 1.25rem 1.25rem 7rem !important;
+  box-sizing: border-box;
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* Outer wrapper: flex + justify center */
+body.guided-flow .guided-layout {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+}
+
+/* Calculator card / main column */
+body.guided-flow .guided-layout-center {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto !important;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* Steps + cards stay centered inside the column */
+body.guided-flow .guided-step-panel,
+body.guided-flow .guided-card,
+body.guided-flow .guided-results-card,
+body.guided-flow .guided-choice-grid,
+body.guided-flow .guided-progress {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+body.guided-flow .guided-step-panel {
+  max-width: 720px;
+  width: 100%;
+}
+
+body.guided-flow .guided-card-narrow {
+  max-width: 680px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+body.guided-flow .guided-card-wide,
+body.guided-flow .guided-results-card {
+  max-width: 720px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Live rail: below main on mobile, beside on large — still as a centered stack */
+body.guided-flow .guided-live-rail {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+@media (min-width: 1100px) {
+  body.guided-flow .guided-main {
+    padding: 1.75rem 2rem 7.5rem !important;
+  }
+
+  /* Wide desktop: center a row of [card + rail] as a unit */
+  body.guided-flow .guided-layout {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 1.75rem;
+    max-width: 1040px;
+  }
+
+  body.guided-flow .guided-layout-center {
+    flex: 0 1 720px;
+    max-width: 720px;
+    margin: 0 !important;
+  }
+
+  body.guided-flow .guided-live-rail {
+    flex: 0 0 260px;
+    max-width: 260px;
+    position: sticky;
+    top: 5.75rem;
+    margin: 0;
+  }
+
+  body.guided-flow .guided-live-rail .ultimate-live-stats {
+    display: grid;
+  }
+}
+
+/* Live rail */
+body.guided-flow .guided-live-rail {
+  width: 100%;
+  margin: 0;
+}
+
+body.guided-flow .guided-live-rail .wizard-live-preview {
+  border-radius: 16px;
+  padding: 1rem 1.15rem;
+  box-shadow: 0 8px 30px rgba(26, 18, 48, 0.08);
+}
+
+body.guided-flow .guided-live-rail .ultimate-live-stats {
+  display: none;
+}
+
+body.guided-flow .guided-side-advisor {
+  display: none;
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid rgba(26, 18, 48, 0.08);
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.35rem;
+}
+
+body.guided-flow .guided-side-advisor strong {
+  display: block;
+  font-size: 0.9rem;
+}
+
+body.guided-flow .guided-side-advisor span {
+  font-size: 0.75rem;
+  color: #5c5670;
+}
+
+body.guided-flow .guided-side-photo {
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  object-fit: cover;
+  border: 2px solid rgba(201, 162, 39, 0.45);
+  align-self: center;
+}
+
+@media (min-width: 1024px) {
+  body.guided-flow .guided-side-advisor {
+    display: flex;
+  }
+}
+
+/* Side rail CTAs under Logan */
+body.guided-flow .guided-reviews-btn {
+  display: block;
+  width: 100%;
+  margin-top: 0.45rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(201, 162, 39, 0.55);
+  background: linear-gradient(135deg, rgba(201, 162, 39, 0.22), rgba(201, 162, 39, 0.1));
+  color: #1a1230;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+body.guided-flow .guided-reviews-btn:hover {
+  border-color: #c9a227;
+  background: linear-gradient(135deg, rgba(201, 162, 39, 0.38), rgba(201, 162, 39, 0.16));
+}
+
+body.guided-flow .guided-realtor-btn {
+  width: 100%;
+  margin-top: 0.25rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(201, 162, 39, 0.55);
+  background: #1a1230;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+}
+
+body.guided-flow .guided-realtor-btn:hover {
+  background: #c9a227;
+  color: #1a1230;
+}
+
+body.guided-flow .guided-loan-options-btn {
+  display: block;
+  width: 100%;
+  margin-top: 0.25rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(26, 18, 48, 0.12);
+  background: #fff;
+  color: #1a1230;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+body.guided-flow .guided-loan-options-btn:hover {
+  border-color: #c9a227;
+  background: rgba(201, 162, 39, 0.12);
+}
+
+/* Compact 2-col loan setup (you + down) — no scroll on laptop */
+body.guided-flow .guided-loan-split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 720px) {
+  body.guided-flow .guided-loan-split {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  body.guided-flow .guided-loan-split-col-accent {
+    padding: 1rem;
+    border-radius: 14px;
+    background: linear-gradient(160deg, #fbf8f0, #fff);
+    border: 1px solid rgba(201, 162, 39, 0.28);
+  }
+
+  body.guided-flow .guided-program-compact {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.5rem !important;
+  }
+
+  body.guided-flow .guided-program-compact .ultimate-program-btn {
+    padding: 0.65rem 0.55rem;
+    font-size: 0.85rem;
+  }
+
+  body.guided-flow .guided-profile-compact {
+    gap: 0.45rem;
+  }
+}
+
+body.guided-flow .guided-step-hint {
+  margin: 1rem 0 0;
+  text-align: center;
+  font-size: 0.82rem;
+  color: #5c5670;
+}
+
+body.guided-flow .guided-credit-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.15rem;
+}
+
+@media (min-width: 720px) {
+  body.guided-flow .guided-credit-grid {
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 1.35rem;
+    align-items: start;
+  }
+
+  body.guided-flow .guided-rate-panel {
+    padding: 1rem;
+    border-radius: 14px;
+    background: linear-gradient(165deg, #1a1230, #2a2040);
+    color: #fff;
+  }
+
+  body.guided-flow .guided-rate-panel .rate-compare-label,
+  body.guided-flow .guided-rate-panel .rate-updated-note,
+  body.guided-flow .guided-rate-panel .guided-step-hint {
+    color: rgba(255, 255, 255, 0.85) !important;
+  }
+
+  body.guided-flow .guided-rate-panel .rate-compare-value,
+  body.guided-flow .guided-rate-panel .rate-compare-label-wrap label {
+    color: #fff;
+  }
+
+  body.guided-flow .guided-term-picker {
+    justify-content: center;
+  }
+}
+
+body.guided-flow .guided-loan-split-card,
+body.guided-flow .guided-credit-card {
+  max-width: 720px;
+}
+
+/* Mobile: show realtor CTA under progress */
+@media (max-width: 1099px) {
+  body.guided-flow .guided-side-advisor {
+    display: flex;
+    max-width: 720px;
+    margin: 0.5rem auto 0;
+    width: 100%;
+  }
+}
+
+/* Realtor quiz as centered overlay from any step */
+body.guided-realtor-open #ultimateRealtorView.guided-realtor-overlay,
+#ultimateRealtorView.guided-realtor-overlay {
+  position: fixed !important;
+  inset: 0;
+  z-index: 200;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(15, 12, 24, 0.55);
+  overflow: auto;
+}
+
+#ultimateRealtorView.guided-realtor-overlay .wizard-card {
+  max-width: 520px;
+  width: 100%;
+  margin: 0 auto;
+  max-height: min(90vh, 900px);
+  overflow: auto;
+}
+
+/* Section labels + headings centered */
+body.guided-flow .guided-section-label,
+body.guided-flow .ultimate-section-label.guided-section-label,
+body.guided-flow .guided-center-note,
+body.guided-flow .guided-step-intro,
+body.guided-flow .guided-step-intro .wizard-title,
+body.guided-flow .guided-step-intro .wizard-lead,
+body.guided-flow .guided-title,
+body.guided-flow .guided-lead,
+body.guided-flow .guided-kicker,
+body.guided-flow .save-estimate-title,
+body.guided-flow .save-estimate-lead,
+body.guided-flow .save-estimate-eyebrow,
+body.guided-flow .results-apply-note,
+body.guided-flow .guided-results-ctas,
+body.guided-flow .guided-section .field-label-row,
+body.guided-flow .rate-compare-label,
+body.guided-flow .wizard-eyebrow {
+  text-align: center !important;
+}
+
+body.guided-flow .guided-section {
+  margin-top: 1.35rem;
+  padding-top: 1.15rem;
+  border-top: 1px solid rgba(26, 18, 48, 0.08);
+}
+
+body.guided-flow .guided-section:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+
+body.guided-flow .guided-loan-details-card .field-label-row {
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+body.guided-flow .guided-lead-submit,
+body.guided-flow .guided-results-ctas .btn-results-apply,
+body.guided-flow .btn-lookup,
+body.guided-flow .btn-wizard-next {
+  text-align: center;
+}
+
+body.guided-flow .guided-tax-ins-on-results label {
+  color: rgba(255, 255, 255, 0.85);
+  text-align: center;
+  display: block;
+}
+
+body.guided-flow .guided-tax-ins-on-results .currency-input {
+  text-align: center;
+}
+
+body.guided-flow .guided-costs-on-results {
+  margin: 1rem 0 1.25rem;
+  padding: 1rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Progress — centered, even */
+.guided-progress {
+  margin: 0 auto 1.5rem;
+  width: 100%;
+  max-width: 720px;
+}
+
+@media (min-width: 1024px) {
+  body.guided-flow .guided-progress {
+    max-width: none;
+  }
+}
+
+.guided-progress-steps {
+  list-style: none;
+  margin: 0 0 0.75rem;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.35rem;
+  justify-content: center;
+}
+
+.guided-progress-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  text-align: center;
+  opacity: 0.4;
+  min-width: 3.4rem;
+  flex: 0 1 auto;
+}
+
+.guided-progress-step.is-active,
+.guided-progress-step.is-done {
+  opacity: 1;
+}
+
+.guided-progress-num {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: #e8e4dc;
+  color: #1a1230;
+}
+
+.guided-progress-step.is-active .guided-progress-num {
+  background: #c9a227;
+  color: #1a1230;
+  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.25);
+}
+
+.guided-progress-step.is-done .guided-progress-num {
+  background: #1a1230;
+  color: #fff;
+}
+
+.guided-progress-label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  line-height: 1.15;
+  color: #5c5670;
+  max-width: 4.5rem;
+}
+
+.guided-progress-step.is-active .guided-progress-label {
+  color: #1a1230;
+}
+
+body.guided-flow .wizard-progress-wrap {
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+body.guided-flow .wizard-progress-meta {
+  justify-content: center;
+  text-align: center;
+  font-size: 0.75rem;
+  gap: 0.5rem;
+}
+
+/* Step panels — centered content */
+.guided-step-panel {
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.guided-step-panel.guided-step-panel-wide,
+.guided-card-wide {
+  max-width: 720px;
+}
+
+.guided-step-intro {
+  margin: 0 0 1.35rem;
+}
+
+.guided-step-intro.guided-centered {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.guided-kicker {
+  margin: 0 0 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #c9a227;
+  letter-spacing: 0.02em;
+}
+
+.guided-title {
+  font-size: clamp(1.55rem, 3.5vw, 2.1rem);
+  margin: 0 0 0.5rem;
+  line-height: 1.2;
+  text-align: inherit;
+}
+
+.guided-lead {
+  margin: 0 auto;
+  font-size: 1rem;
+  color: #5c5670;
+  max-width: 32rem;
+  line-height: 1.5;
+}
+
+.guided-card {
+  margin: 0 auto 1rem;
+  padding: 1.5rem 1.35rem 1.5rem;
+  border-radius: 18px;
+  background: #fff;
+  border: 1px solid rgba(26, 18, 48, 0.07);
+  box-shadow: 0 12px 40px rgba(26, 18, 48, 0.06);
+}
+
+.guided-card-narrow {
+  max-width: 520px;
+}
+
+.guided-card-wide {
+  max-width: 680px;
+}
+
+/* Choice cards */
+.guided-choice-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+@media (min-width: 640px) {
+  .guided-choice-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.guided-choice-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 0.4rem;
+  padding: 1.35rem 1.25rem;
+  border-radius: 18px;
+  border: 2px solid rgba(26, 18, 48, 0.1);
+  background: #fff;
+  cursor: pointer;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+  font: inherit;
+  color: inherit;
+  box-shadow: 0 8px 28px rgba(26, 18, 48, 0.05);
+}
+
+.guided-choice-card:hover {
+  border-color: rgba(201, 162, 39, 0.55);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px rgba(26, 18, 48, 0.1);
+}
+
+.guided-choice-card.is-selected {
+  border-color: #c9a227;
+  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.22);
+}
+
+.guided-choice-icon {
+  font-size: 1.6rem;
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+
+.guided-choice-card strong {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.guided-choice-card span:not(.guided-choice-icon) {
+  font-size: 0.88rem;
+  color: #5c5670;
+  line-height: 1.4;
+}
+
+.guided-shake {
+  animation: guidedShake 0.45s ease;
+}
+
+@keyframes guidedShake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-6px);
+  }
+  75% {
+    transform: translateX(6px);
+  }
+}
+
+/* Address + property summary */
+.guided-address-field .btn-lookup {
+  width: 100%;
+  margin-top: 0.65rem;
+  min-height: 2.75rem;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+@media (min-width: 520px) {
+  .guided-address-field .btn-lookup {
+    width: auto;
+    min-width: 10rem;
+  }
+}
+
+.guided-property-summary {
+  margin: 1.1rem 0 0.5rem;
+  padding: 1rem 1.1rem;
+  border-radius: 14px;
+  background: linear-gradient(145deg, #fbf8f0, #fff);
+  border: 1px solid rgba(201, 162, 39, 0.4);
+}
+
+.guided-property-summary.hidden {
+  display: none;
+}
+
+.guided-property-summary-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.35rem;
+}
+
+.guided-property-summary-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #c9a227;
+}
+
+.guided-property-summary-clear {
+  border: 0;
+  background: transparent;
+  color: #5c5670;
+  font-size: 0.75rem;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.guided-property-summary-addr {
+  display: block;
+  font-size: 1.05rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.35;
+}
+
+.guided-property-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.65rem;
+  margin: 0;
+}
+
+.guided-property-summary-grid dt {
+  font-size: 0.65rem;
+  color: #5c5670;
+  margin: 0;
+}
+
+.guided-property-summary-grid dd {
+  margin: 0.15rem 0 0;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 480px) {
+  .guided-property-summary-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.guided-optional-details {
+  margin-top: 1.1rem;
+  border-top: 1px solid rgba(26, 18, 48, 0.08);
+  padding-top: 0.85rem;
+}
+
+.guided-optional-details summary {
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #5c5670;
+  list-style: none;
+  text-align: center;
+}
+
+.guided-optional-details summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Mini chips */
+.guided-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.guided-mini-chip {
+  border: 1px solid rgba(26, 18, 48, 0.12);
+  background: #f8f6f2;
+  border-radius: 999px;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: #1a1230;
+}
+
+.guided-mini-chip:hover,
+.guided-mini-chip.is-selected {
+  border-color: #c9a227;
+  background: rgba(201, 162, 39, 0.15);
+}
+
+/* Tax grid */
+.guided-tax-ins-grid {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.guided-tax-ins-standalone {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 560px) {
+  .guided-tax-ins-standalone {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+/* Results */
+.guided-results-card {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 1.5rem 1.35rem 1.75rem;
+  border-radius: 20px;
+}
+
+.guided-breakdown {
+  margin: 1.15rem 0;
+}
+
+.guided-stats {
+  margin-bottom: 1.35rem;
+}
+
+.guided-lead-primary {
+  position: relative;
+  display: block !important;
+  margin: 0 auto 1.35rem;
+  max-width: 100%;
+  padding: 1.25rem 1.15rem 1.3rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+body.guided-flow .guided-lead-primary.hidden {
+  display: block !important;
+}
+
+.guided-lead-form input {
+  margin-bottom: 0.5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.guided-lead-submit {
+  width: 100%;
+  margin-top: 0.4rem;
+}
+
+.guided-results-ctas {
+  text-align: center;
+  margin: 0 0 1.1rem;
+}
+
+.guided-results-ctas .btn-results-apply {
+  width: 100%;
+  max-width: 22rem;
+}
+
+.guided-results-compliance {
+  font-size: 0.74rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 0 0 1.1rem;
+  padding: 0.85rem 0.95rem;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: left;
+}
+
+.guided-secondary-details {
+  margin: 0.85rem 0;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.75rem 0.95rem;
+}
+
+.guided-secondary-details summary {
+  cursor: pointer;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.92);
+  list-style: none;
+  text-align: center;
+}
+
+.guided-secondary-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.guided-secondary-details[open] summary {
+  margin-bottom: 0.75rem;
+}
+
+.guided-vs {
+  margin: 0;
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+
+.guided-hub-collapsed {
+  margin-top: 1rem;
+}
+
+.guided-hub-collapsed .ultimate-hub-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  justify-content: center;
+}
+
+.guided-hub-collapsed .ultimate-hub-btn {
+  flex: 1 1 auto;
+  min-width: 8rem;
+  padding: 0.6rem 0.75rem;
+  font-size: 0.8rem;
+}
+
+/* Nav bar centered content */
+body.guided-flow .wizard-nav-inner.guided-nav-inner,
+body.guided-flow .wizard-nav-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  box-sizing: border-box;
+}
+
+@media (min-width: 1024px) {
+  body.guided-flow .wizard-nav-inner.guided-nav-inner,
+  body.guided-flow .wizard-nav-inner {
+    max-width: 1120px;
+  }
+}
+
+body.guided-flow .btn-wizard-next {
+  min-width: 10.5rem;
+}
+
+body.guided-flow .sticky-cta-logan5 {
+  bottom: 4.75rem;
+}
+
+body.guided-flow .guided-footer {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  text-align: center;
+}
+
+body.guided-flow .guided-footer .equal-housing-logo {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Program picker nicer on desktop */
+@media (min-width: 720px) {
+  body.guided-flow .ultimate-program-picker {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+}
+
+/* Kill ultimate/logan5 left-column / stretch rules that break centering */
+body.guided-flow .ultimate-page-shell,
+body.guided-flow .ultimate-page-content {
+  max-width: none !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+  display: block !important;
+  align-items: center !important;
+}
+
+body.guided-flow .ultimate-page-content > * {
+  max-width: none;
+}
+
+body.guided-flow.logan5 .wizard-main,
+body.guided-flow.logan5 .wizard-main.guided-main {
+  max-width: none !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+body.guided-flow.guided-v2 .wizard-main {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* Hide clutter from older ultimate CSS */
+body.guided-flow .ultimate-page-shell::before,
+body.guided-flow .ultimate-page-shell::after {
+  display: none !important;
+}
+
+/* Wizard steps themselves full width of the 720px column, content centered */
+body.guided-flow .wizard-step.guided-step {
+  width: 100%;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+body.guided-flow .guided-step-intro.guided-centered {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+body.guided-flow .guided-choice-grid {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: 640px;
+}
+
+@media (max-width: 640px) {
+  body.guided-flow .wizard-header-tagline {
+    display: none;
+  }
+
+  body.guided-flow .guided-main {
+    padding: 0.85rem 0.85rem 6.75rem !important;
+  }
+
+  body.guided-flow .guided-card {
+    padding: 1.15rem 1rem 1.25rem;
+  }
+
+  body.guided-flow .guided-progress-label {
+    font-size: 0.58rem;
+    max-width: 3.2rem;
+  }
+
+  body.guided-flow .guided-progress-step {
+    min-width: 2.6rem;
+  }
+}
+
+/* =========================================================
+   Hard center lock — wins over styles-ultimate / logan5-column
+   ========================================================= */
+html body.guided-flow .wizard-main,
+html body.guided-flow.logan5 .wizard-main {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  max-width: none !important;
+  width: 100% !important;
+}
+
+html body.guided-flow .guided-layout {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: flex-start !important;
+  width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+html body.guided-flow .guided-layout-center {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  max-width: 720px !important;
+  width: 100% !important;
+}
+
+html body.guided-flow .guided-step-panel,
+html body.guided-flow .guided-card,
+html body.guided-flow .guided-results-card {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+html body.guided-flow .guided-card {
+  max-width: 720px;
+}
+
+html body.guided-flow .guided-card-narrow {
+  max-width: 680px;
+}
+
+/* =========================================================
+   Down-payment range fill (20% should sit ~40% across 0–50)
+   ========================================================= */
+body.guided-flow input[type="range"].guided-range-fill,
+body.guided-flow #downPercent {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  border-radius: 999px;
+  background: linear-gradient(
+    to right,
+    #c9a227 0%,
+    #c9a227 var(--down-fill, 40%),
+    rgba(26, 18, 48, 0.12) var(--down-fill, 40%),
+    rgba(26, 18, 48, 0.12) 100%
+  );
+  outline: none;
+  accent-color: #c9a227;
+}
+
+body.guided-flow input[type="range"].guided-range-fill::-webkit-slider-thumb,
+body.guided-flow #downPercent::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #1a1230;
+  border: 3px solid #c9a227;
+  box-shadow: 0 2px 8px rgba(26, 18, 48, 0.25);
+  cursor: pointer;
+  margin-top: -6px;
+}
+
+body.guided-flow input[type="range"].guided-range-fill::-moz-range-thumb,
+body.guided-flow #downPercent::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #1a1230;
+  border: 3px solid #c9a227;
+  box-shadow: 0 2px 8px rgba(26, 18, 48, 0.25);
+  cursor: pointer;
+}
+
+body.guided-flow input[type="range"].guided-range-fill::-webkit-slider-runnable-track,
+body.guided-flow #downPercent::-webkit-slider-runnable-track {
+  height: 8px;
+  border-radius: 999px;
+  background: transparent;
+}
+
+body.guided-flow input[type="range"].guided-range-fill::-moz-range-track,
+body.guided-flow #downPercent::-moz-range-track {
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(26, 18, 48, 0.12);
+}
+
+/* =========================================================
+   Toast / note popups (FTHB, VA, USDA)
+   ========================================================= */
+.guided-toast-host {
+  position: fixed;
+  z-index: 10050;
+  top: 1rem;
+  right: 1rem;
+  left: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  max-width: min(380px, calc(100vw - 1.5rem));
+  pointer-events: none;
+}
+
+@media (max-width: 520px) {
+  .guided-toast-host {
+    top: auto;
+    bottom: 5.5rem;
+    right: 0.75rem;
+    left: 0.75rem;
+    max-width: none;
+  }
+}
+
+.guided-toast {
+  pointer-events: auto;
+  position: relative;
+  padding: 0.95rem 2rem 0.95rem 1rem;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid rgba(26, 18, 48, 0.1);
+  box-shadow: 0 12px 40px rgba(26, 18, 48, 0.18);
+  animation: guided-toast-in 0.28s ease-out;
+  color: #1a1230;
+}
+
+.guided-toast.is-out {
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity 0.28s, transform 0.28s;
+}
+
+@keyframes guided-toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.guided-toast-title {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 700;
+  margin-bottom: 0.35rem;
+  color: #1a1230;
+}
+
+.guided-toast-body {
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: rgba(26, 18, 48, 0.82);
+}
+
+.guided-toast-body strong {
+  color: #1a1230;
+}
+
+.guided-toast-link {
+  display: inline-block;
+  margin-top: 0.55rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #6b4f12;
+  text-decoration: underline;
+}
+
+.guided-toast-close {
+  position: absolute;
+  top: 0.35rem;
+  right: 0.45rem;
+  border: 0;
+  background: transparent;
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+  color: rgba(26, 18, 48, 0.45);
+  padding: 0.2rem 0.35rem;
+}
+
+.guided-toast-close:hover {
+  color: #1a1230;
+}
+
+.guided-toast.fthb {
+  border-left: 4px solid #c9a227;
+}
+
+.guided-toast.va {
+  border-left: 4px solid #2a5a9e;
+}
+
+.guided-toast.usda {
+  border-left: 4px solid #2d6a3e;
+}
+
+.guided-toast.warn {
+  border-left: 4px solid #c45c26;
+}
+
+.guided-toast.info {
+  border-left: 4px solid #1a1230;
+}
+
+/* Extra hard-center: layout + card always centered, never left-stuck */
+html body.guided-flow.guided-v2 .guided-layout,
+html body.guided-flow .guided-layout {
+  display: flex !important;
+  justify-content: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+html body.guided-flow .guided-layout-center,
+html body.guided-flow .guided-step-panel,
+html body.guided-flow .wizard-card.guided-card {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  max-width: 720px !important;
+}
+
+/* =========================================================
+   STEP 5 only — Credit & term (calm hierarchy)
+   Scoped to [data-step-id="loan-credit"] — other steps untouched
+   ========================================================= */
+
+body.guided-flow [data-step-id="loan-credit"].guided-credit-step {
+  width: 100%;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+body.guided-flow [data-step-id="loan-credit"] .guided-credit-panel {
+  max-width: 720px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 0 0.5rem;
+}
+
+/* Intro breathing room */
+body.guided-flow [data-step-id="loan-credit"] .guided-credit-intro {
+  text-align: center;
+  margin: 0 auto 1.5rem;
+  padding: 0.35rem 0.5rem 0.25rem;
+  max-width: 28rem;
+}
+
+body.guided-flow [data-step-id="loan-credit"] .guided-credit-intro .guided-kicker {
+  margin-bottom: 0.55rem;
+  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+  opacity: 0.85;
+}
+
+body.guided-flow [data-step-id="loan-credit"] .guided-credit-intro .guided-title {
+  margin: 0 0 0.65rem;
+  font-size: clamp(1.55rem, 4.2vw, 1.95rem);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+body.guided-flow [data-step-id="loan-credit"] .guided-credit-intro .guided-lead {
+  margin: 0 auto;
+  max-width: 24rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #5c5670;
+}
+
+/* Main card — quieter shell */
+body.guided-flow [data-step-id="loan-credit"] .guided-credit-card {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 1.5rem 1.35rem 1.6rem;
+  border-radius: 20px;
+  background: #fff;
+  border: 1px solid rgba(26, 18, 48, 0.07);
+  box-shadow: 0 10px 36px rgba(26, 18, 48, 0.06);
+}
+
+body.guided-flow [data-step-id="loan-credit"] .guided-credit-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.75rem;
+  align-items: start;
+}
+
+body.guided-flow [data-step-id="loan-credit"] .guided-credit-main {
+  display: flex;
+  flex-direction: column;
+  gap: 1.65rem;
+}
+
+body.guided-flow [data-step-id="loan-credit"] .guided-credit-section-label {
+  display: block;
+  margin: 0 0 0.75rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #5c5670;
+  text-align: center;
+}
+
+/* —— Score hero —— */
+body.guided-flow [data-step-id="loan-credit"] .guided-credit-score-block {
+  margin: 0;
+  padding: 0.15rem 0 0;
+}
+
+body.guided-flow [data-step-id="loan-credit"] .guided-score-hero {
+  text-align: center;
+  margin: 0 0 1rem;
+}
+
+body.guided-flow [data-step-id="loan-credit"] .guided-score-number,
+body.guided-flow [data-step-id="loan-credit"] #creditScoreDisplay {
+  display: block;
+  font-size: clamp(2.4rem, 8vw, 3rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: #1a1230;
+  font-variant-numeric: tabular-nums;
+}
+
+body.guided-flow [data-step-id="loan-credit"] .guided-score-band,
+body.guided-flow [data-step-id="loan-credit"] #creditBandLabel {
+  display: block !important;
+  margin: 0.55rem auto 0;
+  max-width: 22rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: #3d3654;
+  text-align: center;
+}
+
+/* Always show slider on this step (override mobile hide elsewhere) */
+body.guided-flow [data-step-id="loan-credit"] #creditScore {
+  display: block !important;
+  width: 100%;
+  height: 10px;
+  margin: 0.35rem 0 0.85rem;
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 999px;
+  background: linear-gradient(
+    to right,
+    rgba(201, 162, 39, 0.35),
+    rgba(26, 18, 48, 0.12)
+  );
+  outline: none;
+  accent-color: #c9a227;
+  cursor: pointer;
+}
+
+body.guided-flow [data-step-id="loan-credit"] #creditScore::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #1a1230;
+  border: 3px solid #c9a227;
+  box-shadow: 0 2px 10px rgba(26, 18, 48, 0.22);
+  cursor: pointer;
+}
+
+body.guided-flow [data-step-id="loan-credit"] #creditScore::-moz-range-thumb {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #1a1230;
+  border: 3px solid #c9a227;
+  box-shadow: 0 2px 10px rgba(26, 18, 48, 0.22);
+  cursor: pointer;
+}
+
+/* Tier shortcuts — secondary, quieter */
+body.guided-flow [data-step-id="loan-credit"] .guided-credit-tiers.credit-tier-picker {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.4rem;
+  margin: 0.15rem 0 0.65rem;
+}
+
+body.guided-flow [data-step-id="loan-credit"] .guided-credit-tiers .credit-tier-btn {
+  min-height: 44px;
+  padding: 0.45rem 0.3rem;
+  border-radius: 12px;
+  border: 1px solid rgba(26, 18, 48, 0.1);
+  background: #faf9f7;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #3d3654;
+}
+
+body.guided-flow [data-step-id="loan-credit"] .guided-credit-tiers .credit-tier-btn span {
+  font-size: 0.62rem;
+  font-weight: 400;
+  opacity: 0.7;
+}
+
+body.guided-flow [data-step-id="loan-credit"] .guided-credit-tiers .credit-tier-btn.active {
+  border-color: rgba(201, 162, 39, 0.7);
+  background: rgba(201, 162, 39, 0.14);
+  color: #1a1230;
+}
+
+body.guided-flow [data-step-id="loan-credit"] .guided-credit-helper {
+  margin: 0;
+  text-align: center;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: #8a8499;
+}
+
+/* —— Loan term pills —— */
+body.guided-flow [data-step-id="loan-credit"] .guided-term-block {
+  margin: 0;
+  padding-top: 0.15rem;
+  border-top: 1px solid rgba(26, 18, 48, 0.06);
+}
+
+body.guided-flow [data-step-id="loan-credit"] .guided-term-block .guided-credit-section-label {
+  margin-top: 1.35rem;
+}
+
+body.guided-flow [data-step-id="loan-credit"] .guided-term-picker {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+body.guided-flow [data-step-id="loan-credit"] .guided-term-picker .ultimate-term-btn {
+  min-width: 4.25rem;
+  min-height: 48px;
+  padding: 0.7rem 1rem;
+  border-radius: 999px;
+  border: 1.5px solid rgba(26, 18, 48, 0.12);
+  background: #faf9f7;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #3d3654;
+  box-shadow: none;
+  transform: none;
+}
+
+body.guided-flow [data-step-id="loan-credit"] .guided-term-picker .ultimate-term-btn:hover {
+  border-color: rgba(201, 162, 39, 0.55);
+  background: #fff;
+  transform: none;
+}
+
+body.guided-flow [data-step-id="loan-credit"] .guided-term-picker .ultimate-term-btn.active {
+  background: linear-gradient(135deg, #f0d060 0%, #c9a227 55%, #b8891a 100%);
+  border-color: transparent;
+  color: #1a1230;
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(201, 162, 39, 0.35);
+}
+
+/* —— Rate panel (premium, scannable) —— */
+body.guided-flow [data-step-id="loan-credit"] .guided-rate-panel {
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  color: inherit !important;
+}
+
+body.guided-flow [data-step-id="loan-credit"] .guided-rate-hero.martini-rate-block,
+body.guided-flow [data-step-id="loan-credit"] .guided-rate-hero.ultimate-rate-prominent {
+  margin: 0;
+  padding: 1.25rem 1.2rem 1.15rem;
+  border-radius: 18px;
+  background: linear-gradient(165deg, #1a1230 0%, #2a2048 100%);
+  border: 1px solid rgba(201, 162, 39, 0.28);
+  box-shadow: 0 12px 32px rgba(26, 18, 48, 0.22);
+  color: #fff;
+}
+
+body.guided-flow [data-step-id="loan-credit"] .guided-rate-eyebrow {
+  margin: 0 0 1rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  text-align: center;
+}
+
+body.guided-flow [data-step-id="loan-credit"] .guided-rate-compare {
+  gap: 0.85rem;
+}
+
+body.guided-flow [data-step-id="loan-credit"] .guided-rate-row-typical {
+  padding: 0.55rem 0.65rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  align-items: center;
+}
+
+body.guided-flow [data-step-id="loan-credit"] .guided-rate-row-typical .rate-compare-label {
+  color: rgba(255, 255, 255, 0.7) !important;
+  font-size: 0.82rem;
+  font-weight: 500;
+  text-align: left !important;
+}
+
+body.guided-flow [data-step-id="loan-credit"] .guided-rate-row-typical .rate-compare-value {
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 1.15rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+body.guided-flow [data-step-id="loan-credit"] .guided-rate-row-martini {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.65rem;
+  padding: 0.85rem 0.75rem 0.95rem;
+  border-radius: 14px;
+  background: rgba(201, 162, 39, 0.12);
+  border: 1px solid rgba(201, 162, 39, 0.35);
+}
+
+body.guided-flow [data-step-id="loan-credit"] .guided-martini-label-wrap {
+  width: 100%;
+  align-items: center;
+  text-align: center;
+  gap: 0.45rem;
+}
+
+body.guided-flow [data-step-id="loan-credit"] .guided-martini-label-wrap .rate-compare-label {
+  color: #fff !important;
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-align: center !important;
+  width: 100%;
+}
+
+body.guided-flow [data-step-id="loan-credit"] .guided-rate-savings.rate-savings-chip {
+  display: inline-block;
+  margin: 0 auto;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  background: #2f9e6b;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(47, 158, 107, 0.35);
+}
+
+body.guided-flow [data-step-id="loan-credit"] .guided-rate-savings.hidden {
+  display: none !important;
+}
+
+body.guided-flow [data-step-id="loan-credit"] .guided-rate-input {
+  justify-content: center;
+  gap: 0.35rem;
+}
+
+body.guided-flow [data-step-id="loan-credit"] .guided-rate-input input#interestRate {
+  width: 5.5rem;
+  max-width: 40%;
+  padding: 0.55rem 0.45rem;
+  border: 0;
+  border-radius: 12px;
+  background: #fff;
+  color: #1a1230;
+  font-size: 1.65rem;
+  font-weight: 700;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+}
+
+body.guided-flow [data-step-id="loan-credit"] .guided-rate-input > span {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+/* Expandable calculation details — keeps long PMMS copy off the face */
+body.guided-flow [data-step-id="loan-credit"] .guided-rate-details {
+  margin-top: 0.95rem;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0;
+  overflow: hidden;
+}
+
+body.guided-flow [data-step-id="loan-credit"] .guided-rate-details summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 0.6rem 0.85rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.75);
+  text-align: center;
+  user-select: none;
+}
+
+body.guided-flow [data-step-id="loan-credit"] .guided-rate-details summary::-webkit-details-marker {
+  display: none;
+}
+
+body.guided-flow [data-step-id="loan-credit"] .guided-rate-details summary::after {
+  content: " ▾";
+  opacity: 0.65;
+  font-size: 0.7rem;
+}
+
+body.guided-flow [data-step-id="loan-credit"] .guided-rate-details[open] summary::after {
+  content: " ▴";
+}
+
+body.guided-flow [data-step-id="loan-credit"] .guided-rate-details .rate-updated-note {
+  margin: 0;
+  padding: 0 0.9rem 0.75rem;
+  font-size: 0.72rem;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.65) !important;
+  text-align: left !important;
+}
+
+body.guided-flow [data-step-id="loan-credit"] .guided-rate-badge {
+  display: inline-block;
+  margin: 0 0.9rem 0.75rem;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(201, 162, 39, 0.9);
+}
+
+body.guided-flow [data-step-id="loan-credit"] .guided-credit-next-hint {
+  margin: 0.85rem 0 0;
+  font-size: 0.8rem;
+  color: #8a8499;
+  text-align: center;
+}
+
+/* Desktop 2-col: controls left, rate right */
+@media (min-width: 720px) {
+  body.guided-flow [data-step-id="loan-credit"] .guided-credit-card {
+    padding: 1.75rem 1.6rem 1.75rem;
+  }
+
+  body.guided-flow [data-step-id="loan-credit"] .guided-credit-grid {
+    grid-template-columns: 1.2fr 0.9fr;
+    gap: 1.75rem;
+    align-items: stretch;
+  }
+
+  body.guided-flow [data-step-id="loan-credit"] .guided-rate-panel {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  body.guided-flow [data-step-id="loan-credit"] .guided-rate-hero {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  body.guided-flow [data-step-id="loan-credit"] .guided-credit-tiers.credit-tier-picker {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  body.guided-flow [data-step-id="loan-credit"] .guided-credit-intro {
+    margin-bottom: 1.75rem;
+  }
+}
+
+/* Soften sticky live rail when on credit step (body wizardStep = index+1 → 6) */
+body.guided-flow[data-wizard-step="6"] .guided-live-rail .wizard-live-preview {
+  opacity: 0.92;
+  box-shadow: 0 4px 18px rgba(26, 18, 48, 0.06);
+}
+
+body.guided-flow[data-wizard-step="6"] .guided-live-rail .wizard-live-preview-amount {
+  font-size: 1.35rem;
+}
+
+/* Bottom nav polish on guided flow (esp. credit → estimate) */
+body.guided-flow .wizard-nav {
+  background: linear-gradient(180deg, transparent 0%, rgba(244, 242, 239, 0.92) 18%, #f4f2ef 45%);
+  border-top: 1px solid rgba(26, 18, 48, 0.06);
+  backdrop-filter: blur(8px);
+}
+
+body.guided-flow .wizard-nav-inner.guided-nav-inner {
+  max-width: 720px;
+  gap: 0.75rem;
+  padding-top: 0.15rem;
+}
+
+body.guided-flow .btn-wizard-back {
+  min-height: 50px;
+  padding: 0.7rem 1.15rem;
+  border-radius: 999px;
+  border: 1.5px solid rgba(26, 18, 48, 0.18);
+  background: #fff;
+  color: #1a1230;
+  font-weight: 600;
+  box-shadow: 0 1px 4px rgba(26, 18, 48, 0.04);
+}
+
+body.guided-flow .btn-wizard-back:hover {
+  border-color: rgba(26, 18, 48, 0.35);
+  background: #fff;
+}
+
+body.guided-flow .btn-wizard-next {
+  min-height: 50px;
+  min-width: 11rem;
+  padding: 0.75rem 1.35rem;
+  border-radius: 999px;
+  border: 0;
+  background: linear-gradient(135deg, #f0d060 0%, #c9a227 50%, #b8891a 100%);
+  color: #1a1230;
+  font-weight: 700;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 16px rgba(201, 162, 39, 0.35);
+}
+
+body.guided-flow .btn-wizard-next:hover {
+  filter: brightness(1.03);
+}
+
+@media (max-width: 719px) {
+  body.guided-flow [data-step-id="loan-credit"] .guided-credit-card {
+    padding: 1.25rem 1.05rem 1.35rem;
+  }
+
+  body.guided-flow [data-step-id="loan-credit"] .guided-credit-intro {
+    margin-bottom: 1.15rem;
+  }
+
+  body.guided-flow [data-step-id="loan-credit"] .guided-term-picker .ultimate-term-btn {
+    flex: 1 1 calc(33.33% - 0.5rem);
+    min-width: 4rem;
+  }
+
+  body.guided-flow [data-step-id="loan-credit"] .guided-rate-input input#interestRate {
+    font-size: 1.5rem;
+  }
+}
+
+
+/* =========================================================
+   GLOBAL DESIGN SYSTEM v2 — guided calculator (all steps)
+   Premium, calm, navy/gold, consistent hierarchy
+   ========================================================= */
+
+html body.guided-flow {
+  --g-navy: #1a1230;
+  --g-navy-mid: #252040;
+  --g-navy-soft: #3d3654;
+  --g-gold: #c9a227;
+  --g-gold-light: #e8c84a;
+  --g-gold-deep: #b8891a;
+  --g-cream: #f3f1ec;
+  --g-white: #ffffff;
+  --g-muted: #6b6580;
+  --g-border: rgba(26, 18, 48, 0.09);
+  --g-radius: 16px;
+  --g-radius-sm: 12px;
+  --g-radius-pill: 999px;
+  --g-shadow: 0 10px 36px rgba(26, 18, 48, 0.08);
+  --g-shadow-sm: 0 4px 16px rgba(26, 18, 48, 0.06);
+  --g-shadow-gold: 0 6px 20px rgba(201, 162, 39, 0.32);
+  background: var(--g-cream) !important;
+  color: var(--g-navy);
+}
+
+/* ---------- Header: one polished navy bar ---------- */
+html body.guided-flow .wizard-header.guided-header {
+  background: linear-gradient(105deg, #110c1d 0%, #1a1230 42%, #252040 100%) !important;
+  border-bottom: 3px solid var(--g-gold) !important;
+  padding: 0 !important;
+  box-shadow: 0 4px 24px rgba(17, 12, 29, 0.28);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+html body.guided-flow .guided-header-inner,
+html body.guided-flow .wizard-header-inner.guided-header-inner {
+  max-width: 1120px !important;
+  margin: 0 auto !important;
+  width: 100% !important;
+  padding: 0.7rem 1.15rem !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 0.85rem 1.25rem !important;
+  flex-wrap: nowrap !important;
+}
+
+html body.guided-flow .guided-header-brand {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.85rem !important;
+  min-width: 0 !important;
+  flex: 1 1 auto !important;
+}
+
+html body.guided-flow .guided-logo-link.wizard-logo-link {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+  width: auto !important;
+  max-width: none !important;
+  padding: 0.4rem 0.65rem !important;
+  border-radius: 10px !important;
+  background: #fff !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18) !important;
+  line-height: 0 !important;
+}
+
+html body.guided-flow .guided-logo-link .wizard-logo-full {
+  display: block !important;
+  width: auto !important;
+  height: 40px !important;
+  max-height: 40px !important;
+  max-width: 160px !important;
+  object-fit: contain !important;
+}
+
+html body.guided-flow .guided-header-tagline {
+  margin: 0 !important;
+  text-align: left !important;
+  min-width: 0 !important;
+  line-height: 1.25 !important;
+}
+
+html body.guided-flow .guided-header-tagline strong {
+  display: block !important;
+  font-size: 0.95rem !important;
+  font-weight: 700 !important;
+  color: #fff !important;
+  letter-spacing: 0.01em !important;
+  white-space: nowrap !important;
+}
+
+html body.guided-flow .guided-header-tagline .wizard-header-powered {
+  display: block !important;
+  margin-top: 0.12rem !important;
+  font-size: 0.72rem !important;
+  font-weight: 600 !important;
+  color: var(--g-gold-light) !important;
+  letter-spacing: 0.03em !important;
+  white-space: nowrap !important;
+}
+
+html body.guided-flow .guided-header-actions {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.65rem !important;
+  flex-shrink: 0 !important;
+}
+
+html body.guided-flow .guided-header-phone {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.35rem !important;
+  padding: 0.45rem 0.7rem !important;
+  border-radius: var(--g-radius-pill) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  color: var(--g-gold-light) !important;
+  font-size: 0.88rem !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+  transition: background 0.15s, border-color 0.15s, color 0.15s !important;
+}
+
+html body.guided-flow .guided-header-phone:hover {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(201, 162, 39, 0.55) !important;
+  color: #fff !important;
+}
+
+html body.guided-flow .guided-header-phone-icon {
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+html body.guided-flow .guided-header-apply.btn-apply-now {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.35rem !important;
+  min-height: 42px !important;
+  padding: 0.55rem 1.15rem !important;
+  border-radius: var(--g-radius-pill) !important;
+  border: 0 !important;
+  background: linear-gradient(135deg, #f0d060 0%, var(--g-gold) 50%, var(--g-gold-deep) 100%) !important;
+  color: var(--g-navy) !important;
+  font-size: 0.82rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  box-shadow: var(--g-shadow-gold) !important;
+  white-space: nowrap !important;
+}
+
+html body.guided-flow .guided-header-apply:hover {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 720px) {
+  html body.guided-flow .guided-header-tagline {
+    display: none !important;
+  }
+
+  html body.guided-flow .guided-logo-link .wizard-logo-full {
+    height: 34px !important;
+    max-height: 34px !important;
+    max-width: 130px !important;
+  }
+
+  html body.guided-flow .guided-header-inner {
+    padding: 0.55rem 0.75rem !important;
+  }
+
+  html body.guided-flow .guided-header-apply {
+    min-height: 40px !important;
+    padding: 0.5rem 0.9rem !important;
+    font-size: 0.75rem !important;
+  }
+}
+
+@media (max-width: 420px) {
+  html body.guided-flow .guided-header-phone-text {
+    font-size: 0.78rem;
+  }
+
+  html body.guided-flow .guided-header-phone {
+    padding: 0.4rem 0.55rem !important;
+  }
+
+  html body.guided-flow .guided-header-apply .btn-apply-arrow {
+    display: none;
+  }
+}
+
+/* ---------- Main page chrome ---------- */
+html body.guided-flow .guided-main {
+  padding-top: 1.35rem !important;
+  padding-bottom: 7.25rem !important;
+}
+
+html body.guided-flow .guided-title {
+  font-family: var(--font-display, "Playfair Display", Georgia, serif);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--g-navy);
+  line-height: 1.2;
+}
+
+html body.guided-flow .guided-lead {
+  color: var(--g-muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+html body.guided-flow .guided-kicker {
+  color: var(--g-gold-deep);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+}
+
+html body.guided-flow .guided-card,
+html body.guided-flow .wizard-card.guided-card {
+  border-radius: var(--g-radius) !important;
+  border: 1px solid var(--g-border) !important;
+  box-shadow: var(--g-shadow) !important;
+  background: var(--g-white) !important;
+  padding: 1.4rem 1.3rem 1.5rem !important;
+}
+
+html body.guided-flow .guided-step-intro {
+  margin-bottom: 1.35rem !important;
+}
+
+html body.guided-flow .guided-step-intro .guided-title {
+  margin-bottom: 0.55rem;
+}
+
+/* ---------- Progress ---------- */
+html body.guided-flow .guided-progress {
+  margin-bottom: 1.65rem !important;
+  padding: 0.85rem 0.75rem 0.95rem;
+  border-radius: var(--g-radius);
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid var(--g-border);
+  box-shadow: var(--g-shadow-sm);
+}
+
+html body.guided-flow .guided-progress-num {
+  width: 1.85rem;
+  height: 1.85rem;
+  font-size: 0.72rem;
+  background: #e9e5dc;
+  color: var(--g-navy);
+}
+
+html body.guided-flow .guided-progress-step.is-active .guided-progress-num {
+  background: linear-gradient(135deg, var(--g-gold-light), var(--g-gold));
+  color: var(--g-navy);
+  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.22);
+}
+
+html body.guided-flow .guided-progress-step.is-done .guided-progress-num {
+  background: var(--g-navy);
+  color: #fff;
+}
+
+html body.guided-flow .wizard-progress-track {
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(26, 18, 48, 0.08);
+  overflow: hidden;
+  margin-top: 0.55rem;
+}
+
+html body.guided-flow .wizard-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--g-gold), var(--g-gold-light));
+  border-radius: 999px;
+  transition: width 0.35s ease;
+}
+
+html body.guided-flow .wizard-progress-meta {
+  font-size: 0.75rem;
+  color: var(--g-muted);
+  gap: 0.5rem;
+}
+
+/* ---------- Choice cards ---------- */
+html body.guided-flow .guided-choice-card {
+  border-radius: var(--g-radius) !important;
+  border: 1.5px solid var(--g-border) !important;
+  background: var(--g-white) !important;
+  box-shadow: var(--g-shadow-sm) !important;
+  padding: 1.25rem 1.15rem !important;
+  min-height: 7.5rem;
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.12s !important;
+}
+
+html body.guided-flow .guided-choice-card:hover {
+  border-color: rgba(201, 162, 39, 0.55) !important;
+  box-shadow: 0 10px 28px rgba(26, 18, 48, 0.1) !important;
+  transform: translateY(-2px);
+}
+
+html body.guided-flow .guided-choice-card.is-selected {
+  border-color: var(--g-gold) !important;
+  background: linear-gradient(165deg, #fffdf6, #fff) !important;
+  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.18), var(--g-shadow) !important;
+}
+
+html body.guided-flow .guided-choice-card strong {
+  font-size: 1.05rem;
+  color: var(--g-navy);
+}
+
+html body.guided-flow .guided-choice-card span:not(.guided-choice-icon) {
+  color: var(--g-muted);
+  font-size: 0.86rem;
+  line-height: 1.4;
+}
+
+/* ---------- Form controls ---------- */
+html body.guided-flow .field label,
+html body.guided-flow .field-label-row label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--g-navy-soft);
+  letter-spacing: 0.02em;
+}
+
+html body.guided-flow .field-value {
+  font-weight: 700;
+  color: var(--g-navy);
+  font-variant-numeric: tabular-nums;
+}
+
+html body.guided-flow input[type="text"],
+html body.guided-flow input[type="email"],
+html body.guided-flow input[type="tel"],
+html body.guided-flow input[type="number"],
+html body.guided-flow .currency-input,
+html body.guided-flow .address-input,
+html body.guided-flow select {
+  border-radius: var(--g-radius-sm) !important;
+  border: 1.5px solid rgba(26, 18, 48, 0.12) !important;
+  padding: 0.75rem 0.9rem !important;
+  min-height: 48px;
+  font-size: 1rem !important;
+  background: #fafaf8 !important;
+  transition: border-color 0.15s, box-shadow 0.15s, background 0.15s !important;
+}
+
+html body.guided-flow input:focus,
+html body.guided-flow .currency-input:focus,
+html body.guided-flow .address-input:focus,
+html body.guided-flow select:focus {
+  outline: none !important;
+  border-color: var(--g-gold) !important;
+  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.2) !important;
+  background: #fff !important;
+}
+
+html body.guided-flow input[type="range"]:not(#downPercent):not(#creditScore) {
+  height: 8px;
+  accent-color: var(--g-gold);
+  margin: 0.65rem 0 0.85rem;
+}
+
+html body.guided-flow .btn-lookup {
+  width: 100%;
+  min-height: 48px;
+  margin-top: 0.75rem;
+  border-radius: var(--g-radius-pill);
+  border: 0;
+  background: var(--g-navy);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.92rem;
+  cursor: pointer;
+  box-shadow: var(--g-shadow-sm);
+  transition: background 0.15s, transform 0.12s;
+}
+
+html body.guided-flow .btn-lookup:hover {
+  background: #252040;
+  transform: translateY(-1px);
+}
+
+html body.guided-flow .guided-mini-chip {
+  min-height: 40px;
+  padding: 0.45rem 0.95rem;
+  border-radius: var(--g-radius-pill);
+  border: 1.5px solid rgba(26, 18, 48, 0.1);
+  background: #faf9f7;
+  font-weight: 600;
+  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+}
+
+html body.guided-flow .guided-mini-chip:hover,
+html body.guided-flow .guided-mini-chip.is-selected {
+  border-color: var(--g-gold);
+  background: rgba(201, 162, 39, 0.14);
+  box-shadow: 0 2px 8px rgba(201, 162, 39, 0.15);
+}
+
+html body.guided-flow .ultimate-program-btn {
+  border-radius: var(--g-radius-sm) !important;
+  border: 1.5px solid rgba(26, 18, 48, 0.1) !important;
+  min-height: 56px;
+  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s !important;
+}
+
+html body.guided-flow .ultimate-program-btn:hover {
+  border-color: rgba(201, 162, 39, 0.5) !important;
+}
+
+html body.guided-flow .ultimate-program-btn.active {
+  border-color: transparent !important;
+  background: linear-gradient(135deg, #f0d060 0%, var(--g-gold) 55%, var(--g-gold-deep) 100%) !important;
+  box-shadow: var(--g-shadow-gold) !important;
+  color: var(--g-navy) !important;
+}
+
+html body.guided-flow .ultimate-profile-chip {
+  border-radius: var(--g-radius-sm);
+  border: 1.5px solid rgba(26, 18, 48, 0.1);
+  transition: border-color 0.15s, background 0.15s;
+}
+
+html body.guided-flow .ultimate-profile-chip:has(input:checked) {
+  border-color: var(--g-gold);
+  background: rgba(201, 162, 39, 0.1);
+}
+
+html body.guided-flow .field-note {
+  font-size: 0.78rem;
+  color: var(--g-muted);
+  line-height: 1.4;
+}
+
+/* ---------- Right rail: payment + Logan ---------- */
+html body.guided-flow .guided-live-rail {
+  gap: 0.85rem;
+  display: flex;
+  flex-direction: column;
+}
+
+html body.guided-flow .guided-live-card.wizard-live-preview,
+html body.guided-flow .guided-live-rail .wizard-live-preview {
+  position: relative !important;
+  top: auto !important;
+  margin: 0 !important;
+  padding: 1.15rem 1.15rem 1rem !important;
+  border-radius: var(--g-radius) !important;
+  background: linear-gradient(160deg, #110c1d 0%, #1a1230 55%, #2a2048 100%) !important;
+  border: 1px solid rgba(201, 162, 39, 0.35) !important;
+  border-bottom: 1px solid rgba(201, 162, 39, 0.35) !important;
+  box-shadow: 0 12px 32px rgba(17, 12, 29, 0.22) !important;
+}
+
+html body.guided-flow .wizard-live-preview-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+  max-width: none;
+  margin: 0;
+}
+
+html body.guided-flow .wizard-live-preview-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+html body.guided-flow .wizard-live-preview-amount {
+  font-family: var(--font-display, "Playfair Display", Georgia, serif);
+  font-size: clamp(1.55rem, 3vw, 1.85rem);
+  color: var(--g-gold-light);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+html body.guided-flow .guided-live-stats.ultimate-live-stats,
+html body.guided-flow .guided-live-rail .ultimate-live-stats {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.35rem;
+  margin: 0.85rem 0 0.45rem;
+  padding: 0.65rem 0.35rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+html body.guided-flow .guided-live-stats dt,
+html body.guided-flow .ultimate-live-stats dt {
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+}
+
+html body.guided-flow .guided-live-stats dd,
+html body.guided-flow .ultimate-live-stats dd {
+  margin: 0.15rem 0 0;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+}
+
+html body.guided-flow .wizard-live-preview-note {
+  margin: 0.35rem 0 0;
+  max-width: none;
+  text-align: left;
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.35;
+}
+
+/* Logan advisor card */
+html body.guided-flow .guided-side-advisor {
+  display: none;
+  margin-top: 0 !important;
+  padding: 1.15rem 1.05rem 1.1rem !important;
+  border-radius: var(--g-radius) !important;
+  background: var(--g-white) !important;
+  border: 1px solid var(--g-border) !important;
+  box-shadow: var(--g-shadow) !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 0.95rem !important;
+}
+
+html body.guided-flow .guided-side-identity {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+html body.guided-flow .guided-side-photo {
+  width: 64px !important;
+  height: 64px !important;
+  border-radius: 999px !important;
+  object-fit: cover;
+  border: 2.5px solid rgba(201, 162, 39, 0.55) !important;
+  flex-shrink: 0;
+  align-self: center;
+}
+
+html body.guided-flow .guided-side-copy {
+  min-width: 0;
+  text-align: left;
+}
+
+html body.guided-flow .guided-side-copy strong {
+  display: block;
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--g-navy);
+  line-height: 1.2;
+}
+
+html body.guided-flow .guided-side-role {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--g-gold-deep);
+}
+
+html body.guided-flow .guided-side-nmls {
+  display: block;
+  margin-top: 0.12rem;
+  font-size: 0.7rem;
+  color: var(--g-muted);
+}
+
+html body.guided-flow .guided-side-ctas {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+html body.guided-flow .guided-side-cta,
+html body.guided-flow .guided-reviews-btn,
+html body.guided-flow .guided-realtor-btn,
+html body.guided-flow .guided-loan-options-btn {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  min-height: 46px !important;
+  margin: 0 !important;
+  padding: 0.65rem 0.9rem !important;
+  border-radius: var(--g-radius-pill) !important;
+  font-size: 0.82rem !important;
+  font-weight: 700 !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  box-sizing: border-box !important;
+  transition: transform 0.12s, box-shadow 0.15s, background 0.15s, border-color 0.15s, color 0.15s !important;
+}
+
+html body.guided-flow .guided-side-cta-gold,
+html body.guided-flow .guided-reviews-btn {
+  background: linear-gradient(135deg, #f0d060 0%, var(--g-gold) 55%, var(--g-gold-deep) 100%) !important;
+  border: 0 !important;
+  color: var(--g-navy) !important;
+  box-shadow: 0 4px 14px rgba(201, 162, 39, 0.3) !important;
+}
+
+html body.guided-flow .guided-side-cta-gold:hover,
+html body.guided-flow .guided-reviews-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(201, 162, 39, 0.4) !important;
+  filter: brightness(1.03);
+}
+
+html body.guided-flow .guided-side-cta-navy,
+html body.guided-flow .guided-realtor-btn {
+  background: var(--g-navy) !important;
+  border: 0 !important;
+  color: #fff !important;
+  box-shadow: 0 4px 14px rgba(26, 18, 48, 0.18) !important;
+}
+
+html body.guided-flow .guided-side-cta-navy:hover,
+html body.guided-flow .guided-realtor-btn:hover {
+  background: #252040 !important;
+  color: #fff !important;
+  transform: translateY(-1px);
+}
+
+html body.guided-flow .guided-side-cta-outline,
+html body.guided-flow .guided-loan-options-btn {
+  background: #fff !important;
+  border: 1.5px solid rgba(26, 18, 48, 0.16) !important;
+  color: var(--g-navy) !important;
+}
+
+html body.guided-flow .guided-side-cta-outline:hover,
+html body.guided-flow .guided-loan-options-btn:hover {
+  border-color: var(--g-gold) !important;
+  background: rgba(201, 162, 39, 0.1) !important;
+  transform: translateY(-1px);
+}
+
+@media (min-width: 1024px) {
+  html body.guided-flow .guided-side-advisor {
+    display: flex !important;
+  }
+}
+
+@media (max-width: 1099px) {
+  html body.guided-flow .guided-side-advisor {
+    display: flex !important;
+    max-width: 720px;
+    margin: 0.75rem auto 0 !important;
+    width: 100%;
+  }
+}
+
+/* ---------- Results hero ---------- */
+html body.guided-flow .guided-results-card {
+  border-radius: 20px !important;
+  padding: 1.65rem 1.35rem 1.85rem !important;
+  box-shadow: 0 16px 48px rgba(17, 12, 29, 0.28) !important;
+}
+
+html body.guided-flow .guided-results-card .total-amount {
+  font-family: var(--font-display, "Playfair Display", Georgia, serif);
+  font-size: clamp(2.4rem, 8vw, 3.1rem) !important;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: var(--g-gold-light) !important;
+}
+
+html body.guided-flow .guided-results-card .total-label {
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+html body.guided-flow .guided-results-card .total-sublabel {
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+html body.guided-flow .guided-costs-note {
+  color: rgba(255, 255, 255, 0.6) !important;
+  font-size: 0.78rem !important;
+  max-width: 28rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+html body.guided-flow .guided-results-compliance {
+  font-size: 0.7rem !important;
+  line-height: 1.45 !important;
+  opacity: 0.85;
+  margin-top: 0.5rem;
+}
+
+html body.guided-flow .guided-breakdown {
+  margin: 1.25rem 0;
+}
+
+html body.guided-flow .guided-breakdown li {
+  padding: 0.55rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.9rem;
+}
+
+html body.guided-flow .guided-lead-primary {
+  border-radius: 16px !important;
+  padding: 1.35rem 1.2rem !important;
+  margin: 1.25rem auto !important;
+}
+
+html body.guided-flow .guided-footer {
+  padding-top: 1.5rem;
+  padding-bottom: 6.5rem;
+}
+
+html body.guided-flow .guided-footer .compliance-disclaimer,
+html body.guided-flow .guided-footer .disclaimer,
+html body.guided-flow .guided-footer .nmls-compliance,
+html body.guided-flow .guided-footer .nmls {
+  font-size: 0.72rem;
+  line-height: 1.45;
+  color: var(--g-muted);
+  max-width: 40rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ---------- Bottom nav (all steps) ---------- */
+html body.guided-flow .wizard-nav {
+  background: linear-gradient(180deg, transparent 0%, rgba(243, 241, 236, 0.88) 22%, #f3f1ec 48%) !important;
+  border-top: 1px solid rgba(26, 18, 48, 0.06) !important;
+  backdrop-filter: blur(10px);
+  padding: 0.85rem 1rem calc(0.85rem + env(safe-area-inset-bottom, 0px)) !important;
+}
+
+html body.guided-flow .wizard-nav-inner.guided-nav-inner {
+  max-width: 720px !important;
+  gap: 0.75rem !important;
+}
+
+html body.guided-flow .btn-wizard-back {
+  min-height: 52px !important;
+  padding: 0.75rem 1.2rem !important;
+  border-radius: var(--g-radius-pill) !important;
+  border: 1.5px solid rgba(26, 18, 48, 0.16) !important;
+  background: #fff !important;
+  color: var(--g-navy) !important;
+  font-weight: 600 !important;
+  box-shadow: var(--g-shadow-sm) !important;
+}
+
+html body.guided-flow .btn-wizard-next {
+  min-height: 52px !important;
+  min-width: 11.5rem !important;
+  padding: 0.75rem 1.4rem !important;
+  border-radius: var(--g-radius-pill) !important;
+  border: 0 !important;
+  background: linear-gradient(135deg, #f0d060 0%, var(--g-gold) 50%, var(--g-gold-deep) 100%) !important;
+  color: var(--g-navy) !important;
+  font-weight: 800 !important;
+  font-size: 0.95rem !important;
+  box-shadow: var(--g-shadow-gold) !important;
+}
+
+html body.guided-flow .btn-wizard-next:hover {
+  filter: brightness(1.04);
+}
+
+/* ---------- Loan-you step polish ---------- */
+html body.guided-flow .guided-loan-split-col-accent {
+  border-radius: var(--g-radius-sm);
+  background: linear-gradient(165deg, #fbf8f0, #fff);
+  border: 1px solid rgba(201, 162, 39, 0.22);
+  padding: 1.1rem !important;
+}
+
+html body.guided-flow .guided-section-label {
+  font-size: 0.7rem !important;
+  letter-spacing: 0.08em !important;
+  color: var(--g-muted) !important;
+}
+
+/* Skip / secondary links */
+html body.guided-flow .wizard-skip {
+  display: block;
+  margin: 1rem auto 0;
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--g-muted);
+  background: none;
+  border: 0;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+html body.guided-flow .wizard-skip:hover {
+  color: var(--g-navy);
+}
+
+/* Property summary */
+html body.guided-flow .guided-property-summary {
+  border-radius: var(--g-radius-sm);
+  border: 1px solid rgba(201, 162, 39, 0.3);
+  background: rgba(201, 162, 39, 0.08);
+  padding: 0.95rem 1rem;
+  margin-top: 1rem;
+}
+
+/* Reduce dense inline notes on results */
+html body.guided-flow .guided-tax-ins-on-results .field-note {
+  font-size: 0.68rem !important;
+  opacity: 0.75;
+}
+
+/* Optional details quieter */
+html body.guided-flow .guided-optional-details summary,
+html body.guided-flow .guided-secondary-details summary {
+  font-weight: 600;
+  color: var(--g-muted);
+}
+
+html body.guided-flow .guided-secondary-details summary {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Kill logan5 full-width header-actions that break the bar layout */
+html body.guided-flow.logan5 .wizard-header-actions,
+html body.guided-flow.logan5 .guided-header-actions {
+  width: auto !important;
+  flex-wrap: nowrap !important;
+  justify-content: flex-end !important;
+}
+
+html body.guided-flow.logan5 .wizard-header-inner {
+  max-width: 1120px !important;
+  flex-direction: row !important;
+  align-items: center !important;
+}
+
+html body.guided-flow.logan5 .wizard-header-brand {
+  width: auto !important;
+  flex: 1 1 auto !important;
+}
+
+/* Sticky rail on desktop large screens */
+@media (min-width: 1100px) {
+  html body.guided-flow .guided-live-rail {
+    position: sticky;
+    top: 5.25rem;
+    align-self: flex-start;
+  }
+}
+
+/* =========================================================
+   STEP 4 only — You & down (match credit-step polish)
+   Scoped to [data-step-id="loan-you"]
+   ========================================================= */
+
+body.guided-flow [data-step-id="loan-you"].guided-loan-you-step {
+  width: 100%;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+body.guided-flow [data-step-id="loan-you"] .guided-loan-you-panel {
+  max-width: 720px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Intro breathing room */
+body.guided-flow [data-step-id="loan-you"] .guided-loan-you-intro {
+  text-align: center;
+  margin: 0 auto 1.5rem;
+  padding: 0.35rem 0.5rem 0.25rem;
+  max-width: 30rem;
+}
+
+body.guided-flow [data-step-id="loan-you"] .guided-loan-you-intro .guided-kicker {
+  margin-bottom: 0.55rem;
+  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+}
+
+body.guided-flow [data-step-id="loan-you"] .guided-loan-you-intro .guided-title {
+  margin: 0 0 0.65rem;
+  font-size: clamp(1.55rem, 4.2vw, 1.95rem);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+body.guided-flow [data-step-id="loan-you"] .guided-loan-you-intro .guided-lead {
+  margin: 0 auto;
+  max-width: 26rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #6b6580;
+}
+
+/* Main card shell */
+body.guided-flow [data-step-id="loan-you"] .guided-loan-you-card {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 1.5rem 1.35rem 1.45rem !important;
+  border-radius: 20px !important;
+  background: #fff !important;
+  border: 1px solid rgba(26, 18, 48, 0.07) !important;
+  box-shadow: 0 10px 36px rgba(26, 18, 48, 0.08) !important;
+}
+
+body.guided-flow [data-step-id="loan-you"] .guided-loan-split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.65rem;
+  align-items: start;
+}
+
+body.guided-flow [data-step-id="loan-you"] .guided-loan-you-label {
+  display: block;
+  margin: 0 0 0.7rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6b6580;
+  text-align: center;
+}
+
+body.guided-flow [data-step-id="loan-you"] .guided-loan-you-label-spaced {
+  margin-top: 1.45rem;
+}
+
+/* Profile chips — larger taps, clearer selected */
+body.guided-flow [data-step-id="loan-you"] .guided-loan-you-chips {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+body.guided-flow [data-step-id="loan-you"] .guided-loan-you-chips .ultimate-profile-chip {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  margin: 0;
+  padding: 0.8rem 0.9rem;
+  min-height: 52px;
+  border-radius: 14px;
+  border: 1.5px solid rgba(26, 18, 48, 0.1);
+  background: #faf9f7;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+}
+
+body.guided-flow [data-step-id="loan-you"] .guided-loan-you-chips .ultimate-profile-chip:hover {
+  border-color: rgba(201, 162, 39, 0.5);
+  background: #fff;
+}
+
+body.guided-flow [data-step-id="loan-you"] .guided-loan-you-chips .ultimate-profile-chip:has(input:checked) {
+  border-color: #c9a227;
+  background: rgba(201, 162, 39, 0.12);
+  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.14);
+}
+
+body.guided-flow [data-step-id="loan-you"] .guided-loan-you-chips .ultimate-profile-chip input {
+  margin-top: 0.2rem;
+  width: 1.05rem;
+  height: 1.05rem;
+  accent-color: #c9a227;
+  flex-shrink: 0;
+}
+
+body.guided-flow [data-step-id="loan-you"] .guided-loan-you-chips .ultimate-profile-chip-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.12rem;
+  text-align: left;
+}
+
+body.guided-flow [data-step-id="loan-you"] .guided-loan-you-chips .ultimate-profile-chip-text strong {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #1a1230;
+}
+
+body.guided-flow [data-step-id="loan-you"] .guided-loan-you-chips .ultimate-profile-chip-text span {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #6b6580;
+  line-height: 1.3;
+}
+
+/* Program buttons — pill/card hybrid matching system */
+body.guided-flow [data-step-id="loan-you"] .guided-loan-you-programs {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 0.55rem !important;
+}
+
+body.guided-flow [data-step-id="loan-you"] .guided-loan-you-programs .ultimate-program-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  min-height: 64px;
+  padding: 0.75rem 0.55rem !important;
+  border-radius: 14px !important;
+  border: 1.5px solid rgba(26, 18, 48, 0.1) !important;
+  background: #faf9f7 !important;
+  box-shadow: none !important;
+  cursor: pointer;
+  text-align: center;
+  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s, transform 0.12s !important;
+}
+
+body.guided-flow [data-step-id="loan-you"] .guided-loan-you-programs .ultimate-program-btn:hover {
+  border-color: rgba(201, 162, 39, 0.55) !important;
+  background: #fff !important;
+  transform: translateY(-1px);
+}
+
+body.guided-flow [data-step-id="loan-you"] .guided-loan-you-programs .ultimate-program-btn.active {
+  background: linear-gradient(135deg, #f0d060 0%, #c9a227 55%, #b8891a 100%) !important;
+  border-color: transparent !important;
+  color: #1a1230 !important;
+  box-shadow: 0 4px 14px rgba(201, 162, 39, 0.32) !important;
+  font-weight: 700;
+}
+
+body.guided-flow [data-step-id="loan-you"] .guided-loan-you-programs .ultimate-program-btn strong {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: inherit;
+}
+
+body.guided-flow [data-step-id="loan-you"] .guided-loan-you-programs .ultimate-program-btn span {
+  font-size: 0.7rem;
+  font-weight: 500;
+  opacity: 0.8;
+  line-height: 1.25;
+}
+
+body.guided-flow [data-step-id="loan-you"] .guided-loan-you-programs .ultimate-program-btn.active span {
+  opacity: 0.9;
+  color: #1a1230;
+}
+
+body.guided-flow [data-step-id="loan-you"] .guided-loan-you-note,
+body.guided-flow [data-step-id="loan-you"] .guided-loan-you-tip {
+  margin: 0.65rem 0 0;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: #8a8499;
+  text-align: center;
+}
+
+body.guided-flow [data-step-id="loan-you"] .guided-loan-you-tip {
+  margin-top: 0.35rem;
+}
+
+/* Down payment panel — calm gold accent */
+body.guided-flow [data-step-id="loan-you"] .guided-loan-you-down {
+  padding: 1.25rem 1.15rem 1.3rem !important;
+  border-radius: 16px !important;
+  background: linear-gradient(165deg, #fbf8f0 0%, #fff 70%) !important;
+  border: 1px solid rgba(201, 162, 39, 0.28) !important;
+}
+
+body.guided-flow [data-step-id="loan-you"] .guided-down-hero {
+  text-align: center;
+  margin: 0 0 1rem;
+}
+
+body.guided-flow [data-step-id="loan-you"] .guided-down-hero-value,
+body.guided-flow [data-step-id="loan-you"] #downDisplay {
+  display: block;
+  font-size: clamp(1.45rem, 4.5vw, 1.75rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #1a1230;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.15;
+}
+
+body.guided-flow [data-step-id="loan-you"] .guided-down-hero-lead {
+  margin: 0.4rem 0 0;
+  font-size: 0.8rem;
+  color: #8a8499;
+  text-align: center;
+}
+
+body.guided-flow [data-step-id="loan-you"] .guided-down-field {
+  margin: 0;
+}
+
+body.guided-flow [data-step-id="loan-you"] .guided-down-field #downPercent {
+  display: block !important;
+  width: 100%;
+  height: 10px;
+  margin: 0.25rem 0 1rem;
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 999px;
+  background: linear-gradient(
+    to right,
+    #c9a227 0%,
+    #c9a227 var(--down-fill, 40%),
+    rgba(26, 18, 48, 0.12) var(--down-fill, 40%),
+    rgba(26, 18, 48, 0.12) 100%
+  );
+  outline: none;
+  accent-color: #c9a227;
+  cursor: pointer;
+}
+
+body.guided-flow [data-step-id="loan-you"] .guided-down-field #downPercent::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #1a1230;
+  border: 3px solid #c9a227;
+  box-shadow: 0 2px 10px rgba(26, 18, 48, 0.22);
+  cursor: pointer;
+  margin-top: -8px;
+}
+
+body.guided-flow [data-step-id="loan-you"] .guided-down-field #downPercent::-moz-range-thumb {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #1a1230;
+  border: 3px solid #c9a227;
+  box-shadow: 0 2px 10px rgba(26, 18, 48, 0.22);
+  cursor: pointer;
+}
+
+body.guided-flow [data-step-id="loan-you"] .guided-down-inline {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem;
+  margin-top: 0.15rem;
+}
+
+body.guided-flow [data-step-id="loan-you"] .guided-down-inline .inline-field {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-width: 0;
+}
+
+body.guided-flow [data-step-id="loan-you"] .guided-down-inline .inline-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #6b6580;
+  flex-shrink: 0;
+}
+
+body.guided-flow [data-step-id="loan-you"] .guided-down-inline input {
+  min-height: 46px !important;
+  width: 100%;
+  min-width: 0;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* Quick % chips — same language as term pills */
+body.guided-flow [data-step-id="loan-you"] .guided-down-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.45rem;
+  margin-top: 1.1rem;
+}
+
+body.guided-flow [data-step-id="loan-you"] .guided-down-chips .guided-mini-chip {
+  min-width: 3.4rem;
+  min-height: 44px;
+  padding: 0.5rem 0.85rem;
+  border-radius: 999px;
+  border: 1.5px solid rgba(26, 18, 48, 0.12);
+  background: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #3d3654;
+  box-shadow: none;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s, color 0.15s;
+}
+
+body.guided-flow [data-step-id="loan-you"] .guided-down-chips .guided-mini-chip:hover {
+  border-color: rgba(201, 162, 39, 0.55);
+  background: #fffdf6;
+}
+
+body.guided-flow [data-step-id="loan-you"] .guided-down-chips .guided-mini-chip.is-selected {
+  background: linear-gradient(135deg, #f0d060 0%, #c9a227 55%, #b8891a 100%);
+  border-color: transparent;
+  color: #1a1230;
+  font-weight: 700;
+  box-shadow: 0 3px 12px rgba(201, 162, 39, 0.3);
+}
+
+body.guided-flow [data-step-id="loan-you"] .guided-loan-you-next {
+  margin: 1.25rem 0 0;
+  text-align: center;
+  font-size: 0.8rem;
+  color: #8a8499;
+}
+
+/* Desktop 2-col */
+@media (min-width: 720px) {
+  body.guided-flow [data-step-id="loan-you"] .guided-loan-you-card {
+    padding: 1.7rem 1.55rem 1.55rem !important;
+  }
+
+  body.guided-flow [data-step-id="loan-you"] .guided-loan-split {
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 1.5rem;
+    align-items: stretch;
+  }
+
+  body.guided-flow [data-step-id="loan-you"] .guided-loan-you-down {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  body.guided-flow [data-step-id="loan-you"] .guided-loan-you-intro {
+    margin-bottom: 1.7rem;
+  }
+}
+
+@media (max-width: 719px) {
+  body.guided-flow [data-step-id="loan-you"] .guided-loan-you-card {
+    padding: 1.25rem 1.05rem 1.3rem !important;
+  }
+
+  body.guided-flow [data-step-id="loan-you"] .guided-loan-you-programs .ultimate-program-btn {
+    min-height: 58px;
+  }
+
+  body.guided-flow [data-step-id="loan-you"] .guided-down-chips .guided-mini-chip {
+    flex: 1 1 calc(33.33% - 0.45rem);
+    min-width: 3.2rem;
+  }
+}
+
+/* =========================================================
+   GLOBAL HEADER v3 — exact logos, no white plate, tight bar
+   Logos: assets/logo.png (white dual MMG + Gold Star)
+   ========================================================= */
+
+html body.guided-flow .wizard-header.guided-header {
+  background: #1a1230 !important;
+  background-image: linear-gradient(180deg, #1f1738 0%, #1a1230 55%, #151028 100%) !important;
+  border-bottom: 3px solid #c9a227 !important;
+  padding: 0 !important;
+  box-shadow: 0 2px 16px rgba(17, 12, 29, 0.35) !important;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+html body.guided-flow .wizard-header-inner.guided-header-inner,
+html body.guided-flow .guided-header-inner {
+  max-width: 1120px !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+  padding: 0.55rem 1.15rem !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 0.75rem 1.25rem !important;
+}
+
+/* Logo link — no white bar, no floating plate */
+html body.guided-flow .guided-logo-link.wizard-logo-link,
+html body.guided-flow a.wizard-logo-link.guided-logo-link {
+  display: flex !important;
+  align-items: center !important;
+  flex: 0 1 auto !important;
+  width: auto !important;
+  max-width: min(340px, 52vw) !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  line-height: 0 !important;
+  text-align: left !important;
+}
+
+html body.guided-flow .guided-header-logo.wizard-logo,
+html body.guided-flow .guided-header-logo.wizard-logo-full,
+html body.guided-flow .guided-logo-link .wizard-logo,
+html body.guided-flow .guided-logo-link .wizard-logo-full {
+  display: block !important;
+  width: auto !important;
+  height: 44px !important;
+  max-height: 44px !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  object-fit: contain !important;
+  object-position: left center !important;
+  /* Keep exact artwork; white mark on navy */
+  filter: none !important;
+}
+
+/* Hide any leftover tagline blocks if present */
+html body.guided-flow .guided-header-tagline,
+html body.guided-flow .wizard-header-tagline,
+html body.guided-flow .guided-header-brand {
+  display: none !important;
+}
+
+/* Right actions */
+html body.guided-flow .guided-header-actions,
+html body.guided-flow.logan5 .wizard-header-actions.guided-header-actions {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 0.65rem !important;
+  width: auto !important;
+  flex-shrink: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+html body.guided-flow .guided-header-phone.wizard-header-phone {
+  display: inline-flex !important;
+  align-items: center !important;
+  padding: 0.4rem 0.15rem !important;
+  border: 0 !important;
+  background: transparent !important;
+  color: #e8c84a !important;
+  font-size: 0.95rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.01em !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  transition: color 0.15s !important;
+}
+
+html body.guided-flow .guided-header-phone:hover {
+  color: #fff !important;
+  background: transparent !important;
+}
+
+html body.guided-flow .guided-header-apply.btn-apply-now,
+html body.guided-flow a.guided-header-apply {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.35rem !important;
+  min-height: 40px !important;
+  height: 40px !important;
+  padding: 0 1.15rem !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  background: linear-gradient(135deg, #f0d060 0%, #c9a227 48%, #b8891a 100%) !important;
+  color: #1a1230 !important;
+  font-size: 0.78rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+  box-shadow: 0 3px 12px rgba(201, 162, 39, 0.35) !important;
+  transition: filter 0.15s, transform 0.12s, box-shadow 0.15s !important;
+}
+
+html body.guided-flow .guided-header-apply .btn-apply-text {
+  color: inherit !important;
+}
+
+html body.guided-flow .guided-header-apply .btn-apply-arrow {
+  font-size: 1rem;
+  line-height: 1;
+  color: inherit !important;
+}
+
+html body.guided-flow .guided-header-apply:hover {
+  filter: brightness(1.06);
+  transform: translateY(-1px);
+  box-shadow: 0 5px 16px rgba(201, 162, 39, 0.42) !important;
+  color: #1a1230 !important;
+}
+
+/* Mobile — tighter, still one solid bar */
+@media (max-width: 720px) {
+  html body.guided-flow .wizard-header-inner.guided-header-inner {
+    padding: 0.45rem 0.75rem !important;
+    gap: 0.5rem !important;
+  }
+
+  html body.guided-flow .guided-logo-link.wizard-logo-link {
+    max-width: min(200px, 48vw) !important;
+  }
+
+  html body.guided-flow .guided-header-logo.wizard-logo-full,
+  html body.guided-flow .guided-logo-link .wizard-logo-full {
+    height: 34px !important;
+    max-height: 34px !important;
+  }
+
+  html body.guided-flow .guided-header-phone.wizard-header-phone {
+    font-size: 0.78rem !important;
+    padding: 0.3rem 0 !important;
+  }
+
+  html body.guided-flow .guided-header-apply.btn-apply-now {
+    min-height: 36px !important;
+    height: 36px !important;
+    padding: 0 0.85rem !important;
+    font-size: 0.7rem !important;
+    letter-spacing: 0.04em !important;
+  }
+
+  html body.guided-flow .guided-header-actions {
+    gap: 0.45rem !important;
+  }
+}
+
+@media (max-width: 400px) {
+  html body.guided-flow .guided-header-phone.wizard-header-phone {
+    /* keep number visible; slightly smaller */
+    font-size: 0.72rem !important;
+  }
+
+  html body.guided-flow .guided-logo-link.wizard-logo-link {
+    max-width: 42vw !important;
+  }
+
+  html body.guided-flow .guided-header-logo.wizard-logo-full,
+  html body.guided-flow .guided-logo-link .wizard-logo-full {
+    height: 30px !important;
+    max-height: 30px !important;
+  }
+}
+
+/* Desktop room for full dual logo */
+@media (min-width: 900px) {
+  html body.guided-flow .wizard-header-inner.guided-header-inner {
+    padding: 0.6rem 1.5rem !important;
+  }
+
+  html body.guided-flow .guided-logo-link.wizard-logo-link {
+    max-width: 380px !important;
+  }
+
+  html body.guided-flow .guided-header-logo.wizard-logo-full,
+  html body.guided-flow .guided-logo-link .wizard-logo-full {
+    height: 48px !important;
+    max-height: 48px !important;
+  }
+
+  html body.guided-flow .guided-header-phone.wizard-header-phone {
+    font-size: 1rem !important;
+  }
+
+  html body.guided-flow .guided-header-apply.btn-apply-now {
+    min-height: 42px !important;
+    height: 42px !important;
+    padding: 0 1.25rem !important;
+  }
+}
+
+/* Kill any logan5 rules that reintroduce white logo plates or full-width actions */
+html body.guided-flow.logan5 .wizard-logo-link {
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  width: auto !important;
+}
+
+html body.guided-flow.logan5 .wizard-header-actions {
+  width: auto !important;
+  justify-content: flex-end !important;
+}
+
+html body.guided-flow.logan5 .wizard-header-inner {
+  flex-direction: row !important;
+  max-width: 1120px !important;
+}
+
+/* ---------- Header: powered-by line under exact logo ---------- */
+html body.guided-flow .guided-logo-link.wizard-logo-link {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  gap: 0.2rem !important;
+  line-height: 1.2 !important;
+}
+
+html body.guided-flow .guided-header-powered {
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 0 0 0.05rem !important;
+  font-size: 0.62rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.04em !important;
+  color: rgba(255, 255, 255, 0.52) !important;
+  white-space: nowrap !important;
+  text-transform: none !important;
+  line-height: 1.2 !important;
+}
+
+/* Undo any earlier hide rules for this powered-by line */
+html body.guided-flow a.guided-logo-link .guided-header-powered {
+  display: block !important;
+}
+
+@media (max-width: 720px) {
+  html body.guided-flow .guided-header-powered {
+    font-size: 0.55rem !important;
+    letter-spacing: 0.03em !important;
+  }
+}
+
+/* ---------- Footer: cleaner compliance block ---------- */
+html body.guided-flow .guided-footer.site-footer,
+html body.guided-flow footer.guided-footer {
+  max-width: 720px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding: 2rem 1.25rem 7.5rem !important;
+  text-align: center !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 0.85rem !important;
+}
+
+html body.guided-flow .guided-footer .equal-housing-logo {
+  display: block !important;
+  width: 56px !important;
+  height: auto !important;
+  margin: 0 auto 0.15rem !important;
+  opacity: 0.9;
+}
+
+html body.guided-flow .guided-footer-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+  width: 100%;
+  max-width: 36rem;
+}
+
+html body.guided-flow .guided-footer .compliance-disclaimer,
+html body.guided-flow .guided-footer .disclaimer,
+html body.guided-flow .guided-footer .nmls-compliance,
+html body.guided-flow .guided-footer .nmls {
+  margin: 0 !important;
+  max-width: 36rem !important;
+  font-size: 0.72rem !important;
+  line-height: 1.55 !important;
+  color: #6b6580 !important;
+  text-align: center !important;
+}
+
+html body.guided-flow .guided-footer .compliance-disclaimer strong,
+html body.guided-flow .guided-footer .nmls-compliance strong {
+  color: #3d3654 !important;
+  font-weight: 700 !important;
+}
+
+html body.guided-flow .guided-footer .guided-footer-line2 {
+  margin-top: -0.15rem !important;
+}
+
+html body.guided-flow .guided-footer a {
+  color: #5c5670 !important;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+html body.guided-flow .guided-footer a:hover {
+  color: #1a1230 !important;
+}
+
+/* ---------- Compliance footer: minimal navy bar (all steps) ---------- */
+html body.guided-flow footer.guided-footer,
+html body.guided-flow .guided-footer.site-footer,
+html body.guided-flow .wizard-site-footer.guided-footer {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 2.35rem 1.25rem 7.75rem !important;
+  box-sizing: border-box !important;
+  background: #1a1230 !important;
+  background-image: linear-gradient(180deg, #1a1230 0%, #151028 100%) !important;
+  border-top: 1px solid rgba(201, 162, 39, 0.28) !important;
+  color: rgba(255, 255, 255, 0.62) !important;
+  text-align: center !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 1rem !important;
+  box-shadow: none !important;
+}
+
+html body.guided-flow .guided-footer .equal-housing-logo {
+  display: block !important;
+  width: 48px !important;
+  height: auto !important;
+  margin: 0 auto !important;
+  opacity: 1;
+  /* Exact logo artwork, rendered pure white for navy footer contrast */
+  filter: brightness(0) invert(1) !important;
+}
+
+html body.guided-flow .guided-footer-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.65rem;
+  width: 100%;
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 0;
+}
+
+html body.guided-flow .guided-footer .guided-footer-line {
+  margin: 0 !important;
+  padding: 0 0.25rem !important;
+  max-width: 40rem !important;
+  font-size: 0.68rem !important;
+  line-height: 1.6 !important;
+  font-weight: 400 !important;
+  color: rgba(255, 255, 255, 0.58) !important;
+  text-align: center !important;
+}
+
+html body.guided-flow .guided-footer .guided-footer-line strong {
+  color: rgba(255, 255, 255, 0.78) !important;
+  font-weight: 600 !important;
+}
+
+html body.guided-flow .guided-footer .guided-footer-line a {
+  color: rgba(232, 200, 74, 0.85) !important;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+html body.guided-flow .guided-footer .guided-footer-line a:hover {
+  color: #e8c84a !important;
+}
+
+@media (min-width: 720px) {
+  html body.guided-flow footer.guided-footer {
+    padding: 2.75rem 1.75rem 8rem !important;
+  }
+
+  html body.guided-flow .guided-footer .guided-footer-line {
+    font-size: 0.7rem !important;
+    line-height: 1.65 !important;
+  }
+}
