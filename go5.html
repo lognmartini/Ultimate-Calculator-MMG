@@ -6,16 +6,16 @@
   <meta name="mmg-api-base" content="/" />
   <meta name="mmg-meta-pixel-id" content="" />
   <meta name="mmg-gtag-id" content="" />
-  <meta name="description" content="Logan Martini mortgage payment estimate — purchase or refinance, address lookup, clear steps. Educational only." />
+  <meta name="description" content="Private mortgage strategy estimate with Logan Martini — clear monthly payment, Martini rate advantage, and next steps. Educational only." />
   <meta name="robots" content="index, follow" />
   <meta name="theme-color" content="#1a1230" />
   <link rel="canonical" href="https://martinimortgagegroup.com/mortgage-calculator/go5.html" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Martini Mortgage Group" />
-  <meta property="og:title" content="Payment Estimate | Logan Martini" />
-  <meta property="og:description" content="Purchase or refinance. Search any address or set a price. Clear monthly payment estimate." />
+  <meta property="og:title" content="Your Payment Strategy | Logan Martini" />
+  <meta property="og:description" content="See your monthly payment, Martini vs typical lender, and a clear plan — educational estimate with Logan Martini." />
   <meta property="og:url" content="https://martinimortgagegroup.com/mortgage-calculator/go5.html" />
-  <title>Payment Estimate | Logan Martini · Martini Mortgage Group</title>
+  <title>Your Payment Strategy | Logan Martini · Martini Mortgage Group</title>
   <link rel="icon" href="assets/mmg-logo.png" type="image/png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -27,8 +27,9 @@
   <link rel="stylesheet" href="styles-logan5-landing.css" />
   <link rel="stylesheet" href="styles-logan5-growth.css" />
   <link rel="stylesheet" href="styles-guided.css" />
+  <link rel="stylesheet" href="styles-flagship.css" />
 </head>
-<body class="wizard-social logan3 logan5 guided-flow guided-v2" data-wizard-step="1" data-mmg-version="Logan5" data-loan-goal="purchase" data-has-address="">
+<body class="wizard-social logan3 logan5 guided-flow guided-v2 guided-flagship" data-wizard-step="1" data-mmg-version="Logan5" data-loan-goal="purchase" data-has-address="">
   <div class="logan5-instant-banner hidden" id="logan5InstantBanner" role="status" aria-live="polite">
     <span class="logan5-instant-pulse" aria-hidden="true"></span>
     <div class="logan5-instant-copy">
@@ -90,43 +91,78 @@
     <section class="wizard-step wizard-step-active guided-step guided-choice-step" data-step="0" data-step-id="goal" aria-labelledby="step-goal-title">
       <div class="guided-step-panel">
         <div class="guided-step-intro guided-centered">
-          <p class="guided-kicker">Logan Martini · NMLS #1591485</p>
-          <h1 class="wizard-title guided-title" id="step-goal-title">What are you looking to do?</h1>
-          <p class="wizard-lead guided-lead">We&rsquo;ll tailor the next questions for a purchase or a refinance. Educational estimates only.</p>
+          <p class="guided-kicker">With Logan Martini · NMLS #1591485 · ~2 minutes</p>
+          <h1 class="wizard-title guided-title" id="step-goal-title">See your real monthly payment</h1>
+          <p class="wizard-lead guided-lead">Clear numbers first. Strategy next. Educational estimate only — not a loan application.</p>
         </div>
         <div class="guided-choice-grid" role="group" aria-label="Loan goal">
           <button type="button" class="guided-choice-card" data-goal="purchase" id="goalPurchaseBtn">
             <span class="guided-choice-icon" aria-hidden="true">🏠</span>
-            <strong>Purchase a home</strong>
-            <span>Buying a new primary, second home, or investment property</span>
+            <strong>I&rsquo;m buying</strong>
+            <span>Primary, second home, or investment</span>
           </button>
           <button type="button" class="guided-choice-card" data-goal="refinance" id="goalRefinanceBtn">
             <span class="guided-choice-icon" aria-hidden="true">🔁</span>
-            <strong>Refinance</strong>
-            <span>Lower payment, cash-out, or change term on a home you already own</span>
+            <strong>I&rsquo;m refinancing</strong>
+            <span>Lower payment, cash-out, or new term</span>
           </button>
         </div>
       </div>
     </section>
 
-    <!-- STEP 1: Address in mind? (purchase only; refinance auto-skips) -->
+    <!-- STEP 1: Purchase = has address? | Refinance = refi goal -->
     <section class="wizard-step guided-step guided-choice-step" data-step="1" data-step-id="has-address" hidden aria-labelledby="step-has-addr-title">
       <div class="guided-step-panel">
-        <div class="guided-step-intro guided-centered">
-          <h2 class="wizard-title guided-title" id="step-has-addr-title">Do you have an address in mind?</h2>
-          <p class="wizard-lead guided-lead">If yes, we can look up taxes and insurance. If not, you can start with a purchase price.</p>
+        <!-- Purchase path -->
+        <div class="guided-step-branch" id="guidedPurchaseBranch" data-branch="purchase">
+          <div class="guided-step-intro guided-centered">
+            <p class="guided-kicker">More accurate with an address</p>
+            <h2 class="wizard-title guided-title" id="step-has-addr-title">Do you have a property in mind?</h2>
+            <p class="wizard-lead guided-lead">An address unlocks local tax &amp; insurance estimates for any U.S. location. No address yet? Start with a price.</p>
+          </div>
+          <div class="guided-choice-grid" role="group" aria-label="Has address">
+            <button type="button" class="guided-choice-card" data-has-address="yes" id="hasAddressYesBtn">
+              <span class="guided-choice-icon" aria-hidden="true">📍</span>
+              <strong>Yes — use my address</strong>
+              <span>Tax &amp; insurance for that location</span>
+            </button>
+            <button type="button" class="guided-choice-card" data-has-address="no" id="hasAddressNoBtn">
+              <span class="guided-choice-icon" aria-hidden="true">💵</span>
+              <strong>Not yet — use a price</strong>
+              <span>Model any budget and refine as you shop</span>
+            </button>
+          </div>
         </div>
-        <div class="guided-choice-grid" role="group" aria-label="Has address">
-          <button type="button" class="guided-choice-card" data-has-address="yes" id="hasAddressYesBtn">
-            <span class="guided-choice-icon" aria-hidden="true">📍</span>
-            <strong>Yes — I have an address</strong>
-            <span>Search the listing and we&rsquo;ll pull price, taxes &amp; insurance when available</span>
-          </button>
-          <button type="button" class="guided-choice-card" data-has-address="no" id="hasAddressNoBtn">
-            <span class="guided-choice-icon" aria-hidden="true">💵</span>
-            <strong>No — just a price range</strong>
-            <span>Enter a purchase price and adjust as you shop</span>
-          </button>
+        <!-- Refinance path -->
+        <div class="guided-step-branch hidden" id="guidedRefiBranch" data-branch="refinance" hidden>
+          <div class="guided-step-intro guided-centered">
+            <p class="guided-kicker">Refinance goal</p>
+            <h2 class="wizard-title guided-title" id="step-refi-goal-title">What are you hoping to improve?</h2>
+            <p class="wizard-lead guided-lead">We&rsquo;ll tailor the estimate to your goal. Educational only — not a refinance quote or commitment.</p>
+          </div>
+          <div class="guided-choice-grid guided-refi-goal-grid" role="group" aria-label="Refinance goal">
+            <button type="button" class="guided-choice-card" data-refi-goal="lower-payment" id="refiGoalLowerBtn">
+              <span class="guided-choice-icon" aria-hidden="true">📉</span>
+              <strong>Lower my payment</strong>
+              <span>Rate &amp; term that may reduce monthly cost</span>
+            </button>
+            <button type="button" class="guided-choice-card" data-refi-goal="cash-out" id="refiGoalCashBtn">
+              <span class="guided-choice-icon" aria-hidden="true">💵</span>
+              <strong>Cash-out</strong>
+              <span>Access equity for projects, debt, or reserves</span>
+            </button>
+            <button type="button" class="guided-choice-card" data-refi-goal="shorten-term" id="refiGoalTermBtn">
+              <span class="guided-choice-icon" aria-hidden="true">⏱</span>
+              <strong>Pay off sooner</strong>
+              <span>Shorter term · often higher payment, less interest</span>
+            </button>
+            <button type="button" class="guided-choice-card" data-refi-goal="remove-pmi" id="refiGoalPmiBtn">
+              <span class="guided-choice-icon" aria-hidden="true">✓</span>
+              <strong>Remove PMI</strong>
+              <span>Model ~80% LTV or better (20%+ equity)</span>
+            </button>
+          </div>
+          <p class="field-note guided-center-note guided-refi-goal-note">You can still adjust value, equity, and term on the next screens.</p>
         </div>
       </div>
     </section>
@@ -135,17 +171,18 @@
     <section class="wizard-step guided-step" data-step="2" data-step-id="address" hidden aria-labelledby="step-addr-title">
       <div class="guided-step-panel">
         <div class="guided-step-intro guided-centered">
-          <h2 class="wizard-title guided-title" id="step-addr-title">What&rsquo;s the property address?</h2>
-          <p class="wizard-lead guided-lead" id="step-addr-lead">Search or paste the full address. We&rsquo;ll estimate taxes and insurance for that location.</p>
+          <p class="guided-kicker">Local taxes &amp; insurance</p>
+          <h2 class="wizard-title guided-title" id="step-addr-title">What&rsquo;s the address?</h2>
+          <p class="wizard-lead guided-lead" id="step-addr-lead">Search the listing. We&rsquo;ll pull what we can — you can edit everything.</p>
         </div>
         <div class="wizard-card guided-card guided-card-narrow">
           <div class="field guided-address-field">
-            <label for="propertyAddress">Property address</label>
+            <label for="propertyAddress">Street, city, state</label>
             <div class="address-search-wrap guided-address-wrap">
-              <input type="text" id="propertyAddress" class="address-input" placeholder="Street, city, state…" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" role="combobox" aria-expanded="false" aria-controls="addressSuggestions" aria-autocomplete="list" />
+              <input type="text" id="propertyAddress" class="address-input" placeholder="Start typing the full address…" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" role="combobox" aria-expanded="false" aria-controls="addressSuggestions" aria-autocomplete="list" />
               <ul id="addressSuggestions" class="address-suggestions hidden" role="listbox"></ul>
             </div>
-            <button type="button" class="btn-lookup" id="lookupAddress">Look up property</button>
+            <button type="button" class="btn-lookup" id="lookupAddress">Look up this property</button>
             <p class="field-note" id="locationNote" role="status" aria-live="polite"></p>
             <div class="ultimate-limit-badge hidden" id="ultimateLimitBadge" role="status" aria-live="polite"></div>
           </div>
@@ -161,30 +198,29 @@
               <div><dt>Est. insurance /yr</dt><dd id="propertySummaryIns">—</dd></div>
             </dl>
           </div>
-          <button type="button" class="wizard-skip" id="wizardSkipAddress">Can&rsquo;t find it — enter price only</button>
+          <button type="button" class="wizard-skip" id="wizardSkipAddress">Can&rsquo;t find it? Continue with price only</button>
         </div>
       </div>
     </section>
 
     <!-- STEP 3: Price / value -->
-    <section class="wizard-step guided-step" data-step="3" data-step-id="price" hidden aria-labelledby="step-price-title">
+    <section class="wizard-step guided-step guided-price-step" data-step="3" data-step-id="price" hidden aria-labelledby="step-price-title">
       <div class="guided-step-panel">
         <div class="guided-step-intro guided-centered">
-          <h2 class="wizard-title guided-title" id="step-price-title">Purchase price</h2>
+          <p class="guided-kicker">Your scenario</p>
+          <h2 class="wizard-title guided-title" id="step-price-title">Set the purchase price</h2>
           <p class="wizard-lead guided-lead" id="step-price-lead">Drag the slider or type a number. You can change this anytime.</p>
         </div>
-        <div class="wizard-card guided-card guided-card-narrow">
-          <div class="field" id="homePriceField">
-            <div class="field-label-row">
-              <label for="homePrice" id="homePriceLabel">Purchase price</label>
-              <span class="field-value" id="homePriceDisplay">$450,000</span>
-            </div>
+        <div class="wizard-card guided-card guided-card-narrow guided-price-card">
+          <div class="field guided-price-field" id="homePriceField">
+            <span class="guided-price-hero" id="homePriceDisplay">$450,000</span>
+            <label for="homePrice" id="homePriceLabel" class="sr-only">Purchase price</label>
             <input type="range" id="homePrice" min="50000" max="3000000" step="5000" value="450000" />
-            <input type="text" id="homePriceInput" class="currency-input" inputmode="numeric" value="450,000" aria-label="Purchase price" />
+            <input type="text" id="homePriceInput" class="currency-input guided-price-input" inputmode="numeric" value="450,000" aria-label="Purchase price" />
             <p class="field-note field-note-hint hidden" id="homePriceHint" role="status">Filled from property data — change anytime.</p>
           </div>
           <details class="guided-optional-details">
-            <summary>Or estimate from a target monthly payment</summary>
+            <summary>Prefer a monthly payment target instead?</summary>
             <div id="ultimateModePayment" class="ultimate-mode-panel">
               <div class="ultimate-reverse-card">
                 <div class="field">
@@ -230,9 +266,9 @@
     <section class="wizard-step guided-step guided-loan-you-step" data-step="4" data-step-id="loan-you" hidden aria-labelledby="step-loan-you-title">
       <div class="guided-step-panel guided-step-panel-wide guided-loan-you-panel">
         <div class="guided-step-intro guided-centered guided-loan-you-intro">
-          <p class="guided-kicker">Loan setup</p>
-          <h2 class="wizard-title guided-title" id="step-loan-you-title">You &amp; down payment</h2>
-          <p class="wizard-lead guided-lead">Your profile unlocks the right programs. Then set how much you&rsquo;ll put down.</p>
+          <p class="guided-kicker">Programs that fit you</p>
+          <h2 class="wizard-title guided-title" id="step-loan-you-title">Loan type &amp; down payment</h2>
+          <p class="wizard-lead guided-lead">Tell us a bit about you — we&rsquo;ll match the right program and cash needed down.</p>
         </div>
 
         <div class="wizard-card guided-card guided-card-wide guided-loan-split-card guided-loan-you-card">
@@ -282,15 +318,15 @@
                 <option value="usda">USDA</option>
               </select>
               <p class="field-note field-note-hint guided-center-note guided-loan-you-note" id="loanProgramNote"></p>
-              <p class="ultimate-panel-lead ultimate-program-tip guided-center-note guided-loan-you-tip" id="ultimateProgramTip">First-time? Check the box above, then try 3% down.</p>
+              <p class="ultimate-panel-lead ultimate-program-tip guided-center-note guided-loan-you-tip" id="ultimateProgramTip">First-time buyer? Check the box, then try 3% down.</p>
             </div>
 
             <!-- Right: down payment focus -->
             <div class="guided-loan-split-col guided-loan-split-col-accent guided-loan-you-down">
-              <p class="guided-credit-section-label guided-loan-you-label" id="step-down-title">Down payment</p>
+              <p class="guided-credit-section-label guided-loan-you-label" id="step-down-title">Cash down</p>
               <div class="guided-down-hero" aria-live="polite">
                 <span class="field-value guided-down-hero-value" id="downDisplay">20% · $90,000</span>
-                <p class="field-note guided-down-hero-lead" id="step-down-lead">Tap a chip or drag the slider</p>
+                <p class="field-note guided-down-hero-lead" id="step-down-lead">Quick chips or drag the slider</p>
               </div>
               <div class="field guided-down-field">
                 <label for="downPercent" class="sr-only">Down payment percent</label>
@@ -318,7 +354,7 @@
               </div>
             </div>
           </div>
-          <p class="guided-step-hint guided-loan-you-next">Next: credit score &amp; term — then your full payment.</p>
+          <p class="guided-step-hint guided-loan-you-next">Next: your credit &amp; rate — then the full monthly number.</p>
         </div>
       </div>
     </section>
@@ -327,9 +363,9 @@
     <section class="wizard-step guided-step guided-credit-step" data-step="5" data-step-id="loan-credit" hidden aria-labelledby="step-loan-credit-title">
       <div class="guided-step-panel guided-step-panel-wide guided-credit-panel">
         <div class="guided-step-intro guided-centered guided-credit-intro">
-          <p class="guided-kicker">Almost there</p>
-          <h2 class="wizard-title guided-title" id="step-loan-credit-title">Credit &amp; term</h2>
-          <p class="wizard-lead guided-lead">Your score and loan length set the illustrative rate for your estimate.</p>
+          <p class="guided-kicker">Almost there · Martini rate</p>
+          <h2 class="wizard-title guided-title" id="step-loan-credit-title">Credit score &amp; loan term</h2>
+          <p class="wizard-lead guided-lead">These set your illustrative Martini rate — then we reveal your full payment.</p>
         </div>
 
         <div class="wizard-card guided-card guided-card-wide guided-credit-card">
@@ -344,12 +380,12 @@
                 </div>
                 <input type="range" id="creditScore" min="580" max="850" step="5" value="740" aria-describedby="creditBandLabel" />
                 <div class="credit-tier-picker guided-credit-tiers" id="creditTierPicker" role="radiogroup" aria-label="Credit tier shortcuts"></div>
-                <p class="field-note guided-credit-helper">Also used for insurance on the next screen.</p>
+                <p class="field-note guided-credit-helper">Better scores often mean a stronger rate estimate.</p>
               </div>
 
               <!-- Loan term (primary) -->
               <div class="ultimate-loan-options-open guided-term-block">
-                <p class="guided-credit-section-label" id="loan-term-label">Loan term</p>
+                <p class="guided-credit-section-label" id="loan-term-label">How long will you finance?</p>
                 <div class="ultimate-term-picker guided-term-picker" id="ultimateTermPicker" role="radiogroup" aria-labelledby="loan-term-label">
                   <button type="button" class="ultimate-term-btn active" data-term="30" role="radio" aria-checked="true">30 yr</button>
                   <button type="button" class="ultimate-term-btn" data-term="20" role="radio" aria-checked="false">20 yr</button>
@@ -370,7 +406,7 @@
             <!-- Rate comparison (simplified) -->
             <div class="guided-rate-panel">
               <div class="field rate-field martini-rate-block ultimate-rate-prominent guided-rate-hero">
-                <p class="guided-rate-eyebrow">Rate comparison</p>
+                <p class="guided-rate-eyebrow">Where you stand today</p>
                 <div class="rate-compare guided-rate-compare">
                   <div class="rate-compare-row rate-compare-row-market guided-rate-row-typical">
                     <span class="rate-compare-label">Typical lender</span>
@@ -388,61 +424,40 @@
                   </div>
                 </div>
                 <details class="guided-rate-details">
-                  <summary>How we calculate this</summary>
+                  <summary>How we estimate this rate</summary>
                   <p class="rate-updated-note" id="marketRateUpdated"></p>
                   <span class="rate-daily-badge guided-rate-badge" id="rateDailyBadge">Freddie Mac PMMS + program adjustments</span>
                 </details>
               </div>
-              <p class="guided-step-hint guided-credit-next-hint">Next: full monthly payment with taxes &amp; insurance.</p>
+              <p class="guided-step-hint guided-credit-next-hint">Tap <strong>See my estimate</strong> for your full monthly payment.</p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-<!-- STEP 6: Results + taxes/insurance -->
-    <section class="wizard-step wizard-results ultimate-payment-step ultimate-final-step ultimate-combined-final guided-step" data-step="6" data-step-id="results" hidden aria-labelledby="step-results-title">
+<!-- STEP 6: Results — payment climax + lead capture -->
+    <section class="wizard-step wizard-results ultimate-payment-step ultimate-final-step ultimate-combined-final guided-step guided-results-step" data-step="6" data-step-id="results" hidden aria-labelledby="step-results-title">
       <div class="ultimate-payment-main guided-results-layout" id="ultimatePaymentMain">
         <div class="wizard-card wizard-card-dark panel results-panel lead-results ultimate-results-final ultimate-payment-landing guided-results-card">
-          <header class="ultimate-payment-top" id="results-heading">
-            <p class="wizard-eyebrow">Your estimate</p>
-            <h2 class="wizard-title" id="step-results-title" style="color:#fff;">Your monthly payment</h2>
+
+          <!-- 1. HERO: monthly payment -->
+          <header class="ultimate-payment-top guided-results-hero" id="results-heading">
+            <p class="wizard-eyebrow guided-results-eyebrow">Your personalized estimate</p>
+            <h2 class="wizard-title guided-results-title" id="step-results-title">Here&rsquo;s your monthly payment</h2>
             <div class="ultimate-payment-hero-block">
               <div class="total-payment total-payment-hero">
                 <span class="total-label">Estimated monthly PITI</span>
                 <span class="total-amount" id="pitiPayment">—</span>
-                <span class="total-sublabel">Principal, interest, taxes &amp; insurance</span>
+                <span class="total-sublabel">Principal + interest + taxes + insurance</span>
               </div>
             </div>
             <div class="total-payment total-payment-secondary ultimate-payment-extras hidden" id="totalWithExtras">
-              <span class="total-label">Total with PMI / HOA</span>
+              <span class="total-label">Including PMI / HOA</span>
               <span class="total-amount total-amount-sm" id="totalPayment">$0</span>
               <span class="total-sublabel hidden" id="extrasNote"></span>
             </div>
-            
-          <!-- Taxes / insurance on results (public-record tax + credit-based insurance estimate) -->
-          <div class="guided-costs-on-results">
-            <p class="ultimate-section-label guided-section-label" style="color:rgba(255,255,255,0.9)">Property costs</p>
-            <p class="field-note guided-center-note guided-costs-note">Tax &amp; insurance are location/credit estimates — not your actual bill. Edit anytime.</p>
-            <div class="guided-tax-ins-grid guided-tax-ins-standalone guided-tax-ins-on-results">
-              <div class="field">
-                <label for="propertyTax">Annual property tax</label>
-                <input type="text" id="propertyTax" class="currency-input" value="3,870" inputmode="numeric" />
-                <p class="field-note" id="propertyTaxSourceNote" style="color:rgba(255,255,255,0.55)">Est. ~0.86%/yr (Wake-area millage) — editable · not a tax bill</p>
-              </div>
-              <div class="field">
-                <label for="homeInsurance">Annual home insurance</label>
-                <input type="text" id="homeInsurance" class="currency-input" value="2,326" inputmode="numeric" />
-                <p class="field-note" id="homeInsuranceSourceNote" style="color:rgba(255,255,255,0.55)">Est. ~0.52%/yr of value · credit-tier — editable · not a quote</p>
-              </div>
-              <div class="field">
-                <label for="hoa">Monthly HOA</label>
-                <input type="text" id="hoa" class="currency-input" value="0" inputmode="numeric" />
-              </div>
-            </div>
-          </div>
-
-          <div class="ultimate-buydown-chip hidden" id="ultimateBuydownChip" role="status"></div>
+            <div class="ultimate-buydown-chip hidden" id="ultimateBuydownChip" role="status"></div>
             <div class="ultimate-readiness-panel hidden" id="ultimateReadinessPanel">
               <div class="ultimate-readiness-head">
                 <h3 id="readiness-heading">Pre-approval readiness</h3>
@@ -452,8 +467,103 @@
               <p class="ultimate-readiness-disclaimer">Educational checklist only — not an approval.</p>
             </div>
           </header>
+
           <div class="ultimate-donut-panel hidden" id="ultimateDonutPanel" aria-hidden="true" hidden></div>
 
+          <!-- 2. Martini advantage (always visible, scannable) -->
+          <section class="guided-advantage-card" aria-labelledby="vsCompetitionTitle">
+            <p class="guided-advantage-eyebrow">Why work with Martini</p>
+            <div class="ultimate-payment-meta-row guided-rate-strip-wrap">
+              <div class="ultimate-live-rate-strip guided-advantage-rates">
+                <div class="ultimate-live-rate-col">
+                  <span class="ultimate-live-rate-label">Typical lender</span>
+                  <strong class="ultimate-live-rate-value" id="ultimatePaymentMarketRate">—</strong>
+                </div>
+                <div class="ultimate-live-rate-col ultimate-live-rate-col-martini">
+                  <span class="ultimate-live-rate-label">Your Martini rate</span>
+                  <strong class="ultimate-live-rate-value" id="ultimatePaymentMartiniRate">—</strong>
+                </div>
+              </div>
+              <div class="lead-savings-ribbon lead-savings-ribbon-hero hidden" id="leadSavingsRibbon">
+                <div class="lead-savings-row hidden" id="leadMonthlySavingsRow">
+                  <span class="lead-savings-label">Potential monthly savings</span>
+                  <strong class="lead-savings-amount" id="leadSavingsAmount">—</strong>
+                  <span class="lead-savings-suffix">/mo</span>
+                </div>
+                <div class="lead-savings-row lead-savings-row-cash hidden" id="leadCashSavingsRow">
+                  <span class="lead-savings-label">Est. cash at closing</span>
+                  <strong class="lead-savings-amount" id="leadCashSavingsAmount">—</strong>
+                </div>
+                <p class="lead-savings-disclaimer hidden" id="leadCashSavingsNote">Illustrative only — not a guarantee.</p>
+              </div>
+            </div>
+            <section class="vs-competition ultimate-vs-visible guided-vs guided-vs-inline" id="vsCompetition">
+              <h3 class="vs-competition-title sr-only" id="vsCompetitionTitle">Martini vs. typical lenders</h3>
+              <div class="vs-competition-grid guided-vs-grid">
+                <div class="vs-comp-col vs-comp-col-them">
+                  <span class="vs-comp-col-label">Typical</span>
+                  <span class="vs-comp-col-rate" id="vsTypicalRate">—</span>
+                  <span class="vs-comp-col-payment" id="vsTypicalPi">—</span>
+                </div>
+                <div class="vs-comp-col vs-comp-col-us">
+                  <span class="vs-comp-col-label">Martini</span>
+                  <span class="vs-comp-col-rate" id="vsMartiniRate">—</span>
+                  <span class="vs-comp-col-payment" id="vsMartiniPi">—</span>
+                </div>
+              </div>
+              <ul class="vs-comp-savings guided-vs-savings">
+                <li><span>Monthly P&amp;I savings</span><strong id="vsMonthlyPiSave">—</strong></li>
+                <li><span>Monthly PITI savings</span><strong id="vsMonthlyPitiSave">—</strong></li>
+                <li class="vs-comp-savings-highlight"><span>Interest saved over term</span><strong id="vsLifetimeInterestSave">—</strong></li>
+                <li class="hidden" id="vsPointsRow"><span>Discount points</span><strong id="vsPointsCost">—</strong></li>
+              </ul>
+              <p class="vs-comp-note" id="vsCompNote"></p>
+            </section>
+          </section>
+
+          <!-- 3. Lead capture at peak intent -->
+          <aside class="save-estimate-card guided-lead-primary" id="saveEstimateCard" aria-label="Email this estimate">
+            <p class="save-estimate-eyebrow">Free · no hard credit pull · no obligation</p>
+            <p class="save-estimate-title">Save this estimate to your inbox</p>
+            <p class="save-estimate-lead">Get the full breakdown plus a short note from Logan on your options — so you can review it with confidence.</p>
+            <div class="save-estimate-tabs" role="tablist">
+              <button type="button" class="save-estimate-tab active" id="saveTabEmail" data-save-tab="email" role="tab" aria-selected="true">Email</button>
+              <button type="button" class="save-estimate-tab" id="saveTabSms" data-save-tab="sms" role="tab" aria-selected="false">Text</button>
+            </div>
+            <form id="saveEstimateForm" class="save-estimate-form save-estimate-form-lite guided-lead-form">
+              <input type="text" id="saveEstimateName" name="name" placeholder="First name" autocomplete="given-name" />
+              <input type="email" id="saveEstimateEmail" name="email" placeholder="Email address" autocomplete="email" inputmode="email" required />
+              <div class="save-estimate-sms-fields hidden" id="saveEstimateSmsFields">
+                <input type="tel" id="saveEstimateSmsPhone" name="smsPhone" placeholder="Mobile number" autocomplete="tel" inputmode="tel" />
+                <p class="save-estimate-sms-consent">
+                  <label><input type="checkbox" id="saveEstimateSmsConsent" name="smsConsent" value="1" /> I agree to receive estimate texts. Msg rates may apply. STOP to opt out. TCPA.</label>
+                </p>
+              </div>
+              <div class="save-estimate-optional" id="saveEstimateOptional">
+                <input type="tel" id="saveEstimatePhone" name="phone" placeholder="Phone (optional)" autocomplete="tel" inputmode="tel" />
+              </div>
+              <button type="button" class="save-estimate-expand hidden" id="saveEstimateExpand" tabindex="-1" aria-hidden="true">+</button>
+              <button type="submit" class="btn btn-wizard-next save-estimate-submit guided-lead-submit">Email me my numbers</button>
+              <button type="button" class="save-estimate-skip" id="saveEstimateSkip">Not right now</button>
+            </form>
+            <p class="save-estimate-success hidden" id="saveEstimateSuccess">You&rsquo;re set — check your inbox shortly.</p>
+            <p class="save-estimate-consent">By submitting, you agree we may contact you about this estimate. Not a loan application. TCPA applies.</p>
+            <button type="button" class="save-estimate-dismiss hidden" id="saveEstimateDismiss" aria-label="Dismiss">×</button>
+          </aside>
+
+          <!-- 4. Primary + secondary CTAs only -->
+          <div class="guided-results-ctas">
+            <a href="https://applywithlogan.com" class="btn btn-apply-now btn-results-apply" data-mmg-apply target="_blank" rel="noopener">
+              <span class="btn-apply-text">Ready? Start your application</span>
+              <span class="btn-apply-arrow" aria-hidden="true">→</span>
+            </a>
+            <button type="button" class="guided-results-secondary" id="ultimateHubRealtor" data-hub-action="realtor">
+              Working with an agent? Or need a trusted intro?
+            </button>
+            <p class="results-apply-note">About 3 minutes · soft credit pull only when you apply</p>
+          </div>
+
+          <!-- 5. Compact breakdown -->
           <ul class="breakdown ultimate-final-breakdown guided-breakdown" id="breakdown">
             <li><span>Principal &amp; interest</span><strong id="piPayment">$0</strong></li>
             <li><span>Property tax</span><strong id="taxPayment">$0</strong></li>
@@ -467,97 +577,29 @@
             <div class="stat"><span class="stat-label">Payoff</span><span class="stat-value" id="payoffDate">—</span></div>
           </div>
 
-          <aside class="save-estimate-card guided-lead-primary" id="saveEstimateCard" aria-label="Email this estimate">
-            <p class="save-estimate-eyebrow">Free · no application</p>
-            <p class="save-estimate-title">Email me this estimate</p>
-            <p class="save-estimate-lead">Get this breakdown + a short personalized review from Logan.</p>
-            <div class="save-estimate-tabs" role="tablist">
-              <button type="button" class="save-estimate-tab active" id="saveTabEmail" data-save-tab="email" role="tab" aria-selected="true">Email</button>
-              <button type="button" class="save-estimate-tab" id="saveTabSms" data-save-tab="sms" role="tab" aria-selected="false">Text</button>
-            </div>
-            <form id="saveEstimateForm" class="save-estimate-form save-estimate-form-lite guided-lead-form">
-              <input type="text" id="saveEstimateName" name="name" placeholder="First name" autocomplete="given-name" />
-              <input type="email" id="saveEstimateEmail" name="email" placeholder="Email" autocomplete="email" inputmode="email" required />
-              <div class="save-estimate-sms-fields hidden" id="saveEstimateSmsFields">
-                <input type="tel" id="saveEstimateSmsPhone" name="smsPhone" placeholder="Mobile number" autocomplete="tel" inputmode="tel" />
-                <p class="save-estimate-sms-consent">
-                  <label><input type="checkbox" id="saveEstimateSmsConsent" name="smsConsent" value="1" /> I agree to receive estimate texts. Msg rates may apply. STOP to opt out. TCPA.</label>
-                </p>
-              </div>
-              <div class="save-estimate-optional" id="saveEstimateOptional">
-                <input type="tel" id="saveEstimatePhone" name="phone" placeholder="Phone (optional)" autocomplete="tel" inputmode="tel" />
-              </div>
-              <button type="button" class="save-estimate-expand hidden" id="saveEstimateExpand" tabindex="-1" aria-hidden="true">+</button>
-              <button type="submit" class="btn btn-wizard-next save-estimate-submit guided-lead-submit">Email me this estimate</button>
-              <button type="button" class="save-estimate-skip" id="saveEstimateSkip">No thanks</button>
-            </form>
-            <p class="save-estimate-success hidden" id="saveEstimateSuccess">Saved — we&rsquo;ll send your estimate shortly.</p>
-            <p class="save-estimate-consent">By submitting, you agree we may contact you about this estimate. Not a loan application. TCPA applies.</p>
-            <button type="button" class="save-estimate-dismiss hidden" id="saveEstimateDismiss" aria-label="Dismiss">×</button>
-          </aside>
-
-          <div class="guided-results-ctas">
-            <a href="https://applywithlogan.com" class="btn btn-apply-now btn-results-apply" data-mmg-apply target="_blank" rel="noopener">
-              <span class="btn-apply-text">Start full application</span>
-              <span class="btn-apply-arrow" aria-hidden="true">→</span>
-            </a>
-            <p class="results-apply-note">~3 minutes · soft pull only when you apply</p>
-          </div>
-          <p class="guided-results-compliance" role="note">
-            <strong>Educational estimate only.</strong> Not a Loan Estimate, pre-approval, rate lock, or commitment.
-            NMLS #1591485 · Company NMLS #3446 · Equal Housing Lender.
-          </p>
-
+          <!-- 6. Secondary details (collapsed) -->
           <details class="guided-secondary-details">
-            <summary>Martini vs. typical lenders (illustrative)</summary>
-            <section class="vs-competition ultimate-vs-visible guided-vs" id="vsCompetition">
-              <h3 class="vs-competition-title" id="vsCompetitionTitle">Martini vs. typical lenders</h3>
-              <div class="vs-competition-grid">
-                <div class="vs-comp-col vs-comp-col-them">
-                  <span class="vs-comp-col-label">Typical</span>
-                  <span class="vs-comp-col-rate" id="vsTypicalRate">—</span>
-                  <span class="vs-comp-col-payment" id="vsTypicalPi">—</span>
+            <summary>Adjust taxes, insurance &amp; HOA</summary>
+            <div class="guided-costs-on-results">
+              <p class="field-note guided-center-note guided-costs-note">Estimates only — not your actual bill. Edit anytime.</p>
+              <div class="guided-tax-ins-grid guided-tax-ins-standalone guided-tax-ins-on-results">
+                <div class="field">
+                  <label for="propertyTax">Annual property tax</label>
+                  <input type="text" id="propertyTax" class="currency-input" value="3,330" inputmode="numeric" />
+                  <p class="field-note" id="propertyTaxSourceNote">U.S. average-style estimate · editable · not a tax bill</p>
                 </div>
-                <div class="vs-comp-col vs-comp-col-us">
-                  <span class="vs-comp-col-label">Martini</span>
-                  <span class="vs-comp-col-rate" id="vsMartiniRate">—</span>
-                  <span class="vs-comp-col-payment" id="vsMartiniPi">—</span>
+                <div class="field">
+                  <label for="homeInsurance">Annual home insurance</label>
+                  <input type="text" id="homeInsurance" class="currency-input" value="2,160" inputmode="numeric" />
+                  <p class="field-note" id="homeInsuranceSourceNote">National estimate · editable · not a quote</p>
+                </div>
+                <div class="field">
+                  <label for="hoa">Monthly HOA</label>
+                  <input type="text" id="hoa" class="currency-input" value="0" inputmode="numeric" />
                 </div>
               </div>
-              <ul class="vs-comp-savings">
-                <li><span>Monthly P&amp;I savings</span><strong id="vsMonthlyPiSave">—</strong></li>
-                <li><span>Monthly PITI savings</span><strong id="vsMonthlyPitiSave">—</strong></li>
-                <li class="vs-comp-savings-highlight"><span>Interest saved (term)</span><strong id="vsLifetimeInterestSave">—</strong></li>
-                <li class="hidden" id="vsPointsRow"><span>Discount points</span><strong id="vsPointsCost">—</strong></li>
-              </ul>
-              <p class="vs-comp-note" id="vsCompNote"></p>
-            </section>
+            </div>
           </details>
-
-          <div class="ultimate-payment-meta-row guided-rate-strip-wrap">
-            <div class="ultimate-live-rate-strip">
-              <div class="ultimate-live-rate-col">
-                <span class="ultimate-live-rate-label">Typical</span>
-                <strong class="ultimate-live-rate-value" id="ultimatePaymentMarketRate">—</strong>
-              </div>
-              <div class="ultimate-live-rate-col ultimate-live-rate-col-martini">
-                <span class="ultimate-live-rate-label">Martini</span>
-                <strong class="ultimate-live-rate-value" id="ultimatePaymentMartiniRate">—</strong>
-              </div>
-            </div>
-            <div class="lead-savings-ribbon lead-savings-ribbon-hero hidden" id="leadSavingsRibbon">
-              <div class="lead-savings-row hidden" id="leadMonthlySavingsRow">
-                <span class="lead-savings-label">You could save</span>
-                <strong class="lead-savings-amount" id="leadSavingsAmount">—</strong>
-                <span class="lead-savings-suffix">/mo</span>
-              </div>
-              <div class="lead-savings-row lead-savings-row-cash hidden" id="leadCashSavingsRow">
-                <span class="lead-savings-label">Est. cash at closing</span>
-                <strong class="lead-savings-amount" id="leadCashSavingsAmount">—</strong>
-              </div>
-              <p class="lead-savings-disclaimer hidden" id="leadCashSavingsNote">Illustrative only.</p>
-            </div>
-          </div>
 
           <details class="guided-secondary-details">
             <summary>Ballpark cash to close</summary>
@@ -582,12 +624,16 @@
             </div>
           </details>
 
+          <p class="guided-results-compliance" role="note">
+            <strong>Educational estimate only.</strong> Not a Loan Estimate, pre-approval, rate lock, or commitment.
+            NMLS #1591485 · Company NMLS #3446 · Equal Housing Lender.
+          </p>
+
           <aside class="ultimate-hub-rail guided-hub-collapsed" id="ultimateHubView">
             <p class="ultimate-hub-rail-label">More options</p>
             <div class="ultimate-hub-stack">
               <button type="button" class="ultimate-hub-btn" id="ultimateShareBtn" aria-controls="ultimateShareGate"><strong>Share estimate</strong></button>
               <button type="button" class="ultimate-hub-btn" id="ultimateHubCompare" data-hub-action="compare"><strong>Compare options</strong></button>
-              <button type="button" class="ultimate-hub-btn" id="ultimateHubRealtor" data-hub-action="realtor"><strong>Find a realtor</strong></button>
             </div>
             <div class="ultimate-hub-share-gate hidden" id="ultimateShareGate">
               <form id="ultimateShareLeadForm" class="ultimate-hub-share-form">
@@ -655,31 +701,32 @@
       <div class="ultimate-subview hidden" id="ultimateRealtorView">
         <button type="button" class="ultimate-subview-back" id="ultimateRealtorBack">← Back</button>
         <div class="wizard-card">
-          <h2 id="ultimate-realtor-title">Do you need a realtor?</h2>
+          <h2 id="ultimate-realtor-title">Find a trusted realtor partner</h2>
+          <p class="guided-realtor-lead">Already working with an agent? Tell us and we&rsquo;ll coordinate. Need one? We&rsquo;ll introduce a fit for how you buy.</p>
           <form id="ultimateRealtorForm" class="ultimate-realtor-form">
-            <fieldset class="ultimate-realtor-q"><legend>Style</legend>
+            <fieldset class="ultimate-realtor-q"><legend>How you like to shop</legend>
               <label class="ultimate-realtor-choice"><input type="radio" name="huntStyle" value="spreadsheet-planner" required /> Planner</label>
               <label class="ultimate-realtor-choice"><input type="radio" name="huntStyle" value="gut-feel" /> Gut feel</label>
-              <label class="ultimate-realtor-choice"><input type="radio" name="huntStyle" value="curated-tours" /> Curated</label>
+              <label class="ultimate-realtor-choice"><input type="radio" name="huntStyle" value="curated-tours" /> Curated tours</label>
             </fieldset>
             <fieldset class="ultimate-realtor-q"><legend>Timeline</legend>
               <label class="ultimate-realtor-choice"><input type="radio" name="keysTimeline" value="this-season" required /> This season</label>
               <label class="ultimate-realtor-choice"><input type="radio" name="keysTimeline" value="within-year" /> Within a year</label>
               <label class="ultimate-realtor-choice"><input type="radio" name="keysTimeline" value="just-exploring" /> Exploring</label>
             </fieldset>
-            <fieldset class="ultimate-realtor-q"><legend>Superpower</legend>
+            <fieldset class="ultimate-realtor-q"><legend>What matters most</legend>
               <label class="ultimate-realtor-choice"><input type="radio" name="realtorSuperpower" value="neighborhood-encyclopedia" required /> Neighborhoods</label>
               <label class="ultimate-realtor-choice"><input type="radio" name="realtorSuperpower" value="negotiation-ninja" /> Negotiation</label>
               <label class="ultimate-realtor-choice"><input type="radio" name="realtorSuperpower" value="lightning-texts" /> Fast replies</label>
-              <label class="ultimate-realtor-choice"><input type="radio" name="realtorSuperpower" value="patient-guide" /> Patient</label>
+              <label class="ultimate-realtor-choice"><input type="radio" name="realtorSuperpower" value="patient-guide" /> Patient guide</label>
             </fieldset>
             <div class="ultimate-realtor-contact">
-              <input type="text" name="name" placeholder="Name" /><input type="email" name="email" required placeholder="Email" /><input type="tel" name="phone" placeholder="Phone" />
+              <input type="text" name="name" placeholder="Name" /><input type="email" name="email" required placeholder="Email" /><input type="tel" name="phone" placeholder="Phone (optional)" />
             </div>
-            <button type="submit" class="btn btn-wizard-next ultimate-realtor-submit">Send</button>
-            <div class="ultimate-realtor-confirm hidden" id="ultimateRealtorConfirm"><p class="ultimate-realtor-confirm-title">On the list</p></div>
+            <button type="submit" class="btn btn-wizard-next ultimate-realtor-submit">Request an introduction</button>
+            <div class="ultimate-realtor-confirm hidden" id="ultimateRealtorConfirm"><p class="ultimate-realtor-confirm-title">You&rsquo;re on the list</p></div>
             <p class="ultimate-lead-success hidden" id="ultimateRealtorSuccess"></p>
-            <p class="ultimate-lead-consent" id="ultimateRealtorConsent">TCPA applies.</p>
+            <p class="ultimate-lead-consent" id="ultimateRealtorConsent">Not a loan application. TCPA applies if we contact you.</p>
           </form>
         </div>
       </div>
@@ -690,7 +737,7 @@
       <aside class="ultimate-live-rail guided-live-rail" aria-label="Live payment estimate">
         <div class="wizard-live-preview guided-live-card" id="wizardLivePreview" aria-live="polite">
           <div class="wizard-live-preview-inner">
-            <span class="wizard-live-preview-label">Monthly payment</span>
+            <span class="wizard-live-preview-label">Your monthly payment</span>
             <span class="wizard-live-preview-amount" id="wizardLivePayment">—</span>
           </div>
           <dl class="ultimate-live-stats guided-live-stats" id="ultimateLiveStats">
@@ -698,7 +745,7 @@
             <div><dt>Down</dt><dd id="ultimateLiveDown">20%</dd></div>
             <div><dt>Rate</dt><dd id="ultimateLiveRate">6.25%</dd></div>
           </dl>
-          <p class="wizard-live-preview-note" id="wizardLiveNote">Complete the steps to see your estimate</p>
+          <p class="wizard-live-preview-note" id="wizardLiveNote">Updates as you complete each step</p>
         </div>
         <div class="guided-side-advisor">
           <div class="guided-side-identity">
@@ -709,15 +756,16 @@
               <span class="guided-side-nmls">NMLS #1591485</span>
             </div>
           </div>
+          <p class="guided-side-trust">Clear strategy for first-time buyers and seasoned investors.</p>
           <div class="guided-side-ctas">
-            <a class="guided-reviews-btn guided-side-cta guided-side-cta-gold" id="guidedReviewsBtn" href="https://martinimortgagegroup.com/what-people-say-about-martini-mortgage-group/" target="_blank" rel="noopener">
-              ★ 5-star reviews
-            </a>
             <button type="button" class="guided-realtor-btn guided-side-cta guided-side-cta-navy" id="guidedNeedRealtorBtn">
-              Need a realtor?
+              Need a trusted realtor intro?
             </button>
+            <a class="guided-reviews-btn guided-side-cta guided-side-cta-gold" id="guidedReviewsBtn" href="https://martinimortgagegroup.com/what-people-say-about-martini-mortgage-group/" target="_blank" rel="noopener">
+              ★ 5-star client reviews
+            </a>
             <a class="guided-loan-options-btn guided-side-cta guided-side-cta-outline" id="guidedLoanOptionsBtn" href="https://martinimortgagegroup.com/loan-options/" target="_blank" rel="noopener">
-              Explore loan options
+              See loan options
             </a>
           </div>
         </div>

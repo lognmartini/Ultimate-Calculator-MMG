@@ -262,6 +262,7 @@
       selectCard('[data-step-id="goal"]', $("goalPurchaseBtn"));
       window.MMG_guided_setGoal?.("purchase");
       document.body.dataset.loanGoal = "purchase";
+      delete document.body.dataset.refiGoal;
       window.setTimeout(() => window.MMG_guided_next?.(), 160);
     });
     $("goalRefinanceBtn")?.addEventListener("click", () => {
@@ -284,6 +285,19 @@
       const field = $("propertyAddress");
       if (field) field.value = "";
       window.setTimeout(() => window.MMG_guided_next?.(), 160);
+    });
+
+    // Refinance goals (step 1 when refinance selected)
+    document.querySelectorAll("[data-refi-goal]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll("[data-refi-goal]").forEach((b) => {
+          b.classList.toggle("is-selected", b === btn);
+        });
+        const goalId = btn.getAttribute("data-refi-goal");
+        document.body.dataset.refiGoal = goalId || "";
+        window.MMG_guided_applyRefiGoal?.(goalId);
+        window.setTimeout(() => window.MMG_guided_next?.(), 180);
+      });
     });
 
     document.querySelectorAll(".guided-mini-chip[data-down]").forEach((btn) => {

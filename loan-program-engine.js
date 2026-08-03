@@ -51,7 +51,7 @@
   window.MMG_getEffectiveMinDown = function (programId, profile, homePrice, countyKey) {
     const id = window.MMG_normalizeProgramId(programId);
     const price = Number(homePrice) || 0;
-    const key = countyKey || window.MMG_LOAN_LIMITS?.defaultCounty || "wake";
+    const key = countyKey || window.MMG_LOAN_LIMITS?.defaultCounty || null;
 
     if (id === "conventional" && price > 0 && window.MMG_isJumboConventional(price, 20, key)) {
       return window.MMG_getJumboMinDownPercent(price, key);
@@ -71,7 +71,7 @@
   window.MMG_getProgramDefaultDown = function (programId, profile, homePrice, countyKey) {
     const id = window.MMG_normalizeProgramId(programId);
     const price = Number(homePrice) || 0;
-    const key = countyKey || window.MMG_LOAN_LIMITS?.defaultCounty || "wake";
+    const key = countyKey || window.MMG_LOAN_LIMITS?.defaultCounty || null;
 
     if (id === "conventional" && price > 0 && window.MMG_isJumboConventional(price, 15, key)) {
       return window.MMG_getJumboMinDownPercent(price, key);

@@ -1,30 +1,37 @@
-/** Effective property tax rates (% of assessed value, annual). Estimates for calculator. */
+/**
+ * Effective property tax rates (% of home value, annual) — educational estimates.
+ * Sources: Tax Foundation / ACS effective rates (states); NC county combined
+ * county+city millage approximations for Triangle & common markets (not a bill).
+ * Wake ≈ 0.86–0.91% combined (e.g. Raleigh city + county).
+ */
 window.MMG_TAX_RATES = {
   states: {
+    /** US ≈ ACS national effective average when no address yet */
+    US: 0.9,
     AL: 0.41, AK: 1.19, AZ: 0.62, AR: 0.62, CA: 0.75, CO: 0.51, CT: 2.14,
     DE: 0.57, FL: 0.89, GA: 0.92, HI: 0.28, ID: 0.69, IL: 2.27, IN: 0.85,
     IA: 1.57, KS: 1.41, KY: 0.86, LA: 0.55, ME: 1.36, MD: 1.09, MA: 1.23,
     MI: 1.54, MN: 1.12, MS: 0.81, MO: 0.97, MT: 0.84, NE: 1.73, NV: 0.6,
-    NH: 2.18, NJ: 2.47, NM: 0.8, NY: 1.72, NC: 0.84, ND: 1.05, OH: 1.56,
+    NH: 2.18, NJ: 2.47, NM: 0.8, NY: 1.72, NC: 0.74, ND: 1.05, OH: 1.56,
     OK: 0.9, OR: 0.97, PA: 1.58, RI: 1.53, SC: 0.57, SD: 1.22, TN: 0.71,
     TX: 1.8, UT: 0.63, VT: 1.9, VA: 0.82, WA: 0.98, WV: 0.58, WI: 1.85,
     WY: 0.61, DC: 0.56,
   },
-  /** NC counties — Triangle & common markets (effective rate %). */
+  /** NC counties — combined effective-style % (county + typical city/fire). */
   counties: {
     NC: {
       wake: 0.86,
-      durham: 1.22,
-      orange: 1.18,
+      durham: 1.05,
+      orange: 1.12,
       chatham: 0.95,
       johnston: 0.92,
       franklin: 0.98,
       granville: 1.05,
       nash: 1.12,
       alamance: 1.08,
-      guilford: 1.15,
+      guilford: 1.05,
       forsyth: 1.02,
-      mecklenburg: 0.98,
+      mecklenburg: 0.95,
       union: 0.88,
       cabarrus: 0.94,
       cumberland: 1.05,
@@ -35,10 +42,15 @@ window.MMG_TAX_RATES = {
       watauga: 0.55,
     },
   },
-  /** Annual homeowners insurance as % of home value (estimate). */
+  /**
+   * Annual homeowners insurance as % of home value (illustrative).
+   * Tuned to ~2025–2026 averages (e.g. NC ≈ $2.3k–$3.2k on mid-price homes ≈ 0.5–0.6%).
+   * Not a bindable quote — coastal/wind/flood can be much higher.
+   */
   insuranceByState: {
-    FL: 0.55, LA: 0.5, TX: 0.45, OK: 0.42, CO: 0.38, CA: 0.35, NC: 0.4,
-    SC: 0.42, GA: 0.38, NY: 0.32, NJ: 0.34, default: 0.4,
+    FL: 0.85, LA: 0.72, TX: 0.65, OK: 0.7, CO: 0.58, CA: 0.42, NC: 0.55,
+    SC: 0.58, GA: 0.48, NY: 0.38, NJ: 0.4, VA: 0.42, MD: 0.4, IN: 0.48,
+    AL: 0.55, MS: 0.58, TN: 0.52, default: 0.48,
   },
 };
 

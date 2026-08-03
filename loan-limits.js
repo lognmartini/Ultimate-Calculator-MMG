@@ -1,6 +1,7 @@
 /**
  * 2026 loan limits & eligibility helpers (educational estimates — not underwriting).
- * Sources: FHFA 2026 CLL, HUD FHA county limits, Martini Wake County FHA guide.
+ * Sources: FHFA 2026 CLL baseline, HUD FHA floor/ceiling. County rows refine when known.
+ * National default uses baseline limits (not a single-county assumption).
  */
 window.MMG_LOAN_LIMITS = {
   year: 2026,
@@ -8,8 +9,8 @@ window.MMG_LOAN_LIMITS = {
   conformingCeiling: 1249125,
   fhaFloor: 541287,
   fhaCeiling: 1249125,
-  /** Wake County NC — default Triangle bias */
-  defaultCounty: "wake",
+  /** null = use national baseline until address resolves a known county */
+  defaultCounty: null,
   counties: {
     wake: { name: "Wake County, NC", conforming: 832750, fha: 541287 },
     durham: { name: "Durham County, NC", conforming: 832750, fha: 541287 },
@@ -24,19 +25,23 @@ window.MMG_resolveCountyKey = function (location) {
   const county = String(location?.county || location?.County || "").toLowerCase();
   const normalized = county.replace(/[^a-z]/g, "").replace("county", "").trim();
   if (normalized && window.MMG_LOAN_LIMITS.counties[normalized]) return normalized;
-  return window.MMG_LOAN_LIMITS.defaultCounty;
+  return window.MMG_LOAN_LIMITS.defaultCounty; // may be null → national baseline
 };
 
 window.MMG_getConformingLimit = function (countyKey) {
   const key = countyKey || window.MMG_LOAN_LIMITS.defaultCounty;
-  const row = window.MMG_LOAN_LIMITS.counties[key];
-  return row?.conforming || window.MMG_LOAN_LIMITS.conformingBaseline;
+  if (key && window.MMG_LOAN_LIMITS.counties[key]) {
+    return window.MMG_LOAN_LIMITS.counties[key].conforming;
+  }
+  return window.MMG_LOAN_LIMITS.conformingBaseline;
 };
 
 window.MMG_getFhaLimit = function (countyKey) {
   const key = countyKey || window.MMG_LOAN_LIMITS.defaultCounty;
-  const row = window.MMG_LOAN_LIMITS.counties[key];
-  return row?.fha || window.MMG_LOAN_LIMITS.fhaFloor;
+  if (key && window.MMG_LOAN_LIMITS.counties[key]) {
+    return window.MMG_LOAN_LIMITS.counties[key].fha;
+  }
+  return window.MMG_LOAN_LIMITS.fhaFloor;
 };
 
 /** Loan amount at given down % */
@@ -64,12 +69,12 @@ window.MMG_getFhaIneligibleNote = function (homePrice, countyKey) {
   if (window.MMG_isFhaEligible(homePrice, countyKey)) return "";
   const limit = window.MMG_getFhaLimit(countyKey);
   const maxPrice = window.MMG_getFhaMaxPrice(countyKey);
-  const county = window.MMG_LOAN_LIMITS.counties[countyKey || window.MMG_LOAN_LIMITS.defaultCounty];
-  const name = county?.name || "your county";
+  const county = countyKey ? window.MMG_LOAN_LIMITS.counties[countyKey] : null;
+  const name = county?.name || "this area (2026 national FHA floor used until location is known)";
   return (
-    `FHA loan limit ${name} is $${limit.toLocaleString("en-US")} (2026). ` +
-    `At 3.5% down, FHA typically fits homes up to about $${maxPrice.toLocaleString("en-US")}. ` +
-    `Consider conventional (high balance) for this price.`
+    `FHA loan limit for ${name} is about $${limit.toLocaleString("en-US")}. ` +
+    `At 3.5% down, FHA often fits homes up to about $${maxPrice.toLocaleString("en-US")}. ` +
+    `Consider conventional (including high-balance) for this price. Educational estimate only.`
   );
 };
 

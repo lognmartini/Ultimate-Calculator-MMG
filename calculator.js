@@ -412,20 +412,27 @@
 
   function getTaxRate(state, countyName) {
     const data = taxData();
-    const stateCode = (state || "NC").toUpperCase().slice(0, 2);
+    // National ACS-style effective average ~0.9% when no location (educational)
+    if (!state) {
+      return data.states?.US ?? 0.9;
+    }
+    const stateCode = String(state).toUpperCase().slice(0, 2);
     const countyKey = normalizeCounty(countyName);
     const stateCounties = data.counties?.[stateCode];
     if (stateCounties && countyKey && stateCounties[countyKey] != null) {
       return stateCounties[countyKey];
     }
-    return data.states?.[stateCode] ?? data.states?.NC ?? 1.0;
+    return data.states?.[stateCode] ?? data.states?.US ?? 0.9;
   }
 
   function getInsuranceRate(state, creditScore) {
     const data = taxData();
     const credit = creditData();
-    const stateCode = (state || "NC").toUpperCase().slice(0, 2);
-    const base = data.insuranceByState?.[stateCode] ?? data.insuranceByState?.default ?? 0.4;
+    // National mid-pack insurance % when no state yet
+    const stateCode = state ? String(state).toUpperCase().slice(0, 2) : null;
+    const base = stateCode
+      ? data.insuranceByState?.[stateCode] ?? data.insuranceByState?.default ?? 0.48
+      : data.insuranceByState?.default ?? 0.48;
     let mult = 1.0;
     for (const t of credit.insuranceMult || DEFAULT_CREDIT.insuranceMult) {
       if (creditScore >= t.min) {
@@ -498,7 +505,8 @@
     if (window.MMG_resolveCountyKey && lastGeocode) {
       return window.MMG_resolveCountyKey(lastGeocode);
     }
-    return window.MMG_LOAN_LIMITS?.defaultCounty || "wake";
+    // National baseline until address resolves a known county (not NC/Wake-default)
+    return window.MMG_LOAN_LIMITS?.defaultCounty || null;
   }
 
   function getEffectiveMinDown(program) {
@@ -1112,7 +1120,7 @@
         "Credit below 680? A local strategist can map FHA, VA, or credit-improvement paths—faster than guessing on a big-box lender site.";
     } else {
       line =
-        "Triangle buyers still compare 3+ lenders online—we show your payment and rate edge upfront, then verify with a soft-pull application.";
+        "Smart buyers compare lenders—we show your payment and rate edge upfront, then you can verify with a soft-pull application.";
     }
     els.marketPulseText.textContent = line;
   }
@@ -1298,13 +1306,14 @@
     const state =
       lastGeocode?.state ||
       window.MMG_guidedPropertyState ||
-      "NC";
+      null;
     const insRate = getInsuranceRate(state, score);
     const annual = Math.round(homePrice * (insRate / 100));
     els.homeInsurance.value = formatCurrencyInput(annual);
     const note = document.getElementById("homeInsuranceSourceNote");
     if (note) {
-      note.textContent = `Est. ${insRate.toFixed(2)}%/yr of value · credit tier ${score} · ${state} base (illustrative, not a bindable quote)`;
+      const where = state ? `${state} base` : "U.S. average-style base";
+      note.textContent = `Est. ${insRate.toFixed(2)}%/yr of value · credit ${score} · ${where} (illustrative, not a quote)`;
     }
   }
 
@@ -2051,13 +2060,23 @@
   }
 
   function recalcTaxFromAddressIfNeeded() {
-    if (!lastGeocode || taxManualOverride) return;
+    if (taxManualOverride) return;
     const homePrice = Number(els.homePrice?.value || 0);
-    const taxRate = getTaxRate(lastGeocode.state, lastGeocode.county);
+    if (homePrice <= 0) return;
+    // Local rate when geocoded; otherwise national average-style estimate
+    const taxRate = lastGeocode
+      ? getTaxRate(lastGeocode.state, lastGeocode.county)
+      : getTaxRate(null, null);
     if (els.propertyTax) {
       els.propertyTax.value = formatCurrencyInput(Math.round(homePrice * (taxRate / 100)));
+      const taxNote = document.getElementById("propertyTaxSourceNote");
+      if (taxNote) {
+        taxNote.textContent = lastGeocode
+          ? `Est. ${taxRate.toFixed(2)}%/yr · ${lastGeocode.state || "local"} · editable · not a tax bill`
+          : `Est. ${taxRate.toFixed(2)}%/yr · U.S. average-style · editable · not a tax bill`;
+      }
     }
-    refreshInsuranceFromCredit();
+    if (!insuranceManualOverride) refreshInsuranceFromCredit();
   }
 
   function calculate() {
