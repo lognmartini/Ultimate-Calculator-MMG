@@ -99,10 +99,20 @@
     return currentStep >= resultsStepIndex();
   }
 
+  /** True once user is on price+ step with a valid purchase price (≥ $50k). */
+  function hasPurchasePriceSet() {
+    const price = Number($("homePrice")?.value || 0);
+    return Number.isFinite(price) && price >= 50000;
+  }
+
   function isLogan5LiveRailVisible() {
     if (!IS_LOGAN5) return false;
-    // Side rail after price is set; still useful on results for desktop
-    if (IS_GUIDED) return currentStep >= 3;
+    // Guided: only after price step (and not on results — CSS also hides rail there)
+    if (IS_GUIDED) {
+      if (currentStep < 3) return false;
+      if (currentStep >= resultsStepIndex()) return false;
+      return hasPurchasePriceSet();
+    }
     return currentStep === 1;
   }
 
@@ -110,10 +120,18 @@
     if (!IS_LOGAN5) return;
     const rail = document.querySelector(".ultimate-live-rail");
     const showRail = isLogan5LiveRailVisible();
-    document.body.classList.toggle("logan5-payment-hidden", !isLogan5PaymentRevealed());
+    document.body.classList.toggle("logan5-payment-hidden", !showRail);
+    document.body.classList.toggle("guided-live-active", showRail && IS_GUIDED);
+    document.body.classList.toggle("guided-live-waiting", IS_GUIDED && !showRail && currentStep < resultsStepIndex());
     if (rail) {
       rail.classList.toggle("ultimate-live-rail-hidden", !showRail);
+      rail.hidden = !showRail;
       rail.setAttribute("aria-hidden", showRail ? "false" : "true");
+    }
+    // Mobile entry sits above live card when live is visible
+    const mobileRealtor = $("guidedRealtorMobileEntry");
+    if (mobileRealtor) {
+      mobileRealtor.classList.toggle("guided-realtor-above-live", showRail);
     }
   }
 
@@ -121,54 +139,170 @@
     if (!IS_LOGAN5) return;
     const market = $("ultimatePaymentMarketRate");
     const martini = $("ultimatePaymentMartiniRate");
-    if (market) market.textContent = $("vsTypicalRate")?.textContent || $("marketRateDisplay")?.textContent || "—";
-    if (martini) {
+    const typicalText =
+      $("vsTypicalRate")?.textContent || $("marketRateDisplay")?.textContent || "—";
+    const martiniText = (() => {
       const r = $("vsMartiniRate")?.textContent || $("interestRate")?.value;
-      martini.textContent = r ? (String(r).includes("%") ? r : `${r}%`) : "—";
-    }
+      return r ? (String(r).includes("%") ? r : `${r}%`) : "—";
+    })();
+    if (market) market.textContent = typicalText;
+    if (martini) martini.textContent = martiniText;
     // Credit-step read-only Martini rate display
     const slim = $("guidedMartiniRateDisplay");
     if (slim) {
       const ir = $("interestRate")?.value;
       slim.textContent = ir ? (String(ir).includes("%") ? ir : `${ir}%`) : "—";
     }
+    // Live card rate pair
+    const liveM = $("guidedLiveMartiniRate");
+    const liveT = $("guidedLiveTypicalRate");
+    if (liveM) liveM.textContent = martiniText;
+    if (liveT) liveT.textContent = typicalText;
+  }
+
+  let lastLivePaymentKey = "";
+
+  function setLiveText(id, text) {
+    const el = $(id);
+    if (!el) return;
+    const next = text || "—";
+    if (el.textContent !== next) el.textContent = next;
+  }
+
+  function flashLiveCard() {
+    const card = $("wizardLivePreview");
+    if (!card) return;
+    card.classList.remove("guided-live-flash");
+    // force reflow for re-trigger
+    void card.offsetWidth;
+    card.classList.add("guided-live-flash");
+    window.setTimeout(() => card.classList.remove("guided-live-flash"), 450);
   }
 
   function updateLivePreview() {
     const amount = $("wizardLivePayment");
     const note = $("wizardLiveNote");
-    const piti = $("pitiPayment");
     if (!amount) return;
 
-    // Defer dollar amount until results — protect the payment climax
-    if (IS_GUIDED && currentStep < resultsStepIndex()) {
+    const price = Number($("homePrice")?.value || 0);
+    const ready = Number.isFinite(price) && price >= 50000;
+
+    // Prefer engine outputs (kept in sync by MMG_calculate)
+    const totalEl = $("totalPayment");
+    const pitiEl = $("pitiPayment");
+    // Guided results hero may overwrite pitiPayment with totalMonthly — totalPayment is always all-in
+    let totalText = formatLivePayment(totalEl?.textContent);
+    if (totalText === "—" || totalText === "$0") {
+      totalText = formatLivePayment(pitiEl?.textContent);
+    }
+
+    const pi = formatLivePayment($("piPayment")?.textContent);
+    const tax = formatLivePayment($("taxPayment")?.textContent);
+    const ins = formatLivePayment($("insurancePayment")?.textContent);
+    const pmi = formatLivePayment($("pmiPayment")?.textContent);
+    const hoa = formatLivePayment($("hoaPayment")?.textContent);
+    const pmiRowHidden = $("pmiRow")?.classList.contains("hidden");
+    const hoaRowHidden = $("hoaRow")?.classList.contains("hidden");
+
+    $("wizardLivePreview")?.classList.remove("wizard-live-preview-deferred");
+
+    if (!ready || totalText === "—") {
       amount.textContent = "—";
+      setLiveText("livePi", "—");
+      setLiveText("liveTax", "—");
+      setLiveText("liveIns", "—");
+      setLiveText("livePmi", "—");
+      setLiveText("liveHoa", "—");
+      setLiveText("liveTotal", "—");
+      $("livePmiRow")?.classList.add("hidden");
+      $("liveHoaRow")?.classList.add("hidden");
       if (note) {
-        const notes = [
-          "Answer a few questions to get started",
-          getLoanGoal() === "refinance" ? "Choose your refinance goal" : "Property or price — your call",
-          "Look up an address or continue with price",
-          "Set price & loan type",
-          "Almost there — then see your payment",
-        ];
-        note.textContent = notes[currentStep] || "Your full estimate unlocks at the end";
+        note.textContent =
+          currentStep <= 1
+            ? "Updates as you go"
+            : "Set price $50k+ for estimate";
       }
       $("wizardLivePreview")?.classList.remove("wizard-live-preview-ready");
-      $("wizardLivePreview")?.classList.add("wizard-live-preview-deferred");
-      // Still sync rate strip / stats for context without revealing PITI
       syncPaymentRateStrip();
       return;
     }
 
-    $("wizardLivePreview")?.classList.remove("wizard-live-preview-deferred");
-    const val = formatLivePayment(piti?.textContent);
-    amount.textContent = val;
-    if (note) {
-      note.textContent = val !== "—" ? "Your estimate is ready" : "Calculating…";
+    const prev = amount.textContent;
+    amount.textContent = totalText;
+    setLiveText("livePi", pi);
+    setLiveText("liveTax", tax);
+    setLiveText("liveIns", ins);
+    setLiveText("liveTotal", totalText);
+
+    const pmiRow = $("livePmiRow");
+    if (pmiRow) {
+      const showPmi = !pmiRowHidden && pmi !== "—" && pmi !== "$0";
+      pmiRow.classList.toggle("hidden", !showPmi);
+      if (showPmi) {
+        setLiveText("livePmi", pmi);
+        const lbl = $("livePmiLabel");
+        if (lbl) lbl.textContent = $("pmiRowLabel")?.textContent || "PMI / MI";
+      }
     }
-    $("wizardLivePreview")?.classList.toggle("wizard-live-preview-ready", val !== "—");
+    const hoaRow = $("liveHoaRow");
+    if (hoaRow) {
+      const showHoa = !hoaRowHidden && hoa !== "—" && hoa !== "$0";
+      hoaRow.classList.toggle("hidden", !showHoa);
+      if (showHoa) setLiveText("liveHoa", hoa);
+    }
+
+    if (note) {
+      if (currentStep >= resultsStepIndex()) {
+        note.textContent = "Full estimate ready";
+      } else {
+        note.textContent = "Live · educational";
+      }
+    }
+
+    $("wizardLivePreview")?.classList.toggle("wizard-live-preview-ready", true);
+
+    const key = [
+      totalText,
+      pi,
+      tax,
+      ins,
+      pmi,
+      hoa,
+      $("interestRate")?.value,
+      $("loanProgram")?.value,
+      $("downPercent")?.value,
+      $("homePrice")?.value,
+      $("creditScore")?.value,
+      $("loanTerm")?.value,
+      $("propertyTax")?.value,
+      $("homeInsurance")?.value,
+      $("hoa")?.value,
+    ].join("|");
+    if (lastLivePaymentKey && lastLivePaymentKey !== key) {
+      flashLiveCard();
+      amount.classList.remove("guided-live-amount-tick");
+      void amount.offsetWidth;
+      amount.classList.add("guided-live-amount-tick");
+      window.setTimeout(() => amount.classList.remove("guided-live-amount-tick"), 400);
+    }
+    lastLivePaymentKey = key;
+
+    // Keep mini stats in sync with current inputs
+    const priceDisp = $("homePriceDisplay")?.textContent || $("homePriceInput")?.value;
+    const downDisp =
+      $("downDisplay")?.textContent?.split("·")[0]?.trim() ||
+      `${$("downPercent")?.value || "—"}%`;
+    const rateVal = $("interestRate")?.value;
+    if ($("ultimateLivePrice") && priceDisp) $("ultimateLivePrice").textContent = priceDisp;
+    if ($("ultimateLiveDown")) $("ultimateLiveDown").textContent = downDisp;
+    if ($("ultimateLiveRate") && rateVal) {
+      $("ultimateLiveRate").textContent = String(rateVal).includes("%")
+        ? rateVal
+        : `${rateVal}%`;
+    }
+
     syncPaymentRateStrip();
-    syncLifetimeProofLine();
+    if (currentStep >= resultsStepIndex()) syncLifetimeProofLine();
   }
 
   /** Always surface one above-the-fold savings proof when available */
@@ -244,13 +378,25 @@
       // Overlay mode: don't hide main payment card if not on results
       if (realtor) {
         realtor.classList.remove("hidden");
+        realtor.hidden = false;
         realtor.classList.add("guided-realtor-overlay");
       }
       if (compare) compare.classList.add("hidden");
       document.body.classList.add("logan5-subview-active", "guided-realtor-open");
+      document.body.classList.add("guided-realtor-open");
+      // Lock background scroll while overlay open
+      document.documentElement.style.overflow = "hidden";
+      window.setTimeout(() => {
+        try {
+          $("realtorEmail")?.focus({ preventScroll: true });
+        } catch {
+          $("realtorEmail")?.focus();
+        }
+      }, 80);
       updateNavButtons();
       return;
     }
+    document.documentElement.style.overflow = "";
     if (realtor) realtor.classList.remove("guided-realtor-overlay");
     document.body.classList.remove("guided-realtor-open");
     if (paymentMain) paymentMain.classList.toggle("hidden", view !== null);
@@ -368,15 +514,13 @@
       if (toLoanBtn) toLoanBtn.hidden = true;
       if (title) {
         title.textContent =
-          getLoanGoal() === "refinance"
-            ? "Value & how you’ll refinance"
-            : "Price & how you’ll finance";
+          getLoanGoal() === "refinance" ? "How you’ll refinance" : "How you’ll finance";
       }
       if (lead) {
         lead.textContent =
           getLoanGoal() === "refinance"
-            ? "Pick a loan type. Equity updates automatically."
-            : "Pick a loan type. Down payment updates automatically.";
+            ? "Pick a loan type — equity updates automatically."
+            : "Pick a loan type — down payment updates automatically.";
       }
       // Focus loan heading for keyboard / SR users
       const loanTitle = $("step-loan-you-title");
@@ -402,13 +546,13 @@
       if (toLoanBtn) toLoanBtn.hidden = false;
       if (title) {
         title.textContent =
-          getLoanGoal() === "refinance" ? "What is the home worth today?" : "Set your price";
+          getLoanGoal() === "refinance" ? "Home value" : "Purchase price";
       }
       if (lead) {
         lead.textContent =
           getLoanGoal() === "refinance"
-            ? "Set today’s value. Then choose how you’ll refinance."
-            : "Drag the slider or type a number. Then choose how you’ll finance.";
+            ? "Set today’s value, then loan type."
+            : "Then choose loan type.";
       }
     }
     updateNavButtons();
@@ -555,18 +699,18 @@
     if (choiceHint) {
       if (onPriceStage) {
         choiceHint.hidden = false;
-        choiceHint.textContent = "Set your price, then choose loan type";
+        choiceHint.textContent = "Set price, then loan type";
       } else if (onAddressGate) {
         choiceHint.hidden = false;
-        choiceHint.textContent = "Look up an address or continue with price only";
+        choiceHint.textContent = "Look up address or use price only";
       } else if (onChoice) {
         choiceHint.hidden = false;
         choiceHint.textContent =
           currentStep === 0
-            ? "Tap a choice to continue"
+            ? "Tap to continue"
             : getLoanGoal() === "refinance"
-              ? "Tap your refinance goal to continue"
-              : "Tap a choice to continue";
+              ? "Tap your goal"
+              : "Tap to continue";
       } else {
         choiceHint.hidden = true;
       }
@@ -623,23 +767,21 @@
 
     // Titles for staged price-loan step are owned by setPriceLoanStage()
     if (priceTitle && currentStep !== 3) {
-      priceTitle.textContent = isRefi
-        ? "Value & how you’ll refinance"
-        : "Price & how you’ll finance";
+      priceTitle.textContent = isRefi ? "Home value" : "Purchase price";
     }
     if (priceLead && currentStep !== 3) {
       priceLead.textContent = isRefi
-        ? "Set today’s value, then pick a loan type. Equity updates automatically."
-        : "Set the price, then pick a loan type. Down payment updates automatically.";
+        ? "Then choose how you’ll refinance."
+        : "Then choose loan type.";
     }
     if (priceLabel) priceLabel.textContent = isRefi ? "Home value" : "Purchase price";
     if (addrTitle) {
-      addrTitle.textContent = isRefi ? "Where is the home you own?" : "What’s the address?";
+      addrTitle.textContent = isRefi ? "Your property address" : "Property address";
     }
     if (addrLead) {
       addrLead.textContent = isRefi
-        ? "Look up your address for local tax & insurance — or continue with price only."
-        : "Look up a listing for local estimates — or continue with a price only.";
+        ? "Lookup for local tax & insurance — or price only."
+        : "Lookup for local estimates — or price only.";
     }
     if (downTitle) {
       downTitle.textContent = isRefi ? "Your equity" : "Down payment";
@@ -650,22 +792,18 @@
     }
     if (downLead) {
       downLead.textContent = isRefi
-        ? "Set for this program — open Adjust to change equity %"
-        : "Set for this program — change below if needed";
+        ? "Program default — adjust equity below"
+        : "Program default — adjust below";
     }
     const downSummary = document.querySelector(".guided-down-adjust-summary");
     if (downSummary) {
       downSummary.textContent = isRefi ? "Adjust equity %" : "Adjust down payment";
     }
     if (resultsTitle) {
-      resultsTitle.textContent = isRefi
-        ? "Here’s your refinance payment estimate"
-        : "Here’s your monthly payment";
+      resultsTitle.textContent = isRefi ? "Refinance payment" : "Monthly payment";
     }
     if (resultsEyebrow) {
-      resultsEyebrow.textContent = isRefi
-        ? "Refinance scenario · educational"
-        : "Your personalized estimate";
+      resultsEyebrow.textContent = isRefi ? "Refinance estimate" : "Your estimate";
     }
   }
 
@@ -1001,6 +1139,7 @@
 
   function bindLiveUpdates() {
     document.addEventListener("mmg-calculated", () => {
+      updateLiveRailVisibility();
       updateLivePreview();
       syncPaymentRateStrip();
       syncLifetimeProofLine();
@@ -1010,9 +1149,28 @@
         "#homePrice, #homePriceInput, #downPercent, #downPercentInput, #downAmountInput, #creditScore, #loanProgram, #loanTerm, #interestRate, #propertyAddress, #propertyTax, #homeInsurance, #hoa"
       )
       .forEach((node) => {
-        node.addEventListener("input", () => window.requestAnimationFrame(recalculate));
-        node.addEventListener("change", () => window.requestAnimationFrame(recalculate));
+        node.addEventListener("input", () => {
+          if (node.id === "homePrice" || node.id === "homePriceInput") {
+            updateLiveRailVisibility();
+          }
+          window.requestAnimationFrame(recalculate);
+        });
+        node.addEventListener("change", () => {
+          if (node.id === "homePrice" || node.id === "homePriceInput") {
+            updateLiveRailVisibility();
+          }
+          window.requestAnimationFrame(recalculate);
+        });
       });
+    // Program / term buttons also drive calc (in case change event is missed)
+    document.querySelectorAll(".ultimate-program-btn, .ultimate-term-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        window.setTimeout(() => {
+          recalculate();
+          updateLivePreview();
+        }, 40);
+      });
+    });
     // Clear price error as soon as value is valid
     ["homePrice", "homePriceInput"].forEach((id) => {
       $(id)?.addEventListener("input", () => {

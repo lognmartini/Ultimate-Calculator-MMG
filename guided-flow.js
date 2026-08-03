@@ -377,17 +377,65 @@
     });
   }
 
-  function bindRealtorSide() {
-    $("guidedNeedRealtorBtn")?.addEventListener("click", () => {
-      if (typeof window.MMG_logan5_showSubView === "function") {
-        window.MMG_logan5_showSubView("realtor");
+  function openRealtorIntro(entry) {
+    const src = $("realtorEntrySource");
+    if (src) src.value = entry || "unknown";
+    if (typeof window.MMG_logan5_showSubView === "function") {
+      window.MMG_logan5_showSubView("realtor");
+    }
+    // Focus email for fastest conversion
+    window.setTimeout(() => {
+      try {
+        $("realtorEmail")?.focus({ preventScroll: false });
+      } catch {
+        $("realtorEmail")?.focus();
       }
+    }, 120);
+    window.MMG_trackPixel?.("RealtorIntroOpen", { entry: entry || "unknown" });
+  }
+
+  function bindRealtorSide() {
+    const openFrom = (btn) => {
+      const entry = btn?.getAttribute("data-realtor-entry") || "unknown";
+      openRealtorIntro(entry);
+    };
+
+    $("guidedNeedRealtorBtn")?.addEventListener("click", (e) => openFrom(e.currentTarget));
+    $("guidedMobileRealtorBtn")?.addEventListener("click", (e) => openFrom(e.currentTarget));
+    $("guidedResultsRealtorBtn")?.addEventListener("click", (e) => openFrom(e.currentTarget));
+    $("ultimateHubRealtor")?.addEventListener("click", (e) => {
+      // steps-flow also binds hub → keep entry source
+      const entry = e.currentTarget?.getAttribute("data-realtor-entry") || "hub";
+      const src = $("realtorEntrySource");
+      if (src) src.value = entry;
     });
-    $("ultimateRealtorBack")?.addEventListener("click", () => {
-      document.body.classList.remove("guided-realtor-open");
+
+    const closeRealtor = () => {
+      document.body.classList.remove("guided-realtor-open", "logan5-subview-active");
       $("ultimateRealtorView")?.classList.remove("guided-realtor-overlay");
+      $("ultimateRealtorView")?.classList.add("hidden");
+      document.documentElement.style.overflow = "";
+      if (typeof window.MMG_logan5_showSubView === "function") {
+        window.MMG_logan5_showSubView(null);
+      }
+    };
+
+    $("ultimateRealtorBack")?.addEventListener("click", closeRealtor);
+
+    // Esc closes realtor overlay
+    document.addEventListener("keydown", (e) => {
+      if (e.key !== "Escape") return;
+      if (!document.body.classList.contains("guided-realtor-open")) return;
+      closeRealtor();
+    });
+
+    // Click backdrop (overlay padding area) to close
+    $("ultimateRealtorView")?.addEventListener("click", (e) => {
+      if (e.target === $("ultimateRealtorView")) closeRealtor();
     });
   }
+
+  window.MMG_guided_openRealtorIntro = openRealtorIntro;
 
   function bind() {
     bindChoices();
@@ -467,10 +515,14 @@
         ) {
           setAddressCardState("error");
           note.textContent =
-            "We couldn’t auto-fill this address. Continue with price only — you can edit taxes & insurance later.";
-          note.className = "field-note guided-address-status field-note-error";
+            "Couldn’t find that property. Try another address, or continue with price only (U.S. averages — edit taxes later).";
+          note.className = "field-note guided-address-status field-note-error guided-note-warn";
+          // Spotlight the price-only path so lookup failures don’t dead-end
+          $("wizardSkipAddress")?.classList.add("guided-skip-highlight");
+          $("wizardSkipAddress")?.focus({ preventScroll: true });
         } else if (!stillEmpty) {
           setAddressCardState("success");
+          $("wizardSkipAddress")?.classList.remove("guided-skip-highlight");
         }
       }, 2800);
     });
@@ -486,10 +538,10 @@
       const eyebrow = document.querySelector(".guided-results-eyebrow");
       if (!eyebrow || document.body.dataset.loanGoal !== "refinance") return;
       const labels = {
-        "lower-payment": "Refinance · lower payment scenario",
-        "cash-out": "Refinance · cash-out scenario",
+        "lower-payment": "Refinance · lower payment",
+        "cash-out": "Refinance · cash-out",
         "shorten-term": "Refinance · pay off sooner",
-        "remove-pmi": "Refinance · remove PMI scenario",
+        "remove-pmi": "Refinance · remove PMI",
       };
       if (goal && labels[goal]) eyebrow.textContent = labels[goal];
     });

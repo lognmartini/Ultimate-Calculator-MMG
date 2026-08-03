@@ -22,8 +22,22 @@
 
   function suggestBias(query) {
     const q = query.toUpperCase();
-    if (/\bNC\b|NORTH CAROLINA/.test(q)) {
-      return { lon: -78.6382, lat: 35.7796, dist: 150000 };
+    // Bias by detected state when present; otherwise US geographic center (national tool)
+    const stateCenters = {
+      NC: { lon: -78.6382, lat: 35.7796, dist: 200000 },
+      SC: { lon: -81.0, lat: 34.0, dist: 200000 },
+      VA: { lon: -77.5, lat: 37.5, dist: 220000 },
+      GA: { lon: -83.5, lat: 32.7, dist: 250000 },
+      FL: { lon: -81.5, lat: 27.8, dist: 400000 },
+      TX: { lon: -99.0, lat: 31.0, dist: 500000 },
+      CA: { lon: -119.5, lat: 36.8, dist: 500000 },
+      NY: { lon: -75.5, lat: 42.9, dist: 300000 },
+      CO: { lon: -105.5, lat: 39.0, dist: 300000 },
+    };
+    for (const [st, center] of Object.entries(stateCenters)) {
+      if (new RegExp(`\\b${st}\\b|${st === "NC" ? "NORTH CAROLINA" : st}`).test(q)) {
+        return center;
+      }
     }
     if (
       /\b(AL|AK|AZ|AR|CA|CO|CT|DE|FL|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|ND|OH|OK|OR|PA|RI|SC|SD|TN|TX|UT|VT|VA|WA|WV|WI|WY)\b/.test(
@@ -32,7 +46,8 @@
     ) {
       return { lon: -98.5, lat: 39.8, dist: 2500000 };
     }
-    return { lon: -78.6382, lat: 35.7796, dist: 200000 };
+    // National default — not NC-first
+    return { lon: -98.5, lat: 39.8, dist: 3000000 };
   }
 
   function escapeHtml(str) {

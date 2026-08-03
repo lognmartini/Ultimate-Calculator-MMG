@@ -48,6 +48,8 @@ window.MMG_TAX_RATES = {
    * Not a bindable quote — coastal/wind/flood can be much higher.
    */
   insuranceByState: {
+    /** US mid-pack when no state yet (educational, not a quote) */
+    US: 0.48,
     FL: 0.85, LA: 0.72, TX: 0.65, OK: 0.7, CO: 0.58, CA: 0.42, NC: 0.55,
     SC: 0.58, GA: 0.48, NY: 0.38, NJ: 0.4, VA: 0.42, MD: 0.4, IN: 0.48,
     AL: 0.55, MS: 0.58, TN: 0.52, default: 0.48,

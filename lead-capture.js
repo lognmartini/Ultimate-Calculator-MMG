@@ -1,6 +1,7 @@
 /**
- * Optional, non-blocking buyer lead capture (Logan1 + Logan3).
+ * Optional, non-blocking buyer lead capture (Logan1 + Logan3 + Logan5 guided).
  * Calculator works fully without contact info.
+ * Guided go5: lead form is primary conversion — always available on results.
  */
 (function () {
   "use strict";
@@ -25,6 +26,7 @@
   let logan5HubTimer = null;
   let logan5ScrollDepthObserver = null;
   let logan5ScrollDepthFired = false;
+  let submitting = false;
   const LOGAN5_SCROLL_DEPTH = 0.5;
 
   function isLogan1() {
@@ -46,6 +48,10 @@
     return document.body.classList.contains("logan5");
   }
 
+  function isGuided() {
+    return document.body.classList.contains("guided-flow");
+  }
+
   function isSocialWizard() {
     return isLogan3() || isLogan4() || isLogan5();
   }
@@ -60,7 +66,9 @@
     return document.getElementById("saveEstimateCard");
   }
 
+  /** Legacy popover cards respect dismiss; guided primary form never permanently dies. */
   function shouldShow() {
+    if (isGuided() && isLogan5()) return true;
     try {
       if (localStorage.getItem(DISMISS_KEY) === "1") return false;
       if (localStorage.getItem(SUBMITTED_KEY) === "1") return false;
@@ -72,16 +80,54 @@
 
   function showCard() {
     const el = card();
-    if (!el || shown || !shouldShow()) return;
-    const piti = document.getElementById("pitiPayment")?.textContent?.trim();
-    if (!piti || piti === "—" || piti === "$0") return;
+    if (!el) return;
+    if (!isGuided() && (shown || !shouldShow())) return;
+
+    if (!isGuided()) {
+      const piti = document.getElementById("pitiPayment")?.textContent?.trim();
+      if (!piti || piti === "—" || piti === "$0") return;
+    }
+
     shown = true;
-    el.classList.remove("hidden");
+    el.classList.remove("hidden", "guided-lead-collapsed");
+    el.hidden = false;
+    el.removeAttribute("hidden");
+
+    // Restore form if user previously skipped this session (guided)
+    const form = document.getElementById("saveEstimateForm");
+    const restore = document.getElementById("saveEstimateRestore");
+    const successEl = document.getElementById("saveEstimateSuccess");
+    const alreadySubmitted = successEl && !successEl.classList.contains("hidden") && form?.classList.contains("hidden");
+    if (!alreadySubmitted) {
+      form?.classList.remove("hidden");
+      if (restore) {
+        restore.classList.add("hidden");
+        restore.hidden = true;
+      }
+    }
   }
 
   function hideCard(persistDismiss) {
     const el = card();
-    if (el) el.classList.add("hidden");
+    if (!el) return;
+
+    // Guided: soft-collapse with restore CTA — never permanent localStorage kill
+    if (isGuided() && isLogan5()) {
+      const form = document.getElementById("saveEstimateForm");
+      const restore = document.getElementById("saveEstimateRestore");
+      const successEl = document.getElementById("saveEstimateSuccess");
+      form?.classList.add("hidden");
+      successEl?.classList.add("hidden");
+      if (restore) {
+        restore.classList.remove("hidden");
+        restore.hidden = false;
+      }
+      el.classList.add("guided-lead-collapsed");
+      el.classList.remove("hidden");
+      return;
+    }
+
+    el.classList.add("hidden");
     if (persistDismiss) {
       try {
         localStorage.setItem(DISMISS_KEY, "1");
@@ -120,7 +166,9 @@
       address: get("propertyAddress")?.value || "",
       rate: get("interestRate")?.value || "",
       loanProgram: get("loanProgram")?.value || "",
+      loanTerm: get("loanTerm")?.value || "",
       ref: params.get("ref") || params.get("partner") || "",
+      loanGoal: document.body.dataset.loanGoal || "purchase",
       utm: Object.fromEntries(params),
     };
   }
@@ -129,7 +177,45 @@
     return document.querySelector(".save-estimate-tab.active")?.dataset.saveTab || "email";
   }
 
+  function setSubmitState(busy, label) {
+    const submit = document.querySelector(
+      ".save-estimate-submit, #saveEstimateForm [type='submit']"
+    );
+    if (!submit) return;
+    submit.disabled = !!busy;
+    submit.setAttribute("aria-busy", busy ? "true" : "false");
+    submit.classList.toggle("is-loading", !!busy);
+    if (label) submit.textContent = label;
+  }
+
+  function setFormError(message) {
+    let err = document.getElementById("saveEstimateError");
+    if (!err) {
+      const form = document.getElementById("saveEstimateForm");
+      if (!form) return;
+      err = document.createElement("p");
+      err.id = "saveEstimateError";
+      err.className = "save-estimate-error";
+      err.setAttribute("role", "alert");
+      form.insertBefore(err, form.querySelector(".save-estimate-submit, [type='submit']"));
+    }
+    if (message) {
+      err.textContent = message;
+      err.classList.remove("hidden");
+      err.hidden = false;
+    } else {
+      err.textContent = "";
+      err.classList.add("hidden");
+      err.hidden = true;
+    }
+  }
+
+  function defaultSubmitLabel(tab) {
+    return tab === "sms" ? "Text my estimate" : "Email my estimate";
+  }
+
   async function submitLead(form) {
+    if (submitting) return;
     const emailEl = document.getElementById("saveEstimateEmail");
     const nameEl = document.getElementById("saveEstimateName");
     const phoneEl = document.getElementById("saveEstimatePhone");
@@ -140,25 +226,34 @@
     const email = emailEl?.value?.trim() || "";
     const smsPhone = smsPhoneEl?.value?.trim() || "";
     const digits = smsPhone.replace(/\D/g, "");
+    const name = nameEl?.value?.trim() || "";
+
+    setFormError("");
 
     if (tab === "sms") {
       if (digits.length < 10) {
+        setFormError("Enter a valid 10-digit mobile number.");
         smsPhoneEl?.focus();
         return;
       }
       if (!smsConsentEl?.checked) {
+        setFormError("Check the box to agree to estimate texts.");
         smsConsentEl?.focus();
         return;
       }
     } else if (!email || !email.includes("@")) {
+      setFormError("Enter a valid email address.");
       emailEl?.focus();
       return;
     }
 
+    submitting = true;
+    setSubmitState(true, "Sending…");
+
     const assignedLo = resolveAssignedLo();
     const payload = {
       email: tab === "sms" ? `sms+${digits}@estimate.martinimortgagegroup.com` : email,
-      name: nameEl?.value?.trim() || "",
+      name,
       phone: tab === "sms" ? smsPhone : phoneEl?.value?.trim() || "",
       agent: document.documentElement.dataset.coAgent || "",
       ref: assignedLo === "team" ? "" : assignedLo,
@@ -182,6 +277,7 @@
         shareUrl: window.MMG_logan5_buildShareUrl?.() || "",
       },
     };
+
     try {
       const res = await fetch(`${apiBase()}api/lead`, {
         method: "POST",
@@ -189,28 +285,51 @@
         body: JSON.stringify(payload),
       });
       if (!res.ok) throw new Error("save failed");
+
       form?.classList.add("hidden");
-      successEl?.classList.remove("hidden");
-      if (successEl && tab === "sms") {
-        successEl.textContent = "Saved — we'll text your estimate shortly.";
+      document.getElementById("saveEstimateRestore")?.classList.add("hidden");
+      if (successEl) {
+        successEl.textContent =
+          tab === "sms"
+            ? "You're set — check your texts shortly."
+            : "You're set — check your inbox.";
+        successEl.classList.remove("hidden");
+        successEl.hidden = false;
       }
+      card()?.classList.remove("guided-lead-collapsed");
+
       try {
-        localStorage.setItem(SUBMITTED_KEY, "1");
+        // Don't permanently block guided form on future visits
+        if (!(isGuided() && isLogan5())) {
+          localStorage.setItem(SUBMITTED_KEY, "1");
+        } else {
+          sessionStorage.setItem(SUBMITTED_KEY, "1");
+        }
       } catch {
         /* ignore */
       }
+
       window.MMG_trackPixel?.("LeadSubmit", {
         source: payload.source,
         delivery: tab,
       });
-      window.setTimeout(() => hideCard(false), 5000);
+
+      // Non-guided: auto-hide card after success
+      if (!(isGuided() && isLogan5())) {
+        window.setTimeout(() => hideCard(false), 5000);
+      }
     } catch {
-      if (successEl) {
-        successEl.textContent =
-          isLogan4()
-            ? "We couldn't save that right now — you can still apply or call our team anytime."
-            : "We couldn't save that right now — you can still apply or call Logan anytime.";
-        successEl.classList.remove("hidden");
+      setFormError(
+        isLogan4()
+          ? "Couldn't save right now — apply or call our team anytime."
+          : "Couldn't save right now — apply or call Logan at (919) 238-4934."
+      );
+      setSubmitState(false, defaultSubmitLabel(tab));
+    } finally {
+      submitting = false;
+      // If form still visible (error path), re-enable; success keeps disabled/hidden
+      if (!form?.classList.contains("hidden")) {
+        setSubmitState(false, defaultSubmitLabel(tab));
       }
     }
   }
@@ -224,8 +343,10 @@
   function scheduleReveal() {
     if (timer || !shouldShow() || isSocialWizard()) return;
     timer = window.setTimeout(() => {
-      if (document.getElementById("pitiPayment")?.textContent?.trim() &&
-          document.getElementById("pitiPayment")?.textContent !== "—") {
+      if (
+        document.getElementById("pitiPayment")?.textContent?.trim() &&
+        document.getElementById("pitiPayment")?.textContent !== "—"
+      ) {
         showCard();
       }
     }, DELAY_MS);
@@ -237,8 +358,7 @@
 
   function tryShowLogan5Card() {
     if (!isLogan5() || shown || !shouldShow()) return;
-    // Guided go5 keeps the primary lead form always visible on results
-    if (document.body.classList.contains("guided-flow")) {
+    if (isGuided()) {
       showCard();
       return;
     }
@@ -312,7 +432,9 @@
     const smsTab = document.getElementById("saveTabSms");
     const emailInput = document.getElementById("saveEstimateEmail");
     const smsFields = document.getElementById("saveEstimateSmsFields");
-    const title = document.querySelector(".save-estimate-title");
+    const phoneOptional = document.getElementById("saveEstimateOptional");
+    const title = document.getElementById("saveEstimateHeading") || document.querySelector(".save-estimate-title");
+    const lead = document.querySelector(".save-estimate-lead");
 
     function setTab(tab) {
       const emailPanel = document.getElementById("saveEstimatePanelEmail");
@@ -324,30 +446,52 @@
         btn.setAttribute("tabindex", on ? "0" : "-1");
       });
       if (emailInput) emailInput.required = tab === "email";
-      // SMS panel (legacy id saveEstimateSmsFields)
+
+      // Email-only fields
+      if (emailPanel) {
+        // Keep panel structure; hide only email/phone when SMS
+        emailPanel.classList.remove("hidden");
+        emailPanel.hidden = false;
+      }
+      const emailField = emailInput?.closest(".guided-field");
+      if (emailField) {
+        emailField.classList.toggle("hidden", tab === "sms");
+        emailField.hidden = tab === "sms";
+      }
+      if (phoneOptional) {
+        phoneOptional.classList.toggle("hidden", tab === "sms");
+        phoneOptional.hidden = tab === "sms";
+      }
+
+      // Name always visible (outside SMS-only chrome)
       if (smsFields) {
         const showSms = tab === "sms";
         smsFields.classList.toggle("hidden", !showSms);
         smsFields.hidden = !showSms;
       }
-      if (emailPanel) {
-        emailPanel.classList.toggle("hidden", tab === "sms");
-        emailPanel.hidden = tab === "sms";
-      }
-      const submit = document.querySelector(".save-estimate-submit, #saveEstimateForm [type='submit']");
-      if (submit) {
-        submit.textContent = tab === "sms" ? "Text me my numbers" : "Email me my numbers";
+
+      setFormError("");
+      const submit = document.querySelector(
+        ".save-estimate-submit, #saveEstimateForm [type='submit']"
+      );
+      if (submit && !submitting) {
+        submit.textContent = defaultSubmitLabel(tab);
       }
       if (title) {
         title.textContent =
+          tab === "sms" ? "Text me this payment" : "Email me this payment";
+      }
+      if (lead) {
+        lead.textContent =
           tab === "sms"
-            ? "Text me this estimate — and Logan’s take on it"
-            : "Keep this estimate — and Logan’s take on it";
+            ? "Plus a plain-English note from Logan."
+            : "Plus a plain-English note from Logan.";
       }
     }
 
     function onTabKey(e) {
-      if (e.key !== "ArrowRight" && e.key !== "ArrowLeft" && e.key !== "Home" && e.key !== "End") return;
+      if (e.key !== "ArrowRight" && e.key !== "ArrowLeft" && e.key !== "Home" && e.key !== "End")
+        return;
       e.preventDefault();
       const tabs = [emailTab, smsTab].filter(Boolean);
       let i = tabs.findIndex((t) => t.classList.contains("active"));
@@ -405,9 +549,10 @@
 
   function bind() {
     const el = card();
-    if (!el || !shouldShow()) return;
+    // Always bind form handlers when the card exists — even if previously dismissed
+    if (!el) return;
 
-    if (isLogan1()) {
+    if (isLogan1() && shouldShow()) {
       document
         .querySelectorAll('input[type="range"], #homePriceInput, #downAmountInput')
         .forEach((node) => node.addEventListener("input", onSliderActivity));
@@ -426,7 +571,7 @@
       });
     } else if (isLogan5()) {
       document.addEventListener("mmg-wizard-results", () => {
-        if (document.body.classList.contains("guided-flow")) {
+        if (isGuided()) {
           showCard();
         } else {
           scheduleLogan5Reveal();
@@ -441,8 +586,16 @@
       });
     }
 
-    document.getElementById("saveEstimateDismiss")?.addEventListener("click", () => hideCard(true));
-    document.getElementById("saveEstimateSkip")?.addEventListener("click", () => hideCard(true));
+    document
+      .getElementById("saveEstimateDismiss")
+      ?.addEventListener("click", () => hideCard(!isGuided()));
+    document
+      .getElementById("saveEstimateSkip")
+      ?.addEventListener("click", () => hideCard(!isGuided()));
+    document.getElementById("saveEstimateRestore")?.addEventListener("click", () => {
+      showCard();
+      document.getElementById("saveEstimateEmail")?.focus();
+    });
 
     document.getElementById("saveEstimateForm")?.addEventListener("submit", (e) => {
       e.preventDefault();

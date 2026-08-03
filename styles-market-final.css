@@ -1,0 +1,315 @@
+/**
+ * MARKET-FINAL — last cascade layer for live polish
+ * Buttons · hierarchy · results · live card · mobile/desktop parity
+ */
+
+/* =========================================================
+   1. UNIFIED BUTTON SYSTEM
+   ========================================================= */
+html body.guided-flow.guided-flagship {
+  --mf-navy: #1a1230;
+  --mf-gold: #c9a227;
+  --mf-gold-hi: #e8c84a;
+  --mf-cream: #f4f2ef;
+  --mf-muted: #6b6580;
+  --mf-radius: 12px;
+}
+
+/* Primary = gold solid */
+html body.guided-flow.guided-flagship .btn-wizard-next,
+html body.guided-flow.guided-flagship .guided-lead-submit,
+html body.guided-flow.guided-flagship .guided-price-to-loan,
+html body.guided-flow.guided-flagship .guided-lookup-primary,
+html body.guided-flow.guided-flagship #lookupAddress.guided-lookup-primary,
+html body.guided-flow.guided-flagship .save-estimate-submit {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.4rem !important;
+  min-height: 52px !important;
+  padding: 0.85rem 1.25rem !important;
+  border: 0 !important;
+  border-radius: var(--mf-radius) !important;
+  background: linear-gradient(135deg, #f0d060 0%, #c9a227 55%, #b8891a 100%) !important;
+  color: var(--mf-navy) !important;
+  font-weight: 800 !important;
+  font-size: 0.95rem !important;
+  letter-spacing: 0.01em !important;
+  box-shadow: 0 4px 16px rgba(201, 162, 39, 0.32) !important;
+  cursor: pointer !important;
+  text-decoration: none !important;
+  transition: transform 0.12s ease, filter 0.15s ease, box-shadow 0.15s ease !important;
+}
+
+html body.guided-flow.guided-flagship .btn-wizard-next:hover,
+html body.guided-flow.guided-flagship .guided-lead-submit:hover,
+html body.guided-flow.guided-flagship .guided-price-to-loan:hover,
+html body.guided-flow.guided-flagship #lookupAddress.guided-lookup-primary:hover {
+  filter: brightness(1.04) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Secondary = navy outline on light / ghost on dark results */
+html body.guided-flow.guided-flagship .btn-wizard-back,
+html body.guided-flow.guided-flagship .guided-skip-price-btn,
+html body.guided-flow.guided-flagship #wizardSkipAddress.guided-skip-price-btn {
+  min-height: 48px !important;
+  border-radius: var(--mf-radius) !important;
+  border: 2px solid var(--mf-navy) !important;
+  background: #fff !important;
+  color: var(--mf-navy) !important;
+  font-weight: 700 !important;
+  box-shadow: none !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-secondary-apply,
+html body.guided-flow.guided-flagship .btn-results-apply {
+  min-height: 48px !important;
+  border-radius: var(--mf-radius) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.45) !important;
+  background: transparent !important;
+  color: #fff !important;
+  font-weight: 700 !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-secondary-apply:hover {
+  border-color: var(--mf-gold-hi) !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+/* Tertiary text */
+html body.guided-flow.guided-flagship .save-estimate-skip {
+  display: block !important;
+  width: 100% !important;
+  margin-top: 0.55rem !important;
+  padding: 0.45rem !important;
+  background: none !important;
+  border: 0 !important;
+  color: rgba(255, 255, 255, 0.7) !important;
+  font-size: 0.84rem !important;
+  font-weight: 600 !important;
+  text-decoration: underline !important;
+  text-underline-offset: 2px !important;
+  cursor: pointer !important;
+}
+
+/* =========================================================
+   2. STEP CENTERING & SPACING RHYTHM
+   ========================================================= */
+html body.guided-flow.guided-flagship .guided-step-panel {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+html body.guided-flow.guided-flagship .guided-step-intro {
+  text-align: center !important;
+  margin-bottom: 1.15rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-title {
+  text-align: center !important;
+  color: var(--mf-navy) !important;
+  letter-spacing: -0.02em !important;
+}
+
+html body.guided-flow.guided-flagship .guided-lead {
+  text-align: center !important;
+  color: var(--mf-muted) !important;
+  max-width: 26rem !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+html body.guided-flow.guided-flagship .guided-kicker {
+  text-align: center !important;
+  color: var(--mf-muted) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  font-size: 0.7rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-card,
+html body.guided-flow.guided-flagship .wizard-card.guided-card {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* =========================================================
+   3. RESULTS FINAL — confident conclusion
+   ========================================================= */
+html body.guided-flow.guided-flagship .guided-results-final {
+  max-width: min(440px, 100%) !important;
+  padding: 1.05rem 0.9rem 1.15rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-final .guided-results-title {
+  font-size: clamp(1.05rem, 3.2vw, 1.25rem) !important;
+  margin-bottom: 0.4rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-final #pitiPayment {
+  font-size: clamp(2.5rem, 11vw, 3.15rem) !important;
+  font-weight: 700 !important;
+  color: var(--mf-gold-hi) !important;
+  margin: 0.08rem 0 0.2rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-final .guided-breakdown-hero {
+  margin-top: 0.55rem !important;
+  margin-bottom: 0 !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-final .guided-lead-hero {
+  margin-top: 0.75rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-final .save-estimate-title {
+  font-size: 1.02rem !important;
+  line-height: 1.3 !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-final .guided-lead-submit {
+  width: 100% !important;
+  font-size: 1.02rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-final .guided-results-ctas-solo {
+  max-width: 100% !important;
+  margin-top: 0.9rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-final .guided-results-compliance-quiet {
+  font-size: 0.65rem !important;
+  color: rgba(255, 255, 255, 0.5) !important;
+  margin-top: 1rem !important;
+}
+
+/* Quiet savings ribbon */
+html body.guided-flow.guided-flagship .guided-results-final .lead-savings-ribbon:not(.hidden) {
+  margin-top: 0.65rem !important;
+  padding: 0.5rem 0.75rem !important;
+  border-radius: 10px !important;
+  background: rgba(201, 162, 39, 0.12) !important;
+  border: 1px solid rgba(201, 162, 39, 0.28) !important;
+}
+
+/* =========================================================
+   4. LIVE PAYMENT CARD — dominant total + clear breakdown
+   ========================================================= */
+html body.guided-flow.guided-flagship .guided-live-card-interactive #wizardLivePayment {
+  font-family: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif !important;
+  font-size: clamp(1.75rem, 5vw, 2.15rem) !important;
+  font-weight: 800 !important;
+  color: #1a1230 !important;
+  -webkit-text-fill-color: #1a1230 !important;
+}
+
+html body.guided-flow .guided-live-amount-tick {
+  color: #9a7b14 !important;
+  transform: scale(1.04);
+  transition: color 0.2s ease, transform 0.2s ease !important;
+}
+
+html body.guided-flow .guided-live-breakdown li.guided-live-total strong {
+  font-size: 0.95rem !important;
+  color: #9a7b14 !important;
+}
+
+/* Mobile sticky live card — clear of Continue (density.css refines further) */
+@media (max-width: 1099px) {
+  html body.guided-flow.guided-flagship .guided-live-rail {
+    bottom: calc(3.75rem + env(safe-area-inset-bottom, 0px)) !important;
+    padding: 0 0.5rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-live-card-interactive {
+    padding: 0.55rem 0.7rem 0.6rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-live-card-interactive #wizardLivePayment {
+    font-size: 1.45rem !important;
+  }
+
+  html body.guided-flow .guided-live-breakdown {
+    padding: 0.35rem 0.5rem !important;
+    margin-bottom: 0.35rem !important;
+  }
+
+  html body.guided-flow .guided-live-breakdown li {
+    font-size: 0.7rem !important;
+    padding: 0.12rem 0 !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-live-card-interactive .ultimate-live-stats {
+    display: none !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-main {
+    padding-bottom: calc(8rem + env(safe-area-inset-bottom, 0px)) !important;
+  }
+}
+
+@media (min-width: 1100px) {
+  html body.guided-flow.guided-flagship .guided-live-rail {
+    top: 5.25rem !important;
+  }
+}
+
+/* Results page: hide sticky live duplicate (payment already hero) */
+html body.guided-flow.wizard-on-results .guided-live-rail {
+  display: none !important;
+}
+
+html body.guided-flow.wizard-on-results .guided-main {
+  padding-bottom: 2.5rem !important;
+}
+
+/* =========================================================
+   5. REFI PATH PARITY
+   ========================================================= */
+html body.guided-flow.guided-flagship .guided-refi-goal-grid {
+  max-width: min(460px, 100%) !important;
+  margin: 0 auto !important;
+  gap: 0.5rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-refi-goal-grid .guided-choice-card {
+  text-align: left !important;
+  min-height: 0 !important;
+}
+
+/* =========================================================
+   6. ADDRESS / NATIONAL TRUST
+   ========================================================= */
+html body.guided-flow .guided-national-banner:not(.hidden) {
+  max-width: min(480px, 100%) !important;
+  margin: 0 auto 1rem !important;
+}
+
+/* =========================================================
+   Mobile step breathing room
+   ========================================================= */
+@media (max-width: 560px) {
+  html body.guided-flow.guided-flagship .guided-results-final {
+    padding: 1rem 0.85rem 1.1rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-results-final #pitiPayment {
+    font-size: clamp(2.4rem, 12vw, 3rem) !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-step-nav .btn-wizard-next {
+    min-height: 46px !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-choice-card {
+    min-height: 0 !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html body.guided-flow .guided-live-amount-tick {
+    transform: none !important;
+  }
+}

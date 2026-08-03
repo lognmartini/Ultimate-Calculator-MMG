@@ -1183,27 +1183,59 @@
   async function onRealtorSubmit(e) {
     e.preventDefault();
     const form = $("ultimateRealtorForm");
-    if (!form) return;
+    if (!form || form.dataset.submitting === "1") return;
     const fd = new FormData(form);
     const email = String(fd.get("email") || "").trim();
+    const errEl = $("realtorFormError");
+    const submitBtn = form.querySelector(".ultimate-realtor-submit");
+    const setErr = (msg) => {
+      if (!errEl) return;
+      if (msg) {
+        errEl.textContent = msg;
+        errEl.classList.remove("hidden");
+        errEl.hidden = false;
+      } else {
+        errEl.textContent = "";
+        errEl.classList.add("hidden");
+        errEl.hidden = true;
+      }
+    };
+    setErr("");
     if (!email || !email.includes("@")) {
-      form.querySelector('[type="email"]')?.focus();
+      setErr("Enter a valid email so we can intro a realtor.");
+      form.querySelector('[type="email"], #realtorEmail')?.focus();
       return;
     }
+    form.dataset.submitting = "1";
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.setAttribute("aria-busy", "true");
+      submitBtn.classList.add("is-loading");
+      submitBtn.dataset.label = submitBtn.textContent;
+      submitBtn.textContent = "Sending…";
+    }
+    const entry =
+      String(fd.get("realtorEntry") || document.getElementById("realtorEntrySource")?.value || "") ||
+      "unknown";
     const payload = {
       email,
       name: String(fd.get("name") || "").trim(),
       phone: String(fd.get("phone") || "").trim(),
       assignedLo: "logan",
       version: "Logan5",
-      source: "logan5-realtor-quiz",
+      source: "logan5-realtor-intro",
       notifyEmail: "logan@martinimortgagegroup.com",
       consent: true,
       scenario: {
         ...collectScenarioSnapshot(),
-        huntStyle: fd.get("huntStyle"),
-        keysTimeline: fd.get("keysTimeline"),
-        realtorSuperpower: fd.get("realtorSuperpower"),
+        loanGoal: document.body.dataset.loanGoal || "purchase",
+        refiGoal: document.body.dataset.refiGoal || "",
+        huntStyle: fd.get("huntStyle") || "",
+        keysTimeline: fd.get("keysTimeline") || "",
+        realtorSuperpower: fd.get("realtorSuperpower") || "",
+        hasAgent: fd.get("hasAgent") ? true : false,
+        realtorEntry: entry,
+        intent: "realtor_referral",
       },
     };
     let ok = false;
@@ -1220,22 +1252,36 @@
     const confirm = $("ultimateRealtorConfirm");
     const consent = $("ultimateRealtorConsent");
     if (ok && confirm) {
-      window.MMG_trackPixel?.("LeadSubmit", { source: "logan5-realtor-quiz" });
-      form.querySelectorAll(".ultimate-realtor-q, .ultimate-realtor-contact, .ultimate-realtor-submit").forEach((el) => {
-        el.classList.add("hidden");
+      window.MMG_trackPixel?.("LeadSubmit", {
+        source: "logan5-realtor-intro",
+        entry,
       });
+      form
+        .querySelectorAll(
+          ".ultimate-realtor-q, .ultimate-realtor-contact, .ultimate-realtor-submit, .guided-realtor-prefs, .guided-realtor-has-agent, #realtorFormError"
+        )
+        .forEach((el) => {
+          el.classList.add("hidden");
+        });
       if (consent) consent.classList.add("hidden");
       confirm.classList.remove("hidden");
       confirm.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      form.dataset.submitting = "0";
     } else {
+      setErr("Couldn’t send right now — call Logan at (919) 238-4934 for a realtor intro.");
       const success = $("ultimateRealtorSuccess");
       if (success) {
         success.classList.remove("hidden");
-        success.textContent =
-          "We noted your answers — call (919) 238-4934 if you need help right away.";
+        success.textContent = "Or call (919) 238-4934 anytime.";
+      }
+      form.dataset.submitting = "0";
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.setAttribute("aria-busy", "false");
+        submitBtn.classList.remove("is-loading");
+        submitBtn.textContent = submitBtn.dataset.label || "Get my free realtor intro";
       }
     }
-    form.querySelector(".ultimate-realtor-submit")?.setAttribute("disabled", "true");
   }
 
   function updateProcessHighlight(stepIndex) {

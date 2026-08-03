@@ -336,11 +336,18 @@
   function initStickyCta() {
     const bar = document.getElementById("stickyCta");
     if (!bar || PAGE.embed) return;
+    // Guided flagship: no sticky apply chrome (header + results CTA only)
+    if (document.body.classList.contains("guided-flagship")) {
+      bar.classList.remove("sticky-cta-visible");
+      bar.setAttribute("aria-hidden", "true");
+      bar.hidden = true;
+      document.body.classList.remove("has-sticky-pad");
+      return;
+    }
     const socialWizard = document.body.classList.contains("wizard-social");
     const show = () => {
       const y = window.scrollY || document.documentElement.scrollTop;
       const wizardStep = Number(document.body.dataset.wizardStep || "0");
-      const isLogan5 = document.body.classList.contains("logan5");
       const pastHero = socialWizard
         ? wizardStep >= 3
         : y > 320;
@@ -428,11 +435,11 @@
   function getInsuranceRate(state, creditScore) {
     const data = taxData();
     const credit = creditData();
-    // National mid-pack insurance % when no state yet
+    // National mid-pack insurance % when no state yet (US key → default)
     const stateCode = state ? String(state).toUpperCase().slice(0, 2) : null;
     const base = stateCode
       ? data.insuranceByState?.[stateCode] ?? data.insuranceByState?.default ?? 0.48
-      : data.insuranceByState?.default ?? 0.48;
+      : data.insuranceByState?.US ?? data.insuranceByState?.default ?? 0.48;
     let mult = 1.0;
     for (const t of credit.insuranceMult || DEFAULT_CREDIT.insuranceMult) {
       if (creditScore >= t.min) {
@@ -1992,13 +1999,15 @@
     if (!els.lookupAddress) cacheElements();
     if (els.lookupAddress) {
       els.lookupAddress.disabled = true;
-      els.lookupAddress.textContent = "Looking up property…";
+      els.lookupAddress.classList.add("is-loading");
+      els.lookupAddress.textContent = "Looking up…";
     }
+    document.getElementById("wizardSkipAddress")?.classList.remove("guided-skip-highlight");
     setAddressState("loading");
     setLocationNote(
       updatePrice
-        ? "Searching for this property — price, taxes, and insurance…"
-        : "Pulling local tax and insurance estimates…",
+        ? "Searching for price, taxes & insurance…"
+        : "Pulling local tax & insurance…",
       ""
     );
 
@@ -2018,17 +2027,36 @@
     }
     } catch (err) {
       setAddressState("error");
+      // National fallback tax/ins so user is never stuck without estimates
+      if (!taxManualOverride) {
+        const homePrice = Number(els.homePrice?.value || 450000);
+        const taxRate = getTaxRate(null, null);
+        if (els.propertyTax && homePrice > 0) {
+          els.propertyTax.value = formatCurrencyInput(Math.round(homePrice * (taxRate / 100)));
+        }
+      }
+      if (!insuranceManualOverride) {
+        try {
+          refreshInsuranceFromCredit();
+        } catch {
+          /* ignore */
+        }
+      }
       setLocationNote(
         err.message === "Address not found"
-          ? "We couldn’t find that address. Try the suggestions, or continue with price only."
-          : "Lookup didn’t work this time. Pick a suggestion, or continue with price only — you can edit taxes later.",
+          ? "Couldn’t find that address. Try a suggestion, or continue with price only (U.S. averages)."
+          : "Lookup didn’t work. Continue with price only — U.S. average tax & insurance until you edit.",
         "error"
       );
+      document.getElementById("wizardSkipAddress")?.classList.add("guided-skip-highlight");
     } finally {
       lookupInFlight = false;
       if (els.lookupAddress) {
         els.lookupAddress.disabled = false;
-        els.lookupAddress.textContent = "Look up this property";
+        els.lookupAddress.classList.remove("is-loading");
+        els.lookupAddress.textContent = document.body.classList.contains("guided-flow")
+          ? "Look up property"
+          : "Look up this property";
       }
       const pending = pendingPropertyLookup;
       pendingPropertyLookup = null;
@@ -2133,8 +2161,12 @@
       if (els.piPayment) els.piPayment.textContent = "—";
       if (els.taxPayment) els.taxPayment.textContent = "—";
       if (els.insurancePayment) els.insurancePayment.textContent = "—";
+      if (els.pmiPayment) els.pmiPayment.textContent = "—";
+      if (els.hoaPayment) els.hoaPayment.textContent = "—";
       if (els.loanAmount) els.loanAmount.textContent = "—";
       if (els.totalInterest) els.totalInterest.textContent = "—";
+      if (els.pmiRow) els.pmiRow.classList.add("hidden");
+      if (els.hoaRow) els.hoaRow.classList.add("hidden");
       document.dispatchEvent(new CustomEvent("mmg-calculated", { detail: { incomplete: true } }));
       return;
     }
@@ -2159,7 +2191,18 @@
     const totalMonthly = piti + monthlyPmi + monthlyHoa;
     const hasExtras = monthlyPmi > 0 || monthlyHoa > 0;
 
-    els.pitiPayment.textContent = formatCurrency(piti);
+    // Guided results: hero shows all-in monthly (includes PMI/HOA when present)
+    const guided = document.body.classList.contains("guided-flow");
+    const heroAmount = guided ? totalMonthly : piti;
+    els.pitiPayment.textContent = formatCurrency(heroAmount);
+    const heroSub = document.getElementById("pitiHeroSub");
+    const heroExtras = document.getElementById("pitiHeroExtrasHint");
+    if (guided && heroExtras) {
+      const bits = [];
+      if (monthlyPmi > 0) bits.push(program.miLabel || "MI");
+      if (monthlyHoa > 0) bits.push("HOA");
+      heroExtras.textContent = bits.length ? ` + ${bits.join(" + ")}` : "";
+    }
     if (els.totalPayment) els.totalPayment.textContent = formatCurrency(totalMonthly);
     if (els.piPayment) els.piPayment.textContent = formatCurrency(pi);
     if (els.taxPayment) els.taxPayment.textContent = formatCurrency(monthlyTax);
@@ -2247,10 +2290,17 @@
       );
     }
 
+    // Guided: extras already in hero + breakdown — keep secondary block hidden
     if (els.totalWithExtras) {
-      els.totalWithExtras.classList.toggle("hidden", !hasExtras);
+      if (guided) {
+        els.totalWithExtras.classList.add("hidden");
+        els.totalWithExtras.setAttribute("aria-hidden", "true");
+      } else {
+        els.totalWithExtras.classList.toggle("hidden", !hasExtras);
+        els.totalWithExtras.setAttribute("aria-hidden", hasExtras ? "false" : "true");
+      }
     }
-    if (els.extrasNote && hasExtras) {
+    if (els.extrasNote && hasExtras && !guided) {
       els.extrasNote.textContent = needsPmi
         ? "Includes estimated mortgage insurance (PMI)" + (monthlyHoa > 0 ? " and HOA" : "")
         : "Includes HOA";

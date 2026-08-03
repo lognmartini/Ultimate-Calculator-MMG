@@ -440,8 +440,8 @@ html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="
   gap: 0.55rem !important;
 }
 
-html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-type-grid .ultimate-program-btn {
-  min-height: 68px !important;
+html body.guided-flow.guided-flagship [data-step-id="price-loan"] .guided-loan-type-grid .ultimate-program-btn {
+  min-height: 54px !important;
 }
 
 /* =========================================================
@@ -996,15 +996,47 @@ html body.guided-flow #guidedFthbRow[hidden] {
   display: none !important;
 }
 
-/* Mobile: hide entire live rail until results (no dead "—" block) */
+/* Mobile: sticky interactive live payment card above Continue bar */
 @media (max-width: 1099px) {
-  html body.guided-flow.guided-advisor-collapsed .guided-live-rail,
-  html body.guided-flow.guided-pre-results .guided-live-rail {
+  html body.guided-flow.guided-flagship .guided-live-rail {
+    display: flex !important;
+    position: fixed !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: calc(4.6rem + env(safe-area-inset-bottom, 0px)) !important;
+    z-index: 880 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 0.65rem !important;
+    pointer-events: none !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-live-rail .guided-live-card {
+    pointer-events: auto !important;
+    width: 100% !important;
+    max-width: 520px !important;
+    margin: 0 auto !important;
+    box-shadow: 0 -6px 28px rgba(26, 18, 48, 0.14) !important;
+  }
+
+  /* Collapse long advisor block on mobile — payment card only */
+  html body.guided-flow.guided-advisor-collapsed .guided-side-advisor,
+  html body.guided-flow.guided-pre-results .guided-side-advisor {
     display: none !important;
   }
 
-  html body.guided-flow.wizard-on-results .guided-live-rail {
-    display: flex !important;
+  html body.guided-flow.wizard-on-results .guided-side-advisor {
+    display: none !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-main {
+    padding-bottom: calc(11.5rem + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  /* Results: keep sticky live total for context while scrolling the form */
+  html body.guided-flow.wizard-on-results .guided-live-breakdown {
+    display: none !important;
   }
 }
 
@@ -1048,20 +1080,20 @@ html body.guided-flow .guided-down-chips .guided-mini-chip {
   font-weight: 700 !important;
 }
 
-/* Choice cards: slightly larger tap targets mobile */
+/* Choice cards: compact tap targets (still ≥44px via padding) */
 @media (max-width: 560px) {
   html body.guided-flow.guided-flagship .guided-choice-card {
-    min-height: 72px !important;
-    padding: 1rem 0.9rem !important;
+    min-height: 0 !important;
+    padding: 0.7rem 0.8rem !important;
   }
 
   html body.guided-flow.guided-flagship .guided-loan-type-grid .ultimate-program-btn {
-    min-height: 68px !important;
+    min-height: 52px !important;
   }
 
   html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-term-primary .ultimate-term-btn {
-    min-height: 46px !important;
-    min-width: 4.75rem !important;
+    min-height: 42px !important;
+    min-width: 3.8rem !important;
   }
 }
 
@@ -1400,4 +1432,361 @@ html body.guided-flow .address-suggestions li.active,
 html body.guided-flow #addressSuggestions li.active {
   background: rgba(201, 162, 39, 0.2) !important;
   outline: 1px solid #c9a227;
+}
+
+/* =========================================================
+   RESULTS V2 — conversion hero (mobile + desktop equal)
+   ========================================================= */
+html body.guided-flow.guided-flagship .guided-results-v2 {
+  max-width: min(440px, 100%) !important;
+  padding: 1.05rem 0.9rem 1.15rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-v2 .guided-results-hero {
+  text-align: center !important;
+  margin: 0 0 0.2rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-v2 .guided-results-title {
+  font-size: clamp(1rem, 3.2vw, 1.2rem) !important;
+  margin: 0 0 0.4rem !important;
+  color: #fff !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-v2 #pitiPayment,
+html body.guided-flow.guided-flagship .guided-results-v2 .total-amount {
+  font-size: clamp(2.4rem, 10vw, 3.1rem) !important;
+  line-height: 1.02 !important;
+  letter-spacing: -0.03em !important;
+  color: #e8c84a !important;
+  margin: 0.2rem 0 0.35rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-v2 .total-label {
+  font-size: 0.72rem !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: rgba(255, 255, 255, 0.65) !important;
+  font-weight: 700 !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-v2 .total-sublabel,
+html body.guided-flow.guided-flagship .guided-results-v2 #pitiHeroSub {
+  font-size: 0.8rem !important;
+  color: rgba(255, 255, 255, 0.72) !important;
+  line-height: 1.35 !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-rate-line {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 0.35rem 0.65rem !important;
+  margin: 0.85rem auto 0.35rem !important;
+  font-size: 0.82rem !important;
+  color: rgba(255, 255, 255, 0.78) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-rate-line strong {
+  color: #e8c84a !important;
+  font-weight: 800 !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-rate-sep {
+  opacity: 0.45;
+}
+
+html body.guided-flow.guided-flagship .guided-results-v2 .lead-savings-ribbon {
+  margin: 0.55rem auto 0 !important;
+  max-width: 20rem !important;
+  text-align: center !important;
+}
+
+html body.guided-flow.guided-flagship .guided-breakdown-hero {
+  margin: 1rem 0 0 !important;
+  padding: 0.85rem 1rem !important;
+  border-radius: 14px !important;
+  background: rgba(255, 255, 255, 0.07) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-breakdown-hero li {
+  font-size: 0.9rem !important;
+  padding: 0.35rem 0 !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+html body.guided-flow.guided-flagship .guided-breakdown-hero li:last-child {
+  border-bottom: 0;
+}
+
+html body.guided-flow.guided-flagship .guided-breakdown-hero li strong {
+  color: #fff !important;
+  font-size: 0.95rem !important;
+}
+
+/* Lead form tight under breakdown */
+html body.guided-flow.guided-flagship .guided-lead-hero {
+  margin: 1.15rem 0 0.85rem !important;
+  padding: 1.25rem 1.1rem 1.15rem !important;
+  border-radius: 16px !important;
+  border: 1px solid rgba(201, 162, 39, 0.45) !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-lead-hero .save-estimate-title {
+  font-size: 1.1rem !important;
+  color: #fff !important;
+  text-align: center !important;
+  margin: 0.25rem 0 0.4rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-lead-hero .save-estimate-lead {
+  text-align: center !important;
+  font-size: 0.84rem !important;
+  color: rgba(255, 255, 255, 0.78) !important;
+  margin: 0 0 0.85rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-lead-hero .guided-lead-submit {
+  width: 100% !important;
+  min-height: 52px !important;
+  font-size: 1rem !important;
+  font-weight: 800 !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-compliance-quiet {
+  margin: 0.85rem 0 0.5rem !important;
+  padding: 0.35rem 0.5rem !important;
+  font-size: 0.68rem !important;
+  line-height: 1.45 !important;
+  color: rgba(255, 255, 255, 0.55) !important;
+  text-align: center !important;
+  background: transparent !important;
+  border: 0 !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-v2 .guided-results-ctas-solo {
+  margin: 0.75rem auto 0.25rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-v2 .guided-results-details {
+  margin-top: 0.85rem !important;
+}
+
+/* Hide old advantage card spacing if residual */
+html body.guided-flow.guided-flagship .guided-results-v2 .guided-advantage-card {
+  display: none !important;
+}
+
+/* Mobile results excellence */
+@media (max-width: 560px) {
+  html body.guided-flow.guided-flagship .guided-results-v2 {
+    padding: 1.25rem 0.95rem 1.5rem !important;
+    border-radius: 18px !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-results-v2 #pitiPayment {
+    font-size: clamp(2.7rem, 12vw, 3.3rem) !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-lead-hero {
+    padding: 1.1rem 0.9rem 1rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-breakdown-hero li {
+    font-size: 0.88rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-results-v2 .guided-results-secondary-apply {
+    min-height: 48px !important;
+  }
+
+  /* Refi goal cards denser on mobile */
+  html body.guided-flow.guided-flagship .guided-refi-goal-grid {
+    gap: 0.65rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-refi-goal-grid .guided-choice-card {
+    min-height: 68px !important;
+    padding: 0.85rem 0.75rem !important;
+  }
+}
+
+/* Desktop: slightly wider breathing room for results */
+@media (min-width: 900px) {
+  html body.guided-flow.guided-flagship .guided-results-v2 {
+    max-width: 540px !important;
+    padding: 1.75rem 1.5rem 1.9rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-results-v2 #pitiPayment {
+    font-size: 3.6rem !important;
+  }
+}
+
+/* =========================================================
+   LIVE PAYMENT CARD — accurate + interactive
+   ========================================================= */
+html body.guided-flow.guided-flagship .guided-live-card-interactive {
+  padding: 0.95rem 1rem 1rem !important;
+  border-radius: 16px !important;
+  border: 1px solid rgba(201, 162, 39, 0.28) !important;
+  background: linear-gradient(165deg, #ffffff 0%, #fbf8f0 100%) !important;
+  box-shadow: 0 8px 28px rgba(26, 18, 48, 0.08) !important;
+  transition: box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease !important;
+}
+
+html body.guided-flow.guided-flagship .guided-live-card-interactive .wizard-live-preview-label {
+  display: block !important;
+  text-align: center !important;
+  font-size: 0.68rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: #6b6580 !important;
+}
+
+html body.guided-flow.guided-flagship .guided-live-card-interactive .wizard-live-preview-amount,
+html body.guided-flow.guided-flagship .guided-live-card-interactive #wizardLivePayment {
+  display: block !important;
+  text-align: center !important;
+  font-family: "Playfair Display", Georgia, serif !important;
+  font-size: clamp(1.85rem, 5vw, 2.25rem) !important;
+  font-weight: 700 !important;
+  color: #1a1230 !important;
+  letter-spacing: -0.03em !important;
+  line-height: 1.1 !important;
+  margin: 0.25rem 0 0.35rem !important;
+  transition: color 0.2s ease, transform 0.2s ease !important;
+}
+
+html body.guided-flow.guided-flagship .wizard-live-preview-ready #wizardLivePayment {
+  color: #1a1230 !important;
+  opacity: 1 !important;
+}
+
+html body.guided-flow .guided-live-rate-pair {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 0.25rem 0.5rem !important;
+  margin: 0 0 0.65rem !important;
+  font-size: 0.72rem !important;
+  font-weight: 600 !important;
+  color: #6b6580 !important;
+  text-align: center !important;
+}
+
+html body.guided-flow .guided-live-rate-pair strong {
+  color: #9a7b14 !important;
+  font-weight: 800 !important;
+}
+
+html body.guided-flow .guided-live-breakdown {
+  list-style: none !important;
+  margin: 0 0 0.65rem !important;
+  padding: 0.55rem 0.65rem !important;
+  border-radius: 12px !important;
+  background: rgba(26, 18, 48, 0.03) !important;
+  border: 1px solid rgba(26, 18, 48, 0.06) !important;
+}
+
+html body.guided-flow .guided-live-breakdown li {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: baseline !important;
+  gap: 0.5rem !important;
+  padding: 0.22rem 0 !important;
+  font-size: 0.78rem !important;
+  color: #5c5670 !important;
+  border-bottom: 1px solid rgba(26, 18, 48, 0.05);
+}
+
+html body.guided-flow .guided-live-breakdown li:last-child {
+  border-bottom: 0 !important;
+}
+
+html body.guided-flow .guided-live-breakdown li strong {
+  color: #1a1230 !important;
+  font-weight: 700 !important;
+  font-variant-numeric: tabular-nums !important;
+}
+
+html body.guided-flow .guided-live-breakdown li.guided-live-total {
+  margin-top: 0.2rem !important;
+  padding-top: 0.4rem !important;
+  border-top: 1px solid rgba(201, 162, 39, 0.35) !important;
+  border-bottom: 0 !important;
+  font-weight: 700 !important;
+  color: #1a1230 !important;
+}
+
+html body.guided-flow .guided-live-breakdown li.guided-live-total strong {
+  color: #9a7b14 !important;
+  font-size: 0.9rem !important;
+}
+
+html body.guided-flow .guided-live-breakdown li.hidden {
+  display: none !important;
+}
+
+html body.guided-flow.guided-flagship .guided-live-card-interactive .guided-live-stats,
+html body.guided-flow.guided-flagship .guided-live-card-interactive .ultimate-live-stats {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr 1fr !important;
+  gap: 0.35rem !important;
+  margin: 0 0 0.45rem !important;
+  text-align: center !important;
+}
+
+html body.guided-flow.guided-flagship .guided-live-card-interactive .ultimate-live-stats dt {
+  font-size: 0.62rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  color: #8a8499 !important;
+}
+
+html body.guided-flow.guided-flagship .guided-live-card-interactive .ultimate-live-stats dd {
+  font-size: 0.78rem !important;
+  font-weight: 700 !important;
+  color: #1a1230 !important;
+  margin: 0 !important;
+}
+
+html body.guided-flow.guided-flagship .guided-live-card-interactive .wizard-live-preview-note {
+  text-align: center !important;
+  font-size: 0.72rem !important;
+  color: #8a8499 !important;
+  margin: 0 !important;
+}
+
+/* Soft gold pulse when payment changes */
+html body.guided-flow .guided-live-card.guided-live-flash {
+  border-color: rgba(201, 162, 39, 0.65) !important;
+  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.22), 0 10px 28px rgba(26, 18, 48, 0.1) !important;
+}
+
+html body.guided-flow .guided-live-card.guided-live-flash #wizardLivePayment {
+  color: #9a7b14 !important;
+  transform: scale(1.03);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html body.guided-flow .guided-live-card.guided-live-flash #wizardLivePayment {
+    transform: none !important;
+  }
+}
+
+/* Desktop sticky rail */
+@media (min-width: 1100px) {
+  html body.guided-flow.guided-flagship .guided-live-rail {
+    position: sticky !important;
+    top: 5.5rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-live-card-interactive #wizardLivePayment {
+    font-size: 2.2rem !important;
+  }
 }
