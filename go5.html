@@ -6,7 +6,7 @@
   <meta name="mmg-api-base" content="/" />
   <meta name="mmg-meta-pixel-id" content="" />
   <meta name="mmg-gtag-id" content="" />
-  <meta name="description" content="Private mortgage strategy estimate with Logan Martini — clear monthly payment, Martini rate advantage, and next steps. Educational only." />
+  <meta name="description" content="Strategy-first mortgage payment estimate with Logan Martini — purchase or refinance, any U.S. property. Educational only." />
   <meta name="robots" content="index, follow" />
   <meta name="theme-color" content="#1a1230" />
   <link rel="canonical" href="https://martinimortgagegroup.com/mortgage-calculator/go5.html" />
@@ -28,6 +28,7 @@
   <link rel="stylesheet" href="styles-logan5-growth.css" />
   <link rel="stylesheet" href="styles-guided.css" />
   <link rel="stylesheet" href="styles-flagship.css" />
+  <link rel="stylesheet" href="styles-market-ready.css" />
 </head>
 <body class="wizard-social logan3 logan5 guided-flow guided-v2 guided-flagship" data-wizard-step="1" data-mmg-version="Logan5" data-loan-goal="purchase" data-has-address="">
   <div class="logan5-instant-banner hidden" id="logan5InstantBanner" role="status" aria-live="polite">
@@ -183,6 +184,7 @@
               <ul id="addressSuggestions" class="address-suggestions hidden" role="listbox"></ul>
             </div>
             <button type="button" class="btn-lookup" id="lookupAddress">Look up this property</button>
+            <p class="field-note guided-lookup-hint" id="guidedLookupHint">Tip: pick an address from the suggestions for the best match. Works for properties across the U.S.</p>
             <p class="field-note" id="locationNote" role="status" aria-live="polite"></p>
             <div class="ultimate-limit-badge hidden" id="ultimateLimitBadge" role="status" aria-live="polite"></div>
           </div>
@@ -197,6 +199,7 @@
               <div><dt>Est. tax /yr</dt><dd id="propertySummaryTax">—</dd></div>
               <div><dt>Est. insurance /yr</dt><dd id="propertySummaryIns">—</dd></div>
             </dl>
+            <p class="field-note guided-property-fallback-note">Estimates only — edit price, tax, and insurance anytime on later steps.</p>
           </div>
           <button type="button" class="wizard-skip" id="wizardSkipAddress">Can&rsquo;t find it? Continue with price only</button>
         </div>
@@ -521,11 +524,11 @@
             </section>
           </section>
 
-          <!-- 3. Lead capture at peak intent -->
+          <!-- 3. Lead capture = PRIMARY conversion at peak intent -->
           <aside class="save-estimate-card guided-lead-primary" id="saveEstimateCard" aria-label="Email this estimate">
             <p class="save-estimate-eyebrow">Free · no hard credit pull · no obligation</p>
-            <p class="save-estimate-title">Save this estimate to your inbox</p>
-            <p class="save-estimate-lead">Get the full breakdown plus a short note from Logan on your options — so you can review it with confidence.</p>
+            <p class="save-estimate-title">Keep this estimate — and Logan&rsquo;s take on it</p>
+            <p class="save-estimate-lead">We&rsquo;ll email your full breakdown plus a short, plain-English note on your options. Review it on your time — first-time buyers and investors welcome.</p>
             <div class="save-estimate-tabs" role="tablist">
               <button type="button" class="save-estimate-tab active" id="saveTabEmail" data-save-tab="email" role="tab" aria-selected="true">Email</button>
               <button type="button" class="save-estimate-tab" id="saveTabSms" data-save-tab="sms" role="tab" aria-selected="false">Text</button>
@@ -551,16 +554,16 @@
             <button type="button" class="save-estimate-dismiss hidden" id="saveEstimateDismiss" aria-label="Dismiss">×</button>
           </aside>
 
-          <!-- 4. Primary + secondary CTAs only -->
+          <!-- 4. Secondary actions only (lead form is primary) -->
           <div class="guided-results-ctas">
-            <a href="https://applywithlogan.com" class="btn btn-apply-now btn-results-apply" data-mmg-apply target="_blank" rel="noopener">
-              <span class="btn-apply-text">Ready? Start your application</span>
+            <a href="https://applywithlogan.com" class="btn btn-outline btn-results-apply guided-results-secondary-apply" data-mmg-apply target="_blank" rel="noopener">
+              <span class="btn-apply-text">Or start a full application</span>
               <span class="btn-apply-arrow" aria-hidden="true">→</span>
             </a>
             <button type="button" class="guided-results-secondary" id="ultimateHubRealtor" data-hub-action="realtor">
-              Working with an agent? Or need a trusted intro?
+              Need a trusted realtor intro?
             </button>
-            <p class="results-apply-note">About 3 minutes · soft credit pull only when you apply</p>
+            <p class="results-apply-note">Application ~3 min · soft pull only when you apply</p>
           </div>
 
           <!-- 5. Compact breakdown -->
@@ -756,7 +759,7 @@
               <span class="guided-side-nmls">NMLS #1591485</span>
             </div>
           </div>
-          <p class="guided-side-trust">Clear strategy for first-time buyers and seasoned investors.</p>
+          <p class="guided-side-trust">Built for first-time buyers and lifelong investors — clear numbers, no pressure.</p>
           <div class="guided-side-ctas">
             <button type="button" class="guided-realtor-btn guided-side-cta guided-side-cta-navy" id="guidedNeedRealtorBtn">
               Need a trusted realtor intro?

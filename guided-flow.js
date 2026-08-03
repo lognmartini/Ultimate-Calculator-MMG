@@ -380,11 +380,49 @@
 
     $("propertyAddress")?.addEventListener("change", updatePropertySummary);
     $("lookupAddress")?.addEventListener("click", () => {
+      const note = $("locationNote");
+      const addr = ($("propertyAddress")?.value || "").trim();
+      if (addr.length < 5) {
+        if (note) {
+          note.textContent =
+            "Enter a full street address (or pick from suggestions), or skip and continue with price only.";
+          note.classList.add("guided-note-warn");
+        }
+        $("propertyAddress")?.focus();
+        return;
+      }
+      if (note) {
+        note.textContent = "Looking up property details…";
+        note.classList.remove("guided-note-warn");
+      }
       window.setTimeout(updatePropertySummary, 500);
       window.setTimeout(updatePropertySummary, 1500);
+      window.setTimeout(() => {
+        // Confidence-building fallback if lookup didn't resolve
+        const card = $("propertySummaryCard");
+        const stillEmpty = card?.classList.contains("hidden");
+        if (stillEmpty && note && !note.textContent.includes("Found") && !note.textContent.includes("estimate")) {
+          note.textContent =
+            "We couldn't auto-fill this address. Continue with a purchase price — you can edit taxes & insurance later.";
+        }
+      }, 2800);
     });
     $("clearPropertySummary")?.addEventListener("click", clearPropertySummary);
     $("saveEstimateOptional")?.classList.remove("hidden");
+
+    // Refi goal note on results (when present)
+    document.addEventListener("mmg-wizard-results", () => {
+      const goal = document.body.dataset.refiGoal;
+      const eyebrow = document.querySelector(".guided-results-eyebrow");
+      if (!eyebrow || document.body.dataset.loanGoal !== "refinance") return;
+      const labels = {
+        "lower-payment": "Refinance · lower payment scenario",
+        "cash-out": "Refinance · cash-out scenario",
+        "shorten-term": "Refinance · pay off sooner",
+        "remove-pmi": "Refinance · remove PMI scenario",
+      };
+      if (goal && labels[goal]) eyebrow.textContent = labels[goal];
+    });
 
     paintDownSlider();
     window.setTimeout(paintDownSlider, 400);

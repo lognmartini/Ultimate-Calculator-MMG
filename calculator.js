@@ -2082,22 +2082,52 @@
   function calculate() {
     if (!els.pitiPayment) return;
 
-    const homePrice = Number(els.homePrice?.value || 0);
-    const downPct = Number(els.downPercent?.value || 0);
+    // Edge-case guards — never show NaN / nonsense payments
+    let homePrice = Number(els.homePrice?.value || 0);
+    if (!Number.isFinite(homePrice) || homePrice < 0) homePrice = 0;
+
+    let downPct = Number(els.downPercent?.value || 0);
+    if (!Number.isFinite(downPct)) downPct = 0;
+    downPct = Math.max(0, Math.min(100, downPct));
+
+    let rate = Number(els.interestRate?.value);
+    if (!Number.isFinite(rate) || rate < 0) rate = 0;
+    if (rate > 25) rate = 25;
+
+    let years = Number(els.loanTerm?.value || 30);
+    if (!Number.isFinite(years) || years < 1) years = 30;
+    years = Math.max(1, Math.min(40, Math.round(years)));
+
     const downPayment = Math.round((homePrice * downPct) / 100);
     const loanPrincipal = Math.max(0, homePrice - downPayment);
-    const rate = Number(els.interestRate?.value) || 0;
-    const years = Number(els.loanTerm?.value) || 30;
-    const annualTax = parseCurrency(els.propertyTax?.value);
-    const annualInsurance = parseCurrency(els.homeInsurance?.value);
-    const monthlyHoa = parseCurrency(els.hoa?.value);
-    const pmiAnnualRate = Number(els.pmiRate?.value) || 0;
+    const annualTax = Math.max(0, parseCurrency(els.propertyTax?.value));
+    const annualInsurance = Math.max(0, parseCurrency(els.homeInsurance?.value));
+    const monthlyHoa = Math.max(0, parseCurrency(els.hoa?.value));
+    let pmiAnnualRate = Number(els.pmiRate?.value) || 0;
+    if (!Number.isFinite(pmiAnnualRate) || pmiAnnualRate < 0) pmiAnnualRate = 0;
+
+    if (homePrice < 50000) {
+      els.pitiPayment.textContent = "—";
+      if (els.totalPayment) els.totalPayment.textContent = "—";
+      if (els.piPayment) els.piPayment.textContent = "—";
+      if (els.taxPayment) els.taxPayment.textContent = "—";
+      if (els.insurancePayment) els.insurancePayment.textContent = "—";
+      if (els.loanAmount) els.loanAmount.textContent = "—";
+      if (els.totalInterest) els.totalInterest.textContent = "—";
+      document.dispatchEvent(new CustomEvent("mmg-calculated", { detail: { incomplete: true } }));
+      return;
+    }
 
     const { rows, totalInterest, payment: pi } = buildAmortSchedule(
       loanPrincipal,
       rate,
       years
     );
+
+    if (!Number.isFinite(pi) || !Number.isFinite(totalInterest)) {
+      els.pitiPayment.textContent = "—";
+      return;
+    }
 
     const monthlyTax = annualTax / 12;
     const monthlyInsurance = annualInsurance / 12;
