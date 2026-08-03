@@ -73,7 +73,7 @@
     window.setTimeout(() => {
       el.classList.add("is-out");
       window.setTimeout(() => el.remove(), 320);
-    }, opts.duration || 7000);
+    }, opts.duration || 4000);
   }
 
   /* ---------- Down slider visual fill (0–50 scale; 20% ≈ 40% of track) ---------- */
@@ -128,7 +128,7 @@
       body,
       link: USDA_MAP_URL,
       linkLabel: "Open USDA eligibility map",
-      duration: 12000,
+      duration: 4500,
     });
   }
 
@@ -150,7 +150,7 @@
         body: `${detail.location?.city || "This city"} is often outside USDA rural boundaries. Confirm on the official map before planning on 0% down.`,
         link: USDA_MAP_URL,
         linkLabel: "Open USDA eligibility map",
-        duration: 11000,
+        duration: 4500,
       });
     } else {
       usdaMapNote();
@@ -164,8 +164,10 @@
     const price = Number($("homePrice")?.value || 0);
     const tax = parseCurrency($("propertyTax")?.value);
     const ins = parseCurrency($("homeInsurance")?.value);
-    card.classList.toggle("hidden", addr.length <= 4);
-    if (addr.length <= 4) return;
+    // Only show summary after a real lookup ready state (not just typing)
+    const ready = document.body.dataset.addressReady === "lookup";
+    card.classList.toggle("hidden", !ready || addr.length <= 4);
+    if (!ready || addr.length <= 4) return;
     if ($("propertySummaryAddress")) $("propertySummaryAddress").textContent = addr;
     if ($("propertySummaryPrice")) {
       $("propertySummaryPrice").textContent = price >= 50000 ? formatCurrency(price) : "—";
@@ -187,6 +189,14 @@
     if ($("locationNote")) $("locationNote").textContent = "";
     updatePropertySummary();
     $("socialListingBanner")?.classList.add("hidden");
+    // Reset address gate so sticky Continue stays hidden until re-lookup or skip
+    if (document.body.dataset.addressReady) {
+      delete document.body.dataset.addressReady;
+    }
+    const readyHint = $("guidedAddressReadyHint");
+    if (readyHint) readyHint.hidden = true;
+    $("guidedNationalBanner")?.classList.add("hidden");
+    window.MMG_guided_updateNav?.();
   }
 
   function ensureLeadCardVisibleOnResults() {
@@ -197,6 +207,31 @@
   }
 
   function bindProfileToasts() {
+    function syncFthbVisibility(program) {
+      const fthbRow = $("guidedFthbRow");
+      if (!fthbRow) return;
+      const hide = program === "va" || program === "usda";
+      fthbRow.hidden = hide;
+      fthbRow.classList.toggle("is-muted", hide);
+      fthbRow.setAttribute("aria-hidden", hide ? "true" : "false");
+      if (hide && $("firstTimeBuyer")) $("firstTimeBuyer").checked = false;
+    }
+
+    function syncDownChips(program) {
+      // Show only program-relevant quick amounts to cut noise
+      const map = {
+        conventional: ["3", "5", "10", "20"],
+        fha: ["3.5", "5", "10", "20"],
+        va: ["0", "5", "10", "20"],
+        usda: ["0", "5", "10", "20"],
+      };
+      const allowed = new Set(map[program] || map.conventional);
+      document.querySelectorAll(".guided-down-chips .guided-mini-chip[data-down]").forEach((chip) => {
+        const d = chip.getAttribute("data-down");
+        chip.hidden = !allowed.has(d);
+      });
+    }
+
     $("firstTimeBuyer")?.addEventListener("change", () => {
       if (!$("firstTimeBuyer").checked) return;
       setDownPercent(3);
@@ -212,49 +247,51 @@
       showToast({
         variant: "fthb",
         title: "First-time homebuyer",
-        body: "If you are a first-time homebuyer, many conventional programs allow as little as <strong>3% down</strong> (e.g. HomeReady / Home Possible style options). We’ve set your down payment to <strong>3%</strong>. You can change it anytime. Final eligibility depends on income, credit, occupancy, and underwriting.",
-        duration: 9500,
+        body: "Many conventional programs allow as little as <strong>3% down</strong>. We&rsquo;ve set your down payment to <strong>3%</strong> — change anytime.",
+        duration: 4000,
       });
     });
 
-    $("veteranEligible")?.addEventListener("change", () => {
-      if (!$("veteranEligible").checked) return;
-      showToast({
-        variant: "va",
-        title: "We thank you for your service",
-        body: "VA financing can allow <strong>0% down</strong> for eligible veterans, active duty, and surviving spouses (funding fee and entitlement rules still apply). Select <strong>VA</strong> as the loan type when you’re ready.",
-        duration: 8500,
-      });
-    });
+    // VA / USDA eligibility is declared by picking that loan type (no separate checkboxes on UI).
+    $("veteranEligible")?.addEventListener("change", () => {});
+    $("usdaEligible")?.addEventListener("change", () => {});
 
-    $("usdaEligible")?.addEventListener("change", () => {
-      if (!$("usdaEligible").checked) return;
-      usdaMapNote();
-      const geo = window.MMG_getLastGeocode?.();
-      if (geo) noteUsdaAfterLookup({ location: geo });
-    });
-
-    // Program picker: VA thank-you + USDA map when those loan types are chosen
+    // Program picker: one toast per selection (eligibility is the program itself)
     document.querySelectorAll(".ultimate-program-btn[data-program]").forEach((btn) => {
       btn.addEventListener("click", () => {
         const program = btn.getAttribute("data-program");
         if (program === "va") {
+          const vet = $("veteranEligible");
+          if (vet) vet.checked = true;
+          const usda = $("usdaEligible");
+          if (usda) usda.checked = false;
           showToast({
             variant: "va",
             title: "We thank you for your service",
-            body: "VA loans often allow <strong>0% down</strong> with no monthly PMI for eligible borrowers. Funding fee and entitlement rules still apply — educational estimate only.",
-            duration: 8000,
+            body: "VA loans often allow <strong>0% down</strong> with no monthly PMI for eligible veterans &amp; surviving spouses. Educational estimate only.",
+            duration: 4000,
           });
         }
         if (program === "usda") {
+          const usda = $("usdaEligible");
+          if (usda) usda.checked = true;
+          const vet = $("veteranEligible");
+          if (vet) vet.checked = false;
           usdaMapNote();
           const geo = window.MMG_getLastGeocode?.();
           if (geo) noteUsdaAfterLookup({ location: geo });
         }
+        syncFthbVisibility(program);
+        syncDownChips(program);
         window.setTimeout(paintDownSlider, 30);
         window.setTimeout(paintDownSlider, 200);
       });
     });
+
+    // Initial FTHB + chip state
+    const progNow = $("loanProgram")?.value || "conventional";
+    syncFthbVisibility(progNow);
+    syncDownChips(progNow);
   }
 
   function bindChoices() {
@@ -276,14 +313,19 @@
       selectCard('[data-step-id="has-address"]', $("hasAddressYesBtn"));
       window.MMG_guided_setHasAddress?.("yes");
       document.body.dataset.hasAddress = "yes";
+      // Fresh address path — require lookup or explicit skip
+      window.MMG_guided_setAddressReady?.("");
+      $("guidedNationalBanner")?.classList.add("hidden");
       window.setTimeout(() => window.MMG_guided_next?.(), 160);
     });
     $("hasAddressNoBtn")?.addEventListener("click", () => {
       selectCard('[data-step-id="has-address"]', $("hasAddressNoBtn"));
       window.MMG_guided_setHasAddress?.("no");
       document.body.dataset.hasAddress = "no";
+      window.MMG_guided_setAddressReady?.("skip");
       const field = $("propertyAddress");
       if (field) field.value = "";
+      $("guidedNationalBanner")?.classList.remove("hidden");
       window.setTimeout(() => window.MMG_guided_next?.(), 160);
     });
 
@@ -364,7 +406,7 @@
       ensureLeadCardVisibleOnResults();
       paintDownSlider();
       const step = e?.detail?.step;
-      if (step === 4 || step === 5 || step === 3) {
+      if (step === 3 || step === 4) {
         window.setTimeout(paintDownSlider, 50);
         window.setTimeout(paintDownSlider, 250);
       }
@@ -378,36 +420,64 @@
       paintDownSlider();
     });
 
+    function setAddressCardState(state) {
+      const card = $("guidedAddressCard");
+      if (card) card.setAttribute("data-address-state", state || "idle");
+    }
+
     $("propertyAddress")?.addEventListener("change", updatePropertySummary);
+    $("propertyAddress")?.addEventListener("input", () => {
+      const card = $("guidedAddressCard");
+      if (card?.getAttribute("data-address-state") === "error") {
+        setAddressCardState("idle");
+      }
+    });
     $("lookupAddress")?.addEventListener("click", () => {
       const note = $("locationNote");
       const addr = ($("propertyAddress")?.value || "").trim();
       if (addr.length < 5) {
+        setAddressCardState("error");
         if (note) {
           note.textContent =
-            "Enter a full street address (or pick from suggestions), or skip and continue with price only.";
-          note.classList.add("guided-note-warn");
+            "Type a full street address (or pick a suggestion), or continue with price only.";
+          note.className = "field-note guided-address-status field-note-error guided-note-warn";
         }
         $("propertyAddress")?.focus();
         return;
       }
+      setAddressCardState("loading");
       if (note) {
-        note.textContent = "Looking up property details…";
-        note.classList.remove("guided-note-warn");
+        note.textContent = "Searching for this property…";
+        note.className = "field-note guided-address-status";
       }
       window.setTimeout(updatePropertySummary, 500);
       window.setTimeout(updatePropertySummary, 1500);
       window.setTimeout(() => {
         // Confidence-building fallback if lookup didn't resolve
-        const card = $("propertySummaryCard");
-        const stillEmpty = card?.classList.contains("hidden");
-        if (stillEmpty && note && !note.textContent.includes("Found") && !note.textContent.includes("estimate")) {
+        const summary = $("propertySummaryCard");
+        const stillEmpty = summary?.classList.contains("hidden");
+        const noteText = (note?.textContent || "").toLowerCase();
+        if (
+          stillEmpty &&
+          note &&
+          !noteText.includes("found") &&
+          !noteText.includes("estimate") &&
+          !noteText.includes("couldn’t") &&
+          !noteText.includes("couldn't")
+        ) {
+          setAddressCardState("error");
           note.textContent =
-            "We couldn't auto-fill this address. Continue with a purchase price — you can edit taxes & insurance later.";
+            "We couldn’t auto-fill this address. Continue with price only — you can edit taxes & insurance later.";
+          note.className = "field-note guided-address-status field-note-error";
+        } else if (!stillEmpty) {
+          setAddressCardState("success");
         }
       }, 2800);
     });
-    $("clearPropertySummary")?.addEventListener("click", clearPropertySummary);
+    $("clearPropertySummary")?.addEventListener("click", () => {
+      clearPropertySummary();
+      setAddressCardState("idle");
+    });
     $("saveEstimateOptional")?.classList.remove("hidden");
 
     // Refi goal note on results (when present)

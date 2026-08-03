@@ -1,0 +1,1403 @@
+/**
+ * UX A+ polish — priorities 1–4
+ * Loads last (after styles-layout-fix.css)
+ * 1. Single progress system
+ * 2. Results fold prioritization
+ * 3. Choice-step microcopy
+ * 4. Address recovery primary CTA + states
+ */
+
+/* =========================================================
+   1. PROGRESS — single line + bar (no chip noise)
+   ========================================================= */
+html body.guided-flow.guided-flagship .guided-progress.guided-progress-simple,
+html body.guided-flow .guided-progress.guided-progress-simple {
+  max-width: min(480px, 100%) !important;
+  margin: 0 auto 1.15rem !important;
+  padding: 0.7rem 1rem 0.85rem !important;
+  border-radius: 14px !important;
+  background: rgba(255, 255, 255, 0.88) !important;
+  border: 1px solid rgba(26, 18, 48, 0.08) !important;
+  box-shadow: 0 2px 10px rgba(26, 18, 48, 0.04) !important;
+}
+
+html body.guided-flow .guided-progress-steps-off,
+html body.guided-flow .guided-progress-steps[hidden] {
+  display: none !important;
+}
+
+html body.guided-flow.guided-flagship .guided-progress-simple .wizard-progress-wrap {
+  max-width: none !important;
+  margin: 0 !important;
+  width: 100% !important;
+}
+
+html body.guided-flow.guided-flagship .guided-progress-simple .wizard-progress-meta {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  margin: 0 0 0.45rem !important;
+  gap: 0 !important;
+  text-align: center !important;
+}
+
+html body.guided-flow .guided-progress-line {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: #1a1230;
+  line-height: 1.3;
+}
+
+html body.guided-flow.guided-flagship .guided-progress-simple .wizard-progress-track {
+  height: 6px !important;
+  border-radius: 999px !important;
+  background: rgba(26, 18, 48, 0.08) !important;
+  overflow: hidden !important;
+}
+
+html body.guided-flow.guided-flagship .guided-progress-simple .wizard-progress-fill {
+  height: 100% !important;
+  border-radius: 999px !important;
+  background: linear-gradient(90deg, #c9a227, #e8c84a) !important;
+  transition: width 0.28s ease !important;
+}
+
+/* Results: compact “Complete” progress (P4) — not hidden */
+html body.guided-flow.guided-flagship.wizard-on-results .guided-progress {
+  display: block !important;
+  max-width: min(360px, 100%) !important;
+  margin-bottom: 0.75rem !important;
+  padding: 0.5rem 0.75rem 0.6rem !important;
+  opacity: 0.95;
+}
+
+html body.guided-flow.guided-flagship.wizard-on-results .guided-progress.guided-progress-complete .guided-progress-line {
+  color: #1a5c38 !important;
+}
+
+/* =========================================================
+   2. RESULTS — ruthlessly prioritized fold
+   ========================================================= */
+html body.guided-flow.guided-flagship .guided-advantage-compact {
+  margin: 0.85rem 0 0 !important;
+  padding: 0.75rem 0.5rem 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+
+html body.guided-flow.guided-flagship .guided-advantage-compact .guided-advantage-rates {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 0.5rem !important;
+  max-width: 20rem !important;
+  margin: 0 auto !important;
+}
+
+html body.guided-flow.guided-flagship .guided-advantage-compact .ultimate-live-rate-col {
+  text-align: center !important;
+  padding: 0.45rem 0.35rem !important;
+  border-radius: 10px !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-advantage-compact .ultimate-live-rate-label {
+  display: block !important;
+  font-size: 0.62rem !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  color: rgba(255, 255, 255, 0.55) !important;
+  margin-bottom: 0.15rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-advantage-compact .ultimate-live-rate-value {
+  font-size: 1.05rem !important;
+  color: #fff !important;
+}
+
+html body.guided-flow.guided-flagship .guided-advantage-compact .ultimate-live-rate-col-martini .ultimate-live-rate-value {
+  color: #e8c84a !important;
+}
+
+html body.guided-flow.guided-flagship .guided-advantage-compact .lead-savings-ribbon {
+  margin-top: 0.65rem !important;
+  text-align: center !important;
+}
+
+/* Lead sits tight under edge */
+html body.guided-flow.guided-flagship .guided-lead-primary {
+  margin: 1.1rem 0 0.85rem !important;
+}
+
+/* One secondary CTA */
+html body.guided-flow.guided-flagship .guided-results-ctas-solo {
+  max-width: 20rem !important;
+  margin: 0 auto 1rem !important;
+  gap: 0.4rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-ctas-solo .results-apply-note {
+  text-align: center !important;
+  font-size: 0.72rem !important;
+  color: rgba(255, 255, 255, 0.5) !important;
+  margin: 0 !important;
+}
+
+/* Single details accordion */
+html body.guided-flow.guided-flagship .guided-results-details {
+  margin: 0.5rem 0 0.75rem !important;
+  border-radius: 12px !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  overflow: hidden !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-details-summary {
+  cursor: pointer !important;
+  list-style: none !important;
+  padding: 0.85rem 1rem !important;
+  font-size: 0.88rem !important;
+  font-weight: 600 !important;
+  color: rgba(255, 255, 255, 0.88) !important;
+  text-align: center !important;
+  user-select: none !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-details-summary::-webkit-details-marker {
+  display: none !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-details-summary::after {
+  content: " ▾";
+  opacity: 0.65;
+  font-size: 0.75em;
+}
+
+html body.guided-flow.guided-flagship .guided-results-details[open] .guided-results-details-summary::after {
+  content: " ▴";
+}
+
+html body.guided-flow.guided-flagship .guided-results-details-body {
+  padding: 0 1rem 1.1rem !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-details-body .guided-breakdown,
+html body.guided-flow.guided-flagship .guided-results-details-body .guided-stats {
+  margin-top: 0.85rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-details-section-label,
+html body.guided-flow.guided-flagship .guided-results-details-body .vs-competition-title {
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  color: rgba(232, 200, 74, 0.85) !important;
+  margin: 1rem 0 0.55rem !important;
+  text-align: center !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-details-body .guided-secondary-details {
+  margin-top: 0.65rem !important;
+  border-radius: 10px !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  background: rgba(0, 0, 0, 0.15) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-details-body .guided-secondary-details summary {
+  padding: 0.65rem 0.85rem !important;
+  font-size: 0.82rem !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+  cursor: pointer !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-details-body .guided-hub-collapsed {
+  margin-top: 1rem !important;
+  opacity: 1 !important;
+}
+
+/* =========================================================
+   3. CHOICE MICROCOPY — when Continue is hidden
+   ========================================================= */
+html body.guided-flow .guided-choice-hint {
+  display: block;
+  text-align: center;
+  margin: 0 0 0.65rem;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #1a1230;
+  letter-spacing: 0.01em;
+}
+
+html body.guided-flow .guided-choice-hint[hidden] {
+  display: none !important;
+}
+
+html body.guided-flow.guided-on-choice .guided-step-nav .wizard-nav-inner {
+  justify-content: center !important;
+}
+
+/* Soft pulse on choice cards so the action is obvious */
+html body.guided-flow.guided-on-choice .guided-choice-card {
+  box-shadow: 0 0 0 0 rgba(201, 162, 39, 0.15);
+}
+
+html body.guided-flow.guided-on-choice .guided-choice-card:hover,
+html body.guided-flow.guided-on-choice .guided-choice-card:focus-visible {
+  border-color: rgba(201, 162, 39, 0.55) !important;
+  box-shadow: 0 6px 20px rgba(26, 18, 48, 0.08) !important;
+}
+
+/* =========================================================
+   4. ADDRESS RECOVERY — primary skip + plain-language states
+   ========================================================= */
+html body.guided-flow .guided-address-recovery {
+  margin-top: 1.15rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid rgba(26, 18, 48, 0.08);
+  text-align: center;
+}
+
+html body.guided-flow .guided-skip-price-btn,
+html body.guided-flow #wizardSkipAddress.guided-skip-price-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  max-width: 22rem !important;
+  margin: 0 auto !important;
+  padding: 0.8rem 1.1rem !important;
+  font-size: 0.95rem !important;
+  font-weight: 700 !important;
+  line-height: 1.25 !important;
+  color: #1a1230 !important;
+  background: #fff !important;
+  border: 2px solid #1a1230 !important;
+  border-radius: 12px !important;
+  cursor: pointer !important;
+  text-decoration: none !important;
+  box-shadow: 0 2px 8px rgba(26, 18, 48, 0.06) !important;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.12s ease !important;
+}
+
+html body.guided-flow .guided-skip-price-btn:hover,
+html body.guided-flow #wizardSkipAddress.guided-skip-price-btn:hover {
+  background: #fbf8f0 !important;
+  border-color: #c9a227 !important;
+  color: #1a1230 !important;
+  transform: translateY(-1px);
+}
+
+html body.guided-flow .guided-skip-price-note {
+  margin: 0.65rem auto 0 !important;
+  max-width: 22rem !important;
+  font-size: 0.78rem !important;
+  line-height: 1.45 !important;
+  color: #5c5670 !important;
+  text-align: center !important;
+}
+
+/* Address status states */
+html body.guided-flow .guided-address-status {
+  min-height: 1.25rem;
+  margin-top: 0.55rem !important;
+  font-size: 0.82rem !important;
+  line-height: 1.4 !important;
+}
+
+html body.guided-flow #guidedAddressCard[data-address-state="loading"] .guided-address-status {
+  color: #1a1230 !important;
+  font-weight: 600 !important;
+}
+
+html body.guided-flow #guidedAddressCard[data-address-state="success"] .guided-address-status,
+html body.guided-flow .field-note-success.guided-address-status {
+  color: #1a5c38 !important;
+  font-weight: 600 !important;
+}
+
+html body.guided-flow #guidedAddressCard[data-address-state="error"] .guided-address-status,
+html body.guided-flow .field-note-error.guided-address-status,
+html body.guided-flow .guided-note-warn {
+  color: #8a3b12 !important;
+  font-weight: 600 !important;
+}
+
+/* Emphasize recovery button after a failed lookup */
+html body.guided-flow #guidedAddressCard[data-address-state="error"] .guided-skip-price-btn {
+  border-color: #c9a227 !important;
+  background: #fbf8f0 !important;
+  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.2) !important;
+}
+
+/* =========================================================
+   STEP 4 — unified loan type + down (no double VA/USDA ask)
+   ========================================================= */
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-you-card.guided-loan-unified {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0 !important;
+  padding: 1.2rem 1.15rem 1.25rem !important;
+  max-width: 560px !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-section-label {
+  display: block !important;
+  margin: 0 0 0.7rem !important;
+  font-size: 0.72rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: #6b6580 !important;
+  text-align: center !important;
+}
+
+/* Kill old numbered step chrome if residual CSS remains */
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-step-label,
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-step-num {
+  display: none !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-block-program {
+  padding-bottom: 0.35rem !important;
+  border: 0 !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-block-down {
+  margin-top: 1rem !important;
+  padding: 1.1rem 1rem 1.15rem !important;
+  border-radius: 14px !important;
+  border: 1px solid rgba(201, 162, 39, 0.22) !important;
+  background: linear-gradient(165deg, #fbf8f0 0%, #fff 70%) !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-block + .guided-loan-block-down {
+  border-top: 1px solid rgba(201, 162, 39, 0.22) !important;
+  padding-top: 1.1rem !important;
+}
+
+/* FTHB — single optional flag under programs */
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-fthb-row {
+  margin: 0.85rem auto 0 !important;
+  max-width: 100% !important;
+  transition: opacity 0.2s ease !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-fthb-row.is-muted {
+  opacity: 0.45 !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-fthb-chip {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 0.55rem !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0.7rem 0.85rem !important;
+  border-radius: 12px !important;
+  border: 1.5px solid rgba(26, 18, 48, 0.1) !important;
+  background: #f7f6f3 !important;
+  cursor: pointer !important;
+  text-align: left !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-fthb-chip:has(input:checked) {
+  border-color: rgba(201, 162, 39, 0.6) !important;
+  background: rgba(201, 162, 39, 0.12) !important;
+  box-shadow: 0 0 0 2px rgba(201, 162, 39, 0.12) !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-fthb-chip input {
+  margin-top: 0.15rem !important;
+  flex-shrink: 0 !important;
+  accent-color: #c9a227 !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-fthb-chip .ultimate-profile-chip-text {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.15rem !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-fthb-chip .ultimate-profile-chip-text strong {
+  font-size: 0.88rem !important;
+  font-weight: 700 !important;
+  color: #1a1230 !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-fthb-chip .ultimate-profile-chip-text span {
+  font-size: 0.74rem !important;
+  font-weight: 500 !important;
+  color: #6b6580 !important;
+  line-height: 1.35 !important;
+}
+
+/* Program cards: slightly denser */
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-type-grid {
+  gap: 0.55rem !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-type-grid .ultimate-program-btn {
+  min-height: 68px !important;
+}
+
+/* =========================================================
+   Mobile polish
+   ========================================================= */
+@media (max-width: 560px) {
+  html body.guided-flow .guided-progress-line {
+    font-size: 0.76rem;
+  }
+
+  html body.guided-flow.guided-flagship .guided-progress.guided-progress-simple {
+    padding: 0.6rem 0.75rem 0.75rem !important;
+    margin-bottom: 0.95rem !important;
+  }
+
+  html body.guided-flow .guided-choice-hint {
+    font-size: 0.84rem;
+  }
+
+  html body.guided-flow.guided-flagship .guided-results-details-summary {
+    font-size: 0.84rem !important;
+    padding: 0.75rem 0.85rem !important;
+  }
+
+  html body.guided-flow .guided-skip-price-btn {
+    font-size: 0.9rem !important;
+  }
+}
+
+/* =========================================================
+   P1 — Address step: one primary (lookup) + one secondary (skip)
+   ========================================================= */
+html body.guided-flow.guided-flagship .guided-lookup-primary,
+html body.guided-flow .guided-lookup-primary,
+html body.guided-flow #lookupAddress.guided-lookup-primary {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-height: 52px !important;
+  margin: 0.75rem 0 0 !important;
+  padding: 0.85rem 1.1rem !important;
+  font-size: 0.95rem !important;
+  font-weight: 700 !important;
+  border-radius: 12px !important;
+  background: linear-gradient(135deg, #f0d060 0%, #c9a227 55%, #b8891a 100%) !important;
+  color: #1a1230 !important;
+  border: 0 !important;
+  box-shadow: 0 4px 14px rgba(201, 162, 39, 0.3) !important;
+  cursor: pointer !important;
+}
+
+html body.guided-flow #lookupAddress.guided-lookup-primary:hover {
+  filter: brightness(1.03);
+}
+
+html body.guided-flow .guided-address-or {
+  margin: 0 0 0.55rem !important;
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: #8a8499 !important;
+  text-align: center !important;
+}
+
+html body.guided-flow .guided-address-ready-hint {
+  margin: 0.75rem 0 0 !important;
+  padding: 0.55rem 0.75rem !important;
+  border-radius: 10px !important;
+  background: rgba(26, 92, 56, 0.08) !important;
+  color: #1a5c38 !important;
+  font-size: 0.82rem !important;
+  font-weight: 600 !important;
+  text-align: center !important;
+}
+
+html body.guided-flow .guided-address-ready-hint[hidden] {
+  display: none !important;
+}
+
+html body.guided-flow .guided-national-banner {
+  display: block;
+  max-width: min(480px, 100%);
+  margin: 0 auto 1rem;
+  padding: 0.65rem 0.9rem;
+  border-radius: 12px;
+  background: rgba(201, 162, 39, 0.12);
+  border: 1px solid rgba(201, 162, 39, 0.35);
+  color: #1a1230;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.4;
+}
+
+html body.guided-flow .guided-national-banner.hidden {
+  display: none !important;
+}
+
+html body.guided-flow.guided-on-address-gate .guided-address-recovery {
+  animation: none;
+}
+
+html body.guided-flow .guided-address-recovery.guided-shake,
+html body.guided-flow .guided-shake {
+  animation: guidedShake 0.45s ease;
+}
+
+@keyframes guidedShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+/* =========================================================
+   P2 — Credit step slim
+   ========================================================= */
+html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-credit-card-slim {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1.25rem !important;
+  max-width: 480px !important;
+  margin: 0 auto !important;
+  padding: 1.25rem 1.15rem 1.35rem !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-credit-grid {
+  display: contents !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-score-number,
+html body.guided-flow.guided-flagship [data-step-id="loan-credit"] #creditScoreDisplay {
+  font-size: clamp(2.6rem, 9vw, 3.2rem) !important;
+  text-align: center !important;
+  display: block !important;
+  font-weight: 800 !important;
+  color: #1a1230 !important;
+  letter-spacing: -0.03em !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-score-band {
+  text-align: center !important;
+  margin: 0.35rem auto 0.75rem !important;
+  font-size: 0.82rem !important;
+  color: #6b6580 !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-term-compact {
+  text-align: center !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-term-primary {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 0.45rem !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-term-primary .ultimate-term-btn {
+  min-width: 4.5rem !important;
+  min-height: 44px !important;
+  padding: 0.55rem 0.85rem !important;
+  border-radius: 999px !important;
+  font-weight: 700 !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-term-more {
+  display: inline-block !important;
+  margin: 0.55rem auto 0 !important;
+  padding: 0.35rem 0.6rem !important;
+  background: none !important;
+  border: 0 !important;
+  color: #6b6580 !important;
+  font-size: 0.8rem !important;
+  font-weight: 600 !important;
+  text-decoration: underline !important;
+  text-underline-offset: 2px !important;
+  cursor: pointer !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-rate-slim {
+  margin-top: 0.15rem !important;
+  padding-top: 1rem !important;
+  border-top: 1px solid rgba(26, 18, 48, 0.08) !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-rate-strip-ro {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 0.5rem !important;
+  max-width: 22rem !important;
+  margin: 0 auto !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-rate-strip-col {
+  text-align: center !important;
+  padding: 0.55rem 0.4rem !important;
+  border-radius: 12px !important;
+  background: #f7f6f3 !important;
+  border: 1px solid rgba(26, 18, 48, 0.06) !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-rate-strip-martini {
+  background: linear-gradient(165deg, #fbf8f0, #fff) !important;
+  border-color: rgba(201, 162, 39, 0.35) !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-rate-strip-label {
+  display: block !important;
+  font-size: 0.62rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  color: #8a8499 !important;
+  margin-bottom: 0.15rem !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-rate-strip-value {
+  font-size: 1.15rem !important;
+  font-weight: 800 !important;
+  color: #1a1230 !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-rate-strip-martini .guided-rate-strip-value {
+  color: #9a7b14 !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-rate-advanced {
+  margin-top: 0.75rem !important;
+  border-radius: 10px !important;
+  border: 1px solid rgba(26, 18, 48, 0.08) !important;
+  background: #faf9f7 !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-rate-advanced summary {
+  padding: 0.65rem 0.85rem !important;
+  font-size: 0.82rem !important;
+  font-weight: 600 !important;
+  color: #5c5670 !important;
+  cursor: pointer !important;
+  text-align: center !important;
+  list-style: none !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-rate-advanced summary::-webkit-details-marker {
+  display: none !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-rate-advanced .guided-rate-hero {
+  padding: 0 0.85rem 0.85rem !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-credit-next-hint {
+  margin-top: 0.85rem !important;
+  text-align: center !important;
+}
+
+/* =========================================================
+   P4 — Results: digest → prove → capture
+   ========================================================= */
+html body.guided-flow.guided-flagship .guided-breakdown-visible {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.35rem !important;
+  list-style: none !important;
+  margin: 0.85rem 0 0 !important;
+  padding: 0.85rem 0.9rem !important;
+  border-radius: 12px !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  opacity: 1 !important;
+}
+
+html body.guided-flow.guided-flagship .guided-breakdown-visible li {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: baseline !important;
+  gap: 0.75rem !important;
+  font-size: 0.88rem !important;
+  color: rgba(255, 255, 255, 0.78) !important;
+  padding: 0.15rem 0 !important;
+}
+
+html body.guided-flow.guided-flagship .guided-breakdown-visible li strong {
+  color: #fff !important;
+  font-weight: 700 !important;
+  font-variant-numeric: tabular-nums !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-ordered .guided-lead-primary {
+  margin-top: 1.15rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-details-block {
+  margin-top: 1rem !important;
+  padding: 0.85rem 0.75rem !important;
+  border-radius: 12px !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  background: rgba(0, 0, 0, 0.12) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-details-block .guided-details-section-label {
+  margin-top: 0 !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-details-body .guided-stats {
+  margin-top: 0.5rem !important;
+}
+
+/* Hide national banner when not relevant (results) */
+html body.guided-flow.guided-flagship.wizard-on-results .guided-national-banner {
+  display: none !important;
+}
+
+/* =========================================================
+   R1 — Step 4 slim: program primary, down in disclosure
+   ========================================================= */
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-slim {
+  max-width: 520px !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-down-summary {
+  margin: 1rem auto 0 !important;
+  padding: 0.85rem 1rem !important;
+  border-radius: 12px !important;
+  background: linear-gradient(165deg, #fbf8f0 0%, #fff 70%) !important;
+  border: 1px solid rgba(201, 162, 39, 0.28) !important;
+  text-align: center !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-down-summary-label {
+  display: block !important;
+  font-size: 0.68rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: #6b6580 !important;
+  margin-bottom: 0.25rem !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-down-summary-value,
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] #downDisplay {
+  display: block !important;
+  font-size: clamp(1.35rem, 4vw, 1.65rem) !important;
+  font-weight: 800 !important;
+  color: #1a1230 !important;
+  letter-spacing: -0.02em !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-down-summary .guided-down-hero-lead {
+  margin: 0.3rem 0 0 !important;
+  font-size: 0.76rem !important;
+  color: #8a8499 !important;
+}
+
+/* Down payment adjust — always open (not a disclosure) */
+html body.guided-flow .guided-down-adjust,
+html body.guided-flow .guided-down-adjust-open {
+  display: block !important;
+  margin-top: 0.85rem !important;
+  border-radius: 12px !important;
+  border: 1px solid rgba(26, 18, 48, 0.08) !important;
+  background: #faf9f7 !important;
+  overflow: hidden !important;
+}
+
+html body.guided-flow .guided-down-adjust-summary {
+  cursor: default !important;
+  list-style: none !important;
+  padding: 0.75rem 1rem 0.35rem !important;
+  font-size: 0.72rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: #6b6580 !important;
+  text-align: center !important;
+  user-select: none !important;
+  margin: 0 !important;
+}
+
+html body.guided-flow .guided-down-adjust-summary::after,
+html body.guided-flow .guided-down-adjust-summary::-webkit-details-marker {
+  display: none !important;
+  content: none !important;
+}
+
+html body.guided-flow .guided-down-adjust-body {
+  display: block !important;
+  padding: 0 1rem 1.1rem !important;
+  border-top: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+}
+
+/* =========================================================
+   R2 — Deferred live payment amount
+   ========================================================= */
+html body.guided-flow .wizard-live-preview-deferred .wizard-live-preview-amount,
+html body.guided-flow .wizard-live-preview-deferred #wizardLivePayment {
+  opacity: 0.55 !important;
+  letter-spacing: 0.08em !important;
+}
+
+html body.guided-flow .wizard-live-preview-deferred .wizard-live-preview-label::after {
+  content: none;
+}
+
+/* =========================================================
+   R4 — Mobile: collapse advisor CTAs until results
+   ========================================================= */
+@media (max-width: 1099px) {
+  html body.guided-flow.guided-advisor-collapsed .guided-side-ctas,
+  html body.guided-flow.guided-advisor-collapsed #guidedSideCtas {
+    display: none !important;
+  }
+
+  html body.guided-flow.guided-advisor-collapsed .guided-side-trust {
+    display: none !important;
+  }
+
+  html body.guided-flow.guided-advisor-collapsed .guided-side-advisor {
+    padding: 0.75rem 0.85rem !important;
+  }
+
+  html body.guided-flow.guided-advisor-collapsed .guided-side-identity {
+    margin-bottom: 0 !important;
+  }
+
+  /* Soften live card emphasis mid-flow on mobile */
+  html body.guided-flow.guided-advisor-collapsed .guided-live-rail {
+    opacity: 0.92;
+  }
+}
+
+/* On results, restore full advisor */
+html body.guided-flow.wizard-on-results .guided-side-ctas {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.5rem !important;
+}
+
+/* =========================================================
+   R5 — Soften header Apply until results
+   ========================================================= */
+html body.guided-flow.guided-pre-results .guided-header-apply,
+html body.guided-flow.guided-pre-results .guided-header-apply.guided-header-apply-soft {
+  background: transparent !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.45) !important;
+  color: #fff !important;
+  box-shadow: none !important;
+  font-weight: 600 !important;
+  opacity: 0.88 !important;
+  padding: 0.45rem 0.75rem !important;
+  font-size: 0.78rem !important;
+}
+
+html body.guided-flow.guided-pre-results .guided-header-apply:hover {
+  opacity: 1 !important;
+  border-color: rgba(232, 200, 74, 0.7) !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+html body.guided-flow.guided-pre-results .guided-header-apply .btn-apply-arrow {
+  opacity: 0.7 !important;
+}
+
+/* Full Apply strength on results */
+html body.guided-flow.wizard-on-results .guided-header-apply {
+  opacity: 1 !important;
+  background: linear-gradient(135deg, #f0d060, #c9a227) !important;
+  border: 0 !important;
+  color: #1a1230 !important;
+  box-shadow: 0 2px 10px rgba(201, 162, 39, 0.35) !important;
+  font-weight: 700 !important;
+}
+
+@media (max-width: 560px) {
+  /* On small phones mid-flow, keep Apply as text-ish so it doesn't steal focus */
+  html body.guided-flow.guided-pre-results .guided-header-apply {
+    padding: 0.4rem 0.55rem !important;
+    font-size: 0.72rem !important;
+  }
+}
+
+/* =========================================================
+   R6 — Lifetime savings line under rate strip
+   ========================================================= */
+html body.guided-flow.guided-flagship .guided-lifetime-line {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: baseline !important;
+  justify-content: center !important;
+  gap: 0.4rem 0.65rem !important;
+  margin: 0.75rem auto 0 !important;
+  padding: 0.55rem 0.85rem !important;
+  max-width: 22rem !important;
+  border-radius: 10px !important;
+  background: rgba(201, 162, 39, 0.12) !important;
+  border: 1px solid rgba(201, 162, 39, 0.28) !important;
+  text-align: center !important;
+}
+
+html body.guided-flow.guided-flagship .guided-lifetime-line.hidden {
+  display: none !important;
+}
+
+html body.guided-flow.guided-flagship .guided-lifetime-label {
+  font-size: 0.72rem !important;
+  font-weight: 600 !important;
+  color: rgba(255, 255, 255, 0.65) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-lifetime-value {
+  font-size: 1rem !important;
+  font-weight: 800 !important;
+  color: #e8c84a !important;
+  font-variant-numeric: tabular-nums !important;
+}
+
+/* =========================================================
+   A+ FINAL POLISH
+   ========================================================= */
+
+/* Price validation */
+html body.guided-flow .guided-price-error {
+  margin: 0.65rem 0 0 !important;
+  padding: 0.55rem 0.75rem !important;
+  border-radius: 10px !important;
+  background: rgba(180, 60, 30, 0.08) !important;
+  border: 1px solid rgba(180, 60, 30, 0.28) !important;
+  color: #8a3b12 !important;
+  font-size: 0.82rem !important;
+  font-weight: 600 !important;
+  text-align: center !important;
+}
+
+html body.guided-flow .guided-price-error.hidden {
+  display: none !important;
+}
+
+html body.guided-flow .input-error-flash {
+  outline: 2px solid #c45c2a !important;
+  outline-offset: 2px !important;
+}
+
+/* FTHB fully hidden for VA/USDA */
+html body.guided-flow #guidedFthbRow[hidden] {
+  display: none !important;
+}
+
+/* Mobile: hide entire live rail until results (no dead "—" block) */
+@media (max-width: 1099px) {
+  html body.guided-flow.guided-advisor-collapsed .guided-live-rail,
+  html body.guided-flow.guided-pre-results .guided-live-rail {
+    display: none !important;
+  }
+
+  html body.guided-flow.wizard-on-results .guided-live-rail {
+    display: flex !important;
+  }
+}
+
+/* Sticky Apply bar: only after results */
+html body.guided-flow.guided-pre-results .sticky-cta-logan5,
+html body.guided-flow.guided-pre-results .guided-sticky-apply-late {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+html body.guided-flow.wizard-on-results .sticky-cta-logan5.guided-sticky-apply-late {
+  display: block !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px)) !important;
+}
+
+/* Results Back bar lighter so lead owns attention */
+html body.guided-flow.wizard-on-results .guided-step-nav .btn-wizard-back {
+  opacity: 0.85 !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* Program chips denser when fewer shown */
+html body.guided-flow .guided-down-chips .guided-mini-chip[hidden] {
+  display: none !important;
+}
+
+html body.guided-flow .guided-down-chips {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 0.4rem !important;
+}
+
+html body.guided-flow .guided-down-chips .guided-mini-chip {
+  min-height: 40px !important;
+  min-width: 3.4rem !important;
+  padding: 0.45rem 0.7rem !important;
+  font-weight: 700 !important;
+}
+
+/* Choice cards: slightly larger tap targets mobile */
+@media (max-width: 560px) {
+  html body.guided-flow.guided-flagship .guided-choice-card {
+    min-height: 72px !important;
+    padding: 1rem 0.9rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-loan-type-grid .ultimate-program-btn {
+    min-height: 68px !important;
+  }
+
+  html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-term-primary .ultimate-term-btn {
+    min-height: 46px !important;
+    min-width: 4.75rem !important;
+  }
+}
+
+/* Progress always crisp */
+html body.guided-flow .guided-progress-line {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+/* Lifetime / savings proof line always readable */
+html body.guided-flow.guided-flagship .guided-lifetime-line:not(.hidden) {
+  animation: guidedProofIn 0.35s ease;
+}
+
+@keyframes guidedProofIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* National banner only when relevant (price+ after skip) */
+html body.guided-flow .guided-national-banner:not(.hidden) {
+  animation: guidedProofIn 0.3s ease;
+}
+
+/* Address lookup primary disabled state */
+html body.guided-flow #lookupAddress.guided-lookup-primary:disabled {
+  opacity: 0.7 !important;
+  cursor: wait !important;
+  filter: saturate(0.85);
+}
+
+/* Results card: tighter spacing for digest → prove → capture */
+html body.guided-flow.guided-flagship .guided-results-ordered .guided-results-hero {
+  margin-bottom: 0.25rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-ordered .guided-advantage-compact {
+  margin-top: 0.5rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-ordered .guided-breakdown-visible {
+  margin-top: 0.75rem !important;
+}
+
+/* Ensure Continue sticky never under-covered on iOS */
+html body.guided-flow.guided-flagship .guided-step-nav {
+  padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px)) !important;
+}
+
+/* Soft header Apply: also hide arrow noise mid-flow on tiny screens */
+@media (max-width: 400px) {
+  html body.guided-flow.guided-pre-results .guided-header-apply .btn-apply-arrow {
+    display: none !important;
+  }
+}
+
+/* =========================================================
+   Results: only Back button, static at very bottom
+   ========================================================= */
+html body.guided-flow.guided-flagship.wizard-on-results .guided-step-nav,
+html body.guided-flow.guided-flagship.guided-results-back-only .guided-step-nav,
+html body.guided-flow.guided-flagship.wizard-on-results nav.guided-step-nav.wizard-nav {
+  position: static !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  width: 100% !important;
+  max-width: min(600px, 100%) !important;
+  margin: 1.75rem auto 0.5rem !important;
+  padding: 0.5rem 0.75rem 1.25rem !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  z-index: auto !important;
+}
+
+html body.guided-flow.guided-flagship.wizard-on-results .guided-step-nav .wizard-nav-inner,
+html body.guided-flow.guided-flagship.wizard-on-results .guided-step-nav .wizard-nav-inner.wizard-nav-back-only {
+  display: flex !important;
+  justify-content: center !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
+  gap: 0 !important;
+}
+
+html body.guided-flow.guided-flagship.wizard-on-results .guided-step-nav .btn-wizard-next {
+  display: none !important;
+}
+
+html body.guided-flow.guided-flagship.wizard-on-results .guided-step-nav .btn-wizard-back {
+  display: inline-flex !important;
+  flex: 0 0 auto !important;
+  min-width: 8.5rem !important;
+  min-height: 48px !important;
+  margin: 0 auto !important;
+  opacity: 1 !important;
+  background: transparent !important;
+  border: 1.5px solid rgba(26, 18, 48, 0.18) !important;
+  color: #1a1230 !important;
+  box-shadow: none !important;
+  font-weight: 600 !important;
+}
+
+html body.guided-flow.guided-flagship.wizard-on-results .guided-step-nav .btn-wizard-back:hover {
+  border-color: #c9a227 !important;
+  background: #fbf8f0 !important;
+}
+
+/* No sticky Apply bar crowding the results bottom Back */
+html body.guided-flow.wizard-on-results .sticky-cta-logan5,
+html body.guided-flow.wizard-on-results .guided-sticky-apply-late {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* Less bottom padding on results (no fixed nav) */
+html body.guided-flow.guided-flagship.wizard-on-results .guided-main {
+  padding-bottom: 2rem !important;
+}
+
+html body.guided-flow.guided-flagship.wizard-on-results footer.guided-footer {
+  padding-bottom: 2rem !important;
+}
+
+/* Address auto-advance: subtle success pulse */
+html body.guided-flow #guidedAddressCard[data-address-state="success"] {
+  transition: box-shadow 0.25s ease, border-color 0.25s ease;
+  border-color: rgba(26, 92, 56, 0.25);
+  box-shadow: 0 0 0 3px rgba(26, 92, 56, 0.08);
+}
+
+/* =========================================================
+   Combined price + loan step
+   ========================================================= */
+html body.guided-flow.guided-flagship [data-step-id="price-loan"] .guided-price-loan-panel {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1rem !important;
+  max-width: 560px !important;
+  margin: 0 auto !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="price-loan"] .guided-price-loan-price {
+  max-width: 100% !important;
+  margin: 0 auto !important;
+  padding: 1.15rem 1.15rem 1.2rem !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="price-loan"] .guided-price-loan-loan {
+  max-width: 100% !important;
+  margin: 0 auto !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="price-loan"] .guided-loan-section-label {
+  margin-bottom: 0.75rem !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="price-loan"] .guided-price-hero {
+  margin-top: 0.15rem !important;
+}
+
+/* Keep CSS that targeted loan-you working on combined step */
+html body.guided-flow.guided-flagship [data-step-id="price-loan"] .guided-loan-type-grid,
+html body.guided-flow.guided-flagship [data-step-id="price-loan"] .guided-loan-you-programs {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 0.55rem !important;
+}
+
+/* =========================================================
+   P1–P5: Staging, a11y, contrast, lead labels
+   ========================================================= */
+
+/* P1 — price then loan staging */
+html body.guided-flow .guided-price-to-loan {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.4rem !important;
+  width: 100% !important;
+  max-width: 22rem !important;
+  margin: 1.1rem auto 0 !important;
+  min-height: 52px !important;
+  font-weight: 700 !important;
+}
+
+html body.guided-flow .guided-price-to-loan[hidden] {
+  display: none !important;
+}
+
+html body.guided-flow .guided-loan-stage-hidden,
+html body.guided-flow #guidedLoanStageCard[hidden] {
+  display: none !important;
+}
+
+html body.guided-flow #guidedLoanStageCard:not([hidden]) {
+  animation: guidedProofIn 0.35s ease;
+}
+
+html body.guided-flow.guided-on-price-stage .guided-step-nav .btn-wizard-next {
+  /* sticky continue hidden via JS; hint shows instead */
+}
+
+/* P2 — global focus-visible (high confidence) */
+html body.guided-flow.guided-flagship :focus {
+  outline: none;
+}
+html body.guided-flow.guided-flagship :focus-visible {
+  outline: 2px solid #c9a227 !important;
+  outline-offset: 2px !important;
+  border-radius: 4px;
+}
+html body.guided-flow.guided-flagship .guided-choice-card:focus-visible,
+html body.guided-flow.guided-flagship .ultimate-program-btn:focus-visible,
+html body.guided-flow.guided-flagship .ultimate-term-btn:focus-visible,
+html body.guided-flow.guided-flagship .guided-mini-chip:focus-visible,
+html body.guided-flow.guided-flagship .btn-wizard-next:focus-visible,
+html body.guided-flow.guided-flagship .btn-wizard-back:focus-visible {
+  outline: 3px solid #c9a227 !important;
+  outline-offset: 3px !important;
+}
+
+/* P3 — contrast: soft Apply more readable */
+html body.guided-flow.guided-pre-results .guided-header-apply,
+html body.guided-flow.guided-pre-results .guided-header-apply.guided-header-apply-soft {
+  background: rgba(255, 255, 255, 0.14) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.85) !important;
+  color: #fff !important;
+  opacity: 1 !important;
+  font-weight: 700 !important;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+}
+
+/* P3 — results muted text stronger (AA-ish) */
+html body.guided-flow.guided-flagship .guided-results-compliance {
+  color: rgba(255, 255, 255, 0.72) !important;
+}
+html body.guided-flow.guided-flagship .guided-breakdown-visible li {
+  color: rgba(255, 255, 255, 0.88) !important;
+}
+html body.guided-flow.guided-flagship .guided-lifetime-label {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+html body.guided-flow.guided-flagship .guided-results-details-summary {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+html body.guided-flow.guided-flagship .results-apply-note {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* P3 — selected states not color-only */
+html body.guided-flow .ultimate-program-btn .guided-selected-mark {
+  display: none;
+  margin-top: 0.2rem;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+html body.guided-flow .ultimate-program-btn.active .guided-selected-mark {
+  display: block;
+  color: #1a1230;
+}
+html body.guided-flow .ultimate-program-btn.active {
+  box-shadow: 0 0 0 2px #1a1230, 0 4px 16px rgba(201, 162, 39, 0.35) !important;
+}
+html body.guided-flow .ultimate-term-btn.active,
+html body.guided-flow .guided-mini-chip.is-selected,
+html body.guided-flow .guided-choice-card.is-selected {
+  box-shadow: inset 0 0 0 2px #1a1230 !important;
+  font-weight: 800 !important;
+}
+
+/* P5 — lead form labels */
+html body.guided-flow .guided-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-bottom: 0.65rem;
+}
+html body.guided-flow .guided-field-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.02em;
+}
+html body.guided-flow .guided-optional-tag {
+  font-weight: 500;
+  opacity: 0.75;
+}
+html body.guided-flow .guided-lead-form .guided-field input {
+  width: 100%;
+}
+html body.guided-flow .save-estimate-panel.hidden,
+html body.guided-flow .save-estimate-panel[hidden] {
+  display: none !important;
+}
+
+/* Desktop rail honesty */
+html body.guided-flow .wizard-live-preview-deferred .wizard-live-preview-label {
+  font-size: 0.72rem;
+}
+html body.guided-flow .wizard-live-preview-deferred .wizard-live-preview-amount::before {
+  content: none;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html body.guided-flow #guidedLoanStageCard:not([hidden]),
+  html body.guided-flow .guided-lifetime-line:not(.hidden),
+  html body.guided-flow .guided-national-banner:not(.hidden) {
+    animation: none !important;
+  }
+}
+
+/* sr-only utility if missing */
+html body.guided-flow .sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Address option active */
+html body.guided-flow .address-suggestions li.active,
+html body.guided-flow #addressSuggestions li.active {
+  background: rgba(201, 162, 39, 0.2) !important;
+  outline: 1px solid #c9a227;
+}

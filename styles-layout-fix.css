@@ -1,0 +1,1039 @@
+/**
+ * LAYOUT FIX — desktop + mobile
+ * Pure presentation. No logic/flow changes.
+ * Loads last so it wins over older cascade rules.
+ */
+
+/* =========================================================
+   SHARED GRID TOKENS
+   ========================================================= */
+html body.guided-flow.guided-flagship {
+  --lx-content: min(680px, 100%);
+  --lx-card: min(480px, 100%);
+  --lx-page: min(1040px, 100%);
+  --lx-rail: 268px;
+  --lx-gutter: clamp(0.75rem, 3vw, 1.5rem);
+  --lx-space: clamp(1rem, 2.5vw, 1.5rem);
+  --lx-radius: 16px;
+  --lx-navy: #1a1230;
+  --lx-gold: #c9a227;
+  --lx-cream: #f4f2ef;
+  overflow-x: hidden !important;
+  background: var(--lx-cream) !important;
+}
+
+html body.guided-flow.guided-flagship *,
+html body.guided-flow.guided-flagship *::before,
+html body.guided-flow.guided-flagship *::after {
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   DESKTOP — centered main column + balanced rail
+   ========================================================= */
+html body.guided-flow.guided-flagship .wizard-main.guided-main,
+html body.guided-flow.guided-flagship .guided-main {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
+  padding: var(--lx-space) var(--lx-gutter) 2.75rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-layout {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  max-width: var(--lx-page) !important;
+  margin: 0 auto !important;
+  gap: 1.25rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-layout-center {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  width: 100% !important;
+  max-width: var(--lx-content) !important;
+  margin: 0 auto !important;
+  min-width: 0 !important;
+  gap: 0 !important;
+}
+
+/* Every step / card / progress — centered stack */
+html body.guided-flow.guided-flagship .wizard-step,
+html body.guided-flow.guided-flagship .guided-step-panel,
+html body.guided-flow.guided-flagship .guided-step-panel-wide,
+html body.guided-flow.guided-flagship .guided-progress,
+html body.guided-flow.guided-flagship .guided-card,
+html body.guided-flow.guided-flagship .wizard-card.guided-card,
+html body.guided-flow.guided-flagship .guided-results-card,
+html body.guided-flow.guided-flagship .guided-choice-grid,
+html body.guided-flow.guided-flagship .guided-step-nav,
+html body.guided-flow.guided-flagship nav.guided-step-nav {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+html body.guided-flow.guided-flagship .guided-step-panel,
+html body.guided-flow.guided-flagship .guided-step-panel-wide {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  max-width: var(--lx-content) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-step-intro {
+  width: 100% !important;
+  max-width: 28rem !important;
+  margin: 0 auto var(--lx-space) !important;
+  text-align: center !important;
+  padding: 0 0.25rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-progress {
+  max-width: var(--lx-content) !important;
+  margin: 0 auto var(--lx-space) !important;
+  padding: 0.85rem 0.75rem 0.95rem !important;
+}
+
+/* Address / price cards narrower + centered */
+html body.guided-flow.guided-flagship .guided-card-narrow,
+html body.guided-flow.guided-flagship [data-step-id="address"] .guided-card,
+html body.guided-flow.guided-flagship [data-step-id="price"], [data-step-id="price-loan"] .guided-card {
+  max-width: var(--lx-card) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-card,
+html body.guided-flow.guided-flagship .wizard-card.guided-card {
+  padding: 1.35rem 1.25rem 1.4rem !important;
+  border-radius: var(--lx-radius) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-choice-grid {
+  max-width: min(560px, 100%) !important;
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 0.85rem !important;
+}
+
+@media (min-width: 560px) {
+  html body.guided-flow.guided-flagship .guided-choice-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 1rem !important;
+  }
+}
+
+/* Desktop wide: content + rail side by side, as a unit */
+@media (min-width: 1100px) {
+  html body.guided-flow.guided-flagship .guided-layout {
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    gap: 1.5rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-layout-center {
+    flex: 0 1 680px !important;
+    max-width: 680px !important;
+    margin: 0 !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-live-rail {
+    flex: 0 0 var(--lx-rail) !important;
+    width: var(--lx-rail) !important;
+    max-width: var(--lx-rail) !important;
+    position: sticky !important;
+    top: 5.5rem !important;
+    margin: 0 !important;
+    align-self: flex-start !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-progress {
+    max-width: 100% !important;
+  }
+}
+
+/* Side rail cards — same visual language as main cards */
+html body.guided-flow.guided-flagship .guided-live-rail {
+  width: 100% !important;
+  max-width: var(--lx-content) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.9rem !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+html body.guided-flow.guided-flagship .guided-live-card,
+html body.guided-flow.guided-flagship .guided-side-advisor {
+  border-radius: var(--lx-radius) !important;
+  box-shadow: 0 8px 28px rgba(26, 18, 48, 0.07) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-side-advisor {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.75rem !important;
+  padding: 1.15rem 1.05rem !important;
+  background: #fff !important;
+  border: 1px solid rgba(26, 18, 48, 0.08) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-side-ctas {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.5rem !important;
+  width: 100% !important;
+}
+
+html body.guided-flow.guided-flagship .guided-side-cta {
+  width: 100% !important;
+}
+
+/* In-flow nav under content — not floating */
+html body.guided-flow.guided-flagship .guided-step-nav,
+html body.guided-flow.guided-flagship nav.guided-step-nav {
+  position: static !important;
+  width: 100% !important;
+  max-width: var(--lx-content) !important;
+  margin: 1.35rem auto 0.25rem !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+html body.guided-flow.guided-flagship .guided-step-nav .wizard-nav-inner {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 0.7rem !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+}
+
+html body.guided-flow.guided-flagship .guided-step-nav .btn-wizard-back {
+  flex: 0 0 auto !important;
+  min-width: 7rem !important;
+  min-height: 52px !important;
+}
+
+html body.guided-flow.guided-flagship .guided-step-nav .btn-wizard-next {
+  flex: 1 1 auto !important;
+  max-width: 18rem !important;
+  min-height: 52px !important;
+}
+
+html body.guided-flow.guided-flagship .guided-step-nav .wizard-nav-inner.wizard-nav-solo {
+  max-width: 20rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-step-nav .wizard-nav-inner.wizard-nav-solo .btn-wizard-next {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Loan / credit 2-col on tablet+ */
+@media (min-width: 720px) {
+  html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-split,
+  html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-credit-grid {
+    display: grid !important;
+    grid-template-columns: 1.05fr 0.95fr !important;
+    gap: 1.25rem !important;
+    width: 100% !important;
+    align-items: stretch !important;
+  }
+}
+
+/* Results card centered */
+html body.guided-flow.guided-flagship .guided-results-card {
+  max-width: min(600px, 100%) !important;
+  margin: 0 auto !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-ctas,
+html body.guided-flow.guided-flagship .guided-lead-primary {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-ctas {
+  max-width: 22rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.6rem !important;
+}
+
+/* Header / footer align to page grid */
+html body.guided-flow.guided-flagship .guided-header-inner {
+  max-width: var(--lx-page) !important;
+  margin: 0 auto !important;
+  padding-left: var(--lx-gutter) !important;
+  padding-right: var(--lx-gutter) !important;
+}
+
+html body.guided-flow.guided-flagship footer.guided-footer {
+  padding-left: var(--lx-gutter) !important;
+  padding-right: var(--lx-gutter) !important;
+  padding-top: 2rem !important;
+  padding-bottom: 2.25rem !important;
+}
+
+/* =========================================================
+   MOBILE — clean stack, tap targets, no cutoff
+   ========================================================= */
+@media (max-width: 1099px) {
+  html body.guided-flow.guided-flagship .guided-live-rail {
+    max-width: var(--lx-content) !important;
+  }
+}
+
+@media (max-width: 719px) {
+  html body.guided-flow.guided-flagship {
+    --lx-gutter: 0.85rem;
+    --lx-space: 1.1rem;
+  }
+
+  html body.guided-flow.guided-flagship .guided-main {
+    padding: 0.85rem var(--lx-gutter) 2.25rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-layout {
+    gap: 1rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-step-intro {
+    margin-bottom: 1.1rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-progress {
+    margin-bottom: 1.1rem !important;
+    padding: 0.7rem 0.45rem 0.8rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-progress-steps {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 0.25rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-progress-step {
+    min-width: 0 !important;
+    max-width: 3.6rem !important;
+    flex: 1 1 auto !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-progress-label {
+    font-size: 0.52rem !important;
+    line-height: 1.15 !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-card,
+  html body.guided-flow.guided-flagship .wizard-card.guided-card {
+    padding: 1.15rem 0.95rem 1.2rem !important;
+    width: 100% !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-title {
+    font-size: clamp(1.35rem, 5.8vw, 1.6rem) !important;
+    padding: 0 0.15rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-lead {
+    font-size: 0.9rem !important;
+    padding: 0 0.15rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-choice-card {
+    min-height: 0 !important;
+    padding: 1rem 0.9rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-choice-card strong {
+    font-size: 0.95rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-choice-card span:not(.guided-choice-icon) {
+    font-size: 0.78rem !important;
+    line-height: 1.35 !important;
+  }
+
+  /* Buttons — easy tap */
+  html body.guided-flow.guided-flagship .btn-lookup,
+  html body.guided-flow.guided-flagship .btn-wizard-next,
+  html body.guided-flow.guided-flagship .btn-wizard-back,
+  html body.guided-flow.guided-flagship .guided-lead-submit,
+  html body.guided-flow.guided-flagship .guided-side-cta {
+    min-height: 48px !important;
+    padding: 0.7rem 1rem !important;
+    white-space: normal !important;
+  }
+
+  html body.guided-flow.guided-flagship .btn-lookup,
+  html body.guided-flow.guided-flagship [data-step-id="address"] .btn-lookup {
+    width: 100% !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-step-nav .btn-wizard-back {
+    min-width: 5.5rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-step-nav .btn-wizard-next {
+    max-width: none !important;
+    flex: 1 1 auto !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-step-nav {
+    margin-top: 1.15rem !important;
+  }
+
+  /* Single column loan/credit */
+  html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-split,
+  html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-credit-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.1rem !important;
+  }
+
+  /* Side rail under content */
+  html body.guided-flow.guided-flagship .guided-live-rail {
+    max-width: 100% !important;
+    margin-top: 0.25rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-side-advisor {
+    display: flex !important;
+  }
+
+  /* Results */
+  html body.guided-flow.guided-flagship .guided-results-card {
+    max-width: 100% !important;
+    padding: 1.3rem 0.95rem 1.45rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-results-card #pitiPayment {
+    font-size: clamp(2.05rem, 10vw, 2.75rem) !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-results-ctas {
+    max-width: 100% !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-lead-primary {
+    padding: 1.15rem 0.95rem 1.1rem !important;
+  }
+
+  /* Header compact */
+  html body.guided-flow.guided-flagship .guided-header-inner {
+    gap: 0.4rem !important;
+    padding-left: 0.65rem !important;
+    padding-right: 0.65rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-logo-link {
+    max-width: min(40vw, 140px) !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-header-logo {
+    max-height: 30px !important;
+    width: auto !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-header-phone {
+    font-size: 0.68rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-header-apply {
+    min-height: 36px !important;
+    font-size: 0.65rem !important;
+    padding: 0.4rem 0.65rem !important;
+  }
+
+  /* Prevent text cut-off */
+  html body.guided-flow.guided-flagship .guided-title,
+  html body.guided-flow.guided-flagship .guided-lead,
+  html body.guided-flow.guided-flagship .guided-choice-card,
+  html body.guided-flow.guided-flagship .field-note,
+  html body.guided-flow.guided-flagship .save-estimate-title,
+  html body.guided-flow.guided-flagship .save-estimate-lead,
+  html body.guided-flow.guided-flagship .guided-footer-line {
+    overflow-wrap: anywhere !important;
+    word-break: break-word !important;
+  }
+
+  html body.guided-flow.guided-flagship.wizard-on-results .guided-live-rail .wizard-live-preview {
+    display: none !important;
+  }
+}
+
+/* Tablet: payment + Logan side-by-side under main */
+@media (min-width: 720px) and (max-width: 1099px) {
+  html body.guided-flow.guided-flagship .guided-live-rail {
+    display: grid !important;
+    grid-template-columns: 1.1fr 0.9fr !important;
+    gap: 0.9rem !important;
+    align-items: start !important;
+    max-width: var(--lx-content) !important;
+  }
+}
+
+/* Small phones */
+@media (max-width: 390px) {
+  html body.guided-flow.guided-flagship .guided-progress-step {
+    max-width: 3rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-progress-label {
+    font-size: 0.48rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-property-summary-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-header-phone {
+    font-size: 0.6rem !important;
+  }
+}
+
+/* Safe areas (notched iPhones) */
+@supports (padding: max(0px)) {
+  html body.guided-flow.guided-flagship .guided-main {
+    padding-left: max(var(--lx-gutter), env(safe-area-inset-left)) !important;
+    padding-right: max(var(--lx-gutter), env(safe-area-inset-right)) !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-header-inner {
+    padding-left: max(var(--lx-gutter), env(safe-area-inset-left)) !important;
+    padding-right: max(var(--lx-gutter), env(safe-area-inset-right)) !important;
+  }
+}
+
+/* =========================================================
+   DESKTOP LOW-SCROLL + ALWAYS-VISIBLE PRIMARY ACTION
+   Sticky nav bar (polished) + tighter above-the-fold layout
+   ========================================================= */
+
+/* Persistent action bar — fixed bottom, brand-clean */
+html body.guided-flow.guided-flagship .guided-step-nav,
+html body.guided-flow.guided-flagship nav.guided-step-nav.wizard-nav {
+  position: fixed !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  z-index: 900 !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0.75rem var(--lx-gutter) calc(0.75rem + env(safe-area-inset-bottom, 0px)) !important;
+  background: linear-gradient(
+    180deg,
+    rgba(244, 242, 239, 0) 0%,
+    rgba(244, 242, 239, 0.92) 28%,
+    #f4f2ef 55%
+  ) !important;
+  border-top: 1px solid rgba(26, 18, 48, 0.08) !important;
+  box-shadow: 0 -8px 28px rgba(26, 18, 48, 0.06) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+html body.guided-flow.guided-flagship .guided-step-nav .wizard-nav-inner {
+  max-width: 520px !important;
+  margin: 0 auto !important;
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 0.75rem !important;
+  padding: 0 !important;
+}
+
+html body.guided-flow.guided-flagship .guided-step-nav .btn-wizard-back {
+  flex: 0 0 auto !important;
+  min-width: 7.5rem !important;
+  min-height: 52px !important;
+}
+
+html body.guided-flow.guided-flagship .guided-step-nav .btn-wizard-next {
+  flex: 1 1 auto !important;
+  max-width: 20rem !important;
+  min-height: 52px !important;
+  box-shadow: 0 4px 16px rgba(201, 162, 39, 0.35) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-step-nav .wizard-nav-inner.wizard-nav-solo {
+  max-width: 22rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-step-nav .wizard-nav-inner.wizard-nav-solo .btn-wizard-next {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Room so fixed nav never covers content / footer */
+html body.guided-flow.guided-flagship .guided-main {
+  padding-bottom: 6.5rem !important;
+}
+
+html body.guided-flow.guided-flagship footer.guided-footer {
+  padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px)) !important;
+}
+
+/* Hide sticky action bar on results (no Continue) when next is hidden —
+   still show Back if needed; JS hides next button */
+html body.guided-flow.guided-flagship.wizard-on-results .guided-step-nav {
+  /* keep bar for Back only — lighter */
+  padding-top: 0.65rem !important;
+  padding-bottom: calc(0.65rem + env(safe-area-inset-bottom, 0px)) !important;
+}
+
+/* ---------- Desktop: tighten steps to reduce scroll ---------- */
+@media (min-width: 900px) {
+  html body.guided-flow.guided-flagship .guided-main {
+    padding-top: 1rem !important;
+    padding-bottom: 6.75rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-progress {
+    margin-bottom: 0.85rem !important;
+    padding: 0.55rem 0.75rem 0.65rem !important;
+  }
+
+  /* Compact progress labels on desktop */
+  html body.guided-flow.guided-flagship .guided-progress-meta {
+    margin-bottom: 0.25rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .wizard-progress-wrap {
+    margin-top: 0.25rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-step-intro {
+    margin-bottom: 0.85rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-kicker {
+    margin-bottom: 0.35rem !important;
+    font-size: 0.65rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-title {
+    font-size: clamp(1.4rem, 2vw, 1.7rem) !important;
+    margin-bottom: 0.4rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-lead {
+    font-size: 0.9rem !important;
+    line-height: 1.45 !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-card,
+  html body.guided-flow.guided-flagship .wizard-card.guided-card {
+    padding: 1.1rem 1.2rem 1.15rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-choice-card {
+    min-height: 0 !important;
+    padding: 1rem 1rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-choice-card span:not(.guided-choice-icon) {
+    font-size: 0.8rem !important;
+  }
+
+  /* Loan-you / credit: denser two-col */
+  html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-you-card,
+  html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-credit-card {
+    padding: 1.05rem 1.15rem 1.1rem !important;
+  }
+
+  html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-split,
+  html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-credit-grid {
+    gap: 1rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .ultimate-program-btn {
+    min-height: 52px !important;
+    padding: 0.55rem 0.45rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .ultimate-term-btn,
+  html body.guided-flow.guided-flagship .guided-mini-chip {
+    min-height: 40px !important;
+    padding: 0.35rem 0.75rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-score-number,
+  html body.guided-flow.guided-flagship #creditScoreDisplay {
+    font-size: 2.2rem !important;
+    margin-bottom: 0.25rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-down-hero-value,
+  html body.guided-flow.guided-flagship #downDisplay {
+    font-size: 1.35rem !important;
+  }
+
+  html body.guided-flow.guided-flagship #homePriceDisplay {
+    font-size: 2.15rem !important;
+    margin-bottom: 0.65rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-step-hint,
+  html body.guided-flow.guided-flagship .guided-loan-you-next,
+  html body.guided-flow.guided-flagship .guided-credit-next-hint {
+    margin-top: 0.65rem !important;
+    font-size: 0.78rem !important;
+  }
+
+  /* Rate panel denser */
+  html body.guided-flow.guided-flagship .guided-rate-hero {
+    padding: 0.95rem 1rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-layout {
+    gap: 1.15rem !important;
+  }
+
+  /* Sticky rail aligns under header, above action bar */
+  html body.guided-flow.guided-flagship .guided-live-rail {
+    top: 5.25rem !important;
+    max-height: calc(100vh - 8.5rem) !important;
+    overflow-y: auto !important;
+  }
+}
+
+/* Very wide desktops: keep content from stretching awkwardly */
+@media (min-width: 1100px) {
+  html body.guided-flow.guided-flagship .guided-step-nav .wizard-nav-inner {
+    max-width: 560px !important;
+  }
+}
+
+/* Mobile: sticky bar still useful for Continue; slightly compact */
+@media (max-width: 719px) {
+  html body.guided-flow.guided-flagship .guided-step-nav {
+    padding: 0.65rem 0.85rem calc(0.65rem + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-step-nav .btn-wizard-back {
+    min-width: 5.5rem !important;
+    min-height: 48px !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-step-nav .btn-wizard-next {
+    min-height: 48px !important;
+    max-width: none !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-main {
+    padding-bottom: 5.75rem !important;
+  }
+
+  html body.guided-flow.guided-flagship footer.guided-footer {
+    padding-bottom: calc(5rem + env(safe-area-inset-bottom, 0px)) !important;
+  }
+}
+
+/* Primary button emphasis in sticky bar */
+html body.guided-flow.guided-flagship .guided-step-nav .btn-wizard-next .btn-wizard-next-text {
+  font-weight: 800 !important;
+}
+
+/* =========================================================
+   STEP 4 ONLY — Loan type → Down → Qualifiers
+   Clean vertical stack, clear hierarchy
+   ========================================================= */
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-you-card.guided-loan-stack {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0 !important;
+  padding: 1.25rem 1.25rem 1.35rem !important;
+  max-width: 640px !important;
+  margin: 0 auto !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-block {
+  width: 100% !important;
+  padding: 0 0 1.25rem !important;
+  margin: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-block + .guided-loan-block {
+  padding-top: 1.2rem !important;
+  border-top: 1px solid rgba(26, 18, 48, 0.08) !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-block-qualifiers {
+  padding-bottom: 0.25rem !important;
+}
+
+/* Step labels: 1 / 2 / 3 */
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-step-label {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.5rem !important;
+  margin: 0 0 0.85rem !important;
+  font-size: 0.78rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  color: #1a1230 !important;
+  text-align: center !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-step-label-secondary {
+  color: #6b6580 !important;
+  font-weight: 700 !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-step-num {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 1.45rem !important;
+  height: 1.45rem !important;
+  border-radius: 999px !important;
+  background: linear-gradient(135deg, #f0d060, #c9a227) !important;
+  color: #1a1230 !important;
+  font-size: 0.72rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0 !important;
+  flex-shrink: 0 !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-step-label-secondary .guided-loan-step-num {
+  background: #e8e4dc !important;
+  color: #5c5670 !important;
+}
+
+/* 1. Loan type — equal cards, strong selected state */
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-type-grid,
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-you-programs {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 0.65rem !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-type-grid .ultimate-program-btn {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.2rem !important;
+  min-height: 72px !important;
+  padding: 0.85rem 0.6rem !important;
+  border-radius: 14px !important;
+  border: 2px solid rgba(26, 18, 48, 0.1) !important;
+  background: #faf9f7 !important;
+  box-shadow: none !important;
+  text-align: center !important;
+  cursor: pointer !important;
+  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s, transform 0.12s !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-type-grid .ultimate-program-btn:hover {
+  border-color: rgba(201, 162, 39, 0.55) !important;
+  background: #fff !important;
+  transform: translateY(-1px) !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-type-grid .ultimate-program-btn.active {
+  border-color: transparent !important;
+  background: linear-gradient(135deg, #f0d060 0%, #c9a227 55%, #b8891a 100%) !important;
+  box-shadow: 0 4px 16px rgba(201, 162, 39, 0.35) !important;
+  color: #1a1230 !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-type-grid .ultimate-program-btn strong {
+  font-size: 0.95rem !important;
+  font-weight: 800 !important;
+  color: inherit !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-type-grid .ultimate-program-btn span {
+  font-size: 0.72rem !important;
+  font-weight: 600 !important;
+  opacity: 0.8 !important;
+  line-height: 1.25 !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-you-note:empty {
+  display: none !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-you-note:not(:empty) {
+  margin: 0.65rem 0 0 !important;
+  font-size: 0.78rem !important;
+  text-align: center !important;
+  color: #6b6580 !important;
+}
+
+/* 2. Down payment section */
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-block-down {
+  background: linear-gradient(165deg, #fbf8f0 0%, #fff 70%) !important;
+  border-radius: 14px !important;
+  border: 1px solid rgba(201, 162, 39, 0.22) !important;
+  padding: 1.15rem 1.1rem 1.2rem !important;
+  margin-top: 0.15rem !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-block + .guided-loan-block-down {
+  border-top: 1px solid rgba(201, 162, 39, 0.22) !important;
+  padding-top: 1.15rem !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-down-hero {
+  text-align: center !important;
+  margin: 0 0 0.75rem !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-down-hero-value,
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] #downDisplay {
+  display: block !important;
+  font-size: clamp(1.45rem, 4vw, 1.75rem) !important;
+  font-weight: 800 !important;
+  color: #1a1230 !important;
+  letter-spacing: -0.02em !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-down-hero-lead {
+  margin: 0.3rem 0 0 !important;
+  font-size: 0.78rem !important;
+  color: #8a8499 !important;
+  text-align: center !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-down-field #downPercent {
+  width: 100% !important;
+  margin: 0.25rem 0 0.85rem !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-down-inline {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 0.6rem !important;
+  width: 100% !important;
+  max-width: 320px !important;
+  margin: 0 auto !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-down-chips {
+  margin-top: 0.9rem !important;
+  justify-content: center !important;
+  gap: 0.4rem !important;
+}
+
+/* 3. Qualifiers — lighter, secondary */
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-block-qualifiers {
+  opacity: 0.95;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-qualifiers-row {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 0.45rem !important;
+  border: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  max-width: 100% !important;
+}
+
+@media (min-width: 560px) {
+  html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-qualifiers-row {
+    grid-template-columns: 1fr 1fr 1fr !important;
+    gap: 0.5rem !important;
+  }
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-qualifiers-row .ultimate-profile-chip {
+  margin: 0 !important;
+  padding: 0.6rem 0.65rem !important;
+  min-height: 0 !important;
+  border-radius: 12px !important;
+  border: 1px solid rgba(26, 18, 48, 0.08) !important;
+  background: #f7f6f3 !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 0.45rem !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-qualifiers-row .ultimate-profile-chip:has(input:checked) {
+  border-color: rgba(201, 162, 39, 0.55) !important;
+  background: rgba(201, 162, 39, 0.1) !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-qualifiers-row .ultimate-profile-chip-text strong {
+  font-size: 0.8rem !important;
+  font-weight: 700 !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-qualifiers-row .ultimate-profile-chip-text span {
+  font-size: 0.68rem !important;
+  color: #8a8499 !important;
+  font-weight: 500 !important;
+}
+
+/* Override old 2-col split on this step */
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-split {
+  display: contents !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-you-intro .guided-lead {
+  max-width: 24rem !important;
+}
+
+@media (min-width: 900px) {
+  html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-you-card.guided-loan-stack {
+    padding: 1.15rem 1.25rem 1.2rem !important;
+  }
+
+  html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-type-grid .ultimate-program-btn {
+    min-height: 64px !important;
+    padding: 0.7rem 0.5rem !important;
+  }
+
+  html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-block {
+    padding-bottom: 1rem !important;
+  }
+
+  html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-block + .guided-loan-block {
+    padding-top: 1rem !important;
+  }
+}
+
+@media (max-width: 559px) {
+  html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-type-grid {
+    gap: 0.5rem !important;
+  }
+
+  html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-type-grid .ultimate-program-btn {
+    min-height: 64px !important;
+    padding: 0.7rem 0.4rem !important;
+  }
+
+  html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-type-grid .ultimate-program-btn strong {
+    font-size: 0.88rem !important;
+  }
+}

@@ -696,7 +696,10 @@
     document.querySelectorAll(".ultimate-program-btn").forEach((btn) => {
       const id = btn.dataset.program || "";
       let available = true;
-      if (window.MMG_isProgramAvailable) {
+      // VA / USDA always selectable — choosing the program declares eligibility for the estimate
+      if (id === "va" || id === "usda") {
+        available = true;
+      } else if (window.MMG_isProgramAvailable) {
         available = window.MMG_isProgramAvailable(id, price, profile, countyKey);
       }
       // Keep buttons clickable so taps still show eligibility hints (disabled skips click).
@@ -706,16 +709,27 @@
     });
 
     const current = $("loanProgram")?.value || "conventional";
+    // Don't auto-kick VA/USDA — selecting them is the eligibility declaration
     if (
       window.MMG_isProgramAvailable &&
       price > 0 &&
       current !== "fha" &&
+      current !== "va" &&
+      current !== "usda" &&
       !window.MMG_isProgramAvailable(current, price, profile, countyKey)
     ) {
       setProgramFromButton("conventional", true);
     } else {
       syncProgramButtons();
     }
+
+    // Keep VA/USDA microcopy clear (eligibility = the pick)
+    const vaBtn = document.querySelector('.ultimate-program-btn[data-program="va"]');
+    const vaSub = vaBtn?.querySelector("span:last-child");
+    if (vaSub) vaSub.textContent = "0% · eligible veterans";
+    const usdaBtn = document.querySelector('.ultimate-program-btn[data-program="usda"]');
+    const usdaSub = usdaBtn?.querySelector("span:last-child");
+    if (usdaSub) usdaSub.textContent = "0% · rural areas";
 
     const fhaBtn = document.querySelector('.ultimate-program-btn[data-program="fha"]');
     if (fhaBtn && window.MMG_isFhaEligible && window.MMG_getFhaIneligibleNote) {
@@ -732,10 +746,25 @@
     }
   }
 
+  function syncEligibilityFromProgram(programId) {
+    // Selecting VA/USDA is the eligibility declaration — no separate checkbox step
+    const vet = $("veteranEligible");
+    const usda = $("usdaEligible");
+    if (programId === "va") {
+      if (vet) vet.checked = true;
+      if (usda) usda.checked = false;
+    } else if (programId === "usda") {
+      if (usda) usda.checked = true;
+      if (vet) vet.checked = false;
+    }
+  }
+
   function setProgramFromButton(programId, force) {
     if (programId === "jumbo") programId = "conventional";
     const program = $("loanProgram");
     if (!program) return;
+    // Program pick implies eligibility for educational estimate (VA / USDA)
+    syncEligibilityFromProgram(programId);
     const price = Number($("homePrice")?.value || 0);
     const profile = getInputs().profile;
     const countyKey = getCountyKey();
@@ -744,19 +773,17 @@
     if (
       !force &&
       programId !== "fha" &&
+      programId !== "va" &&
+      programId !== "usda" &&
       window.MMG_isProgramAvailable &&
       !window.MMG_isProgramAvailable(programId, price, profile, countyKey)
     ) {
-      if (programId === "va" && note) {
-        note.textContent = "Check Military / VA eligible above to model 0% down.";
-      } else if (programId === "usda" && note) {
-        note.textContent = "Check USDA rural property above to model 0% down.";
-      }
       return;
     }
 
     program.value = programId;
     program.dispatchEvent(new Event("change", { bubbles: true }));
+    document.dispatchEvent(new Event("mmg-logan5-profile-change"));
     syncProgramButtons();
     if (window.MMG_snapDownToProgram) window.MMG_snapDownToProgram();
     if (window.MMG_applyLoanProgramUi) window.MMG_applyLoanProgramUi();

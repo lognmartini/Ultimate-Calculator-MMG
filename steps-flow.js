@@ -8,22 +8,22 @@
   const IS_LOGAN5 = document.body.classList.contains("logan5");
   const IS_GUIDED = document.body.classList.contains("guided-flow");
 
+  // Align with page H1 intent (progress line: "Step X of Y · Label")
+  // 6 steps after combining price + loan: Goal → … → Price & loan → Credit → Estimate
   const GUIDED_LABELS_PURCHASE = [
-    "Start",
-    "Address?",
-    "Property",
-    "Price",
-    "Loan",
-    "Rate",
+    "Goal",
+    "Property?",
+    "Address",
+    "Price & loan",
+    "Credit",
     "Estimate",
   ];
   const GUIDED_LABELS_REFI = [
-    "Start",
     "Goal",
-    "Property",
-    "Value",
-    "Equity",
-    "Rate",
+    "Refi goal",
+    "Address",
+    "Value & loan",
+    "Credit",
     "Estimate",
   ];
 
@@ -37,7 +37,7 @@
     );
   }
 
-  const TOTAL_STEPS = IS_GUIDED ? Math.max(7, getSteps().length || 7) : 3;
+  const TOTAL_STEPS = IS_GUIDED ? Math.max(6, getSteps().length || 6) : 3;
   function getStepLabels() {
     if (!IS_GUIDED) return LEGACY_LABELS;
     return getLoanGoal() === "refinance" ? GUIDED_LABELS_REFI : GUIDED_LABELS_PURCHASE;
@@ -73,9 +73,9 @@
     return false;
   }
 
-  // Guided path:
-  // purchase: 0 goal → 1 has-address? → 2 address → 3 price → 4 you+down → 5 credit → 6 results
-  // refinance: 0 goal → 1 refi-goal → 2 address → 3 value → 4 equity → 5 credit → 6 results
+  // Guided path (price + loan combined):
+  // purchase: 0 goal → 1 has-address? → 2 address → 3 price+loan → 4 credit → 5 results
+  // refinance: 0 goal → 1 refi-goal → 2 address → 3 value+loan → 4 credit → 5 results
 
   function nextValidStep(from) {
     let i = from + 1;
@@ -126,6 +126,12 @@
       const r = $("vsMartiniRate")?.textContent || $("interestRate")?.value;
       martini.textContent = r ? (String(r).includes("%") ? r : `${r}%`) : "—";
     }
+    // Credit-step read-only Martini rate display
+    const slim = $("guidedMartiniRateDisplay");
+    if (slim) {
+      const ir = $("interestRate")?.value;
+      slim.textContent = ir ? (String(ir).includes("%") ? ir : `${ir}%`) : "—";
+    }
   }
 
   function updateLivePreview() {
@@ -134,36 +140,74 @@
     const piti = $("pitiPayment");
     if (!amount) return;
 
-    if (!isLogan5PaymentRevealed() && !(IS_GUIDED && currentStep >= 3)) {
+    // Defer dollar amount until results — protect the payment climax
+    if (IS_GUIDED && currentStep < resultsStepIndex()) {
       amount.textContent = "—";
       if (note) {
-        note.textContent =
-          currentStep <= 1
-            ? "Answer a few questions to get started"
-            : currentStep === 2
-              ? "Look up the property or continue"
-              : currentStep === 3
-                ? "Set your price, then loan details"
-                : "Almost there — finish loan details";
+        const notes = [
+          "Answer a few questions to get started",
+          getLoanGoal() === "refinance" ? "Choose your refinance goal" : "Property or price — your call",
+          "Look up an address or continue with price",
+          "Set price & loan type",
+          "Almost there — then see your payment",
+        ];
+        note.textContent = notes[currentStep] || "Your full estimate unlocks at the end";
       }
       $("wizardLivePreview")?.classList.remove("wizard-live-preview-ready");
+      $("wizardLivePreview")?.classList.add("wizard-live-preview-deferred");
+      // Still sync rate strip / stats for context without revealing PITI
+      syncPaymentRateStrip();
       return;
     }
 
-    // On mid guided steps, still show live calc if possible
+    $("wizardLivePreview")?.classList.remove("wizard-live-preview-deferred");
     const val = formatLivePayment(piti?.textContent);
     amount.textContent = val;
     if (note) {
-      if (currentStep === resultsStepIndex()) {
-        note.textContent = val !== "—" ? "Your estimate is ready" : "Calculating…";
-      } else if (val !== "—") {
-        note.textContent = "Live as you adjust";
-      } else {
-        note.textContent = "Keep going — your payment gets clearer each step";
-      }
+      note.textContent = val !== "—" ? "Your estimate is ready" : "Calculating…";
     }
     $("wizardLivePreview")?.classList.toggle("wizard-live-preview-ready", val !== "—");
     syncPaymentRateStrip();
+    syncLifetimeProofLine();
+  }
+
+  /** Always surface one above-the-fold savings proof when available */
+  function syncLifetimeProofLine() {
+    const line = $("guidedLifetimeLine");
+    const valEl = $("guidedLifetimeSave");
+    const labelEl = line?.querySelector(".guided-lifetime-label");
+    if (!line || currentStep < resultsStepIndex()) {
+      line?.classList.add("hidden");
+      return;
+    }
+
+    const lifetime = $("vsLifetimeInterestSave")?.textContent?.trim() || "";
+    const monthly = $("leadSavingsAmount")?.textContent?.trim() || "";
+    const monthlyRow = $("leadMonthlySavingsRow");
+    const ribbon = $("leadSavingsRibbon");
+    const monthlyVisible =
+      ribbon &&
+      !ribbon.classList.contains("hidden") &&
+      monthlyRow &&
+      !monthlyRow.classList.contains("hidden");
+
+    const ok = (t) =>
+      t && t !== "—" && t !== "$0" && !/^\$?0(\.00)?$/.test(String(t).replace(/,/g, ""));
+
+    // Prefer monthly if ribbon not already showing it; else lifetime
+    if (!monthlyVisible && ok(monthly)) {
+      line.classList.remove("hidden");
+      if (labelEl) labelEl.textContent = "Potential monthly savings";
+      if (valEl) valEl.textContent = `${monthly}/mo`;
+      return;
+    }
+    if (ok(lifetime)) {
+      line.classList.remove("hidden");
+      if (labelEl) labelEl.textContent = "Est. interest saved over term";
+      if (valEl) valEl.textContent = lifetime;
+      return;
+    }
+    line.classList.add("hidden");
   }
 
   function updateListingBanner() {
@@ -225,6 +269,9 @@
     const fill = $("wizardProgressFill");
     const label = $("wizardProgressLabel");
     const ctx = $("wizardProgressContext");
+    const line = $("wizardProgressLine");
+    const bar = $("wizardProgressBar");
+    const progressRoot = $("guidedProgress");
 
     // Progress based on visible path steps only
     const path = [];
@@ -233,39 +280,211 @@
     }
     const pathPos = Math.max(0, path.indexOf(currentStep));
     const pathLen = Math.max(1, path.length);
-    const pct = ((pathPos + 1) / pathLen) * 100;
+    const onResults = currentStep === resultsStepIndex();
+    const pct = onResults ? 100 : Math.round(((pathPos + 1) / pathLen) * 100);
+    const stepLabel = onResults ? "Complete" : getStepLabels()[currentStep] || "Estimate";
+    const stepText = onResults ? "Complete" : `Step ${pathPos + 1} of ${pathLen}`;
 
     if (fill) fill.style.width = `${pct}%`;
-    if (label) label.textContent = `Step ${pathPos + 1} of ${pathLen}`;
-    if (ctx) ctx.textContent = getStepLabels()[currentStep] || "Estimate";
+    if (label) label.textContent = stepText;
+    if (ctx) ctx.textContent = stepLabel;
+    if (line) {
+      line.textContent = onResults ? "Complete · Your estimate" : `${stepText} · ${stepLabel}`;
+    }
+    if (bar) {
+      bar.setAttribute("aria-valuenow", String(pct));
+      bar.setAttribute(
+        "aria-valuetext",
+        onResults ? "Complete, your estimate is ready" : `${stepText}, ${stepLabel}`
+      );
+    }
     document.body.dataset.wizardStep = String(currentStep + 1);
+    progressRoot?.classList.toggle("guided-progress-complete", onResults);
+    // Show compact complete bar on results (not fully hidden)
+    if (progressRoot) {
+      progressRoot.hidden = false;
+      progressRoot.setAttribute("aria-hidden", "false");
+    }
 
     const list = $("guidedProgressSteps");
     if (list) {
-      list.innerHTML = path
-        .map((stepIdx, pos) => {
-          const active = stepIdx === currentStep;
-          const done = stepIdx < currentStep;
-          const cls = active ? "is-active" : done ? "is-done" : "";
-          return `<li class="guided-progress-step ${cls}" data-guided-step="${stepIdx}">
-            <span class="guided-progress-num">${pos + 1}</span>
-            <span class="guided-progress-label">${getStepLabels()[stepIdx] || ""}</span>
-          </li>`;
-        })
-        .join("");
-    } else {
-      document.querySelectorAll(".guided-progress-step").forEach((el) => {
-        const i = Number(el.getAttribute("data-guided-step") || "0");
-        el.classList.toggle("is-active", i === currentStep);
-        el.classList.toggle("is-done", i < currentStep);
-        el.classList.toggle("is-skipped", isStepSkipped(i));
-      });
+      list.innerHTML = "";
+      list.hidden = true;
+      list.setAttribute("aria-hidden", "true");
     }
 
     const live = $("wizardLivePreview");
     if (live) {
-      live.classList.toggle("wizard-live-preview-results", currentStep === resultsStepIndex());
+      live.classList.toggle("wizard-live-preview-results", onResults);
     }
+  }
+
+  function announceStep(stepIdx) {
+    const live = $("guidedStepLive");
+    if (!live) return;
+    const labels = getStepLabels();
+    const name = labels[stepIdx] || "Next step";
+    if (stepIdx === resultsStepIndex()) {
+      live.textContent = "Your estimate is ready.";
+    } else {
+      live.textContent = `Step ${stepIdx + 1}: ${name}`;
+    }
+  }
+
+  function focusActiveStepHeading() {
+    const active = document.querySelector(".wizard-step.wizard-step-active, .wizard-step:not([hidden])");
+    const heading =
+      active?.querySelector("h1.guided-title, h2.guided-title, h2.guided-results-title, #step-results-title") ||
+      active?.querySelector("h1, h2");
+    if (!heading) return;
+    if (!heading.hasAttribute("tabindex")) heading.setAttribute("tabindex", "-1");
+    try {
+      heading.focus({ preventScroll: true });
+    } catch {
+      heading.focus();
+    }
+  }
+
+  /** P1: stage price → loan on combined step */
+  function isLoanStageVisible() {
+    const card = $("guidedLoanStageCard");
+    return Boolean(card && !card.hidden && !card.classList.contains("guided-loan-stage-hidden"));
+  }
+
+  function setPriceLoanStage(stage) {
+    const step = document.querySelector('[data-step-id="price-loan"]');
+    const loanCard = $("guidedLoanStageCard");
+    const toLoanBtn = $("guidedPriceToLoan");
+    const title = $("step-price-title");
+    const lead = $("step-price-lead");
+    if (!step) return;
+    step.setAttribute("data-price-loan-stage", stage);
+    if (stage === "loan") {
+      if (loanCard) {
+        loanCard.hidden = false;
+        loanCard.classList.remove("guided-loan-stage-hidden");
+        loanCard.setAttribute("aria-hidden", "false");
+      }
+      if (toLoanBtn) toLoanBtn.hidden = true;
+      if (title) {
+        title.textContent =
+          getLoanGoal() === "refinance"
+            ? "Value & how you’ll refinance"
+            : "Price & how you’ll finance";
+      }
+      if (lead) {
+        lead.textContent =
+          getLoanGoal() === "refinance"
+            ? "Pick a loan type. Equity updates automatically."
+            : "Pick a loan type. Down payment updates automatically.";
+      }
+      // Focus loan heading for keyboard / SR users
+      const loanTitle = $("step-loan-you-title");
+      if (loanTitle) {
+        if (!loanTitle.hasAttribute("tabindex")) loanTitle.setAttribute("tabindex", "-1");
+        window.setTimeout(() => {
+          try {
+            loanTitle.focus({ preventScroll: true });
+          } catch {
+            loanTitle.focus();
+          }
+          loanCard?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        }, 50);
+      }
+      $("guidedStepLive") &&
+        ($("guidedStepLive").textContent = "Now choose your loan type.");
+    } else {
+      if (loanCard) {
+        loanCard.hidden = true;
+        loanCard.classList.add("guided-loan-stage-hidden");
+        loanCard.setAttribute("aria-hidden", "true");
+      }
+      if (toLoanBtn) toLoanBtn.hidden = false;
+      if (title) {
+        title.textContent =
+          getLoanGoal() === "refinance" ? "What is the home worth today?" : "Set your price";
+      }
+      if (lead) {
+        lead.textContent =
+          getLoanGoal() === "refinance"
+            ? "Set today’s value. Then choose how you’ll refinance."
+            : "Drag the slider or type a number. Then choose how you’ll finance.";
+      }
+    }
+    updateNavButtons();
+  }
+
+  function revealLoanStage() {
+    const price = Number($("homePrice")?.value || 0);
+    const err = $("guidedPriceError");
+    if (price < 50000) {
+      if (err) err.classList.remove("hidden");
+      $("homePriceInput")?.focus();
+      return false;
+    }
+    if (err) err.classList.add("hidden");
+    setPriceLoanStage("loan");
+    return true;
+  }
+
+  function bindRadiogroupKeyboard(containerSelector) {
+    const root = document.querySelector(containerSelector);
+    if (!root || root.dataset.kbBound === "1") return;
+    root.dataset.kbBound = "1";
+    root.addEventListener("keydown", (e) => {
+      const buttons = Array.from(
+        root.querySelectorAll('[role="radio"]:not([hidden]):not([disabled])')
+      ).filter((b) => !b.closest("[hidden]"));
+      if (!buttons.length) return;
+      let i = buttons.findIndex((b) => b === document.activeElement || b.classList.contains("active"));
+      if (i < 0) i = 0;
+      if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+        e.preventDefault();
+        i = (i + 1) % buttons.length;
+        buttons[i].focus();
+      } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+        e.preventDefault();
+        i = (i - 1 + buttons.length) % buttons.length;
+        buttons[i].focus();
+      } else if (e.key === " " || e.key === "Enter") {
+        e.preventDefault();
+        (document.activeElement || buttons[i]).click();
+      } else if (e.key === "Home") {
+        e.preventDefault();
+        buttons[0].focus();
+      } else if (e.key === "End") {
+        e.preventDefault();
+        buttons[buttons.length - 1].focus();
+      }
+    });
+    // Keep tabindex in sync when selection changes
+    root.addEventListener("click", () => {
+      window.setTimeout(() => {
+        root.querySelectorAll('[role="radio"]').forEach((btn) => {
+          const on = btn.classList.contains("active") || btn.getAttribute("aria-checked") === "true";
+          btn.setAttribute("tabindex", on ? "0" : "-1");
+        });
+      }, 0);
+    });
+  }
+
+  function isAddressStepReady() {
+    // Ready only after successful lookup or explicit "price only" skip
+    const mode = document.body.dataset.addressReady || "";
+    return mode === "lookup" || mode === "skip";
+  }
+
+  function setAddressReady(mode) {
+    // mode: "" | "lookup" | "skip"
+    if (mode) document.body.dataset.addressReady = mode;
+    else delete document.body.dataset.addressReady;
+    const card = $("guidedAddressCard");
+    if (card && mode === "lookup") card.setAttribute("data-address-state", "success");
+    const readyHint = $("guidedAddressReadyHint");
+    if (readyHint) readyHint.hidden = mode !== "lookup";
+    const national = $("guidedNationalBanner");
+    if (national) national.classList.toggle("hidden", mode !== "skip");
+    updateNavButtons();
   }
 
   function updateNavButtons() {
@@ -274,35 +493,41 @@
     const navInner = $("wizardNavInner") || document.querySelector(".wizard-nav-inner");
     const nav = document.querySelector(".ultimate-wizard-nav");
 
-    // Choice steps: hide Continue until selection (or show Continue that validates)
+    // Choice steps + address (until ready) + price stage (until loan revealed)
     const onChoice = IS_GUIDED && (currentStep === 0 || currentStep === 1);
-    // results is last guided step (index 5)
+    const onAddressGate = IS_GUIDED && currentStep === 2 && !isAddressStepReady();
+    const onPriceStage =
+      IS_GUIDED && currentStep === 3 && !isLoanStageVisible();
+    const hideNext = onChoice || onAddressGate || onPriceStage;
+    const choiceHint = $("guidedChoiceHint");
 
     if (IS_LOGAN5 && currentStep === resultsStepIndex()) {
-      if (logan5SubView) {
-        if (back) {
-          back.hidden = false;
-          back.style.visibility = "visible";
-          back.style.pointerEvents = "auto";
-          const backText = back.querySelector(".btn-wizard-back-text");
-          if (backText) backText.textContent = "Back to estimate";
-        }
-        if (next) next.style.display = "none";
-        if (navInner) navInner.classList.remove("wizard-nav-solo");
-        if (nav) nav.classList.remove("wizard-nav-hidden");
-        return;
+      if (choiceHint) {
+        choiceHint.hidden = true;
       }
+      document.body.classList.remove("guided-on-choice", "guided-on-address-gate");
+      document.body.classList.add("guided-results-back-only");
+      // Results: only Back, at bottom of page (no Continue, no sticky chrome)
       if (next) next.style.display = "none";
       if (back) {
         back.hidden = false;
         back.style.visibility = "visible";
         back.style.pointerEvents = "auto";
         const backText = back.querySelector(".btn-wizard-back-text");
-        if (backText) backText.textContent = "Back";
+        if (backText) {
+          backText.textContent = logan5SubView ? "Back to estimate" : "Back";
+        }
+      }
+      if (navInner) {
+        navInner.classList.add("wizard-nav-back-only");
+        navInner.classList.remove("wizard-nav-solo");
       }
       if (nav) nav.classList.remove("wizard-nav-hidden");
       return;
     }
+
+    document.body.classList.remove("guided-results-back-only");
+    if (navInner) navInner.classList.remove("wizard-nav-back-only");
 
     if (back) {
       const onFirst = currentStep === 0;
@@ -314,32 +539,51 @@
     }
 
     if (next) {
-      next.style.display = onChoice ? "none" : "";
+      next.style.display = hideNext ? "none" : "";
       const text =
         next.querySelector(".btn-wizard-next-text") || next.querySelector(".btn-apply-text");
       if (text) {
         if (currentStep === resultsStepIndex() - 1) {
           text.textContent = "See my estimate";
-        } else if (IS_GUIDED && currentStep === 2) {
-          text.textContent = "Continue to price";
-        } else if (IS_GUIDED && currentStep === 3) {
-          text.textContent = "Continue to loan options";
-        } else if (IS_GUIDED && currentStep === 4) {
-          text.textContent = "Continue to credit & rate";
         } else {
           text.textContent = "Continue";
         }
       }
     }
 
+    // Microcopy when Continue is intentionally hidden
+    if (choiceHint) {
+      if (onPriceStage) {
+        choiceHint.hidden = false;
+        choiceHint.textContent = "Set your price, then choose loan type";
+      } else if (onAddressGate) {
+        choiceHint.hidden = false;
+        choiceHint.textContent = "Look up an address or continue with price only";
+      } else if (onChoice) {
+        choiceHint.hidden = false;
+        choiceHint.textContent =
+          currentStep === 0
+            ? "Tap a choice to continue"
+            : getLoanGoal() === "refinance"
+              ? "Tap your refinance goal to continue"
+              : "Tap a choice to continue";
+      } else {
+        choiceHint.hidden = true;
+      }
+    }
+    document.body.classList.toggle("guided-on-choice", onChoice);
+    document.body.classList.toggle("guided-on-address-gate", onAddressGate);
+    document.body.classList.toggle("guided-on-price-stage", onPriceStage);
+
     if (navInner) {
-      navInner.classList.toggle("wizard-nav-solo", currentStep === 0 || onChoice);
+      navInner.classList.toggle("wizard-nav-solo", currentStep === 0 || hideNext);
     }
     if (nav) nav.classList.remove("wizard-nav-hidden");
 
+    // Apply CTA only after payment reveal (don't compete with Continue mid-flow)
     document.body.classList.toggle(
       "logan5-show-apply-everywhere",
-      IS_LOGAN5 && currentStep >= (IS_GUIDED ? 3 : 1)
+      IS_LOGAN5 && currentStep >= resultsStepIndex()
     );
   }
 
@@ -377,13 +621,16 @@
     document.body.classList.toggle("guided-is-refinance", isRefi);
     document.body.classList.toggle("guided-is-purchase", !isRefi);
 
-    if (priceTitle) {
-      priceTitle.textContent = isRefi ? "What is the home worth today?" : "Set the purchase price";
+    // Titles for staged price-loan step are owned by setPriceLoanStage()
+    if (priceTitle && currentStep !== 3) {
+      priceTitle.textContent = isRefi
+        ? "Value & how you’ll refinance"
+        : "Price & how you’ll finance";
     }
-    if (priceLead) {
+    if (priceLead && currentStep !== 3) {
       priceLead.textContent = isRefi
-        ? "Use a realistic market value (or appraisal estimate). You can adjust anytime."
-        : "Drag the slider or type a number. You can change this anytime.";
+        ? "Set today’s value, then pick a loan type. Equity updates automatically."
+        : "Set the price, then pick a loan type. Down payment updates automatically.";
     }
     if (priceLabel) priceLabel.textContent = isRefi ? "Home value" : "Purchase price";
     if (addrTitle) {
@@ -391,16 +638,24 @@
     }
     if (addrLead) {
       addrLead.textContent = isRefi
-        ? "Any U.S. address works. We’ll estimate taxes & insurance for that location when available."
-        : "Search any U.S. listing. We’ll pull taxes and insurance when available — you stay in control.";
+        ? "Look up your address for local tax & insurance — or continue with price only."
+        : "Look up a listing for local estimates — or continue with a price only.";
     }
     if (downTitle) {
-      downTitle.textContent = isRefi ? "Your equity (as % of value)" : "Cash down";
+      downTitle.textContent = isRefi ? "Your equity" : "Down payment";
+    }
+    const loanYouTitle = $("step-loan-you-title");
+    if (loanYouTitle) {
+      loanYouTitle.textContent = "Loan type";
     }
     if (downLead) {
       downLead.textContent = isRefi
-        ? "Equity ≈ down payment %. Example: 20% equity means ~80% loan-to-value (LTV)."
-        : "Quick chips or drag the slider. Lower down can mean PMI on conventional.";
+        ? "Set for this program — open Adjust to change equity %"
+        : "Set for this program — change below if needed";
+    }
+    const downSummary = document.querySelector(".guided-down-adjust-summary");
+    if (downSummary) {
+      downSummary.textContent = isRefi ? "Adjust equity %" : "Adjust down payment";
     }
     if (resultsTitle) {
       resultsTitle.textContent = isRefi
@@ -502,9 +757,23 @@
 
     updateProgress();
     updateNavButtons();
+    // Soft header Apply until results; full strength after payment reveal
+    document.body.classList.toggle("guided-pre-results", currentStep < resultsStepIndex());
+    document.body.classList.toggle("guided-advisor-collapsed", currentStep < resultsStepIndex());
     updateLiveRailVisibility();
     updateLivePreview();
     window.scrollTo({ top: 0, behavior: "smooth" });
+
+    // Reset price→loan staging when leaving / re-entering step 3
+    if (currentStep === 3) {
+      // Auto-reveal loan if price already valid from prior steps (e.g. address fill)
+      const price = Number($("homePrice")?.value || 0);
+      if (price >= 50000 && document.body.dataset.priceLoanTouched === "1") {
+        setPriceLoanStage("loan");
+      } else {
+        setPriceLoanStage("price");
+      }
+    }
 
     if (currentStep === resultsStepIndex()) {
       document.body.classList.add("wizard-on-results");
@@ -513,10 +782,15 @@
       if (typeof window.MMG_logan5_renderCreativeLoans === "function") {
         window.MMG_logan5_renderCreativeLoans();
       }
+      window.setTimeout(syncLifetimeProofLine, 80);
+      window.setTimeout(syncLifetimeProofLine, 400);
     } else {
       document.body.classList.remove("wizard-on-results");
       recalculate();
     }
+
+    announceStep(currentStep);
+    window.setTimeout(focusActiveStepHeading, 80);
 
     document.dispatchEvent(
       new CustomEvent("mmg-wizard-step-change", { detail: { step: currentStep } })
@@ -556,19 +830,37 @@
       }
     }
     if (stepIndex === 2) {
-      // address optional if they skip; allow continue
+      // Require lookup success or explicit "price only" skip
+      if (IS_GUIDED && !isAddressStepReady()) {
+        const recovery = document.querySelector(".guided-address-recovery");
+        recovery?.classList.add("guided-shake");
+        window.setTimeout(() => recovery?.classList.remove("guided-shake"), 500);
+        const hint = $("guidedChoiceHint");
+        if (hint) {
+          hint.hidden = false;
+          hint.textContent = "Look up an address or continue with price only";
+        }
+        return false;
+      }
       return true;
     }
     if (stepIndex === 3) {
+      // Combined price + loan — require price + loan stage revealed
       const price = Number($("homePrice")?.value || 0);
+      const err = $("guidedPriceError");
       if (price < 50000) {
         $("homePriceInput")?.focus();
         $("homePriceInput")?.classList.add("input-error-flash");
+        if (err) err.classList.remove("hidden");
         setTimeout(() => $("homePriceInput")?.classList.remove("input-error-flash"), 1200);
         return false;
       }
+      if (err) err.classList.add("hidden");
+      if (!isLoanStageVisible()) {
+        revealLoanStage();
+        return false;
+      }
     }
-    // step 4 loan details — always OK to leave (defaults apply)
     return true;
   }
 
@@ -711,6 +1003,7 @@
     document.addEventListener("mmg-calculated", () => {
       updateLivePreview();
       syncPaymentRateStrip();
+      syncLifetimeProofLine();
     });
     document
       .querySelectorAll(
@@ -720,6 +1013,13 @@
         node.addEventListener("input", () => window.requestAnimationFrame(recalculate));
         node.addEventListener("change", () => window.requestAnimationFrame(recalculate));
       });
+    // Clear price error as soon as value is valid
+    ["homePrice", "homePriceInput"].forEach((id) => {
+      $(id)?.addEventListener("input", () => {
+        const price = Number($("homePrice")?.value || 0);
+        if (price >= 50000) $("guidedPriceError")?.classList.add("hidden");
+      });
+    });
   }
 
   function bindWizard() {
@@ -742,9 +1042,86 @@
       const field = $("propertyAddress");
       if (field) field.value = "";
       document.body.dataset.hasAddress = "no";
+      setAddressReady("skip");
       updateListingBanner();
+      // Soft national-estimate cue, then advance
+      $("guidedNationalBanner")?.classList.remove("hidden");
       showStep(3); // price step
     });
+
+    // Mark address ready after successful property resolution; auto-advance when on address step
+    let addressAdvanceTimer = null;
+    document.addEventListener("mmg-property-resolved", () => {
+      if (!IS_GUIDED) return;
+      document.body.dataset.hasAddress = "yes";
+      document.body.dataset.priceLoanTouched = "1";
+      setAddressReady("lookup");
+      $("guidedNationalBanner")?.classList.add("hidden");
+
+      // Smooth: pick a suggestion (or successful lookup) → go straight to price
+      if (currentStep === 2) {
+        if (addressAdvanceTimer) window.clearTimeout(addressAdvanceTimer);
+        const note = $("locationNote");
+        if (note && !note.textContent) {
+          note.textContent = "Property found — continuing…";
+          note.className = "field-note guided-address-status field-note-success";
+        }
+        const readyHint = $("guidedAddressReadyHint");
+        if (readyHint) {
+          readyHint.hidden = false;
+          readyHint.innerHTML = "Property found — continuing…";
+        }
+        addressAdvanceTimer = window.setTimeout(() => {
+          addressAdvanceTimer = null;
+          if (currentStep !== 2) return;
+          showStep(nextValidStep(2));
+        }, 380);
+      }
+    });
+
+    // Typing a new address cancels auto-advance and clears ready until re-lookup
+    $("propertyAddress")?.addEventListener("input", () => {
+      if (!IS_GUIDED || currentStep !== 2) return;
+      if (addressAdvanceTimer) {
+        window.clearTimeout(addressAdvanceTimer);
+        addressAdvanceTimer = null;
+      }
+      if (document.body.dataset.addressReady === "lookup") {
+        setAddressReady("");
+      }
+    });
+
+    // Credit step: reveal 10/25 yr terms
+    $("guidedTermMore")?.addEventListener("click", () => {
+      const extras = document.querySelectorAll(".guided-term-extra");
+      const btn = $("guidedTermMore");
+      const open = btn?.getAttribute("aria-expanded") === "true";
+      extras.forEach((el) => {
+        el.hidden = open;
+      });
+      if (btn) {
+        btn.setAttribute("aria-expanded", open ? "false" : "true");
+        btn.textContent = open ? "More terms" : "Fewer terms";
+      }
+    });
+
+    // P1: price → loan staging
+    $("guidedPriceToLoan")?.addEventListener("click", () => {
+      document.body.dataset.priceLoanTouched = "1";
+      revealLoanStage();
+    });
+    ["homePrice", "homePriceInput"].forEach((id) => {
+      $(id)?.addEventListener("input", () => {
+        document.body.dataset.priceLoanTouched = "1";
+      });
+      $(id)?.addEventListener("change", () => {
+        document.body.dataset.priceLoanTouched = "1";
+      });
+    });
+
+    // P2: keyboard radiogroups
+    bindRadiogroupKeyboard("#ultimateProgramPicker");
+    bindRadiogroupKeyboard("#ultimateTermPicker");
 
     // Live insurance re-estimate when credit changes (guided)
     $("creditScore")?.addEventListener("change", () => {
@@ -806,6 +1183,8 @@
   window.MMG_wizardShowStep = showStep;
   window.MMG_logan5_showSubView = showLogan5SubView;
   window.MMG_guided_next = () => showStep(nextValidStep(currentStep));
+  window.MMG_guided_updateNav = updateNavButtons;
+  window.MMG_guided_setAddressReady = setAddressReady;
   window.MMG_guided_setGoal = (goal) => {
     document.body.dataset.loanGoal = goal === "refinance" ? "refinance" : "purchase";
     if (goal === "refinance") document.body.dataset.hasAddress = "yes";

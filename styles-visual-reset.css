@@ -1,0 +1,1347 @@
+/**
+ * VISUAL SYSTEM RESET — Logan5 guided calculator only
+ * Pure presentation. No flow/feature changes. Loads last.
+ * Brand: deep navy + gold (martinimortgagegroup.com)
+ */
+
+/* =========================================================
+   0. TOKENS
+   ========================================================= */
+html body.guided-flow.guided-flagship {
+  --v-navy: #1a1230;
+  --v-navy-mid: #252f6e;
+  --v-gold: #c9a227;
+  --v-gold-hi: #e8c84a;
+  --v-cream: #f4f2ef;
+  --v-white: #ffffff;
+  --v-muted: #5c5670;
+  --v-border: rgba(26, 18, 48, 0.1);
+  --v-radius: 16px;
+  --v-radius-sm: 12px;
+  --v-btn-h: 52px;
+  --v-btn-r: 999px;
+  --v-content: 680px;
+  --v-card: 480px;
+  --v-page: 1020px;
+  --v-rail: 268px;
+  --v-gap: 1rem;
+  --v-space: 1.35rem;
+  --v-shadow: 0 8px 28px rgba(26, 18, 48, 0.07);
+  background: var(--v-cream) !important;
+  color: var(--v-navy) !important;
+  font-family: "DM Sans", system-ui, -apple-system, sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* =========================================================
+   1. BUTTON SYSTEM (strict — all steps)
+   Primary | Secondary | Navy | Ghost | Text
+   ========================================================= */
+
+/* Shared geometry for every real button/CTA */
+html body.guided-flow.guided-flagship .btn-lookup,
+html body.guided-flow.guided-flagship .btn-wizard-next,
+html body.guided-flow.guided-flagship .btn-wizard-back,
+html body.guided-flow.guided-flagship .guided-lead-submit,
+html body.guided-flow.guided-flagship .btn-results-apply,
+html body.guided-flow.guided-flagship .guided-results-secondary,
+html body.guided-flow.guided-flagship .guided-results-secondary-apply,
+html body.guided-flow.guided-flagship .guided-header-apply,
+html body.guided-flow.guided-flagship .guided-reviews-btn,
+html body.guided-flow.guided-flagship .guided-realtor-btn,
+html body.guided-flow.guided-flagship .guided-loan-options-btn,
+html body.guided-flow.guided-flagship .guided-side-cta,
+html body.guided-flow.guided-flagship .ultimate-realtor-submit,
+html body.guided-flow.guided-flagship .btn-outline,
+html body.guided-flow.guided-flagship .btn-apply-now {
+  box-sizing: border-box !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.35rem !important;
+  min-height: var(--v-btn-h) !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 0.75rem 1.3rem !important;
+  border-radius: var(--v-btn-r) !important;
+  font-family: inherit !important;
+  font-size: 0.9rem !important;
+  font-weight: 700 !important;
+  line-height: 1.2 !important;
+  letter-spacing: 0.01em !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  white-space: nowrap !important;
+  transition: transform 0.12s ease, filter 0.12s ease, box-shadow 0.12s ease,
+    background 0.12s ease, border-color 0.12s ease, color 0.12s ease !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* PRIMARY — gold */
+html body.guided-flow.guided-flagship .btn-lookup,
+html body.guided-flow.guided-flagship .btn-wizard-next,
+html body.guided-flow.guided-flagship .guided-lead-submit,
+html body.guided-flow.guided-flagship .guided-header-apply,
+html body.guided-flow.guided-flagship .guided-reviews-btn,
+html body.guided-flow.guided-flagship .ultimate-realtor-submit {
+  border: 0 !important;
+  background: linear-gradient(135deg, #f0d060 0%, var(--v-gold) 50%, #b8891a 100%) !important;
+  color: var(--v-navy) !important;
+  font-weight: 800 !important;
+  box-shadow: 0 3px 12px rgba(201, 162, 39, 0.3) !important;
+}
+
+html body.guided-flow.guided-flagship .btn-lookup:hover,
+html body.guided-flow.guided-flagship .btn-wizard-next:hover,
+html body.guided-flow.guided-flagship .guided-lead-submit:hover {
+  filter: brightness(1.04) !important;
+  transform: translateY(-1px) !important;
+  color: var(--v-navy) !important;
+}
+
+/* SECONDARY / OUTLINE — white + border */
+html body.guided-flow.guided-flagship .btn-wizard-back,
+html body.guided-flow.guided-flagship .btn-outline,
+html body.guided-flow.guided-flagship .guided-loan-options-btn {
+  border: 1.5px solid var(--v-border) !important;
+  background: var(--v-white) !important;
+  color: var(--v-navy) !important;
+  font-weight: 700 !important;
+  box-shadow: 0 1px 3px rgba(26, 18, 48, 0.04) !important;
+}
+
+html body.guided-flow.guided-flagship .btn-wizard-back:hover,
+html body.guided-flow.guided-flagship .btn-outline:hover,
+html body.guided-flow.guided-flagship .guided-loan-options-btn:hover {
+  border-color: rgba(201, 162, 39, 0.5) !important;
+  background: #fffdf7 !important;
+  transform: translateY(-1px) !important;
+}
+
+/* NAVY secondary */
+html body.guided-flow.guided-flagship .guided-realtor-btn {
+  border: 0 !important;
+  background: var(--v-navy) !important;
+  color: #fff !important;
+  box-shadow: 0 2px 10px rgba(26, 18, 48, 0.16) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-realtor-btn:hover {
+  background: #252040 !important;
+  color: #fff !important;
+}
+
+/* GHOST on dark results panels */
+html body.guided-flow.guided-flagship .guided-results-secondary,
+html body.guided-flow.guided-flagship .guided-results-secondary-apply,
+html body.guided-flow.guided-flagship .btn-results-apply {
+  border: 1.5px solid rgba(255, 255, 255, 0.32) !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  color: rgba(255, 255, 255, 0.95) !important;
+  box-shadow: none !important;
+  white-space: normal !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-secondary:hover,
+html body.guided-flow.guided-flagship .btn-results-apply:hover {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(201, 162, 39, 0.5) !important;
+  color: #fff !important;
+}
+
+/* TEXT / TERTIARY — skip links */
+html body.guided-flow.guided-flagship .wizard-skip,
+html body.guided-flow.guided-flagship .save-estimate-skip {
+  display: block !important;
+  width: 100% !important;
+  min-height: 0 !important;
+  height: auto !important;
+  margin: 1rem auto 0 !important;
+  padding: 0.55rem 0.5rem !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: var(--v-muted) !important;
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+  text-decoration: underline !important;
+  text-underline-offset: 3px !important;
+  white-space: normal !important;
+  transform: none !important;
+}
+
+/* Small utility (Clear) — not full CTA height */
+html body.guided-flow.guided-flagship .guided-property-summary-clear {
+  min-height: 32px !important;
+  height: 32px !important;
+  padding: 0 0.7rem !important;
+  border-radius: var(--v-btn-r) !important;
+  border: 1px solid var(--v-border) !important;
+  background: #fff !important;
+  color: var(--v-muted) !important;
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  box-shadow: none !important;
+}
+
+/* =========================================================
+   2. CENTERING & PAGE GRID
+   ========================================================= */
+html body.guided-flow.guided-flagship .wizard-main.guided-main,
+html body.guided-flow.guided-flagship .guided-main {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 auto !important;
+  padding: 1.25rem 1.15rem 7.5rem !important;
+  box-sizing: border-box !important;
+}
+
+html body.guided-flow.guided-flagship .guided-layout {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  max-width: var(--v-page) !important;
+  margin: 0 auto !important;
+  gap: 1.15rem !important;
+  box-sizing: border-box !important;
+}
+
+html body.guided-flow.guided-flagship .guided-layout-center {
+  width: 100% !important;
+  max-width: var(--v-content) !important;
+  margin: 0 auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  min-width: 0 !important;
+}
+
+html body.guided-flow.guided-flagship .wizard-step.guided-step,
+html body.guided-flow.guided-flagship .guided-step-panel,
+html body.guided-flow.guided-flagship .guided-step-panel-wide,
+html body.guided-flow.guided-flagship .guided-progress,
+html body.guided-flow.guided-flagship .guided-card,
+html body.guided-flow.guided-flagship .wizard-card.guided-card,
+html body.guided-flow.guided-flagship .guided-results-card,
+html body.guided-flow.guided-flagship .guided-choice-grid {
+  width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box !important;
+}
+
+html body.guided-flow.guided-flagship .guided-step-panel,
+html body.guided-flow.guided-flagship .guided-step-panel-wide {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  max-width: var(--v-content) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-step-intro {
+  width: 100% !important;
+  max-width: 28rem !important;
+  margin: 0 auto var(--v-space) !important;
+  padding: 0 0.35rem !important;
+  text-align: center !important;
+}
+
+html body.guided-flow.guided-flagship .guided-title,
+html body.guided-flow.guided-flagship .guided-lead,
+html body.guided-flow.guided-flagship .guided-kicker {
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+html body.guided-flow.guided-flagship .guided-title {
+  font-family: "Playfair Display", Georgia, serif !important;
+  font-size: clamp(1.5rem, 4vw, 1.95rem) !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1.2 !important;
+  color: var(--v-navy) !important;
+  margin: 0 0 0.6rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-lead {
+  max-width: 26rem !important;
+  font-size: 0.95rem !important;
+  line-height: 1.5 !important;
+  color: var(--v-muted) !important;
+  margin: 0 auto !important;
+}
+
+html body.guided-flow.guided-flagship .guided-kicker {
+  font-size: 0.68rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.09em !important;
+  text-transform: uppercase !important;
+  color: #8a7420 !important;
+  margin: 0 0 0.55rem !important;
+}
+
+/* Narrow cards (address, price) centered */
+html body.guided-flow.guided-flagship .guided-card-narrow,
+html body.guided-flow.guided-flagship [data-step-id="address"] .guided-card,
+html body.guided-flow.guided-flagship [data-step-id="price"] .guided-card {
+  max-width: var(--v-card) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-card,
+html body.guided-flow.guided-flagship .wizard-card.guided-card {
+  max-width: var(--v-content) !important;
+  padding: 1.4rem 1.3rem 1.45rem !important;
+  border-radius: var(--v-radius) !important;
+  background: var(--v-white) !important;
+  border: 1px solid var(--v-border) !important;
+  box-shadow: var(--v-shadow) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-choice-grid {
+  max-width: 560px !important;
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 0.85rem !important;
+}
+
+@media (min-width: 560px) {
+  html body.guided-flow.guided-flagship .guided-choice-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 1rem !important;
+  }
+}
+
+/* Desktop: content + rail as centered pair */
+@media (min-width: 1100px) {
+  html body.guided-flow.guided-flagship .guided-main {
+    padding: 1.5rem 1.75rem 7.75rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-layout {
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    gap: 1.5rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-layout-center {
+    flex: 0 1 var(--v-content) !important;
+    max-width: var(--v-content) !important;
+    margin: 0 !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-live-rail {
+    flex: 0 0 var(--v-rail) !important;
+    width: var(--v-rail) !important;
+    max-width: var(--v-rail) !important;
+    position: sticky !important;
+    top: 5.5rem !important;
+    margin: 0 !important;
+  }
+}
+
+/* Kill left-stuck ultimate/logan5 rules */
+html body.guided-flow.guided-flagship.logan5 .wizard-main,
+html body.guided-flow.guided-flagship.logan5 .wizard-main.guided-main {
+  max-width: none !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* =========================================================
+   3. SPACING RHYTHM
+   ========================================================= */
+html body.guided-flow.guided-flagship .guided-progress {
+  max-width: var(--v-content) !important;
+  margin: 0 auto var(--v-space) !important;
+  padding: 0.9rem 0.85rem 1rem !important;
+  border-radius: var(--v-radius) !important;
+  background: rgba(255, 255, 255, 0.8) !important;
+  border: 1px solid var(--v-border) !important;
+  box-shadow: 0 2px 12px rgba(26, 18, 48, 0.04) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-step-intro {
+  margin-bottom: 1.4rem !important;
+}
+
+html body.guided-flow.guided-flagship .field {
+  margin-bottom: 0 !important;
+}
+
+html body.guided-flow.guided-flagship .guided-center-note,
+html body.guided-flow.guided-flagship .guided-step-hint {
+  text-align: center !important;
+  margin: 0.85rem auto 0 !important;
+  max-width: 24rem !important;
+  font-size: 0.82rem !important;
+  color: var(--v-muted) !important;
+  line-height: 1.45 !important;
+}
+
+/* =========================================================
+   4. VISUAL HIERARCHY — payment dominates results
+   ========================================================= */
+html body.guided-flow.guided-flagship .guided-results-card {
+  max-width: 600px !important;
+  padding: 1.75rem 1.35rem 1.9rem !important;
+  border-radius: 20px !important;
+  background: linear-gradient(165deg, #110c1d 0%, var(--v-navy) 50%, #221a3a 100%) !important;
+  border: 1px solid rgba(201, 162, 39, 0.28) !important;
+  box-shadow: 0 16px 48px rgba(17, 12, 29, 0.28) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-card #pitiPayment,
+html body.guided-flow.guided-flagship .guided-results-hero .total-amount {
+  display: block !important;
+  text-align: center !important;
+  font-family: "Playfair Display", Georgia, serif !important;
+  font-size: clamp(2.6rem, 9vw, 3.4rem) !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.03em !important;
+  line-height: 1.05 !important;
+  color: var(--v-gold-hi) !important;
+  margin: 0.35rem 0 !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-hero .total-label,
+html body.guided-flow.guided-flagship .guided-results-hero .total-sublabel,
+html body.guided-flow.guided-flagship .guided-results-eyebrow,
+html body.guided-flow.guided-flagship .guided-results-title {
+  text-align: center !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-title {
+  color: #fff !important;
+  font-size: clamp(1.25rem, 3.5vw, 1.5rem) !important;
+  margin: 0 0 1rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-eyebrow {
+  color: rgba(232, 200, 74, 0.9) !important;
+  font-size: 0.68rem !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  font-weight: 700 !important;
+  margin: 0 0 0.4rem !important;
+}
+
+/* Secondary on results quieter */
+html body.guided-flow.guided-flagship .guided-breakdown,
+html body.guided-flow.guided-flagship .guided-stats,
+html body.guided-flow.guided-flagship .guided-secondary-details,
+html body.guided-flow.guided-flagship .guided-hub-collapsed {
+  opacity: 0.92;
+}
+
+html body.guided-flow.guided-flagship .guided-results-compliance {
+  font-size: 0.68rem !important;
+  line-height: 1.5 !important;
+  color: rgba(255, 255, 255, 0.45) !important;
+  text-align: center !important;
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0.5rem 0.25rem !important;
+  margin-top: 1rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-lead-primary {
+  margin: 1.25rem 0 !important;
+  padding: 1.35rem 1.2rem 1.25rem !important;
+  border-radius: 16px !important;
+  border: 1px solid rgba(201, 162, 39, 0.4) !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-lead-submit {
+  width: 100% !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-ctas {
+  width: 100% !important;
+  max-width: 22rem !important;
+  margin: 0 auto 1.25rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.6rem !important;
+  align-items: stretch !important;
+}
+
+html body.guided-flow.guided-flagship .guided-results-ctas > * {
+  width: 100% !important;
+}
+
+/* Price hero on price step */
+html body.guided-flow.guided-flagship #homePriceDisplay,
+html body.guided-flow.guided-flagship .guided-price-hero {
+  display: block !important;
+  text-align: center !important;
+  font-family: "Playfair Display", Georgia, serif !important;
+  font-size: clamp(2.1rem, 6.5vw, 2.7rem) !important;
+  font-weight: 700 !important;
+  color: var(--v-navy) !important;
+  margin: 0.25rem 0 1rem !important;
+  letter-spacing: -0.03em !important;
+}
+
+html body.guided-flow.guided-flagship .guided-score-number,
+html body.guided-flow.guided-flagship #creditScoreDisplay {
+  display: block !important;
+  text-align: center !important;
+  font-size: clamp(2.2rem, 7vw, 2.85rem) !important;
+  font-weight: 700 !important;
+  color: var(--v-navy) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-down-hero-value,
+html body.guided-flow.guided-flagship #downDisplay {
+  display: block !important;
+  text-align: center !important;
+  font-size: clamp(1.4rem, 4vw, 1.7rem) !important;
+  font-weight: 700 !important;
+  color: var(--v-navy) !important;
+}
+
+/* =========================================================
+   5. RIGHT-SIDE RAIL — integrated
+   ========================================================= */
+html body.guided-flow.guided-flagship .guided-live-rail {
+  width: 100% !important;
+  max-width: var(--v-content) !important;
+  margin: 0 auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.85rem !important;
+  box-sizing: border-box !important;
+}
+
+html body.guided-flow.guided-flagship .guided-live-card.wizard-live-preview {
+  margin: 0 !important;
+  padding: 1.15rem 1.1rem !important;
+  border-radius: var(--v-radius) !important;
+  background: linear-gradient(160deg, #110c1d, var(--v-navy) 55%, #252040) !important;
+  border: 1px solid rgba(201, 162, 39, 0.32) !important;
+  box-shadow: var(--v-shadow) !important;
+}
+
+html body.guided-flow.guided-flagship .wizard-live-preview-inner {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 0.2rem !important;
+  max-width: none !important;
+  margin: 0 !important;
+}
+
+html body.guided-flow.guided-flagship .wizard-live-preview-label {
+  font-size: 0.68rem !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: rgba(255, 255, 255, 0.55) !important;
+}
+
+html body.guided-flow.guided-flagship .wizard-live-preview-amount {
+  font-family: "Playfair Display", Georgia, serif !important;
+  font-size: 1.65rem !important;
+  font-weight: 700 !important;
+  color: var(--v-gold-hi) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-live-stats {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr 1fr !important;
+  gap: 0.35rem !important;
+  margin: 0.85rem 0 0.4rem !important;
+  padding: 0.6rem 0.35rem !important;
+  border-radius: 10px !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-live-stats dt {
+  font-size: 0.6rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  color: rgba(255, 255, 255, 0.45) !important;
+  margin: 0 !important;
+}
+
+html body.guided-flow.guided-flagship .guided-live-stats dd {
+  margin: 0.15rem 0 0 !important;
+  font-size: 0.8rem !important;
+  font-weight: 700 !important;
+  color: #fff !important;
+}
+
+html body.guided-flow.guided-flagship .wizard-live-preview-note {
+  margin: 0.35rem 0 0 !important;
+  max-width: none !important;
+  text-align: left !important;
+  font-size: 0.7rem !important;
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-side-advisor {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 0.8rem !important;
+  margin: 0 !important;
+  padding: 1.15rem 1.05rem !important;
+  border-radius: var(--v-radius) !important;
+  background: var(--v-white) !important;
+  border: 1px solid var(--v-border) !important;
+  box-shadow: var(--v-shadow) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-side-identity {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.75rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-side-photo {
+  width: 56px !important;
+  height: 56px !important;
+  border-radius: 999px !important;
+  object-fit: cover !important;
+  border: 2px solid rgba(201, 162, 39, 0.45) !important;
+  flex-shrink: 0 !important;
+}
+
+html body.guided-flow.guided-flagship .guided-side-copy strong {
+  display: block !important;
+  font-size: 0.95rem !important;
+  color: var(--v-navy) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-side-role {
+  display: block !important;
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  color: #8a7420 !important;
+  margin-top: 0.1rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-side-nmls {
+  display: block !important;
+  font-size: 0.7rem !important;
+  color: var(--v-muted) !important;
+  margin-top: 0.1rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-side-trust {
+  margin: 0 !important;
+  font-size: 0.78rem !important;
+  line-height: 1.4 !important;
+  color: var(--v-muted) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-side-ctas {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.5rem !important;
+  width: 100% !important;
+}
+
+html body.guided-flow.guided-flagship .guided-side-cta,
+html body.guided-flow.guided-flagship .guided-reviews-btn,
+html body.guided-flow.guided-flagship .guided-realtor-btn,
+html body.guided-flow.guided-flagship .guided-loan-options-btn {
+  width: 100% !important;
+  white-space: normal !important;
+  font-size: 0.8rem !important;
+  padding: 0.7rem 0.9rem !important;
+}
+
+/* =========================================================
+   6. PILLS, TAGS, SMALL UI
+   ========================================================= */
+html body.guided-flow.guided-flagship .ultimate-term-btn,
+html body.guided-flow.guided-flagship .guided-mini-chip {
+  min-height: 44px !important;
+  min-width: 3.4rem !important;
+  padding: 0.45rem 0.9rem !important;
+  border-radius: var(--v-btn-r) !important;
+  border: 1.5px solid var(--v-border) !important;
+  background: #faf9f7 !important;
+  color: var(--v-navy) !important;
+  font-size: 0.85rem !important;
+  font-weight: 700 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: none !important;
+  cursor: pointer !important;
+}
+
+html body.guided-flow.guided-flagship .ultimate-term-btn.active,
+html body.guided-flow.guided-flagship .guided-mini-chip.is-selected {
+  background: linear-gradient(135deg, #f0d060, var(--v-gold) 55%, #b8891a) !important;
+  border-color: transparent !important;
+  color: var(--v-navy) !important;
+  box-shadow: 0 3px 10px rgba(201, 162, 39, 0.28) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-term-picker,
+html body.guided-flow.guided-flagship .guided-chip-row,
+html body.guided-flow.guided-flagship .guided-down-chips {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 0.45rem !important;
+  width: 100% !important;
+}
+
+html body.guided-flow.guided-flagship .ultimate-program-btn {
+  min-height: 60px !important;
+  border-radius: 14px !important;
+  border: 1.5px solid var(--v-border) !important;
+  background: #faf9f7 !important;
+  padding: 0.7rem 0.55rem !important;
+  text-align: center !important;
+}
+
+html body.guided-flow.guided-flagship .ultimate-program-btn.active {
+  background: linear-gradient(135deg, #f0d060, var(--v-gold) 55%, #b8891a) !important;
+  border-color: transparent !important;
+  box-shadow: 0 3px 12px rgba(201, 162, 39, 0.28) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-progress-num {
+  width: 1.85rem !important;
+  height: 1.85rem !important;
+  border-radius: 999px !important;
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+}
+
+html body.guided-flow.guided-flagship .guided-progress-step.is-active .guided-progress-num {
+  background: linear-gradient(135deg, var(--v-gold-hi), var(--v-gold)) !important;
+  color: var(--v-navy) !important;
+  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.2) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-progress-step.is-done .guided-progress-num {
+  background: var(--v-navy-mid) !important;
+  color: #fff !important;
+}
+
+html body.guided-flow.guided-flagship .guided-progress-steps {
+  justify-content: center !important;
+  gap: 0.35rem 0.4rem !important;
+}
+
+/* Property result chips */
+html body.guided-flow.guided-flagship .guided-property-summary {
+  margin-top: 1.1rem !important;
+  padding: 1rem !important;
+  border-radius: 14px !important;
+  border: 1px solid rgba(201, 162, 39, 0.28) !important;
+  background: linear-gradient(165deg, #fbf8f0, #fff) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-property-summary-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 0.45rem !important;
+  margin: 0 !important;
+}
+
+html body.guided-flow.guided-flagship .guided-property-summary-grid > div {
+  padding: 0.5rem 0.3rem !important;
+  border-radius: 10px !important;
+  background: rgba(26, 18, 48, 0.04) !important;
+  text-align: center !important;
+  border: 1px solid rgba(26, 18, 48, 0.04) !important;
+}
+
+html body.guided-flow.guided-flagship .guided-property-summary-grid dt {
+  margin: 0 0 0.15rem !important;
+  font-size: 0.58rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+  color: #8a8499 !important;
+}
+
+html body.guided-flow.guided-flagship .guided-property-summary-grid dd {
+  margin: 0 !important;
+  font-size: 0.8rem !important;
+  font-weight: 700 !important;
+  color: var(--v-navy) !important;
+}
+
+/* Profile chips */
+html body.guided-flow.guided-flagship .ultimate-profile-chip {
+  border-radius: 12px !important;
+  border: 1.5px solid var(--v-border) !important;
+  padding: 0.75rem 0.85rem !important;
+  background: #faf9f7 !important;
+}
+
+html body.guided-flow.guided-flagship .ultimate-profile-chip:has(input:checked) {
+  border-color: var(--v-gold) !important;
+  background: rgba(201, 162, 39, 0.12) !important;
+}
+
+/* Save estimate tabs as refined pills */
+html body.guided-flow.guided-flagship .save-estimate-tab {
+  min-height: 36px !important;
+  border-radius: var(--v-btn-r) !important;
+  padding: 0.35rem 0.9rem !important;
+  font-size: 0.78rem !important;
+  font-weight: 700 !important;
+}
+
+/* =========================================================
+   7. NAV BAR — balanced Back + Continue
+   ========================================================= */
+html body.guided-flow.guided-flagship .wizard-nav {
+  padding: 0.8rem 1rem calc(0.8rem + env(safe-area-inset-bottom, 0px)) !important;
+  background: linear-gradient(180deg, transparent 0%, rgba(244, 242, 239, 0.92) 22%, #f4f2ef 48%) !important;
+  border-top: 1px solid rgba(26, 18, 48, 0.06) !important;
+}
+
+html body.guided-flow.guided-flagship .wizard-nav-inner,
+html body.guided-flow.guided-flagship .wizard-nav-inner.guided-nav-inner {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.7rem !important;
+  width: 100% !important;
+  max-width: 480px !important;
+  margin: 0 auto !important;
+  padding-left: 0.5rem !important;
+  padding-right: 0.5rem !important;
+  box-sizing: border-box !important;
+}
+
+html body.guided-flow.guided-flagship .btn-wizard-back {
+  flex: 0 0 auto !important;
+  min-width: 7rem !important;
+}
+
+html body.guided-flow.guided-flagship .btn-wizard-next {
+  flex: 1 1 auto !important;
+  max-width: 16rem !important;
+  min-width: 0 !important;
+}
+
+html body.guided-flow.guided-flagship .wizard-nav-solo {
+  max-width: 300px !important;
+}
+
+html body.guided-flow.guided-flagship .wizard-nav-solo .btn-wizard-next {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+/* Address lookup full width in card */
+html body.guided-flow.guided-flagship [data-step-id="address"] .btn-lookup,
+html body.guided-flow.guided-flagship [data-step-id="address"] #lookupAddress {
+  width: 100% !important;
+  margin-top: 0.85rem !important;
+}
+
+html body.guided-flow.guided-flagship [data-step-id="address"] .guided-address-field label {
+  display: block !important;
+  text-align: center !important;
+  margin-bottom: 0.5rem !important;
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+  color: var(--v-muted) !important;
+}
+
+/* Loan/credit grids balanced */
+@media (min-width: 720px) {
+  html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-split,
+  html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-credit-grid {
+    display: grid !important;
+    grid-template-columns: 1.05fr 0.95fr !important;
+    gap: 1.35rem !important;
+    align-items: stretch !important;
+    width: 100% !important;
+  }
+}
+
+/* =========================================================
+   8. MOBILE
+   ========================================================= */
+@media (max-width: 719px) {
+  html body.guided-flow.guided-flagship {
+    --v-btn-h: 50px;
+    --v-card: 100%;
+  }
+
+  html body.guided-flow.guided-flagship .guided-main {
+    padding: 0.9rem 0.9rem 7.4rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-card,
+  html body.guided-flow.guided-flagship .wizard-card.guided-card {
+    padding: 1.15rem 1rem 1.2rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-title {
+    font-size: clamp(1.4rem, 6vw, 1.65rem) !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-lead {
+    font-size: 0.9rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-progress {
+    padding: 0.7rem 0.5rem 0.8rem !important;
+    margin-bottom: 1.1rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-progress-label {
+    font-size: 0.52rem !important;
+    max-width: 2.8rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .wizard-nav-inner {
+    max-width: 100% !important;
+    padding-left: 0.85rem !important;
+    padding-right: 0.85rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .btn-wizard-back {
+    min-width: 5.75rem !important;
+    padding-left: 0.95rem !important;
+    padding-right: 0.95rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .btn-wizard-next {
+    max-width: none !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-results-card {
+    max-width: 100% !important;
+    padding: 1.35rem 1rem 1.5rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-results-ctas {
+    max-width: 100% !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-live-rail {
+    max-width: min(100%, 480px) !important;
+  }
+
+  html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-split,
+  html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-credit-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.15rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-choice-card {
+    min-height: 5.5rem !important;
+    padding: 1.05rem 0.95rem !important;
+  }
+}
+
+@media (min-width: 720px) and (max-width: 1099px) {
+  html body.guided-flow.guided-flagship .guided-live-rail {
+    max-width: var(--v-content) !important;
+    display: grid !important;
+    grid-template-columns: 1.1fr 0.9fr !important;
+    gap: 0.85rem !important;
+    align-items: start !important;
+  }
+}
+
+/* Results: hide floating live payment on small screens (hero owns focus) */
+@media (max-width: 1099px) {
+  html body.guided-flow.guided-flagship.wizard-on-results .guided-live-rail .wizard-live-preview {
+    display: none !important;
+  }
+}
+
+/* Header stays clean (logos unchanged — only layout polish) */
+html body.guided-flow.guided-flagship .guided-header-inner {
+  max-width: var(--v-page) !important;
+  margin: 0 auto !important;
+}
+
+html body.guided-flow.guided-flagship .guided-logo-link {
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+/* Footer secondary */
+html body.guided-flow.guided-flagship footer.guided-footer {
+  background: var(--v-navy) !important;
+  border-top: 1px solid rgba(201, 162, 39, 0.25) !important;
+  text-align: center !important;
+}
+
+html body.guided-flow.guided-flagship .guided-footer-line {
+  color: rgba(255, 255, 255, 0.55) !important;
+  font-size: 0.68rem !important;
+  line-height: 1.55 !important;
+}
+
+html body.guided-flow.guided-flagship .guided-footer .equal-housing-logo {
+  filter: brightness(0) invert(1) !important;
+  width: 48px !important;
+  opacity: 0.9 !important;
+}
+
+/* Focus a11y */
+html body.guided-flow.guided-flagship :focus-visible {
+  outline: 2px solid var(--v-gold) !important;
+  outline-offset: 2px !important;
+}
+
+/* =========================================================
+   STEP NAV — in-flow under content (not fixed floating bar)
+   ========================================================= */
+html body.guided-flow.guided-flagship .wizard-nav.guided-step-nav,
+html body.guided-flow.guided-flagship nav.guided-step-nav {
+  position: static !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  z-index: auto !important;
+  width: 100% !important;
+  max-width: var(--v-content, 680px) !important;
+  margin: 1.5rem auto 0.5rem !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+html body.guided-flow.guided-flagship .guided-step-nav .wizard-nav-inner,
+html body.guided-flow.guided-flagship .guided-step-nav .guided-nav-inner {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.75rem !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+}
+
+html body.guided-flow.guided-flagship .guided-step-nav .btn-wizard-back {
+  flex: 0 0 auto !important;
+  min-width: 7.25rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-step-nav .btn-wizard-next {
+  flex: 1 1 auto !important;
+  max-width: 18rem !important;
+  min-width: 0 !important;
+}
+
+html body.guided-flow.guided-flagship .guided-step-nav.wizard-nav-solo .wizard-nav-inner,
+html body.guided-flow.guided-flagship .guided-step-nav .wizard-nav-solo,
+html body.guided-flow.guided-flagship .guided-step-nav .wizard-nav-inner.wizard-nav-solo {
+  max-width: 20rem !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+html body.guided-flow.guided-flagship .guided-step-nav .wizard-nav-inner.wizard-nav-solo .btn-wizard-next,
+html body.guided-flow.guided-flagship .guided-step-nav.wizard-nav-solo .btn-wizard-next {
+  max-width: 100% !important;
+  width: 100% !important;
+  flex: 1 1 100% !important;
+}
+
+/* Less bottom padding now that nav isn't fixed over content */
+html body.guided-flow.guided-flagship .guided-main {
+  padding-bottom: 3rem !important;
+}
+
+html body.guided-flow.guided-flagship footer.guided-footer {
+  padding-bottom: 2.5rem !important;
+}
+
+/* Hide nav entirely on results (no continue needed) — JS already hides next */
+html body.guided-flow.guided-flagship.wizard-on-results .guided-step-nav {
+  margin-top: 1.25rem !important;
+}
+
+@media (max-width: 719px) {
+  html body.guided-flow.guided-flagship .guided-step-nav {
+    margin-top: 1.25rem !important;
+    margin-bottom: 0.25rem !important;
+    max-width: 100% !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-step-nav .btn-wizard-back {
+    min-width: 5.75rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-step-nav .btn-wizard-next {
+    max-width: none !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-main {
+    padding-bottom: 2.5rem !important;
+  }
+}
+
+/* Ensure sticky CTA doesn't collide if shown */
+html body.guided-flow.guided-flagship .sticky-cta-logan5 {
+  bottom: 1rem !important;
+}
+
+/* Override logan5 fixed bottom nav completely */
+html body.guided-flow.guided-flagship .ultimate-wizard-nav.guided-step-nav,
+html body.guided-flow.guided-flagship.logan5 .ultimate-wizard-nav.guided-step-nav,
+html body.guided-flow.guided-flagship.logan5 .wizard-nav.guided-step-nav {
+  position: static !important;
+  bottom: auto !important;
+  left: auto !important;
+  right: auto !important;
+  width: 100% !important;
+  max-width: var(--v-content, 680px) !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+html body.guided-flow.guided-flagship.logan5 .guided-step-nav .wizard-nav-inner {
+  max-width: 100% !important;
+  padding: 0 !important;
+}
+
+/* =========================================================
+   MOBILE TEXT OVERFLOW FIX — iPhone & Android all sizes
+   ========================================================= */
+html body.guided-flow.guided-flagship,
+html body.guided-flow.guided-flagship * {
+  max-width: 100%;
+}
+
+html body.guided-flow.guided-flagship {
+  overflow-x: hidden !important;
+}
+
+html body.guided-flow.guided-flagship .guided-main,
+html body.guided-flow.guided-flagship .guided-layout,
+html body.guided-flow.guided-flagship .guided-layout-center,
+html body.guided-flow.guided-flagship .guided-step-panel,
+html body.guided-flow.guided-flagship .guided-card,
+html body.guided-flow.guided-flagship .guided-results-card {
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+  box-sizing: border-box !important;
+}
+
+/* Allow wrapping on buttons that had nowrap (except tiny icon buttons) */
+html body.guided-flow.guided-flagship .btn-wizard-next,
+html body.guided-flow.guided-flagship .btn-wizard-back,
+html body.guided-flow.guided-flagship .guided-lead-submit,
+html body.guided-flow.guided-flagship .guided-results-secondary,
+html body.guided-flow.guided-flagship .guided-side-cta,
+html body.guided-flow.guided-flagship .guided-reviews-btn,
+html body.guided-flow.guided-flagship .guided-realtor-btn,
+html body.guided-flow.guided-flagship .guided-loan-options-btn,
+html body.guided-flow.guided-flagship .btn-results-apply {
+  white-space: normal !important;
+  word-break: break-word !important;
+  hyphens: auto;
+  text-align: center !important;
+}
+
+html body.guided-flow.guided-flagship .guided-title,
+html body.guided-flow.guided-flagship .guided-lead,
+html body.guided-flow.guided-flagship .guided-kicker,
+html body.guided-flow.guided-flagship .guided-choice-card strong,
+html body.guided-flow.guided-flagship .guided-choice-card span,
+html body.guided-flow.guided-flagship .field-note,
+html body.guided-flow.guided-flagship .guided-step-hint,
+html body.guided-flow.guided-flagship .save-estimate-title,
+html body.guided-flow.guided-flagship .save-estimate-lead,
+html body.guided-flow.guided-flagship .guided-toast-body,
+html body.guided-flow.guided-flagship .guided-toast-title,
+html body.guided-flow.guided-flagship .guided-side-trust,
+html body.guided-flow.guided-flagship .guided-footer-line {
+  overflow-wrap: anywhere !important;
+  word-break: break-word !important;
+  white-space: normal !important;
+  max-width: 100% !important;
+}
+
+/* Progress labels — no cutoff */
+html body.guided-flow.guided-flagship .guided-progress {
+  overflow: visible !important;
+  padding-left: 0.4rem !important;
+  padding-right: 0.4rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-progress-steps {
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 0.3rem 0.25rem !important;
+  width: 100% !important;
+}
+
+html body.guided-flow.guided-flagship .guided-progress-step {
+  min-width: 0 !important;
+  flex: 1 1 auto !important;
+  max-width: 4.2rem !important;
+}
+
+html body.guided-flow.guided-flagship .guided-progress-label {
+  max-width: 100% !important;
+  width: 100% !important;
+  font-size: 0.55rem !important;
+  line-height: 1.15 !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  display: block !important;
+}
+
+/* Toasts fit phone screens */
+html body.guided-flow.guided-flagship .guided-toast-host,
+.guided-toast-host {
+  left: 0.75rem !important;
+  right: 0.75rem !important;
+  max-width: calc(100vw - 1.5rem) !important;
+  box-sizing: border-box !important;
+}
+
+.guided-toast {
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  word-break: break-word !important;
+}
+
+/* Header phone / apply — don't overflow small phones */
+@media (max-width: 719px) {
+  html body.guided-flow.guided-flagship .guided-header-inner {
+    gap: 0.4rem !important;
+    padding-left: 0.65rem !important;
+    padding-right: 0.65rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-logo-link {
+    max-width: min(42vw, 150px) !important;
+    min-width: 0 !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-header-logo {
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: 32px !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-header-actions {
+    gap: 0.3rem !important;
+    min-width: 0 !important;
+    flex-shrink: 1 !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-header-phone {
+    font-size: 0.68rem !important;
+    padding: 0.35rem 0.4rem !important;
+    white-space: nowrap !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-header-apply {
+    font-size: 0.65rem !important;
+    padding: 0.4rem 0.65rem !important;
+    min-height: 36px !important;
+    white-space: nowrap !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-header-apply .btn-apply-arrow {
+    display: none !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-main {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-choice-card {
+    padding: 0.95rem 0.85rem !important;
+    min-height: 0 !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-choice-card strong {
+    font-size: 0.95rem !important;
+    line-height: 1.25 !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-choice-card span:not(.guided-choice-icon) {
+    font-size: 0.78rem !important;
+    line-height: 1.35 !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-results-card #pitiPayment {
+    font-size: clamp(2.1rem, 11vw, 2.85rem) !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-property-summary-grid {
+    grid-template-columns: 1fr 1fr 1fr !important;
+    gap: 0.35rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-property-summary-grid dd {
+    font-size: 0.7rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-property-summary-addr {
+    font-size: 0.88rem !important;
+    word-break: break-word !important;
+  }
+
+  html body.guided-flow.guided-flagship .ultimate-program-btn strong,
+  html body.guided-flow.guided-flagship .ultimate-program-btn span {
+    word-break: break-word !important;
+    white-space: normal !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-footer-line {
+    padding: 0 0.5rem !important;
+    font-size: 0.62rem !important;
+  }
+}
+
+/* Very small phones (iPhone SE, etc.) */
+@media (max-width: 390px) {
+  html body.guided-flow.guided-flagship .guided-header-phone {
+    font-size: 0.62rem !important;
+    letter-spacing: -0.01em !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-progress-step {
+    max-width: 3.2rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-progress-label {
+    font-size: 0.5rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-title {
+    font-size: 1.35rem !important;
+  }
+
+  html body.guided-flow.guided-flagship .guided-property-summary-grid {
+    grid-template-columns: 1fr !important;
+  }
+}

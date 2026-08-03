@@ -315,22 +315,57 @@
     const title = document.querySelector(".save-estimate-title");
 
     function setTab(tab) {
+      const emailPanel = document.getElementById("saveEstimatePanelEmail");
       [emailTab, smsTab].forEach((btn) => {
         if (!btn) return;
         const on = btn.dataset.saveTab === tab;
         btn.classList.toggle("active", on);
         btn.setAttribute("aria-selected", on ? "true" : "false");
+        btn.setAttribute("tabindex", on ? "0" : "-1");
       });
       if (emailInput) emailInput.required = tab === "email";
-      smsFields?.classList.toggle("hidden", tab !== "sms");
+      // SMS panel (legacy id saveEstimateSmsFields)
+      if (smsFields) {
+        const showSms = tab === "sms";
+        smsFields.classList.toggle("hidden", !showSms);
+        smsFields.hidden = !showSms;
+      }
+      if (emailPanel) {
+        emailPanel.classList.toggle("hidden", tab === "sms");
+        emailPanel.hidden = tab === "sms";
+      }
+      const submit = document.querySelector(".save-estimate-submit, #saveEstimateForm [type='submit']");
+      if (submit) {
+        submit.textContent = tab === "sms" ? "Text me my numbers" : "Email me my numbers";
+      }
       if (title) {
         title.textContent =
-          tab === "sms" ? "Text me this payment" : "Email me this payment";
+          tab === "sms"
+            ? "Text me this estimate — and Logan’s take on it"
+            : "Keep this estimate — and Logan’s take on it";
+      }
+    }
+
+    function onTabKey(e) {
+      if (e.key !== "ArrowRight" && e.key !== "ArrowLeft" && e.key !== "Home" && e.key !== "End") return;
+      e.preventDefault();
+      const tabs = [emailTab, smsTab].filter(Boolean);
+      let i = tabs.findIndex((t) => t.classList.contains("active"));
+      if (e.key === "ArrowRight") i = (i + 1) % tabs.length;
+      if (e.key === "ArrowLeft") i = (i - 1 + tabs.length) % tabs.length;
+      if (e.key === "Home") i = 0;
+      if (e.key === "End") i = tabs.length - 1;
+      const next = tabs[i];
+      if (next) {
+        setTab(next.dataset.saveTab);
+        next.focus();
       }
     }
 
     emailTab?.addEventListener("click", () => setTab("email"));
     smsTab?.addEventListener("click", () => setTab("sms"));
+    emailTab?.addEventListener("keydown", onTabKey);
+    smsTab?.addEventListener("keydown", onTabKey);
     setTab("email");
   }
 

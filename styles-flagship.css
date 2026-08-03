@@ -1002,14 +1002,14 @@ html body.guided-flow.guided-flagship .guided-footer-copy {
 }
 
 /* Loan-you + credit grids: balanced, not left-heavy */
-html body.guided-flow.guided-flagship [data-step-id="loan-you"] .guided-loan-you-card,
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-you-card,
 html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-credit-card {
   width: 100% !important;
   max-width: var(--fs-content-wide) !important;
   margin: 0 auto !important;
 }
 
-html body.guided-flow.guided-flagship [data-step-id="loan-you"] .guided-loan-split,
+html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-split,
 html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-credit-grid {
   width: 100% !important;
 }
@@ -1129,7 +1129,7 @@ html body.guided-flow.guided-flagship [data-step-id="price"] .guided-card {
   }
 
   /* Loan-you: single column breathing room */
-  html body.guided-flow.guided-flagship [data-step-id="loan-you"] .guided-loan-split {
+  html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-split {
     gap: 1.25rem !important;
   }
 
@@ -1185,7 +1185,7 @@ html body.guided-flow.guided-flagship .guided-optional-details summary {
     grid-template-columns: 1fr !important;
   }
 
-  html body.guided-flow.guided-flagship [data-step-id="loan-you"] .guided-loan-split {
+  html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-split {
     grid-template-columns: 1fr !important;
   }
 }
@@ -1198,7 +1198,7 @@ html body.guided-flow.guided-flagship .guided-optional-details summary {
     align-items: stretch !important;
   }
 
-  html body.guided-flow.guided-flagship [data-step-id="loan-you"] .guided-loan-split {
+  html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-split {
     grid-template-columns: 1.05fr 0.95fr !important;
     gap: 1.5rem !important;
     align-items: stretch !important;

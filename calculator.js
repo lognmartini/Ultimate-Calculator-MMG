@@ -1510,7 +1510,16 @@
       note += " Adjust below if you have actual quotes.";
     }
     const noteType = data.parcelMismatch ? "warn" : "success";
-    setLocationNote(note, noteType);
+    // Plain-language success for guided flow; keep richer detail available in note when mismatch
+    if (document.body.classList.contains("guided-flow") && !data.parcelMismatch) {
+      const place = data.location?.display || "This property";
+      setLocationNote(
+        `Property found — local tax & insurance estimates applied for ${place}.`,
+        "success"
+      );
+    } else {
+      setLocationNote(note, noteType);
+    }
     if (!rateManualOverride) {
       applyBaselineRatesImmediate();
     }
@@ -1985,10 +1994,11 @@
       els.lookupAddress.disabled = true;
       els.lookupAddress.textContent = "Looking up property…";
     }
+    setAddressState("loading");
     setLocationNote(
       updatePrice
-        ? "Looking up list price or estimated value, taxes, and insurance…"
-        : "Pulling tax and insurance estimates for this address…",
+        ? "Searching for this property — price, taxes, and insurance…"
+        : "Pulling local tax and insurance estimates…",
       ""
     );
 
@@ -2001,22 +2011,24 @@
       );
       data.updatePriceRequested = updatePrice;
       applyPropertyData(data);
+      setAddressState("success");
     if (document.body.classList.contains("logan5")) {
       syncLoanSizeRules();
       snapDownToProgramDefault();
     }
     } catch (err) {
+      setAddressState("error");
       setLocationNote(
         err.message === "Address not found"
-          ? "We couldn't find that address. Include street, city, state, and ZIP."
-          : "Lookup failed. Use the suggestions while typing, or enter tax and insurance manually.",
+          ? "We couldn’t find that address. Try the suggestions, or continue with price only."
+          : "Lookup didn’t work this time. Pick a suggestion, or continue with price only — you can edit taxes later.",
         "error"
       );
     } finally {
       lookupInFlight = false;
       if (els.lookupAddress) {
         els.lookupAddress.disabled = false;
-        els.lookupAddress.textContent = "Look up this address";
+        els.lookupAddress.textContent = "Look up this property";
       }
       const pending = pendingPropertyLookup;
       pendingPropertyLookup = null;
@@ -2031,10 +2043,19 @@
     }
   }
 
+  function setAddressState(state) {
+    const card = document.getElementById("guidedAddressCard");
+    if (card) card.setAttribute("data-address-state", state || "idle");
+  }
+
   async function lookupFromAddress() {
     const address = els.propertyAddress?.value.trim();
     if (!address) {
-      setLocationNote("Enter a property address to estimate taxes and insurance.", "error");
+      setAddressState("error");
+      setLocationNote(
+        "Type a full street address (or pick a suggestion), or continue with price only.",
+        "error"
+      );
       return;
     }
     await resolvePropertyAndApply(

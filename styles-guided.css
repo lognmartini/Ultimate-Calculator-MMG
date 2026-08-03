@@ -2180,7 +2180,19 @@ html body.guided-flow input:focus,
 html body.guided-flow .currency-input:focus,
 html body.guided-flow .address-input:focus,
 html body.guided-flow select:focus {
-  outline: none !important;
+  outline: none;
+}
+html body.guided-flow input:focus-visible,
+html body.guided-flow .currency-input:focus-visible,
+html body.guided-flow .address-input:focus-visible,
+html body.guided-flow select:focus-visible,
+html body.guided-flow button:focus-visible,
+html body.guided-flow a:focus-visible,
+html body.guided-flow summary:focus-visible,
+html body.guided-flow [role="radio"]:focus-visible,
+html body.guided-flow [role="tab"]:focus-visible {
+  outline: 2px solid #c9a227 !important;
+  outline-offset: 2px !important;
   border-color: var(--g-gold) !important;
   box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.2) !important;
   background: #fff !important;
@@ -2695,44 +2707,44 @@ html body.guided-flow.logan5 .wizard-header-brand {
 
 /* =========================================================
    STEP 4 only — You & down (match credit-step polish)
-   Scoped to [data-step-id="loan-you"]
+   Scoped to [data-step-id="loan-you"], [data-step-id="price-loan"]
    ========================================================= */
 
-body.guided-flow [data-step-id="loan-you"].guided-loan-you-step {
+body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"].guided-loan-you-step {
   width: 100%;
   max-width: 720px;
   margin-left: auto;
   margin-right: auto;
 }
 
-body.guided-flow [data-step-id="loan-you"] .guided-loan-you-panel {
+body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-you-panel {
   max-width: 720px;
   width: 100%;
   margin: 0 auto;
 }
 
 /* Intro breathing room */
-body.guided-flow [data-step-id="loan-you"] .guided-loan-you-intro {
+body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-you-intro {
   text-align: center;
   margin: 0 auto 1.5rem;
   padding: 0.35rem 0.5rem 0.25rem;
   max-width: 30rem;
 }
 
-body.guided-flow [data-step-id="loan-you"] .guided-loan-you-intro .guided-kicker {
+body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-you-intro .guided-kicker {
   margin-bottom: 0.55rem;
   letter-spacing: 0.08em;
   font-size: 0.72rem;
 }
 
-body.guided-flow [data-step-id="loan-you"] .guided-loan-you-intro .guided-title {
+body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-you-intro .guided-title {
   margin: 0 0 0.65rem;
   font-size: clamp(1.55rem, 4.2vw, 1.95rem);
   line-height: 1.2;
   letter-spacing: -0.02em;
 }
 
-body.guided-flow [data-step-id="loan-you"] .guided-loan-you-intro .guided-lead {
+body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-you-intro .guided-lead {
   margin: 0 auto;
   max-width: 26rem;
   font-size: 0.95rem;
@@ -2741,7 +2753,7 @@ body.guided-flow [data-step-id="loan-you"] .guided-loan-you-intro .guided-lead {
 }
 
 /* Main card shell */
-body.guided-flow [data-step-id="loan-you"] .guided-loan-you-card {
+body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-you-card {
   max-width: 720px;
   margin: 0 auto;
   padding: 1.5rem 1.35rem 1.45rem !important;
@@ -2751,14 +2763,14 @@ body.guided-flow [data-step-id="loan-you"] .guided-loan-you-card {
   box-shadow: 0 10px 36px rgba(26, 18, 48, 0.08) !important;
 }
 
-body.guided-flow [data-step-id="loan-you"] .guided-loan-split {
+body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-split {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.65rem;
   align-items: start;
 }
 
-body.guided-flow [data-step-id="loan-you"] .guided-loan-you-label {
+body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-you-label {
   display: block;
   margin: 0 0 0.7rem;
   font-size: 0.7rem;
@@ -2769,12 +2781,12 @@ body.guided-flow [data-step-id="loan-you"] .guided-loan-you-label {
   text-align: center;
 }
 
-body.guided-flow [data-step-id="loan-you"] .guided-loan-you-label-spaced {
+body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-you-label-spaced {
   margin-top: 1.45rem;
 }
 
 /* Profile chips — larger taps, clearer selected */
-body.guided-flow [data-step-id="loan-you"] .guided-loan-you-chips {
+body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-you-chips {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -2783,7 +2795,7 @@ body.guided-flow [data-step-id="loan-you"] .guided-loan-you-chips {
   border: 0;
 }
 
-body.guided-flow [data-step-id="loan-you"] .guided-loan-you-chips .ultimate-profile-chip {
+body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-you-chips .ultimate-profile-chip {
   display: flex;
   align-items: flex-start;
   gap: 0.65rem;
@@ -2797,18 +2809,18 @@ body.guided-flow [data-step-id="loan-you"] .guided-loan-you-chips .ultimate-prof
   transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
 }
 
-body.guided-flow [data-step-id="loan-you"] .guided-loan-you-chips .ultimate-profile-chip:hover {
+body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-you-chips .ultimate-profile-chip:hover {
   border-color: rgba(201, 162, 39, 0.5);
   background: #fff;
 }
 
-body.guided-flow [data-step-id="loan-you"] .guided-loan-you-chips .ultimate-profile-chip:has(input:checked) {
+body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-you-chips .ultimate-profile-chip:has(input:checked) {
   border-color: #c9a227;
   background: rgba(201, 162, 39, 0.12);
   box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.14);
 }
 
-body.guided-flow [data-step-id="loan-you"] .guided-loan-you-chips .ultimate-profile-chip input {
+body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-you-chips .ultimate-profile-chip input {
   margin-top: 0.2rem;
   width: 1.05rem;
   height: 1.05rem;
@@ -2816,20 +2828,20 @@ body.guided-flow [data-step-id="loan-you"] .guided-loan-you-chips .ultimate-prof
   flex-shrink: 0;
 }
 
-body.guided-flow [data-step-id="loan-you"] .guided-loan-you-chips .ultimate-profile-chip-text {
+body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-you-chips .ultimate-profile-chip-text {
   display: flex;
   flex-direction: column;
   gap: 0.12rem;
   text-align: left;
 }
 
-body.guided-flow [data-step-id="loan-you"] .guided-loan-you-chips .ultimate-profile-chip-text strong {
+body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-you-chips .ultimate-profile-chip-text strong {
   font-size: 0.9rem;
   font-weight: 700;
   color: #1a1230;
 }
 
-body.guided-flow [data-step-id="loan-you"] .guided-loan-you-chips .ultimate-profile-chip-text span {
+body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-you-chips .ultimate-profile-chip-text span {
   font-size: 0.75rem;
   font-weight: 500;
   color: #6b6580;
@@ -2837,13 +2849,13 @@ body.guided-flow [data-step-id="loan-you"] .guided-loan-you-chips .ultimate-prof
 }
 
 /* Program buttons — pill/card hybrid matching system */
-body.guided-flow [data-step-id="loan-you"] .guided-loan-you-programs {
+body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-you-programs {
   display: grid !important;
   grid-template-columns: 1fr 1fr !important;
   gap: 0.55rem !important;
 }
 
-body.guided-flow [data-step-id="loan-you"] .guided-loan-you-programs .ultimate-program-btn {
+body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-you-programs .ultimate-program-btn {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -2860,13 +2872,13 @@ body.guided-flow [data-step-id="loan-you"] .guided-loan-you-programs .ultimate-p
   transition: border-color 0.15s, background 0.15s, box-shadow 0.15s, transform 0.12s !important;
 }
 
-body.guided-flow [data-step-id="loan-you"] .guided-loan-you-programs .ultimate-program-btn:hover {
+body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-you-programs .ultimate-program-btn:hover {
   border-color: rgba(201, 162, 39, 0.55) !important;
   background: #fff !important;
   transform: translateY(-1px);
 }
 
-body.guided-flow [data-step-id="loan-you"] .guided-loan-you-programs .ultimate-program-btn.active {
+body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-you-programs .ultimate-program-btn.active {
   background: linear-gradient(135deg, #f0d060 0%, #c9a227 55%, #b8891a 100%) !important;
   border-color: transparent !important;
   color: #1a1230 !important;
@@ -2874,26 +2886,26 @@ body.guided-flow [data-step-id="loan-you"] .guided-loan-you-programs .ultimate-p
   font-weight: 700;
 }
 
-body.guided-flow [data-step-id="loan-you"] .guided-loan-you-programs .ultimate-program-btn strong {
+body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-you-programs .ultimate-program-btn strong {
   font-size: 0.88rem;
   font-weight: 700;
   color: inherit;
 }
 
-body.guided-flow [data-step-id="loan-you"] .guided-loan-you-programs .ultimate-program-btn span {
+body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-you-programs .ultimate-program-btn span {
   font-size: 0.7rem;
   font-weight: 500;
   opacity: 0.8;
   line-height: 1.25;
 }
 
-body.guided-flow [data-step-id="loan-you"] .guided-loan-you-programs .ultimate-program-btn.active span {
+body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-you-programs .ultimate-program-btn.active span {
   opacity: 0.9;
   color: #1a1230;
 }
 
-body.guided-flow [data-step-id="loan-you"] .guided-loan-you-note,
-body.guided-flow [data-step-id="loan-you"] .guided-loan-you-tip {
+body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-you-note,
+body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-you-tip {
   margin: 0.65rem 0 0;
   font-size: 0.78rem;
   line-height: 1.4;
@@ -2901,25 +2913,25 @@ body.guided-flow [data-step-id="loan-you"] .guided-loan-you-tip {
   text-align: center;
 }
 
-body.guided-flow [data-step-id="loan-you"] .guided-loan-you-tip {
+body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-you-tip {
   margin-top: 0.35rem;
 }
 
 /* Down payment panel — calm gold accent */
-body.guided-flow [data-step-id="loan-you"] .guided-loan-you-down {
+body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-you-down {
   padding: 1.25rem 1.15rem 1.3rem !important;
   border-radius: 16px !important;
   background: linear-gradient(165deg, #fbf8f0 0%, #fff 70%) !important;
   border: 1px solid rgba(201, 162, 39, 0.28) !important;
 }
 
-body.guided-flow [data-step-id="loan-you"] .guided-down-hero {
+body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-down-hero {
   text-align: center;
   margin: 0 0 1rem;
 }
 
-body.guided-flow [data-step-id="loan-you"] .guided-down-hero-value,
-body.guided-flow [data-step-id="loan-you"] #downDisplay {
+body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-down-hero-value,
+body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] #downDisplay {
   display: block;
   font-size: clamp(1.45rem, 4.5vw, 1.75rem);
   font-weight: 700;
@@ -2929,18 +2941,18 @@ body.guided-flow [data-step-id="loan-you"] #downDisplay {
   line-height: 1.15;
 }
 
-body.guided-flow [data-step-id="loan-you"] .guided-down-hero-lead {
+body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-down-hero-lead {
   margin: 0.4rem 0 0;
   font-size: 0.8rem;
   color: #8a8499;
   text-align: center;
 }
 
-body.guided-flow [data-step-id="loan-you"] .guided-down-field {
+body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-down-field {
   margin: 0;
 }
 
-body.guided-flow [data-step-id="loan-you"] .guided-down-field #downPercent {
+body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-down-field #downPercent {
   display: block !important;
   width: 100%;
   height: 10px;
@@ -2960,7 +2972,7 @@ body.guided-flow [data-step-id="loan-you"] .guided-down-field #downPercent {
   cursor: pointer;
 }
 
-body.guided-flow [data-step-id="loan-you"] .guided-down-field #downPercent::-webkit-slider-thumb {
+body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-down-field #downPercent::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   width: 26px;
@@ -2973,7 +2985,7 @@ body.guided-flow [data-step-id="loan-you"] .guided-down-field #downPercent::-web
   margin-top: -8px;
 }
 
-body.guided-flow [data-step-id="loan-you"] .guided-down-field #downPercent::-moz-range-thumb {
+body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-down-field #downPercent::-moz-range-thumb {
   width: 26px;
   height: 26px;
   border-radius: 50%;
@@ -2983,28 +2995,28 @@ body.guided-flow [data-step-id="loan-you"] .guided-down-field #downPercent::-moz
   cursor: pointer;
 }
 
-body.guided-flow [data-step-id="loan-you"] .guided-down-inline {
+body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-down-inline {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.65rem;
   margin-top: 0.15rem;
 }
 
-body.guided-flow [data-step-id="loan-you"] .guided-down-inline .inline-field {
+body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-down-inline .inline-field {
   display: flex;
   align-items: center;
   gap: 0.4rem;
   min-width: 0;
 }
 
-body.guided-flow [data-step-id="loan-you"] .guided-down-inline .inline-label {
+body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-down-inline .inline-label {
   font-size: 0.8rem;
   font-weight: 700;
   color: #6b6580;
   flex-shrink: 0;
 }
 
-body.guided-flow [data-step-id="loan-you"] .guided-down-inline input {
+body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-down-inline input {
   min-height: 46px !important;
   width: 100%;
   min-width: 0;
@@ -3013,7 +3025,7 @@ body.guided-flow [data-step-id="loan-you"] .guided-down-inline input {
 }
 
 /* Quick % chips — same language as term pills */
-body.guided-flow [data-step-id="loan-you"] .guided-down-chips {
+body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-down-chips {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -3021,7 +3033,7 @@ body.guided-flow [data-step-id="loan-you"] .guided-down-chips {
   margin-top: 1.1rem;
 }
 
-body.guided-flow [data-step-id="loan-you"] .guided-down-chips .guided-mini-chip {
+body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-down-chips .guided-mini-chip {
   min-width: 3.4rem;
   min-height: 44px;
   padding: 0.5rem 0.85rem;
@@ -3036,12 +3048,12 @@ body.guided-flow [data-step-id="loan-you"] .guided-down-chips .guided-mini-chip 
   transition: border-color 0.15s, background 0.15s, box-shadow 0.15s, color 0.15s;
 }
 
-body.guided-flow [data-step-id="loan-you"] .guided-down-chips .guided-mini-chip:hover {
+body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-down-chips .guided-mini-chip:hover {
   border-color: rgba(201, 162, 39, 0.55);
   background: #fffdf6;
 }
 
-body.guided-flow [data-step-id="loan-you"] .guided-down-chips .guided-mini-chip.is-selected {
+body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-down-chips .guided-mini-chip.is-selected {
   background: linear-gradient(135deg, #f0d060 0%, #c9a227 55%, #b8891a 100%);
   border-color: transparent;
   color: #1a1230;
@@ -3049,7 +3061,7 @@ body.guided-flow [data-step-id="loan-you"] .guided-down-chips .guided-mini-chip.
   box-shadow: 0 3px 12px rgba(201, 162, 39, 0.3);
 }
 
-body.guided-flow [data-step-id="loan-you"] .guided-loan-you-next {
+body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-you-next {
   margin: 1.25rem 0 0;
   text-align: center;
   font-size: 0.8rem;
@@ -3058,37 +3070,37 @@ body.guided-flow [data-step-id="loan-you"] .guided-loan-you-next {
 
 /* Desktop 2-col */
 @media (min-width: 720px) {
-  body.guided-flow [data-step-id="loan-you"] .guided-loan-you-card {
+  body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-you-card {
     padding: 1.7rem 1.55rem 1.55rem !important;
   }
 
-  body.guided-flow [data-step-id="loan-you"] .guided-loan-split {
+  body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-split {
     grid-template-columns: 1.05fr 0.95fr;
     gap: 1.5rem;
     align-items: stretch;
   }
 
-  body.guided-flow [data-step-id="loan-you"] .guided-loan-you-down {
+  body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-you-down {
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
 
-  body.guided-flow [data-step-id="loan-you"] .guided-loan-you-intro {
+  body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-you-intro {
     margin-bottom: 1.7rem;
   }
 }
 
 @media (max-width: 719px) {
-  body.guided-flow [data-step-id="loan-you"] .guided-loan-you-card {
+  body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-you-card {
     padding: 1.25rem 1.05rem 1.3rem !important;
   }
 
-  body.guided-flow [data-step-id="loan-you"] .guided-loan-you-programs .ultimate-program-btn {
+  body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-you-programs .ultimate-program-btn {
     min-height: 58px;
   }
 
-  body.guided-flow [data-step-id="loan-you"] .guided-down-chips .guided-mini-chip {
+  body.guided-flow [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-down-chips .guided-mini-chip {
     flex: 1 1 calc(33.33% - 0.45rem);
     min-width: 3.2rem;
   }

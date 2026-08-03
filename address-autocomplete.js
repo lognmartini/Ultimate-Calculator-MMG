@@ -148,6 +148,8 @@
 
   function renderItems(items) {
     lastItems = items;
+    activeIndex = -1;
+    input.removeAttribute("aria-activedescendant");
     if (!items.length) {
       list.innerHTML =
         '<li class="address-suggestions-empty" role="presentation">No matches — keep typing</li>';
@@ -157,7 +159,7 @@
     list.innerHTML = items
       .map(
         (item, i) =>
-          `<li role="option" data-index="${i}" tabindex="-1">${escapeHtml(item.label)}</li>`
+          `<li role="option" id="address-opt-${i}" data-index="${i}" tabindex="-1">${escapeHtml(item.label)}</li>`
       )
       .join("");
     showOpen();
@@ -167,6 +169,22 @@
         pickItem(items[Number(li.dataset.index)]);
       });
     });
+  }
+
+  function setActiveOption(index) {
+    const options = list.querySelectorAll("li[role='option']");
+    activeIndex = index;
+    options.forEach((li, i) => {
+      const on = i === index;
+      li.classList.toggle("active", on);
+      li.setAttribute("aria-selected", on ? "true" : "false");
+    });
+    if (index >= 0 && options[index]) {
+      input.setAttribute("aria-activedescendant", options[index].id);
+      options[index].scrollIntoView({ block: "nearest" });
+    } else {
+      input.removeAttribute("aria-activedescendant");
+    }
   }
 
   async function pickItem(item) {
@@ -222,14 +240,22 @@
     const options = list.querySelectorAll("li[role='option']");
     if (e.key === "ArrowDown" && options.length) {
       e.preventDefault();
-      activeIndex = Math.min(activeIndex + 1, options.length - 1);
-      options.forEach((li, i) => li.classList.toggle("active", i === activeIndex));
+      setActiveOption(Math.min(activeIndex + 1, options.length - 1));
       return;
     }
     if (e.key === "ArrowUp" && options.length) {
       e.preventDefault();
-      activeIndex = Math.max(activeIndex - 1, 0);
-      options.forEach((li, i) => li.classList.toggle("active", i === activeIndex));
+      setActiveOption(Math.max(activeIndex - 1, 0));
+      return;
+    }
+    if (e.key === "Home" && options.length) {
+      e.preventDefault();
+      setActiveOption(0);
+      return;
+    }
+    if (e.key === "End" && options.length) {
+      e.preventDefault();
+      setActiveOption(options.length - 1);
       return;
     }
     if (e.key === "Enter") {
@@ -241,7 +267,10 @@
         window.MMG_lookupAddress();
       }
     }
-    if (e.key === "Escape") hideList();
+    if (e.key === "Escape") {
+      hideList();
+      input.removeAttribute("aria-activedescendant");
+    }
   });
 
   document.addEventListener("mousedown", (e) => {
