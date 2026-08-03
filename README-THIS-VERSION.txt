@@ -1,27 +1,22 @@
-LOGAN5 FLAGSHIP / MARKET-READY (go5.html)
-=========================================
-Brand-aligned with martinimortgagegroup.com
-(deep navy, gold, DM Sans + Playfair, clean white cards)
+LOGAN5 — upload to GitHub for Render (go5.html)
+================================================
+Source: local project matching ultimate-calculator-mmg.onrender.com/go5.html
+plus latest CTA + results visibility fixes.
 
-Upload ALL contents of this folder to GitHub repo root.
-Keep assets/ as a subfolder.
+1. Upload EVERYTHING in this folder to your GitHub repo root
+   (keep assets/ as a subfolder).
 
-Live page:  /go5.html
+2. Live page after deploy:
+   /go5.html
+
+3. Hard refresh after deploy: Cmd+Shift+R
 
 Critical files:
   go5.html
-  styles-site-polish.css     (loads last — every-step layout/spacing)
-  styles-results-studio.css  (results destination UI)
-  results-interactive.js     (live price/down/term/program/points)
-  styles-market-ready.css
-  styles-flagship.css
-  styles-guided.css
+  styles-site-polish.css  (loads last — visibility + open details)
+  results-interactive.js
+  steps-flow.js
+  lead-capture.js
   guided-flow.js
   calculator.js
-  steps-flow.js
-  tax-rates.js, loan-limits.js, loan-program-engine.js
-  lead-capture.js
-  + supporting JS/CSS + assets/
-
-Results page: hero payment + live adjust (incl. buy points / rate) + lead form
-After deploy: hard refresh Cmd+Shift+R
+  + all listed CSS/JS and assets/

@@ -108,16 +108,17 @@
       }
       const title = document.getElementById("saveEstimateHeading");
       const lead = document.querySelector(".save-estimate-lead, .dest-lead-copy");
-      const isRefi = document.body.dataset.loanGoal === "refinance";
       if (title) {
-        title.textContent = isRefi
-          ? "Email me this refinance estimate"
-          : "Email me this estimate";
+        title.textContent = "Get pre-approved now";
       }
       if (lead) {
         lead.textContent =
-          "Get a clean summary + a quick personalized review from Logan. No obligation.";
+          "Most clients can complete this in under an hour — no obligation.";
       }
+      const submitBtn = document.querySelector(
+        ".save-estimate-submit, #saveEstimateForm [type='submit']"
+      );
+      if (submitBtn) submitBtn.textContent = "Request call";
       el.classList.remove("guided-lead-collapsed");
     }
   }
@@ -141,10 +142,10 @@
         restore.hidden = true;
         restore.setAttribute("aria-hidden", "true");
       }
-      if (title) title.textContent = "Want this estimate emailed?";
+      if (title) title.textContent = "Ready when you are";
       if (lead) {
         lead.innerHTML =
-          '<button type="button" class="dest-reopen-lead" id="destReopenLead">Email me this estimate · free review from Logan</button>';
+          '<button type="button" class="dest-reopen-lead" id="destReopenLead">Request call</button>';
         document.getElementById("destReopenLead")?.addEventListener(
           "click",
           () => showCard(),
@@ -240,7 +241,7 @@
   }
 
   function defaultSubmitLabel(tab) {
-    return tab === "sms" ? "Text my estimate" : "Email me this estimate";
+    return tab === "sms" ? "Request call" : "Request call";
   }
 
   function applyImpactLeadCopy(tab) {
@@ -248,22 +249,17 @@
       document.getElementById("saveEstimateHeading") ||
       document.querySelector(".save-estimate-title");
     const lead = document.querySelector(".save-estimate-lead");
-    const isRefi = document.body.dataset.loanGoal === "refinance";
     if (title) {
-      if (tab === "sms") {
-        title.textContent = isRefi
-          ? "Text me this refinance estimate"
-          : "Text me this estimate";
-      } else {
-        title.textContent = isRefi
-          ? "Email me this refinance estimate"
-          : "Email me this estimate";
-      }
+      title.textContent = "Get pre-approved now";
     }
     if (lead) {
       lead.textContent =
-        "Get a clean summary + a quick personalized review from Logan. No obligation.";
+        "Most clients can complete this in under an hour — no obligation.";
     }
+    const submitBtn = document.querySelector(
+      ".save-estimate-submit, #saveEstimateForm [type='submit']"
+    );
+    if (submitBtn) submitBtn.textContent = "Request call";
   }
 
   async function submitLead(form) {
@@ -343,8 +339,8 @@
       if (successEl) {
         successEl.textContent =
           tab === "sms"
-            ? "You're set — check your texts shortly."
-            : "You're set — check your inbox.";
+            ? "You're set — we'll text you shortly."
+            : "You're set — we'll reach out to get you started.";
         successEl.classList.remove("hidden");
         successEl.hidden = false;
       }

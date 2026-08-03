@@ -809,28 +809,56 @@ body.logan5-realtor .partner-share.hidden {
   text-align: left;
 }
 
-.wizard-results .save-estimate-eyebrow {
+/* Light lead cards (studio) use navy text — do not force white */
+.wizard-results .save-estimate-card.studio-lead .save-estimate-eyebrow {
+  color: #9a7b14;
+}
+
+.wizard-results .save-estimate-card.studio-lead .save-estimate-title {
+  color: #1a1230;
+  font-size: 1.15rem;
+}
+
+.wizard-results .save-estimate-card.studio-lead .save-estimate-lead {
+  color: #5c5670;
+}
+
+.wizard-results .save-estimate-card.studio-lead .save-estimate-form input {
+  background: #faf9fc;
+  color: #1a1230;
+}
+
+.wizard-results .save-estimate-card.studio-lead .save-estimate-consent {
+  color: #6b6578;
+}
+
+.wizard-results .save-estimate-card.studio-lead .save-estimate-success {
+  color: #1a5c38;
+}
+
+/* Legacy dark lead shell only */
+.wizard-results .save-estimate-card:not(.studio-lead) .save-estimate-eyebrow {
   color: rgba(255, 255, 255, 0.65);
 }
 
-.wizard-results .save-estimate-title {
+.wizard-results .save-estimate-card:not(.studio-lead) .save-estimate-title {
   color: #fff;
   font-size: 1rem;
 }
 
-.wizard-results .save-estimate-lead {
+.wizard-results .save-estimate-card:not(.studio-lead) .save-estimate-lead {
   color: rgba(255, 255, 255, 0.82);
 }
 
-.wizard-results .save-estimate-form input {
+.wizard-results .save-estimate-card:not(.studio-lead) .save-estimate-form input {
   background: rgba(255, 255, 255, 0.95);
 }
 
-.wizard-results .save-estimate-consent {
+.wizard-results .save-estimate-card:not(.studio-lead) .save-estimate-consent {
   color: rgba(255, 255, 255, 0.55);
 }
 
-.wizard-results .save-estimate-success {
+.wizard-results .save-estimate-card:not(.studio-lead) .save-estimate-success {
   color: var(--gold-light);
 }
 

@@ -882,3 +882,725 @@ html body.guided-flow.guided-flagship .guided-inline-error:not(.hidden):not([hid
     transition: none !important;
   }
 }
+
+/* =========================================================
+   LEAD CARD HEADLINE — force visible on white studio card
+   (flagship/steps set .save-estimate-title to white for dark cards)
+   ========================================================= */
+html body.guided-flow.guided-flagship .studio-lead .studio-lead-title,
+html body.guided-flow.guided-flagship .studio-lead .save-estimate-title,
+html body.guided-flow.guided-flagship #saveEstimateCard .save-estimate-title,
+html body.guided-flow.guided-flagship #saveEstimateHeading,
+html body.guided-flow.wizard-on-results .studio-lead .save-estimate-title,
+html body.guided-flow.wizard-on-results #saveEstimateHeading {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  margin: 0 0 0.35rem !important;
+  padding: 0 !important;
+  font-size: 1.2rem !important;
+  font-weight: 800 !important;
+  line-height: 1.25 !important;
+  letter-spacing: -0.02em !important;
+  color: #1a1230 !important;
+  -webkit-text-fill-color: #1a1230 !important;
+  text-align: center !important;
+  font-family: "DM Sans", system-ui, sans-serif !important;
+}
+
+html body.guided-flow.guided-flagship .studio-lead .studio-lead-copy,
+html body.guided-flow.guided-flagship .studio-lead .save-estimate-lead,
+html body.guided-flow.guided-flagship #saveEstimateCard .save-estimate-lead,
+html body.guided-flow.wizard-on-results .studio-lead .save-estimate-lead {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  margin: 0 auto 0.85rem !important;
+  max-width: 18.5rem !important;
+  font-size: 0.86rem !important;
+  font-weight: 500 !important;
+  line-height: 1.4 !important;
+  color: #5c5670 !important;
+  -webkit-text-fill-color: #5c5670 !important;
+  text-align: center !important;
+}
+
+html body.guided-flow.guided-flagship .studio-lead,
+html body.guided-flow.guided-flagship #saveEstimateCard.studio-lead {
+  background: #fff !important;
+  color: #1a1230 !important;
+}
+
+/* =========================================================
+   RESULTS VISIBILITY LOCK — all fonts/buttons readable
+   Loads last. Navy text on light surfaces; white only on navy hero.
+   ========================================================= */
+
+/* Surfaces */
+html body.guided-flow.wizard-on-results .studio-break,
+html body.guided-flow.wizard-on-results .studio-controls,
+html body.guided-flow.wizard-on-results .studio-lead,
+html body.guided-flow.wizard-on-results #saveEstimateCard,
+html body.guided-flow.wizard-on-results .studio-trust,
+html body.guided-flow.wizard-on-results .studio-more-body {
+  background: #ffffff !important;
+  color: #1a1230 !important;
+}
+
+/* HERO — white text on navy (intentional) */
+html body.guided-flow.wizard-on-results .studio-hero,
+html body.guided-flow.wizard-on-results .studio-hero * {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+html body.guided-flow.wizard-on-results .studio-hero .studio-kicker,
+html body.guided-flow.wizard-on-results .studio-hero #pitiHeroLabel,
+html body.guided-flow.wizard-on-results .studio-hero strong,
+html body.guided-flow.wizard-on-results .studio-hero .studio-rates strong {
+  color: #e8c84a !important;
+  -webkit-text-fill-color: #e8c84a !important;
+}
+html body.guided-flow.wizard-on-results .studio-hero #pitiPayment,
+html body.guided-flow.wizard-on-results .studio-hero .studio-amount {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+html body.guided-flow.wizard-on-results .studio-hero .studio-sub,
+html body.guided-flow.wizard-on-results .studio-hero .studio-rates {
+  color: rgba(255, 255, 255, 0.8) !important;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.8) !important;
+  opacity: 1 !important;
+}
+
+/* BREAKDOWN */
+html body.guided-flow.wizard-on-results .studio-break #breakdown li,
+html body.guided-flow.wizard-on-results .studio-break #breakdown li span {
+  color: #3d3750 !important;
+  -webkit-text-fill-color: #3d3750 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+html body.guided-flow.wizard-on-results .studio-break #breakdown li strong {
+  color: #1a1230 !important;
+  -webkit-text-fill-color: #1a1230 !important;
+  font-weight: 800 !important;
+}
+
+/* CONTROLS */
+html body.guided-flow.wizard-on-results .studio-controls-head h3,
+html body.guided-flow.wizard-on-results .studio-control-row label,
+html body.guided-flow.wizard-on-results .studio-control-label,
+html body.guided-flow.wizard-on-results .studio-control-row output,
+html body.guided-flow.wizard-on-results #destPriceLabel,
+html body.guided-flow.wizard-on-results #destDownLabel,
+html body.guided-flow.wizard-on-results #destRateLabel {
+  color: #1a1230 !important;
+  -webkit-text-fill-color: #1a1230 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+html body.guided-flow.wizard-on-results .studio-controls-head p,
+html body.guided-flow.wizard-on-results .studio-points-note {
+  color: #5c5670 !important;
+  -webkit-text-fill-color: #5c5670 !important;
+  opacity: 1 !important;
+}
+
+/* Chips — inactive */
+html body.guided-flow.wizard-on-results .studio-chip {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 40px !important;
+  background: #faf9fc !important;
+  color: #1a1230 !important;
+  -webkit-text-fill-color: #1a1230 !important;
+  border: 1.5px solid rgba(26, 18, 48, 0.16) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  font-weight: 700 !important;
+}
+/* Chips — active */
+html body.guided-flow.wizard-on-results .studio-chip.active {
+  background: #1a1230 !important;
+  color: #f5e6a8 !important;
+  -webkit-text-fill-color: #f5e6a8 !important;
+  border-color: #c9a227 !important;
+}
+
+/* Facts */
+html body.guided-flow.wizard-on-results .studio-facts span {
+  color: #5c5670 !important;
+  -webkit-text-fill-color: #5c5670 !important;
+}
+html body.guided-flow.wizard-on-results .studio-facts strong,
+html body.guided-flow.wizard-on-results .studio-facts #loanAmount,
+html body.guided-flow.wizard-on-results .studio-facts #totalInterest,
+html body.guided-flow.wizard-on-results .studio-facts #payoffDate {
+  color: #1a1230 !important;
+  -webkit-text-fill-color: #1a1230 !important;
+}
+
+/* LEAD CARD — full visibility */
+html body.guided-flow.wizard-on-results .studio-lead,
+html body.guided-flow.wizard-on-results #saveEstimateCard {
+  background: #ffffff !important;
+  border: 2px solid #c9a227 !important;
+  color: #1a1230 !important;
+}
+html body.guided-flow.wizard-on-results .studio-lead .studio-lead-title,
+html body.guided-flow.wizard-on-results .studio-lead .save-estimate-title,
+html body.guided-flow.wizard-on-results #saveEstimateHeading {
+  display: block !important;
+  color: #1a1230 !important;
+  -webkit-text-fill-color: #1a1230 !important;
+  font-size: 1.2rem !important;
+  font-weight: 800 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+html body.guided-flow.wizard-on-results .studio-lead .studio-lead-copy,
+html body.guided-flow.wizard-on-results .studio-lead .save-estimate-lead {
+  display: block !important;
+  color: #5c5670 !important;
+  -webkit-text-fill-color: #5c5670 !important;
+  font-size: 0.86rem !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+html body.guided-flow.wizard-on-results .studio-lead .studio-field span,
+html body.guided-flow.wizard-on-results .studio-lead label span {
+  color: #3d3750 !important;
+  -webkit-text-fill-color: #3d3750 !important;
+  opacity: 1 !important;
+}
+html body.guided-flow.wizard-on-results .studio-lead .studio-field em {
+  color: #8a8499 !important;
+  -webkit-text-fill-color: #8a8499 !important;
+}
+html body.guided-flow.wizard-on-results .studio-lead input[type="text"],
+html body.guided-flow.wizard-on-results .studio-lead input[type="email"],
+html body.guided-flow.wizard-on-results .studio-lead input[type="tel"] {
+  display: block !important;
+  width: 100% !important;
+  min-height: 46px !important;
+  background: #faf9fc !important;
+  color: #1a1230 !important;
+  -webkit-text-fill-color: #1a1230 !important;
+  border: 1.5px solid rgba(26, 18, 48, 0.16) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+html body.guided-flow.wizard-on-results .studio-lead input::placeholder {
+  color: #8a8499 !important;
+  opacity: 1 !important;
+}
+
+/* Primary CTA — Request call */
+html body.guided-flow.wizard-on-results .studio-lead .studio-cta,
+html body.guided-flow.wizard-on-results .studio-lead .save-estimate-submit,
+html body.guided-flow.wizard-on-results .studio-lead .guided-lead-submit {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  min-height: 50px !important;
+  background: linear-gradient(145deg, #1a1230, #2a1f45) !important;
+  color: #f5e6a8 !important;
+  -webkit-text-fill-color: #f5e6a8 !important;
+  border: 1.5px solid #c9a227 !important;
+  font-weight: 800 !important;
+  font-size: 1rem !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  cursor: pointer !important;
+}
+html body.guided-flow.wizard-on-results .studio-lead .studio-cta:hover,
+html body.guided-flow.wizard-on-results .studio-lead .save-estimate-submit:hover {
+  background: linear-gradient(145deg, #c9a227, #b8921f) !important;
+  color: #1a1230 !important;
+  -webkit-text-fill-color: #1a1230 !important;
+}
+
+/* Secondary skip */
+html body.guided-flow.wizard-on-results .studio-lead .studio-skip,
+html body.guided-flow.wizard-on-results .studio-lead .save-estimate-skip {
+  display: block !important;
+  color: #5c5670 !important;
+  -webkit-text-fill-color: #5c5670 !important;
+  background: none !important;
+  border: 0 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  text-decoration: underline !important;
+  font-size: 0.78rem !important;
+}
+/* Consent — quiet but readable */
+html body.guided-flow.wizard-on-results .studio-lead .studio-consent,
+html body.guided-flow.wizard-on-results .studio-lead .save-estimate-consent {
+  display: block !important;
+  color: #6b6578 !important;
+  -webkit-text-fill-color: #6b6578 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  font-size: 0.58rem !important;
+}
+/* Success */
+html body.guided-flow.wizard-on-results .studio-lead .save-estimate-success:not(.hidden) {
+  display: block !important;
+  color: #1a5c38 !important;
+  -webkit-text-fill-color: #1a5c38 !important;
+  background: rgba(26, 92, 56, 0.1) !important;
+}
+
+/* Trust */
+html body.guided-flow.wizard-on-results .studio-trust strong {
+  color: #1a1230 !important;
+  -webkit-text-fill-color: #1a1230 !important;
+}
+html body.guided-flow.wizard-on-results .studio-trust span {
+  color: #5c5670 !important;
+  -webkit-text-fill-color: #5c5670 !important;
+}
+
+/* Legal / apply — secondary but visible */
+html body.guided-flow.wizard-on-results .studio-legal {
+  color: #6b6578 !important;
+  -webkit-text-fill-color: #6b6578 !important;
+  opacity: 1 !important;
+  font-size: 0.58rem !important;
+}
+html body.guided-flow.wizard-on-results .studio-apply a,
+html body.guided-flow.wizard-on-results .btn-results-apply {
+  color: #5c5670 !important;
+  -webkit-text-fill-color: #5c5670 !important;
+  background: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  text-decoration: underline !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  font-size: 0.8rem !important;
+  font-weight: 600 !important;
+}
+
+/* More details summary */
+html body.guided-flow.wizard-on-results .studio-more > summary {
+  color: #5c5670 !important;
+  -webkit-text-fill-color: #5c5670 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Reopen after Not now */
+html body.guided-flow.wizard-on-results .dest-reopen-lead {
+  display: inline-flex !important;
+  width: 100% !important;
+  min-height: 48px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: linear-gradient(145deg, #1a1230, #2a1f45) !important;
+  color: #f5e6a8 !important;
+  -webkit-text-fill-color: #f5e6a8 !important;
+  border: 1.5px solid #c9a227 !important;
+  border-radius: 12px !important;
+  font-weight: 800 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  cursor: pointer !important;
+}
+
+/* Back link / nav on results */
+html body.guided-flow.wizard-on-results .btn-wizard-back,
+html body.guided-flow.wizard-on-results .fx-back-link {
+  color: #1a1230 !important;
+  -webkit-text-fill-color: #1a1230 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Range inputs visible */
+html body.guided-flow.wizard-on-results input[type="range"] {
+  opacity: 1 !important;
+  visibility: visible !important;
+  accent-color: #c9a227 !important;
+}
+
+/* Kill accidental white-on-white from legacy wizard-results rules */
+html body.guided-flow.wizard-on-results .wizard-results .save-estimate-title,
+html body.guided-flow.wizard-on-results .wizard-results .save-estimate-lead,
+html body.guided-flow.wizard-on-results .wizard-results .save-estimate-consent,
+html body.guided-flow.wizard-on-results .wizard-results .save-estimate-eyebrow {
+  color: inherit !important;
+}
+html body.guided-flow.wizard-on-results .studio-lead .save-estimate-title {
+  color: #1a1230 !important;
+  -webkit-text-fill-color: #1a1230 !important;
+}
+html body.guided-flow.wizard-on-results .studio-lead .save-estimate-lead {
+  color: #5c5670 !important;
+  -webkit-text-fill-color: #5c5670 !important;
+}
+html body.guided-flow.wizard-on-results .studio-lead .save-estimate-consent {
+  color: #6b6578 !important;
+  -webkit-text-fill-color: #6b6578 !important;
+}
+
+/* Details content text */
+html body.guided-flow.wizard-on-results .studio-more-h,
+html body.guided-flow.wizard-on-results .vs-comp-col-label {
+  color: #5c5670 !important;
+}
+html body.guided-flow.wizard-on-results .vs-comp-col-rate,
+html body.guided-flow.wizard-on-results .vs-comp-col-payment,
+html body.guided-flow.wizard-on-results .vs-comp-savings strong {
+  color: #1a1230 !important;
+}
+html body.guided-flow.wizard-on-results .studio-more .field label,
+html body.guided-flow.wizard-on-results .studio-more .field-note {
+  color: #3d3750 !important;
+}
+html body.guided-flow.wizard-on-results .studio-more input {
+  color: #1a1230 !important;
+  background: #fff !important;
+  border: 1px solid rgba(26, 18, 48, 0.14) !important;
+}
+
+/* =========================================================
+   RESULTS — always-visible taxes / cash-to-close / realtor / more
+   ========================================================= */
+html body.guided-flow.wizard-on-results .studio-more.studio-more-open,
+html body.guided-flow .studio-more.studio-more-open {
+  display: block !important;
+  grid-column: 1 / -1 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0.35rem 0 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  overflow: visible !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  height: auto !important;
+  max-height: none !important;
+}
+
+html body.guided-flow.wizard-on-results .studio-more-banner {
+  text-align: center !important;
+  margin: 0 0 0.75rem !important;
+  padding: 0.55rem 0.75rem !important;
+  background: linear-gradient(135deg, #1a1230, #2a1f45) !important;
+  border-radius: 12px !important;
+  border: 1px solid rgba(201, 162, 39, 0.35) !important;
+}
+
+html body.guided-flow.wizard-on-results .studio-more-banner-title {
+  margin: 0 !important;
+  font-size: 0.95rem !important;
+  font-weight: 800 !important;
+  color: #f5e6a8 !important;
+  -webkit-text-fill-color: #f5e6a8 !important;
+  letter-spacing: -0.01em !important;
+}
+
+html body.guided-flow.wizard-on-results .studio-more-banner-sub {
+  margin: 0.2rem 0 0 !important;
+  font-size: 0.72rem !important;
+  color: rgba(255, 255, 255, 0.72) !important;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.72) !important;
+}
+
+html body.guided-flow.wizard-on-results .studio-more-body {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.85rem !important;
+  padding: 0 !important;
+  overflow: visible !important;
+  height: auto !important;
+  max-height: none !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+html body.guided-flow.wizard-on-results .studio-more-block,
+html body.guided-flow.wizard-on-results .studio-more-card {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  overflow: visible !important;
+  height: auto !important;
+  max-height: none !important;
+}
+
+html body.guided-flow.wizard-on-results .studio-more-card {
+  background: #fff !important;
+  border: 1px solid rgba(26, 18, 48, 0.1) !important;
+  border-radius: 12px !important;
+  padding: 1rem 1.05rem 1.05rem !important;
+  box-shadow: 0 3px 12px rgba(26, 18, 48, 0.04) !important;
+  box-sizing: border-box !important;
+}
+
+html body.guided-flow.wizard-on-results .studio-more-h {
+  display: block !important;
+  margin: 0 0 0.65rem !important;
+  font-size: 0.72rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  color: #5c5670 !important;
+  -webkit-text-fill-color: #5c5670 !important;
+}
+
+/* Tax / insurance / HOA grid */
+html body.guided-flow.wizard-on-results .studio-tax-grid {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  gap: 0.75rem !important;
+}
+html body.guided-flow.wizard-on-results .studio-tax-grid .field {
+  display: block !important;
+  margin: 0 !important;
+}
+html body.guided-flow.wizard-on-results .studio-tax-grid label {
+  display: block !important;
+  margin: 0 0 0.3rem !important;
+  font-size: 0.78rem !important;
+  font-weight: 700 !important;
+  color: #3d3750 !important;
+  -webkit-text-fill-color: #3d3750 !important;
+}
+html body.guided-flow.wizard-on-results .studio-tax-grid input,
+html body.guided-flow.wizard-on-results .studio-more input.currency-input {
+  display: block !important;
+  width: 100% !important;
+  min-height: 44px !important;
+  box-sizing: border-box !important;
+  padding: 0.55rem 0.7rem !important;
+  border-radius: 10px !important;
+  border: 1.5px solid rgba(26, 18, 48, 0.14) !important;
+  background: #faf9fc !important;
+  color: #1a1230 !important;
+  -webkit-text-fill-color: #1a1230 !important;
+  font-size: 1rem !important;
+  font-weight: 700 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+html body.guided-flow.wizard-on-results .studio-tax-grid .field-note {
+  display: block !important;
+  margin: 0.25rem 0 0 !important;
+  font-size: 0.68rem !important;
+  color: #8a8499 !important;
+  -webkit-text-fill-color: #8a8499 !important;
+}
+
+/* Cash to close */
+html body.guided-flow.wizard-on-results .ultimate-payment-cash-quote {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+html body.guided-flow.wizard-on-results #quoteScenarioSummary,
+html body.guided-flow.wizard-on-results .official-quote-scenario {
+  display: block !important;
+  margin: 0 0 0.55rem !important;
+  font-size: 0.78rem !important;
+  color: #5c5670 !important;
+  -webkit-text-fill-color: #5c5670 !important;
+}
+html body.guided-flow.wizard-on-results .seller-credit-panel {
+  display: block !important;
+  margin: 0 0 0.75rem !important;
+  padding: 0.65rem 0.7rem !important;
+  background: #f7f6fa !important;
+  border-radius: 10px !important;
+  border: 1px solid rgba(26, 18, 48, 0.08) !important;
+}
+html body.guided-flow.wizard-on-results .seller-credit-head {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: baseline !important;
+  gap: 0.5rem !important;
+  margin-bottom: 0.35rem !important;
+}
+html body.guided-flow.wizard-on-results .seller-credit-head label {
+  font-size: 0.78rem !important;
+  font-weight: 700 !important;
+  color: #3d3750 !important;
+  -webkit-text-fill-color: #3d3750 !important;
+}
+html body.guided-flow.wizard-on-results .seller-credit-head strong,
+html body.guided-flow.wizard-on-results #sellerCreditDisplay {
+  font-size: 0.95rem !important;
+  font-weight: 800 !important;
+  color: #1a1230 !important;
+  -webkit-text-fill-color: #1a1230 !important;
+}
+html body.guided-flow.wizard-on-results #sellerCreditSlider {
+  display: block !important;
+  width: 100% !important;
+  accent-color: #c9a227 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+html body.guided-flow.wizard-on-results .seller-credit-note {
+  display: block !important;
+  margin: 0.3rem 0 0 !important;
+  font-size: 0.68rem !important;
+  color: #8a8499 !important;
+}
+
+html body.guided-flow.wizard-on-results .official-quote-figures {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+html body.guided-flow.wizard-on-results .official-quote-row {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: baseline !important;
+  gap: 0.75rem !important;
+  padding: 0.55rem 0 !important;
+  border-bottom: 1px solid rgba(26, 18, 48, 0.08) !important;
+  margin: 0 !important;
+}
+html body.guided-flow.wizard-on-results .official-quote-row.hidden {
+  display: none !important;
+}
+html body.guided-flow.wizard-on-results .official-quote-row dt {
+  font-size: 0.84rem !important;
+  font-weight: 500 !important;
+  color: #3d3750 !important;
+  -webkit-text-fill-color: #3d3750 !important;
+}
+html body.guided-flow.wizard-on-results .official-quote-row dd {
+  font-size: 0.9rem !important;
+  font-weight: 800 !important;
+  color: #1a1230 !important;
+  -webkit-text-fill-color: #1a1230 !important;
+  margin: 0 !important;
+  font-variant-numeric: tabular-nums !important;
+}
+html body.guided-flow.wizard-on-results .official-quote-row-total {
+  border-bottom: 0 !important;
+  padding-top: 0.7rem !important;
+  margin-top: 0.15rem !important;
+  border-top: 2px solid rgba(201, 162, 39, 0.4) !important;
+}
+html body.guided-flow.wizard-on-results .official-quote-row-total dt,
+html body.guided-flow.wizard-on-results .official-quote-row-total dd {
+  font-size: 0.98rem !important;
+  font-weight: 800 !important;
+  color: #1a1230 !important;
+  -webkit-text-fill-color: #1a1230 !important;
+}
+
+/* Realtor CTA */
+html body.guided-flow.wizard-on-results .studio-text-btn,
+html body.guided-flow.wizard-on-results #guidedResultsRealtorBtn {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  min-height: 46px !important;
+  border-radius: 10px !important;
+  border: 1.5px solid rgba(26, 18, 48, 0.14) !important;
+  background: #fff !important;
+  color: #1a1230 !important;
+  -webkit-text-fill-color: #1a1230 !important;
+  font-weight: 700 !important;
+  font-size: 0.9rem !important;
+  cursor: pointer !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  font-family: "DM Sans", system-ui, sans-serif !important;
+}
+html body.guided-flow.wizard-on-results .studio-text-btn:hover {
+  border-color: #c9a227 !important;
+  background: #fffef8 !important;
+}
+
+/* More options row */
+html body.guided-flow.wizard-on-results .studio-hub-row,
+html body.guided-flow.wizard-on-results .ultimate-hub-stack {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  gap: 0.45rem !important;
+  margin: 0 !important;
+}
+html body.guided-flow.wizard-on-results .studio-hub-btn,
+html body.guided-flow.wizard-on-results .ultimate-hub-btn {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  min-height: 46px !important;
+  padding: 0.55rem 0.75rem !important;
+  border-radius: 10px !important;
+  border: 1.5px solid rgba(26, 18, 48, 0.14) !important;
+  background: #faf9fc !important;
+  color: #1a1230 !important;
+  -webkit-text-fill-color: #1a1230 !important;
+  font-weight: 700 !important;
+  font-size: 0.86rem !important;
+  cursor: pointer !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  font-family: "DM Sans", system-ui, sans-serif !important;
+  box-sizing: border-box !important;
+}
+html body.guided-flow.wizard-on-results .ultimate-hub-btn strong {
+  color: inherit !important;
+  -webkit-text-fill-color: inherit !important;
+  font-weight: 700 !important;
+}
+html body.guided-flow.wizard-on-results .ultimate-hub-btn:hover {
+  border-color: #c9a227 !important;
+  background: #fff !important;
+}
+
+/* Vs competition visible */
+html body.guided-flow.wizard-on-results #vsCompetition {
+  display: block !important;
+  visibility: visible !important;
+  background: #fff !important;
+  border: 1px solid rgba(26, 18, 48, 0.1) !important;
+  border-radius: 12px !important;
+  padding: 1rem 1.05rem !important;
+}
+
+/* Kill any legacy details-only hiding if class reused */
+html body.guided-flow.wizard-on-results .studio-more.studio-more-open > summary {
+  display: none !important;
+}
+
+@media (min-width: 640px) {
+  html body.guided-flow.wizard-on-results .studio-tax-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+  html body.guided-flow.wizard-on-results .studio-hub-row,
+  html body.guided-flow.wizard-on-results .ultimate-hub-stack {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (min-width: 768px) {
+  html body.guided-flow.wizard-on-results .studio-more-body {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+    gap: 0.85rem !important;
+    align-items: start !important;
+  }
+  /* Full width for hub / realtor when useful */
+  html body.guided-flow.wizard-on-results #vsCompetition {
+    grid-column: 1 / -1 !important;
+  }
+  html body.guided-flow.wizard-on-results #ultimateHubView {
+    grid-column: 1 / -1 !important;
+  }
+}

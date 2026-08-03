@@ -860,21 +860,19 @@
         ? "Estimated refinance payment"
         : "Estimated monthly payment";
     }
-    // Lead form — fixed conversion microcopy (refi only tweaks headline slightly)
+    // Lead form — pre-approval / request call (guided results)
     const leadTitle = $("saveEstimateHeading");
     const leadLead = document.querySelector(".save-estimate-lead");
     if (leadTitle && !leadTitle.dataset.userLocked) {
-      leadTitle.textContent = isRefi
-        ? "Email me this refinance estimate"
-        : "Email me this estimate";
+      leadTitle.textContent = "Get pre-approved now";
     }
     if (leadLead) {
       leadLead.textContent =
-        "Get a clean summary + a quick personalized review from Logan. No obligation.";
+        "Most clients can complete this in under an hour — no obligation.";
     }
     const leadSubmit = document.querySelector(".save-estimate-submit");
     if (leadSubmit && !leadSubmit.classList.contains("is-loading")) {
-      leadSubmit.textContent = "Send my estimate";
+      leadSubmit.textContent = "Request call";
     }
   }
 

@@ -569,10 +569,10 @@
           </div>
 
           <div class="studio-side">
-            <!-- 4. LEAD — one primary -->
-            <section class="studio-lead save-estimate-card" id="saveEstimateCard" aria-label="Email this estimate">
-              <h3 class="studio-lead-title save-estimate-title" id="saveEstimateHeading">Email me this estimate</h3>
-              <p class="studio-lead-copy save-estimate-lead">Get a personalized review from Logan. Free · no obligation.</p>
+            <!-- 4. LEAD — one primary: pre-approval / request call -->
+            <section class="studio-lead save-estimate-card" id="saveEstimateCard" aria-label="Get pre-approved">
+              <h3 class="studio-lead-title save-estimate-title" id="saveEstimateHeading">Get pre-approved now</h3>
+              <p class="studio-lead-copy save-estimate-lead">Most clients can complete this in under an hour — no obligation.</p>
               <form id="saveEstimateForm" class="studio-lead-form save-estimate-form">
                 <label class="studio-field"><span>Name</span>
                   <input type="text" id="saveEstimateName" name="name" placeholder="First name" autocomplete="given-name" />
@@ -595,11 +595,11 @@
                 </div>
                 <p class="save-estimate-error studio-error hidden" id="saveEstimateError" role="alert" hidden></p>
                 <button type="button" class="save-estimate-expand hidden" id="saveEstimateExpand" tabindex="-1" aria-hidden="true">+</button>
-                <button type="submit" class="studio-cta save-estimate-submit guided-lead-submit">Email me this estimate</button>
+                <button type="submit" class="studio-cta save-estimate-submit guided-lead-submit">Request call</button>
               </form>
-              <button type="button" class="save-estimate-restore" id="saveEstimateRestore" hidden aria-hidden="true" tabindex="-1">Email me this estimate</button>
-              <p class="save-estimate-success studio-success hidden" id="saveEstimateSuccess">You&rsquo;re set — check your inbox.</p>
-              <p class="studio-consent save-estimate-consent">You agree we may contact you about this estimate. Not a loan application. TCPA applies.</p>
+              <button type="button" class="save-estimate-restore" id="saveEstimateRestore" hidden aria-hidden="true" tabindex="-1">Request call</button>
+              <p class="save-estimate-success studio-success hidden" id="saveEstimateSuccess">You&rsquo;re set — we&rsquo;ll reach out to get you started.</p>
+              <p class="studio-consent save-estimate-consent">You agree we may contact you about pre-approval and this estimate. Not a loan application. TCPA applies.</p>
               <button type="button" class="studio-skip save-estimate-skip" id="saveEstimateSkip">Not now</button>
               <button type="button" class="save-estimate-dismiss hidden" id="saveEstimateDismiss" aria-label="Dismiss" hidden>×</button>
             </section>
@@ -623,10 +623,14 @@
             </p>
           </div>
 
-          <details class="studio-more" id="guidedResultsDetails">
-            <summary>Taxes, cash to close &amp; more</summary>
+          <!-- Always-visible details: taxes, cash to close, realtor, more options -->
+          <section class="studio-more studio-more-open" id="guidedResultsDetails" aria-label="Taxes, cash to close, and more">
+            <header class="studio-more-banner">
+              <h3 class="studio-more-banner-title">Taxes, cash to close &amp; more</h3>
+              <p class="studio-more-banner-sub">Edit estimates anytime — figures update live</p>
+            </header>
             <div class="studio-more-body">
-              <section class="vs-competition" id="vsCompetition">
+              <section class="vs-competition studio-more-block" id="vsCompetition">
                 <h3 class="studio-more-h" id="vsCompetitionTitle">Martini vs typical</h3>
                 <div class="vs-competition-grid">
                   <div class="vs-comp-col vs-comp-col-them">
@@ -648,7 +652,8 @@
                 </ul>
                 <p class="vs-comp-note" id="vsCompNote"></p>
               </section>
-              <div class="studio-more-block">
+
+              <div class="studio-more-block studio-more-card">
                 <p class="studio-more-h">Taxes, insurance &amp; HOA</p>
                 <div class="guided-tax-ins-grid studio-tax-grid">
                   <div class="field">
@@ -667,7 +672,8 @@
                   </div>
                 </div>
               </div>
-              <div class="studio-more-block">
+
+              <div class="studio-more-block studio-more-card">
                 <p class="studio-more-h">Ballpark cash to close</p>
                 <div class="ultimate-payment-cash-quote">
                   <p class="official-quote-scenario" id="quoteScenarioSummary">Based on your inputs.</p>
@@ -689,16 +695,18 @@
                   </dl>
                 </div>
               </div>
-              <div class="studio-more-block">
+
+              <div class="studio-more-block studio-more-card">
                 <p class="studio-more-h">Need a realtor?</p>
                 <button type="button" class="studio-text-btn" id="guidedResultsRealtorBtn" data-realtor-entry="results-details">Request a free realtor intro</button>
               </div>
-              <aside class="ultimate-hub-rail" id="ultimateHubView">
+
+              <aside class="ultimate-hub-rail studio-more-block studio-more-card" id="ultimateHubView">
                 <p class="studio-more-h">More options</p>
-                <div class="ultimate-hub-stack">
-                  <button type="button" class="ultimate-hub-btn" id="ultimateShareBtn" aria-controls="ultimateShareGate"><strong>Share estimate</strong></button>
-                  <button type="button" class="ultimate-hub-btn" id="ultimateHubCompare" data-hub-action="compare"><strong>Compare options</strong></button>
-                  <button type="button" class="ultimate-hub-btn" id="ultimateHubRealtor" data-hub-action="realtor" data-realtor-entry="hub"><strong>Realtor intro</strong></button>
+                <div class="ultimate-hub-stack studio-hub-row">
+                  <button type="button" class="ultimate-hub-btn studio-hub-btn" id="ultimateShareBtn" aria-controls="ultimateShareGate"><strong>Share estimate</strong></button>
+                  <button type="button" class="ultimate-hub-btn studio-hub-btn" id="ultimateHubCompare" data-hub-action="compare"><strong>Compare options</strong></button>
+                  <button type="button" class="ultimate-hub-btn studio-hub-btn" id="ultimateHubRealtor" data-hub-action="realtor" data-realtor-entry="hub"><strong>Realtor intro</strong></button>
                 </div>
                 <div class="ultimate-hub-share-gate hidden" id="ultimateShareGate">
                   <form id="ultimateShareLeadForm" class="ultimate-hub-share-form">
@@ -720,7 +728,7 @@
                 </div>
               </aside>
             </div>
-          </details>
+          </section>
 
           <div class="payment-breakdown-wheel hidden" id="paymentBreakdownWheel" aria-hidden="true">
             <svg class="pbw-svg" id="pbwSvg" viewBox="0 0 200 200"></svg>

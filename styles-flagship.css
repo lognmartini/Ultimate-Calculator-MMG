@@ -458,7 +458,9 @@ html body.guided-flow.guided-flagship .save-estimate-eyebrow {
   margin: 0 0 0.35rem !important;
 }
 
-html body.guided-flow.guided-flagship .save-estimate-title {
+/* Dark lead shells only — white studio card uses navy (see styles-site-polish) */
+html body.guided-flow.guided-flagship .save-estimate-card:not(.studio-lead) .save-estimate-title,
+html body.guided-flow.guided-flagship .guided-lead-navy .save-estimate-title {
   text-align: center !important;
   color: #fff !important;
   font-size: 1.2rem !important;
@@ -466,12 +468,18 @@ html body.guided-flow.guided-flagship .save-estimate-title {
   margin: 0 0 0.4rem !important;
 }
 
-html body.guided-flow.guided-flagship .save-estimate-lead {
+html body.guided-flow.guided-flagship .save-estimate-card:not(.studio-lead) .save-estimate-lead,
+html body.guided-flow.guided-flagship .guided-lead-navy .save-estimate-lead {
   text-align: center !important;
   color: rgba(255, 255, 255, 0.75) !important;
   font-size: 0.88rem !important;
   line-height: 1.45 !important;
   margin: 0 0 1rem !important;
+}
+
+html body.guided-flow.guided-flagship .studio-lead .save-estimate-title,
+html body.guided-flow.guided-flagship .studio-lead .save-estimate-lead {
+  color: #1a1230 !important;
 }
 
 html body.guided-flow.guided-flagship .guided-lead-form input {
