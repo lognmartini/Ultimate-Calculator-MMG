@@ -273,3 +273,41 @@ html body.guided-flow.guided-flagship .mmg-affordbtn:hover {
   background: rgba(37, 47, 110, 0.1) !important;
   transform: translateY(-1px);
 }
+
+/* ============================================================
+   MOBILE: pin Continue/Back to the bottom on input steps so the
+   next action is always visible (no "is there more?" confusion).
+   Scoped to guided-pre-results only — results keeps its static
+   Back button + the studio mobile CTA bar. Safe-area aware so
+   iOS Safari's toolbar can't cover it.
+   ============================================================ */
+@media (max-width: 767px) {
+  html body.guided-flow.guided-flagship.guided-pre-results .guided-step-nav:not(.wizard-nav-hidden) {
+    position: fixed !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    z-index: 66 !important;
+    margin: 0 !important;
+    padding: 0.6rem 0.9rem calc(0.7rem + env(safe-area-inset-bottom, 0px)) !important;
+    background: rgba(255, 255, 255, 0.97) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    backdrop-filter: blur(10px) !important;
+    border-top: 1px solid var(--line) !important;
+    box-shadow: 0 -6px 22px rgba(27, 35, 82, 0.14) !important;
+  }
+  html body.guided-flow.guided-flagship.guided-pre-results .guided-step-nav:not(.wizard-nav-hidden) .wizard-nav-inner {
+    max-width: 520px !important;
+    margin: 0 auto !important;
+  }
+  /* Make the primary Continue unmistakable on mobile */
+  html body.guided-flow.guided-flagship.guided-pre-results .guided-step-nav .btn-wizard-next {
+    min-height: 52px !important;
+    font-size: 1.05rem !important;
+    font-weight: 800 !important;
+  }
+  /* Clear space so the last content isn't hidden behind the pinned bar */
+  html body.guided-flow.guided-flagship.guided-pre-results .guided-step-panel {
+    padding-bottom: 104px !important;
+  }
+}
