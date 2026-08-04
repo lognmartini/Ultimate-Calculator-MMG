@@ -350,21 +350,21 @@ html body.guided-flow.guided-flagship .ultimate-payment-details { padding-top: 0
    visible — and visibly updating — while the user drags the
    Adjust-your-scenario sliders further down the page.
    ============================================================ */
-html body.guided-flow .mmg-stickypay {
+html body.guided-flow.guided-flagship .mmg-stickypay {
   position: fixed !important;
   top: 0; /* JS sets this to the header height */
-  left: 0;
-  right: 0;
-  z-index: 900; /* under sticky header (1000), above page content */
-  opacity: 0;
-  transform: translateY(-14px);
-  pointer-events: none;
-  transition: opacity 0.22s ease, transform 0.22s ease;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 900 !important; /* under sticky header (1000), above page content */
+  opacity: 0 !important;
+  transform: translateY(-14px) !important;
+  pointer-events: none !important;
+  transition: opacity 0.22s ease, transform 0.22s ease !important;
 }
-html body.guided-flow .mmg-stickypay.is-shown {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
+html body.guided-flow.guided-flagship .mmg-stickypay.is-shown {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  pointer-events: auto !important;
 }
 html body.guided-flow .mmg-stickypay-inner {
   max-width: 920px;
@@ -484,11 +484,11 @@ html body.guided-flow .mmg-scrollcue {
     line-height: 1;
     margin-top: -1px;
   }
-  html body.guided-flow .mmg-scrollcue.mmg-scrollcue-gone {
-    opacity: 0;
-    pointer-events: none;
-    transform: translateX(-50%) translateY(10px);
-    animation: none;
+  html body.guided-flow.guided-flagship .mmg-scrollcue.mmg-scrollcue-gone {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transform: translateX(-50%) translateY(10px) !important;
+    animation: none !important;
   }
 }
 @keyframes mmgScrollCueBob {
