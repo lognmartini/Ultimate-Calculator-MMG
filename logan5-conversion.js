@@ -103,6 +103,7 @@
   }
 
   function shouldShowExit() {
+    return false; // exit popup removed per request
     try {
       if (localStorage.getItem(EXIT_KEY) === "1") return false;
       if (localStorage.getItem(EXIT_SUBMITTED_KEY) === "1") return false;
