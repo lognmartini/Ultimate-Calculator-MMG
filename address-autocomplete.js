@@ -179,10 +179,15 @@
       .join("");
     showOpen();
     list.querySelectorAll("li[role='option']").forEach((li) => {
-      li.addEventListener("mousedown", (e) => {
+      // pointerdown fires for BOTH mouse and touch, before the input blurs —
+      // far more reliable on mobile than mousedown (which iOS can drop on tap).
+      const pick = (e) => {
         e.preventDefault();
         pickItem(items[Number(li.dataset.index)]);
-      });
+      };
+      li.addEventListener("pointerdown", pick);
+      // Fallback for older browsers without Pointer Events
+      if (!("PointerEvent" in window)) li.addEventListener("touchstart", pick, { passive: false });
     });
   }
 

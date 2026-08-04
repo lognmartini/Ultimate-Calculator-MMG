@@ -277,9 +277,12 @@
           if (usda) usda.checked = true;
           const vet = $("veteranEligible");
           if (vet) vet.checked = false;
-          usdaMapNote();
+          // Show ONE USDA notice: city-specific when we have a geocode,
+          // otherwise the generic map note (noteUsdaAfterLookup falls back
+          // to the generic note internally). Avoids the old double notice.
           const geo = window.MMG_getLastGeocode?.();
           if (geo) noteUsdaAfterLookup({ location: geo });
+          else usdaMapNote();
         }
         syncFthbVisibility(program);
         syncDownChips(program);
