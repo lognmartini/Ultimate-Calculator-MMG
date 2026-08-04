@@ -301,8 +301,8 @@
             <p class="field-note guided-inline-error hidden" id="guidedDownError" role="alert" hidden></p>
           </div>
           <p class="guided-price-target-link-wrap">
-            <button type="button" class="guided-price-target-link" id="guidedPriceTargetToggle" aria-expanded="false" aria-controls="ultimateModePayment">
-              Prefer a monthly payment target instead?
+            <button type="button" class="guided-price-target-link mmg-affordbtn" id="guidedPriceTargetToggle" aria-expanded="false" aria-controls="ultimateModePayment">
+              <span aria-hidden="true">🎯</span> Not sure on price? Start with a monthly budget →
             </button>
           </p>
           <div id="ultimateModePayment" class="ultimate-mode-panel guided-price-target-panel hidden" hidden>
@@ -593,7 +593,7 @@
 
               <div class="studio-control">
                 <div class="studio-control-row">
-                  <span class="studio-control-label">Buy points / lower rate</span>
+                  <span class="studio-control-label">Buy points <span class="studio-gloss">— optional upfront fee to lower your rate</span></span>
                   <output id="destRateLabel">6.25%</output>
                 </div>
                 <div class="studio-chips studio-chips-3" role="group" aria-label="Discount points">
@@ -645,6 +645,7 @@
               <button type="button" class="save-estimate-restore" id="saveEstimateRestore" hidden aria-hidden="true" tabindex="-1">Get pre-approved</button>
               <p class="save-estimate-success studio-success hidden" id="saveEstimateSuccess">You&rsquo;re all set — Logan will reach out shortly to get you started.</p>
               <p class="studio-reassure save-estimate-reassure"><span aria-hidden="true">🔒</span> No credit pull to start · your info goes only to Logan</p>
+              <p class="studio-nextstep save-estimate-nextstep"><span aria-hidden="true">👋</span> What happens next: Logan personally reviews your numbers and reaches out within 1 business day — no pressure.</p>
               <p class="studio-consent save-estimate-consent">By submitting, you agree Logan Martini &middot; Martini Mortgage Group (Gold Star Mortgage) may call, text, or email you about your estimate and pre-approval. Consent isn&rsquo;t required to do business &middot; message &amp; data rates may apply. Not a loan application, commitment, or rate lock.</p>
               <button type="button" class="studio-skip save-estimate-skip" id="saveEstimateSkip">Not now</button>
               <button type="button" class="save-estimate-dismiss hidden" id="saveEstimateDismiss" aria-label="Dismiss" hidden>×</button>
@@ -725,7 +726,7 @@
                   <p class="official-quote-scenario" id="quoteScenarioSummary">Based on your inputs.</p>
                   <div class="seller-credit-panel" id="sellerCreditPanel">
                     <div class="seller-credit-head">
-                      <label for="sellerCreditSlider">Seller concessions</label>
+                      <label for="sellerCreditSlider">Seller concessions <span class="studio-gloss">(credits the seller pays toward your costs)</span></label>
                       <strong id="sellerCreditDisplay">$0</strong>
                     </div>
                     <input type="range" id="sellerCreditSlider" min="0" max="0" step="500" value="0" />
@@ -734,7 +735,7 @@
                   <dl class="official-quote-figures">
                     <div class="official-quote-row"><dt>Down payment</dt><dd id="quoteDownPayment">—</dd></div>
                     <div class="official-quote-row"><dt>Est. closing costs</dt><dd id="quoteClosingCosts">—</dd></div>
-                    <div class="official-quote-row"><dt>Prepaids &amp; escrows</dt><dd id="quotePrepaids">—</dd></div>
+                    <div class="official-quote-row"><dt>Prepaids &amp; escrows <span class="studio-gloss">(upfront taxes &amp; insurance)</span></dt><dd id="quotePrepaids">—</dd></div>
                     <div class="official-quote-row hidden" id="quotePointsRow"><dt>Discount points</dt><dd id="quotePointsCost">—</dd></div>
                     <div class="official-quote-row hidden" id="quoteSellerCreditRow"><dt>Seller credit</dt><dd id="quoteSellerCredit">—</dd></div>
                     <div class="official-quote-row official-quote-row-total"><dt>Est. cash to close</dt><dd id="quoteCashToClose">—</dd></div>

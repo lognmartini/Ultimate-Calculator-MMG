@@ -187,18 +187,63 @@
 
   function collectScenario() {
     const get = (id) => document.getElementById(id);
+    const txt = (id) => (get(id)?.textContent || "").trim();
+    const val = (id) => (get(id)?.value || "").trim();
     const params = new URLSearchParams(window.location.search);
+
+    // Human-readable summary of the exact scenario the lead built, so the
+    // notification email shows the full worked-up numbers at a glance.
+    const skip = (v) => !v || v === "$0" || v === "—" || v === "0";
+    const summaryLines = [];
+    const add = (label, v) => { if (!skip(v)) summaryLines.push(`  ${label}: ${v}`); };
+    const goal = document.body.dataset.loanGoal || "purchase";
+    const downPct = val("downPercent");
+    const downAmt = val("downAmountInput");
+    if (!skip(downPct) || !skip(downAmt)) {
+      add(goal === "refinance" ? "Equity" : "Down payment",
+        `${downPct ? downPct + "%" : ""}${downAmt ? " ($" + downAmt.replace(/^\$/, "") + ")" : ""}`.trim());
+    }
+    add("Loan amount", txt("loanAmount"));
+    add("Credit score", val("creditScore"));
+    add("Loan program", (val("loanProgram") || "").toUpperCase());
+    add("Loan term", val("loanTerm") ? val("loanTerm") + " yr" : "");
+    const mart = txt("ultimatePaymentMartiniRate");
+    const mkt = txt("ultimatePaymentMarketRate");
+    if (!skip(mart)) add("Rate", `Martini ${mart}${!skip(mkt) ? " vs typical " + mkt : ""}`);
+    add("Principal & interest", txt("piPayment"));
+    add("Property taxes", txt("taxPayment"));
+    add("Homeowners insurance", txt("insurancePayment"));
+    add("PMI / MI", txt("pmiPayment"));
+    add("HOA", txt("hoaPayment"));
+    add("Annual property tax", val("propertyTax") ? "$" + val("propertyTax").replace(/^\$/, "") : "");
+    add("Annual insurance", val("homeInsurance") ? "$" + val("homeInsurance").replace(/^\$/, "") : "");
+    const summary = summaryLines.length
+      ? "Scenario worked up:\n" + summaryLines.join("\n")
+      : "";
+
     return {
-      homePrice: get("homePrice")?.value || "",
-      downPercent: get("downPercent")?.value || "",
-      creditScore: get("creditScore")?.value || "",
-      piti: get("pitiPayment")?.textContent || "",
-      address: get("propertyAddress")?.value || "",
-      rate: get("interestRate")?.value || "",
-      loanProgram: get("loanProgram")?.value || "",
-      loanTerm: get("loanTerm")?.value || "",
+      homePrice: val("homePrice"),
+      downPercent: downPct,
+      downAmount: downAmt,
+      loanAmount: txt("loanAmount"),
+      creditScore: val("creditScore"),
+      piti: txt("pitiPayment"),
+      totalMonthly: txt("totalPayment"),
+      principalInterest: txt("piPayment"),
+      monthlyTax: txt("taxPayment"),
+      monthlyInsurance: txt("insurancePayment"),
+      monthlyPmi: txt("pmiPayment"),
+      annualTax: val("propertyTax"),
+      annualInsurance: val("homeInsurance"),
+      address: val("propertyAddress"),
+      rate: val("interestRate"),
+      martiniRate: mart,
+      marketRate: mkt,
+      loanProgram: val("loanProgram"),
+      loanTerm: val("loanTerm"),
+      summary,
       ref: params.get("ref") || params.get("partner") || "",
-      loanGoal: document.body.dataset.loanGoal || "purchase",
+      loanGoal: goal,
       utm: Object.fromEntries(params),
     };
   }

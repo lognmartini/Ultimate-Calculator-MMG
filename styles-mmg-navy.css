@@ -225,3 +225,51 @@ html body.guided-flow.guided-flagship .ultimate-exit-sub {
 html body.guided-flow.guided-flagship .ultimate-exit-consent {
   margin: 0.7rem 0 0 !important; font-size: 0.62rem !important; line-height: 1.35 !important; color: #8a8499 !important;
 }
+
+/* ============================================================
+   FIRST-TIME-BUYER POLISH
+   'What happens next' reassurance, plain-language glosses for
+   jargon, and a more visible affordability (payment-target) entry.
+   ============================================================ */
+
+/* What-happens-next line under the lead CTA */
+html body.guided-flow.guided-flagship .studio-nextstep {
+  margin: 0.55rem 0 0 !important;
+  padding: 0.6rem 0.7rem !important;
+  border-radius: 10px !important;
+  background: rgba(37, 47, 110, 0.05) !important;
+  font-size: 0.78rem !important;
+  line-height: 1.4 !important;
+  color: #2b3252 !important;
+}
+html body.guided-flow.guided-flagship .studio-nextstep span { color: var(--navy); }
+
+/* Plain-language glosses next to jargon terms */
+html body.guided-flow.guided-flagship .studio-gloss {
+  font-weight: 500 !important;
+  font-size: 0.82em !important;
+  color: var(--muted) !important;
+  font-style: italic !important;
+}
+
+/* More visible affordability / payment-target entry */
+html body.guided-flow.guided-flagship .mmg-affordbtn {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0.35rem auto 0 !important;
+  padding: 0.6rem 1rem !important;
+  border: 1.5px solid var(--navy) !important;
+  border-radius: 999px !important;
+  background: rgba(37, 47, 110, 0.04) !important;
+  color: var(--navy) !important;
+  font-weight: 700 !important;
+  font-size: 0.9rem !important;
+  text-decoration: none !important;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.15s ease !important;
+}
+html body.guided-flow.guided-flagship .mmg-affordbtn:hover {
+  background: rgba(37, 47, 110, 0.1) !important;
+  transform: translateY(-1px);
+}
