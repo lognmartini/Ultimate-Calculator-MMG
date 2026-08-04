@@ -7,7 +7,7 @@
    1. UNIFIED BUTTON SYSTEM
    ========================================================= */
 html body.guided-flow.guided-flagship {
-  --mf-navy: #1a1230;
+  --mf-navy: #252f6e;
   --mf-gold: #c9a227;
   --mf-gold-hi: #e8c84a;
   --mf-cream: #f4f2ef;
@@ -201,8 +201,8 @@ html body.guided-flow.guided-flagship .guided-live-card-interactive #wizardLiveP
   font-family: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif !important;
   font-size: clamp(1.75rem, 5vw, 2.15rem) !important;
   font-weight: 800 !important;
-  color: #1a1230 !important;
-  -webkit-text-fill-color: #1a1230 !important;
+  color: #252f6e !important;
+  -webkit-text-fill-color: #252f6e !important;
 }
 
 html body.guided-flow .guided-live-amount-tick {

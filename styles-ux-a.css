@@ -17,8 +17,8 @@ html body.guided-flow .guided-progress.guided-progress-simple {
   padding: 0.7rem 1rem 0.85rem !important;
   border-radius: 14px !important;
   background: rgba(255, 255, 255, 0.88) !important;
-  border: 1px solid rgba(26, 18, 48, 0.08) !important;
-  box-shadow: 0 2px 10px rgba(26, 18, 48, 0.04) !important;
+  border: 1px solid rgba(37, 47, 110, 0.08) !important;
+  box-shadow: 0 2px 10px rgba(37, 47, 110, 0.04) !important;
 }
 
 html body.guided-flow .guided-progress-steps-off,
@@ -46,14 +46,14 @@ html body.guided-flow .guided-progress-line {
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.01em;
-  color: #1a1230;
+  color: #252f6e;
   line-height: 1.3;
 }
 
 html body.guided-flow.guided-flagship .guided-progress-simple .wizard-progress-track {
   height: 6px !important;
   border-radius: 999px !important;
-  background: rgba(26, 18, 48, 0.08) !important;
+  background: rgba(37, 47, 110, 0.08) !important;
   overflow: hidden !important;
 }
 
@@ -228,7 +228,7 @@ html body.guided-flow .guided-choice-hint {
   padding: 0.35rem 0.75rem;
   font-size: 0.88rem;
   font-weight: 600;
-  color: #1a1230;
+  color: #252f6e;
   letter-spacing: 0.01em;
 }
 
@@ -248,7 +248,7 @@ html body.guided-flow.guided-on-choice .guided-choice-card {
 html body.guided-flow.guided-on-choice .guided-choice-card:hover,
 html body.guided-flow.guided-on-choice .guided-choice-card:focus-visible {
   border-color: rgba(201, 162, 39, 0.55) !important;
-  box-shadow: 0 6px 20px rgba(26, 18, 48, 0.08) !important;
+  box-shadow: 0 6px 20px rgba(37, 47, 110, 0.08) !important;
 }
 
 /* =========================================================
@@ -257,7 +257,7 @@ html body.guided-flow.guided-on-choice .guided-choice-card:focus-visible {
 html body.guided-flow .guided-address-recovery {
   margin-top: 1.15rem;
   padding-top: 1.1rem;
-  border-top: 1px solid rgba(26, 18, 48, 0.08);
+  border-top: 1px solid rgba(37, 47, 110, 0.08);
   text-align: center;
 }
 
@@ -273,13 +273,13 @@ html body.guided-flow #wizardSkipAddress.guided-skip-price-btn {
   font-size: 0.95rem !important;
   font-weight: 700 !important;
   line-height: 1.25 !important;
-  color: #1a1230 !important;
+  color: #252f6e !important;
   background: #fff !important;
-  border: 2px solid #1a1230 !important;
+  border: 2px solid #252f6e !important;
   border-radius: 12px !important;
   cursor: pointer !important;
   text-decoration: none !important;
-  box-shadow: 0 2px 8px rgba(26, 18, 48, 0.06) !important;
+  box-shadow: 0 2px 8px rgba(37, 47, 110, 0.06) !important;
   transition: background 0.15s ease, border-color 0.15s ease, transform 0.12s ease !important;
 }
 
@@ -287,7 +287,7 @@ html body.guided-flow .guided-skip-price-btn:hover,
 html body.guided-flow #wizardSkipAddress.guided-skip-price-btn:hover {
   background: #fbf8f0 !important;
   border-color: #c9a227 !important;
-  color: #1a1230 !important;
+  color: #252f6e !important;
   transform: translateY(-1px);
 }
 
@@ -309,7 +309,7 @@ html body.guided-flow .guided-address-status {
 }
 
 html body.guided-flow #guidedAddressCard[data-address-state="loading"] .guided-address-status {
-  color: #1a1230 !important;
+  color: #252f6e !important;
   font-weight: 600 !important;
 }
 
@@ -398,7 +398,7 @@ html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="
   margin: 0 !important;
   padding: 0.7rem 0.85rem !important;
   border-radius: 12px !important;
-  border: 1.5px solid rgba(26, 18, 48, 0.1) !important;
+  border: 1.5px solid rgba(37, 47, 110, 0.1) !important;
   background: #f7f6f3 !important;
   cursor: pointer !important;
   text-align: left !important;
@@ -425,7 +425,7 @@ html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="
 html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-fthb-chip .ultimate-profile-chip-text strong {
   font-size: 0.88rem !important;
   font-weight: 700 !important;
-  color: #1a1230 !important;
+  color: #252f6e !important;
 }
 
 html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-fthb-chip .ultimate-profile-chip-text span {
@@ -489,7 +489,7 @@ html body.guided-flow #lookupAddress.guided-lookup-primary {
   font-weight: 700 !important;
   border-radius: 12px !important;
   background: linear-gradient(135deg, #f0d060 0%, #c9a227 55%, #b8891a 100%) !important;
-  color: #1a1230 !important;
+  color: #252f6e !important;
   border: 0 !important;
   box-shadow: 0 4px 14px rgba(201, 162, 39, 0.3) !important;
   cursor: pointer !important;
@@ -532,7 +532,7 @@ html body.guided-flow .guided-national-banner {
   border-radius: 12px;
   background: rgba(201, 162, 39, 0.12);
   border: 1px solid rgba(201, 162, 39, 0.35);
-  color: #1a1230;
+  color: #252f6e;
   font-size: 0.82rem;
   font-weight: 600;
   text-align: center;
@@ -580,7 +580,7 @@ html body.guided-flow.guided-flagship [data-step-id="loan-credit"] #creditScoreD
   text-align: center !important;
   display: block !important;
   font-weight: 800 !important;
-  color: #1a1230 !important;
+  color: #252f6e !important;
   letter-spacing: -0.03em !important;
 }
 
@@ -627,7 +627,7 @@ html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-term-
 html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-rate-slim {
   margin-top: 0.15rem !important;
   padding-top: 1rem !important;
-  border-top: 1px solid rgba(26, 18, 48, 0.08) !important;
+  border-top: 1px solid rgba(37, 47, 110, 0.08) !important;
 }
 
 html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-rate-strip-ro {
@@ -643,7 +643,7 @@ html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-rate-
   padding: 0.55rem 0.4rem !important;
   border-radius: 12px !important;
   background: #f7f6f3 !important;
-  border: 1px solid rgba(26, 18, 48, 0.06) !important;
+  border: 1px solid rgba(37, 47, 110, 0.06) !important;
 }
 
 html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-rate-strip-martini {
@@ -664,7 +664,7 @@ html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-rate-
 html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-rate-strip-value {
   font-size: 1.15rem !important;
   font-weight: 800 !important;
-  color: #1a1230 !important;
+  color: #252f6e !important;
 }
 
 html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-rate-strip-martini .guided-rate-strip-value {
@@ -674,7 +674,7 @@ html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-rate-
 html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-rate-advanced {
   margin-top: 0.75rem !important;
   border-radius: 10px !important;
-  border: 1px solid rgba(26, 18, 48, 0.08) !important;
+  border: 1px solid rgba(37, 47, 110, 0.08) !important;
   background: #faf9f7 !important;
 }
 
@@ -789,7 +789,7 @@ html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="
   display: block !important;
   font-size: clamp(1.35rem, 4vw, 1.65rem) !important;
   font-weight: 800 !important;
-  color: #1a1230 !important;
+  color: #252f6e !important;
   letter-spacing: -0.02em !important;
 }
 
@@ -805,7 +805,7 @@ html body.guided-flow .guided-down-adjust-open {
   display: block !important;
   margin-top: 0.85rem !important;
   border-radius: 12px !important;
-  border: 1px solid rgba(26, 18, 48, 0.08) !important;
+  border: 1px solid rgba(37, 47, 110, 0.08) !important;
   background: #faf9f7 !important;
   overflow: hidden !important;
 }
@@ -917,7 +917,7 @@ html body.guided-flow.wizard-on-results .guided-header-apply {
   opacity: 1 !important;
   background: linear-gradient(135deg, #f0d060, #c9a227) !important;
   border: 0 !important;
-  color: #1a1230 !important;
+  color: #252f6e !important;
   box-shadow: 0 2px 10px rgba(201, 162, 39, 0.35) !important;
   font-weight: 700 !important;
 }
@@ -1017,7 +1017,7 @@ html body.guided-flow #guidedFthbRow[hidden] {
     width: 100% !important;
     max-width: 520px !important;
     margin: 0 auto !important;
-    box-shadow: 0 -6px 28px rgba(26, 18, 48, 0.14) !important;
+    box-shadow: 0 -6px 28px rgba(37, 47, 110, 0.14) !important;
   }
 
   /* Collapse long advisor block on mobile — payment card only */
@@ -1195,8 +1195,8 @@ html body.guided-flow.guided-flagship.wizard-on-results .guided-step-nav .btn-wi
   margin: 0 auto !important;
   opacity: 1 !important;
   background: transparent !important;
-  border: 1.5px solid rgba(26, 18, 48, 0.18) !important;
-  color: #1a1230 !important;
+  border: 1.5px solid rgba(37, 47, 110, 0.18) !important;
+  color: #252f6e !important;
   box-shadow: none !important;
   font-weight: 600 !important;
 }
@@ -1360,15 +1360,15 @@ html body.guided-flow .ultimate-program-btn .guided-selected-mark {
 }
 html body.guided-flow .ultimate-program-btn.active .guided-selected-mark {
   display: block;
-  color: #1a1230;
+  color: #252f6e;
 }
 html body.guided-flow .ultimate-program-btn.active {
-  box-shadow: 0 0 0 2px #1a1230, 0 4px 16px rgba(201, 162, 39, 0.35) !important;
+  box-shadow: 0 0 0 2px #252f6e, 0 4px 16px rgba(201, 162, 39, 0.35) !important;
 }
 html body.guided-flow .ultimate-term-btn.active,
 html body.guided-flow .guided-mini-chip.is-selected,
 html body.guided-flow .guided-choice-card.is-selected {
-  box-shadow: inset 0 0 0 2px #1a1230 !important;
+  box-shadow: inset 0 0 0 2px #252f6e !important;
   font-weight: 800 !important;
 }
 
@@ -1634,7 +1634,7 @@ html body.guided-flow.guided-flagship .guided-live-card-interactive {
   border-radius: 16px !important;
   border: 1px solid rgba(201, 162, 39, 0.28) !important;
   background: linear-gradient(165deg, #ffffff 0%, #fbf8f0 100%) !important;
-  box-shadow: 0 8px 28px rgba(26, 18, 48, 0.08) !important;
+  box-shadow: 0 8px 28px rgba(37, 47, 110, 0.08) !important;
   transition: box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease !important;
 }
 
@@ -1655,7 +1655,7 @@ html body.guided-flow.guided-flagship .guided-live-card-interactive #wizardLiveP
   font-family: "Playfair Display", Georgia, serif !important;
   font-size: clamp(1.85rem, 5vw, 2.25rem) !important;
   font-weight: 700 !important;
-  color: #1a1230 !important;
+  color: #252f6e !important;
   letter-spacing: -0.03em !important;
   line-height: 1.1 !important;
   margin: 0.25rem 0 0.35rem !important;
@@ -1663,7 +1663,7 @@ html body.guided-flow.guided-flagship .guided-live-card-interactive #wizardLiveP
 }
 
 html body.guided-flow.guided-flagship .wizard-live-preview-ready #wizardLivePayment {
-  color: #1a1230 !important;
+  color: #252f6e !important;
   opacity: 1 !important;
 }
 
@@ -1689,8 +1689,8 @@ html body.guided-flow .guided-live-breakdown {
   margin: 0 0 0.65rem !important;
   padding: 0.55rem 0.65rem !important;
   border-radius: 12px !important;
-  background: rgba(26, 18, 48, 0.03) !important;
-  border: 1px solid rgba(26, 18, 48, 0.06) !important;
+  background: rgba(37, 47, 110, 0.03) !important;
+  border: 1px solid rgba(37, 47, 110, 0.06) !important;
 }
 
 html body.guided-flow .guided-live-breakdown li {
@@ -1701,7 +1701,7 @@ html body.guided-flow .guided-live-breakdown li {
   padding: 0.22rem 0 !important;
   font-size: 0.78rem !important;
   color: #5c5670 !important;
-  border-bottom: 1px solid rgba(26, 18, 48, 0.05);
+  border-bottom: 1px solid rgba(37, 47, 110, 0.05);
 }
 
 html body.guided-flow .guided-live-breakdown li:last-child {
@@ -1709,7 +1709,7 @@ html body.guided-flow .guided-live-breakdown li:last-child {
 }
 
 html body.guided-flow .guided-live-breakdown li strong {
-  color: #1a1230 !important;
+  color: #252f6e !important;
   font-weight: 700 !important;
   font-variant-numeric: tabular-nums !important;
 }
@@ -1720,7 +1720,7 @@ html body.guided-flow .guided-live-breakdown li.guided-live-total {
   border-top: 1px solid rgba(201, 162, 39, 0.35) !important;
   border-bottom: 0 !important;
   font-weight: 700 !important;
-  color: #1a1230 !important;
+  color: #252f6e !important;
 }
 
 html body.guided-flow .guided-live-breakdown li.guided-live-total strong {
@@ -1751,7 +1751,7 @@ html body.guided-flow.guided-flagship .guided-live-card-interactive .ultimate-li
 html body.guided-flow.guided-flagship .guided-live-card-interactive .ultimate-live-stats dd {
   font-size: 0.78rem !important;
   font-weight: 700 !important;
-  color: #1a1230 !important;
+  color: #252f6e !important;
   margin: 0 !important;
 }
 
@@ -1765,7 +1765,7 @@ html body.guided-flow.guided-flagship .guided-live-card-interactive .wizard-live
 /* Soft gold pulse when payment changes */
 html body.guided-flow .guided-live-card.guided-live-flash {
   border-color: rgba(201, 162, 39, 0.65) !important;
-  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.22), 0 10px 28px rgba(26, 18, 48, 0.1) !important;
+  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.22), 0 10px 28px rgba(37, 47, 110, 0.1) !important;
 }
 
 html body.guided-flow .guided-live-card.guided-live-flash #wizardLivePayment {

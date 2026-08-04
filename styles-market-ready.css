@@ -8,7 +8,7 @@
    Design tokens
    ========================================================= */
 html body.guided-flow.guided-flagship {
-  --mr-navy: #1a1230;
+  --mr-navy: #252f6e;
   --mr-gold: #c9a227;
   --mr-gold-hi: #e8c84a;
   --mr-cream: #f1efe9;
@@ -22,7 +22,7 @@ html body.guided-flow.guided-flagship {
   --mr-page: 1040px;
   --mr-rail: 272px;
   --mr-gutter: 1.15rem;
-  --mr-shadow: 0 12px 40px rgba(26, 18, 48, 0.09);
+  --mr-shadow: 0 12px 40px rgba(37, 47, 110, 0.09);
   background: var(--mr-cream) !important;
 }
 
@@ -94,11 +94,11 @@ html body.guided-flow.guided-flagship .btn-outline,
 html body.guided-flow.guided-flagship .guided-loan-options-btn,
 html body.guided-flow.guided-flagship .guided-results-secondary-apply,
 html body.guided-flow.guided-flagship .btn-results-apply {
-  border: 1.5px solid rgba(26, 18, 48, 0.14) !important;
+  border: 1.5px solid rgba(37, 47, 110, 0.14) !important;
   background: #fff !important;
   color: var(--mr-navy) !important;
   font-weight: 700 !important;
-  box-shadow: 0 1px 4px rgba(26, 18, 48, 0.05) !important;
+  box-shadow: 0 1px 4px rgba(37, 47, 110, 0.05) !important;
 }
 
 html body.guided-flow.guided-flagship .btn-results-apply,
@@ -121,7 +121,7 @@ html body.guided-flow.guided-flagship .guided-realtor-btn {
   border: 0 !important;
   background: var(--mr-navy) !important;
   color: #fff !important;
-  box-shadow: 0 3px 12px rgba(26, 18, 48, 0.18) !important;
+  box-shadow: 0 3px 12px rgba(37, 47, 110, 0.18) !important;
 }
 
 /* Ghost on dark */
@@ -279,7 +279,7 @@ html body.guided-flow.guided-flagship .guided-side-advisor {
   padding: 1.2rem 1.1rem !important;
   border-radius: var(--mr-radius) !important;
   background: #fff !important;
-  border: 1px solid rgba(26, 18, 48, 0.07) !important;
+  border: 1px solid rgba(37, 47, 110, 0.07) !important;
   box-shadow: var(--mr-shadow) !important;
 }
 
@@ -339,7 +339,7 @@ html body.guided-flow.guided-flagship .guided-property-summary-grid {
 html body.guided-flow.guided-flagship .guided-property-summary-grid > div {
   padding: 0.55rem 0.35rem !important;
   border-radius: 10px !important;
-  background: rgba(26, 18, 48, 0.04) !important;
+  background: rgba(37, 47, 110, 0.04) !important;
   text-align: center !important;
 }
 
@@ -528,12 +528,12 @@ html body.guided-flow.guided-flagship .ultimate-program-btn {
 
 /* =========================================================
    BRAND LOCK — martinimortgagegroup.com alignment
-   Deep navy #1a1230 / brand navy #252f6e / gold #c9a227
+   Deep navy #252f6e / brand navy #252f6e / gold #c9a227
    ========================================================= */
 
 html body.guided-flow.guided-flagship {
   --mr-brand-navy: #252f6e;
-  --mr-navy: #1a1230;
+  --mr-navy: #252f6e;
   --mr-navy-deep: #110c1d;
   --mr-gold: #c9a227;
   --mr-gold-hi: #e8c84a;
@@ -599,14 +599,14 @@ html body.guided-flow.guided-flagship .guided-header-phone {
 html body.guided-flow.guided-flagship .guided-card,
 html body.guided-flow.guided-flagship .wizard-card.guided-card {
   background: var(--mr-white) !important;
-  border: 1px solid rgba(26, 18, 48, 0.06) !important;
+  border: 1px solid rgba(37, 47, 110, 0.06) !important;
   border-radius: 18px !important;
-  box-shadow: 0 10px 36px rgba(26, 18, 48, 0.07) !important;
+  box-shadow: 0 10px 36px rgba(37, 47, 110, 0.07) !important;
 }
 
 /* Choice cards — brand gold selection */
 html body.guided-flow.guided-flagship .guided-choice-card {
-  border: 1.5px solid rgba(26, 18, 48, 0.08) !important;
+  border: 1.5px solid rgba(37, 47, 110, 0.08) !important;
   border-radius: 16px !important;
   background: #fff !important;
   min-height: 7.25rem !important;
@@ -616,21 +616,21 @@ html body.guided-flow.guided-flagship .guided-choice-card {
 html body.guided-flow.guided-flagship .guided-choice-card:hover {
   border-color: rgba(201, 162, 39, 0.55) !important;
   transform: translateY(-2px) !important;
-  box-shadow: 0 12px 28px rgba(26, 18, 48, 0.08) !important;
+  box-shadow: 0 12px 28px rgba(37, 47, 110, 0.08) !important;
 }
 
 html body.guided-flow.guided-flagship .guided-choice-card.is-selected {
   border-color: var(--mr-gold) !important;
   background: linear-gradient(165deg, #fffdf7, #fff) !important;
-  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.18), 0 8px 24px rgba(26, 18, 48, 0.06) !important;
+  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.18), 0 8px 24px rgba(37, 47, 110, 0.06) !important;
 }
 
 /* Progress — gold active, navy done */
 html body.guided-flow.guided-flagship .guided-progress {
   background: rgba(255, 255, 255, 0.85) !important;
-  border: 1px solid rgba(26, 18, 48, 0.06) !important;
+  border: 1px solid rgba(37, 47, 110, 0.06) !important;
   border-radius: 16px !important;
-  box-shadow: 0 4px 16px rgba(26, 18, 48, 0.04) !important;
+  box-shadow: 0 4px 16px rgba(37, 47, 110, 0.04) !important;
 }
 
 html body.guided-flow.guided-flagship .guided-progress-step.is-active .guided-progress-num {
@@ -727,7 +727,7 @@ html body.guided-flow.guided-flagship input[type="number"],
 html body.guided-flow.guided-flagship .currency-input,
 html body.guided-flow.guided-flagship .address-input {
   font-family: var(--font-sans) !important;
-  border: 1.5px solid rgba(26, 18, 48, 0.12) !important;
+  border: 1.5px solid rgba(37, 47, 110, 0.12) !important;
   border-radius: 12px !important;
   min-height: 52px !important;
   background: #fafaf8 !important;

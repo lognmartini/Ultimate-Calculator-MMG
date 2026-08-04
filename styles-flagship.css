@@ -7,7 +7,7 @@
    Tokens & page shell
    ========================================================= */
 html body.guided-flow.guided-flagship {
-  --fs-navy: #1a1230;
+  --fs-navy: #252f6e;
   --fs-navy-mid: #252040;
   --fs-gold: #c9a227;
   --fs-gold-light: #e8c84a;
@@ -16,8 +16,8 @@ html body.guided-flow.guided-flagship {
   --fs-muted: #6b6580;
   --fs-radius: 18px;
   --fs-radius-sm: 12px;
-  --fs-shadow: 0 12px 40px rgba(26, 18, 48, 0.09);
-  --fs-shadow-soft: 0 4px 18px rgba(26, 18, 48, 0.06);
+  --fs-shadow: 0 12px 40px rgba(37, 47, 110, 0.09);
+  --fs-shadow-soft: 0 4px 18px rgba(37, 47, 110, 0.06);
   background: var(--fs-cream) !important;
   -webkit-font-smoothing: antialiased;
 }
@@ -35,7 +35,7 @@ html body.guided-flow.guided-flagship .guided-progress {
   padding: 1rem 0.85rem 1.05rem !important;
   border-radius: var(--fs-radius) !important;
   background: rgba(255, 255, 255, 0.72) !important;
-  border: 1px solid rgba(26, 18, 48, 0.06) !important;
+  border: 1px solid rgba(37, 47, 110, 0.06) !important;
   box-shadow: var(--fs-shadow-soft) !important;
   backdrop-filter: blur(8px);
 }
@@ -94,7 +94,7 @@ html body.guided-flow.guided-flagship .guided-card,
 html body.guided-flow.guided-flagship .wizard-card.guided-card {
   border-radius: var(--fs-radius) !important;
   padding: 1.55rem 1.4rem 1.65rem !important;
-  border: 1px solid rgba(26, 18, 48, 0.06) !important;
+  border: 1px solid rgba(37, 47, 110, 0.06) !important;
   box-shadow: var(--fs-shadow) !important;
   background: var(--fs-white) !important;
 }
@@ -103,7 +103,7 @@ html body.guided-flow.guided-flagship .guided-choice-card {
   min-height: 8.25rem !important;
   padding: 1.4rem 1.25rem !important;
   border-radius: var(--fs-radius) !important;
-  border: 1.5px solid rgba(26, 18, 48, 0.08) !important;
+  border: 1.5px solid rgba(37, 47, 110, 0.08) !important;
   box-shadow: var(--fs-shadow-soft) !important;
   transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease !important;
 }
@@ -111,7 +111,7 @@ html body.guided-flow.guided-flagship .guided-choice-card {
 html body.guided-flow.guided-flagship .guided-choice-card:hover {
   transform: translateY(-3px);
   border-color: rgba(201, 162, 39, 0.5) !important;
-  box-shadow: 0 14px 36px rgba(26, 18, 48, 0.1) !important;
+  box-shadow: 0 14px 36px rgba(37, 47, 110, 0.1) !important;
 }
 
 html body.guided-flow.guided-flagship .guided-choice-card:active {
@@ -266,7 +266,7 @@ html body.guided-flow.guided-flagship .guided-results-card {
   margin: 0 auto !important;
   padding: 1.85rem 1.4rem 2rem !important;
   border-radius: 22px !important;
-  background: linear-gradient(165deg, #1a1230 0%, #221a3a 48%, #1a1230 100%) !important;
+  background: linear-gradient(165deg, #252f6e 0%, #221a3a 48%, #252f6e 100%) !important;
   border: 1px solid rgba(201, 162, 39, 0.28) !important;
   box-shadow: 0 20px 56px rgba(17, 12, 29, 0.35) !important;
 }
@@ -479,7 +479,7 @@ html body.guided-flow.guided-flagship .guided-lead-navy .save-estimate-lead {
 
 html body.guided-flow.guided-flagship .studio-lead .save-estimate-title,
 html body.guided-flow.guided-flagship .studio-lead .save-estimate-lead {
-  color: #1a1230 !important;
+  color: #252f6e !important;
 }
 
 html body.guided-flow.guided-flagship .guided-lead-form input {
@@ -1437,7 +1437,7 @@ html body.guided-flow.guided-flagship .ultimate-realtor-submit {
   border-radius: var(--btn-radius) !important;
   border: 0 !important;
   background: linear-gradient(135deg, #f0d060 0%, #c9a227 50%, #b8891a 100%) !important;
-  color: #1a1230 !important;
+  color: #252f6e !important;
   font-size: 0.92rem !important;
   font-weight: 800 !important;
   letter-spacing: 0.02em !important;
@@ -1469,16 +1469,16 @@ html body.guided-flow.guided-flagship .btn-outline {
   min-height: var(--btn-h) !important;
   padding: 0.7rem 1.2rem !important;
   border-radius: var(--btn-radius) !important;
-  border: 1.5px solid rgba(26, 18, 48, 0.16) !important;
+  border: 1.5px solid rgba(37, 47, 110, 0.16) !important;
   background: #fff !important;
-  color: #1a1230 !important;
+  color: #252f6e !important;
   font-size: 0.88rem !important;
   font-weight: 700 !important;
   text-align: center !important;
   text-decoration: none !important;
   box-sizing: border-box !important;
   cursor: pointer !important;
-  box-shadow: 0 2px 8px rgba(26, 18, 48, 0.05) !important;
+  box-shadow: 0 2px 8px rgba(37, 47, 110, 0.05) !important;
   transition: border-color 0.15s, background 0.15s, transform 0.12s !important;
 }
 
@@ -1490,7 +1490,7 @@ html body.guided-flow.guided-flagship .guided-results-secondary {
 }
 
 html body.guided-flow.guided-flagship .guided-realtor-btn {
-  background: #1a1230 !important;
+  background: #252f6e !important;
   border-color: transparent !important;
   color: #fff !important;
 }
@@ -1505,7 +1505,7 @@ html body.guided-flow.guided-flagship .guided-reviews-btn {
   border-radius: var(--btn-radius) !important;
   border: 0 !important;
   background: linear-gradient(135deg, rgba(240, 208, 96, 0.95), rgba(201, 162, 39, 0.95)) !important;
-  color: #1a1230 !important;
+  color: #252f6e !important;
   font-weight: 800 !important;
   font-size: 0.85rem !important;
   text-decoration: none !important;
@@ -1661,8 +1661,8 @@ html body.guided-flow.guided-flagship {
   --ui-card-max: 480px;
   --ui-content-max: 680px;
   --ui-primary: linear-gradient(135deg, #f0d060 0%, #c9a227 52%, #b8891a 100%);
-  --ui-navy: #1a1230;
-  --ui-border: rgba(26, 18, 48, 0.14);
+  --ui-navy: #252f6e;
+  --ui-border: rgba(37, 47, 110, 0.14);
 }
 
 /* ----- Base button shape (all interactive CTAs) ----- */
@@ -1735,7 +1735,7 @@ html body.guided-flow.guided-flagship .guided-loan-options-btn {
   background: #fff !important;
   color: var(--ui-navy) !important;
   font-weight: 700 !important;
-  box-shadow: 0 1px 4px rgba(26, 18, 48, 0.04) !important;
+  box-shadow: 0 1px 4px rgba(37, 47, 110, 0.04) !important;
 }
 
 html body.guided-flow.guided-flagship .btn-wizard-back:hover,
@@ -1751,7 +1751,7 @@ html body.guided-flow.guided-flagship .guided-realtor-btn {
   border: 0 !important;
   background: var(--ui-navy) !important;
   color: #fff !important;
-  box-shadow: 0 3px 12px rgba(26, 18, 48, 0.18) !important;
+  box-shadow: 0 3px 12px rgba(37, 47, 110, 0.18) !important;
 }
 
 html body.guided-flow.guided-flagship .guided-realtor-btn:hover {
@@ -1889,7 +1889,7 @@ html body.guided-flow.guided-flagship .guided-property-summary {
   border-radius: 14px !important;
   border: 1px solid rgba(201, 162, 39, 0.32) !important;
   background: linear-gradient(165deg, #fbf8f0, #fff) !important;
-  box-shadow: 0 2px 10px rgba(26, 18, 48, 0.04) !important;
+  box-shadow: 0 2px 10px rgba(37, 47, 110, 0.04) !important;
   text-align: left !important;
   box-sizing: border-box !important;
 }
@@ -1950,9 +1950,9 @@ html body.guided-flow.guided-flagship .guided-property-summary-grid > div {
   margin: 0 !important;
   padding: 0.55rem 0.4rem !important;
   border-radius: 10px !important;
-  background: rgba(26, 18, 48, 0.04) !important;
+  background: rgba(37, 47, 110, 0.04) !important;
   text-align: center !important;
-  border: 1px solid rgba(26, 18, 48, 0.05) !important;
+  border: 1px solid rgba(37, 47, 110, 0.05) !important;
 }
 
 html body.guided-flow.guided-flagship .guided-property-summary-grid dt {

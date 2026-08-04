@@ -1,7 +1,7 @@
 :root {
   /* Aligned with martinimortgagegroup.com brand */
   --navy: #252f6e;
-  --navy-dark: #1a1230;
+  --navy-dark: #252f6e;
   --navy-deeper: #110c1d;
   --gold: #c9a227;
   --gold-light: #e8c84a;
@@ -16,8 +16,8 @@
   --text-muted: #5c6378;
   --radius: 12px;
   --radius-lg: 16px;
-  --shadow: 0 8px 32px rgba(26, 18, 48, 0.1);
-  --shadow-lg: 0 16px 48px rgba(26, 18, 48, 0.14);
+  --shadow: 0 8px 32px rgba(37, 47, 110, 0.1);
+  --shadow-lg: 0 16px 48px rgba(37, 47, 110, 0.14);
   --font-sans: "DM Sans", system-ui, sans-serif;
   --font-display: "Playfair Display", Georgia, serif;
 }
@@ -347,7 +347,7 @@ main {
   border-radius: var(--radius);
   font-size: 0.82rem;
   color: var(--text-muted);
-  box-shadow: 0 2px 12px rgba(26, 18, 48, 0.04);
+  box-shadow: 0 2px 12px rgba(37, 47, 110, 0.04);
 }
 
 .credentials-strip strong {
@@ -509,7 +509,7 @@ main {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  box-shadow: 0 2px 12px rgba(26, 18, 48, 0.06);
+  box-shadow: 0 2px 12px rgba(37, 47, 110, 0.06);
   font-size: 0.82rem;
   line-height: 1.4;
   color: var(--text-muted);
@@ -1655,7 +1655,7 @@ select:focus {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  box-shadow: 0 4px 20px rgba(26, 18, 48, 0.05);
+  box-shadow: 0 4px 20px rgba(37, 47, 110, 0.05);
   border-top: 3px solid var(--gold);
 }
 
@@ -1988,7 +1988,7 @@ html.embed-full-mode .embed-only {
   bottom: 0;
   z-index: 1000;
   padding: 0.65rem 1rem calc(0.65rem + env(safe-area-inset-bottom, 0px));
-  background: linear-gradient(180deg, transparent 0%, rgba(26, 18, 48, 0.92) 24%);
+  background: linear-gradient(180deg, transparent 0%, rgba(37, 47, 110, 0.92) 24%);
   pointer-events: none;
   opacity: 0;
   transform: translateY(100%);

@@ -13,9 +13,9 @@
   padding: 0.45rem 0.75rem;
   font-size: 0.72rem;
   color: rgba(255, 255, 255, 0.92);
-  background: linear-gradient(90deg, #1a1230 0%, #2a1f4a 50%, #1a1230 100%);
+  background: linear-gradient(90deg, #252f6e 0%, #2e3a80 50%, #252f6e 100%);
   border-bottom: 1px solid rgba(201, 162, 39, 0.25);
-  box-shadow: 0 4px 14px rgba(26, 18, 48, 0.18);
+  box-shadow: 0 4px 14px rgba(37, 47, 110, 0.18);
 }
 
 .ultimate-rate-ticker-bar .rate-ticker-live {
@@ -77,9 +77,9 @@
 }
 
 .ultimate-limit-chip-limit {
-  background: rgba(26, 18, 48, 0.06);
-  border-color: rgba(26, 18, 48, 0.12);
-  color: #1a1230;
+  background: rgba(37, 47, 110, 0.06);
+  border-color: rgba(37, 47, 110, 0.12);
+  color: #252f6e;
 }
 
 /* ── Credit tier picker (item 6) ── */
@@ -93,7 +93,7 @@
 .credit-tier-btn {
   padding: 0.5rem 0.35rem;
   border-radius: 10px;
-  border: 2px solid rgba(26, 18, 48, 0.1);
+  border: 2px solid rgba(37, 47, 110, 0.1);
   background: #fff;
   font-size: 0.72rem;
   font-weight: 600;
@@ -140,7 +140,7 @@
   margin-top: 1rem;
   padding: 0.85rem;
   border-radius: 14px;
-  background: linear-gradient(135deg, rgba(26, 18, 48, 0.04) 0%, rgba(201, 162, 39, 0.08) 100%);
+  background: linear-gradient(135deg, rgba(37, 47, 110, 0.04) 0%, rgba(201, 162, 39, 0.08) 100%);
   border: 1px solid rgba(201, 162, 39, 0.2);
 }
 
@@ -148,7 +148,7 @@
   position: relative;
   height: 10px;
   border-radius: 999px;
-  background: rgba(26, 18, 48, 0.08);
+  background: rgba(37, 47, 110, 0.08);
   margin: 0.75rem 0 0.5rem;
   overflow: hidden;
 }
@@ -169,14 +169,14 @@
   justify-content: space-between;
   font-size: 0.75rem;
   font-weight: 600;
-  color: #1a1230;
+  color: #252f6e;
 }
 
 .buying-power-pin {
   text-align: center;
   margin-top: 0.35rem;
   font-size: 0.72rem;
-  color: rgba(26, 18, 48, 0.65);
+  color: rgba(37, 47, 110, 0.65);
 }
 
 /* ── Buydown chip (item 8) ── */
@@ -353,7 +353,7 @@
   padding: 1rem;
   border-radius: 14px;
   background: var(--surface-muted, #f8f7fb);
-  border: 1px solid rgba(26, 18, 48, 0.1);
+  border: 1px solid rgba(37, 47, 110, 0.1);
 }
 
 .ultimate-scenario-compare-panel h3 {
@@ -383,7 +383,7 @@
   padding: 0.65rem;
   border-radius: 12px;
   background: #fff;
-  border: 2px solid rgba(26, 18, 48, 0.08);
+  border: 2px solid rgba(37, 47, 110, 0.08);
 }
 
 .ultimate-scenario-col.is-winner {
@@ -407,7 +407,7 @@
 .ultimate-scenario-piti {
   font-size: 1.15rem;
   font-weight: 700;
-  color: #1a1230;
+  color: #252f6e;
 }
 
 .ultimate-scenario-diff-banner {
@@ -434,7 +434,7 @@
 .ultimate-program-rates-table td {
   padding: 0.45rem 0.55rem;
   text-align: left;
-  border-bottom: 1px solid rgba(26, 18, 48, 0.08);
+  border-bottom: 1px solid rgba(37, 47, 110, 0.08);
 }
 
 .ultimate-program-rates-table th {
@@ -459,7 +459,7 @@
   margin: 1rem 0;
   padding: 0.85rem;
   border-radius: 14px;
-  background: linear-gradient(135deg, rgba(26, 18, 48, 0.03) 0%, rgba(74, 222, 128, 0.08) 100%);
+  background: linear-gradient(135deg, rgba(37, 47, 110, 0.03) 0%, rgba(74, 222, 128, 0.08) 100%);
   border: 1px solid rgba(74, 222, 128, 0.2);
 }
 
@@ -539,7 +539,7 @@
   flex: 1;
   padding: 0.4rem;
   border-radius: 8px;
-  border: 1px solid rgba(26, 18, 48, 0.15);
+  border: 1px solid rgba(37, 47, 110, 0.15);
   background: #fff;
   font-size: 0.75rem;
   font-weight: 600;

@@ -15,7 +15,7 @@ html body.guided-flow.guided-flagship {
   --lx-gutter: clamp(0.75rem, 3vw, 1.5rem);
   --lx-space: clamp(1rem, 2.5vw, 1.5rem);
   --lx-radius: 16px;
-  --lx-navy: #1a1230;
+  --lx-navy: #252f6e;
   --lx-gold: #c9a227;
   --lx-cream: #f4f2ef;
   overflow-x: hidden !important;
@@ -175,7 +175,7 @@ html body.guided-flow.guided-flagship .guided-live-rail {
 html body.guided-flow.guided-flagship .guided-live-card,
 html body.guided-flow.guided-flagship .guided-side-advisor {
   border-radius: var(--lx-radius) !important;
-  box-shadow: 0 8px 28px rgba(26, 18, 48, 0.07) !important;
+  box-shadow: 0 8px 28px rgba(37, 47, 110, 0.07) !important;
 }
 
 html body.guided-flow.guided-flagship .guided-side-advisor {
@@ -184,7 +184,7 @@ html body.guided-flow.guided-flagship .guided-side-advisor {
   gap: 0.75rem !important;
   padding: 1.15rem 1.05rem !important;
   background: #fff !important;
-  border: 1px solid rgba(26, 18, 48, 0.08) !important;
+  border: 1px solid rgba(37, 47, 110, 0.08) !important;
 }
 
 html body.guided-flow.guided-flagship .guided-side-ctas {
@@ -547,8 +547,8 @@ html body.guided-flow.guided-flagship nav.guided-step-nav.wizard-nav {
     rgba(244, 242, 239, 0.92) 28%,
     #f4f2ef 55%
   ) !important;
-  border-top: 1px solid rgba(26, 18, 48, 0.08) !important;
-  box-shadow: 0 -8px 28px rgba(26, 18, 48, 0.06) !important;
+  border-top: 1px solid rgba(37, 47, 110, 0.08) !important;
+  box-shadow: 0 -8px 28px rgba(37, 47, 110, 0.06) !important;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
@@ -779,7 +779,7 @@ html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="
 
 html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-block + .guided-loan-block {
   padding-top: 1.2rem !important;
-  border-top: 1px solid rgba(26, 18, 48, 0.08) !important;
+  border-top: 1px solid rgba(37, 47, 110, 0.08) !important;
 }
 
 html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-block-qualifiers {
@@ -797,7 +797,7 @@ html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="
   font-weight: 800 !important;
   letter-spacing: 0.06em !important;
   text-transform: uppercase !important;
-  color: #1a1230 !important;
+  color: #252f6e !important;
   text-align: center !important;
 }
 
@@ -814,7 +814,7 @@ html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="
   height: 1.45rem !important;
   border-radius: 999px !important;
   background: linear-gradient(135deg, #f0d060, #c9a227) !important;
-  color: #1a1230 !important;
+  color: #252f6e !important;
   font-size: 0.72rem !important;
   font-weight: 800 !important;
   letter-spacing: 0 !important;
@@ -845,7 +845,7 @@ html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="
   min-height: 72px !important;
   padding: 0.85rem 0.6rem !important;
   border-radius: 14px !important;
-  border: 2px solid rgba(26, 18, 48, 0.1) !important;
+  border: 2px solid rgba(37, 47, 110, 0.1) !important;
   background: #faf9f7 !important;
   box-shadow: none !important;
   text-align: center !important;
@@ -863,7 +863,7 @@ html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="
   border-color: transparent !important;
   background: linear-gradient(135deg, #f0d060 0%, #c9a227 55%, #b8891a 100%) !important;
   box-shadow: 0 4px 16px rgba(201, 162, 39, 0.35) !important;
-  color: #1a1230 !important;
+  color: #252f6e !important;
 }
 
 html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-type-grid .ultimate-program-btn strong {
@@ -914,7 +914,7 @@ html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="
   display: block !important;
   font-size: clamp(1.45rem, 4vw, 1.75rem) !important;
   font-weight: 800 !important;
-  color: #1a1230 !important;
+  color: #252f6e !important;
   letter-spacing: -0.02em !important;
 }
 
@@ -972,7 +972,7 @@ html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="
   padding: 0.6rem 0.65rem !important;
   min-height: 0 !important;
   border-radius: 12px !important;
-  border: 1px solid rgba(26, 18, 48, 0.08) !important;
+  border: 1px solid rgba(37, 47, 110, 0.08) !important;
   background: #f7f6f3 !important;
   display: flex !important;
   align-items: flex-start !important;

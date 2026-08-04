@@ -6,7 +6,7 @@
 
 /* ========== Global guided layout polish ========== */
 html body.guided-flow.guided-flagship {
-  --studio-navy: #1a1230;
+  --studio-navy: #252f6e;
   --studio-gold: #c9a227;
   --studio-gold-hi: #e8c84a;
   --studio-muted: #5c5670;
@@ -96,12 +96,12 @@ html body.guided-flow.wizard-on-results .guided-step-nav .wizard-nav-inner {
 html body.guided-flow.guided-flagship .guided-step-nav .btn-wizard-back {
   background: #fff !important;
   color: var(--studio-navy) !important;
-  border: 1.5px solid rgba(26, 18, 48, 0.18) !important;
+  border: 1.5px solid rgba(37, 47, 110, 0.18) !important;
   box-shadow: none !important;
 }
 
 html body.guided-flow.guided-flagship .guided-step-nav .btn-wizard-next {
-  background: linear-gradient(145deg, #1a1230, #2a1f45) !important;
+  background: linear-gradient(145deg, #252f6e, #2a1f45) !important;
   color: #f5e6a8 !important;
   border: 1.5px solid var(--studio-gold) !important;
   font-weight: 700 !important;
@@ -110,7 +110,7 @@ html body.guided-flow.guided-flagship .guided-step-nav .btn-wizard-next {
 
 html body.guided-flow.guided-flagship .guided-step-nav .btn-wizard-next:hover {
   transform: translateY(-1px) !important;
-  box-shadow: 0 6px 16px rgba(26, 18, 48, 0.18) !important;
+  box-shadow: 0 6px 16px rgba(37, 47, 110, 0.18) !important;
 }
 
 html body.guided-flow.guided-flagship .guided-choice-card {
@@ -154,11 +154,11 @@ html body.guided-flow .studio-side {
 
 /* Hero */
 html body.guided-flow .studio-hero {
-  background: linear-gradient(155deg, #1a1230 0%, #2d2348 52%, #1a1230 100%) !important;
+  background: linear-gradient(155deg, #252f6e 0%, #2d2348 52%, #252f6e 100%) !important;
   border-radius: 16px !important;
   padding: 1.5rem 1.25rem 1.35rem !important;
   text-align: center !important;
-  box-shadow: 0 12px 32px rgba(26, 18, 48, 0.2) !important;
+  box-shadow: 0 12px 32px rgba(37, 47, 110, 0.2) !important;
 }
 
 html body.guided-flow .studio-kicker {
@@ -228,10 +228,10 @@ html body.guided-flow .studio-vs {
 /* Breakdown card */
 html body.guided-flow .studio-break {
   background: #fff !important;
-  border: 1px solid rgba(26, 18, 48, 0.1) !important;
+  border: 1px solid rgba(37, 47, 110, 0.1) !important;
   border-radius: 14px !important;
   padding: 0.35rem 1.25rem !important;
-  box-shadow: 0 4px 16px rgba(26, 18, 48, 0.05) !important;
+  box-shadow: 0 4px 16px rgba(37, 47, 110, 0.05) !important;
 }
 
 html body.guided-flow .studio-break-list,
@@ -246,7 +246,7 @@ html body.guided-flow .studio-break #breakdown li {
   justify-content: space-between !important;
   gap: 0.75rem !important;
   padding: 0.7rem 0 !important;
-  border-bottom: 1px solid rgba(26, 18, 48, 0.07) !important;
+  border-bottom: 1px solid rgba(37, 47, 110, 0.07) !important;
   font-size: 0.92rem !important;
   color: #3d3750 !important;
   font-weight: 500 !important;
@@ -280,7 +280,7 @@ html body.guided-flow .studio-controls {
   border: 1px solid rgba(201, 162, 39, 0.28) !important;
   border-radius: 14px !important;
   padding: 1.25rem !important;
-  box-shadow: 0 4px 16px rgba(26, 18, 48, 0.05) !important;
+  box-shadow: 0 4px 16px rgba(37, 47, 110, 0.05) !important;
 }
 
 html body.guided-flow .studio-controls-head {
@@ -357,7 +357,7 @@ html body.guided-flow .studio-chips-4 {
 html body.guided-flow .studio-chip {
   min-height: 42px !important;
   border-radius: 10px !important;
-  border: 1.5px solid rgba(26, 18, 48, 0.14) !important;
+  border: 1.5px solid rgba(37, 47, 110, 0.14) !important;
   background: #faf9fc !important;
   color: #3d3750 !important;
   font-size: 0.8rem !important;
@@ -376,7 +376,7 @@ html body.guided-flow .studio-chip.active {
   background: var(--studio-navy) !important;
   color: #f5e6a8 !important;
   border-color: var(--studio-gold) !important;
-  box-shadow: 0 2px 8px rgba(26, 18, 48, 0.15) !important;
+  box-shadow: 0 2px 8px rgba(37, 47, 110, 0.15) !important;
 }
 
 html body.guided-flow .studio-chip:focus-visible {
@@ -390,7 +390,7 @@ html body.guided-flow .studio-facts {
   gap: 0.4rem !important;
   margin-top: 0.35rem !important;
   padding-top: 0.85rem !important;
-  border-top: 1px solid rgba(26, 18, 48, 0.08) !important;
+  border-top: 1px solid rgba(37, 47, 110, 0.08) !important;
 }
 
 html body.guided-flow .studio-facts div {
@@ -468,7 +468,7 @@ html body.guided-flow .studio-field em {
 html body.guided-flow .studio-field input {
   min-height: 46px !important;
   border-radius: 10px !important;
-  border: 1.5px solid rgba(26, 18, 48, 0.14) !important;
+  border: 1.5px solid rgba(37, 47, 110, 0.14) !important;
   padding: 0.55rem 0.7rem !important;
   font-size: 1rem !important;
   color: var(--studio-navy) !important;
@@ -492,7 +492,7 @@ html body.guided-flow .studio-lead .save-estimate-submit {
   margin-top: 0.25rem !important;
   border-radius: 12px !important;
   border: 1.5px solid var(--studio-gold) !important;
-  background: linear-gradient(145deg, #1a1230, #2a1f45) !important;
+  background: linear-gradient(145deg, #252f6e, #2a1f45) !important;
   color: #f5e6a8 !important;
   font-size: 1.02rem !important;
   font-weight: 800 !important;
@@ -505,7 +505,7 @@ html body.guided-flow .studio-cta:hover,
 html body.guided-flow .studio-lead .save-estimate-submit:hover {
   transform: translateY(-1px) !important;
   background: linear-gradient(145deg, #c9a227, #b8921f) !important;
-  color: #1a1230 !important;
+  color: #252f6e !important;
   box-shadow: 0 6px 16px rgba(201, 162, 39, 0.25) !important;
 }
 
@@ -577,7 +577,7 @@ html body.guided-flow .studio-trust {
   padding: 0.65rem 0.85rem !important;
   background: #f7f6fa !important;
   border-radius: 12px !important;
-  border: 1px solid rgba(26, 18, 48, 0.06) !important;
+  border: 1px solid rgba(37, 47, 110, 0.06) !important;
 }
 
 html body.guided-flow .studio-trust img {
@@ -623,7 +623,7 @@ html body.guided-flow .studio-apply a {
 
 html body.guided-flow .studio-more {
   grid-column: 1 / -1 !important;
-  border-top: 1px solid rgba(26, 18, 48, 0.08) !important;
+  border-top: 1px solid rgba(37, 47, 110, 0.08) !important;
   padding-top: 0.35rem !important;
 }
 
@@ -664,7 +664,7 @@ html body.guided-flow .studio-text-btn {
   width: 100% !important;
   min-height: 42px !important;
   border-radius: 10px !important;
-  border: 1.5px solid rgba(26, 18, 48, 0.14) !important;
+  border: 1.5px solid rgba(37, 47, 110, 0.14) !important;
   background: #fff !important;
   font-weight: 600 !important;
   cursor: pointer !important;

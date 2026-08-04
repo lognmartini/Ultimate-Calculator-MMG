@@ -25,15 +25,15 @@ html body.guided-flow .dest-page {
 html body.guided-flow .dest-shell {
   background: #fff !important;
   border-radius: 20px !important;
-  border: 1px solid rgba(26, 18, 48, 0.1) !important;
-  box-shadow: 0 16px 48px rgba(26, 18, 48, 0.12) !important;
+  border: 1px solid rgba(37, 47, 110, 0.1) !important;
+  box-shadow: 0 16px 48px rgba(37, 47, 110, 0.12) !important;
   overflow: hidden !important;
   padding: 0 !important;
 }
 
 /* ---------- HERO ---------- */
 html body.guided-flow .dest-hero {
-  background: linear-gradient(165deg, #1a1230 0%, #2a1f45 55%, #1a1230 100%) !important;
+  background: linear-gradient(165deg, #252f6e 0%, #2a1f45 55%, #252f6e 100%) !important;
   padding: 1.35rem 1.1rem 1.25rem !important;
   text-align: center !important;
 }
@@ -110,7 +110,7 @@ html body.guided-flow .dest-shell #breakdown li {
   align-items: baseline !important;
   gap: 0.75rem !important;
   padding: 0.5rem 0.15rem !important;
-  border-bottom: 1px solid rgba(26, 18, 48, 0.07) !important;
+  border-bottom: 1px solid rgba(37, 47, 110, 0.07) !important;
   font-family: "DM Sans", system-ui, sans-serif !important;
   font-size: 0.9rem !important;
   font-weight: 500 !important;
@@ -129,7 +129,7 @@ html body.guided-flow .dest-shell #breakdown li.hidden {
 
 html body.guided-flow .dest-shell #breakdown li strong {
   font-weight: 800 !important;
-  color: #1a1230 !important;
+  color: #252f6e !important;
   font-variant-numeric: tabular-nums !important;
 }
 
@@ -139,7 +139,7 @@ html body.guided-flow .dest-adjust {
   padding: 0.85rem 0.85rem 0.75rem !important;
   border-radius: 14px !important;
   background: #f7f6fa !important;
-  border: 1px solid rgba(26, 18, 48, 0.08) !important;
+  border: 1px solid rgba(37, 47, 110, 0.08) !important;
   text-align: left !important;
 }
 
@@ -147,7 +147,7 @@ html body.guided-flow .dest-adjust-heading {
   margin: 0 !important;
   font-size: 0.82rem !important;
   font-weight: 800 !important;
-  color: #1a1230 !important;
+  color: #252f6e !important;
   text-align: center !important;
 }
 
@@ -184,7 +184,7 @@ html body.guided-flow .dest-control-top-label {
 html body.guided-flow .dest-control-top strong {
   font-size: 0.85rem !important;
   font-weight: 800 !important;
-  color: #1a1230 !important;
+  color: #252f6e !important;
   font-variant-numeric: tabular-nums !important;
 }
 
@@ -205,7 +205,7 @@ html body.guided-flow .dest-term-pill {
   flex: 1 !important;
   min-height: 40px !important;
   border-radius: 10px !important;
-  border: 1.5px solid rgba(26, 18, 48, 0.14) !important;
+  border: 1.5px solid rgba(37, 47, 110, 0.14) !important;
   background: #fff !important;
   color: #3d3750 !important;
   font-family: "DM Sans", system-ui, sans-serif !important;
@@ -215,7 +215,7 @@ html body.guided-flow .dest-term-pill {
 }
 
 html body.guided-flow .dest-term-pill.active {
-  background: #1a1230 !important;
+  background: #252f6e !important;
   color: #f5e6a8 !important;
   border-color: #c9a227 !important;
 }
@@ -231,7 +231,7 @@ html body.guided-flow .dest-mini-stats {
   gap: 0.35rem !important;
   margin-top: 0.65rem !important;
   padding-top: 0.65rem !important;
-  border-top: 1px solid rgba(26, 18, 48, 0.08) !important;
+  border-top: 1px solid rgba(37, 47, 110, 0.08) !important;
 }
 
 html body.guided-flow .dest-mini-stats div {
@@ -252,7 +252,7 @@ html body.guided-flow .dest-mini-stats span {
 html body.guided-flow .dest-mini-stats strong {
   font-size: 0.75rem !important;
   font-weight: 800 !important;
-  color: #1a1230 !important;
+  color: #252f6e !important;
   font-variant-numeric: tabular-nums !important;
 }
 
@@ -271,7 +271,7 @@ html body.guided-flow .dest-lead-title {
   margin: 0 0 0.3rem !important;
   font-size: 1.15rem !important;
   font-weight: 800 !important;
-  color: #1a1230 !important;
+  color: #252f6e !important;
 }
 
 html body.guided-flow .dest-lead-copy {
@@ -311,9 +311,9 @@ html body.guided-flow .dest-field input {
   min-height: 46px !important;
   padding: 0.55rem 0.7rem !important;
   border-radius: 10px !important;
-  border: 1.5px solid rgba(26, 18, 48, 0.14) !important;
+  border: 1.5px solid rgba(37, 47, 110, 0.14) !important;
   font-size: 1rem !important;
-  color: #1a1230 !important;
+  color: #252f6e !important;
   background: #faf9fc !important;
   width: 100% !important;
   box-sizing: border-box !important;
@@ -333,7 +333,7 @@ html body.guided-flow .dest-lead .save-estimate-submit {
   margin-top: 0.35rem !important;
   border-radius: 12px !important;
   border: 1.5px solid #c9a227 !important;
-  background: linear-gradient(145deg, #1a1230, #2a1f45) !important;
+  background: linear-gradient(145deg, #252f6e, #2a1f45) !important;
   color: #f5e6a8 !important;
   font-size: 1.02rem !important;
   font-weight: 800 !important;
@@ -344,7 +344,7 @@ html body.guided-flow .dest-lead .save-estimate-submit {
 html body.guided-flow .dest-btn-primary:hover,
 html body.guided-flow .dest-lead .save-estimate-submit:hover {
   background: linear-gradient(145deg, #c9a227, #b8921f) !important;
-  color: #1a1230 !important;
+  color: #252f6e !important;
 }
 
 /* Kill duplicate restore primary */
@@ -367,7 +367,7 @@ html body.guided-flow .dest-reopen-lead {
   background: none !important;
   padding: 0 !important;
   margin: 0 !important;
-  color: #1a1230 !important;
+  color: #252f6e !important;
   font-weight: 800 !important;
   font-size: 1rem !important;
   text-decoration: underline !important;
@@ -449,7 +449,7 @@ html body.guided-flow .dest-trust p {
 }
 
 html body.guided-flow .dest-trust strong {
-  color: #1a1230 !important;
+  color: #252f6e !important;
   font-weight: 700 !important;
 }
 
@@ -477,7 +477,7 @@ html body.guided-flow .dest-link-secondary {
 
 html body.guided-flow .dest-more {
   margin: 0.65rem 0.85rem 1rem !important;
-  border-top: 1px solid rgba(26, 18, 48, 0.08) !important;
+  border-top: 1px solid rgba(37, 47, 110, 0.08) !important;
   padding-top: 0.45rem !important;
 }
 
@@ -513,11 +513,11 @@ html body.guided-flow .dest-text-btn {
   width: 100% !important;
   min-height: 42px !important;
   border-radius: 10px !important;
-  border: 1.5px solid rgba(26, 18, 48, 0.14) !important;
+  border: 1.5px solid rgba(37, 47, 110, 0.14) !important;
   background: #fff !important;
   font-weight: 600 !important;
   font-size: 0.85rem !important;
-  color: #1a1230 !important;
+  color: #252f6e !important;
   cursor: pointer !important;
 }
 

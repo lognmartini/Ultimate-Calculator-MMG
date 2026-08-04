@@ -46,13 +46,13 @@ html body.guided-flow .pay-card {
   border-radius: 18px !important;
   overflow: hidden !important;
   background: #fff !important;
-  border: 1px solid rgba(26, 18, 48, 0.1) !important;
-  box-shadow: 0 14px 40px rgba(26, 18, 48, 0.12) !important;
+  border: 1px solid rgba(37, 47, 110, 0.1) !important;
+  box-shadow: 0 14px 40px rgba(37, 47, 110, 0.12) !important;
 }
 
 /* 1. Hero */
 html body.guided-flow .pay-hero {
-  background: linear-gradient(160deg, #1a1230 0%, #2c2148 50%, #1a1230 100%) !important;
+  background: linear-gradient(160deg, #252f6e 0%, #2c2148 50%, #252f6e 100%) !important;
   padding: 1.4rem 1rem 1.2rem !important;
   text-align: center !important;
 }
@@ -136,7 +136,7 @@ html body.guided-flow .pay-card #breakdown li {
   justify-content: space-between !important;
   gap: 0.75rem !important;
   padding: 0.48rem 0.1rem !important;
-  border-bottom: 1px solid rgba(26, 18, 48, 0.07) !important;
+  border-bottom: 1px solid rgba(37, 47, 110, 0.07) !important;
   font-size: 0.9rem !important;
   color: #3d3750 !important;
   font-weight: 500 !important;
@@ -154,7 +154,7 @@ html body.guided-flow .pay-card #breakdown li.hidden {
 
 html body.guided-flow .pay-card #breakdown li strong {
   font-weight: 800 !important;
-  color: #1a1230 !important;
+  color: #252f6e !important;
   font-variant-numeric: tabular-nums !important;
 }
 
@@ -176,7 +176,7 @@ html body.guided-flow .pay-play-head h3 {
   margin: 0 !important;
   font-size: 0.88rem !important;
   font-weight: 800 !important;
-  color: #1a1230 !important;
+  color: #252f6e !important;
 }
 
 html body.guided-flow .pay-play-head p {
@@ -205,7 +205,7 @@ html body.guided-flow .pay-slider-meta label {
 html body.guided-flow .pay-slider-meta output {
   font-size: 0.84rem !important;
   font-weight: 800 !important;
-  color: #1a1230 !important;
+  color: #252f6e !important;
   font-variant-numeric: tabular-nums !important;
 }
 
@@ -239,7 +239,7 @@ html body.guided-flow .pay-pill {
   min-height: 40px !important;
   min-width: 3.2rem !important;
   border-radius: 10px !important;
-  border: 1.5px solid rgba(26, 18, 48, 0.14) !important;
+  border: 1.5px solid rgba(37, 47, 110, 0.14) !important;
   background: #fff !important;
   color: #3d3750 !important;
   font-size: 0.8rem !important;
@@ -249,7 +249,7 @@ html body.guided-flow .pay-pill {
 }
 
 html body.guided-flow .pay-pill.active {
-  background: #1a1230 !important;
+  background: #252f6e !important;
   color: #f5e6a8 !important;
   border-color: #c9a227 !important;
 }
@@ -265,7 +265,7 @@ html body.guided-flow .pay-facts {
   gap: 0.35rem !important;
   margin-top: 0.55rem !important;
   padding-top: 0.55rem !important;
-  border-top: 1px solid rgba(26, 18, 48, 0.08) !important;
+  border-top: 1px solid rgba(37, 47, 110, 0.08) !important;
 }
 
 html body.guided-flow .pay-facts div {
@@ -285,7 +285,7 @@ html body.guided-flow .pay-facts span {
 html body.guided-flow .pay-facts strong {
   font-size: 0.74rem !important;
   font-weight: 800 !important;
-  color: #1a1230 !important;
+  color: #252f6e !important;
   font-variant-numeric: tabular-nums !important;
 }
 
@@ -304,7 +304,7 @@ html body.guided-flow .pay-lead-title {
   margin: 0 0 0.25rem !important;
   font-size: 1.12rem !important;
   font-weight: 800 !important;
-  color: #1a1230 !important;
+  color: #252f6e !important;
 }
 
 html body.guided-flow .pay-lead-copy {
@@ -343,10 +343,10 @@ html body.guided-flow .pay-field em {
 html body.guided-flow .pay-field input {
   min-height: 46px !important;
   border-radius: 10px !important;
-  border: 1.5px solid rgba(26, 18, 48, 0.14) !important;
+  border: 1.5px solid rgba(37, 47, 110, 0.14) !important;
   padding: 0.5rem 0.7rem !important;
   font-size: 1rem !important;
-  color: #1a1230 !important;
+  color: #252f6e !important;
   background: #faf9fc !important;
   width: 100% !important;
   box-sizing: border-box !important;
@@ -366,7 +366,7 @@ html body.guided-flow .pay-lead .save-estimate-submit {
   margin-top: 0.3rem !important;
   border-radius: 12px !important;
   border: 1.5px solid #c9a227 !important;
-  background: linear-gradient(145deg, #1a1230, #2a1f45) !important;
+  background: linear-gradient(145deg, #252f6e, #2a1f45) !important;
   color: #f5e6a8 !important;
   font-size: 1.02rem !important;
   font-weight: 800 !important;
@@ -376,7 +376,7 @@ html body.guided-flow .pay-lead .save-estimate-submit {
 
 html body.guided-flow .pay-cta:hover {
   background: linear-gradient(145deg, #c9a227, #b8921f) !important;
-  color: #1a1230 !important;
+  color: #252f6e !important;
 }
 
 html body.guided-flow #saveEstimateRestore,
@@ -453,7 +453,7 @@ html body.guided-flow .pay-trust img {
 }
 
 html body.guided-flow .pay-trust strong {
-  color: #1a1230 !important;
+  color: #252f6e !important;
 }
 
 html body.guided-flow .pay-legal {
@@ -478,7 +478,7 @@ html body.guided-flow .pay-apply-link {
 
 html body.guided-flow .pay-more {
   margin: 0.55rem 0.8rem 0.9rem !important;
-  border-top: 1px solid rgba(26, 18, 48, 0.08) !important;
+  border-top: 1px solid rgba(37, 47, 110, 0.08) !important;
   padding-top: 0.4rem !important;
 }
 
@@ -514,12 +514,12 @@ html body.guided-flow .pay-text-btn {
   width: 100% !important;
   min-height: 40px !important;
   border-radius: 10px !important;
-  border: 1.5px solid rgba(26, 18, 48, 0.14) !important;
+  border: 1.5px solid rgba(37, 47, 110, 0.14) !important;
   background: #fff !important;
   font-weight: 600 !important;
   font-size: 0.84rem !important;
   cursor: pointer !important;
-  color: #1a1230 !important;
+  color: #252f6e !important;
 }
 
 html body.guided-flow.wizard-on-results .guided-step-nav {

@@ -1,13 +1,13 @@
 /**
  * IMPACT — loads last. Unmistakable hierarchy, lead strength, density, buttons.
- * Navy #1a1230 + gold #c9a227
+ * Navy #252f6e + gold #c9a227
  */
 
 /* =========================================================
    GLOBAL DENSITY + BUTTON SYSTEM
    ========================================================= */
 html body.guided-flow.guided-flagship {
-  --impact-navy: #1a1230;
+  --impact-navy: #252f6e;
   --impact-gold: #c9a227;
   --impact-gold-hi: #e8c84a;
   --impact-pad: 0.5rem;
@@ -51,17 +51,17 @@ html body.guided-flow.guided-flagship #lookupAddress.guided-lookup-primary {
   font-family: "DM Sans", system-ui, sans-serif !important;
   font-weight: 700 !important;
   font-size: 0.95rem !important;
-  background: linear-gradient(145deg, #1a1230 0%, #2a1f45 100%) !important;
+  background: linear-gradient(145deg, #252f6e 0%, #2a1f45 100%) !important;
   color: #f5e6a8 !important;
   border: 1.5px solid #c9a227 !important;
-  box-shadow: 0 4px 14px rgba(26, 18, 48, 0.18) !important;
+  box-shadow: 0 4px 14px rgba(37, 47, 110, 0.18) !important;
 }
 
 html body.guided-flow.guided-flagship .guided-btn-primary:hover,
 html body.guided-flow.guided-flagship .btn-wizard-next:hover,
 html body.guided-flow.guided-flagship .guided-lead-submit:hover {
   background: linear-gradient(145deg, #c9a227 0%, #b8921f 100%) !important;
-  color: #1a1230 !important;
+  color: #252f6e !important;
 }
 
 html body.guided-flow.guided-flagship .guided-btn-secondary,
@@ -74,8 +74,8 @@ html body.guided-flow.guided-flagship .btn-wizard-back {
   font-weight: 600 !important;
   font-size: 0.9rem !important;
   background: #fff !important;
-  color: #1a1230 !important;
-  border: 1.5px solid rgba(26, 18, 48, 0.2) !important;
+  color: #252f6e !important;
+  border: 1.5px solid rgba(37, 47, 110, 0.2) !important;
 }
 
 html body.guided-flow.guided-flagship .guided-results-secondary-apply:hover,
@@ -95,8 +95,8 @@ html body.guided-flow.guided-flagship .guided-results-final.guided-results-impac
   padding: 1.25rem 1rem 1.35rem !important;
   border-radius: 18px !important;
   border: 1px solid rgba(201, 162, 39, 0.35) !important;
-  background: linear-gradient(175deg, #1a1230 0%, #241c38 55%, #1a1230 100%) !important;
-  box-shadow: 0 16px 48px rgba(26, 18, 48, 0.35) !important;
+  background: linear-gradient(175deg, #252f6e 0%, #241c38 55%, #252f6e 100%) !important;
+  box-shadow: 0 16px 48px rgba(37, 47, 110, 0.35) !important;
 }
 
 html body.guided-flow .guided-results-hero-impact {
@@ -254,7 +254,7 @@ html body.guided-flow .guided-lead-impact .save-estimate-eyebrow {
 html body.guided-flow .guided-lead-impact .save-estimate-title {
   font-size: clamp(1.15rem, 3.5vw, 1.35rem) !important;
   font-weight: 800 !important;
-  color: #1a1230 !important;
+  color: #252f6e !important;
   margin: 0 0 0.3rem !important;
   line-height: 1.2 !important;
 }
@@ -283,8 +283,8 @@ html body.guided-flow .guided-lead-impact input[type="tel"] {
   min-height: 46px !important;
   font-size: 1rem !important;
   font-weight: 500 !important;
-  color: #1a1230 !important;
-  border: 1.5px solid rgba(26, 18, 48, 0.18) !important;
+  color: #252f6e !important;
+  border: 1.5px solid rgba(37, 47, 110, 0.18) !important;
   border-radius: 10px !important;
   padding: 0.55rem 0.75rem !important;
   width: 100% !important;
@@ -345,13 +345,13 @@ html body.guided-flow .guided-lead-impact .save-estimate-tab {
   border-radius: 999px !important;
   font-size: 0.8rem !important;
   font-weight: 700 !important;
-  border: 1.5px solid rgba(26, 18, 48, 0.15) !important;
+  border: 1.5px solid rgba(37, 47, 110, 0.15) !important;
   background: #f4f2f8 !important;
   color: #3d3750 !important;
 }
 
 html body.guided-flow .guided-lead-impact .save-estimate-tab.active {
-  background: #1a1230 !important;
+  background: #252f6e !important;
   color: #f5e6a8 !important;
   border-color: #c9a227 !important;
 }
@@ -383,7 +383,7 @@ html body.guided-flow.guided-flagship .guided-results-impact .guided-results-det
 
 html body.guided-flow.guided-flagship .guided-results-impact .guided-results-details-body {
   background: #fff !important;
-  color: #1a1230 !important;
+  color: #252f6e !important;
   border-radius: 12px !important;
   padding: 0.75rem !important;
   margin-top: 0.5rem !important;
@@ -409,10 +409,10 @@ html body.guided-flow .guided-refi-card {
   min-height: 88px !important;
   padding: 0.85rem 0.75rem !important;
   text-align: left !important;
-  border: 1.5px solid rgba(26, 18, 48, 0.12) !important;
+  border: 1.5px solid rgba(37, 47, 110, 0.12) !important;
   border-radius: 14px !important;
   background: #fff !important;
-  box-shadow: 0 4px 14px rgba(26, 18, 48, 0.06) !important;
+  box-shadow: 0 4px 14px rgba(37, 47, 110, 0.06) !important;
 }
 
 html body.guided-flow .guided-refi-card:hover,
@@ -424,7 +424,7 @@ html body.guided-flow .guided-refi-card.is-selected {
 
 html body.guided-flow .guided-refi-card strong {
   font-size: 0.92rem !important;
-  color: #1a1230 !important;
+  color: #252f6e !important;
   display: block !important;
   margin: 0.15rem 0 0.2rem !important;
 }
@@ -453,7 +453,7 @@ html body.guided-flow.guided-is-refinance .guided-progress {
 html body.guided-flow .guided-address-recovery {
   margin-top: 0.85rem !important;
   padding: 0.75rem 0.65rem 0.35rem !important;
-  border-top: 1px dashed rgba(26, 18, 48, 0.12) !important;
+  border-top: 1px dashed rgba(37, 47, 110, 0.12) !important;
   text-align: center !important;
 }
 
@@ -498,9 +498,9 @@ html body.guided-flow #guidedAddressCard[data-address-state="error"] .guided-add
 html body.guided-flow.guided-flagship .guided-live-card-interactive,
 html body.guided-flow.guided-flagship .wizard-live-preview.guided-live-card-interactive,
 html body.guided-flow #wizardLivePreview.guided-live-card-interactive {
-  background: linear-gradient(165deg, #1a1230 0%, #2a2040 55%, #1f1833 100%) !important;
+  background: linear-gradient(165deg, #252f6e 0%, #2a2040 55%, #1f1833 100%) !important;
   border: 2px solid rgba(201, 162, 39, 0.55) !important;
-  box-shadow: 0 10px 32px rgba(26, 18, 48, 0.28), 0 0 0 1px rgba(201, 162, 39, 0.12) !important;
+  box-shadow: 0 10px 32px rgba(37, 47, 110, 0.28), 0 0 0 1px rgba(201, 162, 39, 0.12) !important;
   border-radius: 14px !important;
   padding: 0.85rem 0.9rem 0.9rem !important;
 }
@@ -640,7 +640,7 @@ html body.guided-flow #wizardLiveNote {
 
 html body.guided-flow .guided-live-card.guided-live-flash {
   border-color: #e8c84a !important;
-  box-shadow: 0 0 0 3px rgba(232, 200, 74, 0.45), 0 12px 36px rgba(26, 18, 48, 0.35) !important;
+  box-shadow: 0 0 0 3px rgba(232, 200, 74, 0.45), 0 12px 36px rgba(37, 47, 110, 0.35) !important;
 }
 
 html body.guided-flow .guided-live-amount-tick {
@@ -679,7 +679,7 @@ html body.guided-flow .guided-realtor-mobile-quiet {
 html body.guided-flow .guided-side-cta-realtor-soft,
 html body.guided-flow .guided-realtor-btn.guided-side-cta-realtor-soft {
   background: transparent !important;
-  border: 1px solid rgba(26, 18, 48, 0.15) !important;
+  border: 1px solid rgba(37, 47, 110, 0.15) !important;
   color: #5c5670 !important;
   font-size: 0.72rem !important;
   font-weight: 600 !important;
@@ -690,7 +690,7 @@ html body.guided-flow .guided-realtor-btn.guided-side-cta-realtor-soft {
 
 html body.guided-flow .guided-side-cta-realtor-soft:hover {
   border-color: #c9a227 !important;
-  color: #1a1230 !important;
+  color: #252f6e !important;
   background: #fbf8f0 !important;
 }
 
