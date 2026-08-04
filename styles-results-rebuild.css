@@ -167,7 +167,7 @@ html body.guided-flow .rx-shell #breakdown li {
   font-family: "DM Sans", system-ui, sans-serif !important;
   font-size: 0.92rem !important;
   font-weight: 500 !important;
-  color: #3d3750 !important;
+  color: #2b3252 !important;
   text-align: left !important;
   background: transparent !important;
 }
@@ -236,7 +236,7 @@ html body.guided-flow .rx-field {
 html body.guided-flow .rx-field-label {
   font-size: 0.72rem !important;
   font-weight: 700 !important;
-  color: #3d3750 !important;
+  color: #2b3252 !important;
   letter-spacing: 0.02em !important;
 }
 
@@ -281,7 +281,7 @@ html body.guided-flow .rx-shell .save-estimate-submit {
   padding: 0.75rem 1rem !important;
   border-radius: 12px !important;
   border: 1.5px solid #c9a227 !important;
-  background: linear-gradient(145deg, #252f6e 0%, #2a1f45 100%) !important;
+  background: linear-gradient(145deg, #252f6e 0%, #1b2352 100%) !important;
   color: #f5e6a8 !important;
   font-family: "DM Sans", system-ui, sans-serif !important;
   font-size: 1.05rem !important;
@@ -614,7 +614,7 @@ html body.guided-flow.guided-flagship .guided-step-nav .btn-wizard-back:hover {
 }
 
 html body.guided-flow.guided-flagship .guided-step-nav .btn-wizard-next {
-  background: linear-gradient(145deg, #252f6e 0%, #2a1f45 100%) !important;
+  background: linear-gradient(145deg, #252f6e 0%, #1b2352 100%) !important;
   color: #f5e6a8 !important;
   border: 1.5px solid #c9a227 !important;
   font-weight: 700 !important;

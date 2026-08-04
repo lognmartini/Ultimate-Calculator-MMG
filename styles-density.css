@@ -1233,7 +1233,7 @@ html body.guided-flow.guided-flagship .guided-live-card-interactive .wizard-live
   font-size: 0.72rem !important;
   font-weight: 700 !important;
   letter-spacing: 0.06em !important;
-  color: #3d3750 !important;
+  color: #2b3252 !important;
   opacity: 1 !important;
 }
 
@@ -1255,7 +1255,7 @@ html body.guided-flow .guided-live-rate-pair {
   font-family: "DM Sans", system-ui, sans-serif !important;
   font-size: 0.78rem !important;
   font-weight: 600 !important;
-  color: #3d3750 !important;
+  color: #2b3252 !important;
 }
 
 html body.guided-flow .guided-live-rate-pair strong {
@@ -1326,7 +1326,7 @@ html body.guided-flow .guided-realtor-btn.guided-side-cta-realtor {
   padding: 0.55rem 0.5rem !important;
   border-radius: 11px !important;
   border: 1.5px solid #c9a227 !important;
-  background: linear-gradient(160deg, #252f6e 0%, #2a1f45 100%) !important;
+  background: linear-gradient(160deg, #252f6e 0%, #1b2352 100%) !important;
   color: #fff !important;
   box-shadow: 0 4px 14px rgba(37, 47, 110, 0.18) !important;
   cursor: pointer !important;
@@ -1536,7 +1536,7 @@ html body.guided-flow .guided-realtor-has-agent {
   margin: 0.35rem 0 0.55rem !important;
   font-size: 0.8rem !important;
   line-height: 1.35 !important;
-  color: #3d3750 !important;
+  color: #2b3252 !important;
   cursor: pointer !important;
 }
 
@@ -1596,7 +1596,7 @@ html body.guided-flow .guided-realtor-submit {
   font-size: 0.95rem !important;
   font-weight: 700 !important;
   border-radius: 12px !important;
-  background: linear-gradient(135deg, #252f6e, #2a1f45) !important;
+  background: linear-gradient(135deg, #252f6e, #1b2352) !important;
   border: 1.5px solid #c9a227 !important;
   color: #f5e6a8 !important;
 }
@@ -1641,7 +1641,7 @@ html body.guided-flow .ultimate-realtor-confirm-title {
 
 html body.guided-flow .ultimate-realtor-confirm-lead {
   font-size: 0.88rem !important;
-  color: #3d3750 !important;
+  color: #2b3252 !important;
   margin: 0 0 0.75rem !important;
   line-height: 1.4 !important;
 }

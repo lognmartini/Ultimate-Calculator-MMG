@@ -9,7 +9,7 @@
 /* ========== Design tokens ========== */
 html body.guided-flow.guided-flagship {
   --polish-navy: #252f6e;
-  --polish-navy-mid: #2a1f45;
+  --polish-navy-mid: #1b2352;
   --polish-gold: #c9a227;
   --polish-gold-hi: #e8c84a;
   --polish-cream: #f5e6a8;
@@ -267,7 +267,7 @@ html body.guided-flow.guided-flagship .guided-refi-card {
 html body.guided-flow.guided-flagship .guided-address-field label {
   font-size: 0.76rem !important;
   font-weight: 700 !important;
-  color: #3d3750 !important;
+  color: #2b3252 !important;
   margin-bottom: 0.3rem !important;
   display: block !important;
 }
@@ -476,7 +476,7 @@ html body.guided-flow.guided-flagship .ultimate-term-btn {
   background: var(--polish-surface-2) !important;
   font-weight: 700 !important;
   font-size: 0.82rem !important;
-  color: #3d3750 !important;
+  color: #2b3252 !important;
   cursor: pointer !important;
   transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease !important;
 }
@@ -977,8 +977,8 @@ html body.guided-flow.wizard-on-results .studio-hero .studio-rates {
 /* BREAKDOWN */
 html body.guided-flow.wizard-on-results .studio-break #breakdown li,
 html body.guided-flow.wizard-on-results .studio-break #breakdown li span {
-  color: #3d3750 !important;
-  -webkit-text-fill-color: #3d3750 !important;
+  color: #2b3252 !important;
+  -webkit-text-fill-color: #2b3252 !important;
   opacity: 1 !important;
   visibility: visible !important;
 }
@@ -1072,8 +1072,8 @@ html body.guided-flow.wizard-on-results .studio-lead .save-estimate-lead {
 }
 html body.guided-flow.wizard-on-results .studio-lead .studio-field span,
 html body.guided-flow.wizard-on-results .studio-lead label span {
-  color: #3d3750 !important;
-  -webkit-text-fill-color: #3d3750 !important;
+  color: #2b3252 !important;
+  -webkit-text-fill-color: #2b3252 !important;
   opacity: 1 !important;
 }
 html body.guided-flow.wizard-on-results .studio-lead .studio-field em {
@@ -1107,7 +1107,7 @@ html body.guided-flow.wizard-on-results .studio-lead .guided-lead-submit {
   justify-content: center !important;
   width: 100% !important;
   min-height: 50px !important;
-  background: linear-gradient(145deg, #252f6e, #2a1f45) !important;
+  background: linear-gradient(145deg, #252f6e, #1b2352) !important;
   color: #f5e6a8 !important;
   -webkit-text-fill-color: #f5e6a8 !important;
   border: 1.5px solid #c9a227 !important;
@@ -1201,7 +1201,7 @@ html body.guided-flow.wizard-on-results .dest-reopen-lead {
   min-height: 48px !important;
   align-items: center !important;
   justify-content: center !important;
-  background: linear-gradient(145deg, #252f6e, #2a1f45) !important;
+  background: linear-gradient(145deg, #252f6e, #1b2352) !important;
   color: #f5e6a8 !important;
   -webkit-text-fill-color: #f5e6a8 !important;
   border: 1.5px solid #c9a227 !important;
@@ -1260,7 +1260,7 @@ html body.guided-flow.wizard-on-results .vs-comp-savings strong {
 }
 html body.guided-flow.wizard-on-results .studio-more .field label,
 html body.guided-flow.wizard-on-results .studio-more .field-note {
-  color: #3d3750 !important;
+  color: #2b3252 !important;
 }
 html body.guided-flow.wizard-on-results .studio-more input {
   color: #252f6e !important;
@@ -1291,7 +1291,7 @@ html body.guided-flow.wizard-on-results .studio-more-banner {
   text-align: center !important;
   margin: 0 0 0.75rem !important;
   padding: 0.55rem 0.75rem !important;
-  background: linear-gradient(135deg, #252f6e, #2a1f45) !important;
+  background: linear-gradient(135deg, #252f6e, #1b2352) !important;
   border-radius: 12px !important;
   border: 1px solid rgba(201, 162, 39, 0.35) !important;
 }
@@ -1369,8 +1369,8 @@ html body.guided-flow.wizard-on-results .studio-tax-grid label {
   margin: 0 0 0.3rem !important;
   font-size: 0.78rem !important;
   font-weight: 700 !important;
-  color: #3d3750 !important;
-  -webkit-text-fill-color: #3d3750 !important;
+  color: #2b3252 !important;
+  -webkit-text-fill-color: #2b3252 !important;
 }
 html body.guided-flow.wizard-on-results .studio-tax-grid input,
 html body.guided-flow.wizard-on-results .studio-more input.currency-input {
@@ -1429,8 +1429,8 @@ html body.guided-flow.wizard-on-results .seller-credit-head {
 html body.guided-flow.wizard-on-results .seller-credit-head label {
   font-size: 0.78rem !important;
   font-weight: 700 !important;
-  color: #3d3750 !important;
-  -webkit-text-fill-color: #3d3750 !important;
+  color: #2b3252 !important;
+  -webkit-text-fill-color: #2b3252 !important;
 }
 html body.guided-flow.wizard-on-results .seller-credit-head strong,
 html body.guided-flow.wizard-on-results #sellerCreditDisplay {
@@ -1475,8 +1475,8 @@ html body.guided-flow.wizard-on-results .official-quote-row.hidden {
 html body.guided-flow.wizard-on-results .official-quote-row dt {
   font-size: 0.84rem !important;
   font-weight: 500 !important;
-  color: #3d3750 !important;
-  -webkit-text-fill-color: #3d3750 !important;
+  color: #2b3252 !important;
+  -webkit-text-fill-color: #2b3252 !important;
 }
 html body.guided-flow.wizard-on-results .official-quote-row dd {
   font-size: 0.9rem !important;

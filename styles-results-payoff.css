@@ -138,7 +138,7 @@ html body.guided-flow .pay-card #breakdown li {
   padding: 0.48rem 0.1rem !important;
   border-bottom: 1px solid rgba(37, 47, 110, 0.07) !important;
   font-size: 0.9rem !important;
-  color: #3d3750 !important;
+  color: #2b3252 !important;
   font-weight: 500 !important;
   margin: 0 !important;
   background: transparent !important;
@@ -199,7 +199,7 @@ html body.guided-flow .pay-slider-meta {
 html body.guided-flow .pay-slider-meta label {
   font-size: 0.74rem !important;
   font-weight: 700 !important;
-  color: #3d3750 !important;
+  color: #2b3252 !important;
 }
 
 html body.guided-flow .pay-slider-meta output {
@@ -224,7 +224,7 @@ html body.guided-flow .pay-pills-label {
   display: block !important;
   font-size: 0.74rem !important;
   font-weight: 700 !important;
-  color: #3d3750 !important;
+  color: #2b3252 !important;
   margin-bottom: 0.3rem !important;
 }
 
@@ -241,7 +241,7 @@ html body.guided-flow .pay-pill {
   border-radius: 10px !important;
   border: 1.5px solid rgba(37, 47, 110, 0.14) !important;
   background: #fff !important;
-  color: #3d3750 !important;
+  color: #2b3252 !important;
   font-size: 0.8rem !important;
   font-weight: 700 !important;
   font-family: "DM Sans", system-ui, sans-serif !important;
@@ -331,7 +331,7 @@ html body.guided-flow .pay-field {
 html body.guided-flow .pay-field span {
   font-size: 0.7rem !important;
   font-weight: 700 !important;
-  color: #3d3750 !important;
+  color: #2b3252 !important;
 }
 
 html body.guided-flow .pay-field em {
@@ -366,7 +366,7 @@ html body.guided-flow .pay-lead .save-estimate-submit {
   margin-top: 0.3rem !important;
   border-radius: 12px !important;
   border: 1.5px solid #c9a227 !important;
-  background: linear-gradient(145deg, #252f6e, #2a1f45) !important;
+  background: linear-gradient(145deg, #252f6e, #1b2352) !important;
   color: #f5e6a8 !important;
   font-size: 1.02rem !important;
   font-weight: 800 !important;

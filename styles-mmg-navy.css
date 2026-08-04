@@ -110,3 +110,118 @@ html body.guided-flow.guided-flagship .mmg-choice strong { color: var(--navy) !i
   html body.guided-flow.guided-flagship .mmg-choice .mmg-choice-ic { width: 44px; height: 44px; font-size: 1.4rem; margin: 0 !important; }
   html body.guided-flow.guided-flagship .mmg-choice::after { bottom: auto; top: 50%; transform: translateY(-50%); }
 }
+
+/* ============================================================
+   RESULTS PAGE — conversion layer (navy brand)
+   Elevates the lead card, adds social proof at the decision
+   point, arrow affordance on the primary CTA, and a mobile
+   persistent CTA. All IDs preserved — JS wiring untouched.
+   ============================================================ */
+
+/* ── Lead card: the money moment ── */
+html body.guided-flow.guided-flagship .studio-lead {
+  border: 2px solid var(--gold) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 16px 40px rgba(37, 47, 110, 0.16), 0 2px 0 rgba(201, 162, 39, 0.35) !important;
+  position: relative;
+  padding-top: 1.6rem !important;
+}
+html body.guided-flow.guided-flagship .studio-lead-flag {
+  display: inline-block;
+  margin: 0 auto 0.5rem !important;
+  padding: 0.24rem 0.8rem;
+  border-radius: 999px;
+  background: var(--navy);
+  color: #fff !important;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+html body.guided-flow.guided-flagship .studio-lead-title {
+  font-size: 1.32rem !important;
+  line-height: 1.15 !important;
+  color: var(--navy) !important;
+}
+html body.guided-flow.guided-flagship .studio-lead-copy {
+  font-size: 0.9rem !important;
+  color: var(--muted) !important;
+}
+
+/* Primary CTA — bigger, with arrow affordance */
+html body.guided-flow.guided-flagship .studio-lead .save-estimate-submit {
+  min-height: 54px !important;
+  font-size: 1.08rem !important;
+  letter-spacing: 0.01em !important;
+  box-shadow: 0 10px 24px rgba(37, 47, 110, 0.22) !important;
+}
+html body.guided-flow.guided-flagship .studio-lead .save-estimate-submit::after {
+  content: " →";
+  font-weight: 800;
+}
+html body.guided-flow.guided-flagship .studio-lead .save-estimate-submit.is-loading::after {
+  content: "";
+}
+
+/* Reassurance line under CTA */
+html body.guided-flow.guided-flagship .studio-reassure {
+  margin: 0.6rem 0 0 !important;
+  font-size: 0.74rem !important;
+  font-weight: 600 !important;
+  color: #2b3252 !important;
+  line-height: 1.35 !important;
+}
+html body.guided-flow.guided-flagship .studio-reassure span { color: var(--navy); }
+
+/* ── Trust block: add social proof ── */
+html body.guided-flow.guided-flagship .studio-trust {
+  align-items: center !important;
+  gap: 0.7rem !important;
+  padding: 0.85rem 1rem !important;
+  border: 1px solid var(--line) !important;
+  border-radius: 12px !important;
+  background: #fff !important;
+}
+html body.guided-flow.guided-flagship .studio-trust img {
+  width: 44px !important; height: 44px !important; border-radius: 50% !important;
+  object-fit: cover !important; object-position: 50% 22% !important;
+}
+html body.guided-flow.guided-flagship .studio-trust-nmls { font-weight: 600; color: var(--muted); font-size: 0.82rem; }
+html body.guided-flow.guided-flagship .studio-trust-proof {
+  display: block; margin-top: 0.1rem; font-size: 0.82rem; color: #2b3252;
+}
+html body.guided-flow.guided-flagship .studio-trust-stars { color: var(--star); letter-spacing: 0.5px; }
+
+/* ── Mobile persistent CTA on results ── */
+html body.guided-flow.guided-flagship .studio-mobilebar { display: none; }
+@media (max-width: 767px) {
+  html body.guided-flow.guided-flagship .studio-mobilebar {
+    display: flex; gap: 0.6rem; position: fixed; left: 0; right: 0; bottom: 0; z-index: 70;
+    padding: 0.6rem 0.9rem calc(0.6rem + env(safe-area-inset-bottom, 0px));
+    background: rgba(255, 255, 255, 0.97);
+    -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    border-top: 1px solid var(--line); box-shadow: 0 -6px 20px rgba(27, 35, 82, 0.12);
+  }
+  html body.guided-flow.guided-flagship .studio-mcall {
+    display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto;
+    width: 52px; padding: 0.85rem 0; border-radius: 12px;
+    border: 1.5px solid var(--navy); color: var(--navy); font-size: 1.1rem; text-decoration: none;
+  }
+  html body.guided-flow.guided-flagship .studio-mstart {
+    flex: 1; padding: 0.9rem 1rem; border-radius: 12px; border: 1.5px solid var(--gold);
+    background: linear-gradient(145deg, #252f6e, #1b2352); color: #f5e6a8;
+    font-weight: 800; font-size: 1rem; cursor: pointer; font-family: "DM Sans", system-ui, sans-serif;
+  }
+  html body.guided-flow.guided-flagship .studio-mstart::after { content: " →"; }
+  /* keep the fixed bar from covering the bottom Back button / content */
+  html body.guided-flow.guided-flagship.wizard-on-results .guided-main,
+  html body.guided-flow.guided-flagship .guided-results-step { padding-bottom: 84px !important; }
+}
+
+/* ── Exit-intent modal copy ── */
+html body.guided-flow.guided-flagship .ultimate-exit-sub {
+  margin: 0.15rem 0 0.9rem !important; font-size: 0.9rem !important; color: var(--muted) !important; line-height: 1.4 !important;
+}
+html body.guided-flow.guided-flagship .ultimate-exit-consent {
+  margin: 0.7rem 0 0 !important; font-size: 0.62rem !important; line-height: 1.35 !important; color: #8a8499 !important;
+}

@@ -864,15 +864,15 @@
     const leadTitle = $("saveEstimateHeading");
     const leadLead = document.querySelector(".save-estimate-lead");
     if (leadTitle && !leadTitle.dataset.userLocked) {
-      leadTitle.textContent = "Get pre-approved now";
+      leadTitle.textContent = "Get pre-approved with Logan";
     }
     if (leadLead) {
       leadLead.textContent =
-        "Most clients can complete this in under an hour — no obligation.";
+        "Free and no obligation — most clients start in just a few minutes.";
     }
     const leadSubmit = document.querySelector(".save-estimate-submit");
     if (leadSubmit && !leadSubmit.classList.contains("is-loading")) {
-      leadSubmit.textContent = "Request call";
+      leadSubmit.textContent = "Get pre-approved";
     }
   }
 

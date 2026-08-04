@@ -615,8 +615,9 @@
           <div class="studio-side">
             <!-- 4. LEAD — one primary: pre-approval / request call -->
             <section class="studio-lead save-estimate-card" id="saveEstimateCard" aria-label="Get pre-approved">
-              <h3 class="studio-lead-title save-estimate-title" id="saveEstimateHeading">Get pre-approved now</h3>
-              <p class="studio-lead-copy save-estimate-lead">Most clients can complete this in under an hour — no obligation.</p>
+              <p class="studio-lead-flag">Your next step</p>
+              <h3 class="studio-lead-title save-estimate-title" id="saveEstimateHeading">Get pre-approved with Logan</h3>
+              <p class="studio-lead-copy save-estimate-lead">Free and no obligation — most clients start in just a few minutes.</p>
               <form id="saveEstimateForm" class="studio-lead-form save-estimate-form">
                 <label class="studio-field"><span>Name</span>
                   <input type="text" id="saveEstimateName" name="name" placeholder="First name" autocomplete="given-name" />
@@ -639,21 +640,22 @@
                 </div>
                 <p class="save-estimate-error studio-error hidden" id="saveEstimateError" role="alert" hidden></p>
                 <button type="button" class="save-estimate-expand hidden" id="saveEstimateExpand" tabindex="-1" aria-hidden="true">+</button>
-                <button type="submit" class="studio-cta save-estimate-submit guided-lead-submit">Request call</button>
+                <button type="submit" class="studio-cta save-estimate-submit guided-lead-submit">Get pre-approved</button>
               </form>
-              <button type="button" class="save-estimate-restore" id="saveEstimateRestore" hidden aria-hidden="true" tabindex="-1">Request call</button>
-              <p class="save-estimate-success studio-success hidden" id="saveEstimateSuccess">You&rsquo;re set — we&rsquo;ll reach out to get you started.</p>
-              <p class="studio-consent save-estimate-consent">You agree we may contact you about pre-approval and this estimate. Not a loan application. TCPA applies.</p>
+              <button type="button" class="save-estimate-restore" id="saveEstimateRestore" hidden aria-hidden="true" tabindex="-1">Get pre-approved</button>
+              <p class="save-estimate-success studio-success hidden" id="saveEstimateSuccess">You&rsquo;re all set — Logan will reach out shortly to get you started.</p>
+              <p class="studio-reassure save-estimate-reassure"><span aria-hidden="true">🔒</span> No credit pull to start · your info goes only to Logan</p>
+              <p class="studio-consent save-estimate-consent">By submitting, you agree Logan Martini &middot; Martini Mortgage Group (Gold Star Mortgage) may call, text, or email you about your estimate and pre-approval. Consent isn&rsquo;t required to do business &middot; message &amp; data rates may apply. Not a loan application, commitment, or rate lock.</p>
               <button type="button" class="studio-skip save-estimate-skip" id="saveEstimateSkip">Not now</button>
               <button type="button" class="save-estimate-dismiss hidden" id="saveEstimateDismiss" aria-label="Dismiss" hidden>×</button>
             </section>
 
             <!-- 5. TRUST -->
             <aside class="studio-trust">
-              <img src="assets/logan-headshot.jpg" data-asset="assets/logan-headshot.jpg" data-fallback="assets/logan-martini-portrait.png" alt="" width="36" height="36" />
+              <img src="assets/logan-headshot.jpg" data-asset="assets/logan-headshot.jpg" data-fallback="assets/logan-martini-portrait.png" alt="" width="44" height="44" />
               <div>
-                <strong>Logan Martini</strong>
-                <span>NMLS #1591485</span>
+                <strong>Logan Martini <span class="studio-trust-nmls">· NMLS #1591485</span></strong>
+                <span class="studio-trust-proof"><span class="studio-trust-stars" aria-hidden="true">★★★★★</span> 5.0 · 169 reviews · $1B+ funded</span>
               </div>
             </aside>
 
@@ -815,6 +817,27 @@
         <div id="ultimateConcessionNote"></div>
         <div id="rateAlertForm" class="hidden"><input type="email" id="rateAlertEmail" /><input type="checkbox" id="rateAlertConsent" /><span id="rateAlertSuccess" class="hidden"></span><span id="rateAlertError" class="hidden"></span><span id="rateAlertBaseline"></span></div>
       </div>
+
+      <!-- Mobile-only persistent CTA on results — always-visible primary action -->
+      <div class="studio-mobilebar" role="group" aria-label="Get pre-approved with Logan">
+        <a href="tel:+19192384934" class="studio-mcall" aria-label="Call Logan" data-mmg-phone>📞</a>
+        <button type="button" class="studio-mstart" id="studioMobileStart">Get pre-approved with Logan</button>
+      </div>
+      <script>
+        (function () {
+          var b = document.getElementById("studioMobileStart");
+          if (!b) return;
+          b.addEventListener("click", function () {
+            var card = document.getElementById("saveEstimateCard");
+            if (!card) return;
+            card.scrollIntoView({ behavior: "smooth", block: "center" });
+            var field =
+              document.getElementById("saveEstimateName") ||
+              document.getElementById("saveEstimateEmail");
+            if (field) setTimeout(function () { try { field.focus({ preventScroll: true }); } catch (e) { field.focus(); } }, 450);
+          });
+        })();
+      </script>
     </section>
 
       
@@ -983,12 +1006,14 @@
     <div class="ultimate-exit-backdrop" id="ultimateExitBackdrop"></div>
     <div class="ultimate-exit-card">
       <button type="button" class="ultimate-exit-close" id="ultimateExitClose" aria-label="Close">×</button>
-      <h2 class="ultimate-exit-title" id="ultimateExitTitle">Email my estimate</h2>
+      <h2 class="ultimate-exit-title" id="ultimateExitTitle">Want your estimate emailed to you?</h2>
+      <p class="ultimate-exit-sub">We&rsquo;ll send your numbers so you can pick up right where you left off.</p>
       <form id="ultimateExitForm" class="save-estimate-form">
-        <input type="email" name="email" placeholder="Email" required autocomplete="email" />
-        <button type="submit" class="btn btn-wizard-next ultimate-exit-submit">Send</button>
+        <input type="email" name="email" placeholder="you@email.com" required autocomplete="email" inputmode="email" />
+        <button type="submit" class="btn btn-wizard-next ultimate-exit-submit">Email my estimate</button>
         <button type="button" class="save-estimate-skip" id="ultimateExitDismiss">No thanks</button>
       </form>
+      <p class="ultimate-exit-consent">By submitting, you agree Martini Mortgage Group may email you about this estimate. Not a loan application. Unsubscribe anytime.</p>
       <p class="ultimate-exit-success hidden" id="ultimateExitSuccess"></p>
     </div>
   </aside>

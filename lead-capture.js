@@ -109,16 +109,16 @@
       const title = document.getElementById("saveEstimateHeading");
       const lead = document.querySelector(".save-estimate-lead, .dest-lead-copy");
       if (title) {
-        title.textContent = "Get pre-approved now";
+        title.textContent = "Get pre-approved with Logan";
       }
       if (lead) {
         lead.textContent =
-          "Most clients can complete this in under an hour — no obligation.";
+          "Free and no obligation — most clients start in just a few minutes.";
       }
       const submitBtn = document.querySelector(
         ".save-estimate-submit, #saveEstimateForm [type='submit']"
       );
-      if (submitBtn) submitBtn.textContent = "Request call";
+      if (submitBtn) submitBtn.textContent = "Get pre-approved";
       el.classList.remove("guided-lead-collapsed");
     }
   }
@@ -145,7 +145,7 @@
       if (title) title.textContent = "Ready when you are";
       if (lead) {
         lead.innerHTML =
-          '<button type="button" class="dest-reopen-lead" id="destReopenLead">Request call</button>';
+          '<button type="button" class="dest-reopen-lead" id="destReopenLead">Get pre-approved</button>';
         document.getElementById("destReopenLead")?.addEventListener(
           "click",
           () => showCard(),
@@ -241,7 +241,7 @@
   }
 
   function defaultSubmitLabel(tab) {
-    return tab === "sms" ? "Request call" : "Request call";
+    return tab === "sms" ? "Get pre-approved" : "Get pre-approved";
   }
 
   function applyImpactLeadCopy(tab) {
@@ -250,16 +250,16 @@
       document.querySelector(".save-estimate-title");
     const lead = document.querySelector(".save-estimate-lead");
     if (title) {
-      title.textContent = "Get pre-approved now";
+      title.textContent = "Get pre-approved with Logan";
     }
     if (lead) {
       lead.textContent =
-        "Most clients can complete this in under an hour — no obligation.";
+        "Free and no obligation — most clients start in just a few minutes.";
     }
     const submitBtn = document.querySelector(
       ".save-estimate-submit, #saveEstimateForm [type='submit']"
     );
-    if (submitBtn) submitBtn.textContent = "Request call";
+    if (submitBtn) submitBtn.textContent = "Get pre-approved";
   }
 
   async function submitLead(form) {
@@ -318,7 +318,6 @@
                 ? "logan3-save-estimate"
                 : "logan1-save-estimate",
       consent: true,
-      company_website: document.getElementById("saveEstimateHp")?.value || "",
       smsConsent: tab === "sms" ? true : undefined,
       scenario: {
         ...collectScenario(),
@@ -340,8 +339,8 @@
       if (successEl) {
         successEl.textContent =
           tab === "sms"
-            ? "You're set — we'll text you shortly."
-            : "You're set — we'll reach out to get you started.";
+            ? "You're all set — Logan will text you shortly."
+            : "You're all set — Logan will reach out shortly to get you started.";
         successEl.classList.remove("hidden");
         successEl.hidden = false;
       }

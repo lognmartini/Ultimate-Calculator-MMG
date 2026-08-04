@@ -101,7 +101,7 @@ html body.guided-flow.guided-flagship .guided-step-nav .btn-wizard-back {
 }
 
 html body.guided-flow.guided-flagship .guided-step-nav .btn-wizard-next {
-  background: linear-gradient(145deg, #252f6e, #2a1f45) !important;
+  background: linear-gradient(145deg, #252f6e, #1b2352) !important;
   color: #f5e6a8 !important;
   border: 1.5px solid var(--studio-gold) !important;
   font-weight: 700 !important;
@@ -154,7 +154,7 @@ html body.guided-flow .studio-side {
 
 /* Hero */
 html body.guided-flow .studio-hero {
-  background: linear-gradient(155deg, #252f6e 0%, #2d2348 52%, #252f6e 100%) !important;
+  background: linear-gradient(155deg, #252f6e 0%, #1b2352 52%, #252f6e 100%) !important;
   border-radius: 16px !important;
   padding: 1.5rem 1.25rem 1.35rem !important;
   text-align: center !important;
@@ -248,7 +248,7 @@ html body.guided-flow .studio-break #breakdown li {
   padding: 0.7rem 0 !important;
   border-bottom: 1px solid rgba(37, 47, 110, 0.07) !important;
   font-size: 0.92rem !important;
-  color: #3d3750 !important;
+  color: #2b3252 !important;
   font-weight: 500 !important;
   margin: 0 !important;
   background: transparent !important;
@@ -321,7 +321,7 @@ html body.guided-flow .studio-control-row label,
 html body.guided-flow .studio-control-label {
   font-size: 0.76rem !important;
   font-weight: 700 !important;
-  color: #3d3750 !important;
+  color: #2b3252 !important;
 }
 
 html body.guided-flow .studio-control-row output {
@@ -359,7 +359,7 @@ html body.guided-flow .studio-chip {
   border-radius: 10px !important;
   border: 1.5px solid rgba(37, 47, 110, 0.14) !important;
   background: #faf9fc !important;
-  color: #3d3750 !important;
+  color: #2b3252 !important;
   font-size: 0.8rem !important;
   font-weight: 700 !important;
   font-family: "DM Sans", system-ui, sans-serif !important;
@@ -456,7 +456,7 @@ html body.guided-flow .studio-field {
 html body.guided-flow .studio-field span {
   font-size: 0.72rem !important;
   font-weight: 700 !important;
-  color: #3d3750 !important;
+  color: #2b3252 !important;
 }
 
 html body.guided-flow .studio-field em {
@@ -492,7 +492,7 @@ html body.guided-flow .studio-lead .save-estimate-submit {
   margin-top: 0.25rem !important;
   border-radius: 12px !important;
   border: 1.5px solid var(--studio-gold) !important;
-  background: linear-gradient(145deg, #252f6e, #2a1f45) !important;
+  background: linear-gradient(145deg, #252f6e, #1b2352) !important;
   color: #f5e6a8 !important;
   font-size: 1.02rem !important;
   font-weight: 800 !important;

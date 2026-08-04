@@ -51,7 +51,7 @@ html body.guided-flow.guided-flagship #lookupAddress.guided-lookup-primary {
   font-family: "DM Sans", system-ui, sans-serif !important;
   font-weight: 700 !important;
   font-size: 0.95rem !important;
-  background: linear-gradient(145deg, #252f6e 0%, #2a1f45 100%) !important;
+  background: linear-gradient(145deg, #252f6e 0%, #1b2352 100%) !important;
   color: #f5e6a8 !important;
   border: 1.5px solid #c9a227 !important;
   box-shadow: 0 4px 14px rgba(37, 47, 110, 0.18) !important;
@@ -274,7 +274,7 @@ html body.guided-flow .guided-lead-impact .guided-field {
 html body.guided-flow .guided-lead-impact .guided-field-label {
   font-size: 0.72rem !important;
   font-weight: 700 !important;
-  color: #3d3750 !important;
+  color: #2b3252 !important;
 }
 
 html body.guided-flow .guided-lead-impact input[type="text"],
@@ -347,7 +347,7 @@ html body.guided-flow .guided-lead-impact .save-estimate-tab {
   font-weight: 700 !important;
   border: 1.5px solid rgba(37, 47, 110, 0.15) !important;
   background: #f4f2f8 !important;
-  color: #3d3750 !important;
+  color: #2b3252 !important;
 }
 
 html body.guided-flow .guided-lead-impact .save-estimate-tab.active {
