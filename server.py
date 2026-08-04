@@ -1356,6 +1356,9 @@ def main():
     port = int(os.environ.get("PORT", "8765"))
     host = os.environ.get("HOST", "127.0.0.1")
     server = ThreadingHTTPServer((host, port), Handler)
+    server.socket.listen(128)
+    Handler.protocol_version = "HTTP/1.1"
+    Handler.timeout = 30
     print(f"Martini Mortgage Calculator → http://{host}:{port}")
     if lead_delivery_configured():
         print(
