@@ -512,7 +512,11 @@ def notify_lead_email(entry: dict, to_addr: str) -> bool:
         msg["Subject"] = subject
         msg["From"] = from_addr
         msg["To"] = to_addr
-        msg.set_content("\n".join(lines))
+        # Non-breaking spaces (from Intl currency formatting) and other non-ASCII
+        # characters break plain sending; normalize \xa0 and base64-encode the body
+        # so the message is wire-safe regardless of the SMTP server's capabilities.
+        body_text = "\n".join(lines).replace("\xa0", " ")
+        msg.set_content(body_text, cte="base64")
         port = int(os.environ.get("SMTP_PORT", "587"))
         user = os.environ.get("SMTP_USER", "").strip()
         password = os.environ.get("SMTP_PASSWORD", "").strip()
