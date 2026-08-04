@@ -546,7 +546,7 @@
           } catch {
             loanTitle.focus();
           }
-          loanCard?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          loanCard?.scrollIntoView({ behavior: "smooth", block: "start" });
         }, 50);
       }
       $("guidedStepLive") &&
@@ -864,15 +864,15 @@
     const leadTitle = $("saveEstimateHeading");
     const leadLead = document.querySelector(".save-estimate-lead");
     if (leadTitle && !leadTitle.dataset.userLocked) {
-      leadTitle.textContent = "Get pre-approved with Logan";
+      leadTitle.textContent = "Talk to Logan";
     }
     if (leadLead) {
       leadLead.textContent =
-        "Free and no obligation — most clients start in just a few minutes.";
+        "Not ready to apply? Leave your info and Logan will reach out to answer questions and map your next step — free, no obligation.";
     }
     const leadSubmit = document.querySelector(".save-estimate-submit");
     if (leadSubmit && !leadSubmit.classList.contains("is-loading")) {
-      leadSubmit.textContent = "Get pre-approved";
+      leadSubmit.textContent = "Have Logan reach out";
     }
   }
 

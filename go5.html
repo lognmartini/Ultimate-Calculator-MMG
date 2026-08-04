@@ -614,10 +614,10 @@
 
           <div class="studio-side">
             <!-- 4. LEAD — one primary: pre-approval / request call -->
-            <section class="studio-lead save-estimate-card" id="saveEstimateCard" aria-label="Get pre-approved">
+            <section class="studio-lead save-estimate-card" id="saveEstimateCard" aria-label="Have Logan reach out">
               <p class="studio-lead-flag">Your next step</p>
-              <h3 class="studio-lead-title save-estimate-title" id="saveEstimateHeading">Get pre-approved with Logan</h3>
-              <p class="studio-lead-copy save-estimate-lead">Free and no obligation — most clients start in just a few minutes.</p>
+              <h3 class="studio-lead-title save-estimate-title" id="saveEstimateHeading">Talk to Logan</h3>
+              <p class="studio-lead-copy save-estimate-lead">Not ready to apply? Leave your info and Logan will reach out to answer questions and map your next step — free, no obligation.</p>
               <form id="saveEstimateForm" class="studio-lead-form save-estimate-form">
                 <label class="studio-field"><span>Name</span>
                   <input type="text" id="saveEstimateName" name="name" placeholder="First name" autocomplete="given-name" />
@@ -640,13 +640,13 @@
                 </div>
                 <p class="save-estimate-error studio-error hidden" id="saveEstimateError" role="alert" hidden></p>
                 <button type="button" class="save-estimate-expand hidden" id="saveEstimateExpand" tabindex="-1" aria-hidden="true">+</button>
-                <button type="submit" class="studio-cta save-estimate-submit guided-lead-submit">Get pre-approved</button>
+                <button type="submit" class="studio-cta save-estimate-submit guided-lead-submit">Have Logan reach out</button>
               </form>
-              <button type="button" class="save-estimate-restore" id="saveEstimateRestore" hidden aria-hidden="true" tabindex="-1">Get pre-approved</button>
+              <button type="button" class="save-estimate-restore" id="saveEstimateRestore" hidden aria-hidden="true" tabindex="-1">Have Logan reach out</button>
               <p class="save-estimate-success studio-success hidden" id="saveEstimateSuccess">You&rsquo;re all set — Logan will reach out shortly to get you started.</p>
               <p class="studio-reassure save-estimate-reassure"><span aria-hidden="true">🔒</span> No credit pull to start · your info goes only to Logan</p>
               <p class="studio-nextstep save-estimate-nextstep"><span aria-hidden="true">👋</span> What happens next: Logan personally reviews your numbers and reaches out within 1 business day — no pressure.</p>
-              <p class="studio-consent save-estimate-consent">By submitting, you agree Logan Martini &middot; Martini Mortgage Group (Gold Star Mortgage) may call, text, or email you about your estimate and pre-approval. Consent isn&rsquo;t required to do business &middot; message &amp; data rates may apply. Not a loan application, commitment, or rate lock.</p>
+              <p class="studio-consent save-estimate-consent">By submitting, you agree Logan Martini &middot; Martini Mortgage Group (Gold Star Mortgage) may call, text, or email you about your estimate and mortgage options. Consent isn&rsquo;t required to do business &middot; message &amp; data rates may apply. Not a loan application, commitment, or rate lock.</p>
               <button type="button" class="studio-skip save-estimate-skip" id="saveEstimateSkip">Not now</button>
               <button type="button" class="save-estimate-dismiss hidden" id="saveEstimateDismiss" aria-label="Dismiss" hidden>×</button>
             </section>
@@ -692,8 +692,8 @@
                   </div>
                 </div>
                 <ul class="vs-comp-savings">
-                  <li><span>Monthly P&amp;I savings</span><strong id="vsMonthlyPiSave">—</strong></li>
-                  <li><span>Monthly PITI savings</span><strong id="vsMonthlyPitiSave">—</strong></li>
+                  <li><span>Monthly savings</span><strong id="vsMonthlyPiSave">—</strong></li>
+                  <li class="mmg-dup-row"><span>Monthly PITI savings</span><strong id="vsMonthlyPitiSave">—</strong></li>
                   <li><span>Interest saved over term</span><strong id="vsLifetimeInterestSave">—</strong></li>
                   <li class="hidden" id="vsPointsRow"><span>Discount points</span><strong id="vsPointsCost">—</strong></li>
                 </ul>
@@ -753,7 +753,6 @@
                 <div class="ultimate-hub-stack studio-hub-row">
                   <button type="button" class="ultimate-hub-btn studio-hub-btn" id="ultimateShareBtn" aria-controls="ultimateShareGate"><strong>Share estimate</strong></button>
                   <button type="button" class="ultimate-hub-btn studio-hub-btn" id="ultimateHubCompare" data-hub-action="compare"><strong>Compare options</strong></button>
-                  <button type="button" class="ultimate-hub-btn studio-hub-btn" id="ultimateHubRealtor" data-hub-action="realtor" data-realtor-entry="hub"><strong>Realtor intro</strong></button>
                 </div>
                 <div class="ultimate-hub-share-gate hidden" id="ultimateShareGate">
                   <form id="ultimateShareLeadForm" class="ultimate-hub-share-form">
@@ -784,11 +783,13 @@
           </div>
           <div class="ultimate-payment-details" aria-hidden="true">
             <section class="ultimate-wealth-panel hidden" id="ultimateWealthPanel">
+              <h3>Your estimated home equity</h3>
               <dl class="ultimate-wealth-grid">
-                <div><dt>Y5</dt><dd id="wealthEquity5">—</dd></div>
-                <div><dt>Y10</dt><dd id="wealthEquity10">—</dd></div>
-                <div><dt>Y30</dt><dd id="wealthEquity30">—</dd></div>
+                <div class="ultimate-wealth-stat"><dt>Year 5</dt><dd id="wealthEquity5">—</dd></div>
+                <div class="ultimate-wealth-stat"><dt>Year 10</dt><dd id="wealthEquity10">—</dd></div>
+                <div class="ultimate-wealth-stat"><dt>Year 30</dt><dd id="wealthEquity30">—</dd></div>
               </dl>
+              <p class="ultimate-wealth-note">Projected equity if home value grows ~3%/yr — educational estimate.</p>
             </section>
           </div>
         </div>
@@ -820,9 +821,9 @@
       </div>
 
       <!-- Mobile-only persistent CTA on results — always-visible primary action -->
-      <div class="studio-mobilebar" role="group" aria-label="Get pre-approved with Logan">
+      <div class="studio-mobilebar" role="group" aria-label="Talk to Logan">
         <a href="tel:+19192384934" class="studio-mcall" aria-label="Call Logan" data-mmg-phone>📞</a>
-        <button type="button" class="studio-mstart" id="studioMobileStart">Get pre-approved with Logan</button>
+        <button type="button" class="studio-mstart" id="studioMobileStart">Talk to Logan</button>
       </div>
       <script>
         (function () {

@@ -311,3 +311,35 @@ html body.guided-flow.guided-flagship .mmg-affordbtn:hover {
     padding-bottom: 104px !important;
   }
 }
+
+/* ============================================================
+   RESULTS CLEANUP (mobile + desktop): header scroll offset,
+   remove duplicate rows, fit equity stats, trim empty space.
+   ============================================================ */
+
+/* Sticky header no longer clips content when a step scrolls into view */
+html { scroll-padding-top: 6rem; }
+@media (max-width: 767px){ html { scroll-padding-top: 6.25rem; } }
+
+/* Hide the redundant "Monthly PITI savings" row (identical to Monthly savings when no PMI diff) */
+html body.guided-flow.guided-flagship .mmg-dup-row { display: none !important; }
+
+/* Equity stats: ensure the 3 values fit and never clip on mobile */
+html body.guided-flow.guided-flagship .ultimate-wealth-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 0.5rem !important;
+}
+html body.guided-flow.guided-flagship .ultimate-wealth-stat { min-width: 0 !important; text-align: center !important; padding: 0.5rem 0.3rem !important; background:#fff !important; border-radius:10px !important; }
+html body.guided-flow.guided-flagship .ultimate-wealth-stat dt { font-size: 0.66rem !important; text-transform: uppercase; letter-spacing: 0.03em; color: var(--muted) !important; }
+html body.guided-flow.guided-flagship .ultimate-wealth-stat dd { margin: 0.2rem 0 0 !important; font-size: clamp(0.82rem, 3.6vw, 0.98rem) !important; font-weight: 800 !important; color: #166534 !important; white-space: nowrap; }
+html body.guided-flow.guided-flagship .ultimate-wealth-panel h3 { margin: 0 0 0.2rem !important; font-size: 0.95rem !important; color: var(--navy) !important; text-align:center; }
+html body.guided-flow.guided-flagship .ultimate-wealth-note { text-align:center; }
+
+/* Trim leftover empty space: vs-typical card + bottom of results */
+html body.guided-flow.guided-flagship #vsCompetition { min-height: 0 !important; height: auto !important; }
+html body.guided-flow.guided-flagship #vsCompetition .vs-comp-savings { margin-bottom: 0 !important; padding-bottom: 0 !important; }
+html body.guided-flow.guided-flagship #vsCompetition .vs-comp-note:empty { display: none !important; margin: 0 !important; }
+html body.guided-flow.guided-flagship .ultimate-payment-details { padding-top: 0 !important; padding-bottom: 0 !important; margin-top: 0 !important; }
+@media (max-width: 767px) {
+  html body.guided-flow.guided-flagship.wizard-on-results .guided-step-nav { margin-top: 0.5rem !important; margin-bottom: 0.5rem !important; }
+}

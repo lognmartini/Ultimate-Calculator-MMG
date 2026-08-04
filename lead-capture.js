@@ -109,16 +109,16 @@
       const title = document.getElementById("saveEstimateHeading");
       const lead = document.querySelector(".save-estimate-lead, .dest-lead-copy");
       if (title) {
-        title.textContent = "Get pre-approved with Logan";
+        title.textContent = "Talk to Logan";
       }
       if (lead) {
         lead.textContent =
-          "Free and no obligation — most clients start in just a few minutes.";
+          "Not ready to apply? Leave your info and Logan will reach out to answer questions and map your next step — free, no obligation.";
       }
       const submitBtn = document.querySelector(
         ".save-estimate-submit, #saveEstimateForm [type='submit']"
       );
-      if (submitBtn) submitBtn.textContent = "Get pre-approved";
+      if (submitBtn) submitBtn.textContent = "Have Logan reach out";
       el.classList.remove("guided-lead-collapsed");
     }
   }
@@ -145,7 +145,7 @@
       if (title) title.textContent = "Ready when you are";
       if (lead) {
         lead.innerHTML =
-          '<button type="button" class="dest-reopen-lead" id="destReopenLead">Get pre-approved</button>';
+          '<button type="button" class="dest-reopen-lead" id="destReopenLead">Have Logan reach out</button>';
         document.getElementById("destReopenLead")?.addEventListener(
           "click",
           () => showCard(),
@@ -286,7 +286,7 @@
   }
 
   function defaultSubmitLabel(tab) {
-    return tab === "sms" ? "Get pre-approved" : "Get pre-approved";
+    return tab === "sms" ? "Have Logan reach out" : "Have Logan reach out";
   }
 
   function applyImpactLeadCopy(tab) {
@@ -295,16 +295,16 @@
       document.querySelector(".save-estimate-title");
     const lead = document.querySelector(".save-estimate-lead");
     if (title) {
-      title.textContent = "Get pre-approved with Logan";
+      title.textContent = "Talk to Logan";
     }
     if (lead) {
       lead.textContent =
-        "Free and no obligation — most clients start in just a few minutes.";
+        "Not ready to apply? Leave your info and Logan will reach out to answer questions and map your next step — free, no obligation.";
     }
     const submitBtn = document.querySelector(
       ".save-estimate-submit, #saveEstimateForm [type='submit']"
     );
-    if (submitBtn) submitBtn.textContent = "Get pre-approved";
+    if (submitBtn) submitBtn.textContent = "Have Logan reach out";
   }
 
   async function submitLead(form) {
