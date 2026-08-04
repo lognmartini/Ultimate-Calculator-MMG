@@ -519,7 +519,10 @@ def notify_lead_email(entry: dict, to_addr: str) -> bool:
         msg.set_content(body_text, cte="base64")
         port = int(os.environ.get("SMTP_PORT", "587"))
         user = os.environ.get("SMTP_USER", "").strip()
-        password = os.environ.get("SMTP_PASSWORD", "").strip()
+        # Gmail app passwords are displayed in groups of four separated by spaces
+        # (often non-breaking spaces). Those are not part of the actual password and
+        # break SMTP AUTH (which must be ASCII-encodable). Strip ALL whitespace.
+        password = re.sub(r"\s+", "", os.environ.get("SMTP_PASSWORD", ""))
         with smtplib.SMTP(host, port, timeout=15) as smtp:
             if os.environ.get("SMTP_TLS", "1") != "0":
                 smtp.starttls()
