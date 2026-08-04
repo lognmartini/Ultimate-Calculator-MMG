@@ -6,6 +6,7 @@ import json
 import os
 import re
 import socket
+import threading
 import time
 import urllib.error
 import urllib.parse
@@ -254,6 +255,43 @@ LEADS_PATH = os.path.join(ROOT, ".leads.jsonl")
 LEAD_WEBHOOK_URL = os.environ.get("LEAD_WEBHOOK_URL", "").strip()
 PARTNERS_DIR = os.path.join(ROOT, "partners")
 
+# Every lead emails this address by default (when SMTP is configured).
+LEAD_NOTIFY_EMAIL = os.environ.get(
+    "LEAD_NOTIFY_EMAIL", "logan@martinimortgagegroup.com"
+).strip()
+# Basic anti-spam rate limiting per client IP.
+LEAD_RATE_MAX = int(os.environ.get("LEAD_RATE_MAX", "6"))
+LEAD_RATE_WINDOW_SEC = int(os.environ.get("LEAD_RATE_WINDOW_SEC", "600"))
+_lead_rate_hits: dict = {}
+_lead_rate_lock = threading.Lock()
+
+
+def log_event(msg: str) -> None:
+    """Print to stdout so the message shows up in Render logs."""
+    stamp = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+    print(f"[mmg] {stamp} {msg}", flush=True)
+
+
+def lead_delivery_configured() -> bool:
+    """True when leads have a durable destination beyond the ephemeral file."""
+    return bool(LEAD_WEBHOOK_URL) or bool(os.environ.get("SMTP_HOST", "").strip())
+
+
+def rate_limit_ok(ip: str) -> bool:
+    now = time.time()
+    with _lead_rate_lock:
+        hits = [t for t in _lead_rate_hits.get(ip, []) if now - t < LEAD_RATE_WINDOW_SEC]
+        if len(hits) >= LEAD_RATE_MAX:
+            _lead_rate_hits[ip] = hits
+            return False
+        hits.append(now)
+        _lead_rate_hits[ip] = hits
+        if len(_lead_rate_hits) > 500:
+            for k in list(_lead_rate_hits.keys()):
+                if all(now - t >= LEAD_RATE_WINDOW_SEC for t in _lead_rate_hits[k]):
+                    _lead_rate_hits.pop(k, None)
+        return True
+
 
 def fetch_treasury_10y() -> dict:
     """U.S. Treasury daily yield curve — 10-year benchmark (refreshed daily)."""
@@ -386,17 +424,19 @@ def fetch_pmms_rates() -> dict:
     return payload
 
 
-def append_lead(entry: dict) -> None:
+def append_lead(entry: dict) -> bool:
     try:
         with open(LEADS_PATH, "a", encoding="utf-8") as f:
             f.write(json.dumps(entry) + "\n")
-    except OSError:
-        pass
+        return True
+    except OSError as e:
+        log_event(f"WARN append_lead failed: {e}")
+        return False
 
 
-def notify_lead_webhook(entry: dict) -> None:
+def notify_lead_webhook(entry: dict) -> bool:
     if not LEAD_WEBHOOK_URL:
-        return
+        return False
     try:
         payload = json.dumps(entry).encode("utf-8")
         req = urllib.request.Request(
@@ -408,17 +448,22 @@ def notify_lead_webhook(entry: dict) -> None:
             },
             method="POST",
         )
-        urllib.request.urlopen(req, timeout=10)
-    except (urllib.error.URLError, OSError, TimeoutError, ValueError):
-        pass
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            ok = 200 <= getattr(resp, "status", 200) < 300
+        if not ok:
+            log_event("WARN lead webhook returned non-2xx status")
+        return ok
+    except (urllib.error.URLError, OSError, TimeoutError, ValueError) as e:
+        log_event(f"WARN lead webhook failed: {e}")
+        return False
 
 
-def notify_lead_email(entry: dict, to_addr: str) -> None:
+def notify_lead_email(entry: dict, to_addr: str) -> bool:
     """Optional SMTP notification when SMTP_HOST + SMTP_FROM are configured."""
     host = os.environ.get("SMTP_HOST", "").strip()
     from_addr = os.environ.get("SMTP_FROM", "").strip()
     if not host or not from_addr or not to_addr:
-        return
+        return False
     try:
         import smtplib
         from email.message import EmailMessage
@@ -477,8 +522,10 @@ def notify_lead_email(entry: dict, to_addr: str) -> None:
             if user and password:
                 smtp.login(user, password)
             smtp.send_message(msg)
-    except Exception:
-        pass
+        return True
+    except Exception as e:
+        log_event(f"WARN lead email failed: {e}")
+        return False
 
 
 def sync_partner_photo(slug: str) -> dict:
@@ -1067,6 +1114,19 @@ class Handler(SimpleHTTPRequestHandler):
         except (json.JSONDecodeError, ValueError):
             self._json_response(400, {"ok": False, "error": "invalid JSON"})
             return
+        # Honeypot: real visitors never fill this hidden field; bots do.
+        if (data.get("company_website") or "").strip():
+            log_event("spam lead dropped (honeypot)")
+            self._json_response(200, {"ok": True})
+            return
+        client_ip = (
+            self.headers.get("X-Forwarded-For", "").split(",")[0].strip()
+            or self.client_address[0]
+        )
+        if not rate_limit_ok(client_ip):
+            log_event(f"rate limited lead from {client_ip}")
+            self._json_response(429, {"ok": False, "error": "too many requests"})
+            return
         email = (data.get("email") or "").strip().lower()
         phone = (data.get("phone") or "").strip()
         source = (data.get("source") or "logan1-calculator").strip()
@@ -1086,12 +1146,8 @@ class Handler(SimpleHTTPRequestHandler):
             elif "logan" in ref_lower:
                 assigned_lo = "logan"
         notify_email = (data.get("notifyEmail") or "").strip()
-        if not notify_email and source in (
-            "logan5-realtor-quiz",
-            "logan5-rate-alert",
-            "logan5-share-estimate",
-        ):
-            notify_email = "logan@martinimortgagegroup.com"
+        if not notify_email:
+            notify_email = LEAD_NOTIFY_EMAIL
         entry = {
             "ts": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
             "email": email,
@@ -1106,10 +1162,19 @@ class Handler(SimpleHTTPRequestHandler):
             "scenario": scenario,
             "consent": bool(data.get("consent")),
         }
-        append_lead(entry)
-        notify_lead_webhook(entry)
-        if notify_email:
-            notify_lead_email(entry, notify_email)
+        stored = append_lead(entry)
+        delivered_webhook = notify_lead_webhook(entry)
+        delivered_email = notify_lead_email(entry, notify_email) if notify_email else False
+        if delivered_webhook or delivered_email:
+            log_event(
+                f"lead ok source={source} webhook={delivered_webhook} "
+                f"email={delivered_email} file={stored}"
+            )
+        else:
+            log_event(
+                f"ALERT lead NOT durably delivered (file_only={stored}) "
+                f"source={source} contact={email or entry.get('phone')}"
+            )
         self._json_response(200, {"ok": True})
 
     def _api_preview_info(self, parsed):
@@ -1285,6 +1350,21 @@ def main():
     host = os.environ.get("HOST", "127.0.0.1")
     server = ThreadingHTTPServer((host, port), Handler)
     print(f"Martini Mortgage Calculator → http://{host}:{port}")
+    if lead_delivery_configured():
+        print(
+            "Lead delivery: "
+            + ("webhook " if LEAD_WEBHOOK_URL else "")
+            + ("email(SMTP) " if os.environ.get("SMTP_HOST") else "")
+            + f"→ notify {LEAD_NOTIFY_EMAIL}",
+            flush=True,
+        )
+    else:
+        print(
+            "WARNING: No durable lead destination configured. Set LEAD_WEBHOOK_URL "
+            "or SMTP_HOST/SMTP_FROM in the environment — otherwise leads are only "
+            "written to an ephemeral file and WILL BE LOST when the server restarts.",
+            flush=True,
+        )
     if host == "0.0.0.0":
         print("Listening on all interfaces (production). Use HTTPS reverse proxy in front.")
     if rentcast_api_key():
