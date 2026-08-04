@@ -926,27 +926,33 @@
           } catch (e) {}
           sync();
 
-          // Reveal the bar only after the big hero has scrolled up out of view.
-          // Guard on hero being actually rendered so it never flashes before
-          // the results step is reached (hero is display:none until then).
-          function setShown(on) {
-            var live = hero.getBoundingClientRect().height > 0;
-            var show = !!on && live;
-            if (show) place(); // ensure it lands exactly under the current header
+          // Reveal the bar once the big hero has scrolled up behind the header.
+          // The results content scrolls inside an inner container on this
+          // layout, so we listen for scroll with capture (scroll events
+          // capture but do not bubble) rather than IntersectionObserver, which
+          // does NOT fire for this nested-scroll setup. Guard on the hero being
+          // rendered so nothing shows before the results step is reached
+          // (the hero is display:none until then).
+          function evaluateShown() {
+            var r = hero.getBoundingClientRect();
+            var headerH = hdr ? hdr.getBoundingClientRect().height : 60;
+            var show = r.height > 0 && r.bottom < headerH + 4;
+            if (show) place(); // land exactly under the current header
             bar.classList.toggle("is-shown", show);
             bar.setAttribute("aria-hidden", show ? "false" : "true");
           }
+          document.addEventListener("scroll", evaluateShown, true);
+          window.addEventListener("resize", evaluateShown);
+          window.addEventListener("load", evaluateShown);
+          // Belt-and-suspenders: IntersectionObserver too, where it works
           if ("IntersectionObserver" in window) {
-            var io = new IntersectionObserver(
-              function (entries) {
-                entries.forEach(function (en) {
-                  setShown(!en.isIntersecting);
-                });
-              },
-              { rootMargin: "-80px 0px 0px 0px", threshold: 0 }
-            );
-            io.observe(hero);
+            try {
+              new IntersectionObserver(function () { evaluateShown(); },
+                { rootMargin: "-80px 0px 0px 0px", threshold: [0, 1] }
+              ).observe(hero);
+            } catch (e) {}
           }
+          evaluateShown();
 
           if (cta) {
             cta.addEventListener("click", function () {
