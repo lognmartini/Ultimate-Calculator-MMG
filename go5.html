@@ -169,6 +169,40 @@
           }, 4500);
         })();
       </script>
+
+      <!-- Desktop scroll cue: makes it obvious there's more (trust + reviews) below the fold -->
+      <button type="button" class="mmg-scrollcue" id="mmgScrollCue" aria-label="Scroll down to see more">
+        <span class="mmg-scrollcue-text">More below</span>
+        <span class="mmg-scrollcue-chev" aria-hidden="true">⌄</span>
+      </button>
+      <script>
+        (function () {
+          var cue = document.getElementById("mmgScrollCue");
+          if (!cue) return;
+          var benefits = document.querySelector(".mmg-benefits");
+          function hide() {
+            cue.classList.add("mmg-scrollcue-gone");
+          }
+          cue.addEventListener("click", function () {
+            (benefits || document.querySelector(".mmg-hs")).scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+            hide();
+          });
+          var hidden = false;
+          window.addEventListener(
+            "scroll",
+            function () {
+              if (!hidden && window.scrollY > 80) {
+                hidden = true;
+                hide();
+              }
+            },
+            { passive: true }
+          );
+        })();
+      </script>
     </section>
 
     <!-- STEP 1: Purchase = has address? | Refinance = refi goal -->
@@ -838,6 +872,100 @@
               document.getElementById("saveEstimateEmail");
             if (field) setTimeout(function () { try { field.focus({ preventScroll: true }); } catch (e) { field.focus(); } }, 450);
           });
+        })();
+      </script>
+
+      <!-- Sticky live payment bar: keeps the monthly number in view while adjusting the sliders -->
+      <div id="mmgStickyPay" class="mmg-stickypay" aria-hidden="true" hidden>
+        <div class="mmg-stickypay-inner">
+          <div class="mmg-stickypay-text">
+            <span class="mmg-stickypay-label">Est. monthly payment</span>
+            <span class="mmg-stickypay-amt" id="mmgStickyPayAmt" aria-live="polite">—</span>
+          </div>
+          <button type="button" class="mmg-stickypay-cta" id="mmgStickyPayCta">Talk to Logan</button>
+        </div>
+      </div>
+      <script>
+        (function () {
+          var hero = document.querySelector(".studio-results .studio-hero");
+          var src = document.getElementById("pitiPayment");
+          var bar = document.getElementById("mmgStickyPay");
+          var amt = document.getElementById("mmgStickyPayAmt");
+          var cta = document.getElementById("mmgStickyPayCta");
+          var hdr = document.querySelector(".guided-header");
+          if (!hero || !src || !bar || !amt) return;
+
+          bar.hidden = false; // JS controls visibility from here via the .is-shown class
+
+          // Pin the bar just beneath the sticky site header
+          function place() {
+            if (hdr) bar.style.top = Math.round(hdr.getBoundingClientRect().height) + "px";
+          }
+          place();
+          window.addEventListener("resize", place);
+          // Header height can shift slightly after fonts/content settle
+          window.addEventListener("load", place);
+          setTimeout(place, 1200);
+
+          // Mirror the live payment number (whatever recalculates #pitiPayment)
+          function sync() {
+            var v = (src.textContent || "").trim();
+            if (v && v !== amt.textContent) {
+              amt.textContent = v;
+              amt.classList.remove("pay-tick");
+              void amt.offsetWidth; // restart the flash animation
+              amt.classList.add("pay-tick");
+            }
+          }
+          try {
+            new MutationObserver(sync).observe(src, {
+              childList: true,
+              characterData: true,
+              subtree: true,
+            });
+          } catch (e) {}
+          sync();
+
+          // Reveal the bar only after the big hero has scrolled up out of view.
+          // Guard on hero being actually rendered so it never flashes before
+          // the results step is reached (hero is display:none until then).
+          function setShown(on) {
+            var live = hero.getBoundingClientRect().height > 0;
+            var show = !!on && live;
+            if (show) place(); // ensure it lands exactly under the current header
+            bar.classList.toggle("is-shown", show);
+            bar.setAttribute("aria-hidden", show ? "false" : "true");
+          }
+          if ("IntersectionObserver" in window) {
+            var io = new IntersectionObserver(
+              function (entries) {
+                entries.forEach(function (en) {
+                  setShown(!en.isIntersecting);
+                });
+              },
+              { rootMargin: "-80px 0px 0px 0px", threshold: 0 }
+            );
+            io.observe(hero);
+          }
+
+          if (cta) {
+            cta.addEventListener("click", function () {
+              var card = document.getElementById("saveEstimateCard");
+              if (!card) return;
+              card.scrollIntoView({ behavior: "smooth", block: "center" });
+              var field =
+                document.getElementById("saveEstimateName") ||
+                document.getElementById("saveEstimateEmail");
+              if (field)
+                setTimeout(function () {
+                  try {
+                    field.focus({ preventScroll: true });
+                  } catch (e) {
+                    field.focus();
+                  }
+                }, 450);
+            });
+          }
         })();
       </script>
     </section>
