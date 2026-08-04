@@ -508,7 +508,8 @@ def notify_lead_email(entry: dict, to_addr: str) -> bool:
             lines.append(f"Share URL: {scenario.get('shareUrl', '')}")
         if scenario.get("address"):
             lines.append(f"Address: {scenario.get('address', '')}")
-        msg = EmailMessage()
+        if scenario.get("summary"): lines.append("\n" + scenario["summary"])
+            msg = EmailMessage()
         msg["Subject"] = subject
         msg["From"] = from_addr
         msg["To"] = to_addr
