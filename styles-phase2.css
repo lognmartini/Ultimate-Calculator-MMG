@@ -988,3 +988,183 @@ html body.guided-flow.guided-flagship #guidedResultsDetails.studio-more-open .st
 html body.guided-flow.guided-flagship #guidedResultsDetails {
   margin-top: 0.9rem !important;
 }
+
+/* ============================================================================
+   PHASE 2.5 DESKTOP COMPLETION — tight, low-scroll, pinned nav
+   Goal: Back/Continue always reachable (no scavenger hunt), clean loan-type
+   cards, and a condensed results page. Mobile is untouched (all rules scoped
+   to >= 768px or desktop-only selectors).
+   ============================================================================ */
+
+/* ---- 1) DESKTOP: pin Back/Continue to the bottom on every input step ----
+   Beats styles-visual-reset.css `.wizard-nav.guided-step-nav {position:static}`
+   (specificity 0,4,2) via a higher-specificity selector + !important. Scoped to
+   guided-pre-results so the results step keeps its own static Back button. */
+@media (min-width: 768px) {
+  html body.guided-flow.guided-flagship.guided-pre-results .guided-step-nav:not(.wizard-nav-hidden) {
+    position: fixed !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    top: auto !important;
+    z-index: 66 !important;
+    margin: 0 !important;
+    padding: 0.75rem clamp(1rem, 4vw, 2rem) !important;
+    background: rgba(255, 255, 255, 0.96) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    backdrop-filter: blur(12px) !important;
+    border-top: 1px solid var(--p2-line) !important;
+    box-shadow: 0 -8px 28px rgba(27, 35, 82, 0.10) !important;
+  }
+  html body.guided-flow.guided-flagship.guided-pre-results .guided-step-nav:not(.wizard-nav-hidden) .wizard-nav-inner {
+    max-width: 640px !important;
+    margin: 0 auto !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr) !important;
+  }
+  /* reserve space so the pinned bar never covers the card's last content */
+  html body.guided-flow.guided-flagship.guided-pre-results .guided-step-panel {
+    padding-bottom: 108px !important;
+  }
+  /* ---- 2) DESKTOP: balance the step vertically so short steps don't leave a big
+     dead gap above the pinned nav. Content is centered between header and nav;
+     taller steps overflow and scroll normally. ---- */
+  /* The layout wrapper was capped at min(480px) on pre-results, forcing EVERY
+     desktop step to mobile width (sparse, narrow). Widen it so steps use the
+     desktop width, and center the step vertically to avoid a dead bottom gap. */
+  html body.guided-flow.guided-flagship.guided-pre-results .guided-layout-center {
+    display: flex !important;
+    flex-direction: column !important;
+    max-width: 680px !important;
+    min-height: calc(100vh - 172px) !important;
+    justify-content: center !important;
+    padding-bottom: 0 !important;
+  }
+  /* Give the price + loan-type step room so the four loan cards read cleanly.
+     Beats styles-density.css [data-step-id="price-loan"] .guided-price-loan-panel
+     (min(480px)) with a higher-specificity selector loaded dead-last. */
+  html body.guided-flow.guided-flagship .guided-price-loan-step[data-step-id="price-loan"] .guided-price-loan-panel.guided-step-panel-wide,
+  html body.guided-flow.guided-flagship [data-step-id="price-loan"] .guided-price-loan-panel {
+    max-width: 700px !important;
+    width: 100% !important;
+  }
+  html body.guided-flow.guided-flagship.guided-pre-results .guided-layout-center {
+    align-items: center !important;
+  }
+  html body.guided-flow.guided-flagship #guidedLoanStageCard,
+  html body.guided-flow.guided-flagship #guidedPriceStageCard,
+  html body.guided-flow.guided-flagship .guided-price-loan-loan,
+  html body.guided-flow.guided-flagship .guided-price-loan-price {
+    max-width: 680px !important;
+    width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  html body.guided-flow.guided-flagship .guided-loan-type-grid {
+    gap: 0.6rem !important;
+  }
+}
+
+/* ---- 3) Loan-type cards: tight, clean, non-clipping, obvious selected state ---- */
+html body.guided-flow.guided-flagship .guided-loan-type-grid .ultimate-program-btn {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.15rem !important;
+  text-align: center !important;
+  min-height: 76px !important;
+  height: auto !important;
+  padding: 0.7rem 0.55rem !important;
+  overflow: visible !important;
+  border-radius: 14px !important;
+  border: 1.5px solid var(--p2-line) !important;
+  background: #fff !important;
+  white-space: normal !important;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease !important;
+}
+html body.guided-flow.guided-flagship .guided-loan-type-grid .ultimate-program-btn strong {
+  font-size: clamp(0.82rem, 2.6vw, 0.95rem) !important;
+  line-height: 1.1 !important;
+  color: var(--p2-navy-deep) !important;
+  white-space: nowrap !important;
+  overflow-wrap: normal !important;
+  hyphens: none !important;
+}
+/* On the loan stage the price is already set (Back returns to adjust it and the
+   results page has a live price slider). Hide the redundant full price card so
+   the loan stage stays tight and low-scroll on every device. */
+html body.guided-flow.guided-flagship [data-price-loan-stage="loan"] .guided-price-loan-price {
+  display: none !important;
+}
+html body.guided-flow.guided-flagship .guided-loan-type-grid .ultimate-program-btn span {
+  font-size: 0.72rem !important;
+  line-height: 1.15 !important;
+  color: var(--p2-muted) !important;
+  white-space: normal !important;
+}
+html body.guided-flow.guided-flagship .guided-loan-type-grid .ultimate-program-btn:hover {
+  border-color: var(--p2-gold) !important;
+}
+html body.guided-flow.guided-flagship .guided-loan-type-grid .ultimate-program-btn.active {
+  background: linear-gradient(160deg, var(--p2-navy) 0%, var(--p2-navy-deep) 100%) !important;
+  border-color: var(--p2-gold) !important;
+  box-shadow: 0 8px 20px rgba(27, 35, 82, 0.18) !important;
+}
+html body.guided-flow.guided-flagship .guided-loan-type-grid .ultimate-program-btn.active strong { color: #fff !important; }
+html body.guided-flow.guided-flagship .guided-loan-type-grid .ultimate-program-btn.active span { color: var(--p2-gold-hi) !important; }
+
+/* ---- 4) DESKTOP RESULTS: condensed, premium, minimal-scroll layout ----
+   Widen the page and split the main column so Adjust-your-scenario sits beside
+   the payment + breakdown, with lead capture in its own right column. The
+   heavy detail sections span full width beneath. */
+@media (min-width: 1000px) {
+  /* The results STEP section is capped at 720px by styles-visual-reset.css
+     (.wizard-step.guided-step). Beat it for the results step so the condensed
+     multi-column layout has room to breathe. */
+  html body.guided-flow.guided-flagship.wizard-on-results .wizard-step.guided-results-step,
+  html body.guided-flow.guided-flagship.wizard-on-results .wizard-step.studio-results {
+    max-width: 1160px !important;
+    width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  html body.guided-flow.guided-flagship .studio-page,
+  html body.guided-flow.guided-flagship .ultimate-payment-main.studio-page {
+    max-width: 1140px !important;
+  }
+  html body.guided-flow.guided-flagship .studio-grid {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr) !important;
+    align-items: start !important;
+    gap: 1.1rem 1.25rem !important;
+  }
+  /* Left column becomes its own 2-up grid: (hero + breakdown) | (adjust controls) */
+  html body.guided-flow.guided-flagship .studio-main {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+    grid-auto-rows: min-content !important;
+    align-items: start !important;
+    gap: 1rem !important;
+  }
+  html body.guided-flow.guided-flagship .studio-main .studio-hero { grid-column: 1 !important; grid-row: 1 !important; }
+  html body.guided-flow.guided-flagship .studio-main .studio-break { grid-column: 1 !important; grid-row: 2 !important; }
+  html body.guided-flow.guided-flagship .studio-main #destAdjustPanel {
+    grid-column: 2 !important;
+    grid-row: 1 / span 2 !important;
+    align-self: stretch !important;
+  }
+  /* Right column: lead capture + trust stack naturally (studio-side is flex-column) */
+  html body.guided-flow.guided-flagship .studio-side { align-self: start !important; }
+  /* Detail sections span the full width below the three visual columns */
+  html body.guided-flow.guided-flagship .studio-grid > #guidedResultsDetails,
+  html body.guided-flow.guided-flagship .studio-grid > .ultimate-wealth-panel,
+  html body.guided-flow.guided-flagship .studio-grid > .studio-more {
+    grid-column: 1 / -1 !important;
+  }
+  /* Tighten the hero so it doesn't dominate the shorter column */
+  html body.guided-flow.guided-flagship.wizard-on-results .studio-amount,
+  html body.guided-flow.guided-flagship.wizard-on-results #pitiPayment.studio-amount {
+    font-size: 4.2rem !important;
+  }
+  html body.guided-flow.guided-flagship.wizard-on-results .studio-hero { padding: 1.5rem 1.25rem !important; }
+}
