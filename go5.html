@@ -1244,29 +1244,12 @@
       }
       document.addEventListener("mmg-calculated", watchProgramMarks);
 
-      /* Phase 2.5 — light "More options" on the loan step: tuck the manual
-         %/$ down-payment inputs behind a toggle so the step reads as two clean
-         decisions (loan type, then down payment). Presentation only. */
+      /* Phase 2.5 FINAL — the "More options" toggle only revealed the manual %/$
+         down-payment inputs, which are redundant with the slider + chips. Per
+         request, no toggle is created and the manual inputs stay hidden, so the
+         down-payment section is just the slider + chips (no wasted space). */
       function setupLoanMore() {
-        var card = document.getElementById("guidedLoanStageCard");
-        if (!card || card.dataset.p2MoreBound) return;
-        var adjust = document.getElementById("guidedDownAdjust");
-        if (!adjust) return;
-        card.dataset.p2MoreBound = "1";
-        var wrap = document.createElement("p");
-        wrap.className = "p2-more-toggle-wrap";
-        var btn = document.createElement("button");
-        btn.type = "button";
-        btn.className = "p2-more-toggle";
-        btn.textContent = "More options";
-        btn.setAttribute("aria-expanded", "false");
-        btn.addEventListener("click", function () {
-          var open = card.classList.toggle("p2-more-open");
-          btn.setAttribute("aria-expanded", open ? "true" : "false");
-          btn.textContent = open ? "Fewer options" : "More options";
-        });
-        wrap.appendChild(btn);
-        adjust.appendChild(wrap);
+        return;
       }
       if (document.readyState === "loading") {
         document.addEventListener("DOMContentLoaded", setupLoanMore);

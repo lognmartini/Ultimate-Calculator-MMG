@@ -1264,3 +1264,14 @@ html body.guided-flow.guided-flagship .studio-more-body .ultimate-wealth-panel {
   html body.guided-flow.guided-flagship[data-wizard-step="5"] .guided-credit-tiers { margin-top: 0.35rem !important; }
   html body.guided-flow.guided-flagship[data-wizard-step="5"] .guided-credit-card .guided-loan-section-label { margin: 0.55rem 0 0.4rem !important; }
 }
+
+/* --- Remove the "More options" toggle on the loan step entirely (it only
+   revealed redundant manual %/$ inputs). Hide any residual toggle and reclaim
+   the space so the down-payment section ends cleanly at the chips. --- */
+html body.guided-flow.guided-flagship .p2-more-toggle,
+html body.guided-flow.guided-flagship .p2-more-toggle-wrap {
+  display: none !important;
+}
+html body.guided-flow.guided-flagship #guidedDownAdjust { padding-bottom: 0.2rem !important; }
+html body.guided-flow.guided-flagship #guidedLoanStageCard .guided-down-adjust-body { padding-bottom: 0 !important; margin-bottom: 0 !important; }
+html body.guided-flow.guided-flagship #guidedLoanStageCard .guided-down-chips { margin-bottom: 0 !important; }
