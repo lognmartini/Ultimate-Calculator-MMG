@@ -384,83 +384,86 @@
           <button type="button" class="guided-price-to-loan hidden" id="guidedPriceToLoan" hidden aria-hidden="true" tabindex="-1"></button>
         </div>
 
-        <!-- Stage 2: Loan type + down (revealed after price) -->
-        <div class="wizard-card guided-card guided-card-wide guided-loan-you-card guided-loan-stack guided-loan-unified guided-loan-slim guided-price-loan-loan guided-loan-stage-hidden" id="guidedLoanStageCard" hidden aria-hidden="true">
-          <p class="guided-loan-section-label" id="step-loan-you-title">Loan type</p>
-          <section class="guided-loan-block guided-loan-block-program" aria-labelledby="step-loan-you-title">
-            <div class="ultimate-program-picker guided-program-compact guided-loan-you-programs guided-loan-type-grid" id="ultimateProgramPicker" role="radiogroup" aria-label="Loan program">
-              <button type="button" class="ultimate-program-btn active" data-program="conventional" role="radio" aria-checked="true" tabindex="0">
-                <strong>Conventional</strong>
-                <span id="ultimateGuideConventional">5% min · PMI below 20%</span>
-                <span class="guided-selected-mark" aria-hidden="true">Selected</span>
-              </button>
-              <button type="button" class="ultimate-program-btn" data-program="fha" role="radio" aria-checked="false" tabindex="-1">
-                <strong>FHA</strong>
-                <span>3.5% down · flexible credit</span>
-                <span class="guided-selected-mark" aria-hidden="true">Selected</span>
-              </button>
-              <button type="button" class="ultimate-program-btn" data-program="va" role="radio" aria-checked="false" tabindex="-1">
-                <strong>VA</strong>
-                <span>0% · eligible veterans</span>
-                <span class="guided-selected-mark" aria-hidden="true">Selected</span>
-              </button>
-              <button type="button" class="ultimate-program-btn" data-program="usda" role="radio" aria-checked="false" tabindex="-1">
-                <strong>USDA</strong>
-                <span>0% · rural areas</span>
-                <span class="guided-selected-mark" aria-hidden="true">Selected</span>
-              </button>
-            </div>
-            <select id="loanProgram" class="ultimate-visually-hidden" aria-describedby="loanProgramNote" tabindex="-1">
-              <option value="conventional" selected>Conventional</option>
-              <option value="fha">FHA</option>
-              <option value="va">VA</option>
-              <option value="usda">USDA</option>
-            </select>
-            <p class="field-note field-note-hint guided-center-note guided-loan-you-note" id="loanProgramNote"></p>
-            <p class="ultimate-panel-lead ultimate-program-tip guided-center-note guided-loan-you-tip hidden" id="ultimateProgramTip"></p>
+        <!-- Stage 2: Loan type + down (revealed after price).
+             Restructured into two groups (Loan Type | Down Payment) so desktop
+             can show them SIDE BY SIDE (no scroll) while mobile stacks them. -->
+        <div class="wizard-card guided-card guided-card-wide guided-loan-you-card guided-loan-stack guided-loan-unified guided-loan-slim guided-price-loan-loan guided-loan-stage-hidden p2-loan-2col" id="guidedLoanStageCard" hidden aria-hidden="true">
+          <div class="p2-loan-col p2-loan-col-type">
+            <p class="guided-loan-section-label" id="step-loan-you-title">Loan type</p>
+            <section class="guided-loan-block guided-loan-block-program" aria-labelledby="step-loan-you-title">
+              <div class="ultimate-program-picker guided-program-compact guided-loan-you-programs guided-loan-type-grid" id="ultimateProgramPicker" role="radiogroup" aria-label="Loan program">
+                <button type="button" class="ultimate-program-btn active" data-program="conventional" role="radio" aria-checked="true" tabindex="0">
+                  <strong>Conventional</strong>
+                  <span id="ultimateGuideConventional">5% min · PMI below 20%</span>
+                  <span class="guided-selected-mark" aria-hidden="true">Selected</span>
+                </button>
+                <button type="button" class="ultimate-program-btn" data-program="fha" role="radio" aria-checked="false" tabindex="-1">
+                  <strong>FHA</strong>
+                  <span>3.5% down · flexible credit</span>
+                  <span class="guided-selected-mark" aria-hidden="true">Selected</span>
+                </button>
+                <button type="button" class="ultimate-program-btn" data-program="va" role="radio" aria-checked="false" tabindex="-1">
+                  <strong>VA</strong>
+                  <span>0% · eligible veterans</span>
+                  <span class="guided-selected-mark" aria-hidden="true">Selected</span>
+                </button>
+                <button type="button" class="ultimate-program-btn" data-program="usda" role="radio" aria-checked="false" tabindex="-1">
+                  <strong>USDA</strong>
+                  <span>0% · rural areas</span>
+                  <span class="guided-selected-mark" aria-hidden="true">Selected</span>
+                </button>
+              </div>
+              <select id="loanProgram" class="ultimate-visually-hidden" aria-describedby="loanProgramNote" tabindex="-1">
+                <option value="conventional" selected>Conventional</option>
+                <option value="fha">FHA</option>
+                <option value="va">VA</option>
+                <option value="usda">USDA</option>
+              </select>
+              <p class="field-note field-note-hint guided-center-note guided-loan-you-note" id="loanProgramNote"></p>
+              <p class="ultimate-panel-lead ultimate-program-tip guided-center-note guided-loan-you-tip hidden" id="ultimateProgramTip"></p>
+              <!-- Item 4 (mobile pass): FTHB button removed; hidden flag kept so the
+                   down-payment minimum logic still works (3% chip sets it). -->
+              <div class="sr-only" aria-hidden="true">
+                <input type="checkbox" id="firstTimeBuyer" name="firstTimeBuyer" tabindex="-1" />
+                <input type="checkbox" id="veteranEligible" name="veteranEligible" tabindex="-1" />
+                <input type="checkbox" id="usdaEligible" name="usdaEligible" tabindex="-1" />
+              </div>
+            </section>
+          </div>
 
+          <div class="p2-loan-col p2-loan-col-down">
             <div class="guided-down-summary" aria-live="polite">
               <span class="guided-down-summary-label" id="step-down-title">Down payment</span>
               <strong class="guided-down-summary-value" id="downDisplay">20% · $90,000</strong>
               <p class="field-note guided-down-hero-lead" id="step-down-lead">Program default — adjust below</p>
             </div>
-
-            <!-- Item 4 (mobile pass): removed the separate "First-time buyer" button to
-                 cut clutter/scrolling. The flag is kept as a hidden input so down-payment
-                 minimum logic still works; selecting the 3% chip sets it automatically. -->
-            <div class="sr-only" aria-hidden="true">
-              <input type="checkbox" id="firstTimeBuyer" name="firstTimeBuyer" tabindex="-1" />
-              <input type="checkbox" id="veteranEligible" name="veteranEligible" tabindex="-1" />
-              <input type="checkbox" id="usdaEligible" name="usdaEligible" tabindex="-1" />
-            </div>
-          </section>
-
-          <div class="guided-down-adjust guided-down-adjust-open" id="guidedDownAdjust">
-            <p class="guided-down-adjust-summary guided-loan-section-label">Adjust down payment</p>
-            <div class="guided-loan-block guided-loan-block-down guided-loan-you-down guided-down-adjust-body">
-              <div class="field guided-down-field">
-                <label for="downPercent" class="sr-only">Down payment percent</label>
-                <input type="range" id="downPercent" min="0" max="50" step="0.5" value="20" />
-                <p class="field-note down-pmi-hint hidden" id="downPmiHint"></p>
-                <p class="field-note field-note-hint hidden" id="programDownHint"></p>
-                <div class="inline-inputs guided-down-inline">
-                  <div class="inline-field">
-                    <span class="inline-label">%</span>
-                    <input type="number" id="downPercentInput" min="0" max="100" step="0.5" value="20" />
-                  </div>
-                  <div class="inline-field">
-                    <span class="inline-label">$</span>
-                    <input type="text" id="downAmountInput" class="currency-input" inputmode="numeric" value="90,000" />
+            <div class="guided-down-adjust guided-down-adjust-open" id="guidedDownAdjust">
+              <p class="guided-down-adjust-summary guided-loan-section-label">Adjust down payment</p>
+              <div class="guided-loan-block guided-loan-block-down guided-loan-you-down guided-down-adjust-body">
+                <div class="field guided-down-field">
+                  <label for="downPercent" class="sr-only">Down payment percent</label>
+                  <input type="range" id="downPercent" min="0" max="50" step="0.5" value="20" />
+                  <p class="field-note down-pmi-hint hidden" id="downPmiHint"></p>
+                  <p class="field-note field-note-hint hidden" id="programDownHint"></p>
+                  <div class="inline-inputs guided-down-inline">
+                    <div class="inline-field">
+                      <span class="inline-label">%</span>
+                      <input type="number" id="downPercentInput" min="0" max="100" step="0.5" value="20" />
+                    </div>
+                    <div class="inline-field">
+                      <span class="inline-label">$</span>
+                      <input type="text" id="downAmountInput" class="currency-input" inputmode="numeric" value="90,000" />
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="guided-chip-row guided-down-chips" role="group" aria-label="Quick down payment">
-                <button type="button" class="guided-mini-chip" data-down="3" id="downChip3">3%</button>
-                <button type="button" class="guided-mini-chip" data-down="3.5">3.5%</button>
-                <button type="button" class="guided-mini-chip" data-down="5">5%</button>
-                <button type="button" class="guided-mini-chip" data-down="10">10%</button>
-                <button type="button" class="guided-mini-chip" data-down="20">20%</button>
-                <button type="button" class="guided-mini-chip" data-down="0">0%</button>
+                <div class="guided-chip-row guided-down-chips" role="group" aria-label="Quick down payment">
+                  <button type="button" class="guided-mini-chip" data-down="3" id="downChip3">3%</button>
+                  <button type="button" class="guided-mini-chip" data-down="3.5">3.5%</button>
+                  <button type="button" class="guided-mini-chip" data-down="5">5%</button>
+                  <button type="button" class="guided-mini-chip" data-down="10">10%</button>
+                  <button type="button" class="guided-mini-chip" data-down="20">20%</button>
+                  <button type="button" class="guided-mini-chip" data-down="0">0%</button>
+                </div>
               </div>
             </div>
           </div>
@@ -477,63 +480,68 @@
           <p class="wizard-lead guided-lead">Sets your illustrative Martini rate.</p>
         </div>
 
-        <div class="wizard-card guided-card guided-card-wide guided-credit-card guided-credit-card-slim">
-          <!-- 1. Credit score (primary decision) -->
-          <div class="field credit-field guided-credit-score-block">
-            <label for="creditScore" class="guided-credit-section-label sr-only">Credit score</label>
-            <div class="guided-score-hero" aria-live="polite">
-              <span class="field-value guided-score-number" id="creditScoreDisplay">740</span>
-              <div class="credit-bands credit-bands-desktop-only guided-score-band" id="creditBandLabel">Good — typical conventional pricing</div>
+        <div class="wizard-card guided-card guided-card-wide guided-credit-card guided-credit-card-slim p2-credit-2col">
+          <!-- Left column: credit score -->
+          <div class="p2-credit-col p2-credit-col-score">
+            <div class="field credit-field guided-credit-score-block">
+              <label for="creditScore" class="guided-credit-section-label sr-only">Credit score</label>
+              <div class="guided-score-hero" aria-live="polite">
+                <span class="field-value guided-score-number" id="creditScoreDisplay">740</span>
+                <div class="credit-bands credit-bands-desktop-only guided-score-band" id="creditBandLabel">Good — typical conventional pricing</div>
+              </div>
+              <input type="range" id="creditScore" min="580" max="850" step="5" value="740" aria-describedby="creditBandLabel" />
+              <div class="credit-tier-picker guided-credit-tiers" id="creditTierPicker" role="radiogroup" aria-label="Credit tier shortcuts"></div>
             </div>
-            <input type="range" id="creditScore" min="580" max="850" step="5" value="740" aria-describedby="creditBandLabel" />
-            <div class="credit-tier-picker guided-credit-tiers" id="creditTierPicker" role="radiogroup" aria-label="Credit tier shortcuts"></div>
           </div>
 
-          <!-- 2. Term: primary 30/15/20; extras collapsed -->
-          <div class="ultimate-loan-options-open guided-term-block guided-term-compact">
-            <p class="guided-credit-section-label" id="loan-term-label">Loan term</p>
-            <div class="ultimate-term-picker guided-term-picker guided-term-primary" id="ultimateTermPicker" role="radiogroup" aria-labelledby="loan-term-label">
-              <button type="button" class="ultimate-term-btn active" data-term="30" role="radio" aria-checked="true" tabindex="0">30 yr</button>
-              <button type="button" class="ultimate-term-btn" data-term="15" role="radio" aria-checked="false" tabindex="-1">15 yr</button>
-              <button type="button" class="ultimate-term-btn" data-term="20" role="radio" aria-checked="false" tabindex="-1">20 yr</button>
-              <button type="button" class="ultimate-term-btn guided-term-extra" data-term="25" role="radio" aria-checked="false" tabindex="-1" hidden>25 yr</button>
-              <button type="button" class="ultimate-term-btn guided-term-extra" data-term="10" role="radio" aria-checked="false" tabindex="-1" hidden>10 yr</button>
+          <!-- Right column: loan term + rate -->
+          <div class="p2-credit-col p2-credit-col-terms">
+            <!-- 2. Term: primary 30/15/20; extras collapsed -->
+            <div class="ultimate-loan-options-open guided-term-block guided-term-compact">
+              <p class="guided-credit-section-label" id="loan-term-label">Loan term</p>
+              <div class="ultimate-term-picker guided-term-picker guided-term-primary" id="ultimateTermPicker" role="radiogroup" aria-labelledby="loan-term-label">
+                <button type="button" class="ultimate-term-btn active" data-term="30" role="radio" aria-checked="true" tabindex="0">30 yr</button>
+                <button type="button" class="ultimate-term-btn" data-term="15" role="radio" aria-checked="false" tabindex="-1">15 yr</button>
+                <button type="button" class="ultimate-term-btn" data-term="20" role="radio" aria-checked="false" tabindex="-1">20 yr</button>
+                <button type="button" class="ultimate-term-btn guided-term-extra" data-term="25" role="radio" aria-checked="false" tabindex="-1" hidden>25 yr</button>
+                <button type="button" class="ultimate-term-btn guided-term-extra" data-term="10" role="radio" aria-checked="false" tabindex="-1" hidden>10 yr</button>
+              </div>
+              <button type="button" class="guided-term-more" id="guidedTermMore" aria-expanded="false">More terms</button>
+              <select id="loanTerm" class="ultimate-visually-hidden" tabindex="-1" aria-hidden="true">
+                <option value="30" selected>30 years</option>
+                <option value="25">25 years</option>
+                <option value="20">20 years</option>
+                <option value="15">15 years</option>
+                <option value="10">10 years</option>
+              </select>
             </div>
-            <button type="button" class="guided-term-more" id="guidedTermMore" aria-expanded="false">More terms</button>
-            <select id="loanTerm" class="ultimate-visually-hidden" tabindex="-1" aria-hidden="true">
-              <option value="30" selected>30 years</option>
-              <option value="25">25 years</option>
-              <option value="20">20 years</option>
-              <option value="15">15 years</option>
-              <option value="10">10 years</option>
-            </select>
-          </div>
 
-          <!-- 3. Rate: compact read-only strip; edit in details -->
-          <div class="guided-rate-panel guided-rate-slim">
-            <div class="guided-rate-strip-ro" aria-live="polite">
-              <div class="guided-rate-strip-col">
-                <span class="guided-rate-strip-label">Typical lender</span>
-                <strong class="guided-rate-strip-value" id="marketRateDisplay">6.5%</strong>
-              </div>
-              <div class="guided-rate-strip-col guided-rate-strip-martini">
-                <span class="guided-rate-strip-label">Your Martini rate</span>
-                <strong class="guided-rate-strip-value" id="guidedMartiniRateDisplay">6.25%</strong>
-                <span class="rate-savings-chip guided-rate-savings hidden" id="rateSavingsChip"></span>
-              </div>
-            </div>
-            <details class="guided-rate-details guided-rate-advanced">
-              <summary>Adjust rate or see how we estimate</summary>
-              <div class="field rate-field martini-rate-block ultimate-rate-prominent guided-rate-hero">
-                <div class="input-suffix rate-input-wrap rate-input-wrap-highlight guided-rate-input">
-                  <label for="interestRate" class="rate-compare-label">Martini rate</label>
-                  <input type="number" id="interestRate" min="0" max="20" step="0.125" value="6.25" aria-label="Your Martini interest rate" />
-                  <span>%</span>
+            <!-- 3. Rate: compact read-only strip; edit in details -->
+            <div class="guided-rate-panel guided-rate-slim">
+              <div class="guided-rate-strip-ro" aria-live="polite">
+                <div class="guided-rate-strip-col">
+                  <span class="guided-rate-strip-label">Typical lender</span>
+                  <strong class="guided-rate-strip-value" id="marketRateDisplay">6.5%</strong>
                 </div>
-                <p class="rate-updated-note" id="marketRateUpdated"></p>
-                <span class="rate-daily-badge guided-rate-badge" id="rateDailyBadge">Freddie Mac PMMS + program adjustments</span>
+                <div class="guided-rate-strip-col guided-rate-strip-martini">
+                  <span class="guided-rate-strip-label">Your Martini rate</span>
+                  <strong class="guided-rate-strip-value" id="guidedMartiniRateDisplay">6.25%</strong>
+                  <span class="rate-savings-chip guided-rate-savings hidden" id="rateSavingsChip"></span>
+                </div>
               </div>
-            </details>
+              <details class="guided-rate-details guided-rate-advanced">
+                <summary>Adjust rate or see how we estimate</summary>
+                <div class="field rate-field martini-rate-block ultimate-rate-prominent guided-rate-hero">
+                  <div class="input-suffix rate-input-wrap rate-input-wrap-highlight guided-rate-input">
+                    <label for="interestRate" class="rate-compare-label">Martini rate</label>
+                    <input type="number" id="interestRate" min="0" max="20" step="0.125" value="6.25" aria-label="Your Martini interest rate" />
+                    <span>%</span>
+                  </div>
+                  <p class="rate-updated-note" id="marketRateUpdated"></p>
+                  <span class="rate-daily-badge guided-rate-badge" id="rateDailyBadge">Freddie Mac PMMS + program adjustments</span>
+                </div>
+              </details>
+            </div>
           </div>
         </div>
       </div>

@@ -1275,3 +1275,163 @@ html body.guided-flow.guided-flagship .p2-more-toggle-wrap {
 html body.guided-flow.guided-flagship #guidedDownAdjust { padding-bottom: 0.2rem !important; }
 html body.guided-flow.guided-flagship #guidedLoanStageCard .guided-down-adjust-body { padding-bottom: 0 !important; margin-bottom: 0 !important; }
 html body.guided-flow.guided-flagship #guidedLoanStageCard .guided-down-chips { margin-bottom: 0 !important; }
+
+/* ============================================================================
+   PHASE 2.5 FINAL v3 — PRICE+LOAN "everything fits, no scroll"
+   This is the densest step (price + loan type + down payment on one screen).
+   Compress it hard, scoped to this step only, so the whole thing — progress
+   bar → title → price → loan type → down payment → centered Back/Continue —
+   fits in one window with no scrolling. Content was 876px; target ~640px.
+   ============================================================================ */
+/* Intro: small kicker, smaller title, drop the redundant subtitle */
+html body.guided-flow.guided-flagship [data-step-id="price-loan"] .guided-step-intro { margin-bottom: 0.5rem !important; }
+html body.guided-flow.guided-flagship [data-step-id="price-loan"] .guided-kicker { margin: 0 0 0.15rem !important; font-size: 0.68rem !important; }
+html body.guided-flow.guided-flagship [data-step-id="price-loan"] .guided-title,
+html body.guided-flow.guided-flagship [data-step-id="price-loan"] .wizard-title { font-size: 1.65rem !important; margin: 0 0 0.15rem !important; line-height: 1.05 !important; }
+html body.guided-flow.guided-flagship [data-step-id="price-loan"] .guided-lead { display: none !important; }
+
+/* Compact price bar (loan stage): smaller hero + slim, tight margins */
+html body.guided-flow.guided-flagship [data-price-loan-stage="loan"] .guided-price-loan-price { padding: 0.5rem 1rem 0.6rem !important; margin: 0 auto 0.55rem !important; }
+html body.guided-flow.guided-flagship [data-price-loan-stage="loan"] .guided-price-loan-price .guided-price-hero { font-size: 1.75rem !important; margin: 0.05rem 0 0.3rem !important; }
+html body.guided-flow.guided-flagship [data-price-loan-stage="loan"] .guided-price-loan-price #homePriceLabel { font-size: 0.68rem !important; margin: 0 0 0.15rem !important; }
+
+/* Loan card: tighter padding + shorter loan-type cards + tighter down payment */
+html body.guided-flow.guided-flagship [data-step-id="price-loan"] #guidedLoanStageCard { padding: 0.8rem 1.1rem 0.9rem !important; }
+html body.guided-flow.guided-flagship [data-step-id="price-loan"] #guidedLoanStageCard .guided-loan-section-label { margin: 0 0 0.4rem !important; }
+html body.guided-flow.guided-flagship [data-step-id="price-loan"] .guided-loan-type-grid .ultimate-program-btn { min-height: 60px !important; padding: 0.45rem 0.5rem !important; }
+html body.guided-flow.guided-flagship [data-step-id="price-loan"] .guided-loan-type-grid .ultimate-program-btn span { font-size: 0.68rem !important; }
+html body.guided-flow.guided-flagship [data-step-id="price-loan"] .guided-down-summary { margin: 0.5rem 0 0.35rem !important; padding: 0.55rem 0.6rem !important; }
+html body.guided-flow.guided-flagship [data-step-id="price-loan"] .guided-down-summary .guided-down-summary-value,
+html body.guided-flow.guided-flagship [data-step-id="price-loan"] #downDisplay { font-size: 1.15rem !important; }
+html body.guided-flow.guided-flagship [data-step-id="price-loan"] #guidedDownAdjust { padding-top: 0.3rem !important; padding-bottom: 0.1rem !important; }
+html body.guided-flow.guided-flagship [data-step-id="price-loan"] .guided-down-field { margin-bottom: 0.35rem !important; }
+html body.guided-flow.guided-flagship [data-step-id="price-loan"] .guided-down-chips { margin-top: 0.4rem !important; }
+/* Tighten the nav gap on this dense step */
+html body.guided-flow.guided-flagship[data-wizard-step="4"] .guided-step-nav { margin-top: 0.85rem !important; }
+
+/* Price hero is sized by #homePriceDisplay (ID) — beat it with an ID-level rule
+   so the compact price bar is genuinely short on the loan stage. */
+html body.guided-flow.guided-flagship [data-price-loan-stage="loan"] #homePriceDisplay {
+  font-size: 1.5rem !important;
+  margin: 0.05rem 0 0.25rem !important;
+  line-height: 1.1 !important;
+}
+/* Slim the price slider + kill extra price-card chrome on the loan stage */
+html body.guided-flow.guided-flagship [data-price-loan-stage="loan"] #homePrice { margin: 0.15rem 0 0 !important; }
+html body.guided-flow.guided-flagship [data-price-loan-stage="loan"] .guided-price-loan-price .guided-price-field { margin: 0 !important; }
+/* Down-payment summary to a single tight line */
+html body.guided-flow.guided-flagship [data-step-id="price-loan"] .guided-down-summary .guided-down-hero-lead,
+html body.guided-flow.guided-flagship [data-step-id="price-loan"] #step-down-lead { display: none !important; }
+
+/* Final trims to land the whole price+loan step near ~630px content */
+html body.guided-flow.guided-flagship [data-step-id="price-loan"] .guided-title,
+html body.guided-flow.guided-flagship [data-step-id="price-loan"] .wizard-title { font-size: 1.5rem !important; }
+html body.guided-flow.guided-flagship [data-step-id="price-loan"] #guidedLoanStageCard { padding: 0.7rem 1rem 0.75rem !important; }
+html body.guided-flow.guided-flagship [data-step-id="price-loan"] .guided-loan-type-grid .ultimate-program-btn { min-height: 56px !important; }
+html body.guided-flow.guided-flagship [data-step-id="price-loan"] .guided-down-summary { margin: 0.4rem 0 0.3rem !important; padding: 0.45rem 0.6rem !important; }
+html body.guided-flow.guided-flagship [data-step-id="price-loan"] .guided-down-summary-label { font-size: 0.64rem !important; }
+html body.guided-flow.guided-flagship [data-step-id="price-loan"] #downPercent { margin: 0.15rem 0 !important; }
+html body.guided-flow.guided-flagship [data-step-id="price-loan"] .guided-down-chips { margin-top: 0.35rem !important; }
+html body.guided-flow.guided-flagship [data-step-id="price-loan"] .guided-progress { margin-bottom: 0.4rem !important; }
+
+/* Drop the redundant kicker on this step (the progress bar already reads
+   "STEP 3 OF 5 · PRICE & LOAN") and shave the last bit of chrome so the whole
+   step fits shorter laptop windows too. */
+html body.guided-flow.guided-flagship [data-step-id="price-loan"] .guided-kicker { display: none !important; }
+html body.guided-flow.guided-flagship [data-price-loan-stage="loan"] .guided-price-loan-price { padding: 0.35rem 1rem 0.45rem !important; }
+html body.guided-flow.guided-flagship [data-step-id="price-loan"] #guidedLoanStageCard { padding: 0.6rem 1rem 0.65rem !important; }
+html body.guided-flow.guided-flagship [data-step-id="price-loan"] .guided-down-chips .guided-mini-chip { min-height: 42px !important; }
+html body.guided-flow.guided-flagship[data-wizard-step="4"] .guided-step-nav { margin-top: 0.7rem !important; }
+
+/* ============================================================================
+   PRICE+LOAN v4 — DESKTOP 2-COLUMN loan card (Loan Type | Down Payment)
+   Uses the desktop width so the whole step fits with no scroll and looks
+   premium. Scoped to the loan stage so it never shows on the price stage.
+   Mobile keeps the two groups stacked (block flow).
+   ============================================================================ */
+@media (min-width: 900px) {
+  html body.guided-flow.guided-flagship [data-price-loan-stage="loan"] #guidedLoanStageCard.p2-loan-2col {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+    column-gap: 1.5rem !important;
+    row-gap: 0 !important;
+    align-items: start !important;
+  }
+  html body.guided-flow.guided-flagship #guidedLoanStageCard .p2-loan-col { min-width: 0 !important; }
+  /* Loan-type cards → 2×2 inside the half-width column */
+  html body.guided-flow.guided-flagship #guidedLoanStageCard .guided-loan-type-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.55rem !important;
+  }
+  /* Down-payment column: subtle divider, no top label duplication */
+  html body.guided-flow.guided-flagship #guidedLoanStageCard .p2-loan-col-down {
+    border-left: 1px solid var(--p2-line) !important;
+    padding-left: 1.5rem !important;
+  }
+  /* "Adjust down payment" sub-label is redundant with the summary heading */
+  html body.guided-flow.guided-flagship #guidedLoanStageCard .guided-down-adjust-summary { display: none !important; }
+  /* Down-payment chips in one clean row in the half-width column */
+  html body.guided-flow.guided-flagship #guidedLoanStageCard .guided-down-chips {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+}
+
+/* ============================================================================
+   CREDIT v2 — DESKTOP 2-COLUMN (Credit Score | Loan Term + Rate)
+   Same approach as the loan step: use the width so the whole step fits with no
+   scroll. Mobile stacks the two groups.
+   ============================================================================ */
+@media (min-width: 900px) {
+  html body.guided-flow.guided-flagship .guided-credit-card.p2-credit-2col {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+    column-gap: 1.5rem !important;
+    align-items: center !important;
+  }
+  html body.guided-flow.guided-flagship .guided-credit-card .p2-credit-col { min-width: 0 !important; }
+  html body.guided-flow.guided-flagship .guided-credit-card .p2-credit-col-terms {
+    border-left: 1px solid var(--p2-line) !important;
+    padding-left: 1.5rem !important;
+  }
+}
+
+/* Credit step: compress intro + score so the 2-column step fits short windows */
+@media (min-width: 768px) {
+  html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-kicker { display: none !important; }
+  html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-title,
+  html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .wizard-title { font-size: 1.55rem !important; margin: 0 0 0.15rem !important; line-height: 1.05 !important; }
+  html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-lead { display: none !important; }
+  html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-step-intro { margin-bottom: 0.6rem !important; }
+  html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-credit-card { padding: 0.9rem 1.2rem !important; }
+  html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-score-number { font-size: 2.3rem !important; }
+  html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-score-hero { margin-bottom: 0.3rem !important; }
+  html body.guided-flow.guided-flagship [data-step-id="loan-credit"] #creditScore { margin: 0.3rem 0 0.4rem !important; }
+}
+
+/* Credit 2-col refinements: top-align columns (kill dead space), terms in one
+   clean row, tighter rate panel. */
+@media (min-width: 900px) {
+  html body.guided-flow.guided-flagship .guided-credit-card.p2-credit-2col { align-items: start !important; }
+  html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-term-picker {
+    display: grid !important;
+    grid-template-columns: repeat(5, 1fr) !important;
+    gap: 0.4rem !important;
+  }
+  html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-term-extra { display: inline-flex !important; }
+  html body.guided-flow.guided-flagship [data-step-id="loan-credit"] #guidedTermMore { display: none !important; }
+  html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-term-block { margin-bottom: 0.6rem !important; }
+  html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-rate-panel { margin-top: 0 !important; }
+  html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-rate-strip-ro { padding: 0.5rem 0.6rem !important; }
+}
+
+/* Credit: final shave to fit ~650 */
+@media (min-width: 768px) {
+  html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-step-intro { margin-bottom: 0.4rem !important; }
+  html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-credit-card { padding: 0.7rem 1.2rem !important; }
+  html body.guided-flow.guided-flagship[data-wizard-step="5"] .guided-step-nav { margin-top: 0.7rem !important; }
+}
+
+/* Loan-term chips: show all five and drop the "More terms" toggle on all widths
+   for a consistent, clean picker. */
+html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-term-extra { display: inline-flex !important; }
+html body.guided-flow.guided-flagship [data-step-id="loan-credit"] #guidedTermMore { display: none !important; }
