@@ -864,11 +864,11 @@
     const leadTitle = $("saveEstimateHeading");
     const leadLead = document.querySelector(".save-estimate-lead");
     if (leadTitle && !leadTitle.dataset.userLocked) {
-      leadTitle.textContent = "Get your free rate review";
+      leadTitle.textContent = "Get your free buyer consultation";
     }
     if (leadLead) {
       leadLead.textContent =
-        "Logan personally reviews your exact numbers and calls you back — usually the same business day. No credit pull, no obligation.";
+        "No commitment and no credit pull. Your info goes straight to the Martini Mortgage Group team so they can reach out ASAP with your numbers and next steps.";
     }
     const leadSubmit = document.querySelector(".save-estimate-submit");
     if (leadSubmit && !leadSubmit.classList.contains("is-loading")) {

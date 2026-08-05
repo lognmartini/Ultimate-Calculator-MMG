@@ -882,3 +882,106 @@ html body.guided-flow.guided-flagship.p2-lead-inview .studio-mobilebar {
   pointer-events: none !important;
   transform: translateY(120%) !important;
 }
+
+/* ============================================================
+   MOBILE PASS (items 2, 3, 6) — less scrolling, clearer steps
+   ============================================================ */
+
+/* Item 2 — Address step: drop the county / FHA-limit suggestion badge.
+   It added a tall block of secondary text and pushed the primary actions
+   (look up / skip) below the fold. Keeps the address lookup clean. */
+html body.guided-flow.guided-flagship #ultimateLimitBadge,
+html body.guided-flow.guided-flagship .ultimate-limit-badge {
+  display: none !important;
+}
+
+/* Item 3 — "Property found" card: verify + adjust purchase price inline.
+   Compact price slider that mirrors the main price input. */
+html body.guided-flow.guided-flagship .guided-summary-price {
+  margin: 0.85rem 0 0.4rem !important;
+  padding-top: 0.85rem !important;
+  border-top: 1px solid var(--p2-line) !important;
+}
+html body.guided-flow.guided-flagship .guided-summary-price-head {
+  display: flex !important;
+  align-items: baseline !important;
+  justify-content: space-between !important;
+  gap: 0.75rem !important;
+  margin-bottom: 0.5rem !important;
+}
+html body.guided-flow.guided-flagship .guided-summary-price-label {
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: var(--p2-muted) !important;
+}
+html body.guided-flow.guided-flagship .guided-summary-price-value {
+  font-size: 1.35rem !important;
+  font-weight: 800 !important;
+  color: var(--p2-navy) !important;
+  line-height: 1 !important;
+}
+html body.guided-flow.guided-flagship #summaryPriceSlider {
+  width: 100% !important;
+  margin: 0 !important;
+  display: block !important;
+}
+
+/* Item 6 — make "Taxes, cash to close & more" an obvious, tappable control.
+   Was a faint outlined pill; now a full-width navy button with a chevron. */
+html body.guided-flow.guided-flagship .studio-more .studio-more-banner {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 0.15rem !important;
+  position: relative !important;
+  width: 100% !important;
+  cursor: pointer !important;
+  padding: 1rem 3rem 1rem 1.15rem !important;
+  border-radius: var(--p2-radius-sm) !important;
+  border: 0 !important;
+  background: linear-gradient(135deg, var(--p2-navy) 0%, var(--p2-navy-deep) 100%) !important;
+  box-shadow: var(--p2-shadow) !important;
+  transition: box-shadow 0.2s ease, transform 0.08s ease !important;
+}
+html body.guided-flow.guided-flagship .studio-more .studio-more-banner:hover {
+  box-shadow: var(--p2-shadow-lg) !important;
+}
+html body.guided-flow.guided-flagship .studio-more .studio-more-banner:active {
+  transform: translateY(1px) !important;
+}
+html body.guided-flow.guided-flagship .studio-more .studio-more-banner-title {
+  margin: 0 !important;
+  color: #fff !important;
+  font-size: 1.02rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.01em !important;
+}
+html body.guided-flow.guided-flagship .studio-more .studio-more-banner-sub {
+  margin: 0 !important;
+  color: rgba(255, 255, 255, 0.82) !important;
+  font-size: 0.82rem !important;
+  font-weight: 500 !important;
+}
+/* Gold chevron affordance on the right; rotates when open */
+html body.guided-flow.guided-flagship .studio-more .studio-more-banner::after {
+  content: "⌄" !important;
+  position: absolute !important;
+  right: 1.1rem !important;
+  top: 50% !important;
+  transform: translateY(-60%) !important;
+  font-size: 1.5rem !important;
+  line-height: 1 !important;
+  font-weight: 700 !important;
+  color: var(--p2-gold-hi) !important;
+  transition: transform 0.22s ease !important;
+  pointer-events: none !important;
+}
+html body.guided-flow.guided-flagship .studio-more.studio-more-open .studio-more-banner::after {
+  transform: translateY(-40%) rotate(180deg) !important;
+}
+/* A touch of breathing room so the button reads as its own section */
+html body.guided-flow.guided-flagship #guidedResultsDetails {
+  margin-top: 0.9rem !important;
+}

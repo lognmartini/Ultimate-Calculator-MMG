@@ -346,7 +346,34 @@
     });
 
     document.querySelectorAll(".guided-mini-chip[data-down]").forEach((btn) => {
-      btn.addEventListener("click", () => setDownPercent(btn.getAttribute("data-down")));
+      btn.addEventListener("click", () => {
+        const d = btn.getAttribute("data-down");
+        if (String(d) === "3") {
+          // Item 4 (mobile pass): 3% is the first-time-buyer conventional minimum.
+          // Set the hidden FTHB flag (and ensure conventional) BEFORE applying 3% so the
+          // calculation accepts it, then surface a small note in the VA/USDA popup style.
+          const fthb = $("firstTimeBuyer");
+          if (fthb) fthb.checked = true;
+          const prog = $("loanProgram");
+          if (prog && !["fha", "va", "usda"].includes(prog.value)) {
+            if (typeof window.MMG_logan5_setProgram === "function") {
+              window.MMG_logan5_setProgram("conventional", true);
+            } else {
+              prog.value = "conventional";
+              prog.dispatchEvent(new Event("change", { bubbles: true }));
+            }
+          }
+          setDownPercent(3);
+          showToast({
+            variant: "fthb",
+            title: "3% down",
+            body: "3% is the minimum down payment and is available for <strong>first-time home buyers only</strong>. We&rsquo;ve applied it to your estimate — change anytime.",
+            duration: 4200,
+          });
+        } else {
+          setDownPercent(d);
+        }
+      });
     });
   }
 

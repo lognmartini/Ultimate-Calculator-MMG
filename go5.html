@@ -152,10 +152,8 @@
           <a class="mmg-reviews-link" href="https://martinimortgagegroup.com/what-people-say-about-martini-mortgage-group/" target="_blank" rel="noopener">Read all 169 reviews →</a>
         </div>
       </div>
-      <div class="mmg-mobilebar" role="group" aria-label="Quick actions">
-        <a href="tel:+19192384934" class="mmg-mcall">📞 Call Logan</a>
-        <button type="button" class="mmg-mstart" onclick="document.querySelector('.mmg-choices').scrollIntoView({behavior:'smooth',block:'center'})">Get my estimate →</button>
-      </div>
+      <!-- Item 1 (mobile pass): removed the bottom "Call Logan" / "Get my estimate" bar.
+           On the goal step the only actions are the "I'm buying" / "I'm refinancing" cards. -->
       <script>
         (function () {
           var t = document.getElementById("mmgReviewTrack");
@@ -289,11 +287,20 @@
             </div>
             <strong class="guided-property-summary-addr" id="propertySummaryAddress">—</strong>
             <dl class="guided-property-summary-grid">
-              <div><dt>Price / value</dt><dd id="propertySummaryPrice">—</dd></div>
               <div><dt>Est. tax /yr</dt><dd id="propertySummaryTax">—</dd></div>
               <div><dt>Est. insurance /yr</dt><dd id="propertySummaryIns">—</dd></div>
             </dl>
-            <p class="field-note guided-property-fallback-note">Estimates only — edit price, tax, and insurance on later steps.</p>
+            <!-- Item 3 (mobile pass): verify the address and adjust the purchase price right
+                 here before moving on. This slider mirrors the main price input. -->
+            <div class="guided-summary-price" id="guidedSummaryPrice">
+              <div class="guided-summary-price-head">
+                <span class="guided-summary-price-label">Purchase price</span>
+                <strong class="guided-summary-price-value" id="summaryPriceValue" aria-live="polite">—</strong>
+              </div>
+              <input type="range" id="summaryPriceSlider" class="guided-range-fill" min="50000" max="3000000" step="5000" value="450000" aria-label="Adjust purchase price" />
+              <span class="guided-summary-price-hidden" id="propertySummaryPrice" hidden aria-hidden="true">—</span>
+            </div>
+            <p class="field-note guided-property-fallback-note">Tax &amp; insurance are estimates — you can fine-tune everything on the results page.</p>
             <p class="guided-address-ready-hint" id="guidedAddressReadyHint" hidden>Property found — continuing…</p>
           </div>
           <div class="guided-address-recovery" id="guidedAddressRecovery">
@@ -418,17 +425,11 @@
               <p class="field-note guided-down-hero-lead" id="step-down-lead">Program default — adjust below</p>
             </div>
 
-            <div class="guided-fthb-row" id="guidedFthbRow">
-              <label class="ultimate-profile-chip guided-fthb-chip" for="firstTimeBuyer">
-                <input type="checkbox" id="firstTimeBuyer" name="firstTimeBuyer" />
-                <span class="ultimate-profile-chip-text">
-                  <strong>First-time buyer</strong>
-                  <span>As low as 3% down conventional</span>
-                </span>
-              </label>
-            </div>
-
+            <!-- Item 4 (mobile pass): removed the separate "First-time buyer" button to
+                 cut clutter/scrolling. The flag is kept as a hidden input so down-payment
+                 minimum logic still works; selecting the 3% chip sets it automatically. -->
             <div class="sr-only" aria-hidden="true">
+              <input type="checkbox" id="firstTimeBuyer" name="firstTimeBuyer" tabindex="-1" />
               <input type="checkbox" id="veteranEligible" name="veteranEligible" tabindex="-1" />
               <input type="checkbox" id="usdaEligible" name="usdaEligible" tabindex="-1" />
             </div>
@@ -651,8 +652,8 @@
             <!-- 4. LEAD — one primary: pre-approval / request call -->
             <section class="studio-lead save-estimate-card" id="saveEstimateCard" aria-label="Request my call">
               <p class="studio-lead-flag">Your next step</p>
-              <h3 class="studio-lead-title save-estimate-title" id="saveEstimateHeading">Get your free rate review</h3>
-              <p class="studio-lead-copy save-estimate-lead">Logan personally reviews your exact numbers and calls you back — usually the same business day. No credit pull, no obligation.</p>
+              <h3 class="studio-lead-title save-estimate-title" id="saveEstimateHeading">Get your free buyer consultation</h3>
+              <p class="studio-lead-copy save-estimate-lead">No commitment and no credit pull. Your info goes straight to the Martini Mortgage Group team so they can reach out ASAP with your numbers and next steps.</p>
               <form id="saveEstimateForm" class="studio-lead-form save-estimate-form">
                 <label class="studio-field"><span>Name</span>
                   <input type="text" id="saveEstimateName" name="name" placeholder="First name" autocomplete="given-name" />
@@ -679,7 +680,7 @@
               </form>
               <button type="button" class="save-estimate-restore" id="saveEstimateRestore" hidden aria-hidden="true" tabindex="-1">Request my call</button>
               <p class="save-estimate-success studio-success hidden" id="saveEstimateSuccess">You&rsquo;re all set — Logan will reach out shortly to get you started.</p>
-              <p class="studio-reassure save-estimate-reassure"><span aria-hidden="true">🔒</span> No credit pull to start · your info goes only to Logan</p>
+              <p class="studio-reassure save-estimate-reassure"><span aria-hidden="true">🔒</span> No commitment · no credit pull · your info goes only to the Martini Mortgage Group team</p>
               <p class="studio-nextstep save-estimate-nextstep"><span aria-hidden="true">👋</span> What happens next: Logan personally reviews your numbers and reaches out within 1 business day — no pressure.</p>
               <p class="studio-consent save-estimate-consent">By submitting, you agree Logan Martini &middot; Martini Mortgage Group (Gold Star Mortgage) may call, text, or email you about your estimate and mortgage options. Consent isn&rsquo;t required to do business &middot; message &amp; data rates may apply. Not a loan application, commitment, or rate lock.</p>
               <button type="button" class="studio-skip save-estimate-skip" id="saveEstimateSkip">Not now</button>
@@ -1297,6 +1298,54 @@
         setupLeadStickySync();
       }
       document.addEventListener("mmg-calculated", setupLeadStickySync);
+
+      /* Item 3 (mobile pass) — let the buyer verify the address and adjust the purchase
+         price on the "Property found" card. This slider mirrors the main #homePrice input
+         both ways, so it never diverges from the calculation and edits flow through. */
+      function fmtUSD(n) {
+        try { return "$" + Number(n || 0).toLocaleString("en-US", { maximumFractionDigits: 0 }); }
+        catch (e) { return "$" + Math.round(Number(n) || 0); }
+      }
+      function paintSummaryFill(el) {
+        if (!el) return;
+        var min = Number(el.min) || 0, max = Number(el.max) || 100, val = Number(el.value) || 0;
+        var span = Math.max(0.0001, max - min);
+        var pct = Math.max(0, Math.min(100, ((val - min) / span) * 100));
+        el.style.setProperty("--down-fill", pct + "%");
+      }
+      function setupSummaryPrice() {
+        var s = document.getElementById("summaryPriceSlider");
+        var main = document.getElementById("homePrice");
+        var out = document.getElementById("summaryPriceValue");
+        if (!s || !main || s.dataset.p2Bound) return;
+        s.dataset.p2Bound = "1";
+        if (main.min) s.min = main.min;
+        if (main.max) s.max = main.max;
+        if (main.step) s.step = main.step;
+        function fromMain() {
+          s.value = main.value;
+          if (out) out.textContent = fmtUSD(main.value);
+          paintSummaryFill(s);
+        }
+        function toMain() {
+          main.value = s.value;
+          main.dispatchEvent(new Event("input", { bubbles: true }));
+          main.dispatchEvent(new Event("change", { bubbles: true }));
+          if (out) out.textContent = fmtUSD(s.value);
+          paintSummaryFill(s);
+        }
+        s.addEventListener("input", toMain);
+        s.addEventListener("change", toMain);
+        main.addEventListener("input", fromMain);
+        main.addEventListener("change", fromMain);
+        document.addEventListener("mmg-property-resolved", function () { setTimeout(fromMain, 60); });
+        fromMain();
+      }
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", setupSummaryPrice);
+      } else {
+        setupSummaryPrice();
+      }
     })();
   </script>
 </body>
