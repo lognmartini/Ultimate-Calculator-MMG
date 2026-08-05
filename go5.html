@@ -649,10 +649,10 @@
 
           <div class="studio-side">
             <!-- 4. LEAD — one primary: pre-approval / request call -->
-            <section class="studio-lead save-estimate-card" id="saveEstimateCard" aria-label="Have Logan reach out">
+            <section class="studio-lead save-estimate-card" id="saveEstimateCard" aria-label="Request my call">
               <p class="studio-lead-flag">Your next step</p>
-              <h3 class="studio-lead-title save-estimate-title" id="saveEstimateHeading">Talk to Logan</h3>
-              <p class="studio-lead-copy save-estimate-lead">Not ready to apply? Leave your info and Logan will reach out to answer questions and map your next step — free, no obligation.</p>
+              <h3 class="studio-lead-title save-estimate-title" id="saveEstimateHeading">Get your free rate review</h3>
+              <p class="studio-lead-copy save-estimate-lead">Logan personally reviews your exact numbers and calls you back — usually the same business day. No credit pull, no obligation.</p>
               <form id="saveEstimateForm" class="studio-lead-form save-estimate-form">
                 <label class="studio-field"><span>Name</span>
                   <input type="text" id="saveEstimateName" name="name" placeholder="First name" autocomplete="given-name" />
@@ -675,9 +675,9 @@
                 </div>
                 <p class="save-estimate-error studio-error hidden" id="saveEstimateError" role="alert" hidden></p>
                 <button type="button" class="save-estimate-expand hidden" id="saveEstimateExpand" tabindex="-1" aria-hidden="true">+</button>
-                <button type="submit" class="studio-cta save-estimate-submit guided-lead-submit">Have Logan reach out</button>
+                <button type="submit" class="studio-cta save-estimate-submit guided-lead-submit">Request my call</button>
               </form>
-              <button type="button" class="save-estimate-restore" id="saveEstimateRestore" hidden aria-hidden="true" tabindex="-1">Have Logan reach out</button>
+              <button type="button" class="save-estimate-restore" id="saveEstimateRestore" hidden aria-hidden="true" tabindex="-1">Request my call</button>
               <p class="save-estimate-success studio-success hidden" id="saveEstimateSuccess">You&rsquo;re all set — Logan will reach out shortly to get you started.</p>
               <p class="studio-reassure save-estimate-reassure"><span aria-hidden="true">🔒</span> No credit pull to start · your info goes only to Logan</p>
               <p class="studio-nextstep save-estimate-nextstep"><span aria-hidden="true">👋</span> What happens next: Logan personally reviews your numbers and reaches out within 1 business day — no pressure.</p>
@@ -1242,6 +1242,36 @@
         watchProgramMarks();
       }
       document.addEventListener("mmg-calculated", watchProgramMarks);
+
+      /* Phase 2.5 — light "More options" on the loan step: tuck the manual
+         %/$ down-payment inputs behind a toggle so the step reads as two clean
+         decisions (loan type, then down payment). Presentation only. */
+      function setupLoanMore() {
+        var card = document.getElementById("guidedLoanStageCard");
+        if (!card || card.dataset.p2MoreBound) return;
+        var adjust = document.getElementById("guidedDownAdjust");
+        if (!adjust) return;
+        card.dataset.p2MoreBound = "1";
+        var wrap = document.createElement("p");
+        wrap.className = "p2-more-toggle-wrap";
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "p2-more-toggle";
+        btn.textContent = "More options";
+        btn.setAttribute("aria-expanded", "false");
+        btn.addEventListener("click", function () {
+          var open = card.classList.toggle("p2-more-open");
+          btn.setAttribute("aria-expanded", open ? "true" : "false");
+          btn.textContent = open ? "Fewer options" : "More options";
+        });
+        wrap.appendChild(btn);
+        adjust.appendChild(wrap);
+      }
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", setupLoanMore);
+      } else {
+        setupLoanMore();
+      }
     })();
   </script>
 </body>

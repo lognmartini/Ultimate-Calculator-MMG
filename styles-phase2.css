@@ -768,3 +768,100 @@ html body.guided-flow.guided-flagship .mmg-benefit:nth-of-type(3) .mmg-benefit-i
 html body.guided-flow.guided-flagship .mmg-benefit:nth-of-type(4) .mmg-benefit-ic {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23252f6e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='4' y='11' width='16' height='10' rx='2'/%3E%3Cpath d='M8 11V7a4 4 0 0 1 8 0v4'/%3E%3C/svg%3E") !important;
 }
+
+/* ============================================================
+   PHASE 2.5 — LOAN TYPE / DOWN PAYMENT: aggressive simplification
+   Two clear decisions: (1) Loan type cards, (2) Down payment.
+   Secondary controls tucked behind a light "More options" toggle.
+   ============================================================ */
+/* Remove verbose program explanation helper text */
+html body.guided-flow.guided-flagship #loanProgramNote,
+html body.guided-flow.guided-flagship #ultimateProgramTip,
+html body.guided-flow.guided-flagship .guided-loan-you-note,
+html body.guided-flow.guided-flagship .guided-loan-you-tip { display: none !important; }
+
+/* Loan type: large, equal, clearly-tappable cards (decision 1) */
+html body.guided-flow.guided-flagship #ultimateProgramPicker.guided-loan-type-grid {
+  grid-auto-rows: 1fr !important;
+  gap: 0.7rem !important;
+  margin-bottom: 1.4rem !important;
+}
+html body.guided-flow.guided-flagship .ultimate-program-btn {
+  min-height: 92px !important;
+  padding: 0.95rem 0.7rem !important;
+}
+html body.guided-flow.guided-flagship .ultimate-program-btn strong { font-size: 1.05rem !important; }
+
+/* Down payment: clean second decision directly underneath */
+html body.guided-flow.guided-flagship .guided-down-summary {
+  text-align: center !important;
+  background: rgba(37,47,110,0.04) !important;
+  border: 1px solid var(--p2-line) !important;
+  border-radius: var(--p2-radius-sm) !important;
+  padding: 0.85rem 1rem !important;
+  margin-bottom: 0.9rem !important;
+}
+html body.guided-flow.guided-flagship .guided-down-summary-value {
+  display: block !important;
+  font-size: clamp(1.6rem, 6.5vw, 2rem) !important;
+  font-weight: 800 !important;
+  color: var(--p2-navy-deep) !important;
+  letter-spacing: -0.02em !important;
+}
+html body.guided-flow.guided-flagship .guided-down-hero-lead { font-size: 0.78rem !important; color: var(--p2-muted) !important; margin: 0.15rem 0 0 !important; }
+/* Redundant "Adjust down payment" label — the summary already says Down payment */
+html body.guided-flow.guided-flagship .guided-down-adjust-summary { display: none !important; }
+/* Down chips: keep the common conventional set only */
+html body.guided-flow.guided-flagship .guided-down-chips [data-down="3.5"],
+html body.guided-flow.guided-flagship .guided-down-chips [data-down="0"] { display: none !important; }
+html body.guided-flow.guided-flagship .guided-down-chips {
+  display: flex !important; flex-wrap: wrap !important; gap: 0.5rem !important; justify-content: center !important;
+}
+html body.guided-flow.guided-flagship .guided-mini-chip {
+  min-height: 44px !important; min-width: 64px !important;
+  border-radius: 999px !important; border: 1.5px solid var(--p2-line) !important;
+  font-weight: 700 !important; color: var(--p2-navy-deep) !important; background: var(--p2-card) !important;
+}
+html body.guided-flow.guided-flagship .guided-mini-chip.active {
+  background: linear-gradient(160deg, var(--p2-navy), var(--p2-navy-deep)) !important; color:#fff !important; border-color: var(--p2-gold) !important;
+}
+/* First-time buyer: compact single line */
+html body.guided-flow.guided-flagship .guided-fthb-row { margin: 0.9rem 0 0.2rem !important; }
+html body.guided-flow.guided-flagship .guided-fthb-chip { border-radius: var(--p2-radius-sm) !important; }
+
+/* Manual %/$ inputs → behind "More options" (hidden by default) */
+html body.guided-flow.guided-flagship #guidedLoanStageCard .guided-down-inline { display: none !important; }
+html body.guided-flow.guided-flagship #guidedLoanStageCard.p2-more-open .guided-down-inline {
+  display: flex !important; gap: 0.6rem !important; margin-top: 0.8rem !important;
+}
+html body.guided-flow.guided-flagship .p2-more-toggle {
+  display: inline-flex !important; align-items: center !important; gap: 0.3rem !important;
+  margin: 0.8rem auto 0 !important;
+  background: transparent !important; border: 0 !important;
+  color: var(--p2-navy) !important; font-weight: 700 !important; font-size: 0.85rem !important;
+  cursor: pointer !important; text-decoration: underline !important; text-underline-offset: 3px !important;
+}
+html body.guided-flow.guided-flagship .p2-more-toggle::after {
+  content: "" !important; width: 7px; height: 7px;
+  border-right: 2px solid var(--p2-navy); border-bottom: 2px solid var(--p2-navy);
+  transform: rotate(45deg); margin-left: 2px; transition: transform 0.2s ease;
+}
+html body.guided-flow.guided-flagship #guidedLoanStageCard.p2-more-open .p2-more-toggle::after { transform: rotate(225deg) !important; }
+html body.guided-flow.guided-flagship .p2-more-toggle-wrap { text-align: center !important; }
+
+/* ============================================================
+   PHASE 2.5 — lead card + loan hint cleanup
+   ============================================================ */
+/* "What happens next" now duplicates the strengthened supporting line — remove it */
+html body.guided-flow.guided-flagship .save-estimate-nextstep,
+html body.guided-flow.guided-flagship .studio-nextstep { display: none !important; }
+/* Verbose down-payment helper hints — reduce clutter */
+html body.guided-flow.guided-flagship #programDownHint,
+html body.guided-flow.guided-flagship #downPmiHint { display: none !important; }
+/* Down chips: even single row of four */
+html body.guided-flow.guided-flagship .guided-down-chips {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 0.5rem !important;
+}
+html body.guided-flow.guided-flagship .guided-mini-chip { min-width: 0 !important; width: 100% !important; }

@@ -864,15 +864,15 @@
     const leadTitle = $("saveEstimateHeading");
     const leadLead = document.querySelector(".save-estimate-lead");
     if (leadTitle && !leadTitle.dataset.userLocked) {
-      leadTitle.textContent = "Talk to Logan";
+      leadTitle.textContent = "Get your free rate review";
     }
     if (leadLead) {
       leadLead.textContent =
-        "Not ready to apply? Leave your info and Logan will reach out to answer questions and map your next step — free, no obligation.";
+        "Logan personally reviews your exact numbers and calls you back — usually the same business day. No credit pull, no obligation.";
     }
     const leadSubmit = document.querySelector(".save-estimate-submit");
     if (leadSubmit && !leadSubmit.classList.contains("is-loading")) {
-      leadSubmit.textContent = "Have Logan reach out";
+      leadSubmit.textContent = "Request my call";
     }
   }
 
@@ -1355,6 +1355,21 @@
     $("wizardBack")?.addEventListener("click", () => {
       if (IS_LOGAN5 && currentStep === resultsStepIndex() && logan5SubView) {
         showLogan5SubView(null);
+        return;
+      }
+      // Price-loan is a two-stage step (price -> loan). From the loan stage, Back
+      // must return to the price stage (same step) rather than skipping back to
+      // the previous step, so back navigation reverses the forward path exactly.
+      if (IS_GUIDED && currentStep === 3 && isLoanStageVisible()) {
+        setPriceLoanStage("price");
+        updateNavButtons();
+        try {
+          const card = $("guidedPriceStageCard");
+          if (card) card.scrollIntoView({ behavior: "smooth", block: "start" });
+          else window.scrollTo({ top: 0, behavior: "smooth" });
+        } catch (e) {
+          window.scrollTo(0, 0);
+        }
         return;
       }
       if (currentStep > 0) showStep(prevValidStep(currentStep));
