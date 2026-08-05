@@ -1346,6 +1346,25 @@
       } else {
         setupSummaryPrice();
       }
+
+      /* Results (requested) — fold the "Estimated home equity" panel INTO the
+         "Taxes, cash to close & more" collapsible so it isn't a separate block
+         hanging below the fold. Presentation only; the panel keeps its id/logic. */
+      function moveEquityIntoDetails() {
+        var panel = document.getElementById("ultimateWealthPanel");
+        var body = document.querySelector("#guidedResultsDetails .studio-more-body");
+        if (!panel || !body) return;
+        if (panel.dataset.p2Moved) return;
+        if (panel.parentNode === body) { panel.dataset.p2Moved = "1"; return; }
+        body.appendChild(panel);
+        panel.dataset.p2Moved = "1";
+      }
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", moveEquityIntoDetails);
+      } else {
+        moveEquityIntoDetails();
+      }
+      document.addEventListener("mmg-calculated", moveEquityIntoDetails);
     })();
   </script>
 </body>

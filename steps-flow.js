@@ -546,7 +546,12 @@
           } catch {
             loanTitle.focus();
           }
-          loanCard?.scrollIntoView({ behavior: "smooth", block: "start" });
+          // Show the step from the top so the (compact) purchase price is seen
+          // BEFORE loan type / down payment, per request. Everything fits without
+          // scrolling on desktop; on mobile the price sits just above the fold.
+          const priceCard = $("guidedPriceStageCard");
+          if (priceCard) priceCard.scrollIntoView({ behavior: "smooth", block: "start" });
+          else window.scrollTo({ top: 0, behavior: "smooth" });
         }, 50);
       }
       $("guidedStepLive") &&

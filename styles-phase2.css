@@ -996,48 +996,48 @@ html body.guided-flow.guided-flagship #guidedResultsDetails {
    to >= 768px or desktop-only selectors).
    ============================================================================ */
 
-/* ---- 1) DESKTOP: pin Back/Continue to the bottom on every input step ----
-   Beats styles-visual-reset.css `.wizard-nav.guided-step-nav {position:static}`
-   (specificity 0,4,2) via a higher-specificity selector + !important. Scoped to
-   guided-pre-results so the results step keeps its own static Back button. */
+/* ---- 1) DESKTOP: Back/Continue as a CENTERED, symmetrical pair directly under
+   the card (in normal flow, not pinned). A pinned/fixed bar sat off-center due to
+   an ancestor containing-block; in-flow centering is the "this morning" look and
+   is reliable. No-scroll is achieved by tightening each step (below). ---- */
 @media (min-width: 768px) {
   html body.guided-flow.guided-flagship.guided-pre-results .guided-step-nav:not(.wizard-nav-hidden) {
-    position: fixed !important;
-    left: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
+    position: static !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
     top: auto !important;
-    z-index: 66 !important;
-    margin: 0 !important;
-    padding: 0.75rem clamp(1rem, 4vw, 2rem) !important;
-    background: rgba(255, 255, 255, 0.96) !important;
-    -webkit-backdrop-filter: blur(12px) !important;
-    backdrop-filter: blur(12px) !important;
-    border-top: 1px solid var(--p2-line) !important;
-    box-shadow: 0 -8px 28px rgba(27, 35, 82, 0.10) !important;
+    z-index: auto !important;
+    width: 100% !important;
+    max-width: 460px !important;
+    margin: 1.4rem auto 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    border: 0 !important;
+    box-shadow: none !important;
   }
   html body.guided-flow.guided-flagship.guided-pre-results .guided-step-nav:not(.wizard-nav-hidden) .wizard-nav-inner {
-    max-width: 640px !important;
+    max-width: 460px !important;
     margin: 0 auto !important;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr) !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr) !important;
+    gap: 0.75rem !important;
   }
-  /* reserve space so the pinned bar never covers the card's last content */
+  /* No pinned bar → no reserved bottom padding needed. */
   html body.guided-flow.guided-flagship.guided-pre-results .guided-step-panel {
-    padding-bottom: 108px !important;
+    padding-bottom: 0 !important;
   }
-  /* ---- 2) DESKTOP: balance the step vertically so short steps don't leave a big
-     dead gap above the pinned nav. Content is centered between header and nav;
-     taller steps overflow and scroll normally. ---- */
-  /* The layout wrapper was capped at min(480px) on pre-results, forcing EVERY
-     desktop step to mobile width (sparse, narrow). Widen it so steps use the
-     desktop width, and center the step vertically to avoid a dead bottom gap. */
+  /* ---- 2) DESKTOP: widen the layout wrapper (was capped at min(480px), forcing
+     mobile width) and top-align tightly so the card + centered nav sit together
+     in the upper viewport with no scrolling. ---- */
   html body.guided-flow.guided-flagship.guided-pre-results .guided-layout-center {
     display: flex !important;
     flex-direction: column !important;
     max-width: 680px !important;
-    min-height: calc(100vh - 172px) !important;
-    justify-content: center !important;
-    padding-bottom: 0 !important;
+    min-height: 0 !important;
+    justify-content: flex-start !important;
+    padding-bottom: 1.25rem !important;
   }
   /* Give the price + loan-type step room so the four loan cards read cleanly.
      Beats styles-density.css [data-step-id="price-loan"] .guided-price-loan-panel
@@ -1090,11 +1090,32 @@ html body.guided-flow.guided-flagship .guided-loan-type-grid .ultimate-program-b
   overflow-wrap: normal !important;
   hyphens: none !important;
 }
-/* On the loan stage the price is already set (Back returns to adjust it and the
-   results page has a live price slider). Hide the redundant full price card so
-   the loan stage stays tight and low-scroll on every device. */
+/* On the loan stage, keep the purchase price VISIBLE and adjustable — but as a
+   COMPACT bar (label + price + slim slider) sitting above Loan Type / Down
+   Payment, so buyers verify/change the price before down payment without the
+   full price card's height. (Requested: "see the purchase price and adjust the
+   home price before they see downpayment.") */
 html body.guided-flow.guided-flagship [data-price-loan-stage="loan"] .guided-price-loan-price {
+  display: block !important;
+  max-width: 100% !important;
+  margin: 0 auto 0.75rem !important;
+  padding: 0.7rem 1rem !important;
+}
+/* Compact the price hero + hide the secondary controls on the loan stage */
+html body.guided-flow.guided-flagship [data-price-loan-stage="loan"] .guided-price-loan-price .guided-price-hero {
+  font-size: 1.5rem !important;
+  margin: 0.1rem 0 0.4rem !important;
+}
+html body.guided-flow.guided-flagship [data-price-loan-stage="loan"] .guided-price-loan-price #homePriceInput,
+html body.guided-flow.guided-flagship [data-price-loan-stage="loan"] .guided-price-loan-price .guided-price-input,
+html body.guided-flow.guided-flagship [data-price-loan-stage="loan"] .guided-price-loan-price .guided-price-target-link-wrap,
+html body.guided-flow.guided-flagship [data-price-loan-stage="loan"] .guided-price-loan-price #ultimateModePayment,
+html body.guided-flow.guided-flagship [data-price-loan-stage="loan"] .guided-price-loan-price .field-note-hint {
   display: none !important;
+}
+/* Tighten the price label to a small caption on the loan stage */
+html body.guided-flow.guided-flagship [data-price-loan-stage="loan"] .guided-price-loan-price #homePriceLabel {
+  margin-bottom: 0.25rem !important;
 }
 html body.guided-flow.guided-flagship .guided-loan-type-grid .ultimate-program-btn span {
   font-size: 0.72rem !important;
@@ -1132,35 +1153,26 @@ html body.guided-flow.guided-flagship .guided-loan-type-grid .ultimate-program-b
   html body.guided-flow.guided-flagship .ultimate-payment-main.studio-page {
     max-width: 1140px !important;
   }
+  /* 3 real columns. studio-main becomes display:contents so its children (hero,
+     breakdown, adjust) place directly into the grid. Column 1 = payment hero +
+     breakdown + "Taxes, cash to close & more" toggle (with equity folded in);
+     column 2 = Adjust your scenario; column 3 = lead capture + trust.
+     Matches the requested page-11 layout. */
   html body.guided-flow.guided-flagship .studio-grid {
     display: grid !important;
-    grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr) !important;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1fr) minmax(0, 1.05fr) !important;
+    grid-template-rows: min-content min-content min-content 1fr !important;
     align-items: start !important;
-    gap: 1.1rem 1.25rem !important;
+    gap: 0.9rem 1.2rem !important;
   }
-  /* Left column becomes its own 2-up grid: (hero + breakdown) | (adjust controls) */
-  html body.guided-flow.guided-flagship .studio-main {
-    display: grid !important;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
-    grid-auto-rows: min-content !important;
-    align-items: start !important;
-    gap: 1rem !important;
-  }
-  html body.guided-flow.guided-flagship .studio-main .studio-hero { grid-column: 1 !important; grid-row: 1 !important; }
-  html body.guided-flow.guided-flagship .studio-main .studio-break { grid-column: 1 !important; grid-row: 2 !important; }
-  html body.guided-flow.guided-flagship .studio-main #destAdjustPanel {
-    grid-column: 2 !important;
-    grid-row: 1 / span 2 !important;
-    align-self: stretch !important;
-  }
-  /* Right column: lead capture + trust stack naturally (studio-side is flex-column) */
-  html body.guided-flow.guided-flagship .studio-side { align-self: start !important; }
-  /* Detail sections span the full width below the three visual columns */
-  html body.guided-flow.guided-flagship .studio-grid > #guidedResultsDetails,
-  html body.guided-flow.guided-flagship .studio-grid > .ultimate-wealth-panel,
-  html body.guided-flow.guided-flagship .studio-grid > .studio-more {
-    grid-column: 1 / -1 !important;
-  }
+  html body.guided-flow.guided-flagship .studio-main { display: contents !important; }
+  html body.guided-flow.guided-flagship .studio-main .studio-hero { grid-column: 1 !important; grid-row: 1 !important; align-self: start !important; }
+  html body.guided-flow.guided-flagship .studio-main .studio-break { grid-column: 1 !important; grid-row: 2 !important; align-self: start !important; margin-top: 0.9rem !important; }
+  html body.guided-flow.guided-flagship .studio-grid > #guidedResultsDetails { grid-column: 1 !important; grid-row: 3 !important; align-self: start !important; margin-top: 0.9rem !important; }
+  /* Adjust + lead span all rows (incl. the 1fr slack row) so the left column
+     stays tight at the top instead of distributing its gaps. */
+  html body.guided-flow.guided-flagship .studio-main #destAdjustPanel { grid-column: 2 !important; grid-row: 1 / -1 !important; align-self: start !important; }
+  html body.guided-flow.guided-flagship .studio-side { grid-column: 3 !important; grid-row: 1 / -1 !important; align-self: start !important; }
   /* Tighten the hero so it doesn't dominate the shorter column */
   html body.guided-flow.guided-flagship.wizard-on-results .studio-amount,
   html body.guided-flow.guided-flagship.wizard-on-results #pitiPayment.studio-amount {
@@ -1195,4 +1207,60 @@ html body.guided-flow.guided-flagship .guided-loan-type-grid .ultimate-program-b
   html body.guided-flow.guided-flagship #guidedLoanStageCard { padding-top: 0.9rem !important; }
   html body.guided-flow.guided-flagship #guidedLoanStageCard .guided-down-summary { margin: 0.55rem 0 0.4rem !important; }
   html body.guided-flow.guided-flagship #guidedLoanStageCard .guided-loan-section-label { margin-bottom: 0.5rem !important; }
+}
+
+/* ============================================================================
+   PHASE 2.5 FINAL v2 — desktop PDF + shared structural fixes
+   ============================================================================ */
+
+/* --- Remove Back on "Property in mind?" (choice) and "Property address" (gate)
+   steps. Both auto-advance and the address step's "Skip lookup" is already the
+   alternate path, so Back is redundant clutter. Hide the whole nav on those
+   states (no Continue is used there either). Applies to mobile + desktop. --- */
+html body.guided-flow.guided-flagship.guided-on-choice .guided-step-nav,
+html body.guided-flow.guided-flagship.guided-on-address-gate .guided-step-nav,
+html body.guided-flow.guided-flagship[data-wizard-step="2"] .guided-step-nav,
+html body.guided-flow.guided-flagship[data-wizard-step="3"] .guided-step-nav {
+  display: none !important;
+}
+
+/* --- DESKTOP no-scroll tightening: trim the repeated tax banner + step intros
+   so the card + centered nav fit in the viewport without scrolling. --- */
+@media (min-width: 768px) {
+  html body.guided-flow.guided-flagship #guidedNationalBanner,
+  html body.guided-flow.guided-flagship .guided-national-banner {
+    font-size: 0.78rem !important;
+    padding: 0.4rem 0.9rem !important;
+    margin: 0.35rem auto 0.6rem !important;
+  }
+  html body.guided-flow.guided-flagship .guided-step-intro { margin-bottom: 0.85rem !important; }
+  html body.guided-flow.guided-flagship .guided-step-intro .guided-kicker { margin: 0 0 0.25rem !important; }
+  html body.guided-flow.guided-flagship .guided-step-intro .guided-title,
+  html body.guided-flow.guided-flagship .guided-step-intro .wizard-title { margin: 0 0 0.35rem !important; line-height: 1.05 !important; }
+  html body.guided-flow.guided-flagship .guided-step-intro .guided-lead { margin: 0 auto !important; }
+  /* Credit step: tighten the card so score + tiers + term + rate compare fit */
+  html body.guided-flow.guided-flagship .guided-credit-card { padding: 1.1rem 1.25rem !important; }
+  html body.guided-flow.guided-flagship .guided-score-hero { margin-bottom: 0.5rem !important; }
+}
+
+/* --- Results: the estimated-home-equity panel is moved (via JS) into the
+   "Taxes, cash to close & more" collapsible. Style it to sit cleanly inside the
+   details body, and hide its now-empty original wrapper. --- */
+html body.guided-flow.guided-flagship .ultimate-payment-details:empty { display: none !important; }
+html body.guided-flow.guided-flagship .studio-more-body .ultimate-wealth-panel {
+  margin-top: 0.25rem !important;
+  width: 100% !important;
+}
+
+/* --- Credit step (data-wizard-step 5): drop the tax banner (irrelevant here —
+   it's about credit/rate) and tighten the card so score + tiers + term + rate
+   compare + centered nav all fit with no scroll. --- */
+@media (min-width: 768px) {
+  html body.guided-flow.guided-flagship[data-wizard-step="5"] #guidedNationalBanner { display: none !important; }
+  html body.guided-flow.guided-flagship[data-wizard-step="5"] .guided-credit-card { padding: 0.9rem 1.25rem !important; }
+  html body.guided-flow.guided-flagship[data-wizard-step="5"] .guided-score-hero { margin: 0 0 0.35rem !important; }
+  html body.guided-flow.guided-flagship[data-wizard-step="5"] #creditScore { margin: 0.25rem 0 0.5rem !important; }
+  html body.guided-flow.guided-flagship[data-wizard-step="5"] .credit-tier-picker,
+  html body.guided-flow.guided-flagship[data-wizard-step="5"] .guided-credit-tiers { margin-top: 0.35rem !important; }
+  html body.guided-flow.guided-flagship[data-wizard-step="5"] .guided-credit-card .guided-loan-section-label { margin: 0.55rem 0 0.4rem !important; }
 }
