@@ -1356,6 +1356,27 @@
         moveEquityIntoDetails();
       }
       document.addEventListener("mmg-calculated", moveEquityIntoDetails);
+
+      /* Results — move the "Taxes, cash to close & more" section OUT of the
+         3-column grid to be a full-width block directly below it. Collapsed it's
+         a clean full-width bar; expanded it has the full page width so its
+         contents lay out as premium cards instead of being crushed into the
+         narrow left column. */
+      function moveDetailsOutOfGrid() {
+        var details = document.getElementById("guidedResultsDetails");
+        var grid = document.querySelector(".studio-grid");
+        if (!details || !grid) return;
+        if (details.dataset.p2OutOfGrid) return;
+        if (details.parentNode !== grid) { details.dataset.p2OutOfGrid = "1"; return; }
+        grid.insertAdjacentElement("afterend", details);
+        details.dataset.p2OutOfGrid = "1";
+      }
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", moveDetailsOutOfGrid);
+      } else {
+        moveDetailsOutOfGrid();
+      }
+      document.addEventListener("mmg-calculated", moveDetailsOutOfGrid);
     })();
   </script>
 </body>

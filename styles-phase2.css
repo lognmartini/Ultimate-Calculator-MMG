@@ -1161,18 +1161,24 @@ html body.guided-flow.guided-flagship .guided-loan-type-grid .ultimate-program-b
   html body.guided-flow.guided-flagship .studio-grid {
     display: grid !important;
     grid-template-columns: minmax(0, 0.95fr) minmax(0, 1fr) minmax(0, 1.05fr) !important;
-    grid-template-rows: min-content min-content min-content 1fr !important;
+    grid-template-rows: min-content min-content 1fr !important;
     align-items: start !important;
     gap: 0.9rem 1.2rem !important;
   }
   html body.guided-flow.guided-flagship .studio-main { display: contents !important; }
   html body.guided-flow.guided-flagship .studio-main .studio-hero { grid-column: 1 !important; grid-row: 1 !important; align-self: start !important; }
   html body.guided-flow.guided-flagship .studio-main .studio-break { grid-column: 1 !important; grid-row: 2 !important; align-self: start !important; margin-top: 0.9rem !important; }
-  html body.guided-flow.guided-flagship .studio-grid > #guidedResultsDetails { grid-column: 1 !important; grid-row: 3 !important; align-self: start !important; margin-top: 0.9rem !important; }
   /* Adjust + lead span all rows (incl. the 1fr slack row) so the left column
      stays tight at the top instead of distributing its gaps. */
   html body.guided-flow.guided-flagship .studio-main #destAdjustPanel { grid-column: 2 !important; grid-row: 1 / -1 !important; align-self: start !important; }
   html body.guided-flow.guided-flagship .studio-side { grid-column: 3 !important; grid-row: 1 / -1 !important; align-self: start !important; }
+  /* "Taxes, cash to close & more" now lives full-width BELOW the grid (moved out
+     via JS). Give it room to breathe. */
+  html body.guided-flow.guided-flagship .studio-page > #guidedResultsDetails,
+  html body.guided-flow.guided-flagship #guidedResultsDetails {
+    width: 100% !important;
+    margin: 1rem auto 0 !important;
+  }
   /* Tighten the hero so it doesn't dominate the shorter column */
   html body.guided-flow.guided-flagship.wizard-on-results .studio-amount,
   html body.guided-flow.guided-flagship.wizard-on-results #pitiPayment.studio-amount {
@@ -1476,3 +1482,78 @@ html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-term-
 }
 /* Center the score block content in the full-width card */
 html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-credit-score-block { text-align: center !important; }
+
+/* ============================================================================
+   RESULTS DETAILS — premium expanded "Taxes, cash to close & more"
+   Now full-width below the 3-column grid. When open, lay the blocks out as
+   clean cards in a responsive grid so it looks polished (was crushed into the
+   narrow left column before).
+   ============================================================================ */
+/* Open state: card grid */
+html body.guided-flow.guided-flagship #guidedResultsDetails.studio-more-open .studio-more-body {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
+  gap: 1rem !important;
+  padding: 1.1rem 1.15rem 1.3rem !important;
+  align-items: stretch !important;
+  background: var(--p2-bg) !important;
+}
+/* Each block → clean white card */
+html body.guided-flow.guided-flagship #guidedResultsDetails.studio-more-open .studio-more-body > * {
+  background: #fff !important;
+  border: 1px solid var(--p2-line) !important;
+  border-radius: var(--p2-radius-sm) !important;
+  box-shadow: 0 4px 14px rgba(27, 35, 82, 0.05) !important;
+  padding: 1rem 1.1rem !important;
+  margin: 0 !important;
+}
+/* Card section headings — consistent small uppercase labels */
+html body.guided-flow.guided-flagship #guidedResultsDetails .studio-more-h,
+html body.guided-flow.guided-flagship #guidedResultsDetails #vsCompetitionTitle,
+html body.guided-flow.guided-flagship #guidedResultsDetails .ultimate-wealth-panel h3 {
+  font-size: 0.72rem !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: var(--p2-muted) !important;
+  margin: 0 0 0.7rem !important;
+  font-weight: 800 !important;
+  text-align: left !important;
+}
+/* Taxes / insurance / HOA — inputs stack full-width, labels never wrap oddly */
+html body.guided-flow.guided-flagship #guidedResultsDetails .guided-tax-ins-grid {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 0.7rem !important;
+}
+html body.guided-flow.guided-flagship #guidedResultsDetails .guided-tax-ins-grid .field { min-width: 0 !important; }
+html body.guided-flow.guided-flagship #guidedResultsDetails .guided-tax-ins-grid label {
+  font-size: 0.78rem !important; font-weight: 600 !important; color: var(--p2-navy-ink) !important;
+  white-space: normal !important; margin-bottom: 0.25rem !important; display: block !important;
+}
+html body.guided-flow.guided-flagship #guidedResultsDetails .guided-tax-ins-grid input {
+  width: 100% !important; min-height: 44px !important;
+}
+html body.guided-flow.guided-flagship #guidedResultsDetails .guided-tax-ins-grid .field-note {
+  font-size: 0.68rem !important; color: var(--p2-muted) !important; margin-top: 0.2rem !important;
+}
+/* Cash-to-close figures: clean rows */
+html body.guided-flow.guided-flagship #guidedResultsDetails .official-quote-row {
+  display: flex !important; justify-content: space-between !important; gap: 0.75rem !important;
+  padding: 0.4rem 0 !important; border-bottom: 1px solid var(--p2-line) !important;
+}
+html body.guided-flow.guided-flagship #guidedResultsDetails .official-quote-row-total {
+  border-bottom: 0 !important; border-top: 2px solid var(--p2-navy) !important; margin-top: 0.2rem !important;
+  font-weight: 800 !important; color: var(--p2-navy-deep) !important;
+}
+/* Equity card: green accent, tidy 3-up */
+html body.guided-flow.guided-flagship #guidedResultsDetails .ultimate-wealth-panel {
+  background: linear-gradient(180deg, #f2fbf5 0%, #ffffff 60%) !important;
+  border-color: rgba(22, 101, 52, 0.25) !important;
+}
+/* Mobile: single-column stack of the same cards */
+@media (max-width: 767px) {
+  html body.guided-flow.guided-flagship #guidedResultsDetails.studio-more-open .studio-more-body {
+    grid-template-columns: 1fr !important;
+    padding: 0.9rem !important;
+  }
+}
