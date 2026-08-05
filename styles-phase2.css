@@ -1,0 +1,770 @@
+/* ============================================================================
+   PHASE 2 — VISUAL / UX OVERHAUL (loads dead-last; highest priority)
+   Mobile-first. Navy #252f6e + Gold #c9a227. Logos untouched. No JS logic changes.
+   Scope prefix: html body.guided-flow.guided-flagship  (matches/ō beats prior layers)
+   ============================================================================ */
+
+:root {
+  --p2-navy: #252f6e;
+  --p2-navy-deep: #1b2352;
+  --p2-navy-ink: #161d43;
+  --p2-gold: #c9a227;
+  --p2-gold-hi: #e8c84a;
+  --p2-muted: #5b6486;
+  --p2-line: #e7e9f1;
+  --p2-bg: #f5f6fa;
+  --p2-card: #ffffff;
+  --p2-radius: 18px;
+  --p2-radius-sm: 12px;
+  --p2-shadow: 0 10px 30px rgba(27, 35, 82, 0.10);
+  --p2-shadow-lg: 0 18px 44px rgba(27, 35, 82, 0.16);
+}
+
+/* ---- Global base: one type system (kill mixed serif), smooth rendering ---- */
+html body.guided-flow.guided-flagship,
+html body.guided-flow.guided-flagship * {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+html body.guided-flow.guided-flagship {
+  background: var(--p2-bg) !important;
+  font-family: "DM Sans", system-ui, -apple-system, sans-serif !important;
+}
+/* Every heading uses the sans system — no more Playfair serif in the flow */
+html body.guided-flow.guided-flagship .guided-title,
+html body.guided-flow.guided-flagship .wizard-title,
+html body.guided-flow.guided-flagship .studio-lead-title,
+html body.guided-flow.guided-flagship .studio-controls-head h3,
+html body.guided-flow.guided-flagship .studio-more-banner-title,
+html body.guided-flow.guided-flagship .studio-more-h,
+html body.guided-flow.guided-flagship .ultimate-wealth-panel h3,
+html body.guided-flow.guided-flagship h1,
+html body.guided-flow.guided-flagship h2,
+html body.guided-flow.guided-flagship h3 {
+  font-family: "DM Sans", system-ui, sans-serif !important;
+  letter-spacing: -0.02em !important;
+}
+
+/* ============================================================
+   HEADER — consistent, refined gold Apply button (logo untouched)
+   ============================================================ */
+html body.guided-flow.guided-flagship .guided-header-apply,
+html body.guided-flow.guided-flagship .btn-apply-now {
+  background: linear-gradient(180deg, var(--p2-gold-hi) 0%, var(--p2-gold) 100%) !important;
+  color: var(--p2-navy-deep) !important;
+  border: 0 !important;
+  font-weight: 800 !important;
+  border-radius: 999px !important;
+  box-shadow: 0 4px 14px rgba(201, 162, 39, 0.35) !important;
+  letter-spacing: 0.01em !important;
+}
+html body.guided-flow.guided-flagship .guided-header-apply * { color: var(--p2-navy-deep) !important; }
+html body.guided-flow.guided-flagship .guided-header-phone { color: var(--p2-gold-hi) !important; font-weight: 800 !important; }
+
+/* ============================================================
+   PROGRESS — simplify: drop the redundant time pills, refine bar
+   ============================================================ */
+html body.guided-flow.guided-flagship .wizard-speed-hint,
+html body.guided-flow.guided-flagship .guided-eta,
+html body.guided-flow.guided-flagship .wizard-eta { display: none !important; }
+html body.guided-flow.guided-flagship .guided-progress {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  padding: 0.9rem 1rem 0.2rem !important;
+  max-width: 640px !important;
+  margin: 0 auto !important;
+}
+html body.guided-flow.guided-flagship .wizard-progress-wrap { background: transparent !important; box-shadow:none !important; border:0 !important; padding:0 !important; }
+html body.guided-flow.guided-flagship .guided-progress-line {
+  font-size: 0.72rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  color: var(--p2-muted) !important;
+}
+html body.guided-flow.guided-flagship .wizard-progress-track {
+  height: 6px !important;
+  background: rgba(37,47,110,0.10) !important;
+  border-radius: 999px !important;
+  overflow: hidden !important;
+  margin-top: 0.55rem !important;
+}
+html body.guided-flow.guided-flagship .wizard-progress-fill {
+  background: linear-gradient(90deg, var(--p2-gold) 0%, var(--p2-gold-hi) 100%) !important;
+  border-radius: 999px !important;
+}
+
+/* ============================================================
+   STEP LAYOUT — center content, kill dead vertical voids
+   ============================================================ */
+html body.guided-flow.guided-flagship .guided-step-panel {
+  max-width: 560px !important;
+  margin: 0 auto !important;
+  padding: 0.5rem 1.1rem 120px !important;
+}
+html body.guided-flow.guided-flagship .guided-step-intro { margin-bottom: 1.4rem !important; }
+html body.guided-flow.guided-flagship .guided-kicker,
+html body.guided-flow.guided-flagship .guided-results-eyebrow,
+html body.guided-flow.guided-flagship .studio-kicker {
+  font-size: 0.7rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
+  color: var(--p2-gold) !important;
+  margin-bottom: 0.5rem !important;
+}
+/* Clean, UNBOXED headline (removes the dated gold box around the H1) */
+html body.guided-flow.guided-flagship .guided-title,
+html body.guided-flow.guided-flagship .wizard-title {
+  background: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  color: var(--p2-navy-deep) !important;
+  font-size: clamp(1.9rem, 7vw, 2.4rem) !important;
+  font-weight: 800 !important;
+  line-height: 1.1 !important;
+  margin: 0 auto 0.5rem !important;
+}
+html body.guided-flow.guided-flagship .guided-lead,
+html body.guided-flow.guided-flagship .wizard-lead {
+  color: var(--p2-muted) !important;
+  font-size: 1.02rem !important;
+  margin: 0 auto !important;
+}
+
+/* De-emphasize the repeated "U.S. average tax" info banner → subtle single note */
+html body.guided-flow.guided-flagship .guided-assumption-note,
+html body.guided-flow.guided-flagship .guided-step-note,
+html body.guided-flow.guided-flagship .guided-info-banner,
+html body.guided-flow.guided-flagship .wizard-note-banner {
+  background: transparent !important;
+  border: 0 !important;
+  color: var(--p2-muted) !important;
+  font-size: 0.8rem !important;
+  padding: 0 1rem !important;
+  margin: 0 auto 0.6rem !important;
+  max-width: 460px !important;
+  text-align: center !important;
+}
+
+/* ============================================================
+   CHOICE CARDS — refined, centered, thumb-friendly + SVG icons
+   (landing buying/refi, has-address, refi goals)
+   ============================================================ */
+html body.guided-flow.guided-flagship .guided-choice-grid,
+html body.guided-flow.guided-flagship .mmg-choices {
+  display: grid !important;
+  gap: 0.8rem !important;
+  max-width: 520px !important;
+  margin: 0 auto !important;
+}
+html body.guided-flow.guided-flagship .guided-choice-card,
+html body.guided-flow.guided-flagship .mmg-choice {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  gap: 0.35rem !important;
+  min-height: 132px !important;
+  padding: 1.25rem 1rem !important;
+  background: var(--p2-card) !important;
+  border: 1.5px solid var(--p2-line) !important;
+  border-radius: var(--p2-radius) !important;
+  box-shadow: var(--p2-shadow) !important;
+  position: relative !important;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease !important;
+  -webkit-tap-highlight-color: transparent;
+}
+html body.guided-flow.guided-flagship .guided-choice-card:active,
+html body.guided-flow.guided-flagship .mmg-choice:active {
+  transform: scale(0.985) !important;
+}
+html body.guided-flow.guided-flagship .guided-choice-card:hover,
+html body.guided-flow.guided-flagship .mmg-choice:hover {
+  border-color: var(--p2-navy) !important;
+  box-shadow: var(--p2-shadow-lg) !important;
+  transform: translateY(-2px) !important;
+  background: var(--p2-card) !important;
+}
+html body.guided-flow.guided-flagship .guided-choice-card strong,
+html body.guided-flow.guided-flagship .mmg-choice strong {
+  color: var(--p2-navy-deep) !important;
+  font-size: 1.14rem !important;
+  font-weight: 800 !important;
+  line-height: 1.15 !important;
+}
+html body.guided-flow.guided-flagship .guided-choice-card .mmg-choice-sub,
+html body.guided-flow.guided-flagship .guided-choice-card span:not(.guided-choice-icon):not(.guided-selected-mark),
+html body.guided-flow.guided-flagship .mmg-choice .mmg-choice-sub {
+  color: var(--p2-muted) !important;
+  font-size: 0.85rem !important;
+  font-weight: 500 !important;
+}
+/* icon chip */
+html body.guided-flow.guided-flagship .guided-choice-icon,
+html body.guided-flow.guided-flagship .mmg-choice-ic {
+  width: 52px !important;
+  height: 52px !important;
+  border-radius: 50% !important;
+  background-color: rgba(37, 47, 110, 0.07) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: 26px 26px !important;
+  font-size: 0 !important;           /* hide the emoji glyph */
+  color: transparent !important;
+  display: flex !important;
+  margin: 0 auto 0.15rem !important;
+  flex: 0 0 auto !important;
+}
+html body.guided-flow.guided-flagship .guided-choice-card:hover .guided-choice-icon,
+html body.guided-flow.guided-flagship .mmg-choice:hover .mmg-choice-ic {
+  background-color: rgba(37, 47, 110, 0.12) !important;
+}
+/* Kill the old right-arrow ::after affordance on landing cards (cleaner, centered) */
+html body.guided-flow.guided-flagship .mmg-choice::after { display: none !important; }
+html body.guided-flow.guided-flagship .guided-choice-card::after { content: none !important; }
+
+/* --- SVG icons (navy line, Feather-style) mapped per card --- */
+html body.guided-flow.guided-flagship #goalPurchaseBtn .guided-choice-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23252f6e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 10.5 12 3l9 7.5'/%3E%3Cpath d='M5 9.5V21h14V9.5'/%3E%3Cpath d='M9.5 21v-6h5v6'/%3E%3C/svg%3E") !important;
+}
+html body.guided-flow.guided-flagship #goalRefinanceBtn .guided-choice-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23252f6e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 9a9 9 0 0 0-15-4L3 8'/%3E%3Cpath d='M3 15a9 9 0 0 0 15 4l3-3'/%3E%3Cpath d='M3 4v4h4'/%3E%3Cpath d='M21 20v-4h-4'/%3E%3C/svg%3E") !important;
+}
+html body.guided-flow.guided-flagship #hasAddressYesBtn .guided-choice-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23252f6e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z'/%3E%3Ccircle cx='12' cy='9' r='2.5'/%3E%3C/svg%3E") !important;
+}
+html body.guided-flow.guided-flagship #hasAddressNoBtn .guided-choice-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23252f6e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 7v10'/%3E%3Cpath d='M14.5 9.3c-.4-.9-1.4-1.3-2.5-1.3-1.4 0-2.5.8-2.5 1.9 0 2.4 5 1.2 5 3.7 0 1.1-1.1 1.9-2.5 1.9-1.1 0-2.1-.5-2.5-1.3'/%3E%3C/svg%3E") !important;
+}
+html body.guided-flow.guided-flagship #refiGoalLowerBtn .guided-choice-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23252f6e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 5v14'/%3E%3Cpath d='M6 13l6 6 6-6'/%3E%3C/svg%3E") !important;
+}
+html body.guided-flow.guided-flagship #refiGoalCashBtn .guided-choice-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23252f6e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='2' y='6' width='20' height='12' rx='2'/%3E%3Ccircle cx='12' cy='12' r='2.5'/%3E%3Cpath d='M6 9v6M18 9v6'/%3E%3C/svg%3E") !important;
+}
+html body.guided-flow.guided-flagship #refiGoalTermBtn .guided-choice-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23252f6e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 7v5l3 2'/%3E%3C/svg%3E") !important;
+}
+html body.guided-flow.guided-flagship #refiGoalPmiBtn .guided-choice-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23252f6e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3l7 3v6c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6l7-3Z'/%3E%3Cpath d='M9 12l2 2 4-4'/%3E%3C/svg%3E") !important;
+}
+/* refi goal cards: center their content to match the rest */
+html body.guided-flow.guided-flagship .guided-refi-card { text-align: center !important; align-items: center !important; }
+
+/* ============================================================
+   LOAN TYPE CARDS — kill duplicate "Selected"/tagline clutter, even grid
+   ============================================================ */
+html body.guided-flow.guided-flagship .ultimate-program-btn .guided-selected-mark { display: none !important; }
+html body.guided-flow.guided-flagship .guided-loan-type-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 0.65rem !important;
+}
+html body.guided-flow.guided-flagship .ultimate-program-btn {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  gap: 0.25rem !important;
+  min-height: 84px !important;
+  padding: 0.85rem 0.6rem !important;
+  border-radius: var(--p2-radius-sm) !important;
+  border: 1.5px solid var(--p2-line) !important;
+  background: var(--p2-card) !important;
+}
+html body.guided-flow.guided-flagship .ultimate-program-btn strong { font-size: 0.98rem !important; color: var(--p2-navy-deep) !important; }
+html body.guided-flow.guided-flagship .ultimate-program-btn span:not(.guided-selected-mark) { color: var(--p2-muted) !important; font-size: 0.72rem !important; line-height: 1.25 !important; }
+html body.guided-flow.guided-flagship .ultimate-program-btn.active {
+  background: linear-gradient(160deg, var(--p2-navy) 0%, var(--p2-navy-deep) 100%) !important;
+  border-color: var(--p2-gold) !important;
+}
+html body.guided-flow.guided-flagship .ultimate-program-btn.active strong,
+html body.guided-flow.guided-flagship .ultimate-program-btn.active span:not(.guided-selected-mark) { color: #fff !important; }
+
+/* term chips: clean, hide the now-redundant "More terms" link */
+html body.guided-flow.guided-flagship .guided-term-more { display: none !important; }
+html body.guided-flow.guided-flagship .guided-term-extra { display: inline-flex !important; }
+html body.guided-flow.guided-flagship .ultimate-term-btn {
+  min-height: 48px !important;
+  border-radius: 999px !important;
+  border: 1.5px solid var(--p2-line) !important;
+  font-weight: 700 !important;
+  color: var(--p2-navy-deep) !important;
+  background: var(--p2-card) !important;
+}
+html body.guided-flow.guided-flagship .ultimate-term-btn.active {
+  background: linear-gradient(160deg, var(--p2-navy), var(--p2-navy-deep)) !important;
+  color: #fff !important;
+  border-color: var(--p2-gold) !important;
+}
+
+/* ============================================================
+   SLIDERS — thumb-friendly, on-brand
+   ============================================================ */
+html body.guided-flow.guided-flagship input[type="range"] {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  height: 8px !important;
+  border-radius: 999px !important;
+  background: rgba(37,47,110,0.12) !important;
+  outline: none !important;
+}
+html body.guided-flow.guided-flagship input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff 0 22%, var(--p2-gold-hi) 24%, var(--p2-gold) 100%);
+  border: 3px solid #fff;
+  box-shadow: 0 3px 10px rgba(27,35,82,0.35);
+  cursor: pointer;
+  margin-top: -11px;
+}
+html body.guided-flow.guided-flagship input[type="range"]::-moz-range-thumb {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: var(--p2-gold); border: 3px solid #fff;
+  box-shadow: 0 3px 10px rgba(27,35,82,0.35); cursor: pointer;
+}
+
+/* ============================================================
+   INPUT / VALUE CARDS — consistent radius, spacing
+   ============================================================ */
+html body.guided-flow.guided-flagship .guided-card,
+html body.guided-flow.guided-flagship .wizard-card,
+html body.guided-flow.guided-flagship .studio-break,
+html body.guided-flow.guided-flagship .studio-controls {
+  border-radius: var(--p2-radius) !important;
+  border: 1.5px solid var(--p2-line) !important;
+  box-shadow: var(--p2-shadow) !important;
+  background: var(--p2-card) !important;
+}
+html body.guided-flow.guided-flagship .currency-input,
+html body.guided-flow.guided-flagship input[type="text"].currency-input,
+html body.guided-flow.guided-flagship .guided-credit-score-block input,
+html body.guided-flow.guided-flagship .guided-field input {
+  border-radius: var(--p2-radius-sm) !important;
+  border: 1.5px solid var(--p2-line) !important;
+  min-height: 50px !important;
+  font-size: 1.05rem !important;
+}
+
+/* ============================================================
+   PRIMARY BUTTONS — big, thumb-friendly, no text wrapping
+   ============================================================ */
+html body.guided-flow.guided-flagship .btn-wizard-next,
+html body.guided-flow.guided-flagship .save-estimate-submit,
+html body.guided-flow.guided-flagship .studio-mstart {
+  background: linear-gradient(165deg, var(--p2-navy) 0%, var(--p2-navy-deep) 100%) !important;
+  color: var(--p2-gold-hi) !important;
+  border: 1.5px solid var(--p2-gold) !important;
+  border-radius: 14px !important;
+  font-weight: 800 !important;
+  font-size: 1.02rem !important;
+  min-height: 56px !important;
+  white-space: nowrap !important;
+  letter-spacing: 0.01em !important;
+  box-shadow: 0 10px 24px rgba(27,35,82,0.22) !important;
+}
+html body.guided-flow.guided-flagship .btn-wizard-next *,
+html body.guided-flow.guided-flagship .save-estimate-submit * { color: var(--p2-gold-hi) !important; white-space: nowrap !important; }
+html body.guided-flow.guided-flagship .btn-wizard-back,
+html body.guided-flow.guided-flagship .guided-back {
+  border-radius: 14px !important;
+  min-height: 56px !important;
+  border: 1.5px solid var(--p2-line) !important;
+  color: var(--p2-navy-deep) !important;
+  font-weight: 700 !important;
+  background: var(--p2-card) !important;
+}
+
+/* ============================================================
+   RESULTS — make it a destination
+   ============================================================ */
+html body.guided-flow.guided-flagship .studio-page { max-width: 960px !important; margin: 0 auto !important; }
+/* HERO */
+html body.guided-flow.guided-flagship .studio-hero {
+  background: radial-gradient(120% 120% at 50% 0%, #2b3780 0%, var(--p2-navy) 45%, var(--p2-navy-deep) 100%) !important;
+  border-radius: 22px !important;
+  padding: 2rem 1.25rem 1.75rem !important;
+  box-shadow: 0 18px 44px rgba(27, 35, 82, 0.28) !important;
+  text-align: center !important;
+  border: 1px solid rgba(232,200,74,0.18) !important;
+}
+html body.guided-flow.guided-flagship .studio-hero .studio-kicker { color: var(--p2-gold-hi) !important; }
+html body.guided-flow.guided-flagship .studio-amount,
+html body.guided-flow.guided-flagship #pitiPayment.studio-amount {
+  font-size: clamp(4rem, 19vw, 6rem) !important;
+  font-weight: 800 !important;
+  line-height: 0.92 !important;
+  letter-spacing: -0.045em !important;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  margin: 0.3rem 0 0.5rem !important;
+}
+html body.guided-flow.guided-flagship .studio-sub { color: rgba(255,255,255,0.78) !important; font-size: 0.85rem !important; }
+html body.guided-flow.guided-flagship .studio-rates { color: rgba(255,255,255,0.92) !important; margin-top: 0.6rem !important; font-size: 0.95rem !important; }
+html body.guided-flow.guided-flagship .studio-rates strong { color: var(--p2-gold-hi) !important; }
+
+/* Move the Reg Z disclosure OUT of the top flow → tiny footnote at the bottom */
+html body.guided-flow.guided-flagship .compliance-trigger-terms,
+html body.guided-flow.guided-flagship #complianceTriggerTerms {
+  order: 90 !important;
+  font-size: 0.64rem !important;
+  line-height: 1.4 !important;
+  color: #9096ad !important;
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0.6rem 0.2rem 0 !important;
+  margin-top: 0.5rem !important;
+}
+html body.guided-flow.guided-flagship .compliance-trigger-terms strong { color: #7a80a0 !important; font-weight: 700 !important; }
+
+/* BREAKDOWN */
+html body.guided-flow.guided-flagship .studio-break { padding: 0.4rem 1.1rem !important; }
+html body.guided-flow.guided-flagship .studio-break-list li {
+  padding: 0.95rem 0 !important;
+  font-size: 1.02rem !important;
+}
+html body.guided-flow.guided-flagship .studio-break-list li span { color: var(--p2-navy-ink) !important; }
+html body.guided-flow.guided-flagship .studio-break-list li strong { color: var(--p2-navy-deep) !important; font-size: 1.1rem !important; }
+
+/* CONTROLS — the "addictive" live panel */
+html body.guided-flow.guided-flagship .studio-controls { padding: 1.25rem 1.1rem !important; }
+html body.guided-flow.guided-flagship .studio-controls-head h3 { font-size: 1.15rem !important; color: var(--p2-navy-deep) !important; }
+html body.guided-flow.guided-flagship .studio-controls-head p { color: var(--p2-gold) !important; font-weight: 700 !important; font-size: 0.78rem !important; letter-spacing: 0.04em; text-transform: uppercase; }
+
+/* LEAD CARD — the single money moment */
+html body.guided-flow.guided-flagship .studio-lead {
+  border: 2px solid var(--p2-gold) !important;
+  border-radius: 20px !important;
+  box-shadow: 0 16px 40px rgba(37,47,110,0.16) !important;
+  background: linear-gradient(180deg, #fffdf6 0%, #ffffff 40%) !important;
+  padding: 1.5rem 1.2rem !important;
+}
+html body.guided-flow.guided-flagship .studio-lead-flag {
+  display: inline-block !important;
+  background: var(--p2-navy) !important;
+  color: #fff !important;
+  font-size: 0.62rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  padding: 0.28rem 0.85rem !important;
+  border-radius: 999px !important;
+}
+html body.guided-flow.guided-flagship .studio-lead-title { font-size: 1.5rem !important; color: var(--p2-navy-deep) !important; margin-top: 0.6rem !important; }
+html body.guided-flow.guided-flagship .studio-lead-copy { color: var(--p2-muted) !important; font-size: 0.92rem !important; }
+
+/* Secondary "Start a full application" → quiet text link, not a competing button */
+html body.guided-flow.guided-flagship .btn-results-apply {
+  background: transparent !important;
+  color: var(--p2-navy) !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  font-weight: 700 !important;
+  text-decoration: underline !important;
+  text-underline-offset: 3px !important;
+  min-height: 0 !important;
+  font-size: 0.9rem !important;
+}
+
+/* COLLAPSIBLE "Taxes, cash to close & more" — closed by default (JS adds toggle) */
+html body.guided-flow.guided-flagship .studio-more {
+  border: 1.5px solid var(--p2-line) !important;
+  border-radius: var(--p2-radius) !important;
+  background: var(--p2-card) !important;
+  overflow: hidden !important;
+  box-shadow: var(--p2-shadow) !important;
+}
+html body.guided-flow.guided-flagship .studio-more-banner {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 0.75rem !important;
+  padding: 1.05rem 1.15rem !important;
+  cursor: pointer !important;
+  background: var(--p2-card) !important;
+}
+html body.guided-flow.guided-flagship .studio-more-banner-title { font-size: 1.02rem !important; color: var(--p2-navy-deep) !important; margin: 0 !important; }
+html body.guided-flow.guided-flagship .studio-more-banner-sub { font-size: 0.8rem !important; color: var(--p2-muted) !important; margin: 0.1rem 0 0 !important; }
+html body.guided-flow.guided-flagship .studio-more-banner::after {
+  content: "" !important;
+  width: 12px; height: 12px;
+  border-right: 2.5px solid var(--p2-navy); border-bottom: 2.5px solid var(--p2-navy);
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+  flex: 0 0 auto;
+  margin-right: 4px;
+}
+html body.guided-flow.guided-flagship .studio-more.studio-more-open .studio-more-banner::after { transform: rotate(225deg) !important; }
+html body.guided-flow.guided-flagship .studio-more:not(.studio-more-open) .studio-more-body { display: none !important; }
+
+/* EQUITY panel highlight */
+html body.guided-flow.guided-flagship .ultimate-wealth-panel {
+  border-radius: var(--p2-radius) !important;
+  border: 1.5px solid rgba(22,101,52,0.2) !important;
+  background: linear-gradient(180deg, #f2fbf5 0%, #ffffff 60%) !important;
+}
+
+/* ============================================================
+   MOBILE (primary experience, <= 767px)
+   ============================================================ */
+@media (max-width: 767px) {
+  html body.guided-flow.guided-flagship .studio-page,
+  html body.guided-flow.guided-flagship .ultimate-payment-main { padding-left: 0.9rem !important; padding-right: 0.9rem !important; }
+  html body.guided-flow.guided-flagship .guided-step-panel { padding-bottom: 120px !important; }
+  html body.guided-flow.guided-flagship .guided-title,
+  html body.guided-flow.guided-flagship .wizard-title { font-size: clamp(1.75rem, 8vw, 2.15rem) !important; }
+  /* Tap targets everywhere */
+  html body.guided-flow.guided-flagship button,
+  html body.guided-flow.guided-flagship .guided-choice-card { min-height: 52px; }
+  /* Bottom sticky nav — refined */
+  html body.guided-flow.guided-flagship .guided-step-nav .btn-wizard-next { min-height: 54px !important; font-size: 1.05rem !important; }
+}
+
+/* ============================================================
+   DESKTOP (>= 900px) — use the width, feel premium
+   ============================================================ */
+@media (min-width: 900px) {
+  html body.guided-flow.guided-flagship .guided-step-panel { max-width: 620px !important; }
+  html body.guided-flow.guided-flagship .guided-title,
+  html body.guided-flow.guided-flagship .wizard-title { font-size: 2.6rem !important; }
+  html body.guided-flow.guided-flagship .mmg-choices,
+  html body.guided-flow.guided-flagship .guided-choice-grid { grid-template-columns: 1fr 1fr !important; max-width: 620px !important; }
+  html body.guided-flow.guided-flagship .studio-amount,
+  html body.guided-flow.guided-flagship #pitiPayment.studio-amount { font-size: 5.5rem !important; }
+  html body.guided-flow.guided-flagship .studio-hero { padding: 2.5rem 2rem !important; }
+}
+
+/* ============================================================
+   SPECIFICITY ENFORCERS (ID-level) — guarantee the Phase 2 look wins
+   over the many older !important layers.
+   ============================================================ */
+/* Headline titles: sans, unboxed, no gold outline — every step */
+html body.guided-flow.guided-flagship #step-goal-title,
+html body.guided-flow.guided-flagship #step-has-addr-title,
+html body.guided-flow.guided-flagship #step-addr-title,
+html body.guided-flow.guided-flagship #step-price-title,
+html body.guided-flow.guided-flagship #step-loan-you-title,
+html body.guided-flow.guided-flagship #step-loan-credit-title,
+html body.guided-flow.guided-flagship #step-refi-goal-title,
+html body.guided-flow.guided-flagship #step-down-title,
+html body.guided-flow.guided-flagship h1.wizard-title.guided-title,
+html body.guided-flow.guided-flagship h2.wizard-title.guided-title {
+  font-family: "DM Sans", system-ui, sans-serif !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.02em !important;
+  color: var(--p2-navy-deep) !important;
+  background: none !important;
+  border: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  font-size: clamp(1.85rem, 7.5vw, 2.35rem) !important;
+  line-height: 1.1 !important;
+}
+/* Big display numbers → sans, bold, tight (price, credit) */
+html body.guided-flow.guided-flagship #homePriceDisplay,
+html body.guided-flow.guided-flagship .guided-price-hero,
+html body.guided-flow.guided-flagship #creditScoreDisplay,
+html body.guided-flow.guided-flagship .guided-score-number,
+html body.guided-flow.guided-flagship #pitiPayment,
+html body.guided-flow.guided-flagship .guided-results-card #pitiPayment {
+  font-family: "DM Sans", system-ui, sans-serif !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.03em !important;
+}
+html body.guided-flow.guided-flagship #homePriceDisplay,
+html body.guided-flow.guided-flagship .guided-price-hero {
+  color: var(--p2-navy-deep) !important;
+  font-size: clamp(2.6rem, 12vw, 3.4rem) !important;
+}
+html body.guided-flow.guided-flagship #creditScoreDisplay,
+html body.guided-flow.guided-flagship .guided-score-number {
+  color: var(--p2-navy-deep) !important;
+  font-size: clamp(2.6rem, 12vw, 3.4rem) !important;
+}
+/* Results hero amount stays white + huge even against ID rules */
+html body.guided-flow.guided-flagship .studio-hero #pitiPayment,
+html body.guided-flow.guided-flagship .studio-hero .studio-amount {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  font-size: clamp(4rem, 19vw, 6rem) !important;
+}
+
+/* Header Apply button — beat the ".guided-header-apply-soft" variant */
+html body.guided-flow.guided-flagship .guided-header-apply.guided-header-apply-soft,
+html body.guided-flow.guided-flagship a.guided-header-apply,
+html body.guided-flow.guided-flagship #guidedHeaderApply {
+  background: linear-gradient(180deg, var(--p2-gold-hi) 0%, var(--p2-gold) 100%) !important;
+  color: var(--p2-navy-deep) !important;
+  border: 0 !important;
+  box-shadow: 0 4px 14px rgba(201, 162, 39, 0.35) !important;
+}
+html body.guided-flow.guided-flagship #guidedHeaderApply * { color: var(--p2-navy-deep) !important; }
+
+/* Kicker: tighten so long "NMLS #…" line doesn't wrap awkwardly */
+html body.guided-flow.guided-flagship .guided-kicker {
+  letter-spacing: 0.08em !important;
+  font-size: 0.66rem !important;
+}
+
+/* ============================================================
+   SECTION LABELS — these IDs/classes are in-card labels, not page titles.
+   Render as small uppercase labels (fixes oversized "LOAN TYPE" / "DOWN PAYMENT").
+   ============================================================ */
+html body.guided-flow.guided-flagship #step-loan-you-title,
+html body.guided-flow.guided-flagship #step-down-title,
+html body.guided-flow.guided-flagship #homePriceLabel,
+html body.guided-flow.guided-flagship #loan-term-label,
+html body.guided-flow.guided-flagship .guided-loan-section-label,
+html body.guided-flow.guided-flagship .guided-down-summary-label,
+html body.guided-flow.guided-flagship .guided-credit-section-label:not(.sr-only) {
+  font-family: "DM Sans", system-ui, sans-serif !important;
+  font-size: 0.72rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  color: var(--p2-muted) !important;
+  line-height: 1.25 !important;
+  margin: 0 0 0.55rem !important;
+  padding: 0 !important;
+  border: 0 !important;
+  outline: none !important;
+  background: none !important;
+}
+/* Down-payment summary panel: label small, value prominent */
+html body.guided-flow.guided-flagship .guided-down-summary,
+html body.guided-flow.guided-flagship .guided-down-hero {
+  text-align: center !important;
+}
+html body.guided-flow.guided-flagship .guided-down-hero-value,
+html body.guided-flow.guided-flagship #downSummaryValue,
+html body.guided-flow.guided-flagship .guided-down-summary-value {
+  font-size: clamp(1.5rem, 6vw, 1.9rem) !important;
+  font-weight: 800 !important;
+  color: var(--p2-navy-deep) !important;
+}
+
+/* ============================================================
+   FINAL POLISH BATCH
+   ============================================================ */
+/* Info banner → subtle single note, not a heavy beige box */
+html body.guided-flow.guided-flagship .guided-national-banner {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  color: var(--p2-muted) !important;
+  font-size: 0.82rem !important;
+  font-weight: 500 !important;
+  text-align: center !important;
+  max-width: 440px !important;
+  margin: 0 auto 0.6rem !important;
+  padding: 0 1rem !important;
+}
+/* Redundant "More terms" link — all terms already shown as clean chips */
+html body.guided-flow.guided-flagship #guidedTermMore,
+html body.guided-flow.guided-flagship .guided-term-more { display: none !important; }
+
+/* Collapsible banner title — clear navy, one line, sub hidden when collapsed */
+html body.guided-flow.guided-flagship .studio-more-banner-title {
+  color: var(--p2-navy-deep) !important;
+  font-size: 1rem !important;
+  font-weight: 800 !important;
+  line-height: 1.2 !important;
+}
+html body.guided-flow.guided-flagship .studio-more-banner-text { flex: 1 1 auto !important; min-width: 0 !important; }
+html body.guided-flow.guided-flagship .studio-more:not(.studio-more-open) .studio-more-banner-sub { display: none !important; }
+
+/* Progress: drop the leftover white card so it reads as a clean inline bar */
+html body.guided-flow.guided-flagship .guided-progress,
+html body.guided-flow.guided-flagship .guided-progress-simple {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Credit slider: make the track read as a slim bar (not a tall gray pill) */
+html body.guided-flow.guided-flagship .guided-score-hero input[type="range"],
+html body.guided-flow.guided-flagship #creditScore { background: rgba(37,47,110,0.12) !important; height: 8px !important; }
+
+/* Choice cards a touch tighter so two fit comfortably above the fold on mobile */
+@media (max-width: 767px) {
+  html body.guided-flow.guided-flagship .guided-choice-card,
+  html body.guided-flow.guided-flagship .mmg-choice { min-height: 116px !important; padding: 1.05rem 1rem !important; }
+}
+
+/* ============================================================
+   REFI GOAL CARDS — force centered content + equal heights
+   ============================================================ */
+html body.guided-flow.guided-flagship .guided-choice-grid { grid-auto-rows: 1fr !important; }
+html body.guided-flow.guided-flagship .guided-refi-card.guided-choice-card,
+html body.guided-flow.guided-flagship button.guided-refi-card {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+html body.guided-flow.guided-flagship .guided-refi-card.guided-choice-card > strong,
+html body.guided-flow.guided-flagship .guided-refi-card.guided-choice-card > span:not(.guided-choice-icon) {
+  width: 100% !important;
+  text-align: center !important;
+  align-self: center !important;
+}
+
+/* ============================================================
+   KILL DEAD VOID on short choice steps (has-address, refi-goal) —
+   vertically center the small card sets. (Landing/goal left as-is: it's tall.)
+   ============================================================ */
+@media (max-width: 900px) {
+  html body.guided-flow.guided-flagship [data-step-id="has-address"] .guided-step-panel,
+  html body.guided-flow.guided-flagship [data-step-id="refi-goal"] .guided-step-panel {
+    min-height: calc(100svh - 250px) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+  }
+}
+
+/* ============================================================
+   VOID FIX v2 — fill the viewport on short steps (tuned to real heights)
+   ============================================================ */
+@media (max-width: 900px) {
+  html body.guided-flow.guided-flagship [data-step-id="has-address"] .guided-step-panel,
+  html body.guided-flow.guided-flagship [data-step-id="refi-goal"] .guided-step-panel {
+    min-height: calc(100svh - 168px) !important;
+    padding-bottom: 96px !important;
+    justify-content: center !important;
+  }
+}
+
+/* ============================================================
+   LANDING BENEFIT ICONS — swap emoji for consistent navy SVGs
+   (order: rates, taxes-by-address, vs-lender, private)
+   ============================================================ */
+html body.guided-flow.guided-flagship .mmg-benefit-ic {
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: 22px 22px !important;
+  font-size: 0 !important;
+  color: transparent !important;
+}
+html body.guided-flow.guided-flagship .mmg-benefit:nth-of-type(1) .mmg-benefit-ic {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23252f6e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 17l6-6 4 4 8-8'/%3E%3Cpath d='M21 7v5h-5'/%3E%3C/svg%3E") !important;
+}
+html body.guided-flow.guided-flagship .mmg-benefit:nth-of-type(2) .mmg-benefit-ic {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23252f6e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z'/%3E%3Ccircle cx='12' cy='9' r='2.5'/%3E%3C/svg%3E") !important;
+}
+html body.guided-flow.guided-flagship .mmg-benefit:nth-of-type(3) .mmg-benefit-ic {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23252f6e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3v18'/%3E%3Cpath d='M5 7h14'/%3E%3Cpath d='M5 7l-2.5 5a3 3 0 0 0 5 0L5 7Z'/%3E%3Cpath d='M19 7l-2.5 5a3 3 0 0 0 5 0L19 7Z'/%3E%3Cpath d='M8 21h8'/%3E%3C/svg%3E") !important;
+}
+html body.guided-flow.guided-flagship .mmg-benefit:nth-of-type(4) .mmg-benefit-ic {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23252f6e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='4' y='11' width='16' height='10' rx='2'/%3E%3Cpath d='M8 11V7a4 4 0 0 1 8 0v4'/%3E%3C/svg%3E") !important;
+}

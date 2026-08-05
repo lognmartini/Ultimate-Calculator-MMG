@@ -41,6 +41,7 @@
   <link rel="stylesheet" href="styles-results-studio.css" />
   <link rel="stylesheet" href="styles-site-polish.css" />
   <link rel="stylesheet" href="styles-mmg-navy.css" />
+  <link rel="stylesheet" href="styles-phase2.css" />
 </head>
 <body class="wizard-social logan3 logan5 guided-flow guided-v2 guided-flagship guided-pre-results guided-on-choice guided-nav-empty" data-wizard-step="0" data-mmg-version="Logan5" data-loan-goal="purchase" data-has-address="">
   <div class="logan5-instant-banner hidden" id="logan5InstantBanner" role="status" aria-live="polite">
@@ -1180,5 +1181,68 @@
   <script src="logan5-growth.js"></script>
   <script src="guided-flow.js"></script>
   <script src="results-interactive.js"></script>
+  <script>
+    /* Phase 2 — collapse "Taxes, cash to close & more" by default; banner toggles it.
+       Presentation only; does not touch any calculation. */
+    (function () {
+      function setupMore() {
+        var more = document.getElementById("guidedResultsDetails");
+        if (!more || more.dataset.p2Bound) return;
+        more.dataset.p2Bound = "1";
+        more.classList.remove("studio-more-open"); // closed by default
+        var banner = more.querySelector(".studio-more-banner");
+        if (!banner) return;
+        banner.setAttribute("role", "button");
+        banner.setAttribute("tabindex", "0");
+        banner.setAttribute("aria-expanded", "false");
+        function toggle() {
+          var open = more.classList.toggle("studio-more-open");
+          banner.setAttribute("aria-expanded", open ? "true" : "false");
+        }
+        banner.addEventListener("click", toggle);
+        banner.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); }
+        });
+      }
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", setupMore);
+      } else {
+        setupMore();
+      }
+      // Re-assert closed state once the results step is reached
+      document.addEventListener("mmg-calculated", setupMore);
+
+      /* Phase 2 — kill the duplicated program description. JS elsewhere copies the
+         program tagline into ".guided-selected-mark" with an inline important style,
+         which shows the same text twice on each loan-type card. Neutralize it and
+         keep it neutralized as the picker re-renders. Presentation only. */
+      function hideProgramMarks() {
+        var picker = document.getElementById("ultimateProgramPicker");
+        if (!picker) return;
+        picker.querySelectorAll(".guided-selected-mark").forEach(function (m) {
+          m.style.setProperty("display", "none", "important");
+        });
+      }
+      function watchProgramMarks() {
+        var picker = document.getElementById("ultimateProgramPicker");
+        if (!picker || picker.dataset.p2MarkBound) return;
+        picker.dataset.p2MarkBound = "1";
+        hideProgramMarks();
+        try {
+          new MutationObserver(hideProgramMarks).observe(picker, {
+            childList: true, subtree: true, attributes: true,
+            attributeFilter: ["style", "class"],
+          });
+        } catch (e) {}
+        picker.addEventListener("click", function () { setTimeout(hideProgramMarks, 30); });
+      }
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", watchProgramMarks);
+      } else {
+        watchProgramMarks();
+      }
+      document.addEventListener("mmg-calculated", watchProgramMarks);
+    })();
+  </script>
 </body>
 </html>
