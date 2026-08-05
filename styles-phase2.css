@@ -865,3 +865,20 @@ html body.guided-flow.guided-flagship .guided-down-chips {
   gap: 0.5rem !important;
 }
 html body.guided-flow.guided-flagship .guided-mini-chip { min-width: 0 !important; width: 100% !important; }
+
+/* ============================================================
+   PHASE 2.5 — single primary lead CTA at any time
+   Pay bar becomes a live-payment ticker (no button); the bottom
+   "Talk to Logan" bar hides while the lead form itself is in view.
+   ============================================================ */
+html body.guided-flow.guided-flagship #mmgStickyPayCta { display: none !important; }
+html body.guided-flow.guided-flagship .mmg-stickypay-inner { justify-content: center !important; gap: 0.5rem !important; }
+html body.guided-flow.guided-flagship .mmg-stickypay-text { align-items: center !important; text-align: center !important; flex-direction: row !important; gap: 0.5rem !important; }
+html body.guided-flow.guided-flagship .studio-mobilebar {
+  transition: opacity 0.25s ease, transform 0.25s ease !important;
+}
+html body.guided-flow.guided-flagship.p2-lead-inview .studio-mobilebar {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transform: translateY(120%) !important;
+}

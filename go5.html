@@ -1272,6 +1272,31 @@
       } else {
         setupLoanMore();
       }
+
+      /* Phase 2.5 — one primary lead CTA at a time: hide the persistent bottom
+         "Talk to Logan" bar while the lead form itself is in view (the form's
+         submit becomes the single primary). Presentation only. */
+      function setupLeadStickySync() {
+        var lead = document.getElementById("saveEstimateCard");
+        if (!lead || lead.dataset.p2StickyBound) return;
+        lead.dataset.p2StickyBound = "1";
+        if (!("IntersectionObserver" in window)) return;
+        var io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (en) {
+              document.body.classList.toggle("p2-lead-inview", en.isIntersecting);
+            });
+          },
+          { rootMargin: "0px 0px -140px 0px", threshold: 0.25 }
+        );
+        io.observe(lead);
+      }
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", setupLeadStickySync);
+      } else {
+        setupLeadStickySync();
+      }
+      document.addEventListener("mmg-calculated", setupLeadStickySync);
     })();
   </script>
 </body>
