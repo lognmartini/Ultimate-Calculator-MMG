@@ -930,7 +930,7 @@ html body.guided-flow.guided-flagship #summaryPriceSlider {
 
 /* Item 6 — make "Taxes, cash to close & more" an obvious, tappable control.
    Was a faint outlined pill; now a full-width navy button with a chevron. */
-html body.guided-flow.guided-flagship .studio-more .studio-more-banner {
+html body.guided-flow.guided-flagship #guidedResultsDetails .studio-more-banner {
   display: flex !important;
   flex-direction: column !important;
   align-items: flex-start !important;
@@ -942,30 +942,31 @@ html body.guided-flow.guided-flagship .studio-more .studio-more-banner {
   border-radius: var(--p2-radius-sm) !important;
   border: 0 !important;
   background: linear-gradient(135deg, var(--p2-navy) 0%, var(--p2-navy-deep) 100%) !important;
+  background-color: var(--p2-navy) !important;
   box-shadow: var(--p2-shadow) !important;
   transition: box-shadow 0.2s ease, transform 0.08s ease !important;
 }
-html body.guided-flow.guided-flagship .studio-more .studio-more-banner:hover {
+html body.guided-flow.guided-flagship #guidedResultsDetails .studio-more-banner:hover {
   box-shadow: var(--p2-shadow-lg) !important;
 }
-html body.guided-flow.guided-flagship .studio-more .studio-more-banner:active {
+html body.guided-flow.guided-flagship #guidedResultsDetails .studio-more-banner:active {
   transform: translateY(1px) !important;
 }
-html body.guided-flow.guided-flagship .studio-more .studio-more-banner-title {
+html body.guided-flow.guided-flagship #guidedResultsDetails .studio-more-banner-title {
   margin: 0 !important;
   color: #fff !important;
   font-size: 1.02rem !important;
   font-weight: 800 !important;
   letter-spacing: 0.01em !important;
 }
-html body.guided-flow.guided-flagship .studio-more .studio-more-banner-sub {
+html body.guided-flow.guided-flagship #guidedResultsDetails .studio-more-banner-sub {
   margin: 0 !important;
   color: rgba(255, 255, 255, 0.82) !important;
   font-size: 0.82rem !important;
   font-weight: 500 !important;
 }
 /* Gold chevron affordance on the right; rotates when open */
-html body.guided-flow.guided-flagship .studio-more .studio-more-banner::after {
+html body.guided-flow.guided-flagship #guidedResultsDetails .studio-more-banner::after {
   content: "⌄" !important;
   position: absolute !important;
   right: 1.1rem !important;
@@ -978,7 +979,7 @@ html body.guided-flow.guided-flagship .studio-more .studio-more-banner::after {
   transition: transform 0.22s ease !important;
   pointer-events: none !important;
 }
-html body.guided-flow.guided-flagship .studio-more.studio-more-open .studio-more-banner::after {
+html body.guided-flow.guided-flagship #guidedResultsDetails.studio-more-open .studio-more-banner::after {
   transform: translateY(-40%) rotate(180deg) !important;
 }
 /* A touch of breathing room so the button reads as its own section */
