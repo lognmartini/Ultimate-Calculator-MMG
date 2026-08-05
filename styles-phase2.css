@@ -1435,3 +1435,44 @@ html body.guided-flow.guided-flagship[data-wizard-step="4"] .guided-step-nav { m
    for a consistent, clean picker. */
 html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-term-extra { display: inline-flex !important; }
 html body.guided-flow.guided-flagship [data-step-id="loan-credit"] #guidedTermMore { display: none !important; }
+
+/* ============================================================================
+   CREDIT — REVERT TO SINGLE COLUMN (per request: no two columns, no overlap)
+   Overrides the earlier 2-column rules. Full-width so the score band text and
+   all five loan-term chips fit with nothing overlapping or clipped.
+   ============================================================================ */
+html body.guided-flow.guided-flagship .guided-credit-card.p2-credit-2col {
+  display: block !important;
+  grid-template-columns: none !important;
+}
+html body.guided-flow.guided-flagship .guided-credit-card .p2-credit-col {
+  border-left: 0 !important;
+  padding-left: 0 !important;
+  width: 100% !important;
+}
+html body.guided-flow.guided-flagship .guided-credit-card .p2-credit-col-terms {
+  border-left: 0 !important;
+  padding-left: 0 !important;
+  margin-top: 0.75rem !important;
+  padding-top: 0.75rem !important;
+  border-top: 1px solid var(--p2-line) !important;
+}
+/* Score band text: full width, never clipped by a divider */
+html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-score-band {
+  white-space: normal !important;
+  max-width: 100% !important;
+}
+/* Loan-term chips: all five in one flexible row, no clipping */
+html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-term-picker {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 0.5rem !important;
+  grid-template-columns: none !important;
+}
+html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-term-picker .ultimate-term-btn {
+  flex: 0 1 auto !important;
+  min-width: 74px !important;
+}
+/* Center the score block content in the full-width card */
+html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-credit-score-block { text-align: center !important; }
