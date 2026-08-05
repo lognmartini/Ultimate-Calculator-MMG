@@ -891,6 +891,8 @@ html body.guided-flow.guided-flagship.p2-lead-inview .studio-mobilebar {
    It added a tall block of secondary text and pushed the primary actions
    (look up / skip) below the fold. Keeps the address lookup clean. */
 html body.guided-flow.guided-flagship #ultimateLimitBadge,
+html body.guided-flow.guided-flagship #ultimateLimitBadge.ultimate-limit-badge,
+html body.guided-flow.guided-flagship #ultimateLimitBadge.ultimate-limit-badge:not(.hidden),
 html body.guided-flow.guided-flagship .ultimate-limit-badge {
   display: none !important;
 }
