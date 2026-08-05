@@ -1377,6 +1377,54 @@
         moveDetailsOutOfGrid();
       }
       document.addEventListener("mmg-calculated", moveDetailsOutOfGrid);
+
+      /* Results — rebalance the three columns so a shorter column never leaves a
+         tall empty gap. Column 1 = payment hero + breakdown + Logan trust card +
+         Reg Z disclosure (this fills it to roughly match the lead form height);
+         column 2 = Adjust your scenario; column 3 = the lead capture form only.
+         The "Start a full application" CTA + educational line move to a
+         full-width footer directly below the columns (above Taxes/cash-to-close). */
+      function rebalanceResultsColumns() {
+        var grid = document.querySelector(".studio-grid");
+        if (!grid) return;
+        var side = grid.querySelector(".studio-side");
+        var hero = grid.querySelector(".studio-hero");
+        var brk = grid.querySelector(".studio-break");
+        var adjust = document.getElementById("destAdjustPanel");
+        if (!side || !hero || !brk || !adjust) return;
+        var cola = grid.querySelector(".studio-col-a");
+        if (!cola) {
+          cola = document.createElement("div");
+          cola.className = "studio-col-a";
+          grid.insertBefore(cola, grid.firstChild);
+          cola.appendChild(hero);
+          cola.appendChild(brk);
+          var trust = side.querySelector(".studio-trust");
+          if (trust) cola.appendChild(trust);
+          // Adjust becomes a direct grid child (column 2)
+          grid.insertBefore(adjust, side);
+          // Full-width footer for the secondary CTA + educational line
+          var footer = document.createElement("div");
+          footer.className = "studio-results-footer";
+          var apply = side.querySelector(".studio-apply");
+          var legal = side.querySelector(".studio-legal");
+          if (apply) footer.appendChild(apply);
+          if (legal) footer.appendChild(legal);
+          grid.insertAdjacentElement("afterend", footer);
+          // Keep the Taxes/cash-to-close section directly AFTER the footer
+          var details = document.getElementById("guidedResultsDetails");
+          if (details) footer.insertAdjacentElement("afterend", details);
+        }
+        // Reg Z disclosure always sits at the bottom of column 1
+        var comp = document.getElementById("complianceTriggerTerms");
+        if (comp && comp.parentElement !== cola) cola.appendChild(comp);
+      }
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", rebalanceResultsColumns);
+      } else {
+        rebalanceResultsColumns();
+      }
+      document.addEventListener("mmg-calculated", rebalanceResultsColumns);
     })();
   </script>
 </body>

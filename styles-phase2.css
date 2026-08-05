@@ -1158,20 +1158,55 @@ html body.guided-flow.guided-flagship .guided-loan-type-grid .ultimate-program-b
      breakdown + "Taxes, cash to close & more" toggle (with equity folded in);
      column 2 = Adjust your scenario; column 3 = lead capture + trust.
      Matches the requested page-11 layout. */
+  /* Independent, top-aligned columns — NO stretch row. Each column is one grid
+     cell sized to its own content, so a shorter column never leaves a tall empty
+     gap. JS wraps column 1's pieces (hero + breakdown + trust + Reg Z) into
+     .studio-col-a, moves Adjust into column 2, and leaves the lead card alone in
+     column 3. The CTA + educational line move to a full-width footer below. */
   html body.guided-flow.guided-flagship .studio-grid {
     display: grid !important;
     grid-template-columns: minmax(0, 0.95fr) minmax(0, 1fr) minmax(0, 1.05fr) !important;
-    grid-template-rows: min-content min-content 1fr !important;
+    grid-auto-rows: min-content !important;
     align-items: start !important;
     gap: 0.9rem 1.2rem !important;
   }
   html body.guided-flow.guided-flagship .studio-main { display: contents !important; }
-  html body.guided-flow.guided-flagship .studio-main .studio-hero { grid-column: 1 !important; grid-row: 1 !important; align-self: start !important; }
-  html body.guided-flow.guided-flagship .studio-main .studio-break { grid-column: 1 !important; grid-row: 2 !important; align-self: start !important; margin-top: 0.9rem !important; }
-  /* Adjust + lead span all rows (incl. the 1fr slack row) so the left column
-     stays tight at the top instead of distributing its gaps. */
-  html body.guided-flow.guided-flagship .studio-main #destAdjustPanel { grid-column: 2 !important; grid-row: 1 / -1 !important; align-self: start !important; }
-  html body.guided-flow.guided-flagship .studio-side { grid-column: 3 !important; grid-row: 1 / -1 !important; align-self: start !important; }
+  /* Column 1 wrapper (built by JS) */
+  html body.guided-flow.guided-flagship .studio-col-a {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    align-self: start !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.9rem !important;
+    min-width: 0 !important;
+  }
+  html body.guided-flow.guided-flagship .studio-col-a > .studio-hero,
+  html body.guided-flow.guided-flagship .studio-col-a > .studio-break,
+  html body.guided-flow.guided-flagship .studio-col-a > .studio-trust,
+  html body.guided-flow.guided-flagship .studio-col-a > .compliance-trigger-terms {
+    grid-column: auto !important;
+    grid-row: auto !important;
+    margin: 0 !important;
+  }
+  /* Fallback (pre-JS, or if wrapping is skipped): keep pieces in column 1 */
+  html body.guided-flow.guided-flagship .studio-main > .studio-hero,
+  html body.guided-flow.guided-flagship .studio-main > .studio-break,
+  html body.guided-flow.guided-flagship .studio-main > .compliance-trigger-terms { grid-column: 1 !important; align-self: start !important; }
+  html body.guided-flow.guided-flagship #destAdjustPanel { grid-column: 2 !important; grid-row: 1 !important; align-self: start !important; min-width: 0 !important; }
+  html body.guided-flow.guided-flagship .studio-side { grid-column: 3 !important; grid-row: 1 !important; align-self: start !important; min-width: 0 !important; }
+  /* Full-width footer (built by JS): "Start a full application" + educational line */
+  html body.guided-flow.guided-flagship .studio-results-footer {
+    max-width: 1140px !important;
+    margin: 0.4rem auto 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 0.4rem !important;
+  }
+  html body.guided-flow.guided-flagship .studio-results-footer > .studio-apply { margin: 0 !important; }
+  html body.guided-flow.guided-flagship .studio-results-footer > .studio-legal { margin: 0 !important; max-width: 780px !important; }
   /* "Taxes, cash to close & more" now lives full-width BELOW the grid (moved out
      via JS). Give it room to breathe. */
   html body.guided-flow.guided-flagship .studio-page > #guidedResultsDetails,
