@@ -1664,3 +1664,164 @@ html body.guided-flow.guided-flagship .mmg-reviews-link {
   align-items: center !important;
   min-height: 40px !important;
 }
+
+/* ============================================================================
+   PHASE 4 — MOBILE APP EXPERIENCE (max-width: 767px ONLY)
+   Everything below is scoped to phones. Desktop/tablet-landscape (>=768) is
+   untouched. Goals: minimal scrolling, addicting slider->number loop,
+   phone-first lead capture, always-reachable CTA.
+   ============================================================================ */
+@media (max-width: 767px) {
+
+  /* ---- Results: flatten the rebalanced wrapper so we can freely order the
+     stack. .studio-col-a becomes display:contents (its children hero/breakdown/
+     trust/reg-z become direct flex items). If the rebalance JS didn't run,
+     studio-main keeps its children and simply renders in place (graceful). ---- */
+  html body.guided-flow.guided-flagship.wizard-on-results .studio-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.75rem !important;
+  }
+  html body.guided-flow.guided-flagship.wizard-on-results .studio-col-a {
+    display: contents !important;
+  }
+
+  /* Order: number -> quick breakdown -> adjust (play) -> lead -> trust -> fine print */
+  html body.guided-flow.guided-flagship.wizard-on-results .studio-hero { order: 1 !important; }
+  html body.guided-flow.guided-flagship.wizard-on-results .studio-break { order: 2 !important; }
+  html body.guided-flow.guided-flagship.wizard-on-results #destAdjustPanel { order: 3 !important; }
+  html body.guided-flow.guided-flagship.wizard-on-results .studio-side { order: 4 !important; }
+  html body.guided-flow.guided-flagship.wizard-on-results .studio-trust { order: 5 !important; }
+  html body.guided-flow.guided-flagship.wizard-on-results .compliance-trigger-terms { order: 6 !important; }
+
+  /* Compact the payment hero so the number stays the star but takes less height */
+  html body.guided-flow.guided-flagship.wizard-on-results .studio-hero {
+    padding: 1.15rem 1.1rem 1.25rem !important;
+    border-radius: 18px !important;
+  }
+  html body.guided-flow.guided-flagship.wizard-on-results .studio-amount,
+  html body.guided-flow.guided-flagship.wizard-on-results #pitiPayment.studio-amount {
+    font-size: 3.5rem !important;
+    line-height: 1 !important;
+    margin: 0.1rem 0 0.15rem !important;
+  }
+
+  /* Reg Z disclosure: keep present but quiet + small at the bottom */
+  html body.guided-flow.guided-flagship.wizard-on-results .compliance-trigger-terms {
+    font-size: 0.66rem !important;
+    line-height: 1.35 !important;
+    opacity: 0.72 !important;
+    margin-top: 0.25rem !important;
+  }
+
+  /* Tidy breakdown as a compact context strip under the number */
+  html body.guided-flow.guided-flagship.wizard-on-results .studio-break {
+    margin-top: 0 !important;
+  }
+}
+
+/* PHASE 4 — Phone-first mobile lead form (max-width:767 only). Desktop keeps
+   Name -> Email -> Phone exactly as-is. */
+.studio-lead-mobilenote { display: none; } /* hidden on desktop */
+@media (max-width: 767px) {
+  html body.guided-flow.guided-flagship .studio-lead-mobilenote {
+    display: block !important;
+    margin: 0.35rem 0 0.2rem !important;
+    font-size: 0.9rem !important;
+    font-weight: 600 !important;
+    color: var(--p2-navy-deep, #1b2352) !important;
+    line-height: 1.35 !important;
+  }
+  /* Make the form a flex column so we can float phone to the top */
+  html body.guided-flow.guided-flagship #saveEstimateForm { display: flex !important; flex-direction: column !important; }
+  html body.guided-flow.guided-flagship #saveEstimatePanelEmail { display: contents !important; }
+  /* Phone becomes the primary, first field */
+  html body.guided-flow.guided-flagship #saveEstimateOptional { order: -2 !important; margin-top: 0 !important; }
+  /* Drop the "(optional)" tag on phone — it's now the primary ask */
+  html body.guided-flow.guided-flagship #saveEstimateOptional > span em { display: none !important; }
+  html body.guided-flow.guided-flagship #saveEstimateOptional > span::after { content: " (we'll text or call)" !important; font-weight: 400 !important; font-size: 0.78rem !important; color: var(--p2-muted, #6b7280) !important; }
+  /* Mark email + name as clearly optional now */
+  html body.guided-flow.guided-flagship #saveEstimatePanelEmail > label:not(#saveEstimateOptional) > span::after,
+  html body.guided-flow.guided-flagship #saveEstimateForm > label.studio-field > span::after { content: " · optional" !important; font-weight: 400 !important; font-size: 0.78rem !important; color: var(--p2-muted, #6b7280) !important; }
+}
+
+/* PHASE 4 — MOBILE JUICE (max-width:767 only): tasteful motion that makes the
+   tool feel alive. All respects prefers-reduced-motion. Desktop unaffected. */
+@media (max-width: 767px) {
+  /* Payment number reveal pop */
+  html body.guided-flow.guided-flagship .studio-amount.mmg-reveal-shimmer {
+    animation: mmgRevealPop 0.55s cubic-bezier(0.22, 1, 0.36, 1) both !important;
+  }
+  @keyframes mmgRevealPop {
+    0% { transform: scale(0.9); }
+    55% { transform: scale(1.04); }
+    100% { transform: scale(1); }
+  }
+  /* Springy press on all tap controls */
+  html body.guided-flow.guided-flagship .studio-chip,
+  html body.guided-flow.guided-flagship .dest-term-pill,
+  html body.guided-flow.guided-flagship .dest-program-pill,
+  html body.guided-flow.guided-flagship .dest-points-pill,
+  html body.guided-flow.guided-flagship .guided-choice-card,
+  html body.guided-flow.guided-flagship .ultimate-program-btn,
+  html body.guided-flow.guided-flagship .studio-cta,
+  html body.guided-flow.guided-flagship .btn-wizard-next {
+    transition: transform 0.12s ease, box-shadow 0.12s ease !important;
+  }
+  html body.guided-flow.guided-flagship .studio-chip:active,
+  html body.guided-flow.guided-flagship .dest-term-pill:active,
+  html body.guided-flow.guided-flagship .dest-program-pill:active,
+  html body.guided-flow.guided-flagship .dest-points-pill:active,
+  html body.guided-flow.guided-flagship .guided-choice-card:active,
+  html body.guided-flow.guided-flagship .ultimate-program-btn:active,
+  html body.guided-flow.guided-flagship .studio-cta:active,
+  html body.guided-flow.guided-flagship .btn-wizard-next:active {
+    transform: scale(0.965) !important;
+  }
+  /* Snappy step entrance */
+  html body.guided-flow.guided-flagship .wizard-step.wizard-step-active {
+    animation: mmgStepIn 0.28s ease-out both;
+  }
+  @keyframes mmgStepIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  /* Bigger, friendlier range thumbs for thumbs */
+  html body.guided-flow.guided-flagship input[type="range"]::-webkit-slider-thumb {
+    transition: transform 0.1s ease;
+  }
+  html body.guided-flow.guided-flagship input[type="range"]:active::-webkit-slider-thumb {
+    transform: scale(1.15);
+  }
+}
+@media (max-width: 767px) and (prefers-reduced-motion: reduce) {
+  html body.guided-flow.guided-flagship .studio-amount.mmg-reveal-shimmer,
+  html body.guided-flow.guided-flagship .wizard-step.wizard-step-active { animation: none !important; }
+}
+
+/* PHASE 4 — Mobile credit step: compact so the "Typical vs Martini rate" strip
+   fits above the pinned nav (less scrolling). Mobile only. */
+@media (max-width: 767px) {
+  html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-credit-intro { margin-bottom: 0.45rem !important; }
+  html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-credit-intro .guided-title,
+  html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-credit-intro .wizard-title { font-size: 1.7rem !important; }
+  html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-credit-intro .guided-lead { font-size: 0.85rem !important; }
+  html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-credit-card { padding: 0.85rem 1rem !important; }
+  html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-score-number { font-size: 2.5rem !important; line-height: 1 !important; }
+  html body.guided-flow.guided-flagship [data-step-id="loan-credit"] #creditScore { margin: 0.45rem 0 !important; }
+  html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .credit-tier-picker { margin-top: 0.45rem !important; gap: 0.4rem !important; }
+  html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-term-block { margin-top: 0.55rem !important; }
+  html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-term-picker { margin-top: 0.4rem !important; }
+  html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-rate-panel { margin-top: 0.55rem !important; }
+  html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-rate-strip-ro { padding: 0.55rem 0.7rem !important; }
+}
+
+/* PHASE 4 — Credit step (mobile): the U.S.-average tax/insurance banner already
+   showed on the price & loan steps; hiding it here reclaims ~60px so the
+   "Typical vs Martini rate" strip clears the pinned nav without scrolling. */
+@media (max-width: 767px) {
+  html body.guided-flow.guided-flagship[data-wizard-step="5"] #guidedNationalBanner,
+  html body.guided-flow.guided-flagship[data-wizard-step="5"] .guided-national-banner {
+    display: none !important;
+  }
+}

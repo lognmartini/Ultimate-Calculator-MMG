@@ -663,6 +663,7 @@
               <p class="studio-lead-flag">Your next step</p>
               <h3 class="studio-lead-title save-estimate-title" id="saveEstimateHeading">Get your free buyer consultation</h3>
               <p class="studio-lead-copy save-estimate-lead">No commitment and no credit pull. Your info goes straight to the Martini Mortgage Group team so they can reach out ASAP with your numbers and next steps.</p>
+              <p class="studio-lead-mobilenote">📱 Fastest way — drop your mobile and Logan will reach out with these exact numbers. No credit pull.</p>
               <form id="saveEstimateForm" class="studio-lead-form save-estimate-form">
                 <label class="studio-field"><span>Name</span>
                   <input type="text" id="saveEstimateName" name="name" placeholder="First name" autocomplete="given-name" />
@@ -1426,6 +1427,91 @@
         rebalanceResultsColumns();
       }
       document.addEventListener("mmg-calculated", rebalanceResultsColumns);
+
+      /* Phone-first lead capture on MOBILE only (<=767px). The email field is
+         `required` by default (native validation blocks phone-only submit); on
+         phones we drop that so a mobile number alone is enough (lead-capture.js
+         enforces a valid phone there and treats email as optional). Desktop is
+         untouched — email stays required. */
+      function setupMobilePhoneFirst() {
+        var isMobile = window.matchMedia && window.matchMedia("(max-width: 767px)").matches;
+        var email = document.getElementById("saveEstimateEmail");
+        if (!email) return;
+        if (isMobile) {
+          email.required = false;
+          email.removeAttribute("required");
+        }
+      }
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", setupMobilePhoneFirst);
+      } else {
+        setupMobilePhoneFirst();
+      }
+      // Re-assert after the lead code binds its tabs / reaches results
+      document.addEventListener("mmg-calculated", setupMobilePhoneFirst);
+      window.addEventListener("mmg-wizard-results", setupMobilePhoneFirst);
+      window.setTimeout(setupMobilePhoneFirst, 1200);
+    })();
+  </script>
+
+  <!-- MOBILE JUICE (phones only): count-up reveal, light haptics, tick pulse.
+       All guarded to <=767px so desktop is never affected. -->
+  <script>
+    (function () {
+      function isMobile() {
+        return !!(window.matchMedia && window.matchMedia("(max-width: 767px)").matches);
+      }
+      var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      /* Light haptic on slider drag + chip taps (Android Chrome supports it;
+         iOS ignores it silently — harmless). Throttled so drags don't buzz. */
+      var lastBuzz = 0;
+      function buzz(ms) {
+        if (!isMobile() || !navigator.vibrate) return;
+        var now = (window.performance && performance.now) ? performance.now() : 0;
+        if (now - lastBuzz < 45) return;
+        lastBuzz = now;
+        try { navigator.vibrate(ms || 6); } catch (e) {}
+      }
+      document.addEventListener("input", function (e) {
+        var t = e.target;
+        if (t && t.type === "range") buzz(5);
+      }, true);
+      document.addEventListener("click", function (e) {
+        var t = e.target && e.target.closest ? e.target.closest(".studio-chip, .dest-term-pill, .dest-program-pill, .dest-points-pill, .guided-choice-card, .ultimate-program-btn") : null;
+        if (t) buzz(9);
+      }, true);
+
+      /* One-time count-up reveal of the payment number when results first show. */
+      function countUpReveal() {
+        if (!isMobile() || reduceMotion) return;
+        var el = document.getElementById("pitiPayment");
+        if (!el || el.dataset.counted) return;
+        var finalText = (el.textContent || "").trim();
+        var finalNum = parseFloat(finalText.replace(/[^0-9.]/g, ""));
+        if (!isFinite(finalNum) || finalNum <= 0) return; // wait until a real value exists
+        el.dataset.counted = "1";
+        var start = Math.round(finalNum * 0.62);
+        var dur = 620, t0 = null, raf = 0, done = false;
+        function finish() { if (done) return; done = true; if (raf) cancelAnimationFrame(raf); el.textContent = finalText; }
+        function fmt(n) { return "$" + Math.round(n).toLocaleString("en-US"); }
+        function step(ts) {
+          if (t0 === null) t0 = ts;
+          var p = Math.min(1, (ts - t0) / dur);
+          var eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = fmt(start + (finalNum - start) * eased);
+          if (p < 1) { raf = requestAnimationFrame(step); } else { finish(); }
+        }
+        el.classList.add("mmg-reveal-shimmer");
+        raf = requestAnimationFrame(step);
+        // If the user starts adjusting mid-animation, snap to the true value.
+        ["pointerdown", "input"].forEach(function (ev) {
+          document.addEventListener(ev, finish, { once: true, capture: true });
+        });
+        window.setTimeout(function () { el.classList.remove("mmg-reveal-shimmer"); }, 1400);
+      }
+      window.addEventListener("mmg-wizard-results", function () { window.setTimeout(countUpReveal, 120); });
+      document.addEventListener("mmg-calculated", function () { window.setTimeout(countUpReveal, 120); });
     })();
   </script>
 </body>

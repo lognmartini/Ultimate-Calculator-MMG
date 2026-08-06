@@ -320,6 +320,10 @@
     const smsPhone = smsPhoneEl?.value?.trim() || "";
     const digits = smsPhone.replace(/\D/g, "");
     const name = nameEl?.value?.trim() || "";
+    // Phone-first on mobile (<=767px): require a valid mobile number, email
+    // optional. Desktop keeps its original email-required behavior untouched.
+    const isMobileLead = !!(window.matchMedia && window.matchMedia("(max-width: 767px)").matches);
+    const phoneDigits = (phoneEl?.value || "").replace(/\D/g, "");
 
     setFormError("");
 
@@ -334,6 +338,17 @@
         smsConsentEl?.focus();
         return;
       }
+    } else if (isMobileLead) {
+      if (phoneDigits.length < 10) {
+        setFormError("Enter your mobile number so Logan can reach you.");
+        phoneEl?.focus();
+        return;
+      }
+      if (email && !email.includes("@")) {
+        setFormError("Enter a valid email address.");
+        emailEl?.focus();
+        return;
+      }
     } else if (!email || !email.includes("@")) {
       setFormError("Enter a valid email address.");
       emailEl?.focus();
@@ -345,7 +360,13 @@
 
     const assignedLo = resolveAssignedLo();
     const payload = {
-      email: tab === "sms" ? `sms+${digits}@estimate.martinimortgagegroup.com` : email,
+      email:
+        tab === "sms"
+          ? `sms+${digits}@estimate.martinimortgagegroup.com`
+          : email ||
+            (isMobileLead && phoneDigits.length >= 10
+              ? `call+${phoneDigits}@estimate.martinimortgagegroup.com`
+              : email),
       name,
       phone: tab === "sms" ? smsPhone : phoneEl?.value?.trim() || "",
       agent: document.documentElement.dataset.coAgent || "",
@@ -356,7 +377,7 @@
         tab === "sms"
           ? "logan5-sms-estimate"
           : isLogan5()
-            ? "logan5-save-estimate"
+            ? (isMobileLead ? "logan5-mobile-call" : "logan5-save-estimate")
             : isLogan4()
               ? "logan4-save-estimate"
               : isLogan3()
