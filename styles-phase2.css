@@ -1850,9 +1850,12 @@ html body.guided-flow #destRateLabel {
   -webkit-user-select: none !important;
   transition: filter 0.45s ease !important;
 }
-body.mmg-rate-unlocked .mmg-rate-lock,
-html body.guided-flow.mmg-rate-unlocked #destRateLabel,
-html body.guided-flow.guided-flagship.mmg-rate-unlocked #destRateLabel {
+/* The illustrative rate is shown OPENLY on the results/hero page (with APR in
+   small print for Reg Z); it stays blurred only on the steps BEFORE results so
+   visitors click through to their estimate instead of grabbing the rate early. */
+body.wizard-on-results .mmg-rate-lock,
+html body.guided-flow.wizard-on-results #destRateLabel,
+html body.guided-flow.guided-flagship.wizard-on-results #destRateLabel {
   filter: none !important;
   -webkit-filter: none !important;
 }
@@ -1869,7 +1872,14 @@ html body.guided-flow .studio-hero .mmg-rate-lock-note,
 html body.guided-flow .guided-results-rate-line .mmg-rate-lock-note {
   color: rgba(255, 255, 255, 0.82) !important;
 }
-body.mmg-rate-unlocked .mmg-rate-lock-note { display: none !important; }
+body.wizard-on-results .mmg-rate-lock-note { display: none !important; }
+/* Small-print APR next to the shown rate on the results hero (Reg Z) */
+html body.guided-flow .mmg-hero-apr {
+  font-size: 0.78rem !important;
+  opacity: 0.82 !important;
+  margin-left: 0.2rem !important;
+  font-weight: 500 !important;
+}
 
 /* PHASE 5 — center the now-single estimated-rate tile (typical column removed) */
 html body.guided-flow.guided-flagship .guided-rate-strip-ro { display: flex !important; justify-content: center !important; }

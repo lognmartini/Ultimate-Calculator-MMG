@@ -520,15 +520,15 @@
             <!-- 3. Rate: compact read-only strip; edit in details -->
             <div class="guided-rate-panel guided-rate-slim">
               <div class="guided-rate-strip-ro" aria-live="polite">
-                <div class="guided-rate-strip-col mmg-compare-removed">
-                  <span class="guided-rate-strip-label">Typical lender</span>
+                <div class="guided-rate-strip-col">
+                  <span class="guided-rate-strip-label">National average</span>
                   <strong class="guided-rate-strip-value" id="marketRateDisplay">6.5%</strong>
                 </div>
                 <div class="guided-rate-strip-col guided-rate-strip-martini">
                   <span class="guided-rate-strip-label">Your estimated rate</span>
                   <strong class="guided-rate-strip-value mmg-rate-lock" id="guidedMartiniRateDisplay">6.25%</strong>
                   <span class="rate-savings-chip guided-rate-savings hidden mmg-compare-removed" id="rateSavingsChip"></span>
-                  <span class="mmg-rate-lock-note">🔒 Unlocks with your free estimate — Logan confirms your exact rate</span>
+                  <span class="mmg-rate-lock-note">🔒 Reveals on your estimate — Logan confirms your exact rate</span>
                 </div>
               </div>
               <details class="guided-rate-details guided-rate-advanced">
@@ -562,10 +562,11 @@
               <p class="studio-amount total-amount" id="pitiPayment" aria-live="polite">—</p>
               <p class="studio-sub" id="pitiHeroSub">Principal &amp; interest · taxes · insurance<span id="pitiHeroExtrasHint"></span></p>
               <p class="studio-rates guided-results-rate-line" id="guidedResultsRateLine" aria-live="polite">
-                <span>Est. rate <strong class="mmg-rate-lock" id="ultimatePaymentMartiniRate">—</strong></span>
-                <span class="studio-vs mmg-compare-removed" aria-hidden="true">vs</span>
-                <span class="mmg-compare-removed">Typical <strong id="ultimatePaymentMarketRate">—</strong></span>
-                <span class="mmg-rate-lock-note">🔒 Unlocks below with your free estimate</span>
+                <span>Your rate <strong class="mmg-rate-lock" id="ultimatePaymentMartiniRate">—</strong></span>
+                <span class="mmg-hero-apr">· est. APR <strong id="heroAprDisplay">—</strong></span>
+                <span class="studio-vs" aria-hidden="true">vs</span>
+                <span>National avg <strong id="ultimatePaymentMarketRate">—</strong></span>
+                <span class="mmg-rate-lock-note">🔒 Reveals on your estimate</span>
               </p>
               <div class="rx-engine-hidden" aria-hidden="true">
                 <span id="totalPayment">$0</span>
@@ -1073,9 +1074,9 @@
             <span class="wizard-live-preview-label">Est. monthly payment</span>
             <span class="wizard-live-preview-amount" id="wizardLivePayment">—</span>
             <p class="guided-live-rate-pair" id="guidedLiveRatePair">
-              <span>Est. rate <strong class="mmg-rate-lock" id="guidedLiveMartiniRate">—</strong></span>
-              <span class="guided-live-rate-sep mmg-compare-removed" aria-hidden="true">·</span>
-              <span class="mmg-compare-removed">Typical <strong id="guidedLiveTypicalRate">—</strong></span>
+              <span>Your rate <strong class="mmg-rate-lock" id="guidedLiveMartiniRate">—</strong></span>
+              <span class="guided-live-rate-sep" aria-hidden="true">·</span>
+              <span>National avg <strong id="guidedLiveTypicalRate">—</strong></span>
             </p>
           </div>
           <ul class="guided-live-breakdown" id="guidedLiveBreakdown">
@@ -1514,6 +1515,23 @@
       }
       window.addEventListener("mmg-wizard-results", function () { window.setTimeout(countUpReveal, 120); });
       document.addEventListener("mmg-calculated", function () { window.setTimeout(countUpReveal, 120); });
+    })();
+  </script>
+
+  <!-- Mirror the computed Martini APR next to the shown rate on the results hero
+       (Reg Z: an advertised rate is shown with its APR). -->
+  <script>
+    (function () {
+      function syncHeroApr() {
+        var src = document.getElementById("feeSheetMartiniApr");
+        var dst = document.getElementById("heroAprDisplay");
+        if (!src || !dst) return;
+        var v = (src.textContent || "").trim();
+        if (v) dst.textContent = v;
+      }
+      document.addEventListener("mmg-calculated", syncHeroApr);
+      window.addEventListener("mmg-wizard-results", syncHeroApr);
+      window.setTimeout(syncHeroApr, 600);
     })();
   </script>
 </body>

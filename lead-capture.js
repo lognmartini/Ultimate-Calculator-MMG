@@ -400,9 +400,6 @@
       });
       if (!res.ok) throw new Error("save failed");
 
-      // Unlock the frosted-blurred illustrative rate now that the lead is in.
-      document.body.classList.add("mmg-rate-unlocked");
-
       form?.classList.add("hidden");
       document.getElementById("saveEstimateRestore")?.classList.add("hidden");
       if (successEl) {
