@@ -3,7 +3,7 @@
  * Martini offer: 0.25% below comparable market estimate (par, no discount points).
  */
 window.MMG_MARKET = {
-  fallback: { rate30: 6.5, rate15: 5.875, asOf: "estimate" },
+  fallback: { rate30: 6.625, rate15: 6.0, asOf: "estimate" },
   /** Martini pricing: always this much below rounded par for the scenario */
   martiniDiscount: 0.25,
   /** LP buydown note rate is often priced above par before subsidy (e.g. 6.25% par → 6.875% note). */

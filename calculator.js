@@ -680,12 +680,37 @@
     }
   }
 
+  /** Persist a real (live) PMMS result so it survives page reloads within the day. */
+  function persistPmms(dayKey, data) {
+    try {
+      sessionStorage.setItem("mmg_pmms_day", dayKey);
+      sessionStorage.setItem("mmg_pmms_data", JSON.stringify(data));
+    } catch {
+      /* ignore */
+    }
+  }
+
   async function fetchMarketBaseline() {
     const dayKey = pmmsDayKey();
     invalidatePmmsCacheIfNewDay();
+    // Reuse today's real fetch across reloads. We key freshness on mmg_pmms_day
+    // but MUST also have the actual data (mmg_pmms_data) — the in-memory cachedPmms
+    // is reset to the static fallback on every page load, so short-circuiting on it
+    // alone silently pins the display to the fallback rate.
     try {
-      if (sessionStorage.getItem("mmg_pmms_day") === dayKey && cachedPmms) {
-        return cachedPmms;
+      if (sessionStorage.getItem("mmg_pmms_day") === dayKey) {
+        if (pmmsHasValidRates(cachedPmms) && cachedPmms.__live) {
+          return cachedPmms;
+        }
+        const stored = sessionStorage.getItem("mmg_pmms_data");
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          if (pmmsHasValidRates(parsed)) {
+            parsed.__live = true;
+            cachedPmms = parsed;
+            return cachedPmms;
+          }
+        }
       }
     } catch {
       /* ignore */
@@ -700,12 +725,9 @@
         if (res.ok) {
           const data = await res.json();
           if (pmmsHasValidRates(data)) {
+            data.__live = true;
             cachedPmms = data;
-            try {
-              sessionStorage.setItem("mmg_pmms_day", dayKey);
-            } catch {
-              /* ignore */
-            }
+            persistPmms(dayKey, data);
             return cachedPmms;
           }
         }
@@ -717,12 +739,9 @@
       try {
         const fred = await window.MMG_fetchFredPmms();
         if (pmmsHasValidRates(fred)) {
+          fred.__live = true;
           cachedPmms = fred;
-          try {
-            sessionStorage.setItem("mmg_pmms_day", dayKey);
-          } catch {
-            /* ignore */
-          }
+          persistPmms(dayKey, fred);
           return cachedPmms;
         }
       } catch {
