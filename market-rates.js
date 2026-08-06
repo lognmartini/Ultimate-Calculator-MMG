@@ -56,7 +56,8 @@ window.MMG_MIN_LOAN_AMOUNT = 150000;
  * - Refinance: full 0–100% range (model any equity position, incl. cash-out).
  * - Purchase: as high as possible while keeping the loan amount at or above the
  *   minimum loan amount. Rounded DOWN to the slider step (0.5) so the loan never
- *   dips below the minimum. Low-price homes (price <= min loan) are not capped.
+ *   dips below the minimum. Homes priced at or below the minimum loan amount are
+ *   capped at 25% down (the min-loan floor can't apply below that price).
  */
 window.MMG_maxDownPercent = function () {
   try {
@@ -68,7 +69,7 @@ window.MMG_maxDownPercent = function () {
     var priceEl = document.getElementById("homePrice");
     var price = Number(priceEl && priceEl.value) || 0;
     var minLoan = Number(window.MMG_MIN_LOAN_AMOUNT) || 150000;
-    if (price <= minLoan) return 100;
+    if (price <= minLoan) return 25;
     var raw = (1 - minLoan / price) * 100;
     var stepped = Math.floor(raw * 2) / 2;
     return Math.max(0, Math.min(100, stepped));
