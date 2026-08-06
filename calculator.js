@@ -1379,7 +1379,7 @@
 
   function paintDownSliderTrack() {
     if (!els.downPercent) return;
-    // Track max adapts to the scenario (refi = 100%, purchase = capped by min loan)
+    // Track max adapts to the scenario (currently full 0–100% for every scenario)
     els.downPercent.min = "0";
     const scenarioMax = window.MMG_maxDownPercent ? window.MMG_maxDownPercent() : 50;
     els.downPercent.max = String(scenarioMax);

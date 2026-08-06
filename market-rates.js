@@ -46,40 +46,11 @@ window.MMG_MARKET = {
 };
 
 /**
- * Minimum loan amount Martini will originate. Purchase down payment is capped
- * so the resulting loan never falls below this figure.
- */
-window.MMG_MIN_LOAN_AMOUNT = 150000;
-
-/**
  * Highest down-payment / equity percent allowed for the current scenario.
- * - Refinance: full 0–100% range (model any equity position, incl. cash-out).
- * - Purchase: as high as possible while keeping the loan amount at or above the
- *   minimum loan amount. Rounded DOWN to the slider step (0.5) so the loan never
- *   dips below the minimum. Homes priced at or below the minimum loan amount are
- *   capped at 25% down (the min-loan floor can't apply below that price).
+ * Every scenario (purchase and refinance) allows the full 0–100% range.
  */
 window.MMG_maxDownPercent = function () {
-  // Friction-free for now: allow up to 100% down / equity on every scenario.
-  // The min-loan-amount cap below is intentionally kept (but bypassed) so it can
-  // be re-enabled later once the target audience is dialed in — just remove this line.
   return 100;
-  try {
-    var isRefi =
-      document.body &&
-      document.body.dataset &&
-      document.body.dataset.loanGoal === "refinance";
-    if (isRefi) return 100;
-    var priceEl = document.getElementById("homePrice");
-    var price = Number(priceEl && priceEl.value) || 0;
-    var minLoan = Number(window.MMG_MIN_LOAN_AMOUNT) || 150000;
-    if (price <= minLoan) return 25;
-    var raw = (1 - minLoan / price) * 100;
-    var stepped = Math.floor(raw * 2) / 2;
-    return Math.max(0, Math.min(100, stepped));
-  } catch (e) {
-    return 100;
-  }
 };
 
 window.MMG_roundToEighth = function (rate) {
