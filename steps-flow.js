@@ -999,7 +999,14 @@
     }
 
     announceStep(currentStep);
-    window.setTimeout(focusActiveStepHeading, 80);
+    // Skip heading auto-focus on the very first render so the initial forward
+    // Tab reaches the "Skip to main content" link (the live region above still
+    // announces the step). Focus the heading on every later step transition so
+    // screen readers announce the new step as usual.
+    if (showStep._rendered) {
+      window.setTimeout(focusActiveStepHeading, 80);
+    }
+    showStep._rendered = true;
 
     document.dispatchEvent(
       new CustomEvent("mmg-wizard-step-change", { detail: { step: currentStep } })

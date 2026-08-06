@@ -1592,3 +1592,75 @@ html body.guided-flow.guided-flagship #guidedResultsDetails .ultimate-wealth-pan
     padding: 0.9rem !important;
   }
 }
+
+/* ============================================================================
+   PHASE 3 — GO-LIVE HARDENING
+   Cross-device QA fixes. No redesign; only correctness/usability.
+   ============================================================================ */
+
+/* 1) TABLET PORTRAIT (768–999px) results: the 3-column desktop layout only
+   applies at >=1000px, and the pre-existing 768px 2-column rule now collides
+   with the rebalanced results DOM (an emptied .studio-main grabbing a grid
+   cell -> big empty gap). Force a clean single-column stack in this range so
+   tablet portrait reads intentionally, like a wide phone. Landscape (>=1000)
+   keeps the balanced 3-column layout. */
+@media (min-width: 768px) and (max-width: 999px) {
+  html body.guided-flow.guided-flagship.wizard-on-results .studio-grid {
+    display: block !important;
+  }
+  /* NOTE: the emptied .studio-main is harmless (0 height) in a block stack, so
+     we deliberately do NOT display:none it — if the rebalance JS ever fails to
+     run, its original hero/breakdown/adjust content still shows (graceful). */
+  html body.guided-flow.guided-flagship.wizard-on-results .studio-grid > .studio-col-a,
+  html body.guided-flow.guided-flagship.wizard-on-results .studio-grid > #destAdjustPanel,
+  html body.guided-flow.guided-flagship.wizard-on-results .studio-grid > .studio-side {
+    width: auto !important;
+    max-width: 640px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-bottom: 1.1rem !important;
+  }
+  /* Cancel the sticky lead card from the 768 rule so it flows in the stack */
+  html body.guided-flow.guided-flagship.wizard-on-results .studio-side {
+    position: static !important;
+    top: auto !important;
+  }
+}
+
+/* 2) SKIP-TO-MAIN-CONTENT link (a11y). Hidden until keyboard-focused. */
+.skip-link {
+  position: absolute;
+  left: 8px;
+  top: -60px;
+  z-index: 100000;
+  background: #1b2352;
+  color: #fff;
+  padding: 0.7rem 1.15rem;
+  border-radius: 0 0 10px 10px;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  transition: top 0.15s ease;
+}
+.skip-link:focus {
+  top: 0;
+  outline: 3px solid #c9a227;
+  outline-offset: 2px;
+}
+
+/* 3) Comfortable tap targets for secondary text controls (mobile thumbs).
+   Must out-specify styles-flagship.css (0,3,2); phase2 loads last so matching
+   the specificity wins. Keep the existing full-width block display and just add
+   a comfortable min-height + vertical padding (full-width x 44px tap area). */
+html body.guided-flow.guided-flagship .save-estimate-skip,
+html body.guided-flow.guided-flagship .studio-skip {
+  min-height: 44px !important;
+  padding-top: 0.7rem !important;
+  padding-bottom: 0.7rem !important;
+  line-height: 1.2 !important;
+}
+html body.guided-flow.guided-flagship .mmg-reviews-link {
+  display: inline-flex !important;
+  align-items: center !important;
+  min-height: 40px !important;
+}
