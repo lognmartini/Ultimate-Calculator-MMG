@@ -1,0 +1,37 @@
+name: Refresh mortgage rates (Freddie Mac PMMS)
+
+# Keeps market-rates.js base rates current from Freddie Mac's weekly PMMS
+# (via FRED's public no-key CSV). PMMS releases Thursdays ~noon ET; a daily
+# run always catches it within hours. Only market-rates.js is touched, and a
+# push to main triggers the normal Render auto-deploy.
+
+on:
+  schedule:
+    - cron: "40 17 * * *"   # daily 17:40 UTC (~1:40pm ET)
+  workflow_dispatch: {}       # lets you run it on-demand from the Actions tab
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-rates
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch PMMS and update market-rates.js
+        run: python3 scripts/update_rates.py
+      - name: Commit if rates changed
+        run: |
+          if git diff --quiet -- market-rates.js; then
+            echo "No rate change today."
+          else
+            git config user.name "mmg-rate-bot"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add market-rates.js
+            git commit -m "Auto: refresh Freddie Mac PMMS base rates"
+            git push
+          fi
