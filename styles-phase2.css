@@ -1884,3 +1884,14 @@ html body.guided-flow .mmg-hero-apr {
 /* PHASE 5 — center the now-single estimated-rate tile (typical column removed) */
 html body.guided-flow.guided-flagship .guided-rate-strip-ro { display: flex !important; justify-content: center !important; }
 html body.guided-flow.guided-flagship .guided-rate-strip-ro .guided-rate-strip-martini { flex: 0 1 auto !important; margin: 0 auto !important; min-width: 240px !important; text-align: center !important; }
+
+/* GROUP A — credit-step reassurance (repeat "no credit pull" at the point of hesitation) */
+html body.guided-flow .guided-credit-nopull {
+  margin: 6px auto 0;
+  max-width: 30rem;
+  font-size: .82rem;
+  line-height: 1.35;
+  color: #b8862b;
+  font-weight: 600;
+  text-align: center;
+}

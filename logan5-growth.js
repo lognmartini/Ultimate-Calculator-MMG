@@ -90,7 +90,13 @@
         RateAlertSignup: "Subscribe",
         ShareLink: "Contact",
       };
-      window.fbq("track", fbMap[eventName] || "ViewContent", payload);
+      // Mapped events → Meta standard events; everything else (Start, StepComplete,
+      // RealtorIntroOpen, …) → a distinct custom event so each is its own retargeting audience.
+      if (fbMap[eventName]) {
+        window.fbq("track", fbMap[eventName], payload);
+      } else {
+        window.fbq("trackCustom", eventName, payload);
+      }
     }
     if (typeof window.gtag === "function") {
       window.gtag("event", eventName, payload);

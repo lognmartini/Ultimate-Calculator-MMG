@@ -113,7 +113,32 @@
         <div class="guided-step-intro guided-centered">
           <p class="guided-kicker">Logan Martini · NMLS #1591485 · ~2 min</p>
           <h1 class="wizard-title guided-title" id="step-goal-title">See your monthly payment</h1>
-          <p class="wizard-lead guided-lead">Tap a path to begin · any U.S. property</p>
+          <p class="wizard-lead guided-lead" id="step-goal-lead">Tap a path to begin · any U.S. property</p>
+          <script>
+          /* Message match: swap the landing headline/subcopy to the ad angle via ?angle=.
+             Defaults to the standard copy for missing/unknown values. Copy only — flow unchanged. */
+          (function () {
+            try {
+              var params = new URLSearchParams(window.location.search);
+              var raw = (params.get("angle") || params.get("hl") || "").toLowerCase().trim();
+              if (!raw) return;
+              var MAP = {
+                value:       { h: "See your monthly payment", s: "Tap a path to begin · any U.S. property" },
+                speed:       { h: "See your real monthly payment in ~2 minutes", s: "No credit pull · any U.S. property" },
+                competitive: { h: "See your rate vs today’s national average", s: "Live daily rates · no credit pull · ~2 min" },
+                firsttime:   { h: "See what you can actually afford", s: "First-time buyer? No credit pull · ~2 min" },
+                refi:        { h: "Could refinancing lower your payment?", s: "See your refinance estimate · no credit pull" }
+              };
+              var ALIAS = { "first-time": "firsttime", fthb: "firsttime", refinance: "refi", compare: "competitive", rate: "competitive", fast: "speed", afford: "firsttime" };
+              var key = MAP[raw] ? raw : (ALIAS[raw] || null);
+              if (!key || !MAP[key]) return;
+              var h1 = document.getElementById("step-goal-title");
+              var lead = document.getElementById("step-goal-lead");
+              if (h1) h1.textContent = MAP[key].h;
+              if (lead) lead.textContent = MAP[key].s;
+            } catch (e) { /* fall back to default copy */ }
+          })();
+          </script>
         </div>
         <div class="guided-choice-grid mmg-choices" role="group" aria-label="Loan goal">
           <button type="button" class="guided-choice-card mmg-choice" data-goal="purchase" id="goalPurchaseBtn">
@@ -479,6 +504,7 @@
           <p class="guided-kicker">Almost done</p>
           <h2 class="wizard-title guided-title" id="step-loan-credit-title">Credit score</h2>
           <p class="wizard-lead guided-lead">Sets your illustrative Martini rate.</p>
+          <p class="guided-credit-nopull"><span aria-hidden="true">🔒</span> No credit pull — a rough estimate is perfectly fine, and this won&rsquo;t affect your score.</p>
         </div>
 
         <div class="wizard-card guided-card guided-card-wide guided-credit-card guided-credit-card-slim p2-credit-2col">
@@ -662,11 +688,11 @@
 
           <div class="studio-side">
             <!-- 4. LEAD — one primary: pre-approval / request call -->
-            <section class="studio-lead save-estimate-card" id="saveEstimateCard" aria-label="Request my call">
+            <section class="studio-lead save-estimate-card" id="saveEstimateCard" aria-label="Get your exact rate">
               <p class="studio-lead-flag">Your next step</p>
-              <h3 class="studio-lead-title save-estimate-title" id="saveEstimateHeading">Get your free buyer consultation</h3>
-              <p class="studio-lead-copy save-estimate-lead">No commitment and no credit pull. Your info goes straight to the Martini Mortgage Group team so they can reach out ASAP with your numbers and next steps.</p>
-              <p class="studio-lead-mobilenote">📱 Fastest way — drop your mobile and Logan will reach out with these exact numbers. No credit pull.</p>
+              <h3 class="studio-lead-title save-estimate-title" id="saveEstimateHeading">Get your exact rate — free</h3>
+              <p class="studio-lead-copy save-estimate-lead">Logan confirms your exact rate and a fast pre-approval path — no commitment, no credit pull. Your info goes straight to the Martini Mortgage Group team.</p>
+              <p class="studio-lead-mobilenote">📱 Fastest way — drop your mobile and Logan texts you these exact numbers today. Rates move daily · one text, no spam · no credit pull.</p>
               <form id="saveEstimateForm" class="studio-lead-form save-estimate-form">
                 <label class="studio-field"><span>Name</span>
                   <input type="text" id="saveEstimateName" name="name" placeholder="First name" autocomplete="given-name" />
@@ -689,11 +715,11 @@
                 </div>
                 <p class="save-estimate-error studio-error hidden" id="saveEstimateError" role="alert" hidden></p>
                 <button type="button" class="save-estimate-expand hidden" id="saveEstimateExpand" tabindex="-1" aria-hidden="true">+</button>
-                <button type="submit" class="studio-cta save-estimate-submit guided-lead-submit">Request my call</button>
+                <button type="submit" class="studio-cta save-estimate-submit guided-lead-submit">Send me my exact rate →</button>
               </form>
-              <button type="button" class="save-estimate-restore" id="saveEstimateRestore" hidden aria-hidden="true" tabindex="-1">Request my call</button>
+              <button type="button" class="save-estimate-restore" id="saveEstimateRestore" hidden aria-hidden="true" tabindex="-1">Send me my exact rate →</button>
               <p class="save-estimate-success studio-success hidden" id="saveEstimateSuccess">You&rsquo;re all set — Logan will reach out shortly to get you started.</p>
-              <p class="studio-reassure save-estimate-reassure"><span aria-hidden="true">🔒</span> No commitment · no credit pull · your info goes only to the Martini Mortgage Group team</p>
+              <p class="studio-reassure save-estimate-reassure"><span aria-hidden="true">🔒</span> No commitment · no credit pull · one text, no spam — your info goes only to the Martini Mortgage Group team</p>
               <p class="studio-nextstep save-estimate-nextstep"><span aria-hidden="true">👋</span> What happens next: Logan personally reviews your numbers and reaches out within 1 business day — no pressure.</p>
               <p class="studio-consent save-estimate-consent">By submitting, you agree Logan Martini &middot; Martini Mortgage Group (Gold Star Mortgage) may call, text, or email you about your estimate and mortgage options. Consent isn&rsquo;t required to do business &middot; message &amp; data rates may apply. Not a loan application, commitment, or rate lock.</p>
               <button type="button" class="studio-skip save-estimate-skip" id="saveEstimateSkip">Not now</button>

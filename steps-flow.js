@@ -46,6 +46,9 @@
   let currentStep = 0;
   let logan5SubView = null;
   let deepLinkBootstrapped = false;
+  // Funnel depth tracking (fires once per depth; dormant until a pixel is installed)
+  let _mmgStartFired = false;
+  let _mmgDeepestStep = -1;
 
   function $(id) {
     return document.getElementById(id);
@@ -866,15 +869,15 @@
     const leadTitle = $("saveEstimateHeading");
     const leadLead = document.querySelector(".save-estimate-lead");
     if (leadTitle && !leadTitle.dataset.userLocked) {
-      leadTitle.textContent = "Get your free buyer consultation";
+      leadTitle.textContent = "Get your exact rate — free";
     }
     if (leadLead) {
       leadLead.textContent =
-        "No commitment and no credit pull. Your info goes straight to the Martini Mortgage Group team so they can reach out ASAP with your numbers and next steps.";
+        "Logan confirms your exact rate and a fast pre-approval path — no commitment, no credit pull. Your info goes straight to the Martini Mortgage Group team.";
     }
     const leadSubmit = document.querySelector(".save-estimate-submit");
     if (leadSubmit && !leadSubmit.classList.contains("is-loading")) {
-      leadSubmit.textContent = "Request my call";
+      leadSubmit.textContent = "Send me my exact rate →";
     }
   }
 
@@ -996,6 +999,33 @@
     } else {
       document.body.classList.remove("wizard-on-results");
       recalculate();
+    }
+
+    // Funnel-depth events for retargeting audiences (Start + Step-Complete).
+    // Guarded + fires once per depth; no-op until a Meta/GA pixel is installed.
+    try {
+      if (typeof window.MMG_trackPixel === "function" && currentStep >= 1) {
+        if (!_mmgStartFired) {
+          _mmgStartFired = true;
+          window.MMG_trackPixel("Start", { goal: getLoanGoal() });
+        }
+        if (currentStep > _mmgDeepestStep) {
+          _mmgDeepestStep = currentStep;
+          // Results view is already tracked separately (ViewPayment) — don't double-count.
+          if (currentStep !== resultsStepIndex()) {
+            const stepEl = getSteps().find(
+              (el) => Number(el.getAttribute("data-step") || 0) === currentStep
+            );
+            window.MMG_trackPixel("StepComplete", {
+              step: currentStep,
+              stepId: stepEl ? stepEl.getAttribute("data-step-id") || String(currentStep) : String(currentStep),
+              goal: getLoanGoal(),
+            });
+          }
+        }
+      }
+    } catch (e) {
+      /* tracking must never break the flow */
     }
 
     announceStep(currentStep);
