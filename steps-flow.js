@@ -894,7 +894,7 @@
     const setDown = (pct) => {
       if (!down) return;
       down.min = "0";
-      down.max = "50";
+      down.max = String(window.MMG_maxDownPercent ? window.MMG_maxDownPercent() : 100);
       down.value = String(pct);
       if (downInput) downInput.value = String(pct);
       down.dispatchEvent(new Event("input", { bubbles: true }));

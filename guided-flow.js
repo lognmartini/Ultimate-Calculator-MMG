@@ -76,12 +76,19 @@
     }, opts.duration || 4000);
   }
 
-  /* ---------- Down slider visual fill (0–50 scale; 20% ≈ 40% of track) ---------- */
+  /* ---------- Down slider visual fill (scale adapts to scenario max) ---------- */
   function paintDownSlider() {
     const el = $("downPercent");
     if (!el) return;
     el.min = "0";
-    if (!el.max || Number(el.max) < 50) el.max = "50";
+    const scenarioMax = window.MMG_maxDownPercent ? window.MMG_maxDownPercent() : 50;
+    el.max = String(scenarioMax);
+    // Never leave the thumb past the allowed max (e.g. after a price drop on a purchase).
+    if (Number(el.value) > scenarioMax) {
+      el.value = String(scenarioMax);
+      const inputEl = $("downPercentInput");
+      if (inputEl) inputEl.value = String(scenarioMax);
+    }
     const max = Number(el.max) || 50;
     const min = Number(el.min) || 0;
     const val = Number(el.value) || 0;
@@ -96,9 +103,10 @@
     const el = $("downPercent");
     const input = $("downPercentInput");
     if (!el) return;
-    const v = Math.max(0, Math.min(50, Number(pct) || 0));
+    const scenarioMax = window.MMG_maxDownPercent ? window.MMG_maxDownPercent() : 50;
+    const v = Math.max(0, Math.min(scenarioMax, Number(pct) || 0));
     el.min = "0";
-    el.max = "50";
+    el.max = String(scenarioMax);
     el.value = String(v);
     if (input) input.value = String(v);
     el.dispatchEvent(new Event("input", { bubbles: true }));

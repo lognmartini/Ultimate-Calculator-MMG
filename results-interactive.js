@@ -133,7 +133,11 @@
     const priceRange = $("destPriceRange");
     const downRange = $("destDownRange");
     if (priceRange) priceRange.value = String(price);
-    if (downRange) downRange.value = String(down);
+    if (downRange) {
+      const scenarioMax = window.MMG_maxDownPercent ? window.MMG_maxDownPercent() : 50;
+      downRange.max = String(scenarioMax);
+      downRange.value = String(Math.min(down, scenarioMax));
+    }
 
     updatePriceLabel(price);
     updateDownLabel(price, down);
@@ -273,7 +277,8 @@
   }
 
   function pushDown(val) {
-    const down = Math.min(50, Math.max(0, Number(val) || 0));
+    const scenarioMax = window.MMG_maxDownPercent ? window.MMG_maxDownPercent() : 50;
+    const down = Math.min(scenarioMax, Math.max(0, Number(val) || 0));
     const el = $("downPercent");
     const input = $("downPercentInput");
     if (el) el.value = String(down);

@@ -641,7 +641,9 @@
     // Enforce program minimums by bumping the value, not by shifting the slider scale.
     if (els.downPercent) {
       els.downPercent.min = "0";
-      els.downPercent.max = "50";
+      els.downPercent.max = String(
+        window.MMG_maxDownPercent ? window.MMG_maxDownPercent() : 50
+      );
     }
     if (els.downPercentInput) {
       els.downPercentInput.min = "0";
@@ -1377,10 +1379,13 @@
 
   function paintDownSliderTrack() {
     if (!els.downPercent) return;
-    // Always 0–50 track so 20% lands ~40% across (not stuck left)
+    // Track max adapts to the scenario (refi = 100%, purchase = capped by min loan)
     els.downPercent.min = "0";
-    if (!els.downPercent.max || Number(els.downPercent.max) < 50) {
-      els.downPercent.max = "50";
+    const scenarioMax = window.MMG_maxDownPercent ? window.MMG_maxDownPercent() : 50;
+    els.downPercent.max = String(scenarioMax);
+    if (Number(els.downPercent.value) > scenarioMax) {
+      els.downPercent.value = String(scenarioMax);
+      if (els.downPercentInput) els.downPercentInput.value = String(scenarioMax);
     }
     const max = Number(els.downPercent.max) || 50;
     const min = Number(els.downPercent.min) || 0;
