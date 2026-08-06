@@ -105,7 +105,7 @@
       <span class="wizard-listing-label">Listing pre-loaded</span>
       <strong class="wizard-listing-address" id="socialListingAddress"></strong>
     </div>
-    <p class="ultimate-realtor-strip hidden" id="ultimateRealtorStrip" role="status"></p>
+    <p class="ultimate-realtor-strip hidden mmg-realtor-removed" id="ultimateRealtorStrip" role="status"></p>
 
     <!-- STEP 0: Purchase or refinance -->
     <section class="wizard-step wizard-step-active guided-step guided-choice-step" data-step="0" data-step-id="goal" aria-labelledby="step-goal-title">
@@ -138,7 +138,7 @@
         <div class="mmg-benefits" aria-label="Why use this calculator">
           <div class="mmg-benefit"><span class="mmg-benefit-ic" aria-hidden="true">📈</span><strong>Live daily rates</strong><span>Freddie Mac &amp; 10-yr Treasury</span></div>
           <div class="mmg-benefit"><span class="mmg-benefit-ic" aria-hidden="true">📍</span><strong>Real taxes by address</strong><span>County tax &amp; insurance, any U.S. home</span></div>
-          <div class="mmg-benefit"><span class="mmg-benefit-ic" aria-hidden="true">⚖️</span><strong>Martini vs. typical lender</strong><span>Your savings, side by side</span></div>
+          <div class="mmg-benefit"><span class="mmg-benefit-ic" aria-hidden="true">🔒</span><strong>No credit pull</strong><span>See your numbers, zero risk</span></div>
           <div class="mmg-benefit"><span class="mmg-benefit-ic" aria-hidden="true">🔒</span><strong>Private &amp; instant</strong><span>No credit pull · ~2 minutes</span></div>
         </div>
 
@@ -520,14 +520,15 @@
             <!-- 3. Rate: compact read-only strip; edit in details -->
             <div class="guided-rate-panel guided-rate-slim">
               <div class="guided-rate-strip-ro" aria-live="polite">
-                <div class="guided-rate-strip-col">
+                <div class="guided-rate-strip-col mmg-compare-removed">
                   <span class="guided-rate-strip-label">Typical lender</span>
                   <strong class="guided-rate-strip-value" id="marketRateDisplay">6.5%</strong>
                 </div>
                 <div class="guided-rate-strip-col guided-rate-strip-martini">
-                  <span class="guided-rate-strip-label">Your Martini rate</span>
-                  <strong class="guided-rate-strip-value" id="guidedMartiniRateDisplay">6.25%</strong>
-                  <span class="rate-savings-chip guided-rate-savings hidden" id="rateSavingsChip"></span>
+                  <span class="guided-rate-strip-label">Your estimated rate</span>
+                  <strong class="guided-rate-strip-value mmg-rate-lock" id="guidedMartiniRateDisplay">6.25%</strong>
+                  <span class="rate-savings-chip guided-rate-savings hidden mmg-compare-removed" id="rateSavingsChip"></span>
+                  <span class="mmg-rate-lock-note">🔒 Unlocks with your free estimate — Logan confirms your exact rate</span>
                 </div>
               </div>
               <details class="guided-rate-details guided-rate-advanced">
@@ -561,14 +562,15 @@
               <p class="studio-amount total-amount" id="pitiPayment" aria-live="polite">—</p>
               <p class="studio-sub" id="pitiHeroSub">Principal &amp; interest · taxes · insurance<span id="pitiHeroExtrasHint"></span></p>
               <p class="studio-rates guided-results-rate-line" id="guidedResultsRateLine" aria-live="polite">
-                <span>Martini <strong id="ultimatePaymentMartiniRate">—</strong></span>
-                <span class="studio-vs" aria-hidden="true">vs</span>
-                <span>Typical <strong id="ultimatePaymentMarketRate">—</strong></span>
+                <span>Est. rate <strong class="mmg-rate-lock" id="ultimatePaymentMartiniRate">—</strong></span>
+                <span class="studio-vs mmg-compare-removed" aria-hidden="true">vs</span>
+                <span class="mmg-compare-removed">Typical <strong id="ultimatePaymentMarketRate">—</strong></span>
+                <span class="mmg-rate-lock-note">🔒 Unlocks below with your free estimate</span>
               </p>
               <div class="rx-engine-hidden" aria-hidden="true">
                 <span id="totalPayment">$0</span>
                 <div id="totalWithExtras" class="hidden" aria-hidden="true"><span id="extrasNote"></span></div>
-                <div id="leadSavingsRibbon" class="hidden">
+                <div id="leadSavingsRibbon" class="hidden mmg-compare-removed">
                   <div id="leadMonthlySavingsRow" class="hidden"><strong id="leadSavingsAmount">—</strong></div>
                   <div id="leadCashSavingsRow" class="hidden"><strong id="leadCashSavingsAmount">—</strong></div>
                   <p id="leadCashSavingsNote" class="hidden"></p>
@@ -723,7 +725,7 @@
               <p class="studio-more-banner-sub">Edit estimates anytime — figures update live</p>
             </header>
             <div class="studio-more-body">
-              <section class="vs-competition studio-more-block" id="vsCompetition">
+              <section class="vs-competition studio-more-block mmg-compare-removed" id="vsCompetition">
                 <h3 class="studio-more-h" id="vsCompetitionTitle">Martini vs typical</h3>
                 <div class="vs-competition-grid">
                   <div class="vs-comp-col vs-comp-col-them">
@@ -789,7 +791,7 @@
                 </div>
               </div>
 
-              <div class="studio-more-block studio-more-card">
+              <div class="studio-more-block studio-more-card mmg-realtor-removed">
                 <p class="studio-more-h">Need a realtor?</p>
                 <button type="button" class="studio-text-btn" id="guidedResultsRealtorBtn" data-realtor-entry="results-details">Request a free realtor intro</button>
               </div>
@@ -989,7 +991,7 @@
     </section>
 
       
-      <div class="ultimate-subview hidden" id="ultimateRealtorView" role="dialog" aria-modal="true" aria-labelledby="ultimate-realtor-title">
+      <div class="ultimate-subview hidden mmg-realtor-removed" id="ultimateRealtorView" role="dialog" aria-modal="true" aria-labelledby="ultimate-realtor-title">
         <button type="button" class="ultimate-subview-back" id="ultimateRealtorBack">← Back to estimate</button>
         <div class="wizard-card guided-realtor-card">
           <p class="guided-realtor-eyebrow">Free partner intro · no obligation</p>
@@ -1071,9 +1073,9 @@
             <span class="wizard-live-preview-label">Est. monthly payment</span>
             <span class="wizard-live-preview-amount" id="wizardLivePayment">—</span>
             <p class="guided-live-rate-pair" id="guidedLiveRatePair">
-              <span>Martini <strong id="guidedLiveMartiniRate">—</strong></span>
-              <span class="guided-live-rate-sep" aria-hidden="true">·</span>
-              <span>Typical <strong id="guidedLiveTypicalRate">—</strong></span>
+              <span>Est. rate <strong class="mmg-rate-lock" id="guidedLiveMartiniRate">—</strong></span>
+              <span class="guided-live-rate-sep mmg-compare-removed" aria-hidden="true">·</span>
+              <span class="mmg-compare-removed">Typical <strong id="guidedLiveTypicalRate">—</strong></span>
             </p>
           </div>
           <ul class="guided-live-breakdown" id="guidedLiveBreakdown">

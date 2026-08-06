@@ -1825,3 +1825,52 @@ html body.guided-flow.guided-flagship .mmg-reviews-link {
     display: none !important;
   }
 }
+
+/* ============================================================================
+   PHASE 5 — COMPLIANCE (all viewports): no comparison/superiority claims, no
+   realtor referral flow, and the illustrative rate stays frosted-blurred until
+   the visitor submits the lead. Payment is always visible; only the RATE locks.
+   ============================================================================ */
+/* High specificity to beat existing component !important display rules
+   (e.g. styles-site-polish .studio-more-block, #vsCompetition). */
+html body.guided-flow.guided-flagship .mmg-compare-removed,
+html body.guided-flow.guided-flagship .mmg-realtor-removed,
+html body.guided-flow .mmg-compare-removed,
+html body.guided-flow .mmg-realtor-removed { display: none !important; }
+/* #vsCompetition carries an ID-level rule elsewhere — match it by ID. */
+html body.guided-flow.guided-flagship #vsCompetition.mmg-compare-removed,
+html body.guided-flow.wizard-on-results #vsCompetition.mmg-compare-removed { display: none !important; }
+
+/* Frosted-blur the illustrative rate numbers until the lead is captured. */
+.mmg-rate-lock,
+html body.guided-flow #destRateLabel {
+  filter: blur(7px) !important;
+  -webkit-filter: blur(7px) !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  transition: filter 0.45s ease !important;
+}
+body.mmg-rate-unlocked .mmg-rate-lock,
+html body.guided-flow.mmg-rate-unlocked #destRateLabel,
+html body.guided-flow.guided-flagship.mmg-rate-unlocked #destRateLabel {
+  filter: none !important;
+  -webkit-filter: none !important;
+}
+.mmg-rate-lock-note {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--p2-muted, #6b7280);
+  margin-top: 0.3rem;
+  line-height: 1.3;
+}
+/* On the navy results hero the note needs light text */
+html body.guided-flow .studio-hero .mmg-rate-lock-note,
+html body.guided-flow .guided-results-rate-line .mmg-rate-lock-note {
+  color: rgba(255, 255, 255, 0.82) !important;
+}
+body.mmg-rate-unlocked .mmg-rate-lock-note { display: none !important; }
+
+/* PHASE 5 — center the now-single estimated-rate tile (typical column removed) */
+html body.guided-flow.guided-flagship .guided-rate-strip-ro { display: flex !important; justify-content: center !important; }
+html body.guided-flow.guided-flagship .guided-rate-strip-ro .guided-rate-strip-martini { flex: 0 1 auto !important; margin: 0 auto !important; min-width: 240px !important; text-align: center !important; }
