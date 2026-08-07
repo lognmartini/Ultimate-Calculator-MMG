@@ -869,15 +869,15 @@
     const leadTitle = $("saveEstimateHeading");
     const leadLead = document.querySelector(".save-estimate-lead");
     if (leadTitle && !leadTitle.dataset.userLocked) {
-      leadTitle.textContent = "Get your exact rate — free";
+      leadTitle.textContent = "Get your free consultation";
     }
     if (leadLead) {
       leadLead.textContent =
-        "Logan confirms your exact rate and a fast pre-approval path — no commitment, no credit pull. Your info goes straight to the Martini Mortgage Group team.";
+        "Logan reviews your numbers and walks you through your personalized options — no commitment, no credit pull. Your info goes straight to the Martini Mortgage Group team.";
     }
     const leadSubmit = document.querySelector(".save-estimate-submit");
     if (leadSubmit && !leadSubmit.classList.contains("is-loading")) {
-      leadSubmit.textContent = "Send me my exact rate →";
+      leadSubmit.textContent = "Request Free Consultation";
     }
   }
 

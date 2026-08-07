@@ -109,16 +109,16 @@
       const title = document.getElementById("saveEstimateHeading");
       const lead = document.querySelector(".save-estimate-lead, .dest-lead-copy");
       if (title) {
-        title.textContent = "Get your exact rate — free";
+        title.textContent = "Get your free consultation";
       }
       if (lead) {
         lead.textContent =
-          "Logan confirms your exact rate and a fast pre-approval path — no commitment, no credit pull. Your info goes straight to the Martini Mortgage Group team.";
+          "Logan reviews your numbers and walks you through your personalized options — no commitment, no credit pull. Your info goes straight to the Martini Mortgage Group team.";
       }
       const submitBtn = document.querySelector(
         ".save-estimate-submit, #saveEstimateForm [type='submit']"
       );
-      if (submitBtn) submitBtn.textContent = "Send me my exact rate →";
+      if (submitBtn) submitBtn.textContent = "Request Free Consultation";
       el.classList.remove("guided-lead-collapsed");
     }
   }
@@ -145,7 +145,7 @@
       if (title) title.textContent = "Ready when you are";
       if (lead) {
         lead.innerHTML =
-          '<button type="button" class="dest-reopen-lead" id="destReopenLead">Send me my exact rate →</button>';
+          '<button type="button" class="dest-reopen-lead" id="destReopenLead">Request Free Consultation</button>';
         document.getElementById("destReopenLead")?.addEventListener(
           "click",
           () => showCard(),
@@ -286,7 +286,7 @@
   }
 
   function defaultSubmitLabel(tab) {
-    return tab === "sms" ? "Send me my exact rate →" : "Send me my exact rate →";
+    return tab === "sms" ? "Request Free Consultation" : "Request Free Consultation";
   }
 
   function applyImpactLeadCopy(tab) {
@@ -295,16 +295,16 @@
       document.querySelector(".save-estimate-title");
     const lead = document.querySelector(".save-estimate-lead");
     if (title) {
-      title.textContent = "Get your exact rate — free";
+      title.textContent = "Get your free consultation";
     }
     if (lead) {
       lead.textContent =
-        "Logan confirms your exact rate and reviews your numbers — usually the same business day. No credit pull, no obligation.";
+        "Logan reviews your numbers and personalized options — usually the same business day. No credit pull, no obligation.";
     }
     const submitBtn = document.querySelector(
       ".save-estimate-submit, #saveEstimateForm [type='submit']"
     );
-    if (submitBtn) submitBtn.textContent = "Send me my exact rate →";
+    if (submitBtn) submitBtn.textContent = "Request Free Consultation";
   }
 
   async function submitLead(form) {
