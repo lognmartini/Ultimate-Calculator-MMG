@@ -1,7 +1,7 @@
 /* Navy adjustments on the current site format: clickable buttons, headshot under buttons,
    trust + benefits + reviews. High-specificity prefix so overrides win. */
 
-:root { --navy: #252f6e; --navy-deep: #1b2352; --gold: #c9a227; --muted: #5b6486; --line: #e6e8f0; --star: #e8c84a; }
+:root { --navy: #21292D; --navy-deep: #040708; --gold: #D13239; --muted: #555555; --line: #e6e8f0; --star: #E04A50; }
 
 html body.guided-flow.guided-flagship .mmg-panel { max-width: 640px; margin: 0 auto; }
 
@@ -12,9 +12,9 @@ html body.guided-flow.guided-flagship .mmg-choices {
 }
 html body.guided-flow.guided-flagship .mmg-choice {
   display: flex !important; flex-direction: column; align-items: center; gap: 0.25rem;
-  background: #fff !important; border: 1.5px solid rgba(37, 47, 110, 0.16) !important;
+  background: #fff !important; border: 1.5px solid rgba(33, 41, 45, 0.16) !important;
   border-radius: 18px !important; padding: 1.5rem 1.1rem 1.25rem !important; cursor: pointer;
-  box-shadow: 0 8px 22px rgba(37, 47, 110, 0.09) !important;
+  box-shadow: 0 8px 22px rgba(33, 41, 45, 0.09) !important;
   transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease !important;
   position: relative; overflow: hidden;
 }
@@ -30,7 +30,7 @@ html body.guided-flow.guided-flagship .mmg-choice::after {
 html body.guided-flow.guided-flagship .mmg-choice:hover,
 html body.guided-flow.guided-flagship .mmg-choice:focus-visible {
   transform: translateY(-4px) !important; background: var(--navy) !important; border-color: var(--navy) !important;
-  box-shadow: 0 18px 38px rgba(37, 47, 110, 0.28) !important; outline: none;
+  box-shadow: 0 18px 38px rgba(33, 41, 45, 0.28) !important; outline: none;
 }
 html body.guided-flow.guided-flagship .mmg-choice:hover strong,
 html body.guided-flow.guided-flagship .mmg-choice:focus-visible strong,
@@ -43,7 +43,7 @@ html body.guided-flow.guided-flagship .mmg-choice:focus-visible::after { opacity
 .mmg-choice-ic {
   display: inline-flex !important; align-items: center; justify-content: center;
   width: 60px; height: 60px; border-radius: 50%; margin: 0 auto 0.35rem !important;
-  background: rgba(37, 47, 110, 0.08); font-size: 1.85rem;
+  background: rgba(33, 41, 45, 0.08); font-size: 1.85rem;
 }
 html body.guided-flow.guided-flagship .mmg-choice strong { color: var(--navy) !important; font-size: 1.15rem !important; }
 .mmg-choice-sub { color: var(--muted) !important; font-size: 0.85rem !important; }
@@ -53,12 +53,12 @@ html body.guided-flow.guided-flagship .mmg-choice strong { color: var(--navy) !i
 .mmg-hs { text-align: center; margin: 1.9rem auto 0.5rem; }
 .mmg-hs-img {
   width: 118px; height: 118px; border-radius: 50%; object-fit: cover; object-position: 50% 22%;
-  border: 4px solid #fff; box-shadow: 0 10px 26px rgba(27, 35, 82, 0.22), 0 0 0 1px var(--line);
+  border: 4px solid #fff; box-shadow: 0 10px 26px rgba(4, 7, 8, 0.22), 0 0 0 1px var(--line);
   margin: 0 auto 0.6rem; display: block; background: #eef1f8;
 }
 .mmg-hs-name { font-weight: 800; color: var(--navy); font-size: 1.1rem; margin: 0; }
 .mmg-hs-title { color: var(--muted); font-size: 0.85rem; margin: 0.1rem 0 0.4rem; }
-.mmg-hs-trust { font-size: 0.86rem; color: #2b3252; margin: 0; }
+.mmg-hs-trust { font-size: 0.86rem; color: #21292D; margin: 0; }
 .mmg-hs-trust strong { color: var(--navy); }
 .mmg-stars { color: var(--star); letter-spacing: 1px; }
 
@@ -70,19 +70,19 @@ html body.guided-flow.guided-flagship .mmg-choice strong { color: var(--navy) !i
 .mmg-benefit { text-align: center; }
 .mmg-benefit-ic {
   display: inline-flex; align-items: center; justify-content: center; width: 46px; height: 46px;
-  border-radius: 13px; background: rgba(37, 47, 110, 0.07); font-size: 1.35rem; margin-bottom: 0.45rem;
+  border-radius: 13px; background: rgba(33, 41, 45, 0.07); font-size: 1.35rem; margin-bottom: 0.45rem;
 }
 .mmg-benefit strong { display: block; color: var(--navy); font-size: 0.9rem; margin-bottom: 0.1rem; }
 .mmg-benefit span { font-size: 0.78rem; color: var(--muted); line-height: 1.35; }
 
 /* ── Reviews carousel ── */
 .mmg-reviews { max-width: 600px; margin: 1.9rem auto 0.5rem; text-align: center; }
-.mmg-reviews-head { font-size: 0.88rem; color: #2b3252; margin-bottom: 0.5rem; }
+.mmg-reviews-head { font-size: 0.88rem; color: #21292D; margin-bottom: 0.5rem; }
 .mmg-reviews-head strong { color: var(--navy); }
 .mmg-review-track { position: relative; display: grid; min-height: 84px; }
 .mmg-review {
   grid-area: 1 / 1; margin: 0; padding: 0 1rem; font-size: 1.05rem; font-style: italic;
-  color: #2b3252; line-height: 1.5; opacity: 0; transform: translateY(6px);
+  color: #21292D; line-height: 1.5; opacity: 0; transform: translateY(6px);
   transition: opacity 0.5s ease, transform 0.5s ease; pointer-events: none;
 }
 .mmg-review.is-active { opacity: 1; transform: none; pointer-events: auto; }
@@ -98,7 +98,7 @@ html body.guided-flow.guided-flagship .mmg-choice strong { color: var(--navy) !i
     display: flex; gap: 0.6rem; position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
     padding: 0.6rem 0.9rem calc(0.6rem + env(safe-area-inset-bottom, 0px));
     background: rgba(255, 255, 255, 0.97); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
-    border-top: 1px solid var(--line); box-shadow: 0 -6px 20px rgba(27, 35, 82, 0.1);
+    border-top: 1px solid var(--line); box-shadow: 0 -6px 20px rgba(4, 7, 8, 0.1);
   }
   .mmg-mcall { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; padding: 0.85rem 1.05rem; border-radius: 12px; border: 1.5px solid var(--navy); color: var(--navy); font-weight: 700; text-decoration: none; }
   .mmg-mstart { flex: 1; padding: 0.85rem 1rem; border-radius: 12px; border: none; background: var(--navy); color: #fff; font-weight: 700; font-size: 1rem; cursor: pointer; }
@@ -122,7 +122,7 @@ html body.guided-flow.guided-flagship .mmg-choice strong { color: var(--navy) !i
 html body.guided-flow.guided-flagship .studio-lead {
   border: 2px solid var(--gold) !important;
   border-radius: 16px !important;
-  box-shadow: 0 16px 40px rgba(37, 47, 110, 0.16), 0 2px 0 rgba(201, 162, 39, 0.35) !important;
+  box-shadow: 0 16px 40px rgba(33, 41, 45, 0.16), 0 2px 0 rgba(209, 50, 57, 0.35) !important;
   position: relative;
   padding-top: 1.6rem !important;
 }
@@ -153,7 +153,7 @@ html body.guided-flow.guided-flagship .studio-lead .save-estimate-submit {
   min-height: 54px !important;
   font-size: 1.08rem !important;
   letter-spacing: 0.01em !important;
-  box-shadow: 0 10px 24px rgba(37, 47, 110, 0.22) !important;
+  box-shadow: 0 10px 24px rgba(33, 41, 45, 0.22) !important;
 }
 html body.guided-flow.guided-flagship .studio-lead .save-estimate-submit::after {
   content: " →";
@@ -168,7 +168,7 @@ html body.guided-flow.guided-flagship .studio-reassure {
   margin: 0.6rem 0 0 !important;
   font-size: 0.74rem !important;
   font-weight: 600 !important;
-  color: #2b3252 !important;
+  color: #21292D !important;
   line-height: 1.35 !important;
 }
 html body.guided-flow.guided-flagship .studio-reassure span { color: var(--navy); }
@@ -188,7 +188,7 @@ html body.guided-flow.guided-flagship .studio-trust img {
 }
 html body.guided-flow.guided-flagship .studio-trust-nmls { font-weight: 600; color: var(--muted); font-size: 0.82rem; }
 html body.guided-flow.guided-flagship .studio-trust-proof {
-  display: block; margin-top: 0.1rem; font-size: 0.82rem; color: #2b3252;
+  display: block; margin-top: 0.1rem; font-size: 0.82rem; color: #21292D;
 }
 html body.guided-flow.guided-flagship .studio-trust-stars { color: var(--star); letter-spacing: 0.5px; }
 
@@ -200,7 +200,7 @@ html body.guided-flow.guided-flagship .studio-mobilebar { display: none; }
     padding: 0.6rem 0.9rem calc(0.6rem + env(safe-area-inset-bottom, 0px));
     background: rgba(255, 255, 255, 0.97);
     -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
-    border-top: 1px solid var(--line); box-shadow: 0 -6px 20px rgba(27, 35, 82, 0.12);
+    border-top: 1px solid var(--line); box-shadow: 0 -6px 20px rgba(4, 7, 8, 0.12);
   }
   html body.guided-flow.guided-flagship .studio-mcall {
     display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto;
@@ -209,7 +209,7 @@ html body.guided-flow.guided-flagship .studio-mobilebar { display: none; }
   }
   html body.guided-flow.guided-flagship .studio-mstart {
     flex: 1; padding: 0.9rem 1rem; border-radius: 12px; border: 1.5px solid var(--gold);
-    background: linear-gradient(145deg, #252f6e, #1b2352); color: #f5e6a8;
+    background: linear-gradient(145deg, #21292D, #040708); color: #f5e6a8;
     font-weight: 800; font-size: 1rem; cursor: pointer; font-family: "DM Sans", system-ui, sans-serif;
   }
   html body.guided-flow.guided-flagship .studio-mstart::after { content: " →"; }
@@ -237,10 +237,10 @@ html body.guided-flow.guided-flagship .studio-nextstep {
   margin: 0.55rem 0 0 !important;
   padding: 0.6rem 0.7rem !important;
   border-radius: 10px !important;
-  background: rgba(37, 47, 110, 0.05) !important;
+  background: rgba(33, 41, 45, 0.05) !important;
   font-size: 0.78rem !important;
   line-height: 1.4 !important;
-  color: #2b3252 !important;
+  color: #21292D !important;
 }
 html body.guided-flow.guided-flagship .studio-nextstep span { color: var(--navy); }
 
@@ -261,7 +261,7 @@ html body.guided-flow.guided-flagship .mmg-affordbtn {
   padding: 0.6rem 1rem !important;
   border: 1.5px solid var(--navy) !important;
   border-radius: 999px !important;
-  background: rgba(37, 47, 110, 0.04) !important;
+  background: rgba(33, 41, 45, 0.04) !important;
   color: var(--navy) !important;
   font-weight: 700 !important;
   font-size: 0.9rem !important;
@@ -270,7 +270,7 @@ html body.guided-flow.guided-flagship .mmg-affordbtn {
   transition: background 0.15s ease, transform 0.15s ease !important;
 }
 html body.guided-flow.guided-flagship .mmg-affordbtn:hover {
-  background: rgba(37, 47, 110, 0.1) !important;
+  background: rgba(33, 41, 45, 0.1) !important;
   transform: translateY(-1px);
 }
 
@@ -294,7 +294,7 @@ html body.guided-flow.guided-flagship .mmg-affordbtn:hover {
     -webkit-backdrop-filter: blur(10px) !important;
     backdrop-filter: blur(10px) !important;
     border-top: 1px solid var(--line) !important;
-    box-shadow: 0 -6px 22px rgba(27, 35, 82, 0.14) !important;
+    box-shadow: 0 -6px 22px rgba(4, 7, 8, 0.14) !important;
   }
   html body.guided-flow.guided-flagship.guided-pre-results .guided-step-nav:not(.wizard-nav-hidden) .wizard-nav-inner {
     max-width: 520px !important;
@@ -374,11 +374,11 @@ html body.guided-flow .mmg-stickypay-inner {
   justify-content: space-between;
   gap: 1rem;
   padding: 0.55rem 1rem;
-  background: linear-gradient(155deg, #252f6e 0%, #1b2352 60%, #252f6e 100%);
+  background: linear-gradient(155deg, #21292D 0%, #040708 60%, #21292D 100%);
   color: #fff;
   border-radius: 0 0 14px 14px;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 12px 28px rgba(27, 35, 82, 0.32);
+  box-shadow: 0 12px 28px rgba(4, 7, 8, 0.32);
 }
 html body.guided-flow .mmg-stickypay-text {
   display: flex;
@@ -406,7 +406,7 @@ html body.guided-flow .mmg-stickypay-amt {
 html body.guided-flow .mmg-stickypay-amt.pay-tick {
   color: var(--star);
   transform: scale(1.04);
-  text-shadow: 0 0 18px rgba(232, 200, 74, 0.4);
+  text-shadow: 0 0 18px rgba(224, 74, 80, 0.4);
 }
 html body.guided-flow .mmg-stickypay-cta {
   flex: 0 0 auto;
@@ -417,9 +417,9 @@ html body.guided-flow .mmg-stickypay-cta {
   font-family: "DM Sans", system-ui, sans-serif;
   font-size: 0.9rem;
   font-weight: 800;
-  color: #1b2352;
-  background: linear-gradient(180deg, #e8c84a 0%, #c9a227 100%);
-  box-shadow: 0 4px 12px rgba(201, 162, 39, 0.35);
+  color: #040708;
+  background: linear-gradient(180deg, #E04A50 0%, #D13239 100%);
+  box-shadow: 0 4px 12px rgba(209, 50, 57, 0.35);
   white-space: nowrap;
 }
 html body.guided-flow .mmg-stickypay-cta:hover {
@@ -474,7 +474,7 @@ html body.guided-flow .mmg-scrollcue {
     padding: 0.5rem 1rem 0.55rem;
     border-radius: 999px;
     cursor: pointer;
-    box-shadow: 0 8px 22px rgba(27, 35, 82, 0.16);
+    box-shadow: 0 8px 22px rgba(4, 7, 8, 0.16);
     opacity: 1;
     transition: opacity 0.35s ease, transform 0.35s ease;
     animation: mmgScrollCueBob 1.8s ease-in-out infinite;
