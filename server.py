@@ -257,7 +257,7 @@ PARTNERS_DIR = os.path.join(ROOT, "partners")
 
 # Every lead emails this address by default (when SMTP is configured).
 LEAD_NOTIFY_EMAIL = os.environ.get(
-    "LEAD_NOTIFY_EMAIL", "logan@martinimortgagegroup.com"
+    "LEAD_NOTIFY_EMAIL", "Martini@rate.com"
 ).strip()
 # Basic anti-spam rate limiting per client IP.
 LEAD_RATE_MAX = int(os.environ.get("LEAD_RATE_MAX", "6"))
