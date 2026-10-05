@@ -7,17 +7,17 @@
    Tokens & page shell
    ========================================================= */
 html body.guided-flow.guided-flagship {
-  --fs-navy: #252f6e;
+  --fs-navy: #21292D;
   --fs-navy-mid: #252040;
-  --fs-gold: #c9a227;
-  --fs-gold-light: #e8c84a;
+  --fs-gold: #D13239;
+  --fs-gold-light: #E04A50;
   --fs-cream: #f2f0eb;
   --fs-white: #ffffff;
   --fs-muted: #6b6580;
   --fs-radius: 18px;
   --fs-radius-sm: 12px;
-  --fs-shadow: 0 12px 40px rgba(37, 47, 110, 0.09);
-  --fs-shadow-soft: 0 4px 18px rgba(37, 47, 110, 0.06);
+  --fs-shadow: 0 12px 40px rgba(33, 41, 45, 0.09);
+  --fs-shadow-soft: 0 4px 18px rgba(33, 41, 45, 0.06);
   background: var(--fs-cream) !important;
   -webkit-font-smoothing: antialiased;
 }
@@ -35,7 +35,7 @@ html body.guided-flow.guided-flagship .guided-progress {
   padding: 1rem 0.85rem 1.05rem !important;
   border-radius: var(--fs-radius) !important;
   background: rgba(255, 255, 255, 0.72) !important;
-  border: 1px solid rgba(37, 47, 110, 0.06) !important;
+  border: 1px solid rgba(33, 41, 45, 0.06) !important;
   box-shadow: var(--fs-shadow-soft) !important;
   backdrop-filter: blur(8px);
 }
@@ -94,7 +94,7 @@ html body.guided-flow.guided-flagship .guided-card,
 html body.guided-flow.guided-flagship .wizard-card.guided-card {
   border-radius: var(--fs-radius) !important;
   padding: 1.55rem 1.4rem 1.65rem !important;
-  border: 1px solid rgba(37, 47, 110, 0.06) !important;
+  border: 1px solid rgba(33, 41, 45, 0.06) !important;
   box-shadow: var(--fs-shadow) !important;
   background: var(--fs-white) !important;
 }
@@ -103,15 +103,15 @@ html body.guided-flow.guided-flagship .guided-choice-card {
   min-height: 8.25rem !important;
   padding: 1.4rem 1.25rem !important;
   border-radius: var(--fs-radius) !important;
-  border: 1.5px solid rgba(37, 47, 110, 0.08) !important;
+  border: 1.5px solid rgba(33, 41, 45, 0.08) !important;
   box-shadow: var(--fs-shadow-soft) !important;
   transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease !important;
 }
 
 html body.guided-flow.guided-flagship .guided-choice-card:hover {
   transform: translateY(-3px);
-  border-color: rgba(201, 162, 39, 0.5) !important;
-  box-shadow: 0 14px 36px rgba(37, 47, 110, 0.1) !important;
+  border-color: rgba(209, 50, 57, 0.5) !important;
+  box-shadow: 0 14px 36px rgba(33, 41, 45, 0.1) !important;
 }
 
 html body.guided-flow.guided-flagship .guided-choice-card:active {
@@ -121,7 +121,7 @@ html body.guided-flow.guided-flagship .guided-choice-card:active {
 html body.guided-flow.guided-flagship .guided-choice-card.is-selected {
   border-color: var(--fs-gold) !important;
   background: linear-gradient(165deg, #fffdf7, #fff) !important;
-  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.16), var(--fs-shadow) !important;
+  box-shadow: 0 0 0 3px rgba(209, 50, 57, 0.16), var(--fs-shadow) !important;
 }
 
 html body.guided-flow.guided-flagship .guided-choice-icon {
@@ -266,13 +266,13 @@ html body.guided-flow.guided-flagship .guided-results-card {
   margin: 0 auto !important;
   padding: 1.85rem 1.4rem 2rem !important;
   border-radius: 22px !important;
-  background: linear-gradient(165deg, #252f6e 0%, #221a3a 48%, #252f6e 100%) !important;
-  border: 1px solid rgba(201, 162, 39, 0.28) !important;
-  box-shadow: 0 20px 56px rgba(17, 12, 29, 0.35) !important;
+  background: linear-gradient(165deg, #21292D 0%, #221a3a 48%, #21292D 100%) !important;
+  border: 1px solid rgba(209, 50, 57, 0.28) !important;
+  box-shadow: 0 20px 56px rgba(4, 7, 8, 0.35) !important;
 }
 
 html body.guided-flow.guided-flagship .guided-results-eyebrow {
-  color: rgba(232, 200, 74, 0.85) !important;
+  color: rgba(224, 74, 80, 0.85) !important;
   letter-spacing: 0.12em !important;
   font-size: 0.68rem !important;
   text-transform: uppercase !important;
@@ -302,7 +302,7 @@ html body.guided-flow.guided-flagship .guided-results-card #pitiPayment {
   line-height: 1.05 !important;
   color: var(--fs-gold-light) !important;
   margin: 0.35rem 0 !important;
-  text-shadow: 0 2px 24px rgba(201, 162, 39, 0.25);
+  text-shadow: 0 2px 24px rgba(209, 50, 57, 0.25);
 }
 
 html body.guided-flow.guided-flagship .guided-results-hero .total-label,
@@ -328,7 +328,7 @@ html body.guided-flow.guided-flagship .guided-advantage-card {
   padding: 1.15rem 1rem 1.2rem;
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(201, 162, 39, 0.28);
+  border: 1px solid rgba(209, 50, 57, 0.28);
 }
 
 html body.guided-flow.guided-flagship .guided-advantage-eyebrow {
@@ -338,7 +338,7 @@ html body.guided-flow.guided-flagship .guided-advantage-eyebrow {
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(232, 200, 74, 0.9);
+  color: rgba(224, 74, 80, 0.9);
 }
 
 html body.guided-flow.guided-flagship .guided-advantage-rates {
@@ -356,8 +356,8 @@ html body.guided-flow.guided-flagship .guided-advantage-rates .ultimate-live-rat
 }
 
 html body.guided-flow.guided-flagship .guided-advantage-rates .ultimate-live-rate-col-martini {
-  background: rgba(201, 162, 39, 0.14);
-  border: 1px solid rgba(201, 162, 39, 0.35);
+  background: rgba(209, 50, 57, 0.14);
+  border: 1px solid rgba(209, 50, 57, 0.35);
 }
 
 html body.guided-flow.guided-flagship .guided-advantage-rates .ultimate-live-rate-label {
@@ -444,13 +444,13 @@ html body.guided-flow.guided-flagship .guided-lead-primary {
   padding: 1.4rem 1.2rem 1.35rem !important;
   border-radius: 16px !important;
   background: rgba(255, 255, 255, 0.1) !important;
-  border: 1px solid rgba(201, 162, 39, 0.4) !important;
+  border: 1px solid rgba(209, 50, 57, 0.4) !important;
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.15) !important;
 }
 
 html body.guided-flow.guided-flagship .save-estimate-eyebrow {
   text-align: center;
-  color: rgba(232, 200, 74, 0.9) !important;
+  color: rgba(224, 74, 80, 0.9) !important;
   font-size: 0.68rem !important;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -479,7 +479,7 @@ html body.guided-flow.guided-flagship .guided-lead-navy .save-estimate-lead {
 
 html body.guided-flow.guided-flagship .studio-lead .save-estimate-title,
 html body.guided-flow.guided-flagship .studio-lead .save-estimate-lead {
-  color: #252f6e !important;
+  color: #21292D !important;
 }
 
 html body.guided-flow.guided-flagship .guided-lead-form input {
@@ -495,11 +495,11 @@ html body.guided-flow.guided-flagship .guided-lead-submit {
   min-height: 52px !important;
   margin-top: 0.35rem !important;
   border-radius: 999px !important;
-  background: linear-gradient(135deg, #f0d060, #c9a227 50%, #b8891a) !important;
+  background: linear-gradient(135deg, #E04A50, #D13239 50%, #A8262C) !important;
   color: var(--fs-navy) !important;
   font-weight: 800 !important;
   border: 0 !important;
-  box-shadow: 0 6px 20px rgba(201, 162, 39, 0.35) !important;
+  box-shadow: 0 6px 20px rgba(209, 50, 57, 0.35) !important;
 }
 
 html body.guided-flow.guided-flagship .save-estimate-skip {
@@ -538,7 +538,7 @@ html body.guided-flow.guided-flagship .guided-results-ctas .btn-results-apply {
   min-height: 52px;
   border-radius: 999px;
   font-weight: 800;
-  box-shadow: 0 6px 22px rgba(201, 162, 39, 0.35);
+  box-shadow: 0 6px 22px rgba(209, 50, 57, 0.35);
 }
 
 html body.guided-flow.guided-flagship .guided-results-secondary {
@@ -558,7 +558,7 @@ html body.guided-flow.guided-flagship .guided-results-secondary {
 
 html body.guided-flow.guided-flagship .guided-results-secondary:hover {
   background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(201, 162, 39, 0.5);
+  border-color: rgba(209, 50, 57, 0.5);
 }
 
 html body.guided-flow.guided-flagship .results-apply-note {
@@ -1301,7 +1301,7 @@ html body.guided-flow.guided-flagship [data-step-id="address"] .guided-address-f
   text-align: center;
   margin-bottom: 0.5rem;
   font-weight: 700;
-  color: #3d3654;
+  color: #21292D;
 }
 
 html body.guided-flow.guided-flagship [data-step-id="address"] .btn-lookup {
@@ -1356,7 +1356,7 @@ html body.guided-flow.guided-flagship .guided-lead-submit {
 
 /* Soften secondary apply slightly vs lead form (lead is peak CTA) */
 html body.guided-flow.guided-flagship .guided-results-ctas .btn-results-apply {
-  background: linear-gradient(135deg, #f0d060 0%, #c9a227 50%, #b8891a 100%) !important;
+  background: linear-gradient(135deg, #E04A50 0%, #D13239 50%, #A8262C 100%) !important;
 }
 
 html body.guided-flow.guided-flagship .guided-results-secondary {
@@ -1436,13 +1436,13 @@ html body.guided-flow.guided-flagship .ultimate-realtor-submit {
   padding: 0.75rem var(--btn-pad-x) !important;
   border-radius: var(--btn-radius) !important;
   border: 0 !important;
-  background: linear-gradient(135deg, #f0d060 0%, #c9a227 50%, #b8891a 100%) !important;
-  color: #252f6e !important;
+  background: linear-gradient(135deg, #E04A50 0%, #D13239 50%, #A8262C 100%) !important;
+  color: #21292D !important;
   font-size: 0.92rem !important;
   font-weight: 800 !important;
   letter-spacing: 0.02em !important;
   text-align: center !important;
-  box-shadow: 0 4px 16px rgba(201, 162, 39, 0.32) !important;
+  box-shadow: 0 4px 16px rgba(209, 50, 57, 0.32) !important;
   cursor: pointer !important;
   box-sizing: border-box !important;
   transition: transform 0.12s ease, filter 0.15s ease, box-shadow 0.15s ease !important;
@@ -1454,7 +1454,7 @@ html body.guided-flow.guided-flagship .btn-results-apply:hover,
 html body.guided-flow.guided-flagship .btn-lookup:hover {
   filter: brightness(1.04);
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(201, 162, 39, 0.4) !important;
+  box-shadow: 0 6px 20px rgba(209, 50, 57, 0.4) !important;
 }
 
 /* Secondary — outline / navy */
@@ -1469,16 +1469,16 @@ html body.guided-flow.guided-flagship .btn-outline {
   min-height: var(--btn-h) !important;
   padding: 0.7rem 1.2rem !important;
   border-radius: var(--btn-radius) !important;
-  border: 1.5px solid rgba(37, 47, 110, 0.16) !important;
+  border: 1.5px solid rgba(33, 41, 45, 0.16) !important;
   background: #fff !important;
-  color: #252f6e !important;
+  color: #21292D !important;
   font-size: 0.88rem !important;
   font-weight: 700 !important;
   text-align: center !important;
   text-decoration: none !important;
   box-sizing: border-box !important;
   cursor: pointer !important;
-  box-shadow: 0 2px 8px rgba(37, 47, 110, 0.05) !important;
+  box-shadow: 0 2px 8px rgba(33, 41, 45, 0.05) !important;
   transition: border-color 0.15s, background 0.15s, transform 0.12s !important;
 }
 
@@ -1490,7 +1490,7 @@ html body.guided-flow.guided-flagship .guided-results-secondary {
 }
 
 html body.guided-flow.guided-flagship .guided-realtor-btn {
-  background: #252f6e !important;
+  background: #21292D !important;
   border-color: transparent !important;
   color: #fff !important;
 }
@@ -1504,8 +1504,8 @@ html body.guided-flow.guided-flagship .guided-reviews-btn {
   padding: 0.7rem 1.2rem !important;
   border-radius: var(--btn-radius) !important;
   border: 0 !important;
-  background: linear-gradient(135deg, rgba(240, 208, 96, 0.95), rgba(201, 162, 39, 0.95)) !important;
-  color: #252f6e !important;
+  background: linear-gradient(135deg, rgba(224, 74, 80, 0.95), rgba(209, 50, 57, 0.95)) !important;
+  color: #21292D !important;
   font-weight: 800 !important;
   font-size: 0.85rem !important;
   text-decoration: none !important;
@@ -1660,9 +1660,9 @@ html body.guided-flow.guided-flagship {
   --ui-btn-gap: 0.75rem;
   --ui-card-max: 480px;
   --ui-content-max: 680px;
-  --ui-primary: linear-gradient(135deg, #f0d060 0%, #c9a227 52%, #b8891a 100%);
-  --ui-navy: #252f6e;
-  --ui-border: rgba(37, 47, 110, 0.14);
+  --ui-primary: linear-gradient(135deg, #E04A50 0%, #D13239 52%, #A8262C 100%);
+  --ui-navy: #21292D;
+  --ui-border: rgba(33, 41, 45, 0.14);
 }
 
 /* ----- Base button shape (all interactive CTAs) ----- */
@@ -1714,7 +1714,7 @@ html body.guided-flow.guided-flagship .guided-header-apply {
   background: var(--ui-primary) !important;
   color: var(--ui-navy) !important;
   font-weight: 800 !important;
-  box-shadow: 0 4px 14px rgba(201, 162, 39, 0.34) !important;
+  box-shadow: 0 4px 14px rgba(209, 50, 57, 0.34) !important;
 }
 
 html body.guided-flow.guided-flagship .btn-lookup:hover,
@@ -1723,7 +1723,7 @@ html body.guided-flow.guided-flagship .guided-lead-submit:hover,
 html body.guided-flow.guided-flagship .btn-results-apply:hover {
   filter: brightness(1.05) !important;
   transform: translateY(-1px) !important;
-  box-shadow: 0 6px 18px rgba(201, 162, 39, 0.42) !important;
+  box-shadow: 0 6px 18px rgba(209, 50, 57, 0.42) !important;
   color: var(--ui-navy) !important;
 }
 
@@ -1735,13 +1735,13 @@ html body.guided-flow.guided-flagship .guided-loan-options-btn {
   background: #fff !important;
   color: var(--ui-navy) !important;
   font-weight: 700 !important;
-  box-shadow: 0 1px 4px rgba(37, 47, 110, 0.04) !important;
+  box-shadow: 0 1px 4px rgba(33, 41, 45, 0.04) !important;
 }
 
 html body.guided-flow.guided-flagship .btn-wizard-back:hover,
 html body.guided-flow.guided-flagship .btn-outline:hover,
 html body.guided-flow.guided-flagship .guided-loan-options-btn:hover {
-  border-color: rgba(201, 162, 39, 0.55) !important;
+  border-color: rgba(209, 50, 57, 0.55) !important;
   background: #fffdf6 !important;
   transform: translateY(-1px) !important;
 }
@@ -1751,7 +1751,7 @@ html body.guided-flow.guided-flagship .guided-realtor-btn {
   border: 0 !important;
   background: var(--ui-navy) !important;
   color: #fff !important;
-  box-shadow: 0 3px 12px rgba(37, 47, 110, 0.18) !important;
+  box-shadow: 0 3px 12px rgba(33, 41, 45, 0.18) !important;
 }
 
 html body.guided-flow.guided-flagship .guided-realtor-btn:hover {
@@ -1766,7 +1766,7 @@ html body.guided-flow.guided-flagship .guided-reviews-btn {
   background: var(--ui-primary) !important;
   color: var(--ui-navy) !important;
   font-weight: 800 !important;
-  box-shadow: 0 3px 12px rgba(201, 162, 39, 0.28) !important;
+  box-shadow: 0 3px 12px rgba(209, 50, 57, 0.28) !important;
 }
 
 /* TERTIARY — text link style (skip, no thanks) */
@@ -1807,7 +1807,7 @@ html body.guided-flow.guided-flagship .guided-results-secondary {
 
 html body.guided-flow.guided-flagship .guided-results-secondary:hover {
   background: rgba(255, 255, 255, 0.08) !important;
-  border-color: rgba(201, 162, 39, 0.55) !important;
+  border-color: rgba(209, 50, 57, 0.55) !important;
   color: #fff !important;
 }
 
@@ -1848,7 +1848,7 @@ html body.guided-flow.guided-flagship [data-step-id="address"] .guided-address-f
   font-weight: 700 !important;
   letter-spacing: 0.04em !important;
   text-transform: uppercase !important;
-  color: #5c5670 !important;
+  color: #555555 !important;
 }
 
 html body.guided-flow.guided-flagship [data-step-id="address"] .guided-address-wrap,
@@ -1887,9 +1887,9 @@ html body.guided-flow.guided-flagship .guided-property-summary {
   margin: 1.15rem 0 0 !important;
   padding: 1rem 1rem 1.05rem !important;
   border-radius: 14px !important;
-  border: 1px solid rgba(201, 162, 39, 0.32) !important;
+  border: 1px solid rgba(209, 50, 57, 0.32) !important;
   background: linear-gradient(165deg, #fbf8f0, #fff) !important;
-  box-shadow: 0 2px 10px rgba(37, 47, 110, 0.04) !important;
+  box-shadow: 0 2px 10px rgba(33, 41, 45, 0.04) !important;
   text-align: left !important;
   box-sizing: border-box !important;
 }
@@ -1917,7 +1917,7 @@ html body.guided-flow.guided-flagship .guided-property-summary-clear {
   border-radius: 999px !important;
   border: 1px solid var(--ui-border) !important;
   background: #fff !important;
-  color: #5c5670 !important;
+  color: #555555 !important;
   font-size: 0.72rem !important;
   font-weight: 700 !important;
   cursor: pointer !important;
@@ -1925,7 +1925,7 @@ html body.guided-flow.guided-flagship .guided-property-summary-clear {
 }
 
 html body.guided-flow.guided-flagship .guided-property-summary-clear:hover {
-  border-color: rgba(201, 162, 39, 0.5) !important;
+  border-color: rgba(209, 50, 57, 0.5) !important;
   color: var(--ui-navy) !important;
 }
 
@@ -1950,9 +1950,9 @@ html body.guided-flow.guided-flagship .guided-property-summary-grid > div {
   margin: 0 !important;
   padding: 0.55rem 0.4rem !important;
   border-radius: 10px !important;
-  background: rgba(37, 47, 110, 0.04) !important;
+  background: rgba(33, 41, 45, 0.04) !important;
   text-align: center !important;
-  border: 1px solid rgba(37, 47, 110, 0.05) !important;
+  border: 1px solid rgba(33, 41, 45, 0.05) !important;
 }
 
 html body.guided-flow.guided-flagship .guided-property-summary-grid dt {
@@ -1984,11 +1984,11 @@ html body.guided-flow.guided-flagship #ultimateLimitBadge:not(.hidden) {
   margin: 0.65rem auto 0 !important;
   padding: 0.35rem 0.75rem !important;
   border-radius: 999px !important;
-  background: rgba(201, 162, 39, 0.12) !important;
-  border: 1px solid rgba(201, 162, 39, 0.3) !important;
+  background: rgba(209, 50, 57, 0.12) !important;
+  border: 1px solid rgba(209, 50, 57, 0.3) !important;
   font-size: 0.72rem !important;
   font-weight: 600 !important;
-  color: #6b4f12 !important;
+  color: #A8262C !important;
   text-align: center !important;
 }
 
