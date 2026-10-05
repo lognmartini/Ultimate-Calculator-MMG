@@ -873,7 +873,7 @@
     }
     if (leadLead) {
       leadLead.textContent =
-        "Logan reviews your numbers and walks you through your personalized options — no commitment, no credit pull. Your info goes straight to the Martini Mortgage Group team.";
+        "Logan and Kevin review your numbers and walk you through your personalized options — no commitment, no credit pull. Your info goes straight to the Martini Mortgage Group team.";
     }
     const leadSubmit = document.querySelector(".save-estimate-submit");
     if (leadSubmit && !leadSubmit.classList.contains("is-loading")) {
