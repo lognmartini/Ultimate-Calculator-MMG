@@ -19,9 +19,9 @@ window.MMG_SITE = {
   realtorPath: "/mortgage-calculator/realtor.html",
   socialWizardPath: "/mortgage-calculator/go4.html",
   teamSocialWizardPath: "/mortgage-calculator/go4.html",
-  applyUrl: "https://applywithlogan.com",
+  applyUrl: "https://apply.rate.com/apply/loan-purpose?emp-id=1001008&utm_source=grMktg&utm_medium=email&utm_term=&utm_content=text&utm_campaign=sig",
   /** Default team apply when Logan4 has no ?ref= (Kevin = branch manager) */
-  teamApplyUrl: "https://lo-sites.goldstarfinancial.com/?lar=kmartini",
+  teamApplyUrl: "https://apply.rate.com/apply/loan-purpose?emp-id=1001008&utm_source=grMktg&utm_medium=email&utm_term=&utm_content=text&utm_campaign=sig",
   calendlyUrl: "https://calendly.com/kevinmartini/private-call-with-martini",
   phone: "9192384934",
   phoneDisplay: "(919) 238-4934",
@@ -29,22 +29,22 @@ window.MMG_SITE = {
   address: "507 N Blount St, Raleigh, NC 27604",
   strategistName: "Logan Martini",
   nmls: "1591485",
-  companyNmls: "3446",
+  companyNmls: "2611",
   companyLegalName:
-    "Martini Mortgage Group at Gold Star Mortgage Financial Group, Corporation",
+    "Martini Mortgage Group powered by Guaranteed Rate, Inc. D/B/A Rate",
   loanOfficers: {
     kevin: {
       name: "Kevin Martini",
       title: "Certified Mortgage Advisor",
       nmls: "143962",
-      applyUrl: "https://lo-sites.goldstarfinancial.com/?lar=kmartini",
+      applyUrl: "https://apply.rate.com/apply/loan-purpose?emp-id=1001008&utm_source=grMktg&utm_medium=email&utm_term=&utm_content=text&utm_campaign=sig",
       email: "Kevin@MartiniMortgageGroup.com",
     },
     logan: {
       name: "Logan Martini",
       title: "Senior Mortgage Strategist",
       nmls: "1591485",
-      applyUrl: "https://lo-sites.goldstarfinancial.com/?lar=lmartini",
+      applyUrl: "https://apply.rate.com/apply/loan-purpose?emp-id=1001008&utm_source=grMktg&utm_medium=email&utm_term=&utm_content=text&utm_campaign=sig",
       email: "Logan@MartiniMortgageGroup.com",
     },
   },
