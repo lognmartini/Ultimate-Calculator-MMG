@@ -394,7 +394,7 @@
     return `
     <div class="pdf-hdr">
       <h1>Total Cost Analysis</h1>
-      <p class="pdf-meta"><strong>${escapeHtml(site.brandName || "Martini Mortgage Group")}</strong> · Logan Martini · NMLS #${escapeHtml(site.nmls || "1591485")} · Company NMLS #${escapeHtml(site.companyNmls || "3446")}</p>
+      <p class="pdf-meta"><strong>${escapeHtml(site.brandName || "Martini Mortgage Group")}</strong> · Logan Martini · NMLS #${escapeHtml(site.nmls || "1591485")} · Company NMLS #${escapeHtml(site.companyNmls || "2611")}</p>
       <p class="pdf-meta">Generated ${escapeHtml(generated)}${address ? ` · Property: ${escapeHtml(address)}` : ""}</p>
     </div>
     <div class="pdf-section">
@@ -1167,7 +1167,7 @@
           <div class="ultimate-creative-locked">
             <p>Full rate breakdown, buydown costs, and program guidelines unlock when you connect with Logan.</p>
             <div class="ultimate-creative-actions">
-              <a href="https://applywithlogan.com" class="btn btn-apply-now ultimate-creative-apply" data-mmg-apply target="_blank" rel="noopener">
+              <a href="https://apply.rate.com/apply/loan-purpose?emp-id=1001008&amp;utm_source=grMktg&amp;utm_medium=email&amp;utm_term=&amp;utm_content=text&amp;utm_campaign=sig" class="btn btn-apply-now ultimate-creative-apply" data-mmg-apply target="_blank" rel="noopener">
                 <span class="btn-apply-text">Apply now</span>
                 <span class="btn-apply-arrow" aria-hidden="true">→</span>
               </a>
