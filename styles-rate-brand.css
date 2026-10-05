@@ -214,3 +214,53 @@ html body.guided-flow.guided-flagship {
   --line: #DEDFE0; --border: #DEDFE0; --p2-line: #DEDFE0;
   --text: #21292D;
 }
+
+/* ---------------------------------------------------------------------------
+   Hero "Start a full application" CTA.
+   The results-step version of this button only renders after the wizard is
+   complete, so the hero needs its own. Styled as a secondary (outlined) action
+   so it supports the primary path - running the numbers - instead of competing
+   with it.
+   --------------------------------------------------------------------------- */
+html body .hero-apply-row {
+  margin: 18px auto 0;
+  max-width: 560px;
+  text-align: center;
+}
+html body a.hero-apply-btn.hero-apply-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 26px;
+  border-radius: 999px;
+  border: 2px solid #D13239;
+  background: #FFFFFF;
+  color: #D13239 !important;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background .15s ease, color .15s ease, box-shadow .15s ease;
+}
+html body a.hero-apply-btn.hero-apply-btn:hover {
+  background: #D13239;
+  color: #FFFFFF !important;
+  box-shadow: 0 6px 18px rgba(209, 50, 57, .22);
+}
+html body a.hero-apply-btn.hero-apply-btn:focus-visible {
+  outline: 3px solid rgba(209, 50, 57, .45);
+  outline-offset: 2px;
+}
+html body .hero-apply-btn .hero-apply-arrow { font-size: 17px; line-height: 1; }
+html body .hero-apply-note {
+  margin: 9px 0 0;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: #555555;
+}
+@media (max-width: 560px) {
+  html body a.hero-apply-btn.hero-apply-btn { width: 100%; padding: 14px 18px; }
+  html body .hero-apply-row { padding: 0 16px; }
+}
