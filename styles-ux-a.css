@@ -17,8 +17,8 @@ html body.guided-flow .guided-progress.guided-progress-simple {
   padding: 0.7rem 1rem 0.85rem !important;
   border-radius: 14px !important;
   background: rgba(255, 255, 255, 0.88) !important;
-  border: 1px solid rgba(37, 47, 110, 0.08) !important;
-  box-shadow: 0 2px 10px rgba(37, 47, 110, 0.04) !important;
+  border: 1px solid rgba(33, 41, 45, 0.08) !important;
+  box-shadow: 0 2px 10px rgba(33, 41, 45, 0.04) !important;
 }
 
 html body.guided-flow .guided-progress-steps-off,
@@ -46,21 +46,21 @@ html body.guided-flow .guided-progress-line {
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.01em;
-  color: #252f6e;
+  color: #21292D;
   line-height: 1.3;
 }
 
 html body.guided-flow.guided-flagship .guided-progress-simple .wizard-progress-track {
   height: 6px !important;
   border-radius: 999px !important;
-  background: rgba(37, 47, 110, 0.08) !important;
+  background: rgba(33, 41, 45, 0.08) !important;
   overflow: hidden !important;
 }
 
 html body.guided-flow.guided-flagship .guided-progress-simple .wizard-progress-fill {
   height: 100% !important;
   border-radius: 999px !important;
-  background: linear-gradient(90deg, #c9a227, #e8c84a) !important;
+  background: linear-gradient(90deg, #D13239, #E04A50) !important;
   transition: width 0.28s ease !important;
 }
 
@@ -117,7 +117,7 @@ html body.guided-flow.guided-flagship .guided-advantage-compact .ultimate-live-r
 }
 
 html body.guided-flow.guided-flagship .guided-advantage-compact .ultimate-live-rate-col-martini .ultimate-live-rate-value {
-  color: #e8c84a !important;
+  color: #E04A50 !important;
 }
 
 html body.guided-flow.guided-flagship .guided-advantage-compact .lead-savings-ribbon {
@@ -194,7 +194,7 @@ html body.guided-flow.guided-flagship .guided-results-details-body .vs-competiti
   font-weight: 700 !important;
   letter-spacing: 0.06em !important;
   text-transform: uppercase !important;
-  color: rgba(232, 200, 74, 0.85) !important;
+  color: rgba(224, 74, 80, 0.85) !important;
   margin: 1rem 0 0.55rem !important;
   text-align: center !important;
 }
@@ -228,7 +228,7 @@ html body.guided-flow .guided-choice-hint {
   padding: 0.35rem 0.75rem;
   font-size: 0.88rem;
   font-weight: 600;
-  color: #252f6e;
+  color: #21292D;
   letter-spacing: 0.01em;
 }
 
@@ -242,13 +242,13 @@ html body.guided-flow.guided-on-choice .guided-step-nav .wizard-nav-inner {
 
 /* Soft pulse on choice cards so the action is obvious */
 html body.guided-flow.guided-on-choice .guided-choice-card {
-  box-shadow: 0 0 0 0 rgba(201, 162, 39, 0.15);
+  box-shadow: 0 0 0 0 rgba(209, 50, 57, 0.15);
 }
 
 html body.guided-flow.guided-on-choice .guided-choice-card:hover,
 html body.guided-flow.guided-on-choice .guided-choice-card:focus-visible {
-  border-color: rgba(201, 162, 39, 0.55) !important;
-  box-shadow: 0 6px 20px rgba(37, 47, 110, 0.08) !important;
+  border-color: rgba(209, 50, 57, 0.55) !important;
+  box-shadow: 0 6px 20px rgba(33, 41, 45, 0.08) !important;
 }
 
 /* =========================================================
@@ -257,7 +257,7 @@ html body.guided-flow.guided-on-choice .guided-choice-card:focus-visible {
 html body.guided-flow .guided-address-recovery {
   margin-top: 1.15rem;
   padding-top: 1.1rem;
-  border-top: 1px solid rgba(37, 47, 110, 0.08);
+  border-top: 1px solid rgba(33, 41, 45, 0.08);
   text-align: center;
 }
 
@@ -273,21 +273,21 @@ html body.guided-flow #wizardSkipAddress.guided-skip-price-btn {
   font-size: 0.95rem !important;
   font-weight: 700 !important;
   line-height: 1.25 !important;
-  color: #252f6e !important;
+  color: #21292D !important;
   background: #fff !important;
-  border: 2px solid #252f6e !important;
+  border: 2px solid #21292D !important;
   border-radius: 12px !important;
   cursor: pointer !important;
   text-decoration: none !important;
-  box-shadow: 0 2px 8px rgba(37, 47, 110, 0.06) !important;
+  box-shadow: 0 2px 8px rgba(33, 41, 45, 0.06) !important;
   transition: background 0.15s ease, border-color 0.15s ease, transform 0.12s ease !important;
 }
 
 html body.guided-flow .guided-skip-price-btn:hover,
 html body.guided-flow #wizardSkipAddress.guided-skip-price-btn:hover {
   background: #fbf8f0 !important;
-  border-color: #c9a227 !important;
-  color: #252f6e !important;
+  border-color: #D13239 !important;
+  color: #21292D !important;
   transform: translateY(-1px);
 }
 
@@ -296,7 +296,7 @@ html body.guided-flow .guided-skip-price-note {
   max-width: 22rem !important;
   font-size: 0.78rem !important;
   line-height: 1.45 !important;
-  color: #5c5670 !important;
+  color: #555555 !important;
   text-align: center !important;
 }
 
@@ -309,7 +309,7 @@ html body.guided-flow .guided-address-status {
 }
 
 html body.guided-flow #guidedAddressCard[data-address-state="loading"] .guided-address-status {
-  color: #252f6e !important;
+  color: #21292D !important;
   font-weight: 600 !important;
 }
 
@@ -328,9 +328,9 @@ html body.guided-flow .guided-note-warn {
 
 /* Emphasize recovery button after a failed lookup */
 html body.guided-flow #guidedAddressCard[data-address-state="error"] .guided-skip-price-btn {
-  border-color: #c9a227 !important;
+  border-color: #D13239 !important;
   background: #fbf8f0 !important;
-  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.2) !important;
+  box-shadow: 0 0 0 3px rgba(209, 50, 57, 0.2) !important;
 }
 
 /* =========================================================
@@ -370,12 +370,12 @@ html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="
   margin-top: 1rem !important;
   padding: 1.1rem 1rem 1.15rem !important;
   border-radius: 14px !important;
-  border: 1px solid rgba(201, 162, 39, 0.22) !important;
+  border: 1px solid rgba(209, 50, 57, 0.22) !important;
   background: linear-gradient(165deg, #fbf8f0 0%, #fff 70%) !important;
 }
 
 html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-loan-block + .guided-loan-block-down {
-  border-top: 1px solid rgba(201, 162, 39, 0.22) !important;
+  border-top: 1px solid rgba(209, 50, 57, 0.22) !important;
   padding-top: 1.1rem !important;
 }
 
@@ -398,22 +398,22 @@ html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="
   margin: 0 !important;
   padding: 0.7rem 0.85rem !important;
   border-radius: 12px !important;
-  border: 1.5px solid rgba(37, 47, 110, 0.1) !important;
+  border: 1.5px solid rgba(33, 41, 45, 0.1) !important;
   background: #f7f6f3 !important;
   cursor: pointer !important;
   text-align: left !important;
 }
 
 html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-fthb-chip:has(input:checked) {
-  border-color: rgba(201, 162, 39, 0.6) !important;
-  background: rgba(201, 162, 39, 0.12) !important;
-  box-shadow: 0 0 0 2px rgba(201, 162, 39, 0.12) !important;
+  border-color: rgba(209, 50, 57, 0.6) !important;
+  background: rgba(209, 50, 57, 0.12) !important;
+  box-shadow: 0 0 0 2px rgba(209, 50, 57, 0.12) !important;
 }
 
 html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-fthb-chip input {
   margin-top: 0.15rem !important;
   flex-shrink: 0 !important;
-  accent-color: #c9a227 !important;
+  accent-color: #D13239 !important;
 }
 
 html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-fthb-chip .ultimate-profile-chip-text {
@@ -425,7 +425,7 @@ html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="
 html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-fthb-chip .ultimate-profile-chip-text strong {
   font-size: 0.88rem !important;
   font-weight: 700 !important;
-  color: #252f6e !important;
+  color: #21292D !important;
 }
 
 html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="price-loan"] .guided-fthb-chip .ultimate-profile-chip-text span {
@@ -488,10 +488,10 @@ html body.guided-flow #lookupAddress.guided-lookup-primary {
   font-size: 0.95rem !important;
   font-weight: 700 !important;
   border-radius: 12px !important;
-  background: linear-gradient(135deg, #f0d060 0%, #c9a227 55%, #b8891a 100%) !important;
-  color: #252f6e !important;
+  background: linear-gradient(135deg, #E04A50 0%, #D13239 55%, #A8262C 100%) !important;
+  color: #21292D !important;
   border: 0 !important;
-  box-shadow: 0 4px 14px rgba(201, 162, 39, 0.3) !important;
+  box-shadow: 0 4px 14px rgba(209, 50, 57, 0.3) !important;
   cursor: pointer !important;
 }
 
@@ -530,9 +530,9 @@ html body.guided-flow .guided-national-banner {
   margin: 0 auto 1rem;
   padding: 0.65rem 0.9rem;
   border-radius: 12px;
-  background: rgba(201, 162, 39, 0.12);
-  border: 1px solid rgba(201, 162, 39, 0.35);
-  color: #252f6e;
+  background: rgba(209, 50, 57, 0.12);
+  border: 1px solid rgba(209, 50, 57, 0.35);
+  color: #21292D;
   font-size: 0.82rem;
   font-weight: 600;
   text-align: center;
@@ -580,7 +580,7 @@ html body.guided-flow.guided-flagship [data-step-id="loan-credit"] #creditScoreD
   text-align: center !important;
   display: block !important;
   font-weight: 800 !important;
-  color: #252f6e !important;
+  color: #21292D !important;
   letter-spacing: -0.03em !important;
 }
 
@@ -627,7 +627,7 @@ html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-term-
 html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-rate-slim {
   margin-top: 0.15rem !important;
   padding-top: 1rem !important;
-  border-top: 1px solid rgba(37, 47, 110, 0.08) !important;
+  border-top: 1px solid rgba(33, 41, 45, 0.08) !important;
 }
 
 html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-rate-strip-ro {
@@ -643,12 +643,12 @@ html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-rate-
   padding: 0.55rem 0.4rem !important;
   border-radius: 12px !important;
   background: #f7f6f3 !important;
-  border: 1px solid rgba(37, 47, 110, 0.06) !important;
+  border: 1px solid rgba(33, 41, 45, 0.06) !important;
 }
 
 html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-rate-strip-martini {
   background: linear-gradient(165deg, #fbf8f0, #fff) !important;
-  border-color: rgba(201, 162, 39, 0.35) !important;
+  border-color: rgba(209, 50, 57, 0.35) !important;
 }
 
 html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-rate-strip-label {
@@ -664,7 +664,7 @@ html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-rate-
 html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-rate-strip-value {
   font-size: 1.15rem !important;
   font-weight: 800 !important;
-  color: #252f6e !important;
+  color: #21292D !important;
 }
 
 html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-rate-strip-martini .guided-rate-strip-value {
@@ -674,7 +674,7 @@ html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-rate-
 html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-rate-advanced {
   margin-top: 0.75rem !important;
   border-radius: 10px !important;
-  border: 1px solid rgba(37, 47, 110, 0.08) !important;
+  border: 1px solid rgba(33, 41, 45, 0.08) !important;
   background: #faf9f7 !important;
 }
 
@@ -682,7 +682,7 @@ html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-rate-
   padding: 0.65rem 0.85rem !important;
   font-size: 0.82rem !important;
   font-weight: 600 !important;
-  color: #5c5670 !important;
+  color: #555555 !important;
   cursor: pointer !important;
   text-align: center !important;
   list-style: none !important;
@@ -770,7 +770,7 @@ html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="
   padding: 0.85rem 1rem !important;
   border-radius: 12px !important;
   background: linear-gradient(165deg, #fbf8f0 0%, #fff 70%) !important;
-  border: 1px solid rgba(201, 162, 39, 0.28) !important;
+  border: 1px solid rgba(209, 50, 57, 0.28) !important;
   text-align: center !important;
 }
 
@@ -789,7 +789,7 @@ html body.guided-flow.guided-flagship [data-step-id="loan-you"], [data-step-id="
   display: block !important;
   font-size: clamp(1.35rem, 4vw, 1.65rem) !important;
   font-weight: 800 !important;
-  color: #252f6e !important;
+  color: #21292D !important;
   letter-spacing: -0.02em !important;
 }
 
@@ -805,7 +805,7 @@ html body.guided-flow .guided-down-adjust-open {
   display: block !important;
   margin-top: 0.85rem !important;
   border-radius: 12px !important;
-  border: 1px solid rgba(37, 47, 110, 0.08) !important;
+  border: 1px solid rgba(33, 41, 45, 0.08) !important;
   background: #faf9f7 !important;
   overflow: hidden !important;
 }
@@ -904,7 +904,7 @@ html body.guided-flow.guided-pre-results .guided-header-apply.guided-header-appl
 
 html body.guided-flow.guided-pre-results .guided-header-apply:hover {
   opacity: 1 !important;
-  border-color: rgba(232, 200, 74, 0.7) !important;
+  border-color: rgba(224, 74, 80, 0.7) !important;
   background: rgba(255, 255, 255, 0.06) !important;
 }
 
@@ -915,10 +915,10 @@ html body.guided-flow.guided-pre-results .guided-header-apply .btn-apply-arrow {
 /* Full Apply strength on results */
 html body.guided-flow.wizard-on-results .guided-header-apply {
   opacity: 1 !important;
-  background: linear-gradient(135deg, #f0d060, #c9a227) !important;
+  background: linear-gradient(135deg, #E04A50, #D13239) !important;
   border: 0 !important;
-  color: #252f6e !important;
-  box-shadow: 0 2px 10px rgba(201, 162, 39, 0.35) !important;
+  color: #21292D !important;
+  box-shadow: 0 2px 10px rgba(209, 50, 57, 0.35) !important;
   font-weight: 700 !important;
 }
 
@@ -943,8 +943,8 @@ html body.guided-flow.guided-flagship .guided-lifetime-line {
   padding: 0.55rem 0.85rem !important;
   max-width: 22rem !important;
   border-radius: 10px !important;
-  background: rgba(201, 162, 39, 0.12) !important;
-  border: 1px solid rgba(201, 162, 39, 0.28) !important;
+  background: rgba(209, 50, 57, 0.12) !important;
+  border: 1px solid rgba(209, 50, 57, 0.28) !important;
   text-align: center !important;
 }
 
@@ -961,7 +961,7 @@ html body.guided-flow.guided-flagship .guided-lifetime-label {
 html body.guided-flow.guided-flagship .guided-lifetime-value {
   font-size: 1rem !important;
   font-weight: 800 !important;
-  color: #e8c84a !important;
+  color: #E04A50 !important;
   font-variant-numeric: tabular-nums !important;
 }
 
@@ -1017,7 +1017,7 @@ html body.guided-flow #guidedFthbRow[hidden] {
     width: 100% !important;
     max-width: 520px !important;
     margin: 0 auto !important;
-    box-shadow: 0 -6px 28px rgba(37, 47, 110, 0.14) !important;
+    box-shadow: 0 -6px 28px rgba(33, 41, 45, 0.14) !important;
   }
 
   /* Collapse long advisor block on mobile — payment card only */
@@ -1195,14 +1195,14 @@ html body.guided-flow.guided-flagship.wizard-on-results .guided-step-nav .btn-wi
   margin: 0 auto !important;
   opacity: 1 !important;
   background: transparent !important;
-  border: 1.5px solid rgba(37, 47, 110, 0.18) !important;
-  color: #252f6e !important;
+  border: 1.5px solid rgba(33, 41, 45, 0.18) !important;
+  color: #21292D !important;
   box-shadow: none !important;
   font-weight: 600 !important;
 }
 
 html body.guided-flow.guided-flagship.wizard-on-results .guided-step-nav .btn-wizard-back:hover {
-  border-color: #c9a227 !important;
+  border-color: #D13239 !important;
   background: #fbf8f0 !important;
 }
 
@@ -1307,7 +1307,7 @@ html body.guided-flow.guided-flagship :focus {
   outline: none;
 }
 html body.guided-flow.guided-flagship :focus-visible {
-  outline: 2px solid #c9a227 !important;
+  outline: 2px solid #D13239 !important;
   outline-offset: 2px !important;
   border-radius: 4px;
 }
@@ -1317,7 +1317,7 @@ html body.guided-flow.guided-flagship .ultimate-term-btn:focus-visible,
 html body.guided-flow.guided-flagship .guided-mini-chip:focus-visible,
 html body.guided-flow.guided-flagship .btn-wizard-next:focus-visible,
 html body.guided-flow.guided-flagship .btn-wizard-back:focus-visible {
-  outline: 3px solid #c9a227 !important;
+  outline: 3px solid #D13239 !important;
   outline-offset: 3px !important;
 }
 
@@ -1360,15 +1360,15 @@ html body.guided-flow .ultimate-program-btn .guided-selected-mark {
 }
 html body.guided-flow .ultimate-program-btn.active .guided-selected-mark {
   display: block;
-  color: #252f6e;
+  color: #21292D;
 }
 html body.guided-flow .ultimate-program-btn.active {
-  box-shadow: 0 0 0 2px #252f6e, 0 4px 16px rgba(201, 162, 39, 0.35) !important;
+  box-shadow: 0 0 0 2px #21292D, 0 4px 16px rgba(209, 50, 57, 0.35) !important;
 }
 html body.guided-flow .ultimate-term-btn.active,
 html body.guided-flow .guided-mini-chip.is-selected,
 html body.guided-flow .guided-choice-card.is-selected {
-  box-shadow: inset 0 0 0 2px #252f6e !important;
+  box-shadow: inset 0 0 0 2px #21292D !important;
   font-weight: 800 !important;
 }
 
@@ -1430,8 +1430,8 @@ html body.guided-flow .sr-only {
 /* Address option active */
 html body.guided-flow .address-suggestions li.active,
 html body.guided-flow #addressSuggestions li.active {
-  background: rgba(201, 162, 39, 0.2) !important;
-  outline: 1px solid #c9a227;
+  background: rgba(209, 50, 57, 0.2) !important;
+  outline: 1px solid #D13239;
 }
 
 /* =========================================================
@@ -1458,7 +1458,7 @@ html body.guided-flow.guided-flagship .guided-results-v2 .total-amount {
   font-size: clamp(2.4rem, 10vw, 3.1rem) !important;
   line-height: 1.02 !important;
   letter-spacing: -0.03em !important;
-  color: #e8c84a !important;
+  color: #E04A50 !important;
   margin: 0.2rem 0 0.35rem !important;
 }
 
@@ -1488,7 +1488,7 @@ html body.guided-flow.guided-flagship .guided-results-rate-line {
 }
 
 html body.guided-flow.guided-flagship .guided-results-rate-line strong {
-  color: #e8c84a !important;
+  color: #E04A50 !important;
   font-weight: 800 !important;
 }
 
@@ -1531,7 +1531,7 @@ html body.guided-flow.guided-flagship .guided-lead-hero {
   margin: 1.15rem 0 0.85rem !important;
   padding: 1.25rem 1.1rem 1.15rem !important;
   border-radius: 16px !important;
-  border: 1px solid rgba(201, 162, 39, 0.45) !important;
+  border: 1px solid rgba(209, 50, 57, 0.45) !important;
   background: rgba(255, 255, 255, 0.1) !important;
 }
 
@@ -1632,9 +1632,9 @@ html body.guided-flow.guided-flagship .guided-results-v2 .guided-advantage-card 
 html body.guided-flow.guided-flagship .guided-live-card-interactive {
   padding: 0.95rem 1rem 1rem !important;
   border-radius: 16px !important;
-  border: 1px solid rgba(201, 162, 39, 0.28) !important;
+  border: 1px solid rgba(209, 50, 57, 0.28) !important;
   background: linear-gradient(165deg, #ffffff 0%, #fbf8f0 100%) !important;
-  box-shadow: 0 8px 28px rgba(37, 47, 110, 0.08) !important;
+  box-shadow: 0 8px 28px rgba(33, 41, 45, 0.08) !important;
   transition: box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease !important;
 }
 
@@ -1655,7 +1655,7 @@ html body.guided-flow.guided-flagship .guided-live-card-interactive #wizardLiveP
   font-family: "Playfair Display", Georgia, serif !important;
   font-size: clamp(1.85rem, 5vw, 2.25rem) !important;
   font-weight: 700 !important;
-  color: #252f6e !important;
+  color: #21292D !important;
   letter-spacing: -0.03em !important;
   line-height: 1.1 !important;
   margin: 0.25rem 0 0.35rem !important;
@@ -1663,7 +1663,7 @@ html body.guided-flow.guided-flagship .guided-live-card-interactive #wizardLiveP
 }
 
 html body.guided-flow.guided-flagship .wizard-live-preview-ready #wizardLivePayment {
-  color: #252f6e !important;
+  color: #21292D !important;
   opacity: 1 !important;
 }
 
@@ -1689,8 +1689,8 @@ html body.guided-flow .guided-live-breakdown {
   margin: 0 0 0.65rem !important;
   padding: 0.55rem 0.65rem !important;
   border-radius: 12px !important;
-  background: rgba(37, 47, 110, 0.03) !important;
-  border: 1px solid rgba(37, 47, 110, 0.06) !important;
+  background: rgba(33, 41, 45, 0.03) !important;
+  border: 1px solid rgba(33, 41, 45, 0.06) !important;
 }
 
 html body.guided-flow .guided-live-breakdown li {
@@ -1700,8 +1700,8 @@ html body.guided-flow .guided-live-breakdown li {
   gap: 0.5rem !important;
   padding: 0.22rem 0 !important;
   font-size: 0.78rem !important;
-  color: #5c5670 !important;
-  border-bottom: 1px solid rgba(37, 47, 110, 0.05);
+  color: #555555 !important;
+  border-bottom: 1px solid rgba(33, 41, 45, 0.05);
 }
 
 html body.guided-flow .guided-live-breakdown li:last-child {
@@ -1709,7 +1709,7 @@ html body.guided-flow .guided-live-breakdown li:last-child {
 }
 
 html body.guided-flow .guided-live-breakdown li strong {
-  color: #252f6e !important;
+  color: #21292D !important;
   font-weight: 700 !important;
   font-variant-numeric: tabular-nums !important;
 }
@@ -1717,10 +1717,10 @@ html body.guided-flow .guided-live-breakdown li strong {
 html body.guided-flow .guided-live-breakdown li.guided-live-total {
   margin-top: 0.2rem !important;
   padding-top: 0.4rem !important;
-  border-top: 1px solid rgba(201, 162, 39, 0.35) !important;
+  border-top: 1px solid rgba(209, 50, 57, 0.35) !important;
   border-bottom: 0 !important;
   font-weight: 700 !important;
-  color: #252f6e !important;
+  color: #21292D !important;
 }
 
 html body.guided-flow .guided-live-breakdown li.guided-live-total strong {
@@ -1751,7 +1751,7 @@ html body.guided-flow.guided-flagship .guided-live-card-interactive .ultimate-li
 html body.guided-flow.guided-flagship .guided-live-card-interactive .ultimate-live-stats dd {
   font-size: 0.78rem !important;
   font-weight: 700 !important;
-  color: #252f6e !important;
+  color: #21292D !important;
   margin: 0 !important;
 }
 
@@ -1764,8 +1764,8 @@ html body.guided-flow.guided-flagship .guided-live-card-interactive .wizard-live
 
 /* Soft gold pulse when payment changes */
 html body.guided-flow .guided-live-card.guided-live-flash {
-  border-color: rgba(201, 162, 39, 0.65) !important;
-  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.22), 0 10px 28px rgba(37, 47, 110, 0.1) !important;
+  border-color: rgba(209, 50, 57, 0.65) !important;
+  box-shadow: 0 0 0 3px rgba(209, 50, 57, 0.22), 0 10px 28px rgba(33, 41, 45, 0.1) !important;
 }
 
 html body.guided-flow .guided-live-card.guided-live-flash #wizardLivePayment {
