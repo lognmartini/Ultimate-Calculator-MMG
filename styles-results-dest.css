@@ -25,15 +25,15 @@ html body.guided-flow .dest-page {
 html body.guided-flow .dest-shell {
   background: #fff !important;
   border-radius: 20px !important;
-  border: 1px solid rgba(37, 47, 110, 0.1) !important;
-  box-shadow: 0 16px 48px rgba(37, 47, 110, 0.12) !important;
+  border: 1px solid rgba(33, 41, 45, 0.1) !important;
+  box-shadow: 0 16px 48px rgba(33, 41, 45, 0.12) !important;
   overflow: hidden !important;
   padding: 0 !important;
 }
 
 /* ---------- HERO ---------- */
 html body.guided-flow .dest-hero {
-  background: linear-gradient(165deg, #252f6e 0%, #1b2352 55%, #252f6e 100%) !important;
+  background: linear-gradient(165deg, #21292D 0%, #040708 55%, #21292D 100%) !important;
   padding: 1.35rem 1.1rem 1.25rem !important;
   text-align: center !important;
 }
@@ -45,7 +45,7 @@ html body.guided-flow .dest-hero-label {
   font-weight: 800 !important;
   letter-spacing: 0.12em !important;
   text-transform: uppercase !important;
-  color: #e8c84a !important;
+  color: #E04A50 !important;
 }
 
 html body.guided-flow .dest-hero-amount,
@@ -83,12 +83,12 @@ html body.guided-flow .dest-hero-rates {
 }
 
 html body.guided-flow .dest-hero-rates strong {
-  color: #e8c84a !important;
+  color: #E04A50 !important;
   font-weight: 800 !important;
 }
 
 html body.guided-flow .dest-dot {
-  color: rgba(232, 200, 74, 0.6) !important;
+  color: rgba(224, 74, 80, 0.6) !important;
 }
 
 /* ---------- BREAKDOWN ---------- */
@@ -110,11 +110,11 @@ html body.guided-flow .dest-shell #breakdown li {
   align-items: baseline !important;
   gap: 0.75rem !important;
   padding: 0.5rem 0.15rem !important;
-  border-bottom: 1px solid rgba(37, 47, 110, 0.07) !important;
+  border-bottom: 1px solid rgba(33, 41, 45, 0.07) !important;
   font-family: "DM Sans", system-ui, sans-serif !important;
   font-size: 0.9rem !important;
   font-weight: 500 !important;
-  color: #2b3252 !important;
+  color: #21292D !important;
   background: transparent !important;
   margin: 0 !important;
 }
@@ -129,7 +129,7 @@ html body.guided-flow .dest-shell #breakdown li.hidden {
 
 html body.guided-flow .dest-shell #breakdown li strong {
   font-weight: 800 !important;
-  color: #252f6e !important;
+  color: #21292D !important;
   font-variant-numeric: tabular-nums !important;
 }
 
@@ -139,7 +139,7 @@ html body.guided-flow .dest-adjust {
   padding: 0.85rem 0.85rem 0.75rem !important;
   border-radius: 14px !important;
   background: #f7f6fa !important;
-  border: 1px solid rgba(37, 47, 110, 0.08) !important;
+  border: 1px solid rgba(33, 41, 45, 0.08) !important;
   text-align: left !important;
 }
 
@@ -147,7 +147,7 @@ html body.guided-flow .dest-adjust-heading {
   margin: 0 !important;
   font-size: 0.82rem !important;
   font-weight: 800 !important;
-  color: #252f6e !important;
+  color: #21292D !important;
   text-align: center !important;
 }
 
@@ -178,19 +178,19 @@ html body.guided-flow .dest-control-top label,
 html body.guided-flow .dest-control-top-label {
   font-size: 0.75rem !important;
   font-weight: 700 !important;
-  color: #2b3252 !important;
+  color: #21292D !important;
 }
 
 html body.guided-flow .dest-control-top strong {
   font-size: 0.85rem !important;
   font-weight: 800 !important;
-  color: #252f6e !important;
+  color: #21292D !important;
   font-variant-numeric: tabular-nums !important;
 }
 
 html body.guided-flow .dest-control input[type="range"] {
   width: 100% !important;
-  accent-color: #c9a227 !important;
+  accent-color: #D13239 !important;
   height: 1.4rem !important;
   cursor: pointer !important;
 }
@@ -205,9 +205,9 @@ html body.guided-flow .dest-term-pill {
   flex: 1 !important;
   min-height: 40px !important;
   border-radius: 10px !important;
-  border: 1.5px solid rgba(37, 47, 110, 0.14) !important;
+  border: 1.5px solid rgba(33, 41, 45, 0.14) !important;
   background: #fff !important;
-  color: #2b3252 !important;
+  color: #21292D !important;
   font-family: "DM Sans", system-ui, sans-serif !important;
   font-size: 0.82rem !important;
   font-weight: 700 !important;
@@ -215,13 +215,13 @@ html body.guided-flow .dest-term-pill {
 }
 
 html body.guided-flow .dest-term-pill.active {
-  background: #252f6e !important;
+  background: #21292D !important;
   color: #f5e6a8 !important;
-  border-color: #c9a227 !important;
+  border-color: #D13239 !important;
 }
 
 html body.guided-flow .dest-term-pill:focus-visible {
-  outline: 3px solid #c9a227 !important;
+  outline: 3px solid #D13239 !important;
   outline-offset: 2px !important;
 }
 
@@ -231,7 +231,7 @@ html body.guided-flow .dest-mini-stats {
   gap: 0.35rem !important;
   margin-top: 0.65rem !important;
   padding-top: 0.65rem !important;
-  border-top: 1px solid rgba(37, 47, 110, 0.08) !important;
+  border-top: 1px solid rgba(33, 41, 45, 0.08) !important;
 }
 
 html body.guided-flow .dest-mini-stats div {
@@ -252,7 +252,7 @@ html body.guided-flow .dest-mini-stats span {
 html body.guided-flow .dest-mini-stats strong {
   font-size: 0.75rem !important;
   font-weight: 800 !important;
-  color: #252f6e !important;
+  color: #21292D !important;
   font-variant-numeric: tabular-nums !important;
 }
 
@@ -262,8 +262,8 @@ html body.guided-flow .dest-lead {
   padding: 1.05rem 0.9rem 0.9rem !important;
   border-radius: 14px !important;
   background: #fff !important;
-  border: 2px solid #c9a227 !important;
-  box-shadow: 0 8px 22px rgba(201, 162, 39, 0.12) !important;
+  border: 2px solid #D13239 !important;
+  box-shadow: 0 8px 22px rgba(209, 50, 57, 0.12) !important;
   text-align: center !important;
 }
 
@@ -271,7 +271,7 @@ html body.guided-flow .dest-lead-title {
   margin: 0 0 0.3rem !important;
   font-size: 1.15rem !important;
   font-weight: 800 !important;
-  color: #252f6e !important;
+  color: #21292D !important;
 }
 
 html body.guided-flow .dest-lead-copy {
@@ -279,7 +279,7 @@ html body.guided-flow .dest-lead-copy {
   max-width: 19rem !important;
   font-size: 0.84rem !important;
   line-height: 1.4 !important;
-  color: #5c5670 !important;
+  color: #555555 !important;
 }
 
 html body.guided-flow .dest-lead-form {
@@ -298,7 +298,7 @@ html body.guided-flow .dest-field {
 html body.guided-flow .dest-field span {
   font-size: 0.72rem !important;
   font-weight: 700 !important;
-  color: #2b3252 !important;
+  color: #21292D !important;
 }
 
 html body.guided-flow .dest-field em {
@@ -311,9 +311,9 @@ html body.guided-flow .dest-field input {
   min-height: 46px !important;
   padding: 0.55rem 0.7rem !important;
   border-radius: 10px !important;
-  border: 1.5px solid rgba(37, 47, 110, 0.14) !important;
+  border: 1.5px solid rgba(33, 41, 45, 0.14) !important;
   font-size: 1rem !important;
-  color: #252f6e !important;
+  color: #21292D !important;
   background: #faf9fc !important;
   width: 100% !important;
   box-sizing: border-box !important;
@@ -321,8 +321,8 @@ html body.guided-flow .dest-field input {
 
 html body.guided-flow .dest-field input:focus {
   outline: none !important;
-  border-color: #c9a227 !important;
-  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.22) !important;
+  border-color: #D13239 !important;
+  box-shadow: 0 0 0 3px rgba(209, 50, 57, 0.22) !important;
   background: #fff !important;
 }
 
@@ -332,8 +332,8 @@ html body.guided-flow .dest-lead .save-estimate-submit {
   min-height: 50px !important;
   margin-top: 0.35rem !important;
   border-radius: 12px !important;
-  border: 1.5px solid #c9a227 !important;
-  background: linear-gradient(145deg, #252f6e, #1b2352) !important;
+  border: 1.5px solid #D13239 !important;
+  background: linear-gradient(145deg, #21292D, #040708) !important;
   color: #f5e6a8 !important;
   font-size: 1.02rem !important;
   font-weight: 800 !important;
@@ -343,8 +343,8 @@ html body.guided-flow .dest-lead .save-estimate-submit {
 
 html body.guided-flow .dest-btn-primary:hover,
 html body.guided-flow .dest-lead .save-estimate-submit:hover {
-  background: linear-gradient(145deg, #c9a227, #b8921f) !important;
-  color: #252f6e !important;
+  background: linear-gradient(145deg, #D13239, #b8921f) !important;
+  color: #21292D !important;
 }
 
 /* Kill duplicate restore primary */
@@ -367,7 +367,7 @@ html body.guided-flow .dest-reopen-lead {
   background: none !important;
   padding: 0 !important;
   margin: 0 !important;
-  color: #252f6e !important;
+  color: #21292D !important;
   font-weight: 800 !important;
   font-size: 1rem !important;
   text-decoration: underline !important;
@@ -439,17 +439,17 @@ html body.guided-flow .dest-trust-photo {
   height: 36px !important;
   border-radius: 50% !important;
   object-fit: cover !important;
-  border: 2px solid rgba(201, 162, 39, 0.4) !important;
+  border: 2px solid rgba(209, 50, 57, 0.4) !important;
 }
 
 html body.guided-flow .dest-trust p {
   margin: 0 !important;
   font-size: 0.75rem !important;
-  color: #5c5670 !important;
+  color: #555555 !important;
 }
 
 html body.guided-flow .dest-trust strong {
-  color: #252f6e !important;
+  color: #21292D !important;
   font-weight: 700 !important;
 }
 
@@ -470,14 +470,14 @@ html body.guided-flow .dest-secondary-wrap {
 html body.guided-flow .dest-link-secondary {
   font-size: 0.8rem !important;
   font-weight: 600 !important;
-  color: #5c5670 !important;
+  color: #555555 !important;
   text-decoration: underline !important;
   text-underline-offset: 2px !important;
 }
 
 html body.guided-flow .dest-more {
   margin: 0.65rem 0.85rem 1rem !important;
-  border-top: 1px solid rgba(37, 47, 110, 0.08) !important;
+  border-top: 1px solid rgba(33, 41, 45, 0.08) !important;
   padding-top: 0.45rem !important;
 }
 
@@ -513,11 +513,11 @@ html body.guided-flow .dest-text-btn {
   width: 100% !important;
   min-height: 42px !important;
   border-radius: 10px !important;
-  border: 1.5px solid rgba(37, 47, 110, 0.14) !important;
+  border: 1.5px solid rgba(33, 41, 45, 0.14) !important;
   background: #fff !important;
   font-weight: 600 !important;
   font-size: 0.85rem !important;
-  color: #252f6e !important;
+  color: #21292D !important;
   cursor: pointer !important;
 }
 
