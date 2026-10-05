@@ -445,7 +445,7 @@
       table{width:100%;border-collapse:collapse;margin:12px 0;font-size:0.88rem}
       th,td{border:1px solid #ccc;padding:8px;text-align:left}
       th{background:#f4f2f8;font-weight:600}
-      .pdf-hdr{border-bottom:3px solid #c9a227;padding-bottom:14px;margin-bottom:18px}
+      .pdf-hdr{border-bottom:3px solid #D13239;padding-bottom:14px;margin-bottom:18px}
       .pdf-meta{margin:0.15rem 0;font-size:0.82rem;color:#5c5670}
       .pdf-section{margin:18px 0}
       .pdf-highlight{background:#fff8e1}
@@ -1352,7 +1352,7 @@
     if (strip && ref && !document.body.classList.contains("logan5-realtor")) {
       strip.classList.remove("hidden");
       const name = params.get("realtor_name") || ref.replace(/-/g, " ");
-      strip.innerHTML = `Your realtor shared this calculator — questions? <a href="tel:+19192384934">Call Logan</a> or <a href="#" data-mmg-apply>apply</a> when you&rsquo;re ready. Partner: <strong>${name}</strong>`;
+      strip.innerHTML = `Your realtor shared this calculator — questions? <a href="tel:+19192384934">Call the Martini team</a> or <a href="#" data-mmg-apply>apply</a> when you&rsquo;re ready. Partner: <strong>${name}</strong>`;
     }
   }
 
