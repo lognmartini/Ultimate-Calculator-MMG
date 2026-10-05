@@ -8,15 +8,15 @@
 
 /* ========== Design tokens ========== */
 html body.guided-flow.guided-flagship {
-  --polish-navy: #252f6e;
-  --polish-navy-mid: #1b2352;
-  --polish-gold: #c9a227;
-  --polish-gold-hi: #e8c84a;
+  --polish-navy: #21292D;
+  --polish-navy-mid: #040708;
+  --polish-gold: #D13239;
+  --polish-gold-hi: #E04A50;
   --polish-cream: #f5e6a8;
-  --polish-muted: #5c5670;
+  --polish-muted: #555555;
   --polish-soft: #8a8499;
-  --polish-border: rgba(37, 47, 110, 0.12);
-  --polish-border-strong: rgba(37, 47, 110, 0.18);
+  --polish-border: rgba(33, 41, 45, 0.12);
+  --polish-border-strong: rgba(33, 41, 45, 0.18);
   --polish-surface: #ffffff;
   --polish-surface-2: #f7f6fa;
   --polish-radius: 14px;
@@ -103,7 +103,7 @@ html body.guided-flow.guided-flagship #wizardProgressLine {
 html body.guided-flow.guided-flagship .wizard-progress-track {
   height: 4px !important;
   border-radius: 99px !important;
-  background: rgba(37, 47, 110, 0.08) !important;
+  background: rgba(33, 41, 45, 0.08) !important;
   overflow: hidden !important;
   margin-top: 0.4rem !important;
 }
@@ -174,7 +174,7 @@ html body.guided-flow.guided-flagship .wizard-card.guided-card {
   border: 1px solid var(--polish-border) !important;
   border-radius: var(--polish-radius) !important;
   padding: var(--polish-card-pad) !important;
-  box-shadow: 0 4px 18px rgba(37, 47, 110, 0.05) !important;
+  box-shadow: 0 4px 18px rgba(33, 41, 45, 0.05) !important;
   width: 100% !important;
   max-width: var(--polish-max) !important;
   box-sizing: border-box !important;
@@ -211,7 +211,7 @@ html body.guided-flow.guided-flagship .guided-choice-card {
   background: var(--polish-surface) !important;
   border: 1.5px solid var(--polish-border-strong) !important;
   border-radius: var(--polish-radius) !important;
-  box-shadow: 0 2px 10px rgba(37, 47, 110, 0.04) !important;
+  box-shadow: 0 2px 10px rgba(33, 41, 45, 0.04) !important;
   cursor: pointer !important;
   transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease, background 0.15s ease !important;
   font-family: "DM Sans", system-ui, sans-serif !important;
@@ -239,7 +239,7 @@ html body.guided-flow.guided-flagship .guided-choice-icon {
 html body.guided-flow.guided-flagship .guided-choice-card:hover {
   transform: translateY(-2px) !important;
   border-color: var(--polish-gold) !important;
-  box-shadow: 0 8px 20px rgba(37, 47, 110, 0.1) !important;
+  box-shadow: 0 8px 20px rgba(33, 41, 45, 0.1) !important;
 }
 
 html body.guided-flow.guided-flagship .guided-choice-card:active {
@@ -255,7 +255,7 @@ html body.guided-flow.guided-flagship .guided-choice-card.active,
 html body.guided-flow.guided-flagship .guided-choice-card[aria-pressed="true"] {
   border-color: var(--polish-gold) !important;
   background: linear-gradient(160deg, #fffef8, #fff) !important;
-  box-shadow: 0 0 0 1px rgba(201, 162, 39, 0.35), 0 6px 16px rgba(37, 47, 110, 0.08) !important;
+  box-shadow: 0 0 0 1px rgba(209, 50, 57, 0.35), 0 6px 16px rgba(33, 41, 45, 0.08) !important;
 }
 
 html body.guided-flow.guided-flagship .guided-refi-card {
@@ -267,7 +267,7 @@ html body.guided-flow.guided-flagship .guided-refi-card {
 html body.guided-flow.guided-flagship .guided-address-field label {
   font-size: 0.76rem !important;
   font-weight: 700 !important;
-  color: #2b3252 !important;
+  color: #21292D !important;
   margin-bottom: 0.3rem !important;
   display: block !important;
 }
@@ -290,7 +290,7 @@ html body.guided-flow.guided-flagship .guided-address-field .address-input:focus
 html body.guided-flow.guided-flagship #propertyAddress:focus {
   outline: none !important;
   border-color: var(--polish-gold) !important;
-  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.2) !important;
+  box-shadow: 0 0 0 3px rgba(209, 50, 57, 0.2) !important;
   background: #fff !important;
 }
 
@@ -312,7 +312,7 @@ html body.guided-flow.guided-flagship #lookupAddress {
 
 html body.guided-flow.guided-flagship .guided-lookup-primary:hover {
   transform: translateY(-1px) !important;
-  box-shadow: 0 6px 16px rgba(37, 47, 110, 0.16) !important;
+  box-shadow: 0 6px 16px rgba(33, 41, 45, 0.16) !important;
 }
 
 html body.guided-flow.guided-flagship .guided-lookup-primary:focus-visible {
@@ -353,7 +353,7 @@ html body.guided-flow.guided-flagship .guided-property-summary {
   padding: 0.85rem !important;
   border-radius: var(--polish-radius-sm) !important;
   background: var(--polish-surface-2) !important;
-  border: 1px solid rgba(201, 162, 39, 0.25) !important;
+  border: 1px solid rgba(209, 50, 57, 0.25) !important;
 }
 
 /* ========== Price / loan step ========== */
@@ -433,7 +433,7 @@ html body.guided-flow.guided-flagship .guided-loan-type-grid .ultimate-program-b
   background: var(--polish-navy) !important;
   border-color: var(--polish-gold) !important;
   color: var(--polish-cream) !important;
-  box-shadow: 0 4px 12px rgba(37, 47, 110, 0.15) !important;
+  box-shadow: 0 4px 12px rgba(33, 41, 45, 0.15) !important;
 }
 
 html body.guided-flow.guided-flagship .guided-loan-type-grid .ultimate-program-btn.active strong,
@@ -476,7 +476,7 @@ html body.guided-flow.guided-flagship .ultimate-term-btn {
   background: var(--polish-surface-2) !important;
   font-weight: 700 !important;
   font-size: 0.82rem !important;
-  color: #2b3252 !important;
+  color: #21292D !important;
   cursor: pointer !important;
   transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease !important;
 }
@@ -539,7 +539,7 @@ html body.guided-flow.guided-flagship .guided-step-nav {
   backdrop-filter: blur(12px) !important;
   -webkit-backdrop-filter: blur(12px) !important;
   border-top: 1px solid var(--polish-border) !important;
-  box-shadow: 0 -6px 24px rgba(37, 47, 110, 0.06) !important;
+  box-shadow: 0 -6px 24px rgba(33, 41, 45, 0.06) !important;
 }
 
 html body.guided-flow.guided-flagship .guided-step-nav .wizard-nav-inner {
@@ -588,7 +588,7 @@ html body.guided-flow.guided-flagship .guided-step-nav .btn-wizard-next {
 
 html body.guided-flow.guided-flagship .guided-step-nav .btn-wizard-next:hover {
   transform: translateY(-1px) !important;
-  box-shadow: 0 6px 16px rgba(37, 47, 110, 0.18) !important;
+  box-shadow: 0 6px 16px rgba(33, 41, 45, 0.18) !important;
 }
 
 html body.guided-flow.guided-flagship .guided-step-nav .btn-wizard-next:focus-visible,
@@ -717,9 +717,9 @@ html body.guided-flow.guided-flagship .guided-national-banner:not(.hidden) {
   text-align: center !important;
   font-size: 0.78rem !important;
   border-radius: var(--polish-radius-sm) !important;
-  background: rgba(201, 162, 39, 0.1) !important;
+  background: rgba(209, 50, 57, 0.1) !important;
   color: var(--polish-navy) !important;
-  border: 1px solid rgba(201, 162, 39, 0.22) !important;
+  border: 1px solid rgba(209, 50, 57, 0.22) !important;
 }
 
 /* Inline errors — calm, secondary until needed */
@@ -902,8 +902,8 @@ html body.guided-flow.wizard-on-results #saveEstimateHeading {
   font-weight: 800 !important;
   line-height: 1.25 !important;
   letter-spacing: -0.02em !important;
-  color: #252f6e !important;
-  -webkit-text-fill-color: #252f6e !important;
+  color: #21292D !important;
+  -webkit-text-fill-color: #21292D !important;
   text-align: center !important;
   font-family: "DM Sans", system-ui, sans-serif !important;
 }
@@ -920,15 +920,15 @@ html body.guided-flow.wizard-on-results .studio-lead .save-estimate-lead {
   font-size: 0.86rem !important;
   font-weight: 500 !important;
   line-height: 1.4 !important;
-  color: #5c5670 !important;
-  -webkit-text-fill-color: #5c5670 !important;
+  color: #555555 !important;
+  -webkit-text-fill-color: #555555 !important;
   text-align: center !important;
 }
 
 html body.guided-flow.guided-flagship .studio-lead,
 html body.guided-flow.guided-flagship #saveEstimateCard.studio-lead {
   background: #fff !important;
-  color: #252f6e !important;
+  color: #21292D !important;
 }
 
 /* =========================================================
@@ -944,7 +944,7 @@ html body.guided-flow.wizard-on-results #saveEstimateCard,
 html body.guided-flow.wizard-on-results .studio-trust,
 html body.guided-flow.wizard-on-results .studio-more-body {
   background: #ffffff !important;
-  color: #252f6e !important;
+  color: #21292D !important;
 }
 
 /* HERO — white text on navy (intentional) */
@@ -957,8 +957,8 @@ html body.guided-flow.wizard-on-results .studio-hero .studio-kicker,
 html body.guided-flow.wizard-on-results .studio-hero #pitiHeroLabel,
 html body.guided-flow.wizard-on-results .studio-hero strong,
 html body.guided-flow.wizard-on-results .studio-hero .studio-rates strong {
-  color: #e8c84a !important;
-  -webkit-text-fill-color: #e8c84a !important;
+  color: #E04A50 !important;
+  -webkit-text-fill-color: #E04A50 !important;
 }
 html body.guided-flow.wizard-on-results .studio-hero #pitiPayment,
 html body.guided-flow.wizard-on-results .studio-hero .studio-amount {
@@ -977,14 +977,14 @@ html body.guided-flow.wizard-on-results .studio-hero .studio-rates {
 /* BREAKDOWN */
 html body.guided-flow.wizard-on-results .studio-break #breakdown li,
 html body.guided-flow.wizard-on-results .studio-break #breakdown li span {
-  color: #2b3252 !important;
-  -webkit-text-fill-color: #2b3252 !important;
+  color: #21292D !important;
+  -webkit-text-fill-color: #21292D !important;
   opacity: 1 !important;
   visibility: visible !important;
 }
 html body.guided-flow.wizard-on-results .studio-break #breakdown li strong {
-  color: #252f6e !important;
-  -webkit-text-fill-color: #252f6e !important;
+  color: #21292D !important;
+  -webkit-text-fill-color: #21292D !important;
   font-weight: 800 !important;
 }
 
@@ -996,15 +996,15 @@ html body.guided-flow.wizard-on-results .studio-control-row output,
 html body.guided-flow.wizard-on-results #destPriceLabel,
 html body.guided-flow.wizard-on-results #destDownLabel,
 html body.guided-flow.wizard-on-results #destRateLabel {
-  color: #252f6e !important;
-  -webkit-text-fill-color: #252f6e !important;
+  color: #21292D !important;
+  -webkit-text-fill-color: #21292D !important;
   opacity: 1 !important;
   visibility: visible !important;
 }
 html body.guided-flow.wizard-on-results .studio-controls-head p,
 html body.guided-flow.wizard-on-results .studio-points-note {
-  color: #5c5670 !important;
-  -webkit-text-fill-color: #5c5670 !important;
+  color: #555555 !important;
+  -webkit-text-fill-color: #555555 !important;
   opacity: 1 !important;
 }
 
@@ -1015,47 +1015,47 @@ html body.guided-flow.wizard-on-results .studio-chip {
   justify-content: center !important;
   min-height: 40px !important;
   background: #faf9fc !important;
-  color: #252f6e !important;
-  -webkit-text-fill-color: #252f6e !important;
-  border: 1.5px solid rgba(37, 47, 110, 0.16) !important;
+  color: #21292D !important;
+  -webkit-text-fill-color: #21292D !important;
+  border: 1.5px solid rgba(33, 41, 45, 0.16) !important;
   opacity: 1 !important;
   visibility: visible !important;
   font-weight: 700 !important;
 }
 /* Chips — active */
 html body.guided-flow.wizard-on-results .studio-chip.active {
-  background: #252f6e !important;
+  background: #21292D !important;
   color: #f5e6a8 !important;
   -webkit-text-fill-color: #f5e6a8 !important;
-  border-color: #c9a227 !important;
+  border-color: #D13239 !important;
 }
 
 /* Facts */
 html body.guided-flow.wizard-on-results .studio-facts span {
-  color: #5c5670 !important;
-  -webkit-text-fill-color: #5c5670 !important;
+  color: #555555 !important;
+  -webkit-text-fill-color: #555555 !important;
 }
 html body.guided-flow.wizard-on-results .studio-facts strong,
 html body.guided-flow.wizard-on-results .studio-facts #loanAmount,
 html body.guided-flow.wizard-on-results .studio-facts #totalInterest,
 html body.guided-flow.wizard-on-results .studio-facts #payoffDate {
-  color: #252f6e !important;
-  -webkit-text-fill-color: #252f6e !important;
+  color: #21292D !important;
+  -webkit-text-fill-color: #21292D !important;
 }
 
 /* LEAD CARD — full visibility */
 html body.guided-flow.wizard-on-results .studio-lead,
 html body.guided-flow.wizard-on-results #saveEstimateCard {
   background: #ffffff !important;
-  border: 2px solid #c9a227 !important;
-  color: #252f6e !important;
+  border: 2px solid #D13239 !important;
+  color: #21292D !important;
 }
 html body.guided-flow.wizard-on-results .studio-lead .studio-lead-title,
 html body.guided-flow.wizard-on-results .studio-lead .save-estimate-title,
 html body.guided-flow.wizard-on-results #saveEstimateHeading {
   display: block !important;
-  color: #252f6e !important;
-  -webkit-text-fill-color: #252f6e !important;
+  color: #21292D !important;
+  -webkit-text-fill-color: #21292D !important;
   font-size: 1.2rem !important;
   font-weight: 800 !important;
   opacity: 1 !important;
@@ -1064,16 +1064,16 @@ html body.guided-flow.wizard-on-results #saveEstimateHeading {
 html body.guided-flow.wizard-on-results .studio-lead .studio-lead-copy,
 html body.guided-flow.wizard-on-results .studio-lead .save-estimate-lead {
   display: block !important;
-  color: #5c5670 !important;
-  -webkit-text-fill-color: #5c5670 !important;
+  color: #555555 !important;
+  -webkit-text-fill-color: #555555 !important;
   font-size: 0.86rem !important;
   opacity: 1 !important;
   visibility: visible !important;
 }
 html body.guided-flow.wizard-on-results .studio-lead .studio-field span,
 html body.guided-flow.wizard-on-results .studio-lead label span {
-  color: #2b3252 !important;
-  -webkit-text-fill-color: #2b3252 !important;
+  color: #21292D !important;
+  -webkit-text-fill-color: #21292D !important;
   opacity: 1 !important;
 }
 html body.guided-flow.wizard-on-results .studio-lead .studio-field em {
@@ -1087,9 +1087,9 @@ html body.guided-flow.wizard-on-results .studio-lead input[type="tel"] {
   width: 100% !important;
   min-height: 46px !important;
   background: #faf9fc !important;
-  color: #252f6e !important;
-  -webkit-text-fill-color: #252f6e !important;
-  border: 1.5px solid rgba(37, 47, 110, 0.16) !important;
+  color: #21292D !important;
+  -webkit-text-fill-color: #21292D !important;
+  border: 1.5px solid rgba(33, 41, 45, 0.16) !important;
   opacity: 1 !important;
   visibility: visible !important;
 }
@@ -1107,10 +1107,10 @@ html body.guided-flow.wizard-on-results .studio-lead .guided-lead-submit {
   justify-content: center !important;
   width: 100% !important;
   min-height: 50px !important;
-  background: linear-gradient(145deg, #252f6e, #1b2352) !important;
+  background: linear-gradient(145deg, #21292D, #040708) !important;
   color: #f5e6a8 !important;
   -webkit-text-fill-color: #f5e6a8 !important;
-  border: 1.5px solid #c9a227 !important;
+  border: 1.5px solid #D13239 !important;
   font-weight: 800 !important;
   font-size: 1rem !important;
   opacity: 1 !important;
@@ -1119,17 +1119,17 @@ html body.guided-flow.wizard-on-results .studio-lead .guided-lead-submit {
 }
 html body.guided-flow.wizard-on-results .studio-lead .studio-cta:hover,
 html body.guided-flow.wizard-on-results .studio-lead .save-estimate-submit:hover {
-  background: linear-gradient(145deg, #c9a227, #b8921f) !important;
-  color: #252f6e !important;
-  -webkit-text-fill-color: #252f6e !important;
+  background: linear-gradient(145deg, #D13239, #b8921f) !important;
+  color: #21292D !important;
+  -webkit-text-fill-color: #21292D !important;
 }
 
 /* Secondary skip */
 html body.guided-flow.wizard-on-results .studio-lead .studio-skip,
 html body.guided-flow.wizard-on-results .studio-lead .save-estimate-skip {
   display: block !important;
-  color: #5c5670 !important;
-  -webkit-text-fill-color: #5c5670 !important;
+  color: #555555 !important;
+  -webkit-text-fill-color: #555555 !important;
   background: none !important;
   border: 0 !important;
   opacity: 1 !important;
@@ -1157,12 +1157,12 @@ html body.guided-flow.wizard-on-results .studio-lead .save-estimate-success:not(
 
 /* Trust */
 html body.guided-flow.wizard-on-results .studio-trust strong {
-  color: #252f6e !important;
-  -webkit-text-fill-color: #252f6e !important;
+  color: #21292D !important;
+  -webkit-text-fill-color: #21292D !important;
 }
 html body.guided-flow.wizard-on-results .studio-trust span {
-  color: #5c5670 !important;
-  -webkit-text-fill-color: #5c5670 !important;
+  color: #555555 !important;
+  -webkit-text-fill-color: #555555 !important;
 }
 
 /* Legal / apply — secondary but visible */
@@ -1174,8 +1174,8 @@ html body.guided-flow.wizard-on-results .studio-legal {
 }
 html body.guided-flow.wizard-on-results .studio-apply a,
 html body.guided-flow.wizard-on-results .btn-results-apply {
-  color: #5c5670 !important;
-  -webkit-text-fill-color: #5c5670 !important;
+  color: #555555 !important;
+  -webkit-text-fill-color: #555555 !important;
   background: none !important;
   border: 0 !important;
   box-shadow: none !important;
@@ -1188,8 +1188,8 @@ html body.guided-flow.wizard-on-results .btn-results-apply {
 
 /* More details summary */
 html body.guided-flow.wizard-on-results .studio-more > summary {
-  color: #5c5670 !important;
-  -webkit-text-fill-color: #5c5670 !important;
+  color: #555555 !important;
+  -webkit-text-fill-color: #555555 !important;
   opacity: 1 !important;
   visibility: visible !important;
 }
@@ -1201,10 +1201,10 @@ html body.guided-flow.wizard-on-results .dest-reopen-lead {
   min-height: 48px !important;
   align-items: center !important;
   justify-content: center !important;
-  background: linear-gradient(145deg, #252f6e, #1b2352) !important;
+  background: linear-gradient(145deg, #21292D, #040708) !important;
   color: #f5e6a8 !important;
   -webkit-text-fill-color: #f5e6a8 !important;
-  border: 1.5px solid #c9a227 !important;
+  border: 1.5px solid #D13239 !important;
   border-radius: 12px !important;
   font-weight: 800 !important;
   opacity: 1 !important;
@@ -1215,8 +1215,8 @@ html body.guided-flow.wizard-on-results .dest-reopen-lead {
 /* Back link / nav on results */
 html body.guided-flow.wizard-on-results .btn-wizard-back,
 html body.guided-flow.wizard-on-results .fx-back-link {
-  color: #252f6e !important;
-  -webkit-text-fill-color: #252f6e !important;
+  color: #21292D !important;
+  -webkit-text-fill-color: #21292D !important;
   opacity: 1 !important;
   visibility: visible !important;
 }
@@ -1225,7 +1225,7 @@ html body.guided-flow.wizard-on-results .fx-back-link {
 html body.guided-flow.wizard-on-results input[type="range"] {
   opacity: 1 !important;
   visibility: visible !important;
-  accent-color: #c9a227 !important;
+  accent-color: #D13239 !important;
 }
 
 /* Kill accidental white-on-white from legacy wizard-results rules */
@@ -1236,12 +1236,12 @@ html body.guided-flow.wizard-on-results .wizard-results .save-estimate-eyebrow {
   color: inherit !important;
 }
 html body.guided-flow.wizard-on-results .studio-lead .save-estimate-title {
-  color: #252f6e !important;
-  -webkit-text-fill-color: #252f6e !important;
+  color: #21292D !important;
+  -webkit-text-fill-color: #21292D !important;
 }
 html body.guided-flow.wizard-on-results .studio-lead .save-estimate-lead {
-  color: #5c5670 !important;
-  -webkit-text-fill-color: #5c5670 !important;
+  color: #555555 !important;
+  -webkit-text-fill-color: #555555 !important;
 }
 html body.guided-flow.wizard-on-results .studio-lead .save-estimate-consent {
   color: #6b6578 !important;
@@ -1251,21 +1251,21 @@ html body.guided-flow.wizard-on-results .studio-lead .save-estimate-consent {
 /* Details content text */
 html body.guided-flow.wizard-on-results .studio-more-h,
 html body.guided-flow.wizard-on-results .vs-comp-col-label {
-  color: #5c5670 !important;
+  color: #555555 !important;
 }
 html body.guided-flow.wizard-on-results .vs-comp-col-rate,
 html body.guided-flow.wizard-on-results .vs-comp-col-payment,
 html body.guided-flow.wizard-on-results .vs-comp-savings strong {
-  color: #252f6e !important;
+  color: #21292D !important;
 }
 html body.guided-flow.wizard-on-results .studio-more .field label,
 html body.guided-flow.wizard-on-results .studio-more .field-note {
-  color: #2b3252 !important;
+  color: #21292D !important;
 }
 html body.guided-flow.wizard-on-results .studio-more input {
-  color: #252f6e !important;
+  color: #21292D !important;
   background: #fff !important;
-  border: 1px solid rgba(37, 47, 110, 0.14) !important;
+  border: 1px solid rgba(33, 41, 45, 0.14) !important;
 }
 
 /* =========================================================
@@ -1291,9 +1291,9 @@ html body.guided-flow.wizard-on-results .studio-more-banner {
   text-align: center !important;
   margin: 0 0 0.75rem !important;
   padding: 0.55rem 0.75rem !important;
-  background: linear-gradient(135deg, #252f6e, #1b2352) !important;
+  background: linear-gradient(135deg, #21292D, #040708) !important;
   border-radius: 12px !important;
-  border: 1px solid rgba(201, 162, 39, 0.35) !important;
+  border: 1px solid rgba(209, 50, 57, 0.35) !important;
 }
 
 html body.guided-flow.wizard-on-results .studio-more-banner-title {
@@ -1336,10 +1336,10 @@ html body.guided-flow.wizard-on-results .studio-more-card {
 
 html body.guided-flow.wizard-on-results .studio-more-card {
   background: #fff !important;
-  border: 1px solid rgba(37, 47, 110, 0.1) !important;
+  border: 1px solid rgba(33, 41, 45, 0.1) !important;
   border-radius: 12px !important;
   padding: 1rem 1.05rem 1.05rem !important;
-  box-shadow: 0 3px 12px rgba(37, 47, 110, 0.04) !important;
+  box-shadow: 0 3px 12px rgba(33, 41, 45, 0.04) !important;
   box-sizing: border-box !important;
 }
 
@@ -1350,8 +1350,8 @@ html body.guided-flow.wizard-on-results .studio-more-h {
   font-weight: 800 !important;
   letter-spacing: 0.06em !important;
   text-transform: uppercase !important;
-  color: #5c5670 !important;
-  -webkit-text-fill-color: #5c5670 !important;
+  color: #555555 !important;
+  -webkit-text-fill-color: #555555 !important;
 }
 
 /* Tax / insurance / HOA grid */
@@ -1369,8 +1369,8 @@ html body.guided-flow.wizard-on-results .studio-tax-grid label {
   margin: 0 0 0.3rem !important;
   font-size: 0.78rem !important;
   font-weight: 700 !important;
-  color: #2b3252 !important;
-  -webkit-text-fill-color: #2b3252 !important;
+  color: #21292D !important;
+  -webkit-text-fill-color: #21292D !important;
 }
 html body.guided-flow.wizard-on-results .studio-tax-grid input,
 html body.guided-flow.wizard-on-results .studio-more input.currency-input {
@@ -1380,10 +1380,10 @@ html body.guided-flow.wizard-on-results .studio-more input.currency-input {
   box-sizing: border-box !important;
   padding: 0.55rem 0.7rem !important;
   border-radius: 10px !important;
-  border: 1.5px solid rgba(37, 47, 110, 0.14) !important;
+  border: 1.5px solid rgba(33, 41, 45, 0.14) !important;
   background: #faf9fc !important;
-  color: #252f6e !important;
-  -webkit-text-fill-color: #252f6e !important;
+  color: #21292D !important;
+  -webkit-text-fill-color: #21292D !important;
   font-size: 1rem !important;
   font-weight: 700 !important;
   opacity: 1 !important;
@@ -1408,8 +1408,8 @@ html body.guided-flow.wizard-on-results .official-quote-scenario {
   display: block !important;
   margin: 0 0 0.55rem !important;
   font-size: 0.78rem !important;
-  color: #5c5670 !important;
-  -webkit-text-fill-color: #5c5670 !important;
+  color: #555555 !important;
+  -webkit-text-fill-color: #555555 !important;
 }
 html body.guided-flow.wizard-on-results .seller-credit-panel {
   display: block !important;
@@ -1417,7 +1417,7 @@ html body.guided-flow.wizard-on-results .seller-credit-panel {
   padding: 0.65rem 0.7rem !important;
   background: #f7f6fa !important;
   border-radius: 10px !important;
-  border: 1px solid rgba(37, 47, 110, 0.08) !important;
+  border: 1px solid rgba(33, 41, 45, 0.08) !important;
 }
 html body.guided-flow.wizard-on-results .seller-credit-head {
   display: flex !important;
@@ -1429,20 +1429,20 @@ html body.guided-flow.wizard-on-results .seller-credit-head {
 html body.guided-flow.wizard-on-results .seller-credit-head label {
   font-size: 0.78rem !important;
   font-weight: 700 !important;
-  color: #2b3252 !important;
-  -webkit-text-fill-color: #2b3252 !important;
+  color: #21292D !important;
+  -webkit-text-fill-color: #21292D !important;
 }
 html body.guided-flow.wizard-on-results .seller-credit-head strong,
 html body.guided-flow.wizard-on-results #sellerCreditDisplay {
   font-size: 0.95rem !important;
   font-weight: 800 !important;
-  color: #252f6e !important;
-  -webkit-text-fill-color: #252f6e !important;
+  color: #21292D !important;
+  -webkit-text-fill-color: #21292D !important;
 }
 html body.guided-flow.wizard-on-results #sellerCreditSlider {
   display: block !important;
   width: 100% !important;
-  accent-color: #c9a227 !important;
+  accent-color: #D13239 !important;
   opacity: 1 !important;
   visibility: visible !important;
 }
@@ -1466,7 +1466,7 @@ html body.guided-flow.wizard-on-results .official-quote-row {
   align-items: baseline !important;
   gap: 0.75rem !important;
   padding: 0.55rem 0 !important;
-  border-bottom: 1px solid rgba(37, 47, 110, 0.08) !important;
+  border-bottom: 1px solid rgba(33, 41, 45, 0.08) !important;
   margin: 0 !important;
 }
 html body.guided-flow.wizard-on-results .official-quote-row.hidden {
@@ -1475,14 +1475,14 @@ html body.guided-flow.wizard-on-results .official-quote-row.hidden {
 html body.guided-flow.wizard-on-results .official-quote-row dt {
   font-size: 0.84rem !important;
   font-weight: 500 !important;
-  color: #2b3252 !important;
-  -webkit-text-fill-color: #2b3252 !important;
+  color: #21292D !important;
+  -webkit-text-fill-color: #21292D !important;
 }
 html body.guided-flow.wizard-on-results .official-quote-row dd {
   font-size: 0.9rem !important;
   font-weight: 800 !important;
-  color: #252f6e !important;
-  -webkit-text-fill-color: #252f6e !important;
+  color: #21292D !important;
+  -webkit-text-fill-color: #21292D !important;
   margin: 0 !important;
   font-variant-numeric: tabular-nums !important;
 }
@@ -1490,14 +1490,14 @@ html body.guided-flow.wizard-on-results .official-quote-row-total {
   border-bottom: 0 !important;
   padding-top: 0.7rem !important;
   margin-top: 0.15rem !important;
-  border-top: 2px solid rgba(201, 162, 39, 0.4) !important;
+  border-top: 2px solid rgba(209, 50, 57, 0.4) !important;
 }
 html body.guided-flow.wizard-on-results .official-quote-row-total dt,
 html body.guided-flow.wizard-on-results .official-quote-row-total dd {
   font-size: 0.98rem !important;
   font-weight: 800 !important;
-  color: #252f6e !important;
-  -webkit-text-fill-color: #252f6e !important;
+  color: #21292D !important;
+  -webkit-text-fill-color: #21292D !important;
 }
 
 /* Realtor CTA */
@@ -1509,10 +1509,10 @@ html body.guided-flow.wizard-on-results #guidedResultsRealtorBtn {
   width: 100% !important;
   min-height: 46px !important;
   border-radius: 10px !important;
-  border: 1.5px solid rgba(37, 47, 110, 0.14) !important;
+  border: 1.5px solid rgba(33, 41, 45, 0.14) !important;
   background: #fff !important;
-  color: #252f6e !important;
-  -webkit-text-fill-color: #252f6e !important;
+  color: #21292D !important;
+  -webkit-text-fill-color: #21292D !important;
   font-weight: 700 !important;
   font-size: 0.9rem !important;
   cursor: pointer !important;
@@ -1521,7 +1521,7 @@ html body.guided-flow.wizard-on-results #guidedResultsRealtorBtn {
   font-family: "DM Sans", system-ui, sans-serif !important;
 }
 html body.guided-flow.wizard-on-results .studio-text-btn:hover {
-  border-color: #c9a227 !important;
+  border-color: #D13239 !important;
   background: #fffef8 !important;
 }
 
@@ -1542,10 +1542,10 @@ html body.guided-flow.wizard-on-results .ultimate-hub-btn {
   min-height: 46px !important;
   padding: 0.55rem 0.75rem !important;
   border-radius: 10px !important;
-  border: 1.5px solid rgba(37, 47, 110, 0.14) !important;
+  border: 1.5px solid rgba(33, 41, 45, 0.14) !important;
   background: #faf9fc !important;
-  color: #252f6e !important;
-  -webkit-text-fill-color: #252f6e !important;
+  color: #21292D !important;
+  -webkit-text-fill-color: #21292D !important;
   font-weight: 700 !important;
   font-size: 0.86rem !important;
   cursor: pointer !important;
@@ -1560,7 +1560,7 @@ html body.guided-flow.wizard-on-results .ultimate-hub-btn strong {
   font-weight: 700 !important;
 }
 html body.guided-flow.wizard-on-results .ultimate-hub-btn:hover {
-  border-color: #c9a227 !important;
+  border-color: #D13239 !important;
   background: #fff !important;
 }
 
@@ -1569,7 +1569,7 @@ html body.guided-flow.wizard-on-results #vsCompetition {
   display: block !important;
   visibility: visible !important;
   background: #fff !important;
-  border: 1px solid rgba(37, 47, 110, 0.1) !important;
+  border: 1px solid rgba(33, 41, 45, 0.1) !important;
   border-radius: 12px !important;
   padding: 1rem 1.05rem !important;
 }
