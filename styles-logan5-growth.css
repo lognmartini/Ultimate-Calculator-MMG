@@ -8,8 +8,8 @@ body.logan5 .logan5-instant-banner {
   justify-content: center;
   gap: 0.55rem 1rem;
   padding: 0.55rem 1rem;
-  background: linear-gradient(90deg, #252f6e 0%, #2d2250 50%, #252f6e 100%);
-  border-bottom: 1px solid rgba(201, 162, 39, 0.35);
+  background: linear-gradient(90deg, #21292D 0%, #2d2250 50%, #21292D 100%);
+  border-bottom: 1px solid rgba(209, 50, 57, 0.35);
   color: rgba(255, 255, 255, 0.92);
   font-size: 0.78rem;
 }
@@ -37,14 +37,14 @@ body.logan5 .logan5-instant-copy {
 }
 
 body.logan5 .logan5-instant-copy strong {
-  color: #e8c84a;
+  color: #E04A50;
 }
 
 body.logan5 .logan5-instant-cta {
   padding: 0.4rem 0.85rem;
   border-radius: 999px;
-  background: #c9a227;
-  color: #252f6e;
+  background: #D13239;
+  color: #21292D;
   font-weight: 700;
   font-size: 0.72rem;
   text-decoration: none;
@@ -52,7 +52,7 @@ body.logan5 .logan5-instant-cta {
 }
 
 body.logan5 .logan5-instant-cta:hover {
-  background: #e8c84a;
+  background: #E04A50;
 }
 
 /* ── Payment breakdown wheel (step 3 hero) ── */
@@ -65,7 +65,7 @@ body.logan5 .ultimate-payment-hero-block {
 body.logan5 .payment-breakdown-wheel {
   margin-top: 1.1rem;
   padding-top: 1.15rem;
-  border-top: 1px solid rgba(201, 162, 39, 0.22);
+  border-top: 1px solid rgba(209, 50, 57, 0.22);
 }
 
 body.logan5 .payment-breakdown-wheel--gap {
@@ -73,7 +73,7 @@ body.logan5 .payment-breakdown-wheel--gap {
   padding: 1rem 1.1rem 1.05rem;
   border-radius: 14px;
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(201, 162, 39, 0.28);
+  border: 1px solid rgba(209, 50, 57, 0.28);
 }
 
 body.logan5 .payment-breakdown-wheel--gap .pbw-title {
@@ -154,7 +154,7 @@ body.logan5 .pbw-center-label {
 body.logan5 .pbw-center-amount {
   font-size: clamp(0.95rem, 3.2vw, 1.15rem);
   font-weight: 700;
-  color: #e8c84a;
+  color: #E04A50;
   line-height: 1.15;
 }
 
@@ -209,13 +209,13 @@ body.logan5 .seller-credit-panel {
   margin: 0.85rem 0 1rem;
   padding: 0.85rem 0.9rem;
   border-radius: 12px;
-  background: rgba(37, 47, 110, 0.04);
-  border: 1px solid rgba(201, 162, 39, 0.22);
+  background: rgba(33, 41, 45, 0.04);
+  border: 1px solid rgba(209, 50, 57, 0.22);
 }
 
 body.logan5.wizard-on-results .seller-credit-panel {
   background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(201, 162, 39, 0.28);
+  border-color: rgba(209, 50, 57, 0.28);
 }
 
 body.logan5 .seller-credit-head {
@@ -240,7 +240,7 @@ body.logan5 .seller-credit-head strong {
 body.logan5 .seller-credit-panel input[type="range"] {
   width: 100%;
   margin: 0.25rem 0 0.5rem;
-  accent-color: #c9a227;
+  accent-color: #D13239;
 }
 
 body.logan5 .seller-credit-note {
@@ -259,7 +259,7 @@ body.logan5 .ultimate-scenario-snapshot {
   padding: 0.85rem 1rem;
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(201, 162, 39, 0.28);
+  border: 1px solid rgba(209, 50, 57, 0.28);
 }
 
 body.logan5 .ultimate-scenario-snapshot-label {
@@ -300,7 +300,7 @@ body.logan5 .ultimate-scenario-snapshot-grid dd {
 }
 
 body.logan5 .ultimate-scenario-snapshot-highlight dd {
-  color: #e8c84a;
+  color: #E04A50;
 }
 
 @media (min-width: 560px) {
@@ -313,11 +313,11 @@ body.logan5 .ultimate-scenario-snapshot-highlight dd {
 body.logan5 .ultimate-step3-tabs {
   border-radius: 14px;
   overflow: hidden;
-  border: 1px solid rgba(201, 162, 39, 0.32);
+  border: 1px solid rgba(209, 50, 57, 0.32);
   background: linear-gradient(
     165deg,
-    rgba(37, 47, 110, 0.28) 0%,
-    rgba(37, 47, 110, 0.5) 100%
+    rgba(33, 41, 45, 0.28) 0%,
+    rgba(33, 41, 45, 0.5) 100%
   );
 }
 
@@ -342,9 +342,9 @@ body.logan5 .ultimate-step3-tab {
 }
 
 body.logan5 .ultimate-step3-tab.active {
-  color: #e8c84a;
-  background: rgba(201, 162, 39, 0.1);
-  border-bottom-color: #c9a227;
+  color: #E04A50;
+  background: rgba(209, 50, 57, 0.1);
+  border-bottom-color: #D13239;
 }
 
 body.logan5 .ultimate-step3-panels {
@@ -367,7 +367,7 @@ body.logan5 .ultimate-step3-panel-lead {
 }
 
 body.logan5 .ultimate-step3-panel-lead strong {
-  color: #e8c84a;
+  color: #E04A50;
 }
 
 body.logan5 .ultimate-step3-panel-cta {
@@ -396,9 +396,9 @@ body.logan5 .ultimate-share-btn-primary {
   justify-content: center;
   padding: 0.6rem 0.85rem;
   border-radius: 10px;
-  border: 1px solid rgba(201, 162, 39, 0.45);
-  background: rgba(201, 162, 39, 0.15);
-  color: #e8c84a;
+  border: 1px solid rgba(209, 50, 57, 0.45);
+  background: rgba(209, 50, 57, 0.15);
+  color: #E04A50;
   font-weight: 700;
   font-size: 0.8rem;
   cursor: pointer;
@@ -416,15 +416,15 @@ body.logan5 .ultimate-hub-share-reveal {
   margin-top: 0.55rem;
   padding: 0.75rem 0.8rem;
   border-radius: 12px;
-  background: rgba(37, 47, 110, 0.06);
-  border: 1px solid rgba(37, 47, 110, 0.16);
+  background: rgba(33, 41, 45, 0.06);
+  border: 1px solid rgba(33, 41, 45, 0.16);
 }
 
 body.logan5 .ultimate-hub-share-gate-lead {
   margin: 0 0 0.6rem;
   font-size: 0.74rem;
   line-height: 1.45;
-  color: var(--navy-dark, #252f6e);
+  color: var(--navy-dark, #21292D);
   opacity: 0.88;
 }
 
@@ -438,7 +438,7 @@ body.logan5 .ultimate-hub-share-form input[type="email"] {
   width: 100%;
   padding: 0.6rem 0.7rem;
   border-radius: 10px;
-  border: 2px solid rgba(37, 47, 110, 0.18);
+  border: 2px solid rgba(33, 41, 45, 0.18);
   background: #fff;
   font-size: 0.85rem;
   font-family: inherit;
@@ -450,7 +450,7 @@ body.logan5 .ultimate-hub-share-consent {
   align-items: flex-start;
   font-size: 0.66rem;
   line-height: 1.4;
-  color: var(--text-muted, #5c5670);
+  color: var(--text-muted, #555555);
   cursor: pointer;
 }
 
@@ -477,7 +477,7 @@ body.logan5 .ultimate-hub-share-reveal-label {
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--navy-dark, #252f6e);
+  color: var(--navy-dark, #21292D);
   opacity: 0.7;
 }
 
@@ -492,7 +492,7 @@ body.logan5 .ultimate-hub-share-snapshot > div {
   padding: 0.45rem 0.5rem;
   border-radius: 8px;
   background: #fff;
-  border: 1px solid rgba(201, 162, 39, 0.28);
+  border: 1px solid rgba(209, 50, 57, 0.28);
 }
 
 body.logan5 .ultimate-hub-share-snapshot dt {
@@ -507,19 +507,19 @@ body.logan5 .ultimate-hub-share-snapshot dd {
   margin: 0.1rem 0 0;
   font-size: 0.82rem;
   font-weight: 700;
-  color: var(--navy-dark, #252f6e);
+  color: var(--navy-dark, #21292D);
 }
 
 body.logan5 .ultimate-hub-rail .ultimate-share-url-input {
-  border: 2px solid rgba(37, 47, 110, 0.16);
+  border: 2px solid rgba(33, 41, 45, 0.16);
   background: #fff;
-  color: var(--navy-dark, #252f6e);
+  color: var(--navy-dark, #21292D);
 }
 
 body.logan5 .ultimate-hub-rail .ultimate-share-btn-primary {
-  background: linear-gradient(135deg, #f0d060 0%, #c9a227 55%, #b8891a 100%);
-  color: var(--navy-dark, #252f6e);
-  border: 2px solid rgba(201, 162, 39, 0.65);
+  background: linear-gradient(135deg, #E04A50 0%, #D13239 55%, #A8262C 100%);
+  color: var(--navy-dark, #21292D);
+  border: 2px solid rgba(209, 50, 57, 0.65);
 }
 
 body.logan5 .ultimate-hub-share-success {
@@ -554,7 +554,7 @@ body.logan5 .ultimate-rate-alert-strip {
   padding: 1rem 1.05rem;
   border-radius: 14px;
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(201, 162, 39, 0.28);
+  border: 1px solid rgba(209, 50, 57, 0.28);
 }
 
 body.logan5 .ultimate-rate-alert-heading {
@@ -571,7 +571,7 @@ body.logan5 .ultimate-rate-alert-lead {
 }
 
 body.logan5 .ultimate-rate-alert-lead strong {
-  color: #e8c84a;
+  color: #E04A50;
 }
 
 body.logan5 .ultimate-rate-alert-form {
@@ -610,13 +610,13 @@ body.logan5 .ultimate-rate-alert-submit {
   padding: 0.5rem 0.85rem;
   align-self: stretch;
   width: 100%;
-  border-color: rgba(201, 162, 39, 0.55);
-  color: #e8c84a;
+  border-color: rgba(209, 50, 57, 0.55);
+  color: #E04A50;
   font-weight: 700;
 }
 
 body.logan5 .ultimate-rate-alert-submit:hover {
-  background: rgba(201, 162, 39, 0.18);
+  background: rgba(209, 50, 57, 0.18);
 }
 
 body.logan5 .ultimate-rate-alert-success {
