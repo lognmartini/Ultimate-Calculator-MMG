@@ -6,10 +6,10 @@
 
 /* ========== Global guided layout polish ========== */
 html body.guided-flow.guided-flagship {
-  --studio-navy: #252f6e;
-  --studio-gold: #c9a227;
-  --studio-gold-hi: #e8c84a;
-  --studio-muted: #5c5670;
+  --studio-navy: #21292D;
+  --studio-gold: #D13239;
+  --studio-gold-hi: #E04A50;
+  --studio-muted: #555555;
   --studio-gap: 1.25rem;
   --studio-pad: 1.25rem;
 }
@@ -96,12 +96,12 @@ html body.guided-flow.wizard-on-results .guided-step-nav .wizard-nav-inner {
 html body.guided-flow.guided-flagship .guided-step-nav .btn-wizard-back {
   background: #fff !important;
   color: var(--studio-navy) !important;
-  border: 1.5px solid rgba(37, 47, 110, 0.18) !important;
+  border: 1.5px solid rgba(33, 41, 45, 0.18) !important;
   box-shadow: none !important;
 }
 
 html body.guided-flow.guided-flagship .guided-step-nav .btn-wizard-next {
-  background: linear-gradient(145deg, #252f6e, #1b2352) !important;
+  background: linear-gradient(145deg, #21292D, #040708) !important;
   color: #f5e6a8 !important;
   border: 1.5px solid var(--studio-gold) !important;
   font-weight: 700 !important;
@@ -110,7 +110,7 @@ html body.guided-flow.guided-flagship .guided-step-nav .btn-wizard-next {
 
 html body.guided-flow.guided-flagship .guided-step-nav .btn-wizard-next:hover {
   transform: translateY(-1px) !important;
-  box-shadow: 0 6px 16px rgba(37, 47, 110, 0.18) !important;
+  box-shadow: 0 6px 16px rgba(33, 41, 45, 0.18) !important;
 }
 
 html body.guided-flow.guided-flagship .guided-choice-card {
@@ -154,11 +154,11 @@ html body.guided-flow .studio-side {
 
 /* Hero */
 html body.guided-flow .studio-hero {
-  background: linear-gradient(155deg, #252f6e 0%, #1b2352 52%, #252f6e 100%) !important;
+  background: linear-gradient(155deg, #21292D 0%, #040708 52%, #21292D 100%) !important;
   border-radius: 16px !important;
   padding: 1.5rem 1.25rem 1.35rem !important;
   text-align: center !important;
-  box-shadow: 0 12px 32px rgba(37, 47, 110, 0.2) !important;
+  box-shadow: 0 12px 32px rgba(33, 41, 45, 0.2) !important;
 }
 
 html body.guided-flow .studio-kicker {
@@ -192,7 +192,7 @@ html body.guided-flow .studio-hero #pitiPayment.pay-tick {
   color: var(--studio-gold-hi) !important;
   -webkit-text-fill-color: var(--studio-gold-hi) !important;
   transform: scale(1.035) !important;
-  text-shadow: 0 0 24px rgba(232, 200, 74, 0.35) !important;
+  text-shadow: 0 0 24px rgba(224, 74, 80, 0.35) !important;
 }
 
 html body.guided-flow .studio-sub {
@@ -220,7 +220,7 @@ html body.guided-flow .studio-rates strong {
 }
 
 html body.guided-flow .studio-vs {
-  color: rgba(232, 200, 74, 0.55) !important;
+  color: rgba(224, 74, 80, 0.55) !important;
   font-weight: 700 !important;
   text-transform: lowercase !important;
 }
@@ -228,10 +228,10 @@ html body.guided-flow .studio-vs {
 /* Breakdown card */
 html body.guided-flow .studio-break {
   background: #fff !important;
-  border: 1px solid rgba(37, 47, 110, 0.1) !important;
+  border: 1px solid rgba(33, 41, 45, 0.1) !important;
   border-radius: 14px !important;
   padding: 0.35rem 1.25rem !important;
-  box-shadow: 0 4px 16px rgba(37, 47, 110, 0.05) !important;
+  box-shadow: 0 4px 16px rgba(33, 41, 45, 0.05) !important;
 }
 
 html body.guided-flow .studio-break-list,
@@ -246,9 +246,9 @@ html body.guided-flow .studio-break #breakdown li {
   justify-content: space-between !important;
   gap: 0.75rem !important;
   padding: 0.7rem 0 !important;
-  border-bottom: 1px solid rgba(37, 47, 110, 0.07) !important;
+  border-bottom: 1px solid rgba(33, 41, 45, 0.07) !important;
   font-size: 0.92rem !important;
-  color: #2b3252 !important;
+  color: #21292D !important;
   font-weight: 500 !important;
   margin: 0 !important;
   background: transparent !important;
@@ -277,10 +277,10 @@ html body.guided-flow .studio-break #breakdown li.studio-row-flash strong {
 /* Controls */
 html body.guided-flow .studio-controls {
   background: #fff !important;
-  border: 1px solid rgba(201, 162, 39, 0.28) !important;
+  border: 1px solid rgba(209, 50, 57, 0.28) !important;
   border-radius: 14px !important;
   padding: 1.25rem !important;
-  box-shadow: 0 4px 16px rgba(37, 47, 110, 0.05) !important;
+  box-shadow: 0 4px 16px rgba(33, 41, 45, 0.05) !important;
 }
 
 html body.guided-flow .studio-controls-head {
@@ -321,7 +321,7 @@ html body.guided-flow .studio-control-row label,
 html body.guided-flow .studio-control-label {
   font-size: 0.76rem !important;
   font-weight: 700 !important;
-  color: #2b3252 !important;
+  color: #21292D !important;
 }
 
 html body.guided-flow .studio-control-row output {
@@ -357,9 +357,9 @@ html body.guided-flow .studio-chips-4 {
 html body.guided-flow .studio-chip {
   min-height: 42px !important;
   border-radius: 10px !important;
-  border: 1.5px solid rgba(37, 47, 110, 0.14) !important;
+  border: 1.5px solid rgba(33, 41, 45, 0.14) !important;
   background: #faf9fc !important;
-  color: #2b3252 !important;
+  color: #21292D !important;
   font-size: 0.8rem !important;
   font-weight: 700 !important;
   font-family: "DM Sans", system-ui, sans-serif !important;
@@ -376,7 +376,7 @@ html body.guided-flow .studio-chip.active {
   background: var(--studio-navy) !important;
   color: #f5e6a8 !important;
   border-color: var(--studio-gold) !important;
-  box-shadow: 0 2px 8px rgba(37, 47, 110, 0.15) !important;
+  box-shadow: 0 2px 8px rgba(33, 41, 45, 0.15) !important;
 }
 
 html body.guided-flow .studio-chip:focus-visible {
@@ -390,7 +390,7 @@ html body.guided-flow .studio-facts {
   gap: 0.4rem !important;
   margin-top: 0.35rem !important;
   padding-top: 0.85rem !important;
-  border-top: 1px solid rgba(37, 47, 110, 0.08) !important;
+  border-top: 1px solid rgba(33, 41, 45, 0.08) !important;
 }
 
 html body.guided-flow .studio-facts div {
@@ -422,7 +422,7 @@ html body.guided-flow .studio-lead {
   border-radius: 14px !important;
   padding: 1.35rem 1.25rem 1.15rem !important;
   text-align: center !important;
-  box-shadow: 0 8px 24px rgba(201, 162, 39, 0.12) !important;
+  box-shadow: 0 8px 24px rgba(209, 50, 57, 0.12) !important;
 }
 
 html body.guided-flow .studio-lead-title {
@@ -456,7 +456,7 @@ html body.guided-flow .studio-field {
 html body.guided-flow .studio-field span {
   font-size: 0.72rem !important;
   font-weight: 700 !important;
-  color: #2b3252 !important;
+  color: #21292D !important;
 }
 
 html body.guided-flow .studio-field em {
@@ -468,7 +468,7 @@ html body.guided-flow .studio-field em {
 html body.guided-flow .studio-field input {
   min-height: 46px !important;
   border-radius: 10px !important;
-  border: 1.5px solid rgba(37, 47, 110, 0.14) !important;
+  border: 1.5px solid rgba(33, 41, 45, 0.14) !important;
   padding: 0.55rem 0.7rem !important;
   font-size: 1rem !important;
   color: var(--studio-navy) !important;
@@ -481,7 +481,7 @@ html body.guided-flow .studio-field input {
 html body.guided-flow .studio-field input:focus {
   outline: none !important;
   border-color: var(--studio-gold) !important;
-  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.22) !important;
+  box-shadow: 0 0 0 3px rgba(209, 50, 57, 0.22) !important;
   background: #fff !important;
 }
 
@@ -492,7 +492,7 @@ html body.guided-flow .studio-lead .save-estimate-submit {
   margin-top: 0.25rem !important;
   border-radius: 12px !important;
   border: 1.5px solid var(--studio-gold) !important;
-  background: linear-gradient(145deg, #252f6e, #1b2352) !important;
+  background: linear-gradient(145deg, #21292D, #040708) !important;
   color: #f5e6a8 !important;
   font-size: 1.02rem !important;
   font-weight: 800 !important;
@@ -504,9 +504,9 @@ html body.guided-flow .studio-lead .save-estimate-submit {
 html body.guided-flow .studio-cta:hover,
 html body.guided-flow .studio-lead .save-estimate-submit:hover {
   transform: translateY(-1px) !important;
-  background: linear-gradient(145deg, #c9a227, #b8921f) !important;
-  color: #252f6e !important;
-  box-shadow: 0 6px 16px rgba(201, 162, 39, 0.25) !important;
+  background: linear-gradient(145deg, #D13239, #b8921f) !important;
+  color: #21292D !important;
+  box-shadow: 0 6px 16px rgba(209, 50, 57, 0.25) !important;
 }
 
 html body.guided-flow .studio-cta:focus-visible,
@@ -577,7 +577,7 @@ html body.guided-flow .studio-trust {
   padding: 0.65rem 0.85rem !important;
   background: #f7f6fa !important;
   border-radius: 12px !important;
-  border: 1px solid rgba(37, 47, 110, 0.06) !important;
+  border: 1px solid rgba(33, 41, 45, 0.06) !important;
 }
 
 html body.guided-flow .studio-trust img {
@@ -585,7 +585,7 @@ html body.guided-flow .studio-trust img {
   height: 36px !important;
   border-radius: 50% !important;
   object-fit: cover !important;
-  border: 2px solid rgba(201, 162, 39, 0.4) !important;
+  border: 2px solid rgba(209, 50, 57, 0.4) !important;
   flex-shrink: 0 !important;
 }
 
@@ -623,7 +623,7 @@ html body.guided-flow .studio-apply a {
 
 html body.guided-flow .studio-more {
   grid-column: 1 / -1 !important;
-  border-top: 1px solid rgba(37, 47, 110, 0.08) !important;
+  border-top: 1px solid rgba(33, 41, 45, 0.08) !important;
   padding-top: 0.35rem !important;
 }
 
@@ -664,7 +664,7 @@ html body.guided-flow .studio-text-btn {
   width: 100% !important;
   min-height: 42px !important;
   border-radius: 10px !important;
-  border: 1.5px solid rgba(37, 47, 110, 0.14) !important;
+  border: 1.5px solid rgba(33, 41, 45, 0.14) !important;
   background: #fff !important;
   font-weight: 600 !important;
   cursor: pointer !important;
