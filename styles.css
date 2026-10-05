@@ -1,11 +1,11 @@
 :root {
   /* Aligned with martinimortgagegroup.com brand */
-  --navy: #252f6e;
-  --navy-dark: #252f6e;
-  --navy-deeper: #110c1d;
-  --gold: #c9a227;
-  --gold-light: #e8c84a;
-  --gold-soft: rgba(201, 162, 39, 0.15);
+  --navy: #21292D;
+  --navy-dark: #21292D;
+  --navy-deeper: #040708;
+  --gold: #D13239;
+  --gold-light: #E04A50;
+  --gold-soft: rgba(209, 50, 57, 0.15);
   --success: #3d8f6e;
   --success-soft: rgba(61, 143, 110, 0.2);
   --surface: #ffffff;
@@ -13,11 +13,11 @@
   --surface-warm: #faf9f6;
   --border: #e2e4ec;
   --text: #1c1f2e;
-  --text-muted: #5c6378;
+  --text-muted: #555555;
   --radius: 12px;
   --radius-lg: 16px;
-  --shadow: 0 8px 32px rgba(37, 47, 110, 0.1);
-  --shadow-lg: 0 16px 48px rgba(37, 47, 110, 0.14);
+  --shadow: 0 8px 32px rgba(33, 41, 45, 0.1);
+  --shadow-lg: 0 16px 48px rgba(33, 41, 45, 0.14);
   --font-sans: "DM Sans", system-ui, sans-serif;
   --font-display: "Playfair Display", Georgia, serif;
 }
@@ -135,9 +135,9 @@ img {
   text-transform: uppercase;
   text-decoration: none;
   color: var(--navy-dark);
-  background: linear-gradient(135deg, #f0d060 0%, var(--gold) 45%, #b8891a 100%);
+  background: linear-gradient(135deg, #E04A50 0%, var(--gold) 45%, #A8262C 100%);
   box-shadow:
-    0 4px 14px rgba(201, 162, 39, 0.45),
+    0 4px 14px rgba(209, 50, 57, 0.45),
     0 1px 0 rgba(255, 255, 255, 0.35) inset;
   transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
   cursor: pointer;
@@ -146,7 +146,7 @@ img {
 .btn-apply-now:hover {
   transform: translateY(-2px);
   box-shadow:
-    0 8px 24px rgba(201, 162, 39, 0.55),
+    0 8px 24px rgba(209, 50, 57, 0.55),
     0 1px 0 rgba(255, 255, 255, 0.4) inset;
   filter: brightness(1.05);
   color: var(--navy-dark);
@@ -347,7 +347,7 @@ main {
   border-radius: var(--radius);
   font-size: 0.82rem;
   color: var(--text-muted);
-  box-shadow: 0 2px 12px rgba(37, 47, 110, 0.04);
+  box-shadow: 0 2px 12px rgba(33, 41, 45, 0.04);
 }
 
 .credentials-strip strong {
@@ -384,13 +384,13 @@ main {
   background: var(--gold-soft);
   color: var(--navy);
   font-size: 0.7rem;
-  border: 1px solid rgba(201, 162, 39, 0.45);
+  border: 1px solid rgba(209, 50, 57, 0.45);
 }
 
 .calc-step-label-light .calc-step-num {
   background: rgba(255, 255, 255, 0.12);
   color: var(--gold-light);
-  border-color: rgba(232, 200, 74, 0.35);
+  border-color: rgba(224, 74, 80, 0.35);
 }
 
 @media (max-width: 720px) {
@@ -509,7 +509,7 @@ main {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  box-shadow: 0 2px 12px rgba(37, 47, 110, 0.06);
+  box-shadow: 0 2px 12px rgba(33, 41, 45, 0.06);
   font-size: 0.82rem;
   line-height: 1.4;
   color: var(--text-muted);
@@ -604,7 +604,7 @@ main {
 .address-input:focus {
   outline: none;
   border-color: var(--navy);
-  box-shadow: 0 0 0 3px rgba(37, 47, 110, 0.15);
+  box-shadow: 0 0 0 3px rgba(33, 41, 45, 0.15);
 }
 
 .btn-lookup {
@@ -655,8 +655,8 @@ main {
   padding: 0.75rem 0.85rem 0.5rem;
   margin: 0 -0.85rem;
   border-radius: var(--radius);
-  background: rgba(201, 162, 39, 0.08);
-  border: 1px solid rgba(201, 162, 39, 0.35);
+  background: rgba(209, 50, 57, 0.08);
+  border: 1px solid rgba(209, 50, 57, 0.35);
 }
 
 .field-note-hint {
@@ -812,7 +812,7 @@ input[type="number"]:focus,
 select:focus {
   outline: none;
   border-color: var(--navy);
-  box-shadow: 0 0 0 3px rgba(37, 47, 110, 0.15);
+  box-shadow: 0 0 0 3px rgba(33, 41, 45, 0.15);
 }
 
 .field-row {
@@ -1035,7 +1035,7 @@ select:focus {
   padding: 1rem 1.05rem;
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(201, 162, 39, 0.35);
+  border: 1px solid rgba(209, 50, 57, 0.35);
 }
 
 .vs-competition.hidden {
@@ -1071,8 +1071,8 @@ select:focus {
 }
 
 .vs-comp-col-us {
-  border: 1px solid rgba(201, 162, 39, 0.45);
-  background: rgba(201, 162, 39, 0.12);
+  border: 1px solid rgba(209, 50, 57, 0.45);
+  background: rgba(209, 50, 57, 0.12);
 }
 
 .vs-comp-col-label {
@@ -1147,7 +1147,7 @@ select:focus {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  background: rgba(37, 47, 110, 0.1);
+  background: rgba(33, 41, 45, 0.1);
   color: var(--navy);
 }
 
@@ -1156,7 +1156,7 @@ select:focus {
   padding: 1.35rem 1.15rem 1.15rem;
   border-radius: var(--radius);
   background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(201, 162, 39, 0.35);
+  border: 1px solid rgba(209, 50, 57, 0.35);
 }
 
 .cta-card-eyebrow {
@@ -1449,9 +1449,9 @@ select:focus {
 .martini-rate-block {
   padding: 1.15rem 1.1rem;
   border-radius: var(--radius);
-  background: linear-gradient(145deg, rgba(37, 47, 110, 0.05) 0%, rgba(201, 162, 39, 0.12) 100%);
-  border: 1px solid rgba(201, 162, 39, 0.4);
-  box-shadow: 0 4px 16px rgba(201, 162, 39, 0.12);
+  background: linear-gradient(145deg, rgba(33, 41, 45, 0.05) 0%, rgba(209, 50, 57, 0.12) 100%);
+  border: 1px solid rgba(209, 50, 57, 0.4);
+  box-shadow: 0 4px 16px rgba(209, 50, 57, 0.12);
 }
 
 .rate-block-eyebrow {
@@ -1502,7 +1502,7 @@ select:focus {
 
 .rate-compare-row-highlight {
   padding-top: 0.65rem;
-  border-top: 1px solid rgba(37, 47, 110, 0.12);
+  border-top: 1px solid rgba(33, 41, 45, 0.12);
 }
 
 .rate-compare-label {
@@ -1655,7 +1655,7 @@ select:focus {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  box-shadow: 0 4px 20px rgba(37, 47, 110, 0.05);
+  box-shadow: 0 4px 20px rgba(33, 41, 45, 0.05);
   border-top: 3px solid var(--gold);
 }
 
@@ -1934,7 +1934,7 @@ html.embed-full-mode .embed-only {
   background: var(--navy-dark);
   color: #fff;
   padding: 0.65rem 1rem;
-  border-bottom: 1px solid rgba(201, 162, 39, 0.35);
+  border-bottom: 1px solid rgba(209, 50, 57, 0.35);
 }
 
 .partner-share-inner {
@@ -1988,7 +1988,7 @@ html.embed-full-mode .embed-only {
   bottom: 0;
   z-index: 1000;
   padding: 0.65rem 1rem calc(0.65rem + env(safe-area-inset-bottom, 0px));
-  background: linear-gradient(180deg, transparent 0%, rgba(37, 47, 110, 0.92) 24%);
+  background: linear-gradient(180deg, transparent 0%, rgba(33, 41, 45, 0.92) 24%);
   pointer-events: none;
   opacity: 0;
   transform: translateY(100%);
@@ -2008,7 +2008,7 @@ html.embed-full-mode .embed-only {
   align-items: center;
   gap: 0.75rem;
   background: var(--navy-dark);
-  border: 1px solid rgba(201, 162, 39, 0.45);
+  border: 1px solid rgba(209, 50, 57, 0.45);
   border-radius: var(--radius);
   padding: 0.65rem 0.85rem;
   box-shadow: var(--shadow-lg);
