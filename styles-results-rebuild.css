@@ -69,7 +69,7 @@ html body.guided-flow .rx-hero-label {
   font-weight: 800 !important;
   letter-spacing: 0.12em !important;
   text-transform: uppercase !important;
-  color: #9a7b14 !important;
+  color: #A8262C !important;
 }
 
 html body.guided-flow .rx-hero-title {
@@ -282,7 +282,7 @@ html body.guided-flow .rx-shell .save-estimate-submit {
   border-radius: 12px !important;
   border: 1.5px solid #D13239 !important;
   background: linear-gradient(145deg, #21292D 0%, #040708 100%) !important;
-  color: #f5e6a8 !important;
+  color: #F6D5D7 !important;
   font-family: "DM Sans", system-ui, sans-serif !important;
   font-size: 1.05rem !important;
   font-weight: 800 !important;
@@ -615,7 +615,7 @@ html body.guided-flow.guided-flagship .guided-step-nav .btn-wizard-back:hover {
 
 html body.guided-flow.guided-flagship .guided-step-nav .btn-wizard-next {
   background: linear-gradient(145deg, #21292D 0%, #040708 100%) !important;
-  color: #f5e6a8 !important;
+  color: #F6D5D7 !important;
   border: 1.5px solid #D13239 !important;
   font-weight: 700 !important;
   box-shadow: 0 4px 14px rgba(33, 41, 45, 0.16) !important;
