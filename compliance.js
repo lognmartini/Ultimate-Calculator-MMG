@@ -15,7 +15,7 @@
     respa:
       "RESPA: Nothing on this page requires you to use a particular lender, title company, insurer, or other settlement service provider. You are free to shop for providers.",
     nmls:
-      "NMLS Consumer Access: nmlsconsumeraccess.org — verify Martini Mortgage Group NMLS #3446, Kevin Martini NMLS #143962, and Logan Martini NMLS #1591485.",
+      "NMLS Consumer Access: nmlsconsumeraccess.org — verify Guaranteed Rate, Inc. D/B/A Rate NMLS #2611, Kevin Martini NMLS #143962, and Logan Martini NMLS #1591485.",
     coMarket:
       "Co-marketing disclosure: The real estate professional shown is not a lender, loan originator, or mortgage broker and does not make credit decisions. Martini Mortgage Group is solely responsible for mortgage offerings. This is not a joint venture or affiliated business arrangement for settlement services.",
   };
