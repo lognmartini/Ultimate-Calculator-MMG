@@ -47,7 +47,7 @@ html body.guided-flow.guided-flagship {
   --star: #DFBE63; --ultimate-accent: #DFBE63;
 
   /* --- primary action gradient: gold -> Rate red --- */
-  --ui-primary: linear-gradient(135deg, #F2434E 0%, #E41E2B 52%, #BF1824 100%);
+  --ui-primary: linear-gradient(135deg, #D13239 0%, #E41E2B 52%, #BF1824 100%);
 
   --text: #25292A; --text-muted: #5C6378;
   --shadow: 0 8px 32px rgba(37,41,42,.10);
@@ -68,7 +68,7 @@ html body.guided-flow.guided-flagship .wizard-header-apply.wizard-header-apply,
 html body.guided-flow.guided-flagship .ultimate-hub-btn-apply.ultimate-hub-btn-apply,
 html body.logan5 .logan5-instant-cta.logan5-instant-cta,
 html body.logan5 .ultimate-creative-apply.ultimate-creative-apply {
-  background: linear-gradient(135deg, #F2434E 0%, #E41E2B 52%, #BF1824 100%) !important;
+  background: linear-gradient(135deg, #D13239 0%, #E41E2B 52%, #BF1824 100%) !important;
   background-color: #E41E2B !important;
   border-color: #BF1824 !important;
   color: #fff !important;
@@ -111,17 +111,17 @@ html body.guided-flow.guided-flagship .sticky-cta-btn,
 html body.logan5 .logan5-instant-cta,
 html body.logan5 .ultimate-creative-apply,
 html body.logan5 .ultimate-hub-btn-apply {
-  --p2-gold: #E41E2B;  --p2-gold-hi: #F2434E;
-  --mr-gold: #E41E2B;  --mr-gold-hi: #F2434E;
-  --v-gold: #E41E2B;   --v-gold-hi: #F2434E;
-  --g-gold: #E41E2B;   --g-gold-light: #F2434E;  --g-gold-deep: #BF1824;
-  --fs-gold: #E41E2B;  --fs-gold-light: #F2434E;
-  --mf-gold: #E41E2B;  --mf-gold-hi: #F2434E;
-  --impact-gold: #E41E2B; --impact-gold-hi: #F2434E;
-  --studio-gold: #E41E2B; --studio-gold-hi: #F2434E;
-  --polish-gold: #E41E2B; --polish-gold-hi: #F2434E;
+  --p2-gold: #E41E2B;  --p2-gold-hi: #D13239;
+  --mr-gold: #E41E2B;  --mr-gold-hi: #D13239;
+  --v-gold: #E41E2B;   --v-gold-hi: #D13239;
+  --g-gold: #E41E2B;   --g-gold-light: #D13239;  --g-gold-deep: #BF1824;
+  --fs-gold: #E41E2B;  --fs-gold-light: #D13239;
+  --mf-gold: #E41E2B;  --mf-gold-hi: #D13239;
+  --impact-gold: #E41E2B; --impact-gold-hi: #D13239;
+  --studio-gold: #E41E2B; --studio-gold-hi: #D13239;
+  --polish-gold: #E41E2B; --polish-gold-hi: #D13239;
   --lx-gold: #E41E2B;
-  --gold: #E41E2B;     --gold-light: #F2434E;
+  --gold: #E41E2B;     --gold-light: #D13239;
   /* label colour resolves var(--p2-navy-deep) — white it out for contrast on red */
   --p2-navy-deep: #FFFFFF;
   --navy-deep: #FFFFFF;
@@ -377,3 +377,52 @@ html body.guided-flow.guided-flagship .is-active.is-active, html body.guided-flo
 html body.guided-flow.guided-flagship [aria-pressed="true"], html body.guided-flow.guided-flagship [aria-checked="true"] {
   border-color:#21292D !important;
 }
+
+/* ==========================================================================
+   CTA legibility.
+   White on #F2434E measures 3.69:1 and fails WCAG AA. Every filled call to
+   action now runs #D13239 -> #A8262C, which is 4.97:1 at its lightest point.
+   Text is forced white, bold and underline-free so no CTA can render with
+   invisible writing.
+   ========================================================================== */
+html body.guided-flow.guided-flagship .btn-apply-now.btn-apply-now,
+html body.guided-flow.guided-flagship .btn-results-apply.btn-results-apply,
+html body.guided-flow.guided-flagship .logan5-instant-cta.logan5-instant-cta,
+html body.guided-flow.guided-flagship .sticky-cta-btn.sticky-cta-btn,
+html body.guided-flow.guided-flagship .ultimate-creative-apply.ultimate-creative-apply,
+html body.guided-flow.guided-flagship .ultimate-hub-btn-apply.ultimate-hub-btn-apply,
+html body.guided-flow.guided-flagship .wizard-header-apply.wizard-header-apply,
+html body.guided-flow.guided-flagship .guided-header-apply.guided-header-apply,
+html body.guided-flow.guided-flagship .studio-cta.studio-cta,
+html body.guided-flow.guided-flagship .save-estimate-submit.save-estimate-submit,
+html body.guided-flow.guided-flagship .btn-lookup.btn-lookup,
+html body.guided-flow.guided-flagship .btn-wizard-next.btn-wizard-next {
+  background: linear-gradient(135deg, #D13239 0%, #A8262C 100%) !important;
+  background-color: #D13239 !important;
+  border-color: #A8262C !important;
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  opacity: 1 !important;
+}
+html body.guided-flow.guided-flagship .btn-apply-now.btn-apply-now *,
+html body.guided-flow.guided-flagship .btn-results-apply.btn-results-apply *,
+html body.guided-flow.guided-flagship .logan5-instant-cta.logan5-instant-cta *,
+html body.guided-flow.guided-flagship .sticky-cta-btn.sticky-cta-btn *,
+html body.guided-flow.guided-flagship .ultimate-creative-apply.ultimate-creative-apply *,
+html body.guided-flow.guided-flagship .ultimate-hub-btn-apply.ultimate-hub-btn-apply *,
+html body.guided-flow.guided-flagship .wizard-header-apply.wizard-header-apply *,
+html body.guided-flow.guided-flagship .guided-header-apply.guided-header-apply *,
+html body.guided-flow.guided-flagship .studio-cta.studio-cta *,
+html body.guided-flow.guided-flagship .save-estimate-submit.save-estimate-submit *,
+html body.guided-flow.guided-flagship .btn-lookup.btn-lookup *,
+html body.guided-flow.guided-flagship .btn-wizard-next.btn-wizard-next * {
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  text-decoration: none !important;
+}
+
+/* Google attribution under the review rail */
+html body .mmg-reviews-attrib { margin: 8px 0 0; font-size: 11.5px; color: #555555; text-align: center; }
+html body .mmg-reviews-attrib a { color: #D13239; font-weight: 600; }
