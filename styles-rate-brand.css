@@ -1,0 +1,80 @@
+/* ==========================================================================
+   styles-rate-brand.css
+   Rate brand alignment — load LAST, after every other stylesheet.
+
+   Palette sampled from the live martinimortgagegroup.com (already migrated
+   and already approved), not from a guess at Rate's brand book:
+     Rate red    #E41E2B   primary CTA on 42 elements site-wide
+     Ink         #25292A   body text / dark surfaces
+     Ink deep    #1C1C1A
+     Gold        #C69C39   secondary accent
+     Surface     #FFFFFF   white header and cards
+
+   This file only remaps design tokens and primary CTA colour. Structure,
+   spacing and layout are untouched. Delete this one <link> to revert.
+   ========================================================================== */
+
+:root {
+  /* Rate */
+  --rate-red: #E41E2B;
+  --rate-red-dark: #BF1824;
+  --rate-red-soft: rgba(228, 30, 43, 0.12);
+
+  /* The former navy family now carries the site's near-black.
+     Variable NAMES are kept so no other stylesheet has to change. */
+  --navy: #25292A;
+  --navy-dark: #1C1C1A;
+  --navy-deep: #1C1C1A;
+  --navy-deeper: #0F0F0E;
+
+  --p2-navy: #25292A;
+  --p2-navy-deep: #1C1C1A;
+  --p2-navy-ink: #0F0F0E;
+
+  /* Gold nudged to the exact site value */
+  --gold: #C69C39;
+  --gold-light: #DFBE63;
+  --gold-soft: rgba(198, 156, 57, 0.15);
+  --p2-gold: #C69C39;
+  --p2-gold-hi: #DFBE63;
+  --star: #DFBE63;
+
+  --text: #25292A;
+  --text-muted: #5C6378;
+
+  /* Neutral shadows — the old ones were tinted navy */
+  --shadow: 0 8px 32px rgba(37, 41, 42, 0.10);
+  --shadow-lg: 0 16px 48px rgba(37, 41, 42, 0.14);
+  --p2-shadow: 0 10px 30px rgba(37, 41, 42, 0.10);
+  --p2-shadow-lg: 0 18px 44px rgba(37, 41, 42, 0.16);
+}
+
+/* Primary calls to action take Rate red, matching the website's buttons. */
+.btn-apply-now,
+.btn-results-apply,
+.logan5-instant-cta,
+.sticky-cta-btn,
+.ultimate-creative-apply {
+  background: var(--rate-red) !important;
+  border-color: var(--rate-red) !important;
+  color: #fff !important;
+}
+
+.btn-apply-now:hover,
+.btn-results-apply:hover,
+.logan5-instant-cta:hover,
+.sticky-cta-btn:hover,
+.ultimate-creative-apply:hover {
+  background: var(--rate-red-dark) !important;
+  border-color: var(--rate-red-dark) !important;
+}
+
+/* The header apply is a soft/outline variant — keep it outlined, in red. */
+.guided-header-apply-soft {
+  background: transparent !important;
+  border-color: var(--rate-red) !important;
+  color: var(--rate-red) !important;
+}
+.guided-header-apply-soft:hover {
+  background: var(--rate-red-soft) !important;
+}
