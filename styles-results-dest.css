@@ -216,7 +216,7 @@ html body.guided-flow .dest-term-pill {
 
 html body.guided-flow .dest-term-pill.active {
   background: #21292D !important;
-  color: #f5e6a8 !important;
+  color: #F6D5D7 !important;
   border-color: #D13239 !important;
 }
 
@@ -334,7 +334,7 @@ html body.guided-flow .dest-lead .save-estimate-submit {
   border-radius: 12px !important;
   border: 1.5px solid #D13239 !important;
   background: linear-gradient(145deg, #21292D, #040708) !important;
-  color: #f5e6a8 !important;
+  color: #F6D5D7 !important;
   font-size: 1.02rem !important;
   font-weight: 800 !important;
   cursor: pointer !important;
