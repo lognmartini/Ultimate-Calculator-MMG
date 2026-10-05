@@ -206,14 +206,14 @@ html body.guided-flow.guided-flagship .guided-live-card-interactive #wizardLiveP
 }
 
 html body.guided-flow .guided-live-amount-tick {
-  color: #9a7b14 !important;
+  color: #A8262C !important;
   transform: scale(1.04);
   transition: color 0.2s ease, transform 0.2s ease !important;
 }
 
 html body.guided-flow .guided-live-breakdown li.guided-live-total strong {
   font-size: 0.95rem !important;
-  color: #9a7b14 !important;
+  color: #A8262C !important;
 }
 
 /* Mobile sticky live card — clear of Continue (density.css refines further) */
