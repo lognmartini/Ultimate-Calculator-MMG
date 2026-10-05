@@ -1277,7 +1277,7 @@ html body.guided-flow .guided-live-breakdown li strong {
 }
 
 html body.guided-flow .guided-live-breakdown li.guided-live-total strong {
-  color: #9a7b14 !important;
+  color: #A8262C !important;
   font-size: 0.9rem !important;
 }
 
@@ -1336,7 +1336,7 @@ html body.guided-flow .guided-realtor-btn.guided-side-cta-realtor {
 html body.guided-flow .guided-realtor-btn-main {
   font-size: 0.82rem !important;
   font-weight: 700 !important;
-  color: #f5e6a8 !important;
+  color: #F6D5D7 !important;
   line-height: 1.2 !important;
 }
 
@@ -1349,7 +1349,7 @@ html body.guided-flow .guided-realtor-btn-sub {
 
 html body.guided-flow .guided-realtor-btn.guided-side-cta-realtor:hover {
   background: linear-gradient(160deg, #D13239 0%, #b8921f 100%) !important;
-  border-color: #9a7b14 !important;
+  border-color: #A8262C !important;
 }
 
 html body.guided-flow .guided-realtor-btn.guided-side-cta-realtor:hover .guided-realtor-btn-main {
@@ -1452,7 +1452,7 @@ html body.guided-flow .guided-realtor-mobile-entry {
 
   html body.guided-flow .guided-realtor-cta-mobile strong {
     font-size: 0.85rem !important;
-    color: #f5e6a8 !important;
+    color: #F6D5D7 !important;
   }
 
   html body.guided-flow .guided-realtor-cta-mobile span {
@@ -1488,7 +1488,7 @@ html body.guided-flow .guided-realtor-eyebrow {
   font-size: 0.62rem !important;
   letter-spacing: 0.07em !important;
   text-transform: uppercase !important;
-  color: #9a7b14 !important;
+  color: #A8262C !important;
   font-weight: 700 !important;
   text-align: center !important;
 }
@@ -1598,7 +1598,7 @@ html body.guided-flow .guided-realtor-submit {
   border-radius: 12px !important;
   background: linear-gradient(135deg, #21292D, #040708) !important;
   border: 1.5px solid #D13239 !important;
-  color: #f5e6a8 !important;
+  color: #F6D5D7 !important;
 }
 
 html body.guided-flow .guided-realtor-submit:hover {
