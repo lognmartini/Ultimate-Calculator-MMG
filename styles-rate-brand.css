@@ -316,3 +316,64 @@ html body.guided-flow.guided-flagship .mmg-hs-title { font-size: 13px !important
 @media (max-width: 420px) {
   html body.guided-flow.guided-flagship .mmg-hs-img.mmg-hs-img-team { max-width: 100% !important; }
 }
+
+/* ===========================================================================
+   Team block: Kevin above Logan, each with headshot, role and NMLS.
+   =========================================================================== */
+html body.guided-flow.guided-flagship .mmg-team { text-align:center; }
+html body.guided-flow.guided-flagship .mmg-team-eyebrow {
+  font-size:11px; letter-spacing:1.6px; text-transform:uppercase;
+  color:#555555; font-weight:600; margin:0 0 12px;
+}
+html body.guided-flow.guided-flagship .mmg-person {
+  display:flex; align-items:center; gap:14px; text-align:left;
+  max-width:360px; margin:0 auto 12px; padding:12px 14px;
+  background:#FFFFFF; border:1px solid #DEDFE0; border-radius:14px;
+  box-shadow:0 2px 10px rgba(33,41,45,.06);
+}
+html body.guided-flow.guided-flagship .mmg-person-img {
+  width:64px; height:64px; flex:none; border-radius:50%;
+  object-fit:cover; object-position:center top;
+  border:2px solid #D13239; background:#F2F2F2;
+}
+html body.guided-flow.guided-flagship .mmg-person-copy { min-width:0; }
+html body.guided-flow.guided-flagship .mmg-person-name { margin:0; font-size:16px; font-weight:700; color:#21292D; line-height:1.2; }
+html body.guided-flow.guided-flagship .mmg-person-role { margin:2px 0 0; font-size:12.5px; color:#555555; line-height:1.35; }
+html body.guided-flow.guided-flagship .mmg-person-nmls { margin:3px 0 0; font-size:12px; font-weight:600; color:#D13239; letter-spacing:.3px; }
+
+/* ===========================================================================
+   Call-to-action legibility.
+   Every CTA must have readable text on its own background. The hero button is
+   outlined red-on-white; when it sits on a red or dark surface that inverts.
+   =========================================================================== */
+html body.guided-flow.guided-flagship a.hero-apply-btn.hero-apply-btn,
+html body.guided-flow.guided-flagship a.hero-apply-btn.hero-apply-btn:visited {
+  background:#FFFFFF !important; color:#D13239 !important;
+  border:2px solid #D13239 !important; text-decoration:none !important;
+}
+html body.guided-flow.guided-flagship a.hero-apply-btn.hero-apply-btn:hover,
+html body.guided-flow.guided-flagship a.hero-apply-btn.hero-apply-btn:focus {
+  background:#D13239 !important; color:#FFFFFF !important;
+}
+/* solid red CTAs always carry white, underline-free labels */
+html body.guided-flow.guided-flagship .btn-apply-now.btn-apply-now,
+html body.guided-flow.guided-flagship .btn-apply-now.btn-apply-now *,
+html body.guided-flow.guided-flagship .sticky-cta-btn.sticky-cta-btn,
+html body.guided-flow.guided-flagship .sticky-cta-btn.sticky-cta-btn *,
+html body.guided-flow.guided-flagship .btn-results-apply.btn-results-apply,
+html body.guided-flow.guided-flagship .btn-results-apply.btn-results-apply *,
+html body.guided-flow.guided-flagship .wizard-header-apply.wizard-header-apply,
+html body.guided-flow.guided-flagship .wizard-header-apply.wizard-header-apply *,
+html body.guided-flow.guided-flagship .guided-header-apply.guided-header-apply,
+html body.guided-flow.guided-flagship .guided-header-apply.guided-header-apply *,
+html body.guided-flow.guided-flagship .btn-wizard-next.btn-wizard-next,
+html body.guided-flow.guided-flagship .btn-wizard-next.btn-wizard-next *,
+html body.guided-flow.guided-flagship .btn-lookup.btn-lookup,
+html body.guided-flow.guided-flagship .btn-lookup.btn-lookup * {
+  color:#FFFFFF !important; text-decoration:none !important; -webkit-text-fill-color:#FFFFFF !important;
+}
+/* selected chips: dark surface, white label */
+html body.guided-flow.guided-flagship .is-active.is-active, html body.guided-flow.guided-flagship .is-selected.is-selected,
+html body.guided-flow.guided-flagship [aria-pressed="true"], html body.guided-flow.guided-flagship [aria-checked="true"] {
+  border-color:#21292D !important;
+}
