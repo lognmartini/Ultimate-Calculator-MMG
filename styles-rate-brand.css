@@ -128,3 +128,43 @@ html body.logan5 .ultimate-hub-btn-apply {
   --mr-navy-deep: #FFFFFF;
   color: #fff !important;
 }
+
+/* ---------------------------------------------------------------------------
+   Header: white, matching martinimortgagegroup.com.
+   The Rate + MMG lockup is a dark mark on transparency and is only legible on a
+   light surface. It is used exactly as supplied — not recoloured or reversed,
+   because altering a sponsor trademark is theirs to approve, not ours.
+   --------------------------------------------------------------------------- */
+html body.guided-flow.guided-flagship .wizard-header.guided-header {
+  background: #FFFFFF !important;
+  border-bottom: 1px solid #E2E5EF !important;
+  box-shadow: 0 1px 3px rgba(37, 41, 42, .06) !important;
+}
+
+/* Lockup sizing. The mark is 3:1, so height drives it and width stays auto to
+   avoid distortion. Vertically centred now that the stacked caption is gone. */
+html body.guided-flow.guided-flagship .guided-logo-link {
+  display: inline-flex !important;
+  align-items: center !important;
+  height: auto !important;
+  padding: 0 !important;
+}
+html body.guided-flow.guided-flagship .guided-header-logo {
+  height: 38px !important;
+  width: auto !important;
+  max-width: 230px !important;
+  object-fit: contain !important;
+  filter: none !important;
+}
+
+/* Header text was reversed out of a dark bar; bring it back to ink. */
+html body.guided-flow.guided-flagship .guided-header-phone {
+  color: #25292A !important;
+  font-weight: 600 !important;
+}
+html body.guided-flow.guided-flagship .guided-header-phone:hover {
+  color: #E41E2B !important;
+}
+html body.guided-flow.guided-flagship .guided-header-inner {
+  align-items: center !important;
+}
