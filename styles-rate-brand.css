@@ -96,3 +96,31 @@ html body.logan5 .ultimate-creative-apply.ultimate-creative-apply:hover {
   background: #BF1824 !important;
   background-color: #BF1824 !important;
 }
+
+/* ---------------------------------------------------------------------------
+   Header apply button.
+   styles-phase2.css paints it with linear-gradient(var(--p2-gold-hi), var(--p2-gold))
+   at a specificity that an override cannot beat cleanly. Rather than fight the
+   cascade, redefine the custom properties ON the button itself: the gradient
+   then resolves to Rate red with no !important needed anywhere.
+   --------------------------------------------------------------------------- */
+html body.guided-flow.guided-flagship .guided-header-apply,
+html body.guided-flow.guided-flagship .btn-apply-now,
+html body.guided-flow.guided-flagship .btn-results-apply,
+html body.guided-flow.guided-flagship .sticky-cta-btn,
+html body.logan5 .logan5-instant-cta,
+html body.logan5 .ultimate-creative-apply,
+html body.logan5 .ultimate-hub-btn-apply {
+  --p2-gold: #E41E2B;  --p2-gold-hi: #F2434E;
+  --mr-gold: #E41E2B;  --mr-gold-hi: #F2434E;
+  --v-gold: #E41E2B;   --v-gold-hi: #F2434E;
+  --g-gold: #E41E2B;   --g-gold-light: #F2434E;  --g-gold-deep: #BF1824;
+  --fs-gold: #E41E2B;  --fs-gold-light: #F2434E;
+  --mf-gold: #E41E2B;  --mf-gold-hi: #F2434E;
+  --impact-gold: #E41E2B; --impact-gold-hi: #F2434E;
+  --studio-gold: #E41E2B; --studio-gold-hi: #F2434E;
+  --polish-gold: #E41E2B; --polish-gold-hi: #F2434E;
+  --lx-gold: #E41E2B;
+  --gold: #E41E2B;     --gold-light: #F2434E;
+  color: #fff !important;
+}
