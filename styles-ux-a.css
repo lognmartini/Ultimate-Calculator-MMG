@@ -668,7 +668,7 @@ html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-rate-
 }
 
 html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-rate-strip-martini .guided-rate-strip-value {
-  color: #9a7b14 !important;
+  color: #A8262C !important;
 }
 
 html body.guided-flow.guided-flagship [data-step-id="loan-credit"] .guided-rate-advanced {
@@ -1680,7 +1680,7 @@ html body.guided-flow .guided-live-rate-pair {
 }
 
 html body.guided-flow .guided-live-rate-pair strong {
-  color: #9a7b14 !important;
+  color: #A8262C !important;
   font-weight: 800 !important;
 }
 
@@ -1724,7 +1724,7 @@ html body.guided-flow .guided-live-breakdown li.guided-live-total {
 }
 
 html body.guided-flow .guided-live-breakdown li.guided-live-total strong {
-  color: #9a7b14 !important;
+  color: #A8262C !important;
   font-size: 0.9rem !important;
 }
 
@@ -1769,7 +1769,7 @@ html body.guided-flow .guided-live-card.guided-live-flash {
 }
 
 html body.guided-flow .guided-live-card.guided-live-flash #wizardLivePayment {
-  color: #9a7b14 !important;
+  color: #A8262C !important;
   transform: scale(1.03);
 }
 
