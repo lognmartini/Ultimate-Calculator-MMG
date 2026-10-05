@@ -388,7 +388,7 @@ html body.guided-flow.guided-flagship .guided-back {
 html body.guided-flow.guided-flagship .studio-page { max-width: 960px !important; margin: 0 auto !important; }
 /* HERO */
 html body.guided-flow.guided-flagship .studio-hero {
-  background: radial-gradient(120% 120% at 50% 0%, #2b3780 0%, var(--p2-navy) 45%, var(--p2-navy-deep) 100%) !important;
+  background: radial-gradient(120% 120% at 50% 0%, #2B3034 0%, var(--p2-navy) 45%, var(--p2-navy-deep) 100%) !important;
   border-radius: 22px !important;
   padding: 2rem 1.25rem 1.75rem !important;
   box-shadow: 0 18px 44px rgba(4, 7, 8, 0.28) !important;
