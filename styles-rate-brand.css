@@ -294,3 +294,25 @@ html body.guided-flow.guided-flagship .mmg-review.is-active.is-active {
 }
 html body.guided-flow.guided-flagship .mmg-stars.mmg-stars, html body.guided-flow.guided-flagship .mmg-stars.mmg-stars * { color: #D13239 !important; }
 html body a.skip-link.skip-link { background: #21292D !important; color: #FFFFFF !important; }
+
+/* ---------------------------------------------------------------------------
+   Team photo. The original slot was a circular single headshot; the Rate team
+   image is 874x485 landscape with two people, which a circle would crop badly.
+   Rounded rectangle, natural aspect, no cropping.
+   --------------------------------------------------------------------------- */
+html body.guided-flow.guided-flagship .mmg-hs-img.mmg-hs-img-team {
+  width: auto !important;
+  max-width: 320px !important;
+  height: auto !important;
+  aspect-ratio: 874 / 485 !important;
+  border-radius: 14px !important;
+  object-fit: cover !important;
+  object-position: center top !important;
+  border: 1px solid #DEDFE0 !important;
+  box-shadow: 0 4px 16px rgba(33, 41, 45, .10) !important;
+}
+html body.guided-flow.guided-flagship .mmg-hs-name { margin-top: 12px !important; }
+html body.guided-flow.guided-flagship .mmg-hs-title { font-size: 13px !important; line-height: 1.5 !important; color: #555555 !important; }
+@media (max-width: 420px) {
+  html body.guided-flow.guided-flagship .mmg-hs-img.mmg-hs-img-team { max-width: 100% !important; }
+}
