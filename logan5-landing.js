@@ -8,7 +8,7 @@
   if (!document.body.classList.contains("logan5")) return;
 
   const DONUT_COLORS = {
-    pi: "#c9a227",
+    pi: "#D13239",
     tax: "#6366f1",
     ins: "#38bdf8",
     mi: "#f97316",
