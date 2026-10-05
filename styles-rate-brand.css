@@ -168,3 +168,49 @@ html body.guided-flow.guided-flagship .guided-header-phone:hover {
 html body.guided-flow.guided-flagship .guided-header-inner {
   align-items: center !important;
 }
+
+/* ==========================================================================
+   Rate palette alignment — final pass.
+   Values below are Rate’s own design tokens, read from rate.com:
+     #21292D  primary / dark surfaces (their button-primary background)
+     #040708  darkest
+     #D13239  brand red
+     #555555  secondary text
+     #DEDFE0  borders
+   Gold is retired entirely — it read as the previous sponsor’s palette.
+   ========================================================================== */
+:root,
+html body.logan5,
+html body.guided-flow,
+html body.guided-flow.guided-flagship {
+  --navy: #21292D; --navy-dark: #040708; --navy-deep: #040708; --navy-deeper: #040708;
+  --g-navy: #21292D; --g-navy-soft: #2F3539;
+  --fs-navy: #21292D; --ui-navy: #21292D;
+  --mr-navy: #21292D; --mr-brand-navy: #21292D; --mr-navy-deep: #040708;
+  --v-navy: #21292D; --v-navy-mid: #2F3539;
+  --lx-navy: #21292D; --mf-navy: #21292D; --impact-navy: #21292D;
+  --studio-navy: #21292D; --polish-navy: #21292D; --polish-navy-mid: #2F3539;
+  --p2-navy: #21292D; --p2-navy-deep: #040708; --p2-navy-ink: #040708;
+
+  /* gold retired -> Rate red */
+  --gold: #D13239; --gold-light: #E04A50; --gold-soft: rgba(209,50,57,.14);
+  --g-gold: #D13239; --g-gold-light: #E04A50; --g-gold-deep: #A8262C;
+  --fs-gold: #D13239; --fs-gold-light: #E04A50;
+  --mr-gold: #D13239; --mr-gold-hi: #E04A50;
+  --v-gold: #D13239; --v-gold-hi: #E04A50;
+  --lx-gold: #D13239; --mf-gold: #D13239; --mf-gold-hi: #E04A50;
+  --impact-gold: #D13239; --impact-gold-hi: #E04A50;
+  --studio-gold: #D13239; --studio-gold-hi: #E04A50;
+  --polish-gold: #D13239; --polish-gold-hi: #E04A50;
+  --p2-gold: #D13239; --p2-gold-hi: #E04A50;
+  --star: #D13239; --ultimate-accent: #D13239;
+  --ui-primary: linear-gradient(135deg, #E04A50 0%, #D13239 52%, #A8262C 100%);
+  --rate-red: #D13239; --rate-red-dark: #A8262C; --rate-red-soft: rgba(209,50,57,.12);
+
+  /* the eight muted tokens that were still blue-grey */
+  --muted: #555555; --p2-muted: #555555; --mr-muted: #555555; --v-muted: #555555;
+  --studio-muted: #555555; --polish-muted: #555555; --text-muted: #555555;
+
+  --line: #DEDFE0; --border: #DEDFE0; --p2-line: #DEDFE0;
+  --text: #21292D;
+}
