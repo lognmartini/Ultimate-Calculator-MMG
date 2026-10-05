@@ -264,3 +264,17 @@ html body .hero-apply-note {
   html body a.hero-apply-btn.hero-apply-btn { width: 100%; padding: 14px 18px; }
   html body .hero-apply-row { padding: 0 16px; }
 }
+
+/* ---------------------------------------------------------------------------
+   Hardcoded hex stragglers. These four carry literal colour values rather than
+   tokens, so the variable remap above cannot reach them.
+   --------------------------------------------------------------------------- */
+html body .wizard-progress-fill {
+  background: linear-gradient(90deg, #D13239 0%, #E04A50 100%) !important;
+}
+html body .skip-link { background: #21292D !important; color: #FFFFFF !important; }
+html body .mmg-hs-trust,
+html body .mmg-reviews-head,
+html body .mmg-review,
+html body .mmg-review.is-active { color: #21292D !important; border-color: #DEDFE0 !important; }
+html body .mmg-stars, html body .mmg-stars * { color: #D13239 !important; }
