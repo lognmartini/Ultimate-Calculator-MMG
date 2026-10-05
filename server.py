@@ -424,6 +424,120 @@ def fetch_pmms_rates() -> dict:
     return payload
 
 
+# ---------------------------------------------------------------------------
+# Google reviews (live).
+# Requires GOOGLE_PLACES_API_KEY. GOOGLE_PLACE_ID is optional - when absent the
+# place is resolved once by text search and cached. The Places API returns at
+# most 5 reviews, so this supplements the aggregate rating rather than
+# replacing the full review set on Google.
+# ---------------------------------------------------------------------------
+REVIEWS_CACHE_PATH = os.path.join(ROOT, ".reviews-cache.json")
+REVIEWS_CACHE_TTL_SEC = int(os.environ.get("REVIEWS_CACHE_TTL_SEC", "21600"))
+GOOGLE_PLACES_KEY = os.environ.get("GOOGLE_PLACES_API_KEY", "").strip()
+GOOGLE_PLACE_ID = os.environ.get("GOOGLE_PLACE_ID", "").strip()
+GOOGLE_PLACE_QUERY = os.environ.get(
+    "GOOGLE_PLACE_QUERY", "Martini Mortgage Group Raleigh NC"
+).strip()
+
+
+def _reviews_cache_read() -> dict | None:
+    try:
+        with open(REVIEWS_CACHE_PATH, "r", encoding="utf-8") as fh:
+            blob = json.load(fh)
+        if time.time() - float(blob.get("ts", 0)) < REVIEWS_CACHE_TTL_SEC:
+            return blob.get("data")
+    except Exception:
+        pass
+    return None
+
+
+def _reviews_cache_write(data: dict) -> None:
+    try:
+        with open(REVIEWS_CACHE_PATH, "w", encoding="utf-8") as fh:
+            json.dump({"ts": time.time(), "data": data}, fh)
+    except Exception:
+        pass
+
+
+def _places_post(url: str, payload: dict, field_mask: str) -> dict:
+    body = json.dumps(payload).encode("utf-8")
+    req = urllib.request.Request(
+        url,
+        data=body,
+        headers={
+            "Content-Type": "application/json",
+            "X-Goog-Api-Key": GOOGLE_PLACES_KEY,
+            "X-Goog-FieldMask": field_mask,
+            "User-Agent": USER_AGENT,
+        },
+        method="POST",
+    )
+    with urllib.request.urlopen(req, timeout=12) as resp:
+        return json.loads(resp.read().decode("utf-8"))
+
+
+def _resolve_place_id() -> str:
+    if GOOGLE_PLACE_ID:
+        return GOOGLE_PLACE_ID
+    try:
+        out = _places_post(
+            "https://places.googleapis.com/v1/places:searchText",
+            {"textQuery": GOOGLE_PLACE_QUERY, "maxResultCount": 1},
+            "places.id",
+        )
+        places = out.get("places") or []
+        return (places[0].get("id") or "") if places else ""
+    except Exception:
+        log_event("WARN google place text search failed")
+        return ""
+
+
+def fetch_google_reviews() -> dict:
+    """Live rating, count and up to 5 reviews. Empty dict when unavailable."""
+    cached = _reviews_cache_read()
+    if cached is not None:
+        return cached
+    if not GOOGLE_PLACES_KEY:
+        return {"configured": False, "reviews": []}
+    pid = _resolve_place_id()
+    if not pid:
+        return {"configured": True, "reviews": [], "error": "place_not_found"}
+    try:
+        out = _places_post(
+            "https://places.googleapis.com/v1/places/" + urllib.parse.quote(pid),
+            {},
+            "rating,userRatingCount,googleMapsUri,reviews",
+        )
+    except Exception:
+        log_event("WARN google place details failed")
+        return {"configured": True, "reviews": [], "error": "fetch_failed"}
+    items = []
+    for rv in (out.get("reviews") or []):
+        text = ((rv.get("originalText") or rv.get("text") or {}).get("text") or "").strip()
+        author = ((rv.get("authorAttribution") or {}).get("displayName") or "").strip()
+        if not text or not author:
+            continue
+        items.append(
+            {
+                "author": author,
+                "rating": int(rv.get("rating") or 0),
+                "text": text,
+                "relative": (rv.get("relativePublishTimeDescription") or "").strip(),
+                "uri": (rv.get("googleMapsUri") or "").strip(),
+            }
+        )
+    data = {
+        "configured": True,
+        "rating": out.get("rating"),
+        "total": out.get("userRatingCount"),
+        "placeUri": out.get("googleMapsUri") or "",
+        "reviews": items,
+        "attribution": "Reviews from Google",
+    }
+    _reviews_cache_write(data)
+    return data
+
+
 def append_lead(entry: dict) -> bool:
     try:
         with open(LEADS_PATH, "a", encoding="utf-8") as f:
@@ -1096,6 +1210,9 @@ class Handler(SimpleHTTPRequestHandler):
             return
         if parsed.path == "/api/preview-info":
             self._api_preview_info(parsed)
+            return
+        if parsed.path == "/api/reviews":
+            self._json_response(200, fetch_google_reviews())
             return
         if parsed.path == "/api/health":
             self._json_response(200, {"ok": True, "service": "martini-mortgage-calculator"})
