@@ -136,7 +136,7 @@
     const los = site.loanOfficers || {};
     const loRef = normalizeLoRef(PAGE.ref || PAGE.params.get("ref") || "");
     if (loRef && los[loRef]?.applyUrl) return los[loRef].applyUrl;
-    return site.teamApplyUrl || site.applyUrl || "https://applywithlogan.com";
+    return site.teamApplyUrl || site.applyUrl || "https://apply.rate.com/apply/loan-purpose?emp-id=1001008&utm_source=grMktg&utm_medium=email&utm_term=&utm_content=text&utm_campaign=sig";
   }
 
   function buildApplyUrl() {
@@ -144,12 +144,12 @@
     const isLogan4 = document.body.classList.contains("logan4");
     const base = isLogan4
       ? resolveTeamApplyBase(site)
-      : site.applyUrl || "https://applywithlogan.com";
+      : site.applyUrl || "https://apply.rate.com/apply/loan-purpose?emp-id=1001008&utm_source=grMktg&utm_medium=email&utm_term=&utm_content=text&utm_campaign=sig";
     let url;
     try {
       url = new URL(base);
     } catch {
-      url = new URL("https://applywithlogan.com");
+      url = new URL("https://apply.rate.com/apply/loan-purpose?emp-id=1001008&utm_source=grMktg&utm_medium=email&utm_term=&utm_content=text&utm_campaign=sig");
     }
     const p = PAGE.params;
     const socialWizard = document.body.classList.contains("wizard-social");
@@ -242,7 +242,7 @@
     const teamMeta = document.querySelector(".wizard-team-meta");
     if (teamMeta) {
       teamMeta.textContent =
-        `${site.brandName || "Martini Mortgage Group"} · Powered by Gold Star Mortgage · NMLS #${companyNmls} · Raleigh, NC`;
+        `${site.brandName || "Martini Mortgage Group"} · Powered by Rate · NMLS #${companyNmls} · Raleigh, NC`;
     }
 
     document.querySelectorAll(".nmls-compliance").forEach((el) => {
