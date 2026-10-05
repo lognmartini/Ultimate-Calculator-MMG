@@ -122,5 +122,9 @@ html body.logan5 .ultimate-hub-btn-apply {
   --polish-gold: #E41E2B; --polish-gold-hi: #F2434E;
   --lx-gold: #E41E2B;
   --gold: #E41E2B;     --gold-light: #F2434E;
+  /* label colour resolves var(--p2-navy-deep) — white it out for contrast on red */
+  --p2-navy-deep: #FFFFFF;
+  --navy-deep: #FFFFFF;
+  --mr-navy-deep: #FFFFFF;
   color: #fff !important;
 }
