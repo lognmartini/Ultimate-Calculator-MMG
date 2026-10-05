@@ -209,7 +209,7 @@ html body.guided-flow.guided-flagship .studio-mobilebar { display: none; }
   }
   html body.guided-flow.guided-flagship .studio-mstart {
     flex: 1; padding: 0.9rem 1rem; border-radius: 12px; border: 1.5px solid var(--gold);
-    background: linear-gradient(145deg, #21292D, #040708); color: #f5e6a8;
+    background: linear-gradient(145deg, #21292D, #040708); color: #F6D5D7;
     font-weight: 800; font-size: 1rem; cursor: pointer; font-family: "DM Sans", system-ui, sans-serif;
   }
   html body.guided-flow.guided-flagship .studio-mstart::after { content: " →"; }
