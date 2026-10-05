@@ -12,7 +12,7 @@ html body.guided-flow.guided-flagship {
   --polish-navy-mid: #040708;
   --polish-gold: #D13239;
   --polish-gold-hi: #E04A50;
-  --polish-cream: #f5e6a8;
+  --polish-cream: #F6D5D7;
   --polish-muted: #555555;
   --polish-soft: #8a8499;
   --polish-border: rgba(33, 41, 45, 0.12);
@@ -145,7 +145,7 @@ html body.guided-flow.guided-flagship .guided-kicker {
   font-weight: 800 !important;
   letter-spacing: 0.12em !important;
   text-transform: uppercase !important;
-  color: #9a7b14 !important;
+  color: #A8262C !important;
 }
 
 html body.guided-flow.guided-flagship .guided-title,
@@ -524,7 +524,7 @@ html body.guided-flow.guided-flagship .guided-rate-strip-value {
 }
 
 html body.guided-flow.guided-flagship .guided-rate-strip-martini .guided-rate-strip-value {
-  color: #9a7b14 !important;
+  color: #A8262C !important;
 }
 
 /* ========== Bottom nav — one clear primary ========== */
@@ -1025,8 +1025,8 @@ html body.guided-flow.wizard-on-results .studio-chip {
 /* Chips — active */
 html body.guided-flow.wizard-on-results .studio-chip.active {
   background: #21292D !important;
-  color: #f5e6a8 !important;
-  -webkit-text-fill-color: #f5e6a8 !important;
+  color: #F6D5D7 !important;
+  -webkit-text-fill-color: #F6D5D7 !important;
   border-color: #D13239 !important;
 }
 
@@ -1108,8 +1108,8 @@ html body.guided-flow.wizard-on-results .studio-lead .guided-lead-submit {
   width: 100% !important;
   min-height: 50px !important;
   background: linear-gradient(145deg, #21292D, #040708) !important;
-  color: #f5e6a8 !important;
-  -webkit-text-fill-color: #f5e6a8 !important;
+  color: #F6D5D7 !important;
+  -webkit-text-fill-color: #F6D5D7 !important;
   border: 1.5px solid #D13239 !important;
   font-weight: 800 !important;
   font-size: 1rem !important;
@@ -1202,8 +1202,8 @@ html body.guided-flow.wizard-on-results .dest-reopen-lead {
   align-items: center !important;
   justify-content: center !important;
   background: linear-gradient(145deg, #21292D, #040708) !important;
-  color: #f5e6a8 !important;
-  -webkit-text-fill-color: #f5e6a8 !important;
+  color: #F6D5D7 !important;
+  -webkit-text-fill-color: #F6D5D7 !important;
   border: 1.5px solid #D13239 !important;
   border-radius: 12px !important;
   font-weight: 800 !important;
@@ -1300,8 +1300,8 @@ html body.guided-flow.wizard-on-results .studio-more-banner-title {
   margin: 0 !important;
   font-size: 0.95rem !important;
   font-weight: 800 !important;
-  color: #f5e6a8 !important;
-  -webkit-text-fill-color: #f5e6a8 !important;
+  color: #F6D5D7 !important;
+  -webkit-text-fill-color: #F6D5D7 !important;
   letter-spacing: -0.01em !important;
 }
 
