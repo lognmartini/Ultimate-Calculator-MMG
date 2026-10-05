@@ -114,7 +114,7 @@ body.wizard-social {
   padding: 0.65rem 1rem;
   background: linear-gradient(135deg, var(--navy-deeper) 0%, var(--navy-dark) 100%);
   border-bottom: 2px solid var(--gold);
-  box-shadow: 0 4px 16px rgba(37, 47, 110, 0.15);
+  box-shadow: 0 4px 16px rgba(33, 41, 45, 0.15);
 }
 
 .wizard-live-preview-inner {
@@ -169,7 +169,7 @@ body.wizard-social {
   margin: 0 0 0.85rem;
   padding: 0.65rem 0.85rem;
   background: var(--gold-soft);
-  border: 1px solid rgba(201, 162, 39, 0.45);
+  border: 1px solid rgba(209, 50, 57, 0.45);
   border-radius: var(--radius);
   text-align: center;
 }
@@ -430,7 +430,7 @@ body.logan5 .wizard-step[hidden] {
   padding: 0.3rem;
   background: linear-gradient(145deg, var(--gold-light) 0%, var(--gold) 100%);
   border-radius: 50%;
-  box-shadow: 0 8px 24px rgba(37, 47, 110, 0.16);
+  box-shadow: 0 8px 24px rgba(33, 41, 45, 0.16);
 }
 
 .wizard-advisor-photo {
@@ -539,9 +539,9 @@ body.logan5 .wizard-step[hidden] {
   margin: 0 auto;
   padding: 0.85rem 1rem;
   background: #fff;
-  border: 2px solid rgba(201, 162, 39, 0.35);
+  border: 2px solid rgba(209, 50, 57, 0.35);
   border-radius: var(--radius);
-  box-shadow: 0 8px 24px rgba(37, 47, 110, 0.1);
+  box-shadow: 0 8px 24px rgba(33, 41, 45, 0.1);
 }
 
 .wizard-team-logo {
@@ -743,7 +743,7 @@ body.logan5 .wizard-step[hidden] {
 }
 
 .wizard-site-footer a {
-  color: #e8c84a;
+  color: #E04A50;
 }
 
 .wizard-site-footer .footer-team-link {
@@ -804,7 +804,7 @@ body.logan5-realtor .partner-share.hidden {
   margin: 1rem 0 0;
   padding: 1rem;
   border-radius: var(--radius);
-  border: 1px dashed rgba(232, 200, 74, 0.65);
+  border: 1px dashed rgba(224, 74, 80, 0.65);
   background: rgba(255, 255, 255, 0.08);
   text-align: left;
 }
@@ -815,17 +815,17 @@ body.logan5-realtor .partner-share.hidden {
 }
 
 .wizard-results .save-estimate-card.studio-lead .save-estimate-title {
-  color: #252f6e;
+  color: #21292D;
   font-size: 1.15rem;
 }
 
 .wizard-results .save-estimate-card.studio-lead .save-estimate-lead {
-  color: #5c5670;
+  color: #555555;
 }
 
 .wizard-results .save-estimate-card.studio-lead .save-estimate-form input {
   background: #faf9fc;
-  color: #252f6e;
+  color: #21292D;
 }
 
 .wizard-results .save-estimate-card.studio-lead .save-estimate-consent {
@@ -935,8 +935,8 @@ body.logan5-realtor .partner-share.hidden {
   margin: 1.1rem 0 0;
   padding: 1rem 1rem 0.85rem;
   border-radius: var(--radius);
-  border: 1px solid rgba(232, 200, 74, 0.45);
-  background: linear-gradient(160deg, rgba(232, 200, 74, 0.16) 0%, rgba(255, 255, 255, 0.06) 100%);
+  border: 1px solid rgba(224, 74, 80, 0.45);
+  background: linear-gradient(160deg, rgba(224, 74, 80, 0.16) 0%, rgba(255, 255, 255, 0.06) 100%);
   text-align: left;
 }
 
@@ -976,8 +976,8 @@ body.logan5-realtor .partner-share.hidden {
 }
 
 .martini-advantage-stat-highlight {
-  border-color: rgba(232, 200, 74, 0.55);
-  background: rgba(232, 200, 74, 0.12);
+  border-color: rgba(224, 74, 80, 0.55);
+  background: rgba(224, 74, 80, 0.12);
 }
 
 .martini-advantage-stat-label {
