@@ -394,7 +394,7 @@
     return `
     <div class="pdf-hdr">
       <h1>Total Cost Analysis</h1>
-      <p class="pdf-meta"><strong>${escapeHtml(site.brandName || "Martini Mortgage Group")}</strong> · Logan Martini · NMLS #${escapeHtml(site.nmls || "1591485")} · Company NMLS #${escapeHtml(site.companyNmls || "2611")}</p>
+      <p class="pdf-meta"><strong>${escapeHtml(site.brandName || "Martini Mortgage Group")}</strong> · The Martini Mortgage Group · NMLS #${escapeHtml(site.teamNmlsLine || site.nmls || "143962")} · Company NMLS #${escapeHtml(site.companyNmls || "2611")}</p>
       <p class="pdf-meta">Generated ${escapeHtml(generated)}${address ? ` · Property: ${escapeHtml(address)}` : ""}</p>
     </div>
     <div class="pdf-section">
@@ -1224,7 +1224,7 @@
       assignedLo: "logan",
       version: "Logan5",
       source: "logan5-realtor-intro",
-      notifyEmail: "logan@martinimortgagegroup.com",
+      notifyEmail: "Martini@rate.com",
       consent: true,
       scenario: {
         ...collectScenarioSnapshot(),
