@@ -50,8 +50,8 @@ html body.guided-flow .rx-shell {
   padding: 1.35rem 1.1rem 1.25rem !important;
   border-radius: 20px !important;
   background: #ffffff !important;
-  border: 1px solid rgba(37, 47, 110, 0.1) !important;
-  box-shadow: 0 18px 50px rgba(37, 47, 110, 0.12) !important;
+  border: 1px solid rgba(33, 41, 45, 0.1) !important;
+  box-shadow: 0 18px 50px rgba(33, 41, 45, 0.12) !important;
   text-align: center !important;
 }
 
@@ -59,7 +59,7 @@ html body.guided-flow .rx-shell {
 html body.guided-flow .rx-hero {
   padding: 0.25rem 0 1rem !important;
   margin: 0 0 0.15rem !important;
-  border-bottom: 1px solid rgba(37, 47, 110, 0.08) !important;
+  border-bottom: 1px solid rgba(33, 41, 45, 0.08) !important;
 }
 
 html body.guided-flow .rx-hero-label {
@@ -77,7 +77,7 @@ html body.guided-flow .rx-hero-title {
   font-family: "DM Sans", system-ui, sans-serif !important;
   font-size: 0.95rem !important;
   font-weight: 600 !important;
-  color: #5c5670 !important;
+  color: #555555 !important;
   line-height: 1.25 !important;
 }
 
@@ -91,8 +91,8 @@ html body.guided-flow .rx-shell #pitiPayment {
   font-variant-numeric: tabular-nums !important;
   letter-spacing: -0.04em !important;
   line-height: 0.95 !important;
-  color: #252f6e !important;
-  -webkit-text-fill-color: #252f6e !important;
+  color: #21292D !important;
+  -webkit-text-fill-color: #21292D !important;
 }
 
 html body.guided-flow .rx-hero-sub {
@@ -112,16 +112,16 @@ html body.guided-flow .rx-hero-rates {
   margin: 0 !important;
   font-size: 0.8rem !important;
   font-weight: 600 !important;
-  color: #5c5670 !important;
+  color: #555555 !important;
 }
 
 html body.guided-flow .rx-hero-rates strong {
-  color: #252f6e !important;
+  color: #21292D !important;
   font-weight: 800 !important;
 }
 
 html body.guided-flow .rx-hero-rates-sep {
-  color: #c9a227 !important;
+  color: #D13239 !important;
   font-weight: 700 !important;
 }
 
@@ -163,11 +163,11 @@ html body.guided-flow .rx-shell #breakdown li {
   gap: 0.75rem !important;
   padding: 0.55rem 0.35rem !important;
   margin: 0 !important;
-  border-bottom: 1px solid rgba(37, 47, 110, 0.07) !important;
+  border-bottom: 1px solid rgba(33, 41, 45, 0.07) !important;
   font-family: "DM Sans", system-ui, sans-serif !important;
   font-size: 0.92rem !important;
   font-weight: 500 !important;
-  color: #2b3252 !important;
+  color: #21292D !important;
   text-align: left !important;
   background: transparent !important;
 }
@@ -185,7 +185,7 @@ html body.guided-flow .rx-breakdown-row strong,
 html body.guided-flow .rx-shell #breakdown li strong {
   font-weight: 800 !important;
   font-variant-numeric: tabular-nums !important;
-  color: #252f6e !important;
+  color: #21292D !important;
   font-size: 0.95rem !important;
 }
 
@@ -196,8 +196,8 @@ html body.guided-flow .rx-shell #saveEstimateCard {
   padding: 1.15rem 1rem 1rem !important;
   border-radius: 16px !important;
   background: linear-gradient(180deg, #fbf8f0 0%, #ffffff 100%) !important;
-  border: 2px solid #c9a227 !important;
-  box-shadow: 0 8px 24px rgba(201, 162, 39, 0.12) !important;
+  border: 2px solid #D13239 !important;
+  box-shadow: 0 8px 24px rgba(209, 50, 57, 0.12) !important;
   text-align: center !important;
 }
 
@@ -206,7 +206,7 @@ html body.guided-flow .rx-lead-title {
   font-family: "DM Sans", system-ui, sans-serif !important;
   font-size: clamp(1.15rem, 3.5vw, 1.3rem) !important;
   font-weight: 800 !important;
-  color: #252f6e !important;
+  color: #21292D !important;
   line-height: 1.2 !important;
 }
 
@@ -215,7 +215,7 @@ html body.guided-flow .rx-lead-copy {
   max-width: 20rem !important;
   font-size: 0.86rem !important;
   line-height: 1.4 !important;
-  color: #5c5670 !important;
+  color: #555555 !important;
 }
 
 html body.guided-flow .rx-lead-form {
@@ -236,7 +236,7 @@ html body.guided-flow .rx-field {
 html body.guided-flow .rx-field-label {
   font-size: 0.72rem !important;
   font-weight: 700 !important;
-  color: #2b3252 !important;
+  color: #21292D !important;
   letter-spacing: 0.02em !important;
 }
 
@@ -255,18 +255,18 @@ html body.guided-flow .rx-lead input[type="tel"] {
   min-height: 48px !important;
   padding: 0.6rem 0.8rem !important;
   border-radius: 11px !important;
-  border: 1.5px solid rgba(37, 47, 110, 0.14) !important;
+  border: 1.5px solid rgba(33, 41, 45, 0.14) !important;
   background: #fff !important;
   font-family: "DM Sans", system-ui, sans-serif !important;
   font-size: 1rem !important;
   font-weight: 500 !important;
-  color: #252f6e !important;
+  color: #21292D !important;
 }
 
 html body.guided-flow .rx-field input:focus {
   outline: none !important;
-  border-color: #c9a227 !important;
-  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.22) !important;
+  border-color: #D13239 !important;
+  box-shadow: 0 0 0 3px rgba(209, 50, 57, 0.22) !important;
 }
 
 /* ---------- 4. BUTTONS ---------- */
@@ -280,21 +280,21 @@ html body.guided-flow .rx-shell .save-estimate-submit {
   margin-top: 0.35rem !important;
   padding: 0.75rem 1rem !important;
   border-radius: 12px !important;
-  border: 1.5px solid #c9a227 !important;
-  background: linear-gradient(145deg, #252f6e 0%, #1b2352 100%) !important;
+  border: 1.5px solid #D13239 !important;
+  background: linear-gradient(145deg, #21292D 0%, #040708 100%) !important;
   color: #f5e6a8 !important;
   font-family: "DM Sans", system-ui, sans-serif !important;
   font-size: 1.05rem !important;
   font-weight: 800 !important;
   cursor: pointer !important;
-  box-shadow: 0 6px 18px rgba(37, 47, 110, 0.18) !important;
+  box-shadow: 0 6px 18px rgba(33, 41, 45, 0.18) !important;
   text-decoration: none !important;
 }
 
 html body.guided-flow .rx-btn-primary:hover,
 html body.guided-flow .rx-shell .save-estimate-submit:hover {
-  background: linear-gradient(145deg, #c9a227 0%, #b8921f 100%) !important;
-  color: #252f6e !important;
+  background: linear-gradient(145deg, #D13239 0%, #b8921f 100%) !important;
+  color: #21292D !important;
 }
 
 html body.guided-flow .rx-btn-secondary {
@@ -306,9 +306,9 @@ html body.guided-flow .rx-btn-secondary {
   margin: 0 !important;
   padding: 0.65rem 1rem !important;
   border-radius: 12px !important;
-  border: 1.5px solid rgba(37, 47, 110, 0.18) !important;
+  border: 1.5px solid rgba(33, 41, 45, 0.18) !important;
   background: #fff !important;
-  color: #252f6e !important;
+  color: #21292D !important;
   font-family: "DM Sans", system-ui, sans-serif !important;
   font-size: 0.92rem !important;
   font-weight: 700 !important;
@@ -318,7 +318,7 @@ html body.guided-flow .rx-btn-secondary {
 }
 
 html body.guided-flow .rx-btn-secondary:hover {
-  border-color: #c9a227 !important;
+  border-color: #D13239 !important;
   background: #fbf8f0 !important;
 }
 
@@ -383,7 +383,7 @@ html body.guided-flow .rx-trust {
   max-width: 100% !important;
   border-radius: 12px !important;
   background: #f7f6fa !important;
-  border: 1px solid rgba(37, 47, 110, 0.06) !important;
+  border: 1px solid rgba(33, 41, 45, 0.06) !important;
 }
 
 html body.guided-flow .rx-trust-photo {
@@ -391,7 +391,7 @@ html body.guided-flow .rx-trust-photo {
   height: 40px !important;
   border-radius: 50% !important;
   object-fit: cover !important;
-  border: 2px solid rgba(201, 162, 39, 0.45) !important;
+  border: 2px solid rgba(209, 50, 57, 0.45) !important;
   flex-shrink: 0 !important;
 }
 
@@ -405,7 +405,7 @@ html body.guided-flow .rx-trust-copy {
 html body.guided-flow .rx-trust-copy strong {
   font-size: 0.82rem !important;
   font-weight: 700 !important;
-  color: #252f6e !important;
+  color: #21292D !important;
 }
 
 html body.guided-flow .rx-trust-copy span {
@@ -428,7 +428,7 @@ html body.guided-flow .rx-legal {
 html body.guided-flow .rx-advanced {
   margin-top: 0.85rem !important;
   text-align: left !important;
-  border-top: 1px solid rgba(37, 47, 110, 0.08) !important;
+  border-top: 1px solid rgba(33, 41, 45, 0.08) !important;
   padding-top: 0.55rem !important;
 }
 
@@ -436,7 +436,7 @@ html body.guided-flow .rx-advanced-summary {
   cursor: pointer !important;
   font-size: 0.8rem !important;
   font-weight: 700 !important;
-  color: #5c5670 !important;
+  color: #555555 !important;
   padding: 0.4rem 0 !important;
   list-style: none !important;
   text-align: center !important;
@@ -529,7 +529,7 @@ html body.guided-flow .rx-field input:focus-visible,
 html body.guided-flow .guided-choice-card:focus-visible,
 html body.guided-flow .btn-wizard-next:focus-visible,
 html body.guided-flow .btn-wizard-back:focus-visible {
-  outline: 3px solid #c9a227 !important;
+  outline: 3px solid #D13239 !important;
   outline-offset: 2px !important;
 }
 
@@ -567,12 +567,12 @@ html body.guided-flow #guidedDownError:not(.hidden) {
 /* Global density + primary path clarity */
 html body.guided-flow.guided-flagship .guided-choice-card {
   min-height: 72px !important;
-  border: 1.5px solid rgba(37, 47, 110, 0.14) !important;
+  border: 1.5px solid rgba(33, 41, 45, 0.14) !important;
 }
 
 html body.guided-flow.guided-flagship .guided-choice-card:hover,
 html body.guided-flow.guided-flagship .guided-choice-card.is-selected {
-  border-color: #c9a227 !important;
+  border-color: #D13239 !important;
   background: #fbf8f0 !important;
 }
 
@@ -601,24 +601,24 @@ html body.guided-flow #guidedPriceToLoan {
 /* Back = secondary/outline; Continue = sole primary */
 html body.guided-flow.guided-flagship .guided-step-nav .btn-wizard-back {
   background: #fff !important;
-  color: #252f6e !important;
-  border: 1.5px solid rgba(37, 47, 110, 0.2) !important;
+  color: #21292D !important;
+  border: 1.5px solid rgba(33, 41, 45, 0.2) !important;
   box-shadow: none !important;
   font-weight: 600 !important;
 }
 
 html body.guided-flow.guided-flagship .guided-step-nav .btn-wizard-back:hover {
-  border-color: #c9a227 !important;
+  border-color: #D13239 !important;
   background: #fbf8f0 !important;
-  color: #252f6e !important;
+  color: #21292D !important;
 }
 
 html body.guided-flow.guided-flagship .guided-step-nav .btn-wizard-next {
-  background: linear-gradient(145deg, #252f6e 0%, #1b2352 100%) !important;
+  background: linear-gradient(145deg, #21292D 0%, #040708 100%) !important;
   color: #f5e6a8 !important;
-  border: 1.5px solid #c9a227 !important;
+  border: 1.5px solid #D13239 !important;
   font-weight: 700 !important;
-  box-shadow: 0 4px 14px rgba(37, 47, 110, 0.16) !important;
+  box-shadow: 0 4px 14px rgba(33, 41, 45, 0.16) !important;
 }
 
 /* Light text link for payment target */
@@ -645,13 +645,13 @@ html body.guided-flow .guided-price-target-link {
 }
 
 html body.guided-flow .guided-price-target-link:hover {
-  color: #252f6e !important;
+  color: #21292D !important;
 }
 
 html body.guided-flow .guided-price-target-panel:not(.hidden) {
   margin-top: 0.65rem !important;
   padding-top: 0.65rem !important;
-  border-top: 1px dashed rgba(37, 47, 110, 0.12) !important;
+  border-top: 1px dashed rgba(33, 41, 45, 0.12) !important;
 }
 
 /* Soften national banner — quiet status, not a warning */
@@ -662,8 +662,8 @@ html body.guided-flow .guided-national-banner:not(.hidden) {
   font-size: 0.72rem !important;
   font-weight: 500 !important;
   color: #6b6580 !important;
-  background: rgba(37, 47, 110, 0.04) !important;
-  border: 1px solid rgba(37, 47, 110, 0.08) !important;
+  background: rgba(33, 41, 45, 0.04) !important;
+  border: 1px solid rgba(33, 41, 45, 0.08) !important;
   border-radius: 8px !important;
   text-align: center !important;
 }
