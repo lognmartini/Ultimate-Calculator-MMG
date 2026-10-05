@@ -1,23 +1,23 @@
 /* ============================================================================
    PHASE 2 — VISUAL / UX OVERHAUL (loads dead-last; highest priority)
-   Mobile-first. Navy #252f6e + Gold #c9a227. Logos untouched. No JS logic changes.
+   Mobile-first. Navy #21292D + Gold #D13239. Logos untouched. No JS logic changes.
    Scope prefix: html body.guided-flow.guided-flagship  (matches/ō beats prior layers)
    ============================================================================ */
 
 :root {
-  --p2-navy: #252f6e;
-  --p2-navy-deep: #1b2352;
-  --p2-navy-ink: #161d43;
-  --p2-gold: #c9a227;
-  --p2-gold-hi: #e8c84a;
-  --p2-muted: #5b6486;
+  --p2-navy: #21292D;
+  --p2-navy-deep: #040708;
+  --p2-navy-ink: #040708;
+  --p2-gold: #D13239;
+  --p2-gold-hi: #E04A50;
+  --p2-muted: #555555;
   --p2-line: #e7e9f1;
   --p2-bg: #f5f6fa;
   --p2-card: #ffffff;
   --p2-radius: 18px;
   --p2-radius-sm: 12px;
-  --p2-shadow: 0 10px 30px rgba(27, 35, 82, 0.10);
-  --p2-shadow-lg: 0 18px 44px rgba(27, 35, 82, 0.16);
+  --p2-shadow: 0 10px 30px rgba(4, 7, 8, 0.10);
+  --p2-shadow-lg: 0 18px 44px rgba(4, 7, 8, 0.16);
 }
 
 /* ---- Global base: one type system (kill mixed serif), smooth rendering ---- */
@@ -55,7 +55,7 @@ html body.guided-flow.guided-flagship .btn-apply-now {
   border: 0 !important;
   font-weight: 800 !important;
   border-radius: 999px !important;
-  box-shadow: 0 4px 14px rgba(201, 162, 39, 0.35) !important;
+  box-shadow: 0 4px 14px rgba(209, 50, 57, 0.35) !important;
   letter-spacing: 0.01em !important;
 }
 html body.guided-flow.guided-flagship .guided-header-apply * { color: var(--p2-navy-deep) !important; }
@@ -85,7 +85,7 @@ html body.guided-flow.guided-flagship .guided-progress-line {
 }
 html body.guided-flow.guided-flagship .wizard-progress-track {
   height: 6px !important;
-  background: rgba(37,47,110,0.10) !important;
+  background: rgba(33, 41, 45,0.10) !important;
   border-radius: 999px !important;
   overflow: hidden !important;
   margin-top: 0.55rem !important;
@@ -209,7 +209,7 @@ html body.guided-flow.guided-flagship .mmg-choice-ic {
   width: 52px !important;
   height: 52px !important;
   border-radius: 50% !important;
-  background-color: rgba(37, 47, 110, 0.07) !important;
+  background-color: rgba(33, 41, 45, 0.07) !important;
   background-repeat: no-repeat !important;
   background-position: center !important;
   background-size: 26px 26px !important;
@@ -221,7 +221,7 @@ html body.guided-flow.guided-flagship .mmg-choice-ic {
 }
 html body.guided-flow.guided-flagship .guided-choice-card:hover .guided-choice-icon,
 html body.guided-flow.guided-flagship .mmg-choice:hover .mmg-choice-ic {
-  background-color: rgba(37, 47, 110, 0.12) !important;
+  background-color: rgba(33, 41, 45, 0.12) !important;
 }
 /* Kill the old right-arrow ::after affordance on landing cards (cleaner, centered) */
 html body.guided-flow.guided-flagship .mmg-choice::after { display: none !important; }
@@ -311,7 +311,7 @@ html body.guided-flow.guided-flagship input[type="range"] {
   appearance: none !important;
   height: 8px !important;
   border-radius: 999px !important;
-  background: rgba(37,47,110,0.12) !important;
+  background: rgba(33, 41, 45,0.12) !important;
   outline: none !important;
 }
 html body.guided-flow.guided-flagship input[type="range"]::-webkit-slider-thumb {
@@ -321,14 +321,14 @@ html body.guided-flow.guided-flagship input[type="range"]::-webkit-slider-thumb 
   border-radius: 50%;
   background: radial-gradient(circle at 35% 30%, #fff 0 22%, var(--p2-gold-hi) 24%, var(--p2-gold) 100%);
   border: 3px solid #fff;
-  box-shadow: 0 3px 10px rgba(27,35,82,0.35);
+  box-shadow: 0 3px 10px rgba(4, 7, 8,0.35);
   cursor: pointer;
   margin-top: -11px;
 }
 html body.guided-flow.guided-flagship input[type="range"]::-moz-range-thumb {
   width: 30px; height: 30px; border-radius: 50%;
   background: var(--p2-gold); border: 3px solid #fff;
-  box-shadow: 0 3px 10px rgba(27,35,82,0.35); cursor: pointer;
+  box-shadow: 0 3px 10px rgba(4, 7, 8,0.35); cursor: pointer;
 }
 
 /* ============================================================
@@ -368,7 +368,7 @@ html body.guided-flow.guided-flagship .studio-mstart {
   min-height: 56px !important;
   white-space: nowrap !important;
   letter-spacing: 0.01em !important;
-  box-shadow: 0 10px 24px rgba(27,35,82,0.22) !important;
+  box-shadow: 0 10px 24px rgba(4, 7, 8,0.22) !important;
 }
 html body.guided-flow.guided-flagship .btn-wizard-next *,
 html body.guided-flow.guided-flagship .save-estimate-submit * { color: var(--p2-gold-hi) !important; white-space: nowrap !important; }
@@ -391,9 +391,9 @@ html body.guided-flow.guided-flagship .studio-hero {
   background: radial-gradient(120% 120% at 50% 0%, #2b3780 0%, var(--p2-navy) 45%, var(--p2-navy-deep) 100%) !important;
   border-radius: 22px !important;
   padding: 2rem 1.25rem 1.75rem !important;
-  box-shadow: 0 18px 44px rgba(27, 35, 82, 0.28) !important;
+  box-shadow: 0 18px 44px rgba(4, 7, 8, 0.28) !important;
   text-align: center !important;
-  border: 1px solid rgba(232,200,74,0.18) !important;
+  border: 1px solid rgba(224, 74, 80,0.18) !important;
 }
 html body.guided-flow.guided-flagship .studio-hero .studio-kicker { color: var(--p2-gold-hi) !important; }
 html body.guided-flow.guided-flagship .studio-amount,
@@ -442,7 +442,7 @@ html body.guided-flow.guided-flagship .studio-controls-head p { color: var(--p2-
 html body.guided-flow.guided-flagship .studio-lead {
   border: 2px solid var(--p2-gold) !important;
   border-radius: 20px !important;
-  box-shadow: 0 16px 40px rgba(37,47,110,0.16) !important;
+  box-shadow: 0 16px 40px rgba(33, 41, 45,0.16) !important;
   background: linear-gradient(180deg, #fffdf6 0%, #ffffff 40%) !important;
   padding: 1.5rem 1.2rem !important;
 }
@@ -605,7 +605,7 @@ html body.guided-flow.guided-flagship #guidedHeaderApply {
   background: linear-gradient(180deg, var(--p2-gold-hi) 0%, var(--p2-gold) 100%) !important;
   color: var(--p2-navy-deep) !important;
   border: 0 !important;
-  box-shadow: 0 4px 14px rgba(201, 162, 39, 0.35) !important;
+  box-shadow: 0 4px 14px rgba(209, 50, 57, 0.35) !important;
 }
 html body.guided-flow.guided-flagship #guidedHeaderApply * { color: var(--p2-navy-deep) !important; }
 
@@ -692,7 +692,7 @@ html body.guided-flow.guided-flagship .guided-progress-simple {
 
 /* Credit slider: make the track read as a slim bar (not a tall gray pill) */
 html body.guided-flow.guided-flagship .guided-score-hero input[type="range"],
-html body.guided-flow.guided-flagship #creditScore { background: rgba(37,47,110,0.12) !important; height: 8px !important; }
+html body.guided-flow.guided-flagship #creditScore { background: rgba(33, 41, 45,0.12) !important; height: 8px !important; }
 
 /* Choice cards a touch tighter so two fit comfortably above the fold on mobile */
 @media (max-width: 767px) {
@@ -795,7 +795,7 @@ html body.guided-flow.guided-flagship .ultimate-program-btn strong { font-size: 
 /* Down payment: clean second decision directly underneath */
 html body.guided-flow.guided-flagship .guided-down-summary {
   text-align: center !important;
-  background: rgba(37,47,110,0.04) !important;
+  background: rgba(33, 41, 45,0.04) !important;
   border: 1px solid var(--p2-line) !important;
   border-radius: var(--p2-radius-sm) !important;
   padding: 0.85rem 1rem !important;
@@ -1129,7 +1129,7 @@ html body.guided-flow.guided-flagship .guided-loan-type-grid .ultimate-program-b
 html body.guided-flow.guided-flagship .guided-loan-type-grid .ultimate-program-btn.active {
   background: linear-gradient(160deg, var(--p2-navy) 0%, var(--p2-navy-deep) 100%) !important;
   border-color: var(--p2-gold) !important;
-  box-shadow: 0 8px 20px rgba(27, 35, 82, 0.18) !important;
+  box-shadow: 0 8px 20px rgba(4, 7, 8, 0.18) !important;
 }
 html body.guided-flow.guided-flagship .guided-loan-type-grid .ultimate-program-btn.active strong { color: #fff !important; }
 html body.guided-flow.guided-flagship .guided-loan-type-grid .ultimate-program-btn.active span { color: var(--p2-gold-hi) !important; }
@@ -1538,7 +1538,7 @@ html body.guided-flow.guided-flagship #guidedResultsDetails.studio-more-open .st
   background: #fff !important;
   border: 1px solid var(--p2-line) !important;
   border-radius: var(--p2-radius-sm) !important;
-  box-shadow: 0 4px 14px rgba(27, 35, 82, 0.05) !important;
+  box-shadow: 0 4px 14px rgba(4, 7, 8, 0.05) !important;
   padding: 1rem 1.1rem !important;
   margin: 0 !important;
 }
@@ -1633,7 +1633,7 @@ html body.guided-flow.guided-flagship #guidedResultsDetails .ultimate-wealth-pan
   left: 8px;
   top: -60px;
   z-index: 100000;
-  background: #1b2352;
+  background: #040708;
   color: #fff;
   padding: 0.7rem 1.15rem;
   border-radius: 0 0 10px 10px;
@@ -1644,7 +1644,7 @@ html body.guided-flow.guided-flagship #guidedResultsDetails .ultimate-wealth-pan
 }
 .skip-link:focus {
   top: 0;
-  outline: 3px solid #c9a227;
+  outline: 3px solid #D13239;
   outline-offset: 2px;
 }
 
@@ -1729,7 +1729,7 @@ html body.guided-flow.guided-flagship .mmg-reviews-link {
     margin: 0.35rem 0 0.2rem !important;
     font-size: 0.9rem !important;
     font-weight: 600 !important;
-    color: var(--p2-navy-deep, #1b2352) !important;
+    color: var(--p2-navy-deep, #040708) !important;
     line-height: 1.35 !important;
   }
   /* Make the form a flex column so we can float phone to the top */
