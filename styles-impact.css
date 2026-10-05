@@ -52,7 +52,7 @@ html body.guided-flow.guided-flagship #lookupAddress.guided-lookup-primary {
   font-weight: 700 !important;
   font-size: 0.95rem !important;
   background: linear-gradient(145deg, #21292D 0%, #040708 100%) !important;
-  color: #f5e6a8 !important;
+  color: #F6D5D7 !important;
   border: 1.5px solid #D13239 !important;
   box-shadow: 0 4px 14px rgba(33, 41, 45, 0.18) !important;
 }
@@ -243,7 +243,7 @@ html body.guided-flow.guided-flagship .guided-lead-hero.guided-lead-impact {
 }
 
 html body.guided-flow .guided-lead-impact .save-estimate-eyebrow {
-  color: #9a7b14 !important;
+  color: #A8262C !important;
   font-size: 0.68rem !important;
   font-weight: 800 !important;
   letter-spacing: 0.07em !important;
@@ -352,7 +352,7 @@ html body.guided-flow .guided-lead-impact .save-estimate-tab {
 
 html body.guided-flow .guided-lead-impact .save-estimate-tab.active {
   background: #21292D !important;
-  color: #f5e6a8 !important;
+  color: #F6D5D7 !important;
   border-color: #D13239 !important;
 }
 
