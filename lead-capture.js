@@ -113,7 +113,7 @@
       }
       if (lead) {
         lead.textContent =
-          "Logan reviews your numbers and walks you through your personalized options — no commitment, no credit pull. Your info goes straight to the Martini Mortgage Group team.";
+          "Logan and Kevin review your numbers and walk you through your personalized options — no commitment, no credit pull. Your info goes straight to the Martini Mortgage Group team.";
       }
       const submitBtn = document.querySelector(
         ".save-estimate-submit, #saveEstimateForm [type='submit']"
@@ -299,7 +299,7 @@
     }
     if (lead) {
       lead.textContent =
-        "Logan reviews your numbers and personalized options — usually the same business day. No credit pull, no obligation.";
+        "Logan and Kevin review your numbers and personalized options — usually the same business day. No credit pull, no obligation.";
     }
     const submitBtn = document.querySelector(
       ".save-estimate-submit, #saveEstimateForm [type='submit']"
