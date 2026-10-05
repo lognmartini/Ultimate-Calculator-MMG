@@ -3,7 +3,7 @@
  * Calculator API must be served from the same path (python3 server.py).
  */
 window.MMG_SITE = {
-  brandName: "Martini Mortgage Group",
+  brandName: "The Martini Mortgage Group",
   siteUrl: "https://martinimortgagegroup.com",
   calculatorPath: "/mortgage-calculator/",
   /** Logan3 — step-by-step page for social “click here” posts (Logan-branded) */
@@ -19,16 +19,17 @@ window.MMG_SITE = {
   realtorPath: "/mortgage-calculator/realtor.html",
   socialWizardPath: "/mortgage-calculator/go4.html",
   teamSocialWizardPath: "/mortgage-calculator/go4.html",
-  applyUrl: "https://apply.rate.com/apply/loan-purpose?emp-id=1001008&utm_source=grMktg&utm_medium=email&utm_term=&utm_content=text&utm_campaign=sig",
+  applyUrl: "https://apply.rate.com/apply/loan-purpose?emp-id=1001024&utm_source=grMktg&utm_medium=email&utm_term=&utm_content=text&utm_campaign=sig",
   /** Default team apply when Logan4 has no ?ref= (Kevin = branch manager) */
-  teamApplyUrl: "https://apply.rate.com/apply/loan-purpose?emp-id=1001008&utm_source=grMktg&utm_medium=email&utm_term=&utm_content=text&utm_campaign=sig",
+  teamApplyUrl: "https://apply.rate.com/apply/loan-purpose?emp-id=1001024&utm_source=grMktg&utm_medium=email&utm_term=&utm_content=text&utm_campaign=sig",
   calendlyUrl: "https://calendly.com/kevinmartini/private-call-with-martini",
   phone: "9192384934",
   phoneDisplay: "(919) 238-4934",
-  email: "Kevin@MartiniMortgageGroup.com",
+  email: "Martini@rate.com",
   address: "507 N Blount St, Raleigh, NC 27604",
-  strategistName: "Logan Martini",
-  nmls: "1591485",
+  strategistName: "The Martini Mortgage Group",
+  nmls: "143962",
+  teamNmlsLine: "Logan Martini (NMLS #1591485) | Kevin Martini (NMLS #143962)",
   companyNmls: "2611",
   companyLegalName:
     "Martini Mortgage Group powered by Guaranteed Rate, Inc. D/B/A Rate",
@@ -37,22 +38,22 @@ window.MMG_SITE = {
       name: "Kevin Martini",
       title: "Certified Mortgage Advisor",
       nmls: "143962",
-      applyUrl: "https://apply.rate.com/apply/loan-purpose?emp-id=1001008&utm_source=grMktg&utm_medium=email&utm_term=&utm_content=text&utm_campaign=sig",
-      email: "Kevin@MartiniMortgageGroup.com",
+      applyUrl: "https://apply.rate.com/apply/loan-purpose?emp-id=1001024&utm_source=grMktg&utm_medium=email&utm_term=&utm_content=text&utm_campaign=sig",
+      email: "Martini@rate.com",
     },
     logan: {
       name: "Logan Martini",
       title: "Senior Mortgage Strategist",
       nmls: "1591485",
-      applyUrl: "https://apply.rate.com/apply/loan-purpose?emp-id=1001008&utm_source=grMktg&utm_medium=email&utm_term=&utm_content=text&utm_campaign=sig",
-      email: "Logan@MartiniMortgageGroup.com",
+      applyUrl: "https://apply.rate.com/apply/loan-purpose?emp-id=1001024&utm_source=grMktg&utm_medium=email&utm_term=&utm_content=text&utm_campaign=sig",
+      email: "Martini@rate.com",
     },
   },
   /** Default campaign tag when no ?ref= or UTM is present */
   defaultCampaign: "mmg-calculator",
   defaultSocialCampaign: "mmg-social-steps",
   defaultTeamSocialCampaign: "mmg-team-social",
-  teamTagline: "Your Raleigh mortgage team",
+  teamTagline: "Logan Martini (NMLS #1591485) | Kevin Martini (NMLS #143962)",
   /** Open Graph / share image (absolute URL on your CDN or site) */
   shareImage:
     "https://martinimortgagegroup.com/wp-content/uploads/mmg-calculator-share.jpg",
