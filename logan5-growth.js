@@ -7,7 +7,7 @@
   if (!document.body.classList.contains("logan5")) return;
 
   const WHEEL_COLORS = {
-    pi: "#e8c84a",
+    pi: "#E04A50",
     tax: "#818cf8",
     ins: "#38bdf8",
     mi: "#fb923c",
