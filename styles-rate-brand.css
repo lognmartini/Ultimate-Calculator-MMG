@@ -56,26 +56,43 @@ html body.guided-flow.guided-flagship {
   --p2-shadow-lg: 0 18px 44px rgba(37,41,42,.16);
 }
 
-/* Primary calls to action take Rate red, matching the website buttons. */
-html body .btn-apply-now,
-html body .btn-results-apply,
-html body .logan5-instant-cta,
-html body .sticky-cta-btn,
-html body .ultimate-creative-apply,
-html body .ultimate-hub-btn-apply,
-html body .wizard-header-apply {
+/* Primary calls to action take Rate red.
+   Selectors deliberately repeat a class to out-specify the gold rules in
+   styles-phase2.css / styles-market-ready.css, which are themselves !important. */
+html body.guided-flow.guided-flagship .guided-header-apply.guided-header-apply,
+html body.guided-flow.guided-flagship .guided-header-apply.guided-header-apply-soft.guided-header-apply-soft,
+html body.guided-flow.guided-flagship .btn-apply-now.btn-apply-now,
+html body.guided-flow.guided-flagship .btn-results-apply.btn-results-apply,
+html body.guided-flow.guided-flagship .sticky-cta-btn.sticky-cta-btn,
+html body.guided-flow.guided-flagship .wizard-header-apply.wizard-header-apply,
+html body.guided-flow.guided-flagship .ultimate-hub-btn-apply.ultimate-hub-btn-apply,
+html body.logan5 .logan5-instant-cta.logan5-instant-cta,
+html body.logan5 .ultimate-creative-apply.ultimate-creative-apply {
   background: linear-gradient(135deg, #F2434E 0%, #E41E2B 52%, #BF1824 100%) !important;
+  background-color: #E41E2B !important;
   border-color: #BF1824 !important;
   color: #fff !important;
 }
-html body .btn-apply-now::before, html body .sticky-cta-btn::before,
-html body .wizard-header-apply::before, html body .btn-results-apply::before {
+html body.guided-flow.guided-flagship .guided-header-apply.guided-header-apply::before,
+html body.guided-flow.guided-flagship .guided-header-apply.guided-header-apply-soft.guided-header-apply-soft::before,
+html body.guided-flow.guided-flagship .btn-apply-now.btn-apply-now::before,
+html body.guided-flow.guided-flagship .btn-results-apply.btn-results-apply::before,
+html body.guided-flow.guided-flagship .sticky-cta-btn.sticky-cta-btn::before,
+html body.guided-flow.guided-flagship .wizard-header-apply.wizard-header-apply::before,
+html body.guided-flow.guided-flagship .ultimate-hub-btn-apply.ultimate-hub-btn-apply::before,
+html body.logan5 .logan5-instant-cta.logan5-instant-cta::before,
+html body.logan5 .ultimate-creative-apply.ultimate-creative-apply::before {
   background: none !important;
 }
-html body .btn-apply-now:hover,
-html body .btn-results-apply:hover,
-html body .logan5-instant-cta:hover,
-html body .sticky-cta-btn:hover,
-html body .wizard-header-apply:hover {
+html body.guided-flow.guided-flagship .guided-header-apply.guided-header-apply:hover,
+html body.guided-flow.guided-flagship .guided-header-apply.guided-header-apply-soft.guided-header-apply-soft:hover,
+html body.guided-flow.guided-flagship .btn-apply-now.btn-apply-now:hover,
+html body.guided-flow.guided-flagship .btn-results-apply.btn-results-apply:hover,
+html body.guided-flow.guided-flagship .sticky-cta-btn.sticky-cta-btn:hover,
+html body.guided-flow.guided-flagship .wizard-header-apply.wizard-header-apply:hover,
+html body.guided-flow.guided-flagship .ultimate-hub-btn-apply.ultimate-hub-btn-apply:hover,
+html body.logan5 .logan5-instant-cta.logan5-instant-cta:hover,
+html body.logan5 .ultimate-creative-apply.ultimate-creative-apply:hover {
   background: #BF1824 !important;
+  background-color: #BF1824 !important;
 }
