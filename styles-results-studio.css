@@ -102,7 +102,7 @@ html body.guided-flow.guided-flagship .guided-step-nav .btn-wizard-back {
 
 html body.guided-flow.guided-flagship .guided-step-nav .btn-wizard-next {
   background: linear-gradient(145deg, #21292D, #040708) !important;
-  color: #f5e6a8 !important;
+  color: #F6D5D7 !important;
   border: 1.5px solid var(--studio-gold) !important;
   font-weight: 700 !important;
   transition: transform 0.15s ease, box-shadow 0.15s ease !important;
@@ -271,7 +271,7 @@ html body.guided-flow .studio-break #breakdown li strong {
 }
 
 html body.guided-flow .studio-break #breakdown li.studio-row-flash strong {
-  color: #9a7b14 !important;
+  color: #A8262C !important;
 }
 
 /* Controls */
@@ -333,7 +333,7 @@ html body.guided-flow .studio-control-row output {
 }
 
 html body.guided-flow .studio-control-row output.studio-out-flash {
-  color: #9a7b14 !important;
+  color: #A8262C !important;
 }
 
 html body.guided-flow .studio-control input[type="range"] {
@@ -374,7 +374,7 @@ html body.guided-flow .studio-chip:hover {
 
 html body.guided-flow .studio-chip.active {
   background: var(--studio-navy) !important;
-  color: #f5e6a8 !important;
+  color: #F6D5D7 !important;
   border-color: var(--studio-gold) !important;
   box-shadow: 0 2px 8px rgba(33, 41, 45, 0.15) !important;
 }
@@ -493,7 +493,7 @@ html body.guided-flow .studio-lead .save-estimate-submit {
   border-radius: 12px !important;
   border: 1.5px solid var(--studio-gold) !important;
   background: linear-gradient(145deg, #21292D, #040708) !important;
-  color: #f5e6a8 !important;
+  color: #F6D5D7 !important;
   font-size: 1.02rem !important;
   font-weight: 800 !important;
   cursor: pointer !important;
