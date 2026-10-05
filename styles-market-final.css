@@ -7,9 +7,9 @@
    1. UNIFIED BUTTON SYSTEM
    ========================================================= */
 html body.guided-flow.guided-flagship {
-  --mf-navy: #252f6e;
-  --mf-gold: #c9a227;
-  --mf-gold-hi: #e8c84a;
+  --mf-navy: #21292D;
+  --mf-gold: #D13239;
+  --mf-gold-hi: #E04A50;
   --mf-cream: #f4f2ef;
   --mf-muted: #6b6580;
   --mf-radius: 12px;
@@ -30,12 +30,12 @@ html body.guided-flow.guided-flagship .save-estimate-submit {
   padding: 0.85rem 1.25rem !important;
   border: 0 !important;
   border-radius: var(--mf-radius) !important;
-  background: linear-gradient(135deg, #f0d060 0%, #c9a227 55%, #b8891a 100%) !important;
+  background: linear-gradient(135deg, #E04A50 0%, #D13239 55%, #A8262C 100%) !important;
   color: var(--mf-navy) !important;
   font-weight: 800 !important;
   font-size: 0.95rem !important;
   letter-spacing: 0.01em !important;
-  box-shadow: 0 4px 16px rgba(201, 162, 39, 0.32) !important;
+  box-shadow: 0 4px 16px rgba(209, 50, 57, 0.32) !important;
   cursor: pointer !important;
   text-decoration: none !important;
   transition: transform 0.12s ease, filter 0.15s ease, box-shadow 0.15s ease !important;
@@ -190,8 +190,8 @@ html body.guided-flow.guided-flagship .guided-results-final .lead-savings-ribbon
   margin-top: 0.65rem !important;
   padding: 0.5rem 0.75rem !important;
   border-radius: 10px !important;
-  background: rgba(201, 162, 39, 0.12) !important;
-  border: 1px solid rgba(201, 162, 39, 0.28) !important;
+  background: rgba(209, 50, 57, 0.12) !important;
+  border: 1px solid rgba(209, 50, 57, 0.28) !important;
 }
 
 /* =========================================================
@@ -201,8 +201,8 @@ html body.guided-flow.guided-flagship .guided-live-card-interactive #wizardLiveP
   font-family: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif !important;
   font-size: clamp(1.75rem, 5vw, 2.15rem) !important;
   font-weight: 800 !important;
-  color: #252f6e !important;
-  -webkit-text-fill-color: #252f6e !important;
+  color: #21292D !important;
+  -webkit-text-fill-color: #21292D !important;
 }
 
 html body.guided-flow .guided-live-amount-tick {
