@@ -787,7 +787,7 @@ html body.guided-flow.guided-flagship .guided-refi-goal-grid {
   html body.guided-flow.guided-flagship .guided-live-card-interactive {
     padding: 0.45rem 0.6rem 0.5rem !important;
     border-radius: 11px !important;
-    box-shadow: 0 6px 22px rgba(37, 47, 110, 0.14) !important;
+    box-shadow: 0 6px 22px rgba(33, 41, 45, 0.14) !important;
   }
 
   html body.guided-flow.guided-flagship .guided-live-card-interactive #wizardLivePayment {
@@ -1192,8 +1192,8 @@ html body.guided-flow .save-estimate-success:not(.hidden) {
 }
 
 html body.guided-flow .guided-skip-highlight {
-  box-shadow: 0 0 0 2px #c9a227, 0 4px 14px rgba(201, 162, 39, 0.25) !important;
-  border-color: #c9a227 !important;
+  box-shadow: 0 0 0 2px #D13239, 0 4px 14px rgba(209, 50, 57, 0.25) !important;
+  border-color: #D13239 !important;
   animation: guided-skip-pulse 1.2s ease 2;
 }
 
@@ -1225,7 +1225,7 @@ html body.guided-flow.logan5-payment-hidden .guided-live-rail {
 /* Readable live payment type — high-contrast system UI fonts (not thin serif) */
 html body.guided-flow.guided-flagship .guided-live-card-interactive {
   background: #ffffff !important;
-  border: 1.5px solid rgba(37, 47, 110, 0.12) !important;
+  border: 1.5px solid rgba(33, 41, 45, 0.12) !important;
 }
 
 html body.guided-flow.guided-flagship .guided-live-card-interactive .wizard-live-preview-label {
@@ -1233,7 +1233,7 @@ html body.guided-flow.guided-flagship .guided-live-card-interactive .wizard-live
   font-size: 0.72rem !important;
   font-weight: 700 !important;
   letter-spacing: 0.06em !important;
-  color: #2b3252 !important;
+  color: #21292D !important;
   opacity: 1 !important;
 }
 
@@ -1244,8 +1244,8 @@ html body.guided-flow.guided-flagship .guided-live-card-interactive #wizardLiveP
   font-weight: 800 !important;
   font-variant-numeric: tabular-nums !important;
   letter-spacing: -0.02em !important;
-  color: #252f6e !important;
-  -webkit-text-fill-color: #252f6e !important;
+  color: #21292D !important;
+  -webkit-text-fill-color: #21292D !important;
   opacity: 1 !important;
   text-shadow: none !important;
   transition: color 0.15s ease, transform 0.15s ease !important;
@@ -1255,11 +1255,11 @@ html body.guided-flow .guided-live-rate-pair {
   font-family: "DM Sans", system-ui, sans-serif !important;
   font-size: 0.78rem !important;
   font-weight: 600 !important;
-  color: #2b3252 !important;
+  color: #21292D !important;
 }
 
 html body.guided-flow .guided-live-rate-pair strong {
-  color: #252f6e !important;
+  color: #21292D !important;
   font-weight: 800 !important;
 }
 
@@ -1271,7 +1271,7 @@ html body.guided-flow .guided-live-breakdown li {
 }
 
 html body.guided-flow .guided-live-breakdown li strong {
-  color: #252f6e !important;
+  color: #21292D !important;
   font-weight: 800 !important;
   font-variant-numeric: tabular-nums !important;
 }
@@ -1285,7 +1285,7 @@ html body.guided-flow.guided-flagship .guided-live-card-interactive .wizard-live
   font-family: "DM Sans", system-ui, sans-serif !important;
   font-size: 0.72rem !important;
   font-weight: 600 !important;
-  color: #5c5670 !important;
+  color: #555555 !important;
 }
 
 /* Less bottom chrome when live card is hidden (pre-price steps) */
@@ -1325,10 +1325,10 @@ html body.guided-flow .guided-realtor-btn.guided-side-cta-realtor {
   min-height: 48px !important;
   padding: 0.55rem 0.5rem !important;
   border-radius: 11px !important;
-  border: 1.5px solid #c9a227 !important;
-  background: linear-gradient(160deg, #252f6e 0%, #1b2352 100%) !important;
+  border: 1.5px solid #D13239 !important;
+  background: linear-gradient(160deg, #21292D 0%, #040708 100%) !important;
   color: #fff !important;
-  box-shadow: 0 4px 14px rgba(37, 47, 110, 0.18) !important;
+  box-shadow: 0 4px 14px rgba(33, 41, 45, 0.18) !important;
   cursor: pointer !important;
   text-align: center !important;
 }
@@ -1348,16 +1348,16 @@ html body.guided-flow .guided-realtor-btn-sub {
 }
 
 html body.guided-flow .guided-realtor-btn.guided-side-cta-realtor:hover {
-  background: linear-gradient(160deg, #c9a227 0%, #b8921f 100%) !important;
+  background: linear-gradient(160deg, #D13239 0%, #b8921f 100%) !important;
   border-color: #9a7b14 !important;
 }
 
 html body.guided-flow .guided-realtor-btn.guided-side-cta-realtor:hover .guided-realtor-btn-main {
-  color: #252f6e !important;
+  color: #21292D !important;
 }
 
 html body.guided-flow .guided-realtor-btn.guided-side-cta-realtor:hover .guided-realtor-btn-sub {
-  color: rgba(37, 47, 110, 0.75) !important;
+  color: rgba(33, 41, 45, 0.75) !important;
 }
 
 /* Results-page realtor card — high visibility after lead/apply */
@@ -1374,26 +1374,26 @@ html body.guided-flow .guided-realtor-cta {
   width: 100% !important;
   padding: 0.85rem 0.9rem !important;
   border-radius: 14px !important;
-  border: 1.5px solid rgba(201, 162, 39, 0.55) !important;
-  background: linear-gradient(165deg, #252f6e 0%, #2d2448 55%, #3a2f1a 100%) !important;
+  border: 1.5px solid rgba(209, 50, 57, 0.55) !important;
+  background: linear-gradient(165deg, #21292D 0%, #2d2448 55%, #3a2f1a 100%) !important;
   color: #fff !important;
   cursor: pointer !important;
   text-align: center !important;
-  box-shadow: 0 8px 24px rgba(37, 47, 110, 0.2) !important;
+  box-shadow: 0 8px 24px rgba(33, 41, 45, 0.2) !important;
   transition: transform 0.15s ease, box-shadow 0.15s ease !important;
 }
 
 html body.guided-flow .guided-realtor-cta:hover {
   transform: translateY(-1px) !important;
-  box-shadow: 0 10px 28px rgba(37, 47, 110, 0.28) !important;
-  border-color: #c9a227 !important;
+  box-shadow: 0 10px 28px rgba(33, 41, 45, 0.28) !important;
+  border-color: #D13239 !important;
 }
 
 html body.guided-flow .guided-realtor-cta-kicker {
   font-size: 0.62rem !important;
   letter-spacing: 0.06em !important;
   text-transform: uppercase !important;
-  color: #c9a227 !important;
+  color: #D13239 !important;
   font-weight: 600 !important;
 }
 
@@ -1479,7 +1479,7 @@ html body.guided-flow #ultimateRealtorView.guided-realtor-overlay .wizard-card {
   max-width: min(440px, 100%) !important;
   padding: 1.15rem 1rem 1.2rem !important;
   border-radius: 16px !important;
-  border: 1px solid rgba(201, 162, 39, 0.35) !important;
+  border: 1px solid rgba(209, 50, 57, 0.35) !important;
   box-shadow: 0 16px 48px rgba(0, 0, 0, 0.28) !important;
 }
 
@@ -1498,7 +1498,7 @@ html body.guided-flow #ultimate-realtor-title {
   font-size: clamp(1.15rem, 4vw, 1.35rem) !important;
   line-height: 1.25 !important;
   text-align: center !important;
-  color: #252f6e !important;
+  color: #21292D !important;
 }
 
 html body.guided-flow .guided-realtor-lead {
@@ -1506,7 +1506,7 @@ html body.guided-flow .guided-realtor-lead {
   font-size: 0.84rem !important;
   line-height: 1.4 !important;
   text-align: center !important;
-  color: #5c5670 !important;
+  color: #555555 !important;
 }
 
 html body.guided-flow .guided-realtor-contact {
@@ -1536,14 +1536,14 @@ html body.guided-flow .guided-realtor-has-agent {
   margin: 0.35rem 0 0.55rem !important;
   font-size: 0.8rem !important;
   line-height: 1.35 !important;
-  color: #2b3252 !important;
+  color: #21292D !important;
   cursor: pointer !important;
 }
 
 html body.guided-flow .guided-realtor-prefs {
   margin: 0 0 0.65rem !important;
   border-radius: 10px !important;
-  border: 1px solid rgba(37, 47, 110, 0.1) !important;
+  border: 1px solid rgba(33, 41, 45, 0.1) !important;
   padding: 0.15rem 0.65rem 0.45rem !important;
   background: #faf9fc !important;
 }
@@ -1552,7 +1552,7 @@ html body.guided-flow .guided-realtor-prefs summary {
   cursor: pointer !important;
   font-size: 0.78rem !important;
   font-weight: 600 !important;
-  color: #252f6e !important;
+  color: #21292D !important;
   padding: 0.45rem 0 !important;
   list-style: none !important;
 }
@@ -1583,7 +1583,7 @@ html body.guided-flow .guided-realtor-prefs .ultimate-realtor-choice {
   margin: 0.2rem 0.35rem 0.2rem 0 !important;
   padding: 0.35rem 0.55rem !important;
   border-radius: 999px !important;
-  border: 1px solid rgba(37, 47, 110, 0.12) !important;
+  border: 1px solid rgba(33, 41, 45, 0.12) !important;
   background: #fff !important;
   font-size: 0.75rem !important;
   cursor: pointer !important;
@@ -1596,14 +1596,14 @@ html body.guided-flow .guided-realtor-submit {
   font-size: 0.95rem !important;
   font-weight: 700 !important;
   border-radius: 12px !important;
-  background: linear-gradient(135deg, #252f6e, #1b2352) !important;
-  border: 1.5px solid #c9a227 !important;
+  background: linear-gradient(135deg, #21292D, #040708) !important;
+  border: 1.5px solid #D13239 !important;
   color: #f5e6a8 !important;
 }
 
 html body.guided-flow .guided-realtor-submit:hover {
-  background: linear-gradient(135deg, #c9a227, #b8921f) !important;
-  color: #252f6e !important;
+  background: linear-gradient(135deg, #D13239, #b8921f) !important;
+  color: #21292D !important;
 }
 
 html body.guided-flow .guided-realtor-submit.is-loading,
@@ -1618,13 +1618,13 @@ html body.guided-flow #ultimateRealtorView .ultimate-subview-back {
   left: 0.75rem !important;
   z-index: 2 !important;
   background: rgba(255, 255, 255, 0.95) !important;
-  border: 1px solid rgba(37, 47, 110, 0.12) !important;
+  border: 1px solid rgba(33, 41, 45, 0.12) !important;
   border-radius: 999px !important;
   padding: 0.4rem 0.75rem !important;
   font-size: 0.78rem !important;
   font-weight: 600 !important;
   cursor: pointer !important;
-  color: #252f6e !important;
+  color: #21292D !important;
 }
 
 html body.guided-flow .ultimate-realtor-confirm {
@@ -1641,7 +1641,7 @@ html body.guided-flow .ultimate-realtor-confirm-title {
 
 html body.guided-flow .ultimate-realtor-confirm-lead {
   font-size: 0.88rem !important;
-  color: #2b3252 !important;
+  color: #21292D !important;
   margin: 0 0 0.75rem !important;
   line-height: 1.4 !important;
 }
@@ -1656,7 +1656,7 @@ html body.guided-flow .guided-realtor-after-apply {
 }
 
 html body.guided-flow .guided-hub-realtor strong {
-  color: #252f6e !important;
+  color: #21292D !important;
 }
 
 /* Desktop: hide mobile entry */
