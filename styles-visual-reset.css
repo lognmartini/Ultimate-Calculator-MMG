@@ -8,14 +8,14 @@
    0. TOKENS
    ========================================================= */
 html body.guided-flow.guided-flagship {
-  --v-navy: #252f6e;
-  --v-navy-mid: #252f6e;
-  --v-gold: #c9a227;
-  --v-gold-hi: #e8c84a;
+  --v-navy: #21292D;
+  --v-navy-mid: #21292D;
+  --v-gold: #D13239;
+  --v-gold-hi: #E04A50;
   --v-cream: #f4f2ef;
   --v-white: #ffffff;
-  --v-muted: #5c5670;
-  --v-border: rgba(37, 47, 110, 0.1);
+  --v-muted: #555555;
+  --v-border: rgba(33, 41, 45, 0.1);
   --v-radius: 16px;
   --v-radius-sm: 12px;
   --v-btn-h: 52px;
@@ -26,7 +26,7 @@ html body.guided-flow.guided-flagship {
   --v-rail: 268px;
   --v-gap: 1rem;
   --v-space: 1.35rem;
-  --v-shadow: 0 8px 28px rgba(37, 47, 110, 0.07);
+  --v-shadow: 0 8px 28px rgba(33, 41, 45, 0.07);
   background: var(--v-cream) !important;
   color: var(--v-navy) !important;
   font-family: "DM Sans", system-ui, -apple-system, sans-serif !important;
@@ -86,10 +86,10 @@ html body.guided-flow.guided-flagship .guided-header-apply,
 html body.guided-flow.guided-flagship .guided-reviews-btn,
 html body.guided-flow.guided-flagship .ultimate-realtor-submit {
   border: 0 !important;
-  background: linear-gradient(135deg, #f0d060 0%, var(--v-gold) 50%, #b8891a 100%) !important;
+  background: linear-gradient(135deg, #E04A50 0%, var(--v-gold) 50%, #A8262C 100%) !important;
   color: var(--v-navy) !important;
   font-weight: 800 !important;
-  box-shadow: 0 3px 12px rgba(201, 162, 39, 0.3) !important;
+  box-shadow: 0 3px 12px rgba(209, 50, 57, 0.3) !important;
 }
 
 html body.guided-flow.guided-flagship .btn-lookup:hover,
@@ -108,13 +108,13 @@ html body.guided-flow.guided-flagship .guided-loan-options-btn {
   background: var(--v-white) !important;
   color: var(--v-navy) !important;
   font-weight: 700 !important;
-  box-shadow: 0 1px 3px rgba(37, 47, 110, 0.04) !important;
+  box-shadow: 0 1px 3px rgba(33, 41, 45, 0.04) !important;
 }
 
 html body.guided-flow.guided-flagship .btn-wizard-back:hover,
 html body.guided-flow.guided-flagship .btn-outline:hover,
 html body.guided-flow.guided-flagship .guided-loan-options-btn:hover {
-  border-color: rgba(201, 162, 39, 0.5) !important;
+  border-color: rgba(209, 50, 57, 0.5) !important;
   background: #fffdf7 !important;
   transform: translateY(-1px) !important;
 }
@@ -124,7 +124,7 @@ html body.guided-flow.guided-flagship .guided-realtor-btn {
   border: 0 !important;
   background: var(--v-navy) !important;
   color: #fff !important;
-  box-shadow: 0 2px 10px rgba(37, 47, 110, 0.16) !important;
+  box-shadow: 0 2px 10px rgba(33, 41, 45, 0.16) !important;
 }
 
 html body.guided-flow.guided-flagship .guided-realtor-btn:hover {
@@ -146,7 +146,7 @@ html body.guided-flow.guided-flagship .btn-results-apply {
 html body.guided-flow.guided-flagship .guided-results-secondary:hover,
 html body.guided-flow.guided-flagship .btn-results-apply:hover {
   background: rgba(255, 255, 255, 0.12) !important;
-  border-color: rgba(201, 162, 39, 0.5) !important;
+  border-color: rgba(209, 50, 57, 0.5) !important;
   color: #fff !important;
 }
 
@@ -366,7 +366,7 @@ html body.guided-flow.guided-flagship .guided-progress {
   border-radius: var(--v-radius) !important;
   background: rgba(255, 255, 255, 0.8) !important;
   border: 1px solid var(--v-border) !important;
-  box-shadow: 0 2px 12px rgba(37, 47, 110, 0.04) !important;
+  box-shadow: 0 2px 12px rgba(33, 41, 45, 0.04) !important;
 }
 
 html body.guided-flow.guided-flagship .guided-step-intro {
@@ -394,9 +394,9 @@ html body.guided-flow.guided-flagship .guided-results-card {
   max-width: 600px !important;
   padding: 1.75rem 1.35rem 1.9rem !important;
   border-radius: 20px !important;
-  background: linear-gradient(165deg, #110c1d 0%, var(--v-navy) 50%, #221a3a 100%) !important;
-  border: 1px solid rgba(201, 162, 39, 0.28) !important;
-  box-shadow: 0 16px 48px rgba(17, 12, 29, 0.28) !important;
+  background: linear-gradient(165deg, #040708 0%, var(--v-navy) 50%, #221a3a 100%) !important;
+  border: 1px solid rgba(209, 50, 57, 0.28) !important;
+  box-shadow: 0 16px 48px rgba(4, 7, 8, 0.28) !important;
 }
 
 html body.guided-flow.guided-flagship .guided-results-card #pitiPayment,
@@ -426,7 +426,7 @@ html body.guided-flow.guided-flagship .guided-results-title {
 }
 
 html body.guided-flow.guided-flagship .guided-results-eyebrow {
-  color: rgba(232, 200, 74, 0.9) !important;
+  color: rgba(224, 74, 80, 0.9) !important;
   font-size: 0.68rem !important;
   letter-spacing: 0.1em !important;
   text-transform: uppercase !important;
@@ -457,7 +457,7 @@ html body.guided-flow.guided-flagship .guided-lead-primary {
   margin: 1.25rem 0 !important;
   padding: 1.35rem 1.2rem 1.25rem !important;
   border-radius: 16px !important;
-  border: 1px solid rgba(201, 162, 39, 0.4) !important;
+  border: 1px solid rgba(209, 50, 57, 0.4) !important;
   background: rgba(255, 255, 255, 0.1) !important;
 }
 
@@ -527,8 +527,8 @@ html body.guided-flow.guided-flagship .guided-live-card.wizard-live-preview {
   margin: 0 !important;
   padding: 1.15rem 1.1rem !important;
   border-radius: var(--v-radius) !important;
-  background: linear-gradient(160deg, #110c1d, var(--v-navy) 55%, #252040) !important;
-  border: 1px solid rgba(201, 162, 39, 0.32) !important;
+  background: linear-gradient(160deg, #040708, var(--v-navy) 55%, #252040) !important;
+  border: 1px solid rgba(209, 50, 57, 0.32) !important;
   box-shadow: var(--v-shadow) !important;
 }
 
@@ -612,7 +612,7 @@ html body.guided-flow.guided-flagship .guided-side-photo {
   height: 56px !important;
   border-radius: 999px !important;
   object-fit: cover !important;
-  border: 2px solid rgba(201, 162, 39, 0.45) !important;
+  border: 2px solid rgba(209, 50, 57, 0.45) !important;
   flex-shrink: 0 !important;
 }
 
@@ -684,10 +684,10 @@ html body.guided-flow.guided-flagship .guided-mini-chip {
 
 html body.guided-flow.guided-flagship .ultimate-term-btn.active,
 html body.guided-flow.guided-flagship .guided-mini-chip.is-selected {
-  background: linear-gradient(135deg, #f0d060, var(--v-gold) 55%, #b8891a) !important;
+  background: linear-gradient(135deg, #E04A50, var(--v-gold) 55%, #A8262C) !important;
   border-color: transparent !important;
   color: var(--v-navy) !important;
-  box-shadow: 0 3px 10px rgba(201, 162, 39, 0.28) !important;
+  box-shadow: 0 3px 10px rgba(209, 50, 57, 0.28) !important;
 }
 
 html body.guided-flow.guided-flagship .guided-term-picker,
@@ -710,9 +710,9 @@ html body.guided-flow.guided-flagship .ultimate-program-btn {
 }
 
 html body.guided-flow.guided-flagship .ultimate-program-btn.active {
-  background: linear-gradient(135deg, #f0d060, var(--v-gold) 55%, #b8891a) !important;
+  background: linear-gradient(135deg, #E04A50, var(--v-gold) 55%, #A8262C) !important;
   border-color: transparent !important;
-  box-shadow: 0 3px 12px rgba(201, 162, 39, 0.28) !important;
+  box-shadow: 0 3px 12px rgba(209, 50, 57, 0.28) !important;
 }
 
 html body.guided-flow.guided-flagship .guided-progress-num {
@@ -726,7 +726,7 @@ html body.guided-flow.guided-flagship .guided-progress-num {
 html body.guided-flow.guided-flagship .guided-progress-step.is-active .guided-progress-num {
   background: linear-gradient(135deg, var(--v-gold-hi), var(--v-gold)) !important;
   color: var(--v-navy) !important;
-  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.2) !important;
+  box-shadow: 0 0 0 3px rgba(209, 50, 57, 0.2) !important;
 }
 
 html body.guided-flow.guided-flagship .guided-progress-step.is-done .guided-progress-num {
@@ -744,7 +744,7 @@ html body.guided-flow.guided-flagship .guided-property-summary {
   margin-top: 1.1rem !important;
   padding: 1rem !important;
   border-radius: 14px !important;
-  border: 1px solid rgba(201, 162, 39, 0.28) !important;
+  border: 1px solid rgba(209, 50, 57, 0.28) !important;
   background: linear-gradient(165deg, #fbf8f0, #fff) !important;
 }
 
@@ -758,9 +758,9 @@ html body.guided-flow.guided-flagship .guided-property-summary-grid {
 html body.guided-flow.guided-flagship .guided-property-summary-grid > div {
   padding: 0.5rem 0.3rem !important;
   border-radius: 10px !important;
-  background: rgba(37, 47, 110, 0.04) !important;
+  background: rgba(33, 41, 45, 0.04) !important;
   text-align: center !important;
-  border: 1px solid rgba(37, 47, 110, 0.04) !important;
+  border: 1px solid rgba(33, 41, 45, 0.04) !important;
 }
 
 html body.guided-flow.guided-flagship .guided-property-summary-grid dt {
@@ -789,7 +789,7 @@ html body.guided-flow.guided-flagship .ultimate-profile-chip {
 
 html body.guided-flow.guided-flagship .ultimate-profile-chip:has(input:checked) {
   border-color: var(--v-gold) !important;
-  background: rgba(201, 162, 39, 0.12) !important;
+  background: rgba(209, 50, 57, 0.12) !important;
 }
 
 /* Save estimate tabs as refined pills */
@@ -807,7 +807,7 @@ html body.guided-flow.guided-flagship .save-estimate-tab {
 html body.guided-flow.guided-flagship .wizard-nav {
   padding: 0.8rem 1rem calc(0.8rem + env(safe-area-inset-bottom, 0px)) !important;
   background: linear-gradient(180deg, transparent 0%, rgba(244, 242, 239, 0.92) 22%, #f4f2ef 48%) !important;
-  border-top: 1px solid rgba(37, 47, 110, 0.06) !important;
+  border-top: 1px solid rgba(33, 41, 45, 0.06) !important;
 }
 
 html body.guided-flow.guided-flagship .wizard-nav-inner,
@@ -984,7 +984,7 @@ html body.guided-flow.guided-flagship .guided-logo-link {
 /* Footer secondary */
 html body.guided-flow.guided-flagship footer.guided-footer {
   background: var(--v-navy) !important;
-  border-top: 1px solid rgba(201, 162, 39, 0.25) !important;
+  border-top: 1px solid rgba(209, 50, 57, 0.25) !important;
   text-align: center !important;
 }
 
