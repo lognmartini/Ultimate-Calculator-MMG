@@ -278,3 +278,19 @@ html body .mmg-reviews-head,
 html body .mmg-review,
 html body .mmg-review.is-active { color: #21292D !important; border-color: #DEDFE0 !important; }
 html body .mmg-stars, html body .mmg-stars * { color: #D13239 !important; }
+
+/* The straggler rules above lost the cascade: styles-ux-a.css targets the bar
+   with a four-class selector and its own !important. Matching that specificity. */
+html body.guided-flow.guided-flagship .guided-progress-simple .wizard-progress-fill.wizard-progress-fill,
+html body.guided-flow.guided-flagship .wizard-progress-fill.wizard-progress-fill {
+  background: linear-gradient(90deg, #D13239 0%, #E04A50 100%) !important;
+}
+html body.guided-flow.guided-flagship .mmg-hs-trust.mmg-hs-trust,
+html body.guided-flow.guided-flagship .mmg-reviews-head.mmg-reviews-head,
+html body.guided-flow.guided-flagship .mmg-review.mmg-review,
+html body.guided-flow.guided-flagship .mmg-review.is-active.is-active {
+  color: #21292D !important;
+  border-color: #DEDFE0 !important;
+}
+html body.guided-flow.guided-flagship .mmg-stars.mmg-stars, html body.guided-flow.guided-flagship .mmg-stars.mmg-stars * { color: #D13239 !important; }
+html body a.skip-link.skip-link { background: #21292D !important; color: #FFFFFF !important; }
